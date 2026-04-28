@@ -44,8 +44,19 @@
     .hero-title { font-size: clamp(32px, 4.5vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.25; margin-bottom: 20px; }
     .hero-desc { font-size: 15px; color: #444; margin-bottom: 32px; line-height: 1.9; }
     .hero-laurels { display: flex; gap: 24px; flex-wrap: wrap; }
-    .laurel { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
-    .laurel-icon { font-size: 28px; color: var(--gold); line-height: 1; }
+    .laurel { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+    .laurel-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; background: rgba(184,150,46,0.08);
+    }
+    .laurel-icon::before, .laurel-icon::after {
+      content: '❧'; position: absolute; font-size: 18px; color: var(--gold); opacity: 0.7;
+    }
+    .laurel-icon::before { left: -2px; transform: scaleX(-1); }
+    .laurel-icon::after  { right: -2px; }
+    .laurel-icon svg { width: 22px; height: 22px; color: var(--gold); position: relative; z-index: 1; }
     .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
     .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
     .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; }
@@ -173,16 +184,22 @@
       </p>
       <div class="hero-laurels">
         <div class="laurel">
-          <div class="laurel-icon">🏅</div>
-          <span class="laurel-label">FP資格者が直接対応</span>
+          <div class="laurel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span class="laurel-label">FP資格者が<br>直接対応</span>
         </div>
         <div class="laurel">
-          <div class="laurel-icon">🏅</div>
-          <span class="laurel-label">豊富な実績と信頼</span>
+          <div class="laurel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span class="laurel-label">豊富な実績と<br>信頼</span>
         </div>
         <div class="laurel">
-          <div class="laurel-icon">🏅</div>
-          <span class="laurel-label">安心・丁寧なサポート</span>
+          <div class="laurel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span class="laurel-label">安心・丁寧な<br>サポート</span>
         </div>
       </div>
     </div>
