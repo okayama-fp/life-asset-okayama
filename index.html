@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>パーソナル・アセット・パートナーズ｜個人事業主の資産・融資サポート</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243460;
+      --gold: #b8962e;
+      --gold-light: #d4aa3a;
+      --gold-bg: #f5f0e8;
+      --white: #ffffff;
+      --gray-bg: #f8f8f8;
+      --text: #333333;
+      --text-light: #666666;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', Meiryo, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ========== HEADER ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg { width: 26px; height: 26px; }
+
+    .logo-text { line-height: 1.3; }
+    .logo-text .name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.03em;
+    }
+    .logo-text .tagline {
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    nav a {
+      font-size: 13.5px;
+      color: var(--navy);
+      font-weight: 500;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-cta:hover { background: var(--gold-light); }
+
+    /* ========== HERO ========== */
+    .hero {
+      background: linear-gradient(135deg, #eef1f7 0%, #f5f7fb 60%, #e8ecf5 100%);
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .hero-content { flex: 1; z-index: 1; }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--navy);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .hero-title .highlight {
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-light);
+      margin: 20px 0 32px;
+      line-height: 1.8;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .badge-icon {
+      width: 56px;
+      height: 56px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+    }
+
+    .badge-icon svg { width: 26px; height: 26px; color: var(--gold); }
+
+    .badge-label {
+      font-size: 11.5px;
+      color: var(--navy);
+      font-weight: 600;
+      line-height: 1.4;
+      max-width: 80px;
+    }
+
+    .hero-image {
+      flex: 0 0 380px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-photo-wrapper {
+      width: 340px;
+      height: 400px;
+      background: linear-gradient(160deg, #c8d4e8 0%, #a8bcda 100%);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .hero-photo-placeholder svg {
+      width: 160px;
+      height: 240px;
+      opacity: 0.5;
+    }
+
+    .hero-profile-tag {
+      position: absolute;
+      bottom: 16px;
+      right: -16px;
+      background: var(--white);
+      border-left: 4px solid var(--gold);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .hero-profile-tag .role {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hero-profile-tag .person-name {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: 0.06em;
+    }
+
+    .hero-profile-tag .person-name span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-light);
+      display: block;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+
+    /* ========== BANNER ========== */
+    .banner {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .banner h2 {
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .banner p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      padding: 72px 24px;
+      background: var(--white);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    .cards {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .card {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(26,39,68,0.12);
+      transform: translateY(-4px);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #c8d4e8, #8faac8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img-placeholder {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img-placeholder svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.4;
+      color: white;
+    }
+
+    .card-img-1 { background: linear-gradient(135deg, #5b7fa6, #3a5980); }
+    .card-img-2 { background: linear-gradient(135deg, #6b7fa0, #4a5f80); }
+    .card-img-3 { background: linear-gradient(135deg, #4a7090, #305570); }
+
+    .card-body { padding: 24px; }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .card-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .card-list li {
+      font-size: 12.5px;
+      color: var(--text);
+      padding: 3px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .card-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 4px;
+      transition: background 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-secondary:hover { background: var(--navy-light); }
+
+    /* ========== REASONS ========== */
+    .reasons {
+      padding: 72px 24px;
+      background: var(--gray-bg);
+    }
+
+    .reasons-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .reason-item {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 28px 24px;
+      text-align: center;
+      border-top: 4px solid var(--gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .reason-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .reason-icon svg { width: 28px; height: 28px; color: white; }
+
+    .reason-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .reason-desc {
+      font-size: 12.5px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ========== CTA BANNER ========== */
+    .cta-banner {
+      background: var(--gold-bg);
+      border: 1px solid #e0d5c0;
+      padding: 40px 24px;
+    }
+
+    .cta-banner-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .cta-banner-text .label {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .cta-banner-text h3 {
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .cta-banner-text p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+
+    /* ========== WORRIES ========== */
+    .worries {
+      background: var(--navy);
+      padding: 56px 24px;
+    }
+
+    .worries-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .worries-left h3 {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: var(--white);
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .worries-left h3 em {
+      color: var(--gold-light);
+      font-style: normal;
+    }
+
+    .worries-list {
+      list-style: none;
+    }
+
+    .worries-list li {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .worries-list li:last-child { border-bottom: none; }
+
+    .worries-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .worries-right { text-align: center; }
+
+    .worries-right p {
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .worries-right .big-text {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    .worries-right .big-text .accent { color: var(--gold-light); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #111827;
+      color: rgba(255,255,255,0.75);
+      padding: 24px;
+      font-size: 12.5px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--gold);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--gold-light); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-image { flex: 0 0 auto; }
+      .hero-badges { justify-content: center; }
+      .hero-profile-tag { position: static; margin-top: 16px; border-left: 4px solid var(--gold); border-radius: 6px; }
+      .cards { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+      .reasons-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .cta-banner-inner { flex-direction: column; text-align: center; }
+      .worries-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { display: none; }
+      .hero-photo-wrapper { width: 280px; height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d4aa3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="tagline">個人事業主の未来を、資産の面から力強くサポート。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="#home">ホーム</a>
+      <a href="#services">サービス</a>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#profile">代表プロフィール</a>
+      <a href="#flow">ご相談の流れ</a>
+    </nav>
+    <a href="#contact" class="btn-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      無料相談はこちら
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="hero-subtitle">個人事業主のための</p>
+      <h1 class="hero-title">
+        お金の悩みを、<br>
+        <span class="highlight">戦略</span>に変える。
+      </h1>
+      <p class="hero-desc">
+        事業も人生も、どちらも大切にしたいあなたへ。<br>
+        資産形成・資金調達・将来設計をトータルサポートします。
+      </p>
+      <div class="hero-badges">
+        <div class="badge">
+          <div class="badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <span class="badge-label">個人事業主専門の資産アドバイス</span>
+        </div>
+        <div class="badge">
+          <div class="badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <span class="badge-label">資金繰り・融資に強いサポート</span>
+        </div>
+        <div class="badge">
+          <div class="badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <span class="badge-label">安心・信頼のFP資格者</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image" id="profile">
+      <div class="hero-photo-wrapper">
+        <div class="hero-photo-placeholder">
+          <!-- Person silhouette placeholder -->
+          <svg viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="50" rx="30" ry="34" fill="rgba(255,255,255,0.4)"/>
+            <path d="M10 180 C10 130 110 130 110 180" fill="rgba(255,255,255,0.3)"/>
+            <!-- Suit jacket shape -->
+            <path d="M30 120 L10 180 L110 180 L90 120 L75 110 C75 110 70 125 60 125 C50 125 45 110 45 110 Z" fill="rgba(26,39,68,0.5)"/>
+            <!-- Tie -->
+            <polygon points="60,110 56,125 60,135 64,125" fill="rgba(180,150,50,0.6)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-profile-tag">
+        <div class="role">FP資格者・個人資産アドバイザー</div>
+        <div class="person-name">
+          高月　義照
+          <span>パーソナル・アセット・パートナーズ代表</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<section class="banner">
+  <h2>あなたの事業の成長と、豊かな未来のために。</h2>
+  <p>お金のプロとして、あなたの想いに寄り添い、最適な解決策をご提案します。</p>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2 class="section-title">個人事業主向けサービス</h2>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-img card-img-1">
+        <div class="card-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <path d="M7 8l3 3 2-2 3 4"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">個人資産管理・将来設計</h3>
+        <p class="card-desc">収入やライフプランに合わせた資産形成で、将来の安心をつくります。</p>
+        <ul class="card-list">
+          <li>資産ポートフォリオの最適化</li>
+          <li>老後資金・教育資金の準備</li>
+          <li>税制を考慮した資産形成</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">詳しく見る &rsaquo;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img card-img-2">
+        <div class="card-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">資金繰り・キャッシュフロー改善</h3>
+        <p class="card-desc">事業の安定と成長のための、資金繰り改善やキャッシュフローをサポートします。</p>
+        <ul class="card-list">
+          <li>収支改善・資金繰り表の作成</li>
+          <li>固定費の見直し・コスト削減</li>
+          <li>事業計画・予算策定支援</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">詳しく見る &rsaquo;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img card-img-3">
+        <div class="card-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">個人融資サポート</h3>
+        <p class="card-desc">事業資金や運転資金など、あなたの状況に合わせた融資をサポートします。</p>
+        <ul class="card-list">
+          <li>日本政策金融公庫のご相談・申請支援</li>
+          <li>金融機関との交渉サポート</li>
+          <li>融資審査のポイントアドバイス</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">詳しく見る &rsaquo;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REASONS -->
+<section class="reasons" id="reasons">
+  <h2 class="section-title">選ばれる3つの理由</h2>
+  <div class="reasons-grid">
+
+    <div class="reason-item">
+      <div class="reason-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+      </div>
+      <h3 class="reason-title">個人事業主専門のサポート</h3>
+      <p class="reason-desc">個人事業主特有の税制や資金繰りに精通。事業とプライベート、両面を支援します。</p>
+    </div>
+
+    <div class="reason-item">
+      <div class="reason-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </div>
+      <h3 class="reason-title">お金のプロによる安心の提案</h3>
+      <p class="reason-desc">FP資格者として中立な立場で、あなたに本当に必要なプランをご提案します。</p>
+    </div>
+
+    <div class="reason-item">
+      <div class="reason-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+      </div>
+      <h3 class="reason-title">資金調達に強いネットワーク</h3>
+      <p class="reason-desc">金融機関との豊富なつながりで、スムーズな融資実現をサポートします。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="flow">
+  <div class="cta-banner-inner">
+    <div class="cta-banner-text">
+      <p class="label">まずは無料相談</p>
+      <h3>まずは無料相談で、あなたの悩みをお聞かせください。</h3>
+      <p>対面・オンラインでのご相談が可能です。初回相談は無料です。</p>
+    </div>
+    <a href="#contact" class="btn-gold">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      無料相談を申し込む &rsaquo;
+    </a>
+  </div>
+</section>
+
+<!-- WORRIES -->
+<section class="worries" id="contact">
+  <div class="worries-inner">
+    <div class="worries-left">
+      <h3>このような<em>お悩み</em>はありませんか？</h3>
+      <ul class="worries-list">
+        <li>売上はあるのに、なぜかお金が残らない</li>
+        <li>将来が不安…老後資金をしっかり準備したい</li>
+        <li>事業資金を借りたいが、どうすればいいかわからない</li>
+        <li>節税や資産運用の方法を知りたい</li>
+      </ul>
+    </div>
+    <div class="worries-right">
+      <p>一つでも当てはまる方は、ぜひご相談ください。</p>
+      <p class="big-text">
+        あなたの未来を、<br>
+        <span class="accent">共に創ります。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      パーソナル・アセット・パートナーズ
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:contact@pap-fp.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        contact@pap-fp.com
+      </a>
+      <a href="tel:09012345678">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        090-1234-5678
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
