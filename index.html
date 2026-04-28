@@ -3,647 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>パーソナル・アセット・パートナーズ｜個人事業主の資産・融資サポート</title>
+  <title>パーソナル・アセット・パートナーズ｜FP資格者による資産・融資サポート</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --navy: #1a2744;
       --navy-light: #243460;
       --gold: #b8962e;
       --gold-light: #d4aa3a;
       --gold-bg: #f5f0e8;
-      --white: #ffffff;
-      --gray-bg: #f8f8f8;
-      --text: #333333;
-      --text-light: #666666;
+      --white: #fff;
+      --gray-bg: #f7f8fa;
+      --text: #222;
+      --text-light: #666;
+      --border: #e5e5e5;
     }
-
-    body {
-      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', Meiryo, sans-serif;
-      color: var(--text);
-      line-height: 1.7;
-    }
-
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
     a { text-decoration: none; color: inherit; }
 
-    /* ========== HEADER ========== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--white);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--navy);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-icon svg { width: 26px; height: 26px; }
-
-    .logo-text { line-height: 1.3; }
-    .logo-text .name {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: 0.03em;
-    }
-    .logo-text .tagline {
-      font-size: 10px;
-      color: var(--text-light);
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    nav a {
-      font-size: 13.5px;
-      color: var(--navy);
-      font-weight: 500;
-      white-space: nowrap;
-      transition: color 0.2s;
-    }
+    /* ===== HEADER ===== */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+    .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .logo-text .tagline { font-size: 10px; color: var(--text-light); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
     nav a:hover { color: var(--gold); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+    .btn-cta:hover { background: var(--navy-light); }
 
-    .btn-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--gold);
-      color: var(--white);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 4px;
-      white-space: nowrap;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-    .btn-cta:hover { background: var(--gold-light); }
+    /* ===== HERO ===== */
+    .hero { background: linear-gradient(135deg, #d6dce8 0%, #e8ecf5 40%, #c8d4e4 100%); min-height: 580px; display: flex; align-items: center; overflow: hidden; position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=60&fit=crop') center/cover no-repeat; opacity: 0.12; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 60px 24px; display: flex; align-items: center; gap: 40px; width: 100%; position: relative; z-index: 1; }
+    .hero-content { flex: 1; }
+    .hero-badge { display: inline-block; background: linear-gradient(90deg, #b8962e, #d4aa3a); color: var(--white); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 2px; margin-bottom: 20px; letter-spacing: 0.05em; }
+    .hero-title { font-size: clamp(32px, 4.5vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.25; margin-bottom: 20px; }
+    .hero-desc { font-size: 15px; color: #444; margin-bottom: 32px; line-height: 1.9; }
+    .hero-laurels { display: flex; gap: 24px; flex-wrap: wrap; }
+    .laurel { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+    .laurel-icon { font-size: 28px; color: var(--gold); line-height: 1; }
+    .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
+    .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
+    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; }
+    .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; }
+    .hero-profile-tag { position: absolute; bottom: 16px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .hero-profile-tag .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 4px; }
+    .hero-profile-tag .person-name { font-size: 22px; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .hero-profile-tag .person-sub { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
-    /* ========== HERO ========== */
-    .hero {
-      background: linear-gradient(135deg, #eef1f7 0%, #f5f7fb 60%, #e8ecf5 100%);
-      min-height: 560px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
-    }
+    /* ===== DARK BANNER ===== */
+    .banner { background: var(--navy); color: var(--white); text-align: center; padding: 44px 24px; }
+    .banner h2 { font-size: clamp(18px,3vw,26px); font-weight: 700; margin-bottom: 10px; }
+    .banner p { font-size: 14px; opacity: 0.8; }
 
-    .hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 24px;
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      width: 100%;
-    }
+    /* ===== ICON SERVICES ===== */
+    .icon-services { background: var(--white); border-bottom: 1px solid var(--border); padding: 48px 24px; }
+    .icon-services-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .icon-service-item { background: var(--white); padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; }
+    .icon-service-icon { width: 48px; height: 48px; border: 2px solid var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .icon-service-icon svg { width: 22px; height: 22px; color: var(--navy); }
+    .icon-service-text h3 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .icon-service-text p { font-size: 12px; color: var(--text-light); line-height: 1.6; }
 
-    .hero-content { flex: 1; z-index: 1; }
+    /* ===== SERVICES ===== */
+    .services { padding: 72px 24px; background: var(--gray-bg); }
+    .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 48px; }
+    .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: var(--gold); margin: 10px auto 0; border-radius: 2px; }
+    .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .card { background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
+    .card:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.12); transform: translateY(-4px); }
+    .card-img { height: 180px; overflow: hidden; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-body { padding: 22px; }
+    .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .card-desc { font-size: 12.5px; color: var(--text-light); margin-bottom: 14px; line-height: 1.7; }
+    .card-list { list-style: none; margin-bottom: 18px; }
+    .card-list li { font-size: 12.5px; color: var(--text); padding: 3px 0 3px 20px; position: relative; }
+    .card-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .btn-navy { display: flex; align-items: center; justify-content: center; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 600; padding: 10px; border-radius: 4px; transition: background .2s; }
+    .btn-navy:hover { background: var(--navy-light); }
 
-    .hero-subtitle {
-      font-size: 15px;
-      color: var(--navy);
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .hero-title {
-      font-size: clamp(36px, 5vw, 52px);
-      font-weight: 900;
-      color: var(--navy);
-      line-height: 1.25;
-      margin-bottom: 6px;
-    }
-
-    .hero-title .highlight {
-      color: var(--gold);
-    }
-
-    .hero-desc {
-      font-size: 15px;
-      color: var(--text-light);
-      margin: 20px 0 32px;
-      line-height: 1.8;
-    }
-
-    .hero-badges {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      text-align: center;
-    }
-
-    .badge-icon {
-      width: 56px;
-      height: 56px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-    }
-
-    .badge-icon svg { width: 26px; height: 26px; color: var(--gold); }
-
-    .badge-label {
-      font-size: 11.5px;
-      color: var(--navy);
-      font-weight: 600;
-      line-height: 1.4;
-      max-width: 80px;
-    }
-
-    .hero-image {
-      flex: 0 0 380px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-photo-wrapper {
-      width: 340px;
-      height: 400px;
-      background: linear-gradient(160deg, #c8d4e8 0%, #a8bcda 100%);
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .hero-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .hero-photo-placeholder svg {
-      width: 160px;
-      height: 240px;
-      opacity: 0.5;
-    }
-
-    .hero-profile-tag {
-      position: absolute;
-      bottom: 16px;
-      right: -16px;
-      background: var(--white);
-      border-left: 4px solid var(--gold);
-      padding: 12px 16px;
-      border-radius: 0 6px 6px 0;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    }
-
-    .hero-profile-tag .role {
-      font-size: 10px;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .hero-profile-tag .person-name {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: 0.06em;
-    }
-
-    .hero-profile-tag .person-name span {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-light);
-      display: block;
-      letter-spacing: 0.02em;
-      margin-top: 2px;
-    }
-
-    /* ========== BANNER ========== */
-    .banner {
-      background: var(--navy);
-      color: var(--white);
-      text-align: center;
-      padding: 40px 24px;
-    }
-
-    .banner h2 {
-      font-size: clamp(18px, 3vw, 24px);
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: 0.04em;
-    }
-
-    .banner p {
-      font-size: 14px;
-      opacity: 0.85;
-    }
-
-    /* ========== SERVICES ========== */
-    .services {
-      padding: 72px 24px;
-      background: var(--white);
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 48px;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 48px;
-      height: 3px;
-      background: var(--gold);
-      margin: 12px auto 0;
-      border-radius: 2px;
-    }
-
-    .cards {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .card {
-      border: 1px solid #e5e5e5;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-
-    .card:hover {
-      box-shadow: 0 8px 32px rgba(26,39,68,0.12);
-      transform: translateY(-4px);
-    }
-
-    .card-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-      background: linear-gradient(135deg, #c8d4e8, #8faac8);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-img-placeholder {
-      width: 100%;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card-img-placeholder svg {
-      width: 64px;
-      height: 64px;
-      opacity: 0.4;
-      color: white;
-    }
-
-    .card-img-1 { background: linear-gradient(135deg, #5b7fa6, #3a5980); }
-    .card-img-2 { background: linear-gradient(135deg, #6b7fa0, #4a5f80); }
-    .card-img-3 { background: linear-gradient(135deg, #4a7090, #305570); }
-
-    .card-body { padding: 24px; }
-
-    .card-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      color: var(--text-light);
-      margin-bottom: 16px;
-      line-height: 1.7;
-    }
-
-    .card-list {
-      list-style: none;
-      margin-bottom: 20px;
-    }
-
-    .card-list li {
-      font-size: 12.5px;
-      color: var(--text);
-      padding: 3px 0;
-      padding-left: 20px;
-      position: relative;
-    }
-
-    .card-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--navy);
-      color: var(--white);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 4px;
-      transition: background 0.2s;
-      width: 100%;
-      justify-content: center;
-    }
-    .btn-secondary:hover { background: var(--navy-light); }
-
-    /* ========== REASONS ========== */
-    .reasons {
-      padding: 72px 24px;
-      background: var(--gray-bg);
-    }
-
-    .reasons-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .reason-item {
-      background: var(--white);
-      border-radius: 8px;
-      padding: 28px 24px;
-      text-align: center;
-      border-top: 4px solid var(--gold);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    }
-
-    .reason-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--navy);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-
-    .reason-icon svg { width: 28px; height: 28px; color: white; }
-
-    .reason-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    .reason-desc {
-      font-size: 12.5px;
-      color: var(--text-light);
-      line-height: 1.7;
-    }
-
-    /* ========== CTA BANNER ========== */
-    .cta-banner {
-      background: var(--gold-bg);
-      border: 1px solid #e0d5c0;
-      padding: 40px 24px;
-    }
-
-    .cta-banner-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-    }
-
-    .cta-banner-text .label {
-      font-size: 12px;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .cta-banner-text h3 {
-      font-size: clamp(18px, 2.5vw, 22px);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-
-    .cta-banner-text p {
-      font-size: 13px;
-      color: var(--text-light);
-    }
-
-    .btn-gold {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--gold);
-      color: var(--white);
-      font-size: 14px;
-      font-weight: 700;
-      padding: 14px 28px;
-      border-radius: 4px;
-      white-space: nowrap;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
+    /* ===== CTA BANNER ===== */
+    .cta-banner { padding: 40px 24px; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cta-banner-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--gold-bg); border: 1px solid #ddd0b0; border-radius: 8px; padding: 32px 40px; }
+    .cta-banner-text .em { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+    .cta-banner-text h3 { font-size: clamp(16px,2.5vw,21px); font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .cta-banner-text h3 strong { color: var(--gold); }
+    .cta-banner-text p { font-size: 12.5px; color: var(--text-light); }
+    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--white); font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
     .btn-gold:hover { background: var(--gold-light); }
 
-    /* ========== WORRIES ========== */
-    .worries {
-      background: var(--navy);
-      padding: 56px 24px;
-    }
+    /* ===== REASONS ===== */
+    .reasons { padding: 72px 24px; background: var(--gray-bg); }
+    .reasons-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .reason-item { background: var(--white); border-radius: 8px; padding: 28px 22px; text-align: center; border-top: 4px solid var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .reason-icon { width: 52px; height: 52px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .reason-icon svg { width: 26px; height: 26px; color: white; }
+    .reason-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.4; }
+    .reason-desc { font-size: 12px; color: var(--text-light); line-height: 1.7; }
 
-    .worries-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .worries-left h3 {
-      font-size: clamp(18px, 2.5vw, 22px);
-      color: var(--white);
-      font-weight: 800;
-      margin-bottom: 24px;
-    }
-
-    .worries-left h3 em {
-      color: var(--gold-light);
-      font-style: normal;
-    }
-
-    .worries-list {
-      list-style: none;
-    }
-
-    .worries-list li {
-      color: rgba(255,255,255,0.9);
-      font-size: 14px;
-      padding: 8px 0;
-      padding-left: 24px;
-      position: relative;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .worries-list li:last-child { border-bottom: none; }
-
-    .worries-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--gold-light);
-      font-weight: 700;
-    }
-
-    .worries-right { text-align: center; }
-
-    .worries-right p {
-      color: rgba(255,255,255,0.8);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    .worries-right .big-text {
-      font-size: clamp(22px, 3vw, 30px);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.5;
-    }
-
-    .worries-right .big-text .accent { color: var(--gold-light); }
-
-    /* ========== FOOTER ========== */
-    footer {
-      background: #111827;
-      color: rgba(255,255,255,0.75);
-      padding: 24px;
-      font-size: 12.5px;
-    }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .footer-logo-icon {
-      width: 28px;
-      height: 28px;
-      background: var(--gold);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .footer-contact {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-contact a {
-      color: rgba(255,255,255,0.7);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-    }
-
+    /* ===== FOOTER ===== */
+    footer { background: #0f1825; color: rgba(255,255,255,0.7); padding: 24px; font-size: 12px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 13px; font-weight: 700; }
+    .footer-logo-icon { width: 28px; height: 28px; background: var(--navy); border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .footer-logo-icon span { color: var(--gold); font-size: 10px; font-weight: 900; }
+    .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-contact a { color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; transition: color .2s; }
     .footer-contact a:hover { color: var(--gold-light); }
 
-    /* ========== RESPONSIVE ========== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .hero-inner { flex-direction: column; text-align: center; }
       .hero-image { flex: 0 0 auto; }
-      .hero-badges { justify-content: center; }
-      .hero-profile-tag { position: static; margin-top: 16px; border-left: 4px solid var(--gold); border-radius: 6px; }
-      .cards { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-      .reasons-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .hero-laurels { justify-content: center; }
+      .hero-profile-tag { position: static; margin-top: 16px; }
+      .icon-services-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .reasons-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
       .cta-banner-inner { flex-direction: column; text-align: center; }
-      .worries-inner { grid-template-columns: 1fr; gap: 32px; }
     }
-
     @media (max-width: 640px) {
       nav { display: none; }
-      .hero-photo-wrapper { width: 280px; height: 320px; }
+      .hero-photo-wrapper { width: 260px; height: 340px; }
     }
   </style>
 </head>
@@ -653,27 +139,21 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d4aa3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
+      <div class="logo-icon"><span>FP</span></div>
       <div class="logo-text">
         <div class="name">パーソナル・アセット・パートナーズ</div>
-        <div class="tagline">個人事業主の未来を、資産の面から力強くサポート。</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
     <nav>
       <a href="#home">ホーム</a>
       <a href="#services">サービス</a>
       <a href="#reasons">選ばれる理由</a>
-      <a href="#profile">代表プロフィール</a>
-      <a href="#flow">ご相談の流れ</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#flow">相談の流れ</a>
     </nav>
     <a href="#contact" class="btn-cta">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
       無料相談はこちら
     </a>
   </div>
@@ -683,121 +163,156 @@
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-content">
-      <p class="hero-subtitle">個人事業主のための</p>
+      <div class="hero-badge">FP資格者による安心サポート</div>
       <h1 class="hero-title">
-        お金の悩みを、<br>
-        <span class="highlight">戦略</span>に変える。
+        あなたの資産と未来を<br>共に育てるパートナー
       </h1>
       <p class="hero-desc">
-        事業も人生も、どちらも大切にしたいあなたへ。<br>
-        資産形成・資金調達・将来設計をトータルサポートします。
+        個人資産管理から資金調達まで、<br>
+        お一人おひとりに最適なご提案をいたします。
       </p>
-      <div class="hero-badges">
-        <div class="badge">
-          <div class="badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-            </svg>
-          </div>
-          <span class="badge-label">個人事業主専門の資産アドバイス</span>
+      <div class="hero-laurels">
+        <div class="laurel">
+          <div class="laurel-icon">🏅</div>
+          <span class="laurel-label">FP資格者が直接対応</span>
         </div>
-        <div class="badge">
-          <div class="badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <span class="badge-label">資金繰り・融資に強いサポート</span>
+        <div class="laurel">
+          <div class="laurel-icon">🏅</div>
+          <span class="laurel-label">豊富な実績と信頼</span>
         </div>
-        <div class="badge">
-          <div class="badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <span class="badge-label">安心・信頼のFP資格者</span>
+        <div class="laurel">
+          <div class="laurel-icon">🏅</div>
+          <span class="laurel-label">安心・丁寧なサポート</span>
         </div>
       </div>
     </div>
-
-    <div class="hero-image" id="profile">
+    <div class="hero-image">
       <div class="hero-photo-wrapper">
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=480&h=600&fit=crop&crop=faces&q=80" alt="（削除済み） 代表" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;" />
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&fit=crop&crop=faces&q=80" alt="高橋宏之 代表" />
       </div>
       <div class="hero-profile-tag">
-        <div class="role">FP資格者・個人資産アドバイザー</div>
-        <div class="person-name">
-          （削除済み）　（削除済み）
-          <span>パーソナル・アセット・パートナーズ代表</span>
-        </div>
+        <div class="role">FP資格者／個人資産アドバイザー</div>
+        <div class="person-name">高橋　宏之</div>
+        <div class="person-sub">ファイナンシャル・プランナー（AFP）<br>個人資産管理会社 代表</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BANNER -->
+<!-- DARK BANNER -->
 <section class="banner">
-  <h2>あなたの事業の成長と、豊かな未来のために。</h2>
-  <p>お金のプロとして、あなたの想いに寄り添い、最適な解決策をご提案します。</p>
+  <h2>お金の悩み、ひとりで抱えていませんか？</h2>
+  <p>将来への不安、資産の運用、急な資金ニーズ——　そのお悩み、私たちが解決します。</p>
+</section>
+
+<!-- ICON SERVICES -->
+<section class="icon-services">
+  <div class="icon-services-grid">
+    <div class="icon-service-item">
+      <div class="icon-service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+        </svg>
+      </div>
+      <div class="icon-service-text">
+        <h3>将来設計・資産運用</h3>
+        <p>ライフプランに合わせた資産形成・運用プランをご提案します。</p>
+      </div>
+    </div>
+    <div class="icon-service-item">
+      <div class="icon-service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div class="icon-service-text">
+        <h3>個人資産管理会社</h3>
+        <p>資産の一元管理で、効率的かつ安全な資産運用をサポート。</p>
+      </div>
+    </div>
+    <div class="icon-service-item">
+      <div class="icon-service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <div class="icon-service-text">
+        <h3>個人融資サポート</h3>
+        <p>急な資金ニーズにも柔軟に対応。安心の個人融資サービス。</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <h2 class="section-title">個人事業主向けサービス</h2>
+  <h2 class="section-title">サービスのご案内</h2>
   <div class="cards">
 
     <div class="card">
-      <div style="height:180px;overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80" alt="個人資産管理" style="width:100%;height:100%;object-fit:cover;" />
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80" alt="個人資産管理" />
       </div>
       <div class="card-body">
-        <h3 class="card-title">個人資産管理・将来設計</h3>
-        <p class="card-desc">収入やライフプランに合わせた資産形成で、将来の安心をつくります。</p>
+        <h3 class="card-title">個人資産管理</h3>
+        <p class="card-desc">資産の見える化と最適化で、将来に向けた資産形成を支援します。</p>
         <ul class="card-list">
-          <li>資産ポートフォリオの最適化</li>
-          <li>老後資金・教育資金の準備</li>
-          <li>税制を考慮した資産形成</li>
+          <li>資産ポートフォリオ分析</li>
+          <li>資産運用プランの設計</li>
+          <li>定期的な資産状況の確認</li>
         </ul>
-        <a href="#contact" class="btn-secondary">詳しく見る &rsaquo;</a>
+        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
       </div>
     </div>
 
     <div class="card">
-      <div style="height:180px;overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80" alt="資金繰り改善" style="width:100%;height:100%;object-fit:cover;" />
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80" alt="アドバイザー業務" />
       </div>
       <div class="card-body">
-        <h3 class="card-title">資金繰り・キャッシュフロー改善</h3>
-        <p class="card-desc">事業の安定と成長のための、資金繰り改善やキャッシュフローをサポートします。</p>
+        <h3 class="card-title">アドバイザー業務</h3>
+        <p class="card-desc">専門知識と経験を活かし、最適なアドバイスを提供します。</p>
         <ul class="card-list">
-          <li>収支改善・資金繰り表の作成</li>
-          <li>固定費の見直し・コスト削減</li>
-          <li>事業計画・予算策定支援</li>
+          <li>ライフプラン設計</li>
+          <li>相続・事業承継対策</li>
+          <li>保険の見直し・最適化</li>
         </ul>
-        <a href="#contact" class="btn-secondary">詳しく見る &rsaquo;</a>
+        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
       </div>
     </div>
 
     <div class="card">
-      <div style="height:180px;overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80" alt="融資サポート" style="width:100%;height:100%;object-fit:cover;" />
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80" alt="個人融資サポート" />
       </div>
       <div class="card-body">
         <h3 class="card-title">個人融資サポート</h3>
-        <p class="card-desc">事業資金や運転資金など、あなたの状況に合わせた融資をサポートします。</p>
+        <p class="card-desc">個人の状況に合わせた融資プランで、資金調達をサポートします。</p>
         <ul class="card-list">
-          <li>日本政策金融公庫のご相談・申請支援</li>
-          <li>金融機関との交渉サポート</li>
-          <li>融資審査のポイントアドバイス</li>
+          <li>事業資金・生活資金の融資</li>
+          <li>柔軟な返済プラン</li>
+          <li>スピーディーな審査</li>
         </ul>
-        <a href="#contact" class="btn-secondary">詳しく見る &rsaquo;</a>
+        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="contact">
+  <div class="cta-banner-inner">
+    <div class="cta-banner-text">
+      <p class="em">まずは無料相談</p>
+      <h3>まずは<strong>無料相談</strong>で、あなたの未来を一緒に考えませんか？</h3>
+      <p>初回相談は無料です。お気軽にお問い合わせください。</p>
+    </div>
+    <a href="mailto:lifeassetpartners@gmail.com" class="btn-gold">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+      無料相談を申し込む &rsaquo;
+    </a>
   </div>
 </section>
 
@@ -813,8 +328,8 @@
           <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
         </svg>
       </div>
-      <h3 class="reason-title">個人事業主専門のサポート</h3>
-      <p class="reason-desc">個人事業主特有の税制や資金繰りに精通。事業とプライベート、両面を支援します。</p>
+      <h3 class="reason-title">FP資格者が直接対応</h3>
+      <p class="reason-desc">専門知識を持つFPが、最初から最後まで丁寧にサポートします。</p>
     </div>
 
     <div class="reason-item">
@@ -824,8 +339,8 @@
           <polyline points="9 12 11 14 15 10"/>
         </svg>
       </div>
-      <h3 class="reason-title">お金のプロによる安心の提案</h3>
-      <p class="reason-desc">FP資格者として中立な立場で、あなたに本当に必要なプランをご提案します。</p>
+      <h3 class="reason-title">お客様第一の安心サポート</h3>
+      <p class="reason-desc">お客様の利益を最優先に考えた、誠実で透明性の高いサービス。</p>
     </div>
 
     <div class="reason-item">
@@ -836,47 +351,10 @@
           <line x1="6" y1="20" x2="6" y2="14"/>
         </svg>
       </div>
-      <h3 class="reason-title">資金調達に強いネットワーク</h3>
-      <p class="reason-desc">金融機関との豊富なつながりで、スムーズな融資実現をサポートします。</p>
+      <h3 class="reason-title">豊富な実績と信頼</h3>
+      <p class="reason-desc">多くのお客様からご信頼をいただき、確かな実績を重ねています。</p>
     </div>
 
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section class="cta-banner" id="flow">
-  <div class="cta-banner-inner">
-    <div class="cta-banner-text">
-      <p class="label">まずは無料相談</p>
-      <h3>まずは無料相談で、あなたの悩みをお聞かせください。</h3>
-      <p>対面・オンラインでのご相談が可能です。初回相談は無料です。</p>
-    </div>
-    <a href="#contact" class="btn-gold">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-      無料相談を申し込む &rsaquo;
-    </a>
-  </div>
-</section>
-
-<!-- WORRIES -->
-<section class="worries" id="contact">
-  <div class="worries-inner">
-    <div class="worries-left">
-      <h3>このような<em>お悩み</em>はありませんか？</h3>
-      <ul class="worries-list">
-        <li>売上はあるのに、なぜかお金が残らない</li>
-        <li>将来が不安…老後資金をしっかり準備したい</li>
-        <li>事業資金を借りたいが、どうすればいいかわからない</li>
-        <li>節税や資産運用の方法を知りたい</li>
-      </ul>
-    </div>
-    <div class="worries-right">
-      <p>一つでも当てはまる方は、ぜひご相談ください。</p>
-      <p class="big-text">
-        あなたの未来を、<br>
-        <span class="accent">共に創ります。</span>
-      </p>
-    </div>
   </div>
 </section>
 
@@ -884,22 +362,16 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
+      <div class="footer-logo-icon"><span>FP</span></div>
       パーソナル・アセット・パートナーズ
     </div>
     <div class="footer-contact">
       <a href="mailto:lifeassetpartners@gmail.com">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
         lifeassetpartners@gmail.com
       </a>
       <a href="tel:09010104737">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         090-1010-4737
       </a>
     </div>
