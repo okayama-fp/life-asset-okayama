@@ -1,279 +1,351 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ファミリーアセットデザイン｜高月義照</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Hiragino Kaku Gothic ProN",sans-serif;background:#0b1c2c;color:#fff;}
-.container{max-width:900px;margin:auto;padding:20px 20px 80px;}
-
-/* ナビ */
-nav{
-  position:sticky;top:0;z-index:200;
-  background:#0a1828;border-bottom:1px solid rgba(255,215,0,.2);
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 24px;
-}
-.nav-logo{font-size:14px;font-weight:700;color:gold;}
-.nav-links{display:flex;gap:20px;}
-.nav-links a{
-  color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;
-  transition:color .2s;
-}
-.nav-links a:hover{color:gold;}
-.nav-btn{
-  background:gold;color:#0b1c2c;font-size:13px;font-weight:700;
-  padding:8px 16px;border-radius:6px;text-decoration:none;transition:background .2s;
-}
-.nav-btn:hover{background:#e6b800;}
-
-/* ヒーローボタン */
-.hero-btns{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
-.btn-sim{
-  display:inline-block;padding:14px 28px;
-  background:gold;color:#0b1c2c;font-weight:700;font-size:15px;
-  border-radius:8px;text-decoration:none;transition:background .2s;
-}
-.btn-sim:hover{background:#e6b800;}
-.btn-contact{
-  display:inline-block;padding:14px 28px;
-  background:transparent;color:gold;font-weight:700;font-size:15px;
-  border:2px solid gold;border-radius:8px;text-decoration:none;transition:all .2s;
-}
-.btn-contact:hover{background:rgba(255,215,0,.1);}
-
-html{scroll-behavior:smooth;}
-h1,h2{color:gold;}
-h1{font-size:clamp(22px,4vw,36px);line-height:1.4;margin-bottom:12px;}
-h2{font-size:20px;margin-bottom:12px;}
-.card{background:#122c44;padding:20px;border-radius:10px;margin-bottom:20px;}
-label{display:block;font-size:13px;color:rgba(255,255,255,.7);margin-top:10px;}
-input[type=number],input[type=text],input[type=email],select,textarea{
-  width:100%;padding:10px;margin-top:4px;
-  background:#0b1c2c;border:1px solid rgba(255,255,255,.2);
-  border-radius:6px;color:#fff;font-size:14px;
-}
-input[type=checkbox]{width:auto;margin-right:6px;}
-.chk-label{display:flex;align-items:center;margin-top:10px;cursor:pointer;}
-button{
-  width:100%;padding:13px;margin-top:14px;
-  background:gold;border:none;border-radius:6px;
-  font-weight:bold;font-size:15px;cursor:pointer;
-}
-button:hover{background:#e6b800;}
-.btn-line{background:#06C755;color:#fff;}
-.btn-line:hover{background:#05a845;}
-.result-big{font-size:32px;font-weight:bold;color:gold;margin:8px 0;}
-.result-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
-.result-item p{font-size:12px;color:rgba(255,255,255,.6);}
-.result-item span{font-size:18px;font-weight:bold;color:#fff;}
-.msg{margin-top:8px;font-size:14px;padding:8px 12px;border-radius:4px;background:rgba(255,255,255,.08);}
-.score-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;}
-.score-item{background:rgba(0,0,0,.3);border-radius:8px;padding:12px;text-align:center;}
-.score-item p{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:4px;}
-.score-item span{font-size:24px;font-weight:bold;color:gold;}
-.total-score{font-size:28px;font-weight:bold;color:gold;}
-.comment{margin-top:12px;font-size:14px;line-height:1.7;color:rgba(255,255,255,.85);}
-.hero{display:flex;justify-content:space-between;align-items:center;
-  padding:40px 20px;gap:20px;flex-wrap:wrap;}
-.hero-text{flex:1;min-width:200px;}
-.hero-text p{margin-top:10px;font-size:15px;color:rgba(255,255,255,.8);}
-.hero img{width:180px;border-radius:10px;object-fit:cover;}
-.ratio-row{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0;}
-.ratio-item{flex:1;background:rgba(0,0,0,.3);border-radius:6px;padding:10px;text-align:center;}
-.ratio-item p{font-size:11px;color:rgba(255,255,255,.6);}
-.ratio-item span{font-size:16px;font-weight:bold;color:#fff;}
-canvas{margin:0 0 20px;max-height:280px;}
-hr{border:none;border-top:1px solid rgba(255,255,255,.15);margin:16px 0;}
-.fixed-line{
-  position:fixed;bottom:0;left:0;right:0;
-  background:#06C755;text-align:center;padding:14px;z-index:100;
-}
-.fixed-line a{color:#fff;text-decoration:none;font-weight:bold;font-size:15px;}
-@media(max-width:600px){
-  .hero{flex-direction:column;text-align:center;}
-  .hero img{width:150px;}
-  .score-box{grid-template-columns:1fr;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人資産管理会社｜高月 義照 FP資格者</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<!-- ナビゲーション -->
-<nav>
-  <span class="nav-logo">ファミリーアセットデザイン</span>
-  <div class="nav-links">
-    <a href="#home">ホーム</a>
-    <a href="#simulator">資産診断</a>
-    <a href="#diagnosis">総合診断</a>
-    <a href="#contact">お問い合わせ</a>
+<!-- ===== HEADER ===== -->
+<header id="top">
+  <div class="hdr-inner">
+    <div class="hdr-logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="17" stroke="#c9a063" stroke-width="1.5"/>
+        <path d="M18 28V17" stroke="#c9a063" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M18 17C18 17 12 13 12 8a6 6 0 0 1 12 0c0 5-6 9-6 9z" fill="#c9a063"/>
+        <path d="M18 22c0 0-4-2.5-4-6" stroke="rgba(201,160,99,.55)" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M18 22c0 0 4-2.5 4-6" stroke="rgba(201,160,99,.55)" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="hdr-name">個人資産管理会社</div>
+        <div class="hdr-tag">あなたの資産を、未来の安心につなぐ</div>
+      </div>
+    </div>
+    <nav class="hdr-nav">
+      <a href="#top">ホーム</a>
+      <a href="#services">サービス</a>
+      <a href="#simulator">資産診断</a>
+      <a href="#profile">プロフィール</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <a href="#contact" class="hdr-btn">無料相談はこちら</a>
+    <button class="hamburger" id="hamburger">&#9776;</button>
   </div>
-  <a href="#simulator" class="nav-btn">無料診断する</a>
-</nav>
-
-<div class="container">
-
-<!-- ヒーロー -->
-<div class="hero" id="home">
-  <div class="hero-text">
-    <h1>あなたの資産を<br>共に育てるパートナー</h1>
-    <p>個人資産管理から資金調達まで、<br>最適なプランをご提案します。</p>
-    <div class="hero-btns">
-      <a href="#simulator" class="btn-sim">📊 無料で資産シミュレーション</a>
-      <a href="#contact" class="btn-contact">📩 無料相談する</a>
-    </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#top"       onclick="closeMNav()">ホーム</a>
+    <a href="#services"  onclick="closeMNav()">サービス</a>
+    <a href="#simulator" onclick="closeMNav()">資産診断</a>
+    <a href="#profile"   onclick="closeMNav()">プロフィール</a>
+    <a href="#contact"   onclick="closeMNav()">お問い合わせ</a>
   </div>
-  <img src="images/fp-yoshiteru.jpg"
-       onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=360&fit=crop&crop=faces&q=80'"
-       alt="高月 義照">
-</div>
+</header>
 
-<!-- NISAシミュレーター -->
-<div class="card" id="simulator">
-  <h2>📊 NISA資産シミュレーター</h2>
-
-  <label>毎月積立額（円）</label>
-  <input type="number" id="monthly" value="30000">
-
-  <label>初期投資額（円）</label>
-  <input type="number" id="initial" value="0">
-
-  <label>年利（%）</label>
-  <input type="number" id="rate" value="5">
-
-  <label>運用年数（年）</label>
-  <input type="number" id="years" value="20">
-
-  <label class="chk-label">
-    <input type="checkbox" id="inflation"> インフレ考慮（実質 −2%）
-  </label>
-
-  <button onclick="calc()">計算する</button>
-</div>
-
-<div class="card">
-  <p style="color:rgba(255,255,255,.6);font-size:13px;">将来の資産総額</p>
-  <div class="result-big" id="future">—</div>
-  <div class="result-row">
-    <div class="result-item">
-      <p>元本合計</p>
-      <span id="principal">—</span>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">FP資格者による安心サポート</div>
+      <h1 class="hero-title">個人資産管理会社</h1>
+      <p class="hero-sub">資産の最適化と、確かな未来設計をサポートします</p>
+      <div class="hero-icons">
+        <div class="h-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>資産運用相談</span>
+        </div>
+        <div class="h-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>リスク管理</span>
+        </div>
+        <div class="h-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>相続・事業承継支援</span>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#simulator" class="btn-gold">📊 無料で資産シミュレーション</a>
+        <a href="#contact"   class="btn-outline">📩 無料相談する</a>
+      </div>
     </div>
-    <div class="result-item">
-      <p>運用益</p>
-      <span id="profit">—</span>
-    </div>
-  </div>
-  <p class="msg" id="message"></p>
-</div>
-
-<canvas id="chart"></canvas>
-
-<!-- 資産・税務・健康 診断 -->
-<div class="card" id="diagnosis">
-  <h2>🏦 資産・税務・健康 総合診断</h2>
-
-  <label>年収（円）</label>
-  <input type="number" id="income" value="6000000">
-
-  <label>総資産（円）</label>
-  <input type="number" id="assets" value="10000000">
-
-  <label>年間税金＋社会保険料（円）</label>
-  <input type="number" id="tax" value="1000000">
-
-  <label>健康状態</label>
-  <select id="health">
-    <option value="good">良好</option>
-    <option value="normal">普通</option>
-    <option value="bad">不安あり</option>
-  </select>
-
-  <button onclick="diagnose()">診断する</button>
-
-  <hr>
-
-  <div class="ratio-row">
-    <div class="ratio-item">
-      <p>資産÷年収</p>
-      <span id="ratio1">—</span>
-    </div>
-    <div class="ratio-item">
-      <p>税負担÷資産</p>
-      <span id="ratio2">—</span>
-    </div>
-    <div class="ratio-item">
-      <p>税負担÷年収</p>
-      <span id="ratio3">—</span>
+    <div class="hero-right">
+      <img src="images/fp-yoshiteru.jpg"
+           onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=600&fit=crop&crop=faces,top&q=80'"
+           alt="高月 義照 代表">
+      <div class="hero-card">
+        <div class="hc-top">個人資産管理会社 代表</div>
+        <div class="hc-name">高月　義照</div>
+        <div class="hc-role">FP資格者 / アドバイザープランナー</div>
+      </div>
     </div>
   </div>
+</section>
 
-  <p style="font-size:13px;color:rgba(255,255,255,.6);margin-top:8px;">総合スコア</p>
-  <div class="total-score" id="totalScore">—</div>
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="sec-wrap">
+    <h2 class="sec-title">サービス内容</h2>
+    <div class="cards">
 
-  <div class="score-box">
-    <div class="score-item">
-      <p>資産スコア</p>
-      <span id="assetScoreVal">—</span>
-    </div>
-    <div class="score-item">
-      <p>税務スコア</p>
-      <span id="taxScoreVal">—</span>
-    </div>
-    <div class="score-item">
-      <p>健康スコア</p>
-      <span id="healthScoreVal">—</span>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>資産運用相談</h3>
+        <p>NISA・投資信託・株式など、ライフプランに合わせた資産形成をご提案します。</p>
+        <ul>
+          <li>ポートフォリオ分析</li>
+          <li>NISA・iDeCo活用</li>
+          <li>長期投資プラン設計</li>
+        </ul>
+        <a href="#contact" class="card-btn">詳しく見る ›</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h3>リスク管理</h3>
+        <p>家計の見直しから保険の最適化まで、生活を守るリスクヘッジをサポートします。</p>
+        <ul>
+          <li>家計改善アドバイス</li>
+          <li>保険見直し・最適化</li>
+          <li>緊急資金プランニング</li>
+        </ul>
+        <a href="#contact" class="card-btn">詳しく見る ›</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>相続・事業承継支援</h3>
+        <p>円滑な資産承継と税務対策を通じて、次世代への安心した財産移転を支援します。</p>
+        <ul>
+          <li>相続プラン設計</li>
+          <li>事業承継アドバイス</li>
+          <li>税務・法務連携サポート</li>
+        </ul>
+        <a href="#contact" class="card-btn">詳しく見る ›</a>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <div class="comment" id="scoreComment"></div>
-  <div class="comment" id="advice"></div>
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-banner">
+  <p>お金の悩み、ひとりで抱えていませんか？</p>
+  <p class="cta-sub">将来への不安・資産運用・急な資金ニーズ——　まずはご相談ください。</p>
+  <a href="#simulator" class="btn-gold">📊 今すぐ無料シミュレーション</a>
+</section>
 
-  <button class="btn-line" onclick="goLine()">無料で詳細プランを受け取る（LINE）</button>
-</div>
+<!-- ===== SIMULATOR ===== -->
+<section class="simulator" id="simulator">
+  <div class="sec-wrap">
+    <h2 class="sec-title white">📊 NISA資産シミュレーター</h2>
+    <p class="sec-sub">毎月の積立額と年利を入力するだけで将来の資産が一目でわかります</p>
 
-<!-- お問い合わせ -->
-<div class="card" id="contact">
-  <h2>📩 無料相談のお申し込み</h2>
+    <div class="sim-grid">
+      <div class="sim-box">
+        <div class="sim-field">
+          <label>毎月積立額（円）</label>
+          <input type="number" id="monthly" value="30000">
+        </div>
+        <div class="sim-field">
+          <label>初期投資額（円）</label>
+          <input type="number" id="initial" value="0">
+        </div>
+        <div class="sim-field">
+          <label>年利（%）</label>
+          <input type="number" id="rate" value="5">
+        </div>
+        <div class="sim-field">
+          <label>運用年数（年）</label>
+          <input type="number" id="years" value="20">
+        </div>
+        <div class="sim-field chk">
+          <label><input type="checkbox" id="inflation"> インフレ考慮（実質 −2%）</label>
+        </div>
+        <button class="sim-btn" onclick="calc()">計算する</button>
+      </div>
 
-  <label>お名前</label>
-  <input type="text" id="cf-name" placeholder="高月 義照">
+      <div class="sim-box">
+        <p class="sim-lbl">将来の資産総額</p>
+        <div class="sim-result" id="future">—</div>
+        <div class="sim-sub-row">
+          <div><p>元本合計</p><span id="principal">—</span></div>
+          <div><p>運用益</p><span id="profit">—</span></div>
+        </div>
+        <p class="sim-msg" id="message"></p>
+      </div>
+    </div>
 
-  <label>電話番号</label>
-  <input type="text" id="cf-tel" placeholder="090-0000-0000">
+    <canvas id="chart" style="max-height:300px;margin:24px 0;"></canvas>
 
-  <label>メールアドレス</label>
-  <input type="email" id="cf-email" placeholder="example@email.com">
+    <div class="sim-diag">
+      <h3>📋 診断結果</h3>
+      <p class="sim-risk" id="risk"></p>
+      <p>このまま何もしない場合、将来 <strong id="lack" style="color:gold;"></strong> 円不足する可能性があります。<br>今から対策すれば改善できます。</p>
+      <button class="btn-line" onclick="goLine()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.02 2 11c0 3.07 1.6 5.8 4.07 7.55L5 21l2.97-1.55C9.2 19.8 10.58 20 12 20c5.52 0 10-4.02 10-9s-4.48-9-10-9z"/></svg>
+        無料で資産プランを受け取る（LINE）
+      </button>
+    </div>
+  </div>
+</section>
 
-  <label>ご相談内容</label>
-  <select id="cf-type">
-    <option value="">選択してください</option>
-    <option>資産運用・NISA</option>
-    <option>ライフプラン設計</option>
-    <option>相続・事業承継</option>
-    <option>個人融資サポート</option>
-    <option>その他</option>
-  </select>
+<!-- ===== PROFILE ===== -->
+<section class="profile" id="profile">
+  <div class="sec-wrap profile-inner">
+    <img src="images/fp-yoshiteru.jpg"
+         onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=320&h=380&fit=crop&crop=faces,top&q=80'"
+         alt="高月 義照">
+    <div class="profile-text">
+      <p class="profile-label">代表プロフィール</p>
+      <h2>高月　義照</h2>
+      <p class="profile-role">FP資格者 / アドバイザープランナー</p>
+      <p>個人の資産形成から老後設計まで、一人ひとりに寄り添ったご提案を行っています。難しい金融知識をわかりやすく解説し、安心して資産運用に取り組めるよう全力でサポートします。</p>
+      <div class="profile-tags">
+        <span>FP資格保有</span>
+        <span>資産運用相談</span>
+        <span>相続・承継支援</span>
+        <span>NISA・iDeCo</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <label>メッセージ</label>
-  <textarea id="cf-msg" rows="4" placeholder="ご質問・ご要望をご記入ください"
-    style="width:100%;padding:10px;margin-top:4px;background:#0b1c2c;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:#fff;font-size:14px;resize:vertical;"></textarea>
+<!-- ===== REASONS ===== -->
+<section class="reasons">
+  <div class="sec-wrap">
+    <h2 class="sec-title">選ばれる3つの理由</h2>
+    <div class="reasons-grid">
+      <div class="reason">
+        <div class="reason-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>FP資格者が直接対応</h3>
+        <p>資格を持つ専門家が最初から最後まで担当。安心してご相談いただけます。</p>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h3>お客様第一の安心設計</h3>
+        <p>ノルマなし・中立的な立場でアドバイス。お客様の利益を最優先に考えます。</p>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>初回相談は完全無料</h3>
+        <p>費用が心配な方も安心。まずはお気軽にご相談ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <button onclick="sendForm()">送信する</button>
-  <p id="form-msg" style="text-align:center;margin-top:10px;font-size:14px;"></p>
-</div>
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="sec-wrap">
+    <h2 class="sec-title">無料相談のお申し込み</h2>
+    <p class="sec-sub" style="color:#555;">初回相談無料。お気軽にお問い合わせください。</p>
 
-</div><!-- /container -->
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>連絡先</h3>
+        <a href="tel:09010104737" class="info-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          090-1010-4737
+        </a>
+        <a href="mailto:yamakaze8000@gmail.com" class="info-row">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          yamakaze8000@gmail.com
+        </a>
+        <button class="btn-line" style="margin-top:20px;" onclick="goLine()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.02 2 11c0 3.07 1.6 5.8 4.07 7.55L5 21l2.97-1.55C9.2 19.8 10.58 20 12 20c5.52 0 10-4.02 10-9s-4.48-9-10-9z"/></svg>
+          LINEで相談する
+        </button>
+      </div>
 
-<div class="fixed-line">
-  <a href="#" onclick="goLine();return false;">📲 LINEで無料相談する</a>
+      <form class="contact-form" onsubmit="sendForm(event)">
+        <div class="f-group">
+          <label>お名前 <span class="req">必須</span></label>
+          <input type="text" id="cf-name" placeholder="高月 義照" required>
+        </div>
+        <div class="f-group">
+          <label>電話番号</label>
+          <input type="tel" id="cf-tel" placeholder="090-0000-0000">
+        </div>
+        <div class="f-group">
+          <label>メールアドレス <span class="req">必須</span></label>
+          <input type="email" id="cf-email" placeholder="example@email.com" required>
+        </div>
+        <div class="f-group">
+          <label>ご相談内容</label>
+          <select id="cf-type">
+            <option value="">選択してください</option>
+            <option>資産運用・NISA</option>
+            <option>家計見直し・保険</option>
+            <option>相続・事業承継</option>
+            <option>老後資金設計</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>メッセージ</label>
+          <textarea id="cf-msg" rows="4" placeholder="ご質問・ご要望をご記入ください"></textarea>
+        </div>
+        <button type="submit" class="form-submit">送信する</button>
+        <p id="form-msg"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="ftr-inner">
+    <div class="ftr-left">
+      <div class="ftr-logo">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+          <path d="M18 28V17" stroke="#c9a063" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M18 17C18 17 12 13 12 8a6 6 0 0 1 12 0c0 5-6 9-6 9z" fill="#c9a063"/>
+        </svg>
+        <span>個人資産管理会社</span>
+      </div>
+      <p>あなたの資産を、未来の安心につなぐ</p>
+    </div>
+    <div class="ftr-contact">
+      <a href="tel:09010104737">📞 090-1010-4737</a>
+      <a href="mailto:yamakaze8000@gmail.com">✉ yamakaze8000@gmail.com</a>
+    </div>
+    <a href="#contact" class="btn-gold ftr-btn">無料相談はこちら</a>
+  </div>
+  <div class="ftr-copy">© 2026 高月義照 / 個人資産管理会社</div>
+</footer>
+
+<!-- ===== LINE固定バー ===== -->
+<div class="line-bar">
+  <a href="#" onclick="goLine();return false;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.02 2 11c0 3.07 1.6 5.8 4.07 7.55L5 21l2.97-1.55C9.2 19.8 10.58 20 12 20c5.52 0 10-4.02 10-9s-4.48-9-10-9z"/></svg>
+    LINEで無料相談する
+  </a>
 </div>
 
 <script>
-/* ===== NISA シミュレーター ===== */
+/* ===== ハンバーガーメニュー ===== */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.toggle('open');
+});
+function closeMNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+}
+
+/* ===== NISAシミュレーター ===== */
 let nisaChart;
 
 function calc() {
@@ -282,45 +354,40 @@ function calc() {
   const r    = Number(document.getElementById('rate').value) / 100;
   const y    = Number(document.getElementById('years').value);
   const inf  = document.getElementById('inflation').checked ? 0.02 : 0;
+  const mr   = (r - inf) / 12;
 
-  const monthlyRate = (r - inf) / 12;
   let total = init;
   const data = [];
-
   for (let n = 1; n <= y * 12; n++) {
-    total = total * (1 + monthlyRate) + m;
+    total = total * (1 + mr) + m;
     if (n % 12 === 0) data.push(Math.round(total));
   }
 
   const principal = init + m * y * 12;
   const profit    = total - principal;
+  const lack      = Math.max(0, 20000000 - total);
 
   document.getElementById('future').textContent    = fmt(total) + ' 円';
   document.getElementById('principal').textContent = fmt(principal) + ' 円';
   document.getElementById('profit').textContent    = fmt(profit) + ' 円';
   document.getElementById('message').textContent   =
-    total > 20000000 ? '✅ 順調です。このまま継続しましょう！'
-                     : '⚠️ 対策が必要です。早めの行動が重要です。';
+    total > 20000000 ? '✅ 順調！このまま継続しましょう。' : '⚠️ 対策が必要です。早めの行動が重要です。';
+  document.getElementById('lack').textContent      = fmt(lack);
+  const riskEl = document.getElementById('risk');
+  riskEl.textContent = lack > 0 ? '将来リスク：高 ⚠️' : '将来リスク：低 ✅';
+  riskEl.style.color = lack > 0 ? '#ff7070' : '#5cd65c';
 
-  drawChart(data, y);
-}
-
-function drawChart(data, years) {
-  const ctx = document.getElementById('chart');
   if (nisaChart) nisaChart.destroy();
-  nisaChart = new Chart(ctx, {
+  nisaChart = new Chart(document.getElementById('chart'), {
     type: 'line',
     data: {
       labels: data.map((_, i) => (i + 1) + '年'),
       datasets: [{
         label: '資産推移（円）',
-        data: data,
-        borderColor: 'gold',
-        backgroundColor: 'rgba(255,215,0,.12)',
-        borderWidth: 2,
-        pointRadius: 2,
-        fill: true,
-        tension: 0.3
+        data,
+        borderColor: '#c9a063',
+        backgroundColor: 'rgba(201,160,99,.15)',
+        borderWidth: 2, pointRadius: 2, fill: true, tension: 0.3
       }]
     },
     options: {
@@ -328,53 +395,20 @@ function drawChart(data, years) {
       plugins: { legend: { labels: { color: '#fff' } } },
       scales: {
         x: { ticks: { color: '#aaa' }, grid: { color: 'rgba(255,255,255,.08)' } },
-        y: {
-          ticks: { color: '#aaa', callback: v => (v / 10000).toLocaleString() + '万' },
-          grid: { color: 'rgba(255,255,255,.08)' }
-        }
+        y: { ticks: { color: '#aaa', callback: v => (v/10000).toLocaleString()+'万' },
+             grid: { color: 'rgba(255,255,255,.08)' } }
       }
     }
   });
 }
 
-/* ===== 総合診断 ===== */
-function diagnose() {
-  const incomeVal = Number(document.getElementById('income').value);
-  const assetsVal = Number(document.getElementById('assets').value);
-  const taxVal    = Number(document.getElementById('tax').value);
-  const healthVal = document.getElementById('health').value;
+function fmt(n) { return Math.round(n).toLocaleString(); }
 
-  const r1 = assetsVal / incomeVal;
-  const r2 = taxVal / assetsVal;
-  const r3 = taxVal / incomeVal;
+/* ===== フォーム送信 ===== */
+const GAS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
-  document.getElementById('ratio1').textContent = r1.toFixed(2) + ' 倍';
-  document.getElementById('ratio2').textContent = (r2 * 100).toFixed(1) + '%';
-  document.getElementById('ratio3').textContent = (r3 * 100).toFixed(1) + '%';
-
-  const aScore = r1 >= 3 ? 40 : r1 >= 1 ? 25 : 10;
-  const tScore = r3 <= 0.20 ? 30 : r3 <= 0.25 ? 20 : 10;
-  const hScore = healthVal === 'good' ? 30 : healthVal === 'normal' ? 20 : 10;
-  const total  = aScore + tScore + hScore;
-
-  document.getElementById('totalScore').textContent    = total + ' 点 / 100点';
-  document.getElementById('assetScoreVal').textContent  = aScore;
-  document.getElementById('taxScoreVal').textContent    = tScore;
-  document.getElementById('healthScoreVal').textContent = hScore;
-
-  document.getElementById('scoreComment').textContent =
-    total >= 80 ? '◎ 非常に良好な状態です！この調子で継続しましょう。' :
-    total >= 60 ? '○ 平均的な状態です。いくつか改善できる余地があります。' :
-                  '△ 改善が必要です。早めに専門家にご相談ください。';
-
-  document.getElementById('advice').textContent =
-    '今から対策することで、将来の資産を大きく改善できます。無料相談でプロがアドバイスします。';
-}
-
-/* ===== お問い合わせ送信 ===== */
-const GAS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // ← GASのURLに変更
-
-async function sendForm() {
+async function sendForm(e) {
+  e.preventDefault();
   const msgEl = document.getElementById('form-msg');
   const body = {
     name:  document.getElementById('cf-name').value,
@@ -383,37 +417,22 @@ async function sendForm() {
     type:  document.getElementById('cf-type').value,
     memo:  document.getElementById('cf-msg').value
   };
-
-  if (!body.name || !body.email) {
-    msgEl.style.color = '#ff7070';
-    msgEl.textContent = 'お名前とメールアドレスを入力してください。';
-    return;
-  }
-
-  msgEl.style.color = '#aaa';
-  msgEl.textContent = '送信中...';
-
+  msgEl.style.color = '#888'; msgEl.textContent = '送信中...';
   try {
-    await fetch(GAS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    msgEl.style.color = '#5cd65c';
+    await fetch(GAS_URL, { method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+    msgEl.style.color = '#2a8a2a';
     msgEl.textContent = '✅ 送信完了！2〜3営業日以内にご連絡いたします。';
-  } catch (e) {
-    msgEl.style.color = '#ff7070';
+    e.target.reset();
+  } catch {
+    msgEl.style.color = 'red';
     msgEl.textContent = '送信エラー。お電話にてご連絡ください。';
   }
 }
 
 /* ===== LINE ===== */
-function goLine() {
-  window.location.href = 'https://line.me/your-link'; // ← LINEのURLに変更
-}
+function goLine() { window.location.href = 'https://line.me/your-link'; }
 
-/* 初回実行 */
 calc();
 </script>
 </body>
