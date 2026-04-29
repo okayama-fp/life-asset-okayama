@@ -2,7 +2,7 @@
   "name": "パーソナル・アセット・パートナーズ",
   "short_name": "PAP",
   "description": "FP資格者による資産・融資サポート。株・経済ニュース自動更新。",
-  "start_url": "/",
+  "start_url": "/123/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
@@ -28,13 +28,13 @@
       "name": "最新ニュース",
       "short_name": "ニュース",
       "description": "株・経済最新ニュースを表示",
-      "url": "/#news"
+      "url": "/123/#news"
     },
     {
       "name": "無料相談",
       "short_name": "相談",
       "description": "無料相談の申し込み",
-      "url": "/#contact"
+      "url": "/123/#contact"
     }
   ]
 }
