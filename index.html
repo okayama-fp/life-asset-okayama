@@ -127,6 +127,35 @@
     .footer-contact a { color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; transition: color .2s; }
     .footer-contact a:hover { color: var(--gold-light); }
 
+    /* ===== MARKET NEWS ===== */
+    .market-ticker { background: var(--navy); color: var(--white); padding: 14px 24px; }
+    .market-ticker-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .market-ticker-label { font-size: 11px; font-weight: 700; color: var(--gold); background: rgba(184,150,46,0.15); padding: 3px 10px; border-radius: 2px; white-space: nowrap; }
+    .market-ticker-items { display: flex; gap: 28px; flex: 1; flex-wrap: wrap; }
+    .market-item { display: flex; align-items: center; gap: 8px; }
+    .market-item-name { font-size: 12px; color: rgba(255,255,255,0.65); white-space: nowrap; }
+    .market-item-value { font-size: 14px; font-weight: 700; color: var(--white); white-space: nowrap; font-feature-settings: 'tnum'; }
+    .market-item-change { font-size: 12px; font-weight: 600; white-space: nowrap; padding: 2px 7px; border-radius: 2px; }
+    .market-item-change.up { color: #4ade80; background: rgba(74,222,128,0.12); }
+    .market-item-change.down { color: #f87171; background: rgba(248,113,113,0.12); }
+    .market-item-change.flat { color: rgba(255,255,255,0.4); }
+    .market-ticker-time { font-size: 10px; color: rgba(255,255,255,0.35); white-space: nowrap; margin-left: auto; }
+    .news-section { padding: 60px 24px; background: var(--gray-bg); }
+    .news-grid { max-width: 1100px; margin: 0 auto 12px; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .news-card { background: var(--white); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; transition: box-shadow .2s, transform .2s; display: flex; flex-direction: column; }
+    .news-card:hover { box-shadow: 0 4px 20px rgba(26,39,68,0.1); transform: translateY(-2px); }
+    .news-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+    .news-card-date { font-size: 11px; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+    .news-card-title { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.55; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--navy); font-weight: 600; margin-top: 12px; transition: color .2s; }
+    .news-card-link:hover { color: var(--gold); }
+    .news-source-bar { max-width: 1100px; margin: 0 auto; text-align: right; font-size: 11px; color: var(--text-light); }
+    .news-loading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 48px; color: var(--text-light); font-size: 14px; grid-column: 1 / -1; }
+    .news-error { text-align: center; padding: 48px; color: var(--text-light); font-size: 13px; grid-column: 1 / -1; }
+    .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .hero-inner { flex-direction: column; text-align: center; }
@@ -137,10 +166,13 @@
       .cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .reasons-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
       .cta-banner-inner { flex-direction: column; text-align: center; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      .market-ticker-items { gap: 16px; }
     }
     @media (max-width: 640px) {
       nav { display: none; }
       .hero-photo-wrapper { width: 260px; height: 340px; }
+      .news-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
     }
   </style>
 </head>
@@ -158,10 +190,10 @@
     </a>
     <nav>
       <a href="#home">ホーム</a>
+      <a href="#news">ニュース</a>
       <a href="#services">サービス</a>
       <a href="#reasons">選ばれる理由</a>
-      <a href="#voice">お客様の声</a>
-      <a href="#flow">相談の流れ</a>
+      <a href="#contact">お問い合わせ</a>
     </nav>
     <a href="#contact" class="btn-cta">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
@@ -221,6 +253,45 @@
   <h2>お金の悩み、ひとりで抱えていませんか？</h2>
   <p>将来への不安、資産の運用、急な資金ニーズ——　そのお悩み、私たちが解決します。</p>
 </section>
+
+<!-- MARKET NEWS -->
+<div id="news">
+  <div class="market-ticker">
+    <div class="market-ticker-inner">
+      <span class="market-ticker-label">マーケット情報</span>
+      <div class="market-ticker-items" id="market-ticker-items">
+        <div class="market-item">
+          <span class="market-item-name">日経平均</span>
+          <span class="market-item-value" id="n225-val">---</span>
+          <span class="market-item-change flat" id="n225-chg">---%</span>
+        </div>
+        <div class="market-item">
+          <span class="market-item-name">TOPIX</span>
+          <span class="market-item-value" id="topx-val">---</span>
+          <span class="market-item-change flat" id="topx-chg">---%</span>
+        </div>
+        <div class="market-item">
+          <span class="market-item-name">USD/JPY</span>
+          <span class="market-item-value" id="usdjpy-val">---</span>
+          <span class="market-item-change flat" id="usdjpy-chg">---%</span>
+        </div>
+        <div class="market-item">
+          <span class="market-item-name">S&amp;P 500</span>
+          <span class="market-item-value" id="sp500-val">---</span>
+          <span class="market-item-change flat" id="sp500-chg">---%</span>
+        </div>
+      </div>
+      <span class="market-ticker-time" id="market-ticker-time"></span>
+    </div>
+  </div>
+  <section class="news-section">
+    <h2 class="section-title">株・経済最新ニュース</h2>
+    <div class="news-grid" id="news-grid">
+      <div class="news-loading"><div class="spinner"></div>ニュースを読み込んでいます...</div>
+    </div>
+    <div class="news-source-bar">出典: NHK経済ニュース &nbsp;|&nbsp; 自動更新（5分毎）</div>
+  </section>
+</div>
 
 <!-- ICON SERVICES -->
 <section class="icon-services">
@@ -394,6 +465,119 @@
     </div>
   </div>
 </footer>
+
+
+<script>
+(function () {
+  'use strict';
+  var REFRESH = 5 * 60 * 1000;
+
+  var SYMBOLS = [
+    { encoded: '%5EN225',   valId: 'n225-val',   chgId: 'n225-chg',   name: '日経平均', fx: false },
+    { encoded: '%5ETOPX',   valId: 'topx-val',   chgId: 'topx-chg',   name: 'TOPIX',   fx: false },
+    { encoded: 'USDJPY%3DX', valId: 'usdjpy-val', chgId: 'usdjpy-chg', name: 'USD/JPY', fx: true  },
+    { encoded: '%5EGSPC',   valId: 'sp500-val',  chgId: 'sp500-chg',  name: 'S&P 500', fx: false }
+  ];
+
+  function fmtDate(s) {
+    var d = new Date(s);
+    return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function fetchQuote(sym) {
+    return fetch(
+      'https://query1.finance.yahoo.com/v8/finance/chart/' + sym.encoded + '?range=1d&interval=1d'
+    )
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        var m = j && j.chart && j.chart.result && j.chart.result[0] && j.chart.result[0].meta;
+        if (!m) return null;
+        return { price: m.regularMarketPrice, prev: m.chartPreviousClose || m.previousClose };
+      })
+      .catch(function () { return null; });
+  }
+
+  function applyQuote(sym, data) {
+    var valEl = document.getElementById(sym.valId);
+    var chgEl = document.getElementById(sym.chgId);
+    if (!valEl || !chgEl) return;
+    if (!data || !data.price) return;
+    var price = data.price, prev = data.prev || data.price;
+    var chg = price - prev;
+    var pct = prev ? chg / prev * 100 : 0;
+    var up = chg >= 0;
+    valEl.textContent = sym.fx
+      ? price.toFixed(2)
+      : price.toLocaleString('ja-JP', { maximumFractionDigits: 2 });
+    chgEl.textContent = (up ? '+' : '') + pct.toFixed(2) + '%';
+    chgEl.className = 'market-item-change ' + (up ? 'up' : 'down');
+  }
+
+  function refreshMarket() {
+    var promises = SYMBOLS.map(fetchQuote);
+    Promise.all(promises).then(function (results) {
+      results.forEach(function (data, i) { applyQuote(SYMBOLS[i], data); });
+      var now = new Date();
+      var el = document.getElementById('market-ticker-time');
+      if (el) {
+        el.textContent = '更新: ' +
+          String(now.getHours()).padStart(2, '0') + ':' +
+          String(now.getMinutes()).padStart(2, '0');
+      }
+    });
+  }
+
+  function refreshNews() {
+    var grid = document.getElementById('news-grid');
+    if (!grid) return;
+    fetch(
+      'https://api.rss2json.com/v1/api.json' +
+      '?rss_url=https%3A%2F%2Fwww3.nhk.or.jp%2Frss%2Fnews%2Fcat5.xml&count=6'
+    )
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (j) {
+        if (!j.items || !j.items.length) return Promise.reject();
+        grid.innerHTML = j.items.slice(0, 6).map(function (item) {
+          var desc = (item.description || '').replace(/<[^>]+>/g, '').trim();
+          return '<article class="news-card"><div class="news-card-body">' +
+            '<div class="news-card-date">' + fmtDate(item.pubDate) + '</div>' +
+            '<h3 class="news-card-title">' + esc(item.title) + '</h3>' +
+            (desc ? '<p class="news-card-desc">' + esc(desc.slice(0, 120)) + '</p>' : '') +
+            '<a href="' + esc(item.link) + '" target="_blank" rel="noopener noreferrer" class="news-card-link">' +
+            '続きを読む ' +
+            '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">' +
+            '<path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+            '</a></div></article>';
+        }).join('');
+      })
+      .catch(function () {
+        grid.innerHTML =
+          '<div class="news-error">ニュースを取得できませんでした。しばらく後にお試しください。</div>';
+      });
+  }
+
+  function init() {
+    refreshMarket();
+    refreshNews();
+    setInterval(refreshMarket, REFRESH);
+    setInterval(refreshNews, REFRESH);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>
