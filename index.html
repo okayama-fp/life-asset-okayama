@@ -9,6 +9,43 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Hiragino Kaku Gothic ProN",sans-serif;background:#0b1c2c;color:#fff;}
 .container{max-width:900px;margin:auto;padding:20px 20px 80px;}
+
+/* ナビ */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:#0a1828;border-bottom:1px solid rgba(255,215,0,.2);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 24px;
+}
+.nav-logo{font-size:14px;font-weight:700;color:gold;}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{
+  color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;
+  transition:color .2s;
+}
+.nav-links a:hover{color:gold;}
+.nav-btn{
+  background:gold;color:#0b1c2c;font-size:13px;font-weight:700;
+  padding:8px 16px;border-radius:6px;text-decoration:none;transition:background .2s;
+}
+.nav-btn:hover{background:#e6b800;}
+
+/* ヒーローボタン */
+.hero-btns{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.btn-sim{
+  display:inline-block;padding:14px 28px;
+  background:gold;color:#0b1c2c;font-weight:700;font-size:15px;
+  border-radius:8px;text-decoration:none;transition:background .2s;
+}
+.btn-sim:hover{background:#e6b800;}
+.btn-contact{
+  display:inline-block;padding:14px 28px;
+  background:transparent;color:gold;font-weight:700;font-size:15px;
+  border:2px solid gold;border-radius:8px;text-decoration:none;transition:all .2s;
+}
+.btn-contact:hover{background:rgba(255,215,0,.1);}
+
+html{scroll-behavior:smooth;}
 h1,h2{color:gold;}
 h1{font-size:clamp(22px,4vw,36px);line-height:1.4;margin-bottom:12px;}
 h2{font-size:20px;margin-bottom:12px;}
@@ -65,13 +102,29 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.15);margin:16px 0;}
 </head>
 <body>
 
+<!-- ナビゲーション -->
+<nav>
+  <span class="nav-logo">ファミリーアセットデザイン</span>
+  <div class="nav-links">
+    <a href="#home">ホーム</a>
+    <a href="#simulator">資産診断</a>
+    <a href="#diagnosis">総合診断</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
+  <a href="#simulator" class="nav-btn">無料診断する</a>
+</nav>
+
 <div class="container">
 
 <!-- ヒーロー -->
-<div class="hero">
+<div class="hero" id="home">
   <div class="hero-text">
     <h1>あなたの資産を<br>共に育てるパートナー</h1>
     <p>個人資産管理から資金調達まで、<br>最適なプランをご提案します。</p>
+    <div class="hero-btns">
+      <a href="#simulator" class="btn-sim">📊 無料で資産シミュレーション</a>
+      <a href="#contact" class="btn-contact">📩 無料相談する</a>
+    </div>
   </div>
   <img src="images/fp-removed.jpg"
        onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=360&fit=crop&crop=faces&q=80'"
@@ -79,7 +132,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.15);margin:16px 0;}
 </div>
 
 <!-- NISAシミュレーター -->
-<div class="card">
+<div class="card" id="simulator">
   <h2>📊 NISA資産シミュレーター</h2>
 
   <label>毎月積立額（円）</label>
@@ -120,7 +173,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.15);margin:16px 0;}
 <canvas id="chart"></canvas>
 
 <!-- 資産・税務・健康 診断 -->
-<div class="card">
+<div class="card" id="diagnosis">
   <h2>🏦 資産・税務・健康 総合診断</h2>
 
   <label>年収（円）</label>
@@ -183,7 +236,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.15);margin:16px 0;}
 </div>
 
 <!-- お問い合わせ -->
-<div class="card">
+<div class="card" id="contact">
   <h2>📩 無料相談のお申し込み</h2>
 
   <label>お名前</label>
