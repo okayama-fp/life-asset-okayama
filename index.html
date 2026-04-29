@@ -29,6 +29,7 @@
       <a href="#top">ホーム</a>
       <a href="#services">サービス</a>
       <a href="#simulator">資産診断</a>
+      <a href="#diagnosis">健康診断</a>
       <a href="#profile">プロフィール</a>
       <a href="#contact">お問い合わせ</a>
     </nav>
@@ -38,8 +39,9 @@
   <div class="mobile-nav" id="mobileNav">
     <a href="#top"       onclick="closeMNav()">ホーム</a>
     <a href="#services"  onclick="closeMNav()">サービス</a>
-    <a href="#simulator" onclick="closeMNav()">資産診断</a>
-    <a href="#profile"   onclick="closeMNav()">プロフィール</a>
+    <a href="#simulator"  onclick="closeMNav()">資産診断</a>
+    <a href="#diagnosis"  onclick="closeMNav()">健康診断</a>
+    <a href="#profile"    onclick="closeMNav()">プロフィール</a>
     <a href="#contact"   onclick="closeMNav()">お問い合わせ</a>
   </div>
 </header>
@@ -192,6 +194,113 @@
       <button class="btn-line" onclick="goLine()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.02 2 11c0 3.07 1.6 5.8 4.07 7.55L5 21l2.97-1.55C9.2 19.8 10.58 20 12 20c5.52 0 10-4.02 10-9s-4.48-9-10-9z"/></svg>
         無料で資産プランを受け取る（LINE）
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HEALTH DIAGNOSIS ===== -->
+<section class="simulator" id="diagnosis" style="padding-top:0;">
+  <div class="sec-wrap">
+    <div class="diag-divider"></div>
+    <h2 class="sec-title white">🏥 資産健康診断シミュレーション</h2>
+    <p class="sec-sub">収入・支出・資産を入力して、あなたの財務健康状態をスコア診断します</p>
+
+    <div class="sim-grid">
+      <div class="sim-box">
+        <div class="sim-field">
+          <label>年齢（歳）</label>
+          <input type="number" id="d-age" value="35">
+        </div>
+        <div class="sim-field">
+          <label>年収（円）</label>
+          <input type="number" id="d-income" value="6000000">
+        </div>
+        <div class="sim-field">
+          <label>月の手取り（円）</label>
+          <input type="number" id="d-monthly-income" value="350000">
+        </div>
+        <div class="sim-field">
+          <label>月の支出（円）</label>
+          <input type="number" id="d-expense" value="250000">
+        </div>
+        <div class="sim-field">
+          <label>総資産（円）</label>
+          <input type="number" id="d-assets" value="5000000">
+        </div>
+        <div class="sim-field">
+          <label>年間 税金＋社会保険料（円）</label>
+          <input type="number" id="d-tax" value="1200000">
+        </div>
+        <div class="sim-field">
+          <label>健康状態</label>
+          <select id="d-health">
+            <option value="good">良好</option>
+            <option value="normal">普通</option>
+            <option value="bad">不安あり</option>
+          </select>
+        </div>
+        <button class="sim-btn" onclick="diagnose()">診断する</button>
+      </div>
+
+      <div class="sim-box" id="diag-result" style="display:none;">
+        <p class="sim-lbl">総合スコア</p>
+        <div class="diag-score-wrap">
+          <div class="diag-score-ring">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/>
+              <circle id="diag-ring" cx="60" cy="60" r="50" fill="none" stroke="#c9a063"
+                stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="314" stroke-dashoffset="314"
+                transform="rotate(-90 60 60)"
+                style="transition:stroke-dashoffset 1s ease;"/>
+            </svg>
+            <div class="diag-score-num" id="d-total">0</div>
+          </div>
+          <div class="diag-grade" id="d-grade">—</div>
+        </div>
+
+        <div class="diag-bars">
+          <div class="diag-bar-item">
+            <div class="diag-bar-label"><span>貯蓄率</span><span id="d-saving-rate">—</span></div>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="d-saving-bar"></div></div>
+          </div>
+          <div class="diag-bar-item">
+            <div class="diag-bar-label"><span>資産倍率</span><span id="d-asset-rate">—</span></div>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="d-asset-bar"></div></div>
+          </div>
+          <div class="diag-bar-item">
+            <div class="diag-bar-label"><span>税負担率</span><span id="d-tax-rate">—</span></div>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="d-tax-bar" style="background:#ff7070;"></div></div>
+          </div>
+          <div class="diag-bar-item">
+            <div class="diag-bar-label"><span>健康スコア</span><span id="d-health-label">—</span></div>
+            <div class="diag-bar-bg"><div class="diag-bar-fill" id="d-health-bar"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 詳細結果 -->
+    <div class="diag-detail" id="diag-detail" style="display:none;">
+      <div class="diag-detail-grid">
+        <div class="diag-detail-card">
+          <p class="ddc-label">月の貯蓄額</p>
+          <p class="ddc-val" id="d-save-amount">—</p>
+        </div>
+        <div class="diag-detail-card">
+          <p class="ddc-label">老後必要資金（65歳まで）</p>
+          <p class="ddc-val" id="d-retire-need">—</p>
+        </div>
+        <div class="diag-detail-card">
+          <p class="ddc-label">現在の不足額</p>
+          <p class="ddc-val" id="d-shortage" style="color:#ff7070;">—</p>
+        </div>
+      </div>
+      <div class="diag-comment" id="d-comment"></div>
+      <button class="btn-line" style="max-width:400px;margin:20px auto 0;display:flex;" onclick="goLine()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.02 2 11c0 3.07 1.6 5.8 4.07 7.55L5 21l2.97-1.55C9.2 19.8 10.58 20 12 20c5.52 0 10-4.02 10-9s-4.48-9-10-9z"/></svg>
+        無料で改善プランを受け取る（LINE）
       </button>
     </div>
   </div>
@@ -403,6 +512,81 @@ function calc() {
 }
 
 function fmt(n) { return Math.round(n).toLocaleString(); }
+
+/* ===== 資産健康診断 ===== */
+function diagnose() {
+  const age     = Number(document.getElementById('d-age').value);
+  const income  = Number(document.getElementById('d-income').value);
+  const mIncome = Number(document.getElementById('d-monthly-income').value);
+  const expense = Number(document.getElementById('d-expense').value);
+  const assets  = Number(document.getElementById('d-assets').value);
+  const tax     = Number(document.getElementById('d-tax').value);
+  const health  = document.getElementById('d-health').value;
+
+  // 各指標
+  const monthlySave = mIncome - expense;
+  const savingRate  = mIncome > 0 ? (monthlySave / mIncome) * 100 : 0;
+  const assetRatio  = income > 0 ? assets / income : 0;
+  const taxRate     = income > 0 ? (tax / income) * 100 : 0;
+  const yearsToRetire = Math.max(0, 65 - age);
+  const retireNeed  = expense * 12 * 25; // 25年分の支出
+  const shortage    = Math.max(0, retireNeed - assets - (monthlySave * 12 * yearsToRetire));
+
+  // スコア計算（各25点満点）
+  const savingScore = savingRate >= 20 ? 25 : savingRate >= 10 ? 18 : savingRate >= 5 ? 10 : 3;
+  const assetScore  = assetRatio >= 5  ? 25 : assetRatio >= 3  ? 20 : assetRatio >= 1 ? 12 : 4;
+  const taxScore    = taxRate <= 20 ? 25 : taxRate <= 25 ? 18 : taxRate <= 30 ? 10 : 4;
+  const healthScore = health === 'good' ? 25 : health === 'normal' ? 15 : 5;
+  const total       = savingScore + assetScore + taxScore + healthScore;
+
+  // グレード
+  const grade = total >= 85 ? { text: '◎ 非常に優秀', color: '#5cd65c' }
+              : total >= 70 ? { text: '○ 良好',       color: '#7ec8e3' }
+              : total >= 50 ? { text: '△ 要改善',     color: '#f0c040' }
+              :               { text: '✕ 要注意',     color: '#ff7070' };
+
+  // コメント
+  const comments = [];
+  if (savingRate < 10) comments.push('💡 貯蓄率が低め。月の支出を見直すことで改善できます。');
+  if (assetRatio < 3)  comments.push('💡 年収に対して資産が少ない。NISA・iDeCoの活用を検討しましょう。');
+  if (taxRate > 25)    comments.push('💡 税負担が重め。節税対策（iDeCo・ふるさと納税等）が効果的です。');
+  if (health === 'bad') comments.push('💡 健康リスクに備え、医療・就労不能保険の見直しをおすすめします。');
+  if (shortage > 0)    comments.push(`💡 老後資金が約${fmt(shortage)}円不足する見込みです。早期の積立が重要です。`);
+  if (comments.length === 0) comments.push('✅ 現在の財務状況は良好です。このまま継続し、さらなる最適化を目指しましょう。');
+
+  // 表示
+  document.getElementById('diag-result').style.display = 'block';
+  document.getElementById('diag-detail').style.display = 'block';
+  document.getElementById('d-total').textContent = total;
+  document.getElementById('d-grade').textContent = grade.text;
+  document.getElementById('d-grade').style.color = grade.color;
+
+  // リング
+  setTimeout(() => {
+    const offset = 314 - (314 * total / 100);
+    document.getElementById('diag-ring').style.strokeDashoffset = offset;
+    document.getElementById('diag-ring').style.stroke =
+      total >= 70 ? '#5cd65c' : total >= 50 ? '#f0c040' : '#ff7070';
+  }, 100);
+
+  // バー
+  setBar('d-saving-rate', 'd-saving-bar', savingRate.toFixed(1) + '%', Math.min(savingRate * 3, 100));
+  setBar('d-asset-rate',  'd-asset-bar',  assetRatio.toFixed(1) + '倍', Math.min(assetRatio * 15, 100));
+  setBar('d-tax-rate',    'd-tax-bar',    taxRate.toFixed(1) + '%',    Math.min(taxRate * 2.5, 100));
+  setBar('d-health-label','d-health-bar', health==='good'?'良好':health==='normal'?'普通':'不安あり', healthScore*4);
+
+  document.getElementById('d-save-amount').textContent = fmt(monthlySave) + ' 円/月';
+  document.getElementById('d-retire-need').textContent = fmt(retireNeed) + ' 円';
+  document.getElementById('d-shortage').textContent    = shortage > 0 ? fmt(shortage) + ' 円不足' : '不足なし ✅';
+  document.getElementById('d-comment').innerHTML       = comments.map(c => `<p>${c}</p>`).join('');
+}
+
+function setBar(labelId, barId, labelText, pct) {
+  document.getElementById(labelId).textContent = labelText;
+  setTimeout(() => {
+    document.getElementById(barId).style.width = Math.min(pct, 100) + '%';
+  }, 200);
+}
 
 /* ===== フォーム送信 ===== */
 const GAS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
