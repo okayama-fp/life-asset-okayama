@@ -288,6 +288,43 @@ header {
 .sim-risk { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
 .sim-diag p { font-size: 13px; color: rgba(255,255,255,.8); line-height: 1.7; }
 
+/* ===== HEALTH DIAGNOSIS ===== */
+.diag-divider {
+  border-top: 1px solid rgba(255,255,255,.12);
+  margin-bottom: 60px;
+}
+.diag-score-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 20px;
+}
+.diag-score-ring {
+  position: relative; width: 120px; height: 120px;
+}
+.diag-score-ring svg { width: 120px; height: 120px; }
+.diag-score-num {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px; font-weight: 900; color: var(--gold);
+}
+.diag-grade { font-size: 18px; font-weight: 700; }
+.diag-bars { display: flex; flex-direction: column; gap: 12px; }
+.diag-bar-item { display: flex; flex-direction: column; gap: 4px; }
+.diag-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.7); }
+.diag-bar-bg { background: rgba(255,255,255,.1); border-radius: 4px; height: 8px; overflow: hidden; }
+.diag-bar-fill {
+  height: 100%; width: 0; background: var(--gold);
+  border-radius: 4px; transition: width 1s ease;
+}
+.diag-detail { margin-top: 20px; }
+.diag-detail-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+.diag-detail-card { background: #122c44; border-radius: 8px; padding: 16px; text-align: center; }
+.ddc-label { font-size: 12px; color: rgba(255,255,255,.6); margin-bottom: 6px; }
+.ddc-val { font-size: 18px; font-weight: 700; color: var(--gold); }
+.diag-comment {
+  background: #122c44; border-radius: 8px; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.diag-comment p { font-size: 13px; color: rgba(255,255,255,.85); line-height: 1.7; }
+
 /* ===== PROFILE ===== */
 .profile { padding: 80px 0; background: var(--white); }
 .profile-inner { display: flex; align-items: center; gap: 48px; }
