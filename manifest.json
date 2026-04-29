@@ -1,0 +1,40 @@
+{
+  "name": "パーソナル・アセット・パートナーズ",
+  "short_name": "PAP",
+  "description": "FP資格者による資産・融資サポート。株・経済ニュース自動更新。",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#1a2744",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%231a2744'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='72' fill='%23b8962e'>FP</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%231a2744'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='200' fill='%23b8962e'>FP</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business"],
+  "shortcuts": [
+    {
+      "name": "最新ニュース",
+      "short_name": "ニュース",
+      "description": "株・経済最新ニュースを表示",
+      "url": "/#news"
+    },
+    {
+      "name": "無料相談",
+      "short_name": "相談",
+      "description": "無料相談の申し込み",
+      "url": "/#contact"
+    }
+  ]
+}
