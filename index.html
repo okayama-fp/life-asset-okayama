@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>パーソナル・アセット・パートナーズ｜FP資格者による資産・融資サポート</title>
+  <title>ライフアセットパートナーズ｜FP資格者による資産・融資サポート</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -26,7 +26,7 @@
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+    .logo-icon span { color: var(--gold); font-size: 13px; font-weight: 900; letter-spacing: -0.5px; }
     .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
     .logo-text .tagline { font-size: 10px; color: var(--text-light); }
     nav { display: flex; align-items: center; gap: 24px; }
@@ -37,7 +37,7 @@
 
     /* ===== HERO ===== */
     .hero { background: linear-gradient(135deg, #d6dce8 0%, #e8ecf5 40%, #c8d4e4 100%); min-height: 580px; display: flex; align-items: center; overflow: hidden; position: relative; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=60&fit=crop') center/cover no-repeat; opacity: 0.12; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('images/hero-bg.jpg') center/cover no-repeat; opacity: 0.12; }
     .hero-inner { max-width: 1100px; margin: 0 auto; padding: 60px 24px; display: flex; align-items: center; gap: 40px; width: 100%; position: relative; z-index: 1; }
     .hero-content { flex: 1; }
     .hero-badge { display: inline-block; background: linear-gradient(90deg, #b8962e, #d4aa3a); color: var(--white); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 2px; margin-bottom: 20px; letter-spacing: 0.05em; }
@@ -59,7 +59,7 @@
     .laurel-icon svg { width: 22px; height: 22px; color: var(--gold); position: relative; z-index: 1; }
     .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
     .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
-    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; }
+    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; background: #c8d4e4; }
     .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; }
     .hero-profile-tag { position: absolute; bottom: 16px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
     .hero-profile-tag .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 4px; }
@@ -87,7 +87,7 @@
     .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
     .card { background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
     .card:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.12); transform: translateY(-4px); }
-    .card-img { height: 180px; overflow: hidden; }
+    .card-img { height: 180px; overflow: hidden; background: #dde3ed; }
     .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .card-body { padding: 22px; }
     .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
@@ -123,6 +123,8 @@
     .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 13px; font-weight: 700; }
     .footer-logo-icon { width: 28px; height: 28px; background: var(--navy); border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .footer-logo-icon span { color: var(--gold); font-size: 10px; font-weight: 900; }
+    .footer-info { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-info span { color: rgba(255,255,255,0.65); }
     .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-contact a { color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; transition: color .2s; }
     .footer-contact a:hover { color: var(--gold-light); }
@@ -150,9 +152,9 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">
-      <div class="logo-icon"><span>FP</span></div>
+      <div class="logo-icon"><span>LP</span></div>
       <div class="logo-text">
-        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="name">ライフアセットパートナーズ</div>
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
@@ -205,12 +207,14 @@
     </div>
     <div class="hero-image">
       <div class="hero-photo-wrapper">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&fit=crop&crop=faces&q=80" alt="高橋宏之 代表" />
+        <!-- images/person.jpg に人物写真を配置してください -->
+        <img src="images/person.jpg" alt="髙月義照"
+             onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&fit=crop&crop=faces&q=80'" />
       </div>
       <div class="hero-profile-tag">
-        <div class="role">FP資格者／個人資産アドバイザー</div>
+        <div class="role">FP資格者・個人資産アドバイザー</div>
         <div class="person-name">髙月　義照</div>
-        <div class="person-sub">個人資産管理会社 代表</div>
+        <div class="person-sub">ファイナンシャル・プランナー<br>個人資産管理会社 代表</div>
       </div>
     </div>
   </div>
@@ -269,7 +273,9 @@
 
     <div class="card">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80" alt="個人資産管理" />
+        <!-- images/service1.jpg に画像を配置してください -->
+        <img src="images/service1.jpg" alt="個人資産管理"
+             onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80'" />
       </div>
       <div class="card-body">
         <h3 class="card-title">個人資産管理</h3>
@@ -285,7 +291,9 @@
 
     <div class="card">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80" alt="アドバイザー業務" />
+        <!-- images/service2.jpg に画像を配置してください -->
+        <img src="images/service2.jpg" alt="アドバイザー業務"
+             onerror="this.src='https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80'" />
       </div>
       <div class="card-body">
         <h3 class="card-title">アドバイザー業務</h3>
@@ -301,7 +309,9 @@
 
     <div class="card">
       <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80" alt="個人融資サポート" />
+        <!-- images/service3.jpg に画像を配置してください -->
+        <img src="images/service3.jpg" alt="個人融資サポート"
+             onerror="this.src='https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80'" />
       </div>
       <div class="card-body">
         <h3 class="card-title">個人融資サポート</h3>
@@ -379,17 +389,16 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-icon"><span>FP</span></div>
-      パーソナル・アセット・パートナーズ
+      <div class="footer-logo-icon"><span>LP</span></div>
+      ライフアセットパートナーズ
+    </div>
+    <div class="footer-info">
+      <span>代表　髙月 義照</span>
     </div>
     <div class="footer-contact">
       <a href="mailto:yamakaze8000@gmail.com">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
         yamakaze8000@gmail.com
-      </a>
-      <a href="tel:09010104737">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        090-1010-4737
       </a>
     </div>
   </div>
