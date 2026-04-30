@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資産シミュレーター｜ライフアセットパートナーズ</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    padding: 20px;
+  }
+  .box {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #0b3c5d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #0b3c5d;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>資産シミュレーション</h2>
+
+  <label>現在の資産（万円）</label>
+  <input type="number" id="initial" value="3700">
+
+  <label>毎月の積立（万円）</label>
+  <input type="number" id="monthly" value="10">
+
+  <label>想定利回り（%）</label>
+  <input type="number" id="rate" value="5">
+
+  <label>運用年数（年）</label>
+  <input type="number" id="years" value="20">
+
+  <button onclick="calculate()">計算する</button>
+
+  <div class="result" id="result"></div>
+
+  <a href="index.html" class="back-link">← トップページに戻る</a>
+</div>
+
+<script>
+function calculate() {
+  let initial = parseFloat(document.getElementById("initial").value) * 10000;
+  let monthly = parseFloat(document.getElementById("monthly").value) * 10000;
+  let rate = parseFloat(document.getElementById("rate").value) / 100;
+  let years = parseFloat(document.getElementById("years").value);
+
+  let months = years * 12;
+  let total = initial;
+
+  for (let i = 0; i < months; i++) {
+    total = total * (1 + rate / 12) + monthly;
+  }
+
+  document.getElementById("result").innerHTML =
+    "将来資産：約 " + Math.round(total / 10000).toLocaleString() + " 万円";
+}
+</script>
+
+</body>
+</html>
