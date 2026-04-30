@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>融資シミュレーター｜ライフアセットパートナーズ</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  padding: 20px;
+}
+.box {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-top: 4px solid #b8962e;
+}
+h2 { text-align: center; color: #1a2744; margin-bottom: 16px; }
+label { display: block; font-size: 13px; color: #444; margin-top: 10px; margin-bottom: 2px; }
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  background: #1a2744;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+button:hover { background: #243460; }
+.result {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 2;
+  text-align: center;
+}
+.safe   { color: green; }
+.warn   { color: orange; }
+.danger { color: red; }
+table {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: collapse;
+}
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+th { background: #1a2744; color: white; }
+h3 { color: #1a2744; margin-top: 20px; margin-bottom: 8px; font-size: 15px; }
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  color: #1a2744;
+  text-decoration: none;
+  font-size: 14px;
+}
+.back-link:hover { text-decoration: underline; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>融資シミュレーション</h2>
+
+  <label>借入額（万円）</label>
+  <input id="loan" type="number" value="300">
+
+  <label>金利（%）</label>
+  <input id="rate" type="number" value="3">
+
+  <label>返済年数</label>
+  <input id="years" type="number" value="5">
+
+  <label>月収（万円）</label>
+  <input id="income" type="number" value="30">
+
+  <label>生活費（万円）</label>
+  <input id="expense" type="number" value="20">
+
+  <label>既存ローン返済（万円）</label>
+  <input id="other" type="number" value="0">
+
+  <button onclick="calc()">計算する</button>
+
+  <div class="result" id="result"></div>
+  <div id="tableArea"></div>
+
+  <a href="index.html" class="back-link">← トップページに戻る</a>
+</div>
+
+<script>
+function payment(P, r, n) {
+  if (r === 0) return P / n;
+  return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+}
+
+function calc() {
+  let loan    = +document.getElementById("loan").value * 10000;
+  let rate    = +document.getElementById("rate").value / 100 / 12;
+  let years   = +document.getElementById("years").value;
+  let n       = years * 12;
+  let monthly = payment(loan, rate, n);
+
+  let income  = +document.getElementById("income").value * 10000;
+  let expense = +document.getElementById("expense").value * 10000;
+  let other   = +document.getElementById("other").value * 10000;
+  let remain  = income - expense - other - monthly;
+
+  let status, cls;
+  if (remain > 30000)      { status = "安全"; cls = "safe"; }
+  else if (remain > 0)     { status = "注意"; cls = "warn"; }
+  else                     { status = "危険"; cls = "danger"; }
+
+  document.getElementById("result").innerHTML =
+    "毎月返済：約 " + Math.round(monthly / 10000).toLocaleString() + " 万円<br>" +
+    "残り余力：" + Math.round(remain / 10000).toLocaleString() + " 万円<br>" +
+    "判定：<span class='" + cls + "'>" + status + "</span>";
+
+  let plans = [3, 5, 7];
+  let html = "<h3>返済プラン比較</h3><table><tr><th>年数</th><th>月額</th><th>総支払</th></tr>";
+  plans.forEach(y => {
+    let m     = payment(loan, rate, y * 12);
+    let total = m * y * 12;
+    html += "<tr><td>" + y + "年</td><td>" + Math.round(m / 10000).toLocaleString() + "万</td><td>" + Math.round(total / 10000).toLocaleString() + "万</td></tr>";
+  });
+  html += "</table>";
+  document.getElementById("tableArea").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
