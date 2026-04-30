@@ -26,9 +26,7 @@
     header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--sky), var(--navy)); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .logo-icon span { color: #fff; font-size: 12px; font-weight: 900; }
-    .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .logo-main { font-size: 22px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
     .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
     nav { display: flex; align-items: center; gap: 28px; }
     nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
@@ -141,9 +139,8 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">
-      <div class="logo-icon"><span>LP</span></div>
       <div class="logo-text">
-        <div class="name">ライフアセットパートナーズ</div>
+        <div class="logo-main">Life Asset</div>
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
