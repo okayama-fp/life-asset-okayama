@@ -36,20 +36,20 @@
     .btn-cta:hover { background: var(--navy-light); }
 
     /* ===== HERO ===== */
-    .hero { background: linear-gradient(135deg, #d6dce8 0%, #e8ecf5 40%, #c8d4e4 100%); min-height: 580px; display: flex; align-items: center; overflow: hidden; position: relative; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: url('images/hero-bg.jpg') center/cover no-repeat; opacity: 0.12; }
-    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 60px 24px; display: flex; align-items: center; gap: 40px; width: 100%; position: relative; z-index: 1; }
-    .hero-content { flex: 1; }
+    .hero { background: linear-gradient(135deg, #1a2744 0%, #243460 60%, #1a2744 100%); min-height: 520px; display: flex; align-items: center; overflow: hidden; position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(184,150,46,0.12) 0%, transparent 70%); }
+    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 60px; width: 100%; position: relative; z-index: 1; }
     .hero-badge { display: inline-block; background: linear-gradient(90deg, #b8962e, #d4aa3a); color: var(--white); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 2px; margin-bottom: 20px; letter-spacing: 0.05em; }
-    .hero-title { font-size: clamp(32px, 4.5vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.25; margin-bottom: 20px; }
-    .hero-desc { font-size: 15px; color: #444; margin-bottom: 32px; line-height: 1.9; }
-    .hero-laurels { display: flex; gap: 24px; flex-wrap: wrap; }
+    .hero-title { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; color: var(--white); line-height: 1.25; margin-bottom: 20px; }
+    .hero-title em { color: var(--gold-light); font-style: normal; }
+    .hero-desc { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 36px; line-height: 1.9; }
+    .hero-laurels { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
     .laurel { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
     .laurel-icon {
       width: 64px; height: 64px; border-radius: 50%;
       border: 2px solid var(--gold);
       display: flex; align-items: center; justify-content: center;
-      position: relative; background: rgba(184,150,46,0.08);
+      position: relative; background: rgba(184,150,46,0.1);
     }
     .laurel-icon::before, .laurel-icon::after {
       content: '❧'; position: absolute; font-size: 18px; color: var(--gold); opacity: 0.7;
@@ -57,19 +57,19 @@
     .laurel-icon::before { left: -2px; transform: scaleX(-1); }
     .laurel-icon::after  { right: -2px; }
     .laurel-icon svg { width: 22px; height: 22px; color: var(--gold); position: relative; z-index: 1; }
-    .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
-    .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
-    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; background: #c8d4e4; }
-    .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; }
-    .hero-profile-tag { position: absolute; bottom: 16px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .hero-profile-tag .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 4px; }
-    .hero-profile-tag .person-name { font-size: 22px; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 4px; }
-    .hero-profile-tag .person-sub { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .laurel-label { font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 700; line-height: 1.4; max-width: 72px; }
+    .hero-profile-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(184,150,46,0.4); border-radius: 12px; padding: 32px 28px; text-align: center; flex-shrink: 0; min-width: 220px; backdrop-filter: blur(4px); }
+    .hero-profile-card .avatar { width: 72px; height: 72px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .hero-profile-card .avatar svg { width: 38px; height: 38px; color: white; }
+    .hero-profile-card .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 8px; letter-spacing: 0.05em; }
+    .hero-profile-card .person-name { font-size: 24px; font-weight: 900; color: var(--white); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .hero-profile-card .person-sub { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+    .hero-profile-card .divider { width: 40px; height: 2px; background: var(--gold); margin: 12px auto; border-radius: 1px; }
 
     /* ===== DARK BANNER ===== */
-    .banner { background: var(--navy); color: var(--white); text-align: center; padding: 44px 24px; }
+    .banner { background: var(--gold); color: var(--white); text-align: center; padding: 44px 24px; }
     .banner h2 { font-size: clamp(18px,3vw,26px); font-weight: 700; margin-bottom: 10px; }
-    .banner p { font-size: 14px; opacity: 0.8; }
+    .banner p { font-size: 14px; opacity: 0.9; }
 
     /* ===== ICON SERVICES ===== */
     .icon-services { background: var(--white); border-bottom: 1px solid var(--border); padding: 48px 24px; }
@@ -87,8 +87,8 @@
     .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
     .card { background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
     .card:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.12); transform: translateY(-4px); }
-    .card-img { height: 180px; overflow: hidden; background: #dde3ed; }
-    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-icon-header { height: 120px; background: var(--navy); display: flex; align-items: center; justify-content: center; }
+    .card-icon-header svg { width: 48px; height: 48px; color: var(--gold); }
     .card-body { padding: 22px; }
     .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
     .card-desc { font-size: 12.5px; color: var(--text-light); margin-bottom: 14px; line-height: 1.7; }
@@ -131,10 +131,9 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-image { flex: 0 0 auto; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-profile-card { margin: 0 auto; }
       .hero-laurels { justify-content: center; }
-      .hero-profile-tag { position: static; margin-top: 16px; }
       .icon-services-grid { grid-template-columns: 1fr; }
       .cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .reasons-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
@@ -142,7 +141,6 @@
     }
     @media (max-width: 640px) {
       nav { display: none; }
-      .hero-photo-wrapper { width: 260px; height: 340px; }
     }
   </style>
 </head>
@@ -162,8 +160,7 @@
       <a href="#home">ホーム</a>
       <a href="#services">サービス</a>
       <a href="#reasons">選ばれる理由</a>
-      <a href="#voice">お客様の声</a>
-      <a href="#flow">相談の流れ</a>
+      <a href="#contact">相談の流れ</a>
     </nav>
     <a href="#contact" class="btn-cta">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
@@ -178,7 +175,7 @@
     <div class="hero-content">
       <div class="hero-badge">FP資格者による安心サポート</div>
       <h1 class="hero-title">
-        あなたの資産と未来を<br>共に育てるパートナー
+        あなたの<em>資産</em>と<em>未来</em>を<br>共に育てるパートナー
       </h1>
       <p class="hero-desc">
         個人資産管理から資金調達まで、<br>
@@ -205,17 +202,16 @@
         </div>
       </div>
     </div>
-    <div class="hero-image">
-      <div class="hero-photo-wrapper">
-        <!-- images/person.jpg に人物写真を配置してください -->
-        <img src="images/profile.jpg" alt="髙月義照"
-             onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&fit=crop&crop=faces&q=80'" />
+    <div class="hero-profile-card">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
       </div>
-      <div class="hero-profile-tag">
-        <div class="role">FP資格者・個人資産アドバイザー</div>
-        <div class="person-name">髙月　義照</div>
-        <div class="person-sub">ファイナンシャル・プランナー<br>個人資産管理会社 代表</div>
-      </div>
+      <div class="role">FP資格者・個人資産アドバイザー</div>
+      <div class="person-name">髙月　義照</div>
+      <div class="divider"></div>
+      <div class="person-sub">ファイナンシャル・プランナー<br>個人資産管理会社 代表</div>
     </div>
   </div>
 </section>
@@ -272,10 +268,10 @@
   <div class="cards">
 
     <div class="card">
-      <div class="card-img">
-        <!-- images/service1.jpg に画像を配置してください -->
-        <img src="images/service1.jpg" alt="個人資産管理"
-             onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80'" />
+      <div class="card-icon-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
       </div>
       <div class="card-body">
         <h3 class="card-title">個人資産管理</h3>
@@ -290,10 +286,10 @@
     </div>
 
     <div class="card">
-      <div class="card-img">
-        <!-- images/service2.jpg に画像を配置してください -->
-        <img src="images/service2.jpg" alt="アドバイザー業務"
-             onerror="this.src='https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80'" />
+      <div class="card-icon-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        </svg>
       </div>
       <div class="card-body">
         <h3 class="card-title">アドバイザー業務</h3>
@@ -308,10 +304,10 @@
     </div>
 
     <div class="card">
-      <div class="card-img">
-        <!-- images/service3.jpg に画像を配置してください -->
-        <img src="images/service3.jpg" alt="個人融資サポート"
-             onerror="this.src='https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80'" />
+      <div class="card-icon-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
       </div>
       <div class="card-body">
         <h3 class="card-title">個人融資サポート</h3>
