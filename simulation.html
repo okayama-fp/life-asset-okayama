@@ -7,77 +7,185 @@
 <style>
   body {
     font-family: Arial, sans-serif;
-    background: #f5f7fa;
+    background: #f0f9ff;
     padding: 20px;
+    min-height: 100vh;
+  }
+  .page-wrapper {
+    display: flex;
+    gap: 28px;
+    max-width: 760px;
+    margin: auto;
+    align-items: flex-start;
   }
   .box {
-    max-width: 500px;
-    margin: auto;
+    flex: 1;
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(14,165,233,0.10);
+    border-top: 4px solid #0ea5e9;
   }
   h2 {
     text-align: center;
+    color: #0f3460;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: #444;
+    margin-top: 10px;
+    margin-bottom: 2px;
   }
   input {
     width: 100%;
     padding: 10px;
-    margin: 8px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    margin: 0;
+    border-radius: 6px;
+    border: 1px solid #bae6fd;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #f0f9ff;
   }
+  input:focus { outline: none; border-color: #0ea5e9; background: #fff; }
   button {
     width: 100%;
     padding: 12px;
-    background: #0b3c5d;
+    background: linear-gradient(90deg, #0ea5e9, #38bdf8);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 16px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: opacity .2s;
   }
+  button:hover { opacity: 0.88; }
   .result {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+    color: #0f3460;
   }
   .back-link {
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: #0b3c5d;
+    color: #0ea5e9;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
   }
   .back-link:hover { text-decoration: underline; }
+
+  /* キャラクター */
+  .character-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 48px;
+    min-width: 130px;
+  }
+  .speech-bubble {
+    background: #fff;
+    border: 2px solid #bae6fd;
+    border-radius: 14px;
+    padding: 10px 13px;
+    font-size: 12px;
+    color: #0f3460;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(14,165,233,0.10);
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #bae6fd;
+  }
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #fff;
+    z-index: 1;
+  }
+  .character {
+    text-align: center;
+    font-size: 13px;
+    color: #2c6fb7;
+    font-weight: 700;
+  }
+  .character p { margin: 6px 0 0; }
+
+  @media (max-width: 580px) {
+    .page-wrapper { flex-direction: column; align-items: center; }
+    .character-col { flex-direction: row; gap: 12px; align-items: center; padding-top: 0; order: -1; }
+    .speech-bubble::after, .speech-bubble::before { display: none; }
+    .speech-bubble { margin-bottom: 0; }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="box">
-  <h2>資産シミュレーション</h2>
+<div class="page-wrapper">
+  <!-- シミュレーター -->
+  <div class="box">
+    <h2>資産シミュレーション</h2>
 
-  <label>現在の資産（万円）</label>
-  <input type="number" id="initial" value="3700">
+    <label>現在の資産（万円）</label>
+    <input type="number" id="initial" value="3700">
 
-  <label>毎月の積立（万円）</label>
-  <input type="number" id="monthly" value="10">
+    <label>毎月の積立（万円）</label>
+    <input type="number" id="monthly" value="10">
 
-  <label>想定利回り（%）</label>
-  <input type="number" id="rate" value="5">
+    <label>想定利回り（%）</label>
+    <input type="number" id="rate" value="5">
 
-  <label>運用年数（年）</label>
-  <input type="number" id="years" value="20">
+    <label>運用年数（年）</label>
+    <input type="number" id="years" value="20">
 
-  <button onclick="calculate()">計算する</button>
+    <button onclick="calculate()">計算する</button>
 
-  <div class="result" id="result"></div>
+    <div class="result" id="result"></div>
 
-  <a href="index.html" class="back-link">← トップページに戻る</a>
+    <a href="index.html" class="back-link">← トップページに戻る</a>
+  </div>
+
+  <!-- キャラクター -->
+  <div class="character-col">
+    <div class="speech-bubble">あなたの資産、<br>一緒にチェック<br>しましょう！</div>
+    <div class="character">
+      <svg width="110" height="110" viewBox="0 0 120 120">
+        <!-- 顔 -->
+        <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+        <!-- 目 -->
+        <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+        <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+        <!-- 口 -->
+        <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+        <!-- スーツ -->
+        <rect x="35" y="80" width="50" height="25" rx="8" fill="#2c6fb7"/>
+        <!-- ネクタイ -->
+        <polygon points="60,80 55,95 65,95" fill="#ffffff"/>
+      </svg>
+      <p>ライフアセットくん</p>
+    </div>
+  </div>
 </div>
 
 <script>
