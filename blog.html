@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ブログ｜パーソナル・アセット・パートナーズ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243460;
+      --gold: #b8962e;
+      --gold-light: #d4aa3a;
+      --gold-bg: #f5f0e8;
+      --white: #fff;
+      --gray-bg: #f7f8fa;
+      --text: #222;
+      --text-light: #666;
+      --border: #e5e5e5;
+    }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+    .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .logo-text .tagline { font-size: 10px; color: var(--text-light); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--gold); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+    .btn-cta:hover { background: var(--navy-light); }
+    @media (max-width: 768px) { nav { display: none; } }
+
+    /* PAGE HERO */
+    .page-hero { background: var(--navy); color: var(--white); padding: 48px 24px; text-align: center; }
+    .page-hero h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; margin-bottom: 8px; }
+    .page-hero p { font-size: 14px; opacity: 0.75; }
+    .page-hero h1::after { content: ''; display: block; width: 40px; height: 3px; background: var(--gold); margin: 12px auto 0; border-radius: 2px; }
+
+    /* BLOG LIST */
+    .blog-section { padding: 64px 24px; background: var(--gray-bg); min-height: 60vh; }
+    .blog-inner { max-width: 800px; margin: 0 auto; }
+    .post-list { display: flex; flex-direction: column; gap: 20px; }
+    .post-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; transition: box-shadow .25s, transform .25s; cursor: pointer; }
+    .post-card:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.10); transform: translateY(-2px); }
+    .post-card a { display: block; }
+    .post-date { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 8px; letter-spacing: 0.05em; }
+    .post-title { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 10px; line-height: 1.4; }
+    .post-excerpt { font-size: 13px; color: var(--text-light); line-height: 1.8; }
+    .post-more { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--gold); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); text-align: center; padding: 24px; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><span>LP</span></div>
+      <div class="logo-text">
+        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="tagline">Personal Asset Partners</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html#home">ホーム</a>
+      <a href="index.html#services">サービス</a>
+      <a href="index.html#reasons">選ばれる理由</a>
+      <a href="index.html#voice">お客様の声</a>
+      <a href="blog.html" class="active">ブログ</a>
+    </nav>
+    <a href="index.html#contact" class="btn-cta">無料相談</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>ブログ</h1>
+  <p>資産運用・FP・生活設計に関する情報をお届けします</p>
+</div>
+
+<section class="blog-section">
+  <div class="blog-inner">
+    <div class="post-list" id="postList">
+      <!-- 記事カードはJavaScriptで生成されます -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 パーソナル・アセット・パートナーズ. All rights reserved.</p>
+</footer>
+
+<script>
+  // ブログ記事リスト（新しい記事を追加するときはここに追記するだけ）
+  const posts = [
+    {
+      file: "posts/nisa-basics.md",
+      date: "2025年5月1日",
+      title: "新NISAをわかりやすく解説｜2024年からの変更点まとめ",
+      excerpt: "2024年から始まった新しいNISA制度。旧NISAとの違いや、どう活用すべきかをFP資格者がわかりやすく解説します。"
+    },
+  ];
+
+  const list = document.getElementById("postList");
+  posts.forEach(post => {
+    list.innerHTML += `
+      <div class="post-card">
+        <a href="post.html?file=${encodeURIComponent(post.file)}">
+          <div class="post-date">${post.date}</div>
+          <div class="post-title">${post.title}</div>
+          <div class="post-excerpt">${post.excerpt}</div>
+          <span class="post-more">続きを読む →</span>
+        </a>
+      </div>`;
+  });
+</script>
+
+</body>
+</html>

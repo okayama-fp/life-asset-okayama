@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ブログ記事｜パーソナル・アセット・パートナーズ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243460;
+      --gold: #b8962e;
+      --gold-light: #d4aa3a;
+      --gold-bg: #f5f0e8;
+      --white: #fff;
+      --gray-bg: #f7f8fa;
+      --text: #222;
+      --text-light: #666;
+      --border: #e5e5e5;
+    }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+    .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .logo-text .tagline { font-size: 10px; color: var(--text-light); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--gold); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+    .btn-cta:hover { background: var(--navy-light); }
+    @media (max-width: 768px) { nav { display: none; } }
+
+    /* ARTICLE */
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gold); font-weight: 700; margin-bottom: 32px; }
+    .back-link:hover { opacity: 0.8; }
+    .article-date { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .article-title { font-size: clamp(22px, 4vw, 32px); font-weight: 900; color: var(--navy); line-height: 1.35; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--border); }
+
+    /* MARKDOWN CONTENT */
+    .article-body h1,
+    .article-body h2 { font-size: 20px; font-weight: 800; color: var(--navy); margin: 36px 0 14px; padding-left: 12px; border-left: 4px solid var(--gold); }
+    .article-body h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin: 24px 0 10px; }
+    .article-body p { font-size: 15px; line-height: 1.9; margin-bottom: 18px; }
+    .article-body ul, .article-body ol { margin: 0 0 18px 24px; }
+    .article-body li { font-size: 15px; line-height: 1.8; margin-bottom: 6px; }
+    .article-body strong { color: var(--navy); font-weight: 700; }
+    .article-body blockquote { border-left: 4px solid var(--gold); background: var(--gold-bg); padding: 16px 20px; margin: 20px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+    .article-body table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    .article-body th { background: var(--navy); color: var(--white); padding: 10px 14px; text-align: left; }
+    .article-body td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    .article-body tr:nth-child(even) td { background: var(--gray-bg); }
+    .article-body hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    /* CTA */
+    .article-cta { margin-top: 56px; background: var(--gold-bg); border: 1px solid #ddd0b0; border-radius: 8px; padding: 32px; text-align: center; }
+    .article-cta p { font-size: 14px; color: var(--text-light); margin-bottom: 16px; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--white); font-size: 14px; font-weight: 700; padding: 14px 32px; border-radius: 4px; transition: background .2s; }
+    .btn-gold:hover { background: var(--gold-light); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); text-align: center; padding: 24px; font-size: 12px; }
+
+    #loading { text-align: center; padding: 80px 24px; color: var(--text-light); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><span>LP</span></div>
+      <div class="logo-text">
+        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="tagline">Personal Asset Partners</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html#home">ホーム</a>
+      <a href="index.html#services">サービス</a>
+      <a href="index.html#reasons">選ばれる理由</a>
+      <a href="index.html#voice">お客様の声</a>
+      <a href="blog.html" class="active">ブログ</a>
+    </nav>
+    <a href="index.html#contact" class="btn-cta">無料相談</a>
+  </div>
+</header>
+
+<div id="loading">記事を読み込んでいます...</div>
+<div class="article-wrap" id="articleWrap" style="display:none">
+  <a href="blog.html" class="back-link">← ブログ一覧に戻る</a>
+  <div class="article-date" id="articleDate"></div>
+  <h1 class="article-title" id="articleTitle"></h1>
+  <div class="article-body" id="articleBody"></div>
+  <div class="article-cta">
+    <p>資産運用・融資・生活設計についてお気軽にご相談ください</p>
+    <a href="index.html#contact" class="btn-gold">無料相談はこちら →</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 パーソナル・アセット・パートナーズ. All rights reserved.</p>
+</footer>
+
+<!-- marked.js でMarkdownをHTMLに変換 -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  const file = params.get("file");
+
+  if (!file) {
+    location.href = "blog.html";
+  } else {
+    fetch(file)
+      .then(r => {
+        if (!r.ok) throw new Error("記事が見つかりません");
+        return r.text();
+      })
+      .then(md => {
+        // 1行目をタイトルとして取得
+        const lines = md.trim().split("\n");
+        const titleLine = lines.find(l => l.startsWith("# "));
+        const title = titleLine ? titleLine.replace(/^# /, "") : "記事";
+        document.title = title + "｜パーソナル・アセット・パートナーズ";
+        document.getElementById("articleTitle").textContent = title;
+
+        // date メタコメントを取得（例: <!-- date: 2025年5月1日 -->）
+        const dateMatch = md.match(/<!--\s*date:\s*(.+?)\s*-->/);
+        if (dateMatch) document.getElementById("articleDate").textContent = dateMatch[1];
+
+        // タイトル行とdateコメントを除いた本文をレンダリング
+        const body = md.replace(/^#\s+.+\n?/, "").replace(/<!--.*?-->/gs, "").trim();
+        document.getElementById("articleBody").innerHTML = marked.parse(body);
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("articleWrap").style.display = "block";
+      })
+      .catch(err => {
+        document.getElementById("loading").textContent = "記事の読み込みに失敗しました。";
+      });
+  }
+</script>
+
+</body>
+</html>
