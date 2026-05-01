@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>極上のマスカット 産地直送｜ブドウ農家からの直送便</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:       #3a7d44;
+      --green-light: #5aa85e;
+      --green-pale:  #e8f5e9;
+      --green-bg:    #f4faf5;
+      --gold:        #8b7355;
+      --white:       #ffffff;
+      --cream:       #fafdf8;
+      --text:        #2c3e2d;
+      --text-sub:    #5a6b5b;
+      --border:      #d4e8d1;
+      --shadow:      rgba(58,125,68,0.12);
+    }
+    body { font-family: 'Hiragino Mincho ProN','Yu Mincho','Hiragino Sans',serif; color: var(--text); line-height: 1.8; background: var(--white); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== HEADER ===== */
+    header { background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { font-size: 24px; }
+    .logo-name { font-size: 15px; font-weight: 700; color: var(--green); letter-spacing: 0.05em; }
+    .logo-sub { font-size: 10px; color: var(--text-sub); letter-spacing: 0.08em; }
+    nav { display: flex; gap: 28px; }
+    nav a { font-size: 12px; color: var(--text-sub); letter-spacing: 0.06em; transition: color .2s; }
+    nav a:hover { color: var(--green); }
+    .btn-order { display: inline-flex; align-items: center; gap: 6px; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; padding: 9px 20px; border-radius: 50px; letter-spacing: 0.04em; transition: background .2s, transform .15s; }
+    .btn-order:hover { background: var(--green-light); transform: translateY(-1px); }
+
+    /* ===== HERO ===== */
+    .hero { position: relative; min-height: 600px; display: flex; align-items: center; overflow: hidden; background: linear-gradient(135deg, #c8e6c9 0%, #dcedc8 40%, #b2dfdb 100%); }
+    .hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1596363505729-4190a9506133?w=1400&q=80&fit=crop') center/cover no-repeat; opacity: 0.35; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(255,255,255,0.92) 45%, rgba(255,255,255,0.2) 100%); }
+    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 80px 32px; display: grid; grid-template-columns: 1fr 420px; align-items: center; gap: 48px; position: relative; z-index: 1; width: 100%; }
+    .hero-catch { font-size: 13px; color: var(--green); letter-spacing: 0.12em; margin-bottom: 16px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .hero-title { font-size: clamp(32px, 4vw, 54px); font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 20px; letter-spacing: 0.04em; }
+    .hero-title em { color: var(--green); font-style: normal; }
+    .hero-desc { font-size: 14px; color: var(--text-sub); line-height: 2; margin-bottom: 36px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .hero-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; background: rgba(255,255,255,0.9); border: 1px solid var(--border); border-radius: 50%; width: 84px; height: 84px; justify-content: center; box-shadow: 0 4px 16px var(--shadow); font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .hero-badge .icon { font-size: 20px; }
+    .hero-badge .label { font-size: 10px; color: var(--text-sub); font-weight: 600; text-align: center; line-height: 1.3; }
+    .hero-img-wrap { position: relative; display: flex; justify-content: center; }
+    .hero-grape-img { width: 380px; height: 480px; object-fit: cover; border-radius: 200px 200px 180px 180px; box-shadow: 0 24px 60px rgba(58,125,68,0.2); border: 6px solid rgba(255,255,255,0.8); }
+    .hero-circle-badge { position: absolute; bottom: 32px; right: -8px; width: 120px; height: 120px; background: rgba(255,255,255,0.95); border-radius: 50%; border: 2px solid var(--green); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 8px 24px var(--shadow); padding: 12px; }
+    .hero-circle-badge .cb-text { font-size: 10px; color: var(--text-sub); line-height: 1.6; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .hero-circle-badge .cb-name { font-size: 14px; font-weight: 700; color: var(--green); margin: 4px 0 2px; }
+    .hero-circle-badge .cb-en { font-size: 11px; color: var(--text-sub); font-style: italic; font-family: Georgia, serif; }
+
+    /* ===== DIVIDER ===== */
+    .section-divider { text-align: center; padding: 12px 0; color: var(--green); font-size: 18px; letter-spacing: 8px; opacity: 0.5; }
+
+    /* ===== FEATURES ===== */
+    .features { padding: 72px 32px; background: var(--cream); }
+    .section-heading { text-align: center; margin-bottom: 48px; }
+    .section-heading h2 { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; color: var(--text); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .section-heading .deco { display: flex; align-items: center; justify-content: center; gap: 16px; color: var(--green); font-size: 13px; opacity: 0.6; }
+    .section-heading .deco::before, .section-heading .deco::after { content: ''; width: 40px; height: 1px; background: var(--green); opacity: 0.5; }
+    .features-layout { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; gap: 48px; align-items: start; }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .feature-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px var(--shadow); transition: transform .25s, box-shadow .25s; }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px var(--shadow); }
+    .feature-img { height: 180px; overflow: hidden; }
+    .feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .feature-card:hover .feature-img img { transform: scale(1.05); }
+    .feature-body { padding: 18px 20px 22px; }
+    .feature-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: var(--green); color: #fff; border-radius: 50%; font-size: 12px; font-weight: 700; margin-bottom: 10px; font-family: Georgia, serif; }
+    .feature-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .feature-desc { font-size: 12px; color: var(--text-sub); line-height: 1.8; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+
+    /* ===== VOICE SIDEBAR ===== */
+    .voice-sidebar h3 { font-size: 14px; font-weight: 700; color: var(--green); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .voice-sidebar h3::before, .voice-sidebar h3::after { content: '❧'; font-size: 12px; color: var(--green); opacity: 0.6; }
+    .voice-item { background: var(--white); border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 12px var(--shadow); border-left: 3px solid var(--green-light); }
+    .voice-text { font-size: 12px; color: var(--text); line-height: 1.8; margin-bottom: 8px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .voice-attr { font-size: 11px; color: var(--text-sub); text-align: right; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .voice-stars { color: #f4a335; font-size: 11px; margin-bottom: 6px; }
+
+    /* ===== BOTTOM 3-COL ===== */
+    .bottom-section { padding: 64px 32px; background: var(--green-bg); }
+    .bottom-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 300px; gap: 36px; align-items: start; }
+    .producer-card { display: flex; gap: 20px; align-items: flex-start; }
+    .producer-img { width: 100px; height: 120px; object-fit: cover; border-radius: 12px; flex-shrink: 0; box-shadow: 0 4px 16px var(--shadow); }
+    .producer-text h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .producer-text p { font-size: 12px; color: var(--text-sub); line-height: 1.9; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .producer-name { font-size: 12px; color: var(--green); font-weight: 700; margin-top: 12px; text-align: right; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+
+    .shipping-card h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+    .shipping-list { list-style: none; }
+    .shipping-list li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; color: var(--text-sub); font-family: 'Hiragino Kaku Gothic ProN', sans-serif; line-height: 1.6; }
+    .shipping-list li:last-child { border-bottom: none; }
+    .shipping-list .ship-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .shipping-note { font-size: 11px; color: #999; margin-top: 10px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+
+    .shop-card { background: var(--white); border-radius: 20px; padding: 28px 24px; text-align: center; box-shadow: 0 8px 32px var(--shadow); border: 1px solid var(--border); }
+    .shop-card h3 { font-size: 13px; color: var(--text-sub); margin-bottom: 16px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .shop-grape-img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
+    .btn-shop { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--green); color: #fff; font-size: 14px; font-weight: 700; padding: 14px; border-radius: 10px; width: 100%; transition: background .2s; margin-bottom: 12px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; cursor: pointer; border: none; }
+    .btn-shop:hover { background: var(--green-light); }
+    .shop-gift { font-size: 11.5px; color: var(--text-sub); line-height: 1.7; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .shop-gift strong { color: var(--green); }
+
+    /* ===== SEASON BANNER ===== */
+    .season-banner { background: linear-gradient(135deg, var(--green) 0%, #2d6a36 100%); color: #fff; text-align: center; padding: 40px 24px; }
+    .season-banner p { font-size: 13px; opacity: 0.85; margin-bottom: 8px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .season-banner h2 { font-size: clamp(18px, 3vw, 26px); font-weight: 700; letter-spacing: 0.08em; }
+    .season-banner .season-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+    .season-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 6px 18px; font-size: 12px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+
+    /* ===== GALLERY ===== */
+    .gallery { padding: 64px 32px; background: var(--white); }
+    .gallery-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .gallery-item { border-radius: 12px; overflow: hidden; aspect-ratio: 1; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--text); color: rgba(255,255,255,0.7); padding: 36px 32px; font-size: 12px; font-family: 'Hiragino Kaku Gothic ProN', sans-serif; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { color: #fff; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-badges { justify-content: center; }
+      .hero-img-wrap { display: none; }
+      .features-layout { grid-template-columns: 1fr; }
+      .bottom-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 640px) {
+      nav { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .header-inner { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">🍇</span>
+      <div>
+        <div class="logo-name">極上マスカット農園</div>
+        <div class="logo-sub">PREMIUM MUSCAT FARM</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#features">美味しさの秘密</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#producer">生産者紹介</a>
+      <a href="#shop">ご注文</a>
+    </nav>
+    <a href="#shop" class="btn-order">
+      🛒 ご購入はこちら
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="hero-catch">大地の恵みと、まごころを一粒一粒に。</p>
+      <h1 class="hero-title">
+        <em>極上のマスカット</em>を<br>産地直送でお届けします
+      </h1>
+      <p class="hero-desc">
+        ブドウ農家として、土づくりからこだわり、<br>
+        本当に美味しいマスカットを育てています。
+      </p>
+      <div class="hero-badges">
+        <div class="hero-badge">
+          <span class="icon">☀️</span>
+          <span class="label">たっぷりの<br>太陽</span>
+        </div>
+        <div class="hero-badge">
+          <span class="icon">🏔️</span>
+          <span class="label">水はけの良い<br>土壌</span>
+        </div>
+        <div class="hero-badge">
+          <span class="icon">🍇</span>
+          <span class="label">丁寧な<br>栽培管理</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <img
+        class="hero-grape-img"
+        src="https://images.unsplash.com/photo-1596363505729-4190a9506133?w=600&h=750&fit=crop&q=85"
+        alt="極上マスカット"
+      />
+      <div class="hero-circle-badge">
+        <span class="cb-text">甘くて上品な香り<br>皮ごと食べられる</span>
+        <span class="cb-name">マスカット</span>
+        <span class="cb-en">Muscat</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEASON BANNER -->
+<div class="season-banner">
+  <p>旬の季節限定お届け</p>
+  <h2>収穫時期：8月下旬〜10月上旬</h2>
+  <div class="season-tags">
+    <span class="season-tag">産地直送</span>
+    <span class="season-tag">新鮮なままお届け</span>
+    <span class="season-tag">贈り物・ギフト対応</span>
+    <span class="season-tag">丁寧に梱包</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-heading">
+    <div class="deco">私たちのマスカットの美味しさの秘密</div>
+  </div>
+  <div class="features-layout">
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=360&fit=crop&q=80" alt="自然環境" />
+        </div>
+        <div class="feature-body">
+          <div class="feature-num">1</div>
+          <h3 class="feature-title">恵まれた自然環境</h3>
+          <p class="feature-desc">昼夜の寒暖差が大きく、水はけの良い土地で、ブドウ栽培に最適な環境です。</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=360&fit=crop&q=80" alt="栽培管理" />
+        </div>
+        <div class="feature-body">
+          <div class="feature-num">2</div>
+          <h3 class="feature-title">丁寧な栽培管理</h3>
+          <p class="feature-desc">一房一房、手をかけて育てます。摘粒や袋かけなど、細やかな管理で高品質を実現しています。</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-img">
+          <img src="https://images.unsplash.com/photo-1596363505729-4190a9506133?w=600&h=360&fit=crop&q=80" alt="甘さ" />
+        </div>
+        <div class="feature-body">
+          <div class="feature-num">3</div>
+          <h3 class="feature-title">とろけるような甘さ</h3>
+          <p class="feature-desc">糖度が高く、酸味は控えめ。口に入れた瞬間、上品な甘さと香りが広がります。</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-img">
+          <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=600&h=360&fit=crop&q=80" alt="皮ごと食べられる" />
+        </div>
+        <div class="feature-body">
+          <div class="feature-num">4</div>
+          <h3 class="feature-title">皮ごと食べられる</h3>
+          <p class="feature-desc">薄い皮でパリッとした食感。皮ごと食べられて、栄養もたっぷりです。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VOICE SIDEBAR -->
+    <div class="voice-sidebar" id="voice">
+      <h3>お客様の声</h3>
+
+      <div class="voice-item">
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-text">とても甘くて感動しました！家族みんなであっという間に食べてしまいました。</p>
+        <p class="voice-attr">（東京都 30代女性）</p>
+      </div>
+
+      <div class="voice-item">
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-text">新鮮でみずみずしく、香りも良くて本当に美味しいです。リピート決定です！</p>
+        <p class="voice-attr">（大阪府 40代男性）</p>
+      </div>
+
+      <div class="voice-item">
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-text">贈り物にしましたが、とても喜ばれました。また注文します。</p>
+        <p class="voice-attr">（福岡県 50代女性）</p>
+      </div>
+
+      <div class="voice-item">
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-text">皮ごと食べられて子供も大喜び。毎年この時期が楽しみです。</p>
+        <p class="voice-attr">（愛知県 30代女性）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="section-heading">
+    <div class="deco">農園の風景</div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1596363505729-4190a9506133?w=400&h=400&fit=crop&q=80" alt="マスカット" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=400&h=400&fit=crop&q=80" alt="ブドウ棚" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=400&h=400&fit=crop&q=80" alt="収穫" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=400&fit=crop&q=80" alt="農園" />
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM 3-COL -->
+<section class="bottom-section" id="producer">
+  <div class="bottom-grid">
+
+    <!-- PRODUCER -->
+    <div>
+      <h3 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:16px;">生産者からのごあいさつ</h3>
+      <div class="producer-card">
+        <img
+          class="producer-img"
+          src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=200&h=240&fit=crop&q=80"
+          alt="生産者"
+        />
+        <div class="producer-text">
+          <p>ブドウ作りは、自然が相手のため毎年違う表情を見せてくれます。その年その年の気候や土の状態を見極め、ベストなタイミングで手をかけることを大切にしています。「美味しい！」の笑顔のために、これからも真心こめて育てていきます。</p>
+          <p class="producer-name">ブドウ農家　〇〇〇〇</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHIPPING -->
+    <div>
+      <div class="shipping-card">
+        <h3>ご注文・発送について</h3>
+        <ul class="shipping-list">
+          <li>
+            <span class="ship-icon">🚚</span>
+            <span>産地直送で新鮮な状態でお届け</span>
+          </li>
+          <li>
+            <span class="ship-icon">📦</span>
+            <span>丁寧に梱包して発送します</span>
+          </li>
+          <li>
+            <span class="ship-icon">📅</span>
+            <span>収穫時期：8月下旬〜10月上旬</span>
+          </li>
+          <li>
+            <span class="ship-icon">❄️</span>
+            <span>クール便にてお届けします</span>
+          </li>
+          <li>
+            <span class="ship-icon">🎁</span>
+            <span>熨斗・ギフト包装承ります</span>
+          </li>
+        </ul>
+        <p class="shipping-note">※天候により、時期が前後する場合があります。</p>
+      </div>
+    </div>
+
+    <!-- SHOP CTA -->
+    <div class="shop-card" id="shop">
+      <h3>ご注文はオンラインショップから</h3>
+      <img
+        class="shop-grape-img"
+        src="https://images.unsplash.com/photo-1596363505729-4190a9506133?w=400&h=280&fit=crop&q=80"
+        alt="マスカット箱"
+      />
+      <button class="btn-shop">
+        🛒 ご購入はこちら
+      </button>
+      <p class="shop-gift">
+        <strong>熨斗・ギフト対応も承ります。</strong><br>
+        大切な方への贈り物にもどうぞ。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      🍇 極上マスカット農園
+    </div>
+    <p>© 2026 極上マスカット農園. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
