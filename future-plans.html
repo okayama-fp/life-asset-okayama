@@ -13,7 +13,6 @@
       --sky-bg:    #f0f9ff;
       --navy:      #0f3460;
       --white:     #ffffff;
-      --gray-bg:   #f8fafc;
       --text:      #1e293b;
       --text-sub:  #64748b;
       --border:    #e2e8f0;
@@ -41,40 +40,23 @@
     .hero p { font-size: 15px; color: var(--text-sub); line-height: 1.9; max-width: 520px; }
     .hero-img { width: 280px; height: 360px; object-fit: cover; object-position: center top; border-radius: 24px; box-shadow: 0 20px 50px rgba(15,52,96,0.15); flex-shrink: 0; display: block; }
 
-    /* ===== SECTION COMMON ===== */
-    .section-wrap { padding: 72px 32px; }
-    .section-wrap.bg-gray { background: var(--gray-bg); }
-    .inner { max-width: 960px; margin: 0 auto; }
-    .section-label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 50px; margin-bottom: 12px; }
-    .section-label::before { content: ''; width: 5px; height: 5px; background: var(--sky); border-radius: 50%; }
-    h2.section-title { font-size: clamp(20px, 3vw, 28px); font-weight: 900; color: var(--navy); margin-bottom: 12px; }
-    h2.section-title.center { text-align: center; }
-    .section-desc { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
-    .section-desc.center { text-align: center; }
+    /* ===== LIFEPLAN BLOCKS ===== */
+    .lifeplan { background: #f7fbff; padding: 72px 20px; }
+    .lifeplan-wrap { max-width: 860px; margin: auto; }
+    .lifeplan h2 { text-align: center; color: var(--navy); font-size: clamp(20px, 3vw, 28px); font-weight: 900; margin-bottom: 48px; }
+    .block { display: flex; gap: 20px; margin-bottom: 32px; align-items: flex-start; }
+    .char { width: 80px; text-align: center; flex-shrink: 0; }
+    .char-name { font-size: 11px; color: #2c6fb7; font-weight: 700; margin-top: 4px; }
+    .bubble { background: #fff; padding: 22px 24px; border-radius: 14px; box-shadow: 0 4px 16px rgba(14,165,233,0.09); border-left: 4px solid var(--sky-pale); flex: 1; }
+    .bubble-title { font-weight: 800; color: var(--navy); margin-bottom: 10px; font-size: 15px; }
+    .bubble p { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+    .bubble p + p { margin-top: 8px; }
+    .bubble ul { padding-left: 20px; font-size: 14px; color: var(--text-sub); line-height: 2; }
 
-    /* ===== WHAT IS ===== */
-    .what-is { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; }
-    .what-is-text p { font-size: 15px; color: var(--text); line-height: 1.9; }
-    .what-is-visual { background: var(--sky-bg); border-radius: 20px; padding: 32px; text-align: center; }
-    .what-is-visual .big-text { font-size: 48px; font-weight: 900; color: var(--sky); line-height: 1; margin-bottom: 8px; }
-    .what-is-visual p { font-size: 13px; color: var(--text-sub); }
-
-    /* ===== CARDS 3 ===== */
-    .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-    .card { background: var(--white); border-radius: 16px; padding: 28px 22px; border: 1px solid var(--border); transition: transform .2s, box-shadow .2s; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(14,165,233,0.1); }
-    .card-icon { width: 48px; height: 48px; background: var(--sky-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
-    .card-icon svg { width: 24px; height: 24px; color: var(--sky); }
-    .card h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .card p { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
-
-    /* ===== CARDS 4 ===== */
-    .cards-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
-
-    /* ===== LIST ===== */
-    .check-list { list-style: none; margin-top: 36px; display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-    .check-list li { display: flex; align-items: flex-start; gap: 10px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; font-size: 14px; font-weight: 500; color: var(--text); }
-    .check-list li::before { content: '✓'; color: var(--sky); font-weight: 800; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    /* ===== PHOTO CREDIT ===== */
+    .photo-section { text-align: center; padding: 40px 20px 48px; background: var(--white); }
+    .photo-section img { width: 90px; height: 90px; object-fit: cover; object-position: center top; border-radius: 50%; box-shadow: 0 4px 16px rgba(15,52,96,0.15); display: block; margin: 0 auto 10px; }
+    .photo-section p { font-size: 12px; color: var(--text-sub); }
 
     /* ===== CTA ===== */
     .cta-section { background: linear-gradient(135deg, var(--navy) 0%, #1e4d8c 100%); padding: 72px 32px; text-align: center; position: relative; overflow: hidden; }
@@ -85,27 +67,24 @@
     .btn-primary:hover { background: var(--sky-light); transform: translateY(-2px); }
 
     /* ===== FOOTER ===== */
-    footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 24px 32px; font-size: 12px; }
+    footer { background: var(--sky-bg); border-top: 2px solid #bae6fd; color: var(--text-sub); padding: 28px 32px; font-size: 12px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 13px; font-weight: 700; }
-    .footer-logo-icon { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900; color: #fff; }
-    .footer-contact a { color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 5px; transition: color .2s; }
-    .footer-contact a:hover { color: var(--sky-light); }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.5); font-size: 12px; transition: color .2s; }
-    .back-link:hover { color: var(--sky-light); }
+    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--navy); font-size: 13px; font-weight: 700; }
+    .footer-logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900; color: #fff; }
+    .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-contact a { color: var(--sky); display: flex; align-items: center; gap: 5px; transition: color .2s; }
+    .footer-contact a:hover { color: var(--navy); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 860px) {
       .hero-inner { grid-template-columns: 1fr; text-align: center; }
       .hero-img { margin: 0 auto; width: 220px; height: 280px; }
       .hero p { margin: 0 auto; }
-      .what-is { grid-template-columns: 1fr; }
-      .cards-3, .cards-4 { grid-template-columns: 1fr; }
-      .check-list { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .header-inner { padding: 0 20px; }
-      .section-wrap { padding: 52px 20px; }
+      .block { flex-direction: column; align-items: center; }
+      .bubble { border-left: none; border-top: 4px solid var(--sky-pale); }
     }
   </style>
 </head>
@@ -139,107 +118,123 @@
   </div>
 </section>
 
-<!-- WHAT IS -->
-<section class="section-wrap">
-  <div class="inner">
-    <div class="section-label">ライフプランとは</div>
-    <h2 class="section-title">将来の「見える化」から<br>始まる安心</h2>
-    <div class="what-is">
-      <div class="what-is-text">
-        <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」し、最適な行動を決めるための設計図です。<br><br>将来への漠然とした不安を数字に落とし込み、今の自分に何が必要かを明確にすることで、無理なく着実に資産を形成できます。</p>
+<!-- LIFEPLAN BLOCKS -->
+<section class="lifeplan">
+  <div class="lifeplan-wrap">
+
+    <h2>ライフプランとは？</h2>
+
+    <!-- ① -->
+    <div class="block">
+      <div class="char">
+        <svg width="70" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+          <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+          <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+          <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+        </svg>
+        <div class="char-name">ライフアセットくん</div>
       </div>
-      <div class="what-is-visual">
-        <div class="big-text">資産<br>設計図</div>
-        <p>収入・支出・将来目標を<br>ひとつにまとめて可視化</p>
+      <div class="bubble">
+        <div class="bubble-title">今から実現できるライフプランがあります</div>
+        <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」するシミュレーションです。</p>
+        <p>資産形成・資産運用・将来設計まで、ライフアセットパートナーズがトータルでサポートします。</p>
       </div>
     </div>
+
+    <!-- ② -->
+    <div class="block">
+      <div class="char">
+        <svg width="70" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+          <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+          <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+          <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+        </svg>
+        <div class="char-name">ライフアセットくん</div>
+      </div>
+      <div class="bubble">
+        <div class="bubble-title">収入と支出のバランスがすべて</div>
+        <p>収入を増やすことだけでなく、支出とのバランスが資産形成のカギです。</p>
+        <ul>
+          <li>無駄な支出の見直し</li>
+          <li>借金を防ぐ仕組み</li>
+          <li>会社員でもできる節税対策</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ③ -->
+    <div class="block">
+      <div class="char">
+        <svg width="70" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+          <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+          <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+          <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+        </svg>
+        <div class="char-name">ライフアセットくん</div>
+      </div>
+      <div class="bubble">
+        <div class="bubble-title">不安を"数字"で解消します</div>
+        <p>将来の不安は「なんとなく」ではなく、数字で見ることで解消できます。</p>
+        <p>正しい金融知識とデータで、間違った選択を防ぎます。</p>
+      </div>
+    </div>
+
+    <!-- ④ -->
+    <div class="block">
+      <div class="char">
+        <svg width="70" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+          <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+          <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+          <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+        </svg>
+        <div class="char-name">ライフアセットくん</div>
+      </div>
+      <div class="bubble">
+        <div class="bubble-title">老後資金も今から対策できます</div>
+        <p>年金や老後資金も事前にシミュレーション可能です。</p>
+        <ul>
+          <li>将来受け取れる年金</li>
+          <li>必要な生活費</li>
+          <li>2000万円問題の対策</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ⑤ -->
+    <div class="block">
+      <div class="char">
+        <svg width="70" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+          <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+          <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+          <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+        </svg>
+        <div class="char-name">ライフアセットくん</div>
+      </div>
+      <div class="bubble">
+        <div class="bubble-title">こんな方におすすめ</div>
+        <ul>
+          <li>資産を増やしたい</li>
+          <li>老後が不安</li>
+          <li>節税を知りたい</li>
+          <li>住宅購入を考えている</li>
+          <li>資金調達をしたい</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- WHY -->
-<section class="section-wrap bg-gray">
-  <div class="inner">
-    <div class="section-label">ライフプランが必要な理由</div>
-    <h2 class="section-title center">3つの重要なポイント</h2>
-    <div class="cards-3">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </div>
-        <h3>収支バランスの最適化</h3>
-        <p>収入を増やすだけでなく、支出とのバランスを整えることで、無理なく資産を増やすことができます。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </div>
-        <h3>将来不安の見える化</h3>
-        <p>曖昧だった将来の不安を数字で明確にし、正しい判断ができる状態にします。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
-        <h3>老後資金の準備</h3>
-        <p>年金や生活費をシミュレーションし、今からできる対策を具体的に提案します。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO -->
-<section class="section-wrap">
-  <div class="inner">
-    <div class="section-label">対象の方</div>
-    <h2 class="section-title center">こんな方におすすめ</h2>
-    <ul class="check-list">
-      <li>将来のお金に不安がある</li>
-      <li>資産を増やしたいが何から始めればいいか分からない</li>
-      <li>節税や社会保険の対策を知りたい</li>
-      <li>住宅ローンや資金調達に不安がある</li>
-      <li>老後資金をしっかり準備したい</li>
-      <li>NISAや投資を始めたいが怖い</li>
-    </ul>
-  </div>
-</section>
-
-<!-- COUNSELING -->
-<section class="section-wrap bg-gray">
-  <div class="inner">
-    <div class="section-label">サービス内容</div>
-    <h2 class="section-title center">個別カウンセリング内容</h2>
-    <div class="cards-4">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3>資産分析</h3>
-        <p>収支バランス・資産状況を徹底分析し、現状を正確に把握します。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>節税・社会保険対策</h3>
-        <p>会社員・個人事業主どちらにも対応した具体的な節税策をご提案。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3>資産形成・運用</h3>
-        <p>NISA・投資戦略の最適化で、将来に向けた着実な資産形成を支援。</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <h3>融資・住宅</h3>
-        <p>銀行融資・住宅購入のタイミングや条件を丁寧にサポートします。</p>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- 写真（小さく） -->
+<div class="photo-section">
+  <img src="images/fp-yoshiteru.jpg" alt="髙月義照">
+  <p>ライフアセットパートナーズ　代表　髙月 義照</p>
+</div>
 
 <!-- CTA -->
 <section class="cta-section">
@@ -258,11 +253,9 @@
       <div class="footer-logo-icon">LP</div>
       ライフアセットパートナーズ　／　代表　髙月 義照
     </div>
-    <div class="footer-contact" style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
-      <a href="index.html" class="back-link">
-        ← トップページに戻る
-      </a>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" style="color:rgba(255,255,255,0.55); display:flex; align-items:center; gap:5px;">
+    <div class="footer-contact">
+      <a href="index.html">← トップページに戻る</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
         lifeassetpartners@gmail.com
       </a>
