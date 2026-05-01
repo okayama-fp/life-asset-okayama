@@ -123,19 +123,42 @@
         return r.text();
       })
       .then(md => {
-        // 1行目をタイトルとして取得
-        const lines = md.trim().split("\n");
-        const titleLine = lines.find(l => l.startsWith("# "));
-        const title = titleLine ? titleLine.replace(/^# /, "") : "記事";
+        let content = md;
+        let fmTitle = "", fmDate = "";
+
+        // YAML front matter を解析（--- で囲まれた部分）
+        const fmMatch = content.match(/^---\n([\s\S]*?)\n---\n/);
+        if (fmMatch) {
+          const fm = fmMatch[1];
+          const t = fm.match(/title:\s*["']?(.+?)["']?\s*$/m);
+          const d = fm.match(/date:\s*["']?(.+?)["']?\s*$/m);
+          if (t) fmTitle = t[1];
+          if (d) {
+            const raw = d[1];
+            // YYYY-MM-DD → 日本語表示
+            const dt = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+            fmDate = dt ? `${dt[1]}年${parseInt(dt[2])}月${parseInt(dt[3])}日` : raw;
+          }
+          content = content.slice(fmMatch[0].length);
+        }
+
+        // # タイトル行を取得（front matterがあればそちら優先）
+        const titleLine = content.match(/^#\s+(.+)/m);
+        const h1Title = titleLine ? titleLine[1].replace(/\s*\n[\s\S]*/, "") : "";
+        const title = fmTitle || h1Title || "記事";
         document.title = title + "｜パーソナル・アセット・パートナーズ";
         document.getElementById("articleTitle").textContent = title;
 
-        // date メタコメントを取得（例: <!-- date: 2025年5月1日 -->）
-        const dateMatch = md.match(/<!--\s*date:\s*(.+?)\s*-->/);
-        if (dateMatch) document.getElementById("articleDate").textContent = dateMatch[1];
+        // 日付（front matter → <!-- date --> コメントの順で優先）
+        if (fmDate) {
+          document.getElementById("articleDate").textContent = fmDate;
+        } else {
+          const dateMatch = content.match(/<!--\s*date:\s*(.+?)\s*-->/);
+          if (dateMatch) document.getElementById("articleDate").textContent = dateMatch[1];
+        }
 
-        // タイトル行とdateコメントを除いた本文をレンダリング
-        const body = md.replace(/^#\s+.+\n?/, "").replace(/<!--.*?-->/gs, "").trim();
+        // # タイトル行とdateコメントを除いた本文をレンダリング
+        const body = content.replace(/^#[^\n]*\n?/, "").replace(/<!--.*?-->/gs, "").trim();
         document.getElementById("articleBody").innerHTML = marked.parse(body);
 
         document.getElementById("loading").style.display = "none";
