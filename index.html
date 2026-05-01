@@ -104,6 +104,27 @@
     .btn-sky { display: flex; align-items: center; justify-content: center; background: var(--sky); color: #fff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 10px; transition: background .2s; }
     .btn-sky:hover { background: var(--sky-light); }
 
+    /* ===== LIFEPLAN BLOCKS ===== */
+    .lifeplan-section { background: #f7fbff; padding: 72px 32px; }
+    .lifeplan-section h2 { text-align: center; color: var(--navy); font-size: clamp(20px,3vw,28px); font-weight: 900; margin-bottom: 8px; }
+    .lifeplan-section .sub { text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 48px; }
+    .lp-wrap { max-width: 860px; margin: 0 auto; }
+    .lp-block { display: flex; gap: 20px; margin-bottom: 28px; align-items: flex-start; }
+    .lp-char { width: 72px; flex-shrink: 0; }
+    .lp-char img { width: 72px; }
+    .lp-bubble { background: #fff; padding: 20px 24px; border-radius: 14px; box-shadow: 0 4px 16px rgba(14,165,233,0.09); border-left: 4px solid var(--sky-pale); flex: 1; }
+    .lp-bubble-title { font-weight: 800; color: var(--navy); margin-bottom: 8px; font-size: 15px; }
+    .lp-bubble p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+    .lp-bubble p + p { margin-top: 6px; }
+    .lp-bubble ul { padding-left: 18px; font-size: 13px; color: var(--text-sub); line-height: 2; }
+    .lp-what { max-width: 860px; margin: 40px auto 0; background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 4px 16px rgba(14,165,233,0.07); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .lp-what h3 { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+    .lp-what p { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
+    .lp-what-visual { background: var(--sky-bg); border-radius: 14px; padding: 24px 28px; text-align: center; }
+    .lp-what-visual .big { font-size: 36px; font-weight: 900; color: var(--sky); line-height: 1.2; }
+    .lp-what-visual small { font-size: 11px; color: var(--text-sub); display: block; margin-top: 6px; }
+    @media(max-width:640px){ .lp-block{flex-direction:column;align-items:center;} .lp-what{grid-template-columns:1fr;} }
+
     /* ===== CTA BANNER ===== */
     .cta-banner { padding: 48px 32px; background: var(--white); }
     .cta-banner-inner { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, var(--sky-bg), #e0f2fe); border: 1px solid #bae6fd; border-radius: 24px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
@@ -347,6 +368,85 @@
       <div class="couple-char">
         <img src="images/life-asset-kun.png" alt="ライフアセットくん">
         <div class="couple-char-speech">老後の資金計画も<br>一緒に考えます！<br>まずは無料相談へ。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFEPLAN BLOCKS -->
+<section class="lifeplan-section">
+  <div class="lp-wrap">
+    <h2>ライフプランとは？</h2>
+    <p class="sub">あなたの未来を「見える化」して、安心へ</p>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">今から実現できるライフプランがあります</div>
+        <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」するシミュレーションです。</p>
+        <p>資産形成・資産運用・将来設計まで、ライフアセットパートナーズがトータルでサポートします。</p>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">収入と支出のバランスがすべて</div>
+        <p>収入を増やすことだけでなく、支出とのバランスが資産形成のカギです。</p>
+        <ul>
+          <li>無駄な支出の見直し</li>
+          <li>借金を防ぐ仕組み</li>
+          <li>会社員でもできる節税対策</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">不安を"数字"で解消します</div>
+        <p>将来の不安は「なんとなく」ではなく、数字で見ることで解消できます。</p>
+        <p>正しい金融知識とデータで、間違った選択を防ぎます。</p>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">老後資金も今から対策できます</div>
+        <p>年金や老後資金も事前にシミュレーション可能です。</p>
+        <ul>
+          <li>将来受け取れる年金</li>
+          <li>必要な生活費</li>
+          <li>2000万円問題の対策</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">こんな方におすすめ</div>
+        <ul>
+          <li>資産を増やしたい</li>
+          <li>老後が不安</li>
+          <li>節税を知りたい</li>
+          <li>住宅購入を考えている</li>
+          <li>資金調達をしたい</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ライフプランとは（詳細） -->
+    <div class="lp-what">
+      <div>
+        <h3>ライフプランとは<br>将来の「見える化」から始まる安心</h3>
+        <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」し、最適な行動を決めるための設計図です。</p>
+        <p style="margin-top:8px;">将来への漠然とした不安を数字に落とし込み、今の自分に何が必要かを明確にすることで、無理なく着実に資産を形成できます。</p>
+      </div>
+      <div class="lp-what-visual">
+        <div class="big">資産<br>設計図</div>
+        <small>収入・支出・将来目標を<br>ひとつにまとめて可視化</small>
       </div>
     </div>
   </div>
