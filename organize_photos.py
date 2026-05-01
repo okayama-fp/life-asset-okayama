@@ -6,11 +6,16 @@ E:\\ の写真・動画を西暦年月日フォルダへ自動整理するスク
 
 フォルダ構成:
   E:\整理済み\
-    2024年\
-      2024-01月\
-        2024-01-15\
-          IMG_001.jpg
-          VID_001.mp4
+    写真\
+      2024年\
+        2024-01月\
+          2024-01-15\
+            IMG_001.jpg
+    動画\
+      2024年\
+        2024-01月\
+          2024-01-15\
+            VID_001.mp4
 
 使い方:
   確認のみ（移動しない）:  python organize_photos.py --dry-run
@@ -84,10 +89,13 @@ def get_file_date(path: Path) -> datetime:
 
 def build_dest_path(file: Path, date: datetime) -> Path:
     """整理先のフルパスを生成する
-    例: E:\整理済み\2024年\2024-01月\2024-01-15\IMG_001.jpg
+    例: E:\整理済み\写真\2024年\2024-01月\2024-01-15\IMG_001.jpg
+        E:\整理済み\動画\2024年\2024-01月\2024-01-15\VID_001.mp4
     """
+    kind_dir = "写真" if file.suffix.lower() in PHOTO_EXT else "動画"
     folder = (
         DEST_DIR
+        / kind_dir
         / f"{date.year}年"
         / f"{date.year}-{date.month:02d}月"
         / f"{date.year}-{date.month:02d}-{date.day:02d}"
