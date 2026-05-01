@@ -3,198 +3,226 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>パーソナル・アセット・パートナーズ｜FP資格者による資産・融資サポート</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>ライフアセットパートナーズ｜FP資格者による資産・融資サポート</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #1a2744;
-      --navy-light: #243460;
-      --gold: #b8962e;
-      --gold-light: #d4aa3a;
-      --gold-bg: #f5f0e8;
-      --white: #fff;
-      --gray-bg: #f7f8fa;
-      --text: #222;
-      --text-light: #666;
-      --border: #e5e5e5;
+      --sky:       #0ea5e9;
+      --sky-light: #38bdf8;
+      --sky-pale:  #e0f2fe;
+      --sky-bg:    #f0f9ff;
+      --navy:      #0f3460;
+      --navy-soft: #1e4d8c;
+      --white:     #ffffff;
+      --gray-bg:   #f8fafc;
+      --text:      #1e293b;
+      --text-sub:  #64748b;
+      --border:    #e2e8f0;
     }
-    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: var(--white); }
     a { text-decoration: none; color: inherit; }
 
     /* ===== HEADER ===== */
-    header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
-    .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
-    .logo-text .tagline { font-size: 10px; color: var(--text-light); }
-    nav { display: flex; align-items: center; gap: 24px; }
-    nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
-    nav a:hover { color: var(--gold); }
-    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
-    .btn-cta:hover { background: var(--navy-light); }
+    .logo-main { font-size: 22px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
+    nav { display: flex; align-items: center; gap: 28px; }
+    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
+    nav a:hover { color: var(--sky); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s, transform .15s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
+    .btn-cta:hover { background: var(--sky-light); transform: translateY(-1px); }
 
     /* ===== HERO ===== */
-    .hero { background: linear-gradient(135deg, #d6dce8 0%, #e8ecf5 40%, #c8d4e4 100%); min-height: 580px; display: flex; align-items: center; overflow: hidden; position: relative; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=60&fit=crop') center/cover no-repeat; opacity: 0.12; }
-    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 60px 24px; display: flex; align-items: center; gap: 40px; width: 100%; position: relative; z-index: 1; }
-    .hero-content { flex: 1; }
-    .hero-badge { display: inline-block; background: linear-gradient(90deg, #b8962e, #d4aa3a); color: var(--white); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 2px; margin-bottom: 20px; letter-spacing: 0.05em; }
-    .hero-title { font-size: clamp(32px, 4.5vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.25; margin-bottom: 20px; }
-    .hero-desc { font-size: 15px; color: #444; margin-bottom: 32px; line-height: 1.9; }
-    .hero-laurels { display: flex; gap: 24px; flex-wrap: wrap; }
-    .laurel { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-    .laurel-icon {
-      width: 64px; height: 64px; border-radius: 50%;
-      border: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; background: rgba(184,150,46,0.08);
-    }
-    .laurel-icon::before, .laurel-icon::after {
-      content: '❧'; position: absolute; font-size: 18px; color: var(--gold); opacity: 0.7;
-    }
-    .laurel-icon::before { left: -2px; transform: scaleX(-1); }
-    .laurel-icon::after  { right: -2px; }
-    .laurel-icon svg { width: 22px; height: 22px; color: var(--gold); position: relative; z-index: 1; }
-    .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
-    .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
-    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; }
-    .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; }
-    .hero-profile-tag { position: absolute; bottom: 16px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .hero-profile-tag .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 4px; }
-    .hero-profile-tag .person-name { font-size: 22px; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 4px; }
-    .hero-profile-tag .person-sub { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .hero { background: linear-gradient(150deg, var(--sky-bg) 0%, #fff 60%); padding: 80px 32px 100px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%); border-radius: 50%; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 64px; position: relative; z-index: 1; }
+    .hero-label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 50px; margin-bottom: 20px; }
+    .hero-label::before { content: ''; width: 6px; height: 6px; background: var(--sky); border-radius: 50%; }
+    .hero-title { font-size: clamp(30px, 4vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.3; margin-bottom: 18px; }
+    .hero-title em { color: var(--sky); font-style: normal; }
+    .hero-desc { font-size: 15px; color: var(--text-sub); line-height: 1.9; margin-bottom: 36px; }
+    .hero-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+    .badge { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 50px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .badge svg { color: var(--sky); flex-shrink: 0; }
+    .hero-img-wrap { position: relative; flex-shrink: 0; }
+    .hero-img-wrap img { width: 300px; height: 400px; object-fit: cover; object-position: center top; border-radius: 24px; box-shadow: 0 24px 60px rgba(15,52,96,0.15); display: block; }
+    .hero-profile { position: absolute; bottom: -16px; left: -24px; background: #fff; border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border-left: 4px solid var(--sky); }
+    .hero-profile .role { font-size: 10px; color: var(--sky); font-weight: 600; margin-bottom: 3px; }
+    .hero-profile .name { font-size: 17px; font-weight: 900; color: var(--navy); letter-spacing: .06em; margin-bottom: 3px; }
+    .hero-profile .title { font-size: 10px; color: var(--text-sub); line-height: 1.6; }
 
-    /* ===== DARK BANNER ===== */
-    .banner { background: var(--navy); color: var(--white); text-align: center; padding: 44px 24px; }
-    .banner h2 { font-size: clamp(18px,3vw,26px); font-weight: 700; margin-bottom: 10px; }
-    .banner p { font-size: 14px; opacity: 0.8; }
+    /* ===== CHARACTER ===== */
+    .char-strip { background: var(--sky-bg); padding: 24px 32px; display: flex; align-items: center; justify-content: center; gap: 20px; }
+    .char-strip img.char-img { width: 72px; flex-shrink: 0; }
+    .char-strip-bubble { background: #fff; border: 2px solid #bae6fd; border-radius: 14px; padding: 12px 18px; font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.7; position: relative; max-width: 480px; }
+    .char-strip-bubble::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: #bae6fd; }
+    .char-strip-bubble::after { content: ''; position: absolute; left: -7px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: #fff; z-index: 1; }
+    .char-name-small { font-size: 10px; color: #2c6fb7; font-weight: 700; text-align: center; margin-top: 4px; }
+
+    /* ===== ELDERLY COUPLE SECTION ===== */
+    .couple-section { padding: 72px 32px; background: var(--white); }
+    .couple-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .couple-img { width: 100%; height: 320px; object-fit: cover; border-radius: 20px; box-shadow: 0 12px 40px rgba(15,52,96,0.12); display: block; }
+    .couple-text h2 { font-size: clamp(20px,3vw,26px); font-weight: 900; color: var(--navy); margin-bottom: 16px; }
+    .couple-text p { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin-bottom: 20px; }
+    .couple-char { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+    .couple-char img { width: 56px; flex-shrink: 0; }
+    .couple-char-speech { background: var(--sky-bg); border-left: 3px solid var(--sky); border-radius: 8px; padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--navy); line-height: 1.6; }
+
+    /* ===== BANNER ===== */
+    .banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); color: #fff; text-align: center; padding: 48px 24px; }
+    .banner h2 { font-size: clamp(18px,3vw,24px); font-weight: 700; margin-bottom: 10px; }
+    .banner p { font-size: 14px; opacity: 0.75; }
 
     /* ===== ICON SERVICES ===== */
-    .icon-services { background: var(--white); border-bottom: 1px solid var(--border); padding: 48px 24px; }
-    .icon-services-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .icon-service-item { background: var(--white); padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; }
-    .icon-service-icon { width: 48px; height: 48px; border: 2px solid var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .icon-service-icon svg { width: 22px; height: 22px; color: var(--navy); }
+    .icon-services { background: var(--white); padding: 56px 32px; }
+    .icon-services-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .icon-service-item { background: var(--sky-bg); border-radius: 16px; padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; transition: transform .2s, box-shadow .2s; }
+    .icon-service-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(14,165,233,0.12); }
+    .icon-service-icon { width: 48px; height: 48px; background: var(--sky); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .icon-service-icon svg { width: 22px; height: 22px; color: #fff; }
     .icon-service-text h3 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .icon-service-text p { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+    .icon-service-text p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
 
     /* ===== SERVICES ===== */
-    .services { padding: 72px 24px; background: var(--gray-bg); }
-    .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 48px; }
-    .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: var(--gold); margin: 10px auto 0; border-radius: 2px; }
+    .services { padding: 80px 32px; background: var(--gray-bg); }
+    .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .section-sub { text-align: center; font-size: 14px; color: var(--text-sub); margin-bottom: 48px; }
     .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .card { background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
-    .card:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.12); transform: translateY(-4px); }
-    .card-img { height: 180px; overflow: hidden; }
-    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card-body { padding: 22px; }
+    .card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
+    .card:hover { box-shadow: 0 12px 40px rgba(14,165,233,0.12); transform: translateY(-5px); }
+    .card-header { height: 120px; background: linear-gradient(135deg, var(--sky-bg), #dbeafe); display: flex; align-items: center; justify-content: center; }
+    .card-header svg { width: 52px; height: 52px; color: var(--sky); }
+    .card-body { padding: 24px; }
     .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .card-desc { font-size: 12.5px; color: var(--text-light); margin-bottom: 14px; line-height: 1.7; }
-    .card-list { list-style: none; margin-bottom: 18px; }
-    .card-list li { font-size: 12.5px; color: var(--text); padding: 3px 0 3px 20px; position: relative; }
-    .card-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
-    .btn-navy { display: flex; align-items: center; justify-content: center; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 600; padding: 10px; border-radius: 4px; transition: background .2s; }
-    .btn-navy:hover { background: var(--navy-light); }
+    .card-desc { font-size: 12.5px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.7; }
+    .card-list { list-style: none; margin-bottom: 20px; }
+    .card-list li { font-size: 12.5px; color: var(--text); padding: 4px 0 4px 20px; position: relative; }
+    .card-list li::before { content: '✓'; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
+    .btn-sky { display: flex; align-items: center; justify-content: center; background: var(--sky); color: #fff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 10px; transition: background .2s; }
+    .btn-sky:hover { background: var(--sky-light); }
+
+    /* ===== LIFEPLAN BLOCKS ===== */
+    .lifeplan-section { background: #f7fbff; padding: 72px 32px; }
+    .lifeplan-section h2 { text-align: center; color: var(--navy); font-size: clamp(20px,3vw,28px); font-weight: 900; margin-bottom: 8px; }
+    .lifeplan-section .sub { text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 48px; }
+    .lp-wrap { max-width: 860px; margin: 0 auto; }
+    .lp-block { display: flex; gap: 20px; margin-bottom: 28px; align-items: flex-start; }
+    .lp-char { width: 72px; flex-shrink: 0; }
+    .lp-char img { width: 72px; }
+    .lp-bubble { background: #fff; padding: 20px 24px; border-radius: 14px; box-shadow: 0 4px 16px rgba(14,165,233,0.09); border-left: 4px solid var(--sky-pale); flex: 1; }
+    .lp-bubble-title { font-weight: 800; color: var(--navy); margin-bottom: 8px; font-size: 15px; }
+    .lp-bubble p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+    .lp-bubble p + p { margin-top: 6px; }
+    .lp-bubble ul { padding-left: 18px; font-size: 13px; color: var(--text-sub); line-height: 2; }
+    .lp-what { max-width: 860px; margin: 40px auto 0; background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 4px 16px rgba(14,165,233,0.07); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .lp-what h3 { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+    .lp-what p { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
+    .lp-what-visual { background: var(--sky-bg); border-radius: 14px; padding: 24px 28px; text-align: center; }
+    .lp-what-visual .big { font-size: 36px; font-weight: 900; color: var(--sky); line-height: 1.2; }
+    .lp-what-visual small { font-size: 11px; color: var(--text-sub); display: block; margin-top: 6px; }
+    @media(max-width:640px){ .lp-block{flex-direction:column;align-items:center;} .lp-what{grid-template-columns:1fr;} }
 
     /* ===== CTA BANNER ===== */
-    .cta-banner { padding: 40px 24px; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .cta-banner-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--gold-bg); border: 1px solid #ddd0b0; border-radius: 8px; padding: 32px 40px; }
-    .cta-banner-text .em { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
-    .cta-banner-text h3 { font-size: clamp(16px,2.5vw,21px); font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .cta-banner-text h3 strong { color: var(--gold); }
-    .cta-banner-text p { font-size: 12.5px; color: var(--text-light); }
-    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--white); font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
-    .btn-gold:hover { background: var(--gold-light); }
+    .cta-banner { padding: 48px 32px; background: var(--white); }
+    .cta-banner-inner { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, var(--sky-bg), #e0f2fe); border: 1px solid #bae6fd; border-radius: 24px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .cta-banner-text .em { font-size: 12px; color: var(--sky); font-weight: 700; margin-bottom: 8px; }
+    .cta-banner-text h3 { font-size: clamp(17px,2.5vw,22px); font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .cta-banner-text h3 strong { color: var(--sky); }
+    .cta-banner-text p { font-size: 13px; color: var(--text-sub); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 50px; white-space: nowrap; transition: background .2s, transform .15s; box-shadow: 0 4px 16px rgba(14,165,233,0.35); flex-shrink: 0; }
+    .btn-primary:hover { background: var(--sky-light); transform: translateY(-2px); }
 
     /* ===== REASONS ===== */
-    .reasons { padding: 72px 24px; background: var(--gray-bg); }
-    .reasons-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
-    .reason-item { background: var(--white); border-radius: 8px; padding: 28px 22px; text-align: center; border-top: 4px solid var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-    .reason-icon { width: 52px; height: 52px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
-    .reason-icon svg { width: 26px; height: 26px; color: white; }
-    .reason-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.4; }
-    .reason-desc { font-size: 12px; color: var(--text-light); line-height: 1.7; }
+    .reasons { padding: 80px 32px; background: var(--gray-bg); }
+    .reasons-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .reason-item { background: var(--white); border-radius: 20px; padding: 32px 24px; text-align: center; border-top: 4px solid var(--sky); box-shadow: 0 2px 16px rgba(0,0,0,0.04); transition: transform .2s; }
+    .reason-item:hover { transform: translateY(-4px); }
+    .reason-icon { width: 56px; height: 56px; background: var(--sky-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .reason-icon svg { width: 26px; height: 26px; color: var(--sky); }
+    .reason-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .reason-desc { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
 
     /* ===== VOICE (TESTIMONIALS) ===== */
-    .voice { padding: 72px 24px; background: var(--white); }
+    .voice { padding: 80px 32px; background: var(--white); }
     .voice-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .voice-card { background: var(--gray-bg); border-radius: 8px; padding: 28px 24px; position: relative; border: 1px solid var(--border); }
-    .voice-quote { font-size: 56px; color: var(--gold); opacity: 0.3; line-height: 1; position: absolute; top: 12px; left: 20px; font-family: Georgia, serif; }
-    .voice-text { font-size: 13px; color: var(--text); line-height: 1.8; margin-bottom: 20px; padding-top: 24px; }
-    .voice-stars { display: flex; gap: 3px; margin-bottom: 14px; }
-    .voice-stars span { color: var(--gold); font-size: 14px; }
-    .voice-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .voice-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .voice-avatar span { color: var(--gold); font-size: 13px; font-weight: 700; }
-    .voice-info .name { font-size: 13px; font-weight: 700; color: var(--navy); }
-    .voice-info .attr { font-size: 11px; color: var(--text-light); }
+    .voice-card { background: var(--sky-bg); border-radius: 20px; padding: 28px 24px; position: relative; border: 1px solid #bae6fd; }
+    .voice-quote { font-size: 56px; color: var(--sky); opacity: 0.25; line-height: 1; position: absolute; top: 12px; left: 20px; font-family: Georgia, serif; }
+    .voice-stars { display: flex; gap: 3px; margin-bottom: 12px; padding-top: 24px; }
+    .voice-stars span { color: #f59e0b; font-size: 15px; }
+    .voice-text { font-size: 13px; color: var(--text); line-height: 1.8; margin-bottom: 20px; }
+    .voice-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid #bae6fd; }
+    .voice-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--sky); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .voice-avatar span { color: #fff; font-size: 13px; font-weight: 700; }
+    .voice-info .v-name { font-size: 13px; font-weight: 700; color: var(--navy); }
+    .voice-info .v-attr { font-size: 11px; color: var(--text-sub); }
 
     /* ===== FLOW ===== */
-    .flow { padding: 72px 24px; background: var(--navy); }
-    .flow .section-title { color: var(--white); }
-    .flow .section-title::after { background: var(--gold); }
-    .flow-steps { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
-    .flow-step { display: flex; gap: 28px; align-items: flex-start; position: relative; padding-bottom: 36px; }
+    .flow { padding: 80px 32px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); }
+    .flow .section-title { color: #fff; }
+    .flow .section-sub { color: rgba(255,255,255,0.65); }
+    .flow-steps { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; }
+    .flow-step { display: flex; gap: 24px; align-items: flex-start; padding-bottom: 32px; position: relative; }
     .flow-step:last-child { padding-bottom: 0; }
-    .flow-step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 60px; }
-    .flow-step-num { width: 60px; height: 60px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: var(--white); flex-shrink: 0; }
-    .flow-step-line { width: 2px; flex: 1; background: rgba(184,150,46,0.4); min-height: 32px; margin-top: 6px; }
+    .flow-step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 56px; }
+    .flow-step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--sky); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #fff; flex-shrink: 0; box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
+    .flow-step-line { width: 2px; flex: 1; background: rgba(14,165,233,0.3); min-height: 28px; margin-top: 6px; }
     .flow-step:last-child .flow-step-line { display: none; }
-    .flow-step-body { flex: 1; padding-top: 12px; }
-    .flow-step-body h3 { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+    .flow-step-body { flex: 1; padding-top: 10px; }
+    .flow-step-body h3 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
     .flow-step-body p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; }
-    .flow-step-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 10px; }
-    .flow-step-icon svg { width: 22px; height: 22px; color: var(--gold); }
 
     /* ===== CONTACT FORM ===== */
-    .contact { padding: 72px 24px; background: var(--gray-bg); }
-    .contact-inner { max-width: 680px; margin: 0 auto; }
-    .form-group { margin-bottom: 20px; }
+    .contact { padding: 80px 32px; background: var(--gray-bg); }
+    .contact-inner { max-width: 640px; margin: 0 auto; }
+    .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
-    .form-group label .req { color: var(--gold); margin-left: 4px; font-size: 11px; }
+    .form-group label .req { color: var(--sky); margin-left: 4px; font-size: 11px; }
     .form-group input, .form-group textarea, .form-group select {
-      width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 4px;
+      width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
       font-size: 14px; font-family: inherit; color: var(--text); background: var(--white);
       transition: border-color .2s, box-shadow .2s; outline: none;
     }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      border-color: var(--navy); box-shadow: 0 0 0 3px rgba(26,39,68,0.08);
+      border-color: var(--sky); box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
     }
     .form-group textarea { resize: vertical; min-height: 120px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-submit { width: 100%; padding: 16px; background: var(--navy); color: var(--white); border: none; border-radius: 4px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s; font-family: inherit; }
-    .form-submit:hover { background: var(--navy-light); }
-    .form-note { font-size: 11.5px; color: var(--text-light); text-align: center; margin-top: 12px; line-height: 1.7; }
+    .form-submit { width: 100%; padding: 16px; background: var(--sky); color: #fff; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s, transform .15s; font-family: inherit; box-shadow: 0 4px 16px rgba(14,165,233,0.35); }
+    .form-submit:hover { background: var(--sky-light); transform: translateY(-2px); }
+    .form-note { font-size: 11.5px; color: var(--text-sub); text-align: center; margin-top: 14px; line-height: 1.7; }
 
     /* ===== FOOTER ===== */
-    footer { background: #0f1825; color: rgba(255,255,255,0.7); padding: 24px; font-size: 12px; }
+    footer { background: var(--sky-bg); border-top: 2px solid #bae6fd; color: var(--text-sub); padding: 28px 32px; font-size: 12px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 13px; font-weight: 700; }
-    .footer-logo-icon { width: 28px; height: 28px; background: var(--navy); border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .footer-logo-icon span { color: var(--gold); font-size: 10px; font-weight: 900; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--navy); font-size: 13px; font-weight: 700; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; }
     .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-contact a { color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; transition: color .2s; }
-    .footer-contact a:hover { color: var(--gold-light); }
+    .footer-contact a { color: var(--sky); display: flex; align-items: center; gap: 5px; transition: color .2s; }
+    .footer-contact a:hover { color: var(--navy); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-image { flex: 0 0 auto; }
-      .hero-laurels { justify-content: center; }
-      .hero-profile-tag { position: static; margin-top: 16px; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; padding-bottom: 60px; }
+      .hero-img-wrap { margin: 0 auto; }
+      .hero-badges { justify-content: center; }
+      .hero-profile { left: 50%; transform: translateX(-50%); bottom: -20px; white-space: nowrap; }
       .icon-services-grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-      .reasons-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
-      .cta-banner-inner { flex-direction: column; text-align: center; }
-      .voice-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .cards { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .reasons-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+      .cta-banner-inner { flex-direction: column; text-align: center; padding: 32px 24px; }
+      .voice-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .couple-inner { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       nav { display: none; }
-      .hero-photo-wrapper { width: 260px; height: 340px; }
-      .flow-step { flex-direction: column; gap: 12px; }
+      .header-inner { padding: 0 20px; }
+      .hero { padding: 60px 20px 80px; }
     }
   </style>
 </head>
@@ -204,9 +232,8 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">
-      <div class="logo-icon"><span>FP</span></div>
       <div class="logo-text">
-        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="logo-main">Life Asset</div>
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
@@ -228,49 +255,41 @@
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">FP資格者による安心サポート</div>
+      <div class="hero-label">FP資格者による安心サポート</div>
       <h1 class="hero-title">
-        あなたの資産と未来を<br>共に育てるパートナー
+        あなたの<em>資産</em>と<em>未来</em>を<br>共に育てるパートナー
       </h1>
       <p class="hero-desc">
         個人資産管理から資金調達まで、<br>
         お一人おひとりに最適なご提案をいたします。
       </p>
-      <div class="hero-laurels">
-        <div class="laurel">
-          <div class="laurel-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <span class="laurel-label">FP資格者が<br>直接対応</span>
+      <div class="hero-badges">
+        <div class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          FP資格者が直接対応
         </div>
-        <div class="laurel">
-          <div class="laurel-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <span class="laurel-label">豊富な実績と<br>信頼</span>
+        <div class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          安心・丁寧なサポート
         </div>
-        <div class="laurel">
-          <div class="laurel-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <span class="laurel-label">安心・丁寧な<br>サポート</span>
+        <div class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          豊富な実績と信頼
         </div>
       </div>
     </div>
-    <div class="hero-image">
-      <div class="hero-photo-wrapper">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&fit=crop&crop=faces&q=80" alt="髙月義照 代表" />
-      </div>
-      <div class="hero-profile-tag">
-        <div class="role">FP資格者／個人資産アドバイザー</div>
-        <div class="person-name">髙月　義照</div>
-        <div class="person-sub">個人資産管理会社 代表</div>
+    <div class="hero-img-wrap">
+      <img src="images/couple-young.jpg" alt="若い夫婦" />
+      <div class="hero-profile">
+        <div class="role">お客様の声</div>
+        <div class="name" style="font-size:14px;">将来のお金の不安が解消できました</div>
+        <div class="title">20代・30代ご夫婦 / 資産形成サポート</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DARK BANNER -->
+<!-- BANNER -->
 <section class="banner">
   <h2>お金の悩み、ひとりで抱えていませんか？</h2>
   <p>将来への不安、資産の運用、急な資金ニーズ——　そのお悩み、私たちが解決します。</p>
@@ -281,9 +300,7 @@
   <div class="icon-services-grid">
     <div class="icon-service-item">
       <div class="icon-service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
       </div>
       <div class="icon-service-text">
         <h3>将来設計・資産運用</h3>
@@ -292,9 +309,7 @@
     </div>
     <div class="icon-service-item">
       <div class="icon-service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
       <div class="icon-service-text">
         <h3>個人資産管理会社</h3>
@@ -303,10 +318,7 @@
     </div>
     <div class="icon-service-item">
       <div class="icon-service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
       <div class="icon-service-text">
         <h3>個人融資サポート</h3>
@@ -316,14 +328,27 @@
   </div>
 </section>
 
+<!-- CHARACTER STRIP -->
+<div class="char-strip">
+  <div>
+    <img src="images/life-asset-kun.png" alt="ライフアセットくん" class="char-img">
+    <div class="char-name-small">ライフアセットくん</div>
+  </div>
+  <div class="char-strip-bubble">
+    お金のこと、将来のこと——<br>
+    一緒に考えて、カタチにします！<br>
+    まずはお気軽にご相談ください。
+  </div>
+</div>
+
 <!-- SERVICES -->
 <section class="services" id="services">
   <h2 class="section-title">サービスのご案内</h2>
+  <p class="section-sub">お客様の状況に合わせた最適なプランをご提供します</p>
   <div class="cards">
-
     <div class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80" alt="個人資産管理" />
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       </div>
       <div class="card-body">
         <h3 class="card-title">個人資産管理</h3>
@@ -333,13 +358,12 @@
           <li>資産運用プランの設計</li>
           <li>定期的な資産状況の確認</li>
         </ul>
-        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
+        <a href="simulation.html" class="btn-sky">詳しく見る &rsaquo;</a>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80" alt="アドバイザー業務" />
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
       </div>
       <div class="card-body">
         <h3 class="card-title">アドバイザー業務</h3>
@@ -349,13 +373,12 @@
           <li>相続・事業承継対策</li>
           <li>保険の見直し・最適化</li>
         </ul>
-        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
+        <a href="advisor.html" class="btn-sky">詳しく見る &rsaquo;</a>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80" alt="個人融資サポート" />
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
       <div class="card-body">
         <h3 class="card-title">個人融資サポート</h3>
@@ -365,10 +388,9 @@
           <li>柔軟な返済プラン</li>
           <li>スピーディーな審査</li>
         </ul>
-        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
+        <a href="loan.html" class="btn-sky">詳しく見る &rsaquo;</a>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -380,60 +402,144 @@
       <h3>まずは<strong>無料相談</strong>で、あなたの未来を一緒に考えませんか？</h3>
       <p>初回相談は無料です。お気軽にお問い合わせください。</p>
     </div>
-    <a href="#contact" class="btn-gold">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-      無料相談を申し込む &rsaquo;
-    </a>
+    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:center;">
+      <img src="images/life-asset-kun.png" alt="ライフアセットくん" style="width:64px; flex-shrink:0;">
+      <a href="#contact" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        無料相談を申し込む
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ELDERLY COUPLE SECTION -->
+<section class="couple-section">
+  <div class="couple-inner">
+    <img src="images/couple-elderly.jpg" alt="ご夫婦" class="couple-img">
+    <div class="couple-text">
+      <h2>老後も安心して、<br>笑顔で暮らせるように</h2>
+      <p>老後資金・相続・保険の見直しまで、人生の大切な節目でもライフアセットパートナーズがしっかり寄り添います。</p>
+      <p>お金のことを"見える化"して、将来の安心を今から一緒に準備しましょう。</p>
+      <div class="couple-char">
+        <img src="images/life-asset-kun.png" alt="ライフアセットくん">
+        <div class="couple-char-speech">老後の資金計画も<br>一緒に考えます！<br>まずは無料相談へ。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFEPLAN BLOCKS -->
+<section class="lifeplan-section">
+  <div class="lp-wrap">
+    <h2>ライフプランとは？</h2>
+    <p class="sub">あなたの未来を「見える化」して、安心へ</p>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">今から実現できるライフプランがあります</div>
+        <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」するシミュレーションです。</p>
+        <p>資産形成・資産運用・将来設計まで、ライフアセットパートナーズがトータルでサポートします。</p>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">収入と支出のバランスがすべて</div>
+        <p>収入を増やすことだけでなく、支出とのバランスが資産形成のカギです。</p>
+        <ul>
+          <li>無駄な支出の見直し</li>
+          <li>借金を防ぐ仕組み</li>
+          <li>会社員でもできる節税対策</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">不安を"数字"で解消します</div>
+        <p>将来の不安は「なんとなく」ではなく、数字で見ることで解消できます。</p>
+        <p>正しい金融知識とデータで、間違った選択を防ぎます。</p>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">老後資金も今から対策できます</div>
+        <p>年金や老後資金も事前にシミュレーション可能です。</p>
+        <ul>
+          <li>将来受け取れる年金</li>
+          <li>必要な生活費</li>
+          <li>2000万円問題の対策</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lp-block">
+      <div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div>
+      <div class="lp-bubble">
+        <div class="lp-bubble-title">こんな方におすすめ</div>
+        <ul>
+          <li>資産を増やしたい</li>
+          <li>老後が不安</li>
+          <li>節税を知りたい</li>
+          <li>住宅購入を考えている</li>
+          <li>資金調達をしたい</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lp-what">
+      <div>
+        <h3>ライフプランとは<br>将来の「見える化」から始まる安心</h3>
+        <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」し、最適な行動を決めるための設計図です。</p>
+        <p style="margin-top:8px;">将来への漠然とした不安を数字に落とし込み、今の自分に何が必要かを明確にすることで、無理なく着実に資産を形成できます。</p>
+      </div>
+      <div class="lp-what-visual">
+        <div class="big">資産<br>設計図</div>
+        <small>収入・支出・将来目標を<br>ひとつにまとめて可視化</small>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- REASONS -->
 <section class="reasons" id="reasons">
   <h2 class="section-title">選ばれる3つの理由</h2>
+  <p class="section-sub">多くのお客様から信頼をいただいています</p>
   <div class="reasons-grid">
-
     <div class="reason-item">
       <div class="reason-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
       </div>
       <h3 class="reason-title">FP資格者が直接対応</h3>
       <p class="reason-desc">専門知識を持つFPが、最初から最後まで丁寧にサポートします。</p>
     </div>
-
     <div class="reason-item">
       <div class="reason-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 11 14 15 10"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
       </div>
       <h3 class="reason-title">お客様第一の安心サポート</h3>
       <p class="reason-desc">お客様の利益を最優先に考えた、誠実で透明性の高いサービス。</p>
     </div>
-
     <div class="reason-item">
       <div class="reason-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="20" x2="18" y2="10"/>
-          <line x1="12" y1="20" x2="12" y2="4"/>
-          <line x1="6" y1="20" x2="6" y2="14"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       </div>
       <h3 class="reason-title">豊富な実績と信頼</h3>
       <p class="reason-desc">多くのお客様からご信頼をいただき、確かな実績を重ねています。</p>
     </div>
-
   </div>
 </section>
 
 <!-- VOICE (TESTIMONIALS) -->
 <section class="voice" id="voice">
   <h2 class="section-title">お客様の声</h2>
+  <p class="section-sub">実際にご利用いただいたお客様からのご感想</p>
   <div class="voice-grid">
-
     <div class="voice-card">
       <div class="voice-quote">"</div>
       <div class="voice-stars">
@@ -443,12 +549,11 @@
       <div class="voice-author">
         <div class="voice-avatar"><span>T</span></div>
         <div class="voice-info">
-          <div class="name">T.M. 様</div>
-          <div class="attr">50代・会社員</div>
+          <div class="v-name">T.M. 様</div>
+          <div class="v-attr">50代・会社員</div>
         </div>
       </div>
     </div>
-
     <div class="voice-card">
       <div class="voice-quote">"</div>
       <div class="voice-stars">
@@ -458,12 +563,11 @@
       <div class="voice-author">
         <div class="voice-avatar"><span>K</span></div>
         <div class="voice-info">
-          <div class="name">K.S. 様</div>
-          <div class="attr">40代・自営業</div>
+          <div class="v-name">K.S. 様</div>
+          <div class="v-attr">40代・自営業</div>
         </div>
       </div>
     </div>
-
     <div class="voice-card">
       <div class="voice-quote">"</div>
       <div class="voice-stars">
@@ -473,20 +577,19 @@
       <div class="voice-author">
         <div class="voice-avatar"><span>Y</span></div>
         <div class="voice-info">
-          <div class="name">Y.N. 様</div>
-          <div class="attr">60代・主婦</div>
+          <div class="v-name">Y.N. 様</div>
+          <div class="v-attr">60代・主婦</div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- FLOW -->
 <section class="flow" id="flow">
   <h2 class="section-title">相談の流れ</h2>
+  <p class="section-sub">ご相談から始まる、安心のサポートステップ</p>
   <div class="flow-steps">
-
     <div class="flow-step">
       <div class="flow-step-left">
         <div class="flow-step-num">1</div>
@@ -494,13 +597,9 @@
       </div>
       <div class="flow-step-body">
         <h3>お問い合わせ・ご予約</h3>
-        <p>メールまたはお電話にてお気軽にご連絡ください。ご都合に合わせた日程をご案内します。初回相談は無料です。</p>
-      </div>
-      <div class="flow-step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        <p>メールまたはお問い合わせフォームにてご連絡ください。ご都合に合わせた日程をご案内します。初回相談は無料です。</p>
       </div>
     </div>
-
     <div class="flow-step">
       <div class="flow-step-left">
         <div class="flow-step-num">2</div>
@@ -510,11 +609,7 @@
         <h3>ヒアリング・現状確認</h3>
         <p>現在の資産状況やお悩み、将来のご希望などを丁寧にお伺いします。秘密は厳守いたします。</p>
       </div>
-      <div class="flow-step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
     </div>
-
     <div class="flow-step">
       <div class="flow-step-left">
         <div class="flow-step-num">3</div>
@@ -524,11 +619,7 @@
         <h3>ご提案・プランニング</h3>
         <p>お客様の状況に最適なプランをご提案いたします。複数の選択肢を比較しながら、最善の方法を一緒に考えます。</p>
       </div>
-      <div class="flow-step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
     </div>
-
     <div class="flow-step">
       <div class="flow-step-left">
         <div class="flow-step-num">4</div>
@@ -538,11 +629,7 @@
         <h3>実行・サポート開始</h3>
         <p>ご納得いただいたプランをもとに、具体的なサポートを開始します。手続きなどもしっかりお手伝いします。</p>
       </div>
-      <div class="flow-step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      </div>
     </div>
-
     <div class="flow-step">
       <div class="flow-step-left">
         <div class="flow-step-num">5</div>
@@ -551,27 +638,24 @@
         <h3>定期フォローアップ</h3>
         <p>状況の変化に応じて、継続的にサポートいたします。いつでもご相談いただける体制を整えています。</p>
       </div>
-      <div class="flow-step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-      </div>
     </div>
-
   </div>
 </section>
 
 <!-- CONTACT FORM -->
 <section class="contact" id="contact">
   <h2 class="section-title">無料相談・お問い合わせ</h2>
+  <p class="section-sub">お気軽にご相談ください。通常2営業日以内にご返答いたします。</p>
   <div class="contact-inner">
-    <form action="mailto:yamakaze8000@gmail.com" method="post" enctype="text/plain">
+    <form action="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" method="get" target="_blank">
       <div class="form-row">
         <div class="form-group">
           <label>お名前<span class="req">必須</span></label>
-          <input type="text" name="name" placeholder="山田 太郎" required />
+          <input type="text" name="su" placeholder="山田 太郎" required />
         </div>
         <div class="form-group">
           <label>年代</label>
-          <select name="age">
+          <select>
             <option value="">選択してください</option>
             <option>20代</option>
             <option>30代</option>
@@ -581,19 +665,9 @@
           </select>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>メールアドレス<span class="req">必須</span></label>
-          <input type="email" name="email" placeholder="example@email.com" required />
-        </div>
-        <div class="form-group">
-          <label>電話番号</label>
-          <input type="tel" name="tel" placeholder="090-XXXX-XXXX" />
-        </div>
-      </div>
       <div class="form-group">
         <label>ご相談内容<span class="req">必須</span></label>
-        <select name="category" required>
+        <select name="body" required>
           <option value="">選択してください</option>
           <option>個人資産管理について</option>
           <option>資産運用・将来設計について</option>
@@ -604,12 +678,12 @@
       </div>
       <div class="form-group">
         <label>ご質問・ご要望</label>
-        <textarea name="message" placeholder="ご自由にお書きください"></textarea>
+        <textarea placeholder="ご自由にお書きください"></textarea>
       </div>
       <button type="submit" class="form-submit">
         相談を申し込む（無料）
       </button>
-      <p class="form-note">送信いただいた内容は、サービスのご提供以外の目的には使用いたしません。<br>通常2営業日以内にご返答いたします。</p>
+      <p class="form-note">送信いただいた内容は、サービスのご提供以外の目的には使用いたしません。</p>
     </form>
   </div>
 </section>
@@ -618,17 +692,17 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-icon"><span>FP</span></div>
-      パーソナル・アセット・パートナーズ
+      <div class="footer-logo-text">Life Asset</div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span>ライフアセットパートナーズ　／　代表　髙月 義照</span>
+        <span style="font-size:11px;color:#64748b;font-weight:500;">ファイナンシャルプランナー（FP資格者）</span>
+      </div>
+      <img src="images/fp-yoshiteru2.jpg" alt="髙月義照" style="width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
     </div>
     <div class="footer-contact">
-      <a href="mailto:yamakaze8000@gmail.com">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        yamakaze8000@gmail.com
-      </a>
-      <a href="tel:09010104737">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        090-1010-4737
+        lifeassetpartners@gmail.com
       </a>
     </div>
   </div>
