@@ -34,8 +34,8 @@ from datetime import datetime
 from pathlib import Path
 
 # ===================== 設定 =====================
-SOURCE_DIR = Path(r"E:\\")          # 整理元フォルダ
-DEST_DIR   = Path(r"E:\整理済み")   # 整理先フォルダ
+SOURCE_DIR = Path(r"E:\整理済み")   # 整理元フォルダ（前回整理済みのフォルダ）
+DEST_DIR   = Path(r"E:\整理済み")   # 整理先フォルダ（同じ場所に写真・動画サブフォルダを作る）
 CUTOFF     = datetime(2026, 1, 31, 23, 59, 59)  # この日時までのファイルを対象
 
 DRY_RUN    = "--dry-run" in sys.argv  # --dry-run で確認のみ（実際には移動しない）
@@ -89,8 +89,8 @@ def get_file_date(path: Path) -> datetime:
 
 def build_dest_path(file: Path, date: datetime) -> Path:
     """整理先のフルパスを生成する
-    例: E:\整理済み\写真\2024年\2024-01月\2024-01-15\IMG_001.jpg
-        E:\整理済み\動画\2024年\2024-01月\2024-01-15\VID_001.mp4
+    例: E:/整理済み/写真/2024年/2024-01月/2024-01-15/IMG_001.jpg
+        E:/整理済み/動画/2024年/2024-01月/2024-01-15/VID_001.mp4
     """
     kind_dir = "写真" if file.suffix.lower() in PHOTO_EXT else "動画"
     folder = (
@@ -117,13 +117,22 @@ def unique_dest(path: Path) -> Path:
         i += 1
 
 
-def is_inside_dest(file: Path) -> bool:
-    """整理済みフォルダ内のファイルは再処理しない"""
+PHOTO_DEST = DEST_DIR / "写真"
+VIDEO_DEST = DEST_DIR / "動画"
+
+def is_already_sorted(file: Path) -> bool:
+    """すでに写真・動画サブフォルダに振り分け済みのファイルはスキップ"""
     try:
-        file.relative_to(DEST_DIR)
+        file.relative_to(PHOTO_DEST)
         return True
     except ValueError:
-        return False
+        pass
+    try:
+        file.relative_to(VIDEO_DEST)
+        return True
+    except ValueError:
+        pass
+    return False
 
 
 def main() -> None:
@@ -150,8 +159,8 @@ def main() -> None:
         if file.suffix.lower() not in target_exts:
             continue
 
-        # 整理済みフォルダ内はスキップ
-        if is_inside_dest(file):
+        # すでに写真・動画フォルダに振り分け済みはスキップ
+        if is_already_sorted(file):
             continue
 
         # ファイル日付を取得
@@ -188,7 +197,7 @@ def main() -> None:
 
         moved += 1
 
-    # 空フォルダを削除（DRY_RUN 以外）
+    # 空フォルダを削除（DRY_RUN 以外、写真・動画フォルダは除く）
     if not DRY_RUN and moved > 0:
         _remove_empty_dirs(SOURCE_DIR)
 
@@ -203,11 +212,13 @@ def main() -> None:
 
 
 def _remove_empty_dirs(root: Path) -> None:
-    """整理後に空になったフォルダを削除する（整理先フォルダは対象外）"""
+    """整理後に空になったフォルダを削除する（写真・動画サブフォルダは対象外）"""
     for dirpath in sorted(root.rglob("*"), reverse=True):
         if not dirpath.is_dir():
             continue
-        if is_inside_dest(dirpath):
+        if dirpath == PHOTO_DEST or dirpath == VIDEO_DEST:
+            continue
+        if is_already_sorted(dirpath):
             continue
         try:
             dirpath.rmdir()  # 空でなければ失敗するので安全
