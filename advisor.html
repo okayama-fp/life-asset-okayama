@@ -7,33 +7,62 @@
 <style>
   body {
     font-family: Arial, sans-serif;
-    background: #f5f7fa;
+    background: #f0f9ff;
     padding: 20px;
   }
   h1 {
     text-align: center;
-    color: #1a2744;
+    color: #0f3460;
     margin-bottom: 8px;
   }
   .subtitle {
     text-align: center;
-    color: #666;
+    color: #64748b;
     font-size: 14px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
+
+  /* キャラクター帯 */
+  .character-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto 28px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 10px rgba(14,165,233,0.08);
+    border-left: 4px solid #38bdf8;
+  }
+  .character-row svg { flex-shrink: 0; }
+  .character-row .char-name {
+    font-size: 11px;
+    color: #2c6fb7;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .character-row .char-speech {
+    font-size: 13px;
+    color: #0f3460;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+
   .box {
     max-width: 500px;
     margin: 0 auto 24px;
     background: white;
     padding: 24px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border-top: 4px solid #b8962e;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(14,165,233,0.09);
+    border-top: 4px solid #0ea5e9;
   }
   h3 {
-    color: #1a2744;
+    color: #0f3460;
     margin-bottom: 16px;
-    font-size: 18px;
+    font-size: 17px;
   }
   label {
     display: block;
@@ -45,38 +74,42 @@
   input {
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 6px;
+    border: 1px solid #bae6fd;
     box-sizing: border-box;
     font-size: 14px;
+    background: #f0f9ff;
   }
+  input:focus { outline: none; border-color: #0ea5e9; background: #fff; }
   button {
     width: 100%;
     padding: 12px;
-    background: #1a2744;
+    background: linear-gradient(90deg, #0ea5e9, #38bdf8);
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
     margin-top: 16px;
+    transition: opacity .2s;
   }
-  button:hover { background: #243460; }
+  button:hover { opacity: 0.88; }
   .result {
     margin-top: 16px;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
-    color: #1a2744;
+    color: #0f3460;
     line-height: 2;
   }
   .back-link {
     display: block;
     text-align: center;
     margin: 8px auto 32px;
-    color: #1a2744;
+    color: #0ea5e9;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     max-width: 500px;
   }
   .back-link:hover { text-decoration: underline; }
@@ -86,6 +119,20 @@
 
 <h1>アドバイザー業務</h1>
 <p class="subtitle">専門知識を活かした各種シミュレーション</p>
+
+<!-- キャラクター帯 -->
+<div class="character-row">
+  <div>
+    <svg width="64" height="64" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="40" fill="#eaf4ff"/>
+      <circle cx="45" cy="55" r="5" fill="#2c6fb7"/>
+      <circle cx="75" cy="55" r="5" fill="#2c6fb7"/>
+      <path d="M45 75 Q60 85 75 75" stroke="#2c6fb7" stroke-width="3" fill="none"/>
+    </svg>
+    <div class="char-name">ライフアセットくん</div>
+  </div>
+  <div class="char-speech">老後・相続・保険のこと、<br>一緒にシミュレーションしましょう！</div>
+</div>
 
 <!-- ライフプラン -->
 <div class="box">
