@@ -140,10 +140,17 @@
 ユーザーから指示
   → ローカルで実装・コミット（自律）
   → ユーザーが確認
-  → ユーザーの許可後 → git push → PR作成
+  → ユーザーの許可後 → git push → PR作成（feature branch のみ）
+  → 公開してよいか確認 → ユーザーOK後 → gh-pages へマージ → 自動公開
 ```
 
-**git push・PR作成は必ずユーザーの許可を得てから行う。**
+### 公開ルール（GitHub Pages）
+- `gh-pages` ブランチに push / merge すると **自動で公開**される
+- **`gh-pages` への直接 push は絶対にしない**
+- PR を `gh-pages` へマージする前に必ず「公開してよいですか？」と確認する
+- feature branch への push は公開に影響しない（安全）
+
+**git push・PR作成・gh-pages マージは必ずユーザーの許可を得てから行う。**
 
 ---
 
