@@ -39,12 +39,17 @@
 
 ---
 
-## デプロイ手順
+## ワークフロー（重要）
+- **Claude はローカル編集・コミットのみ行う**
+- **`git push` はユーザーが確認してから自分で実行する**
+- pushを求められても、ユーザーから明示的に「pushして」と言われない限り実行しない
+
 ```bash
-# 変更をgh-pagesへコミット＆プッシュ
+# Claude が行う作業（ここまで）
 git add <ファイル>
 git commit -m "説明"
-git pull origin gh-pages --rebase   # 競合回避
+
+# ユーザーが確認後に自分で実行
 git push -u origin gh-pages
 ```
 
