@@ -149,6 +149,7 @@
 - **`gh-pages` への直接 push は絶対にしない**
 - PR を `gh-pages` へマージする前に必ず「公開してよいですか？」と確認する
 - feature branch への push は公開に影響しない（安全）
+- **GitHub Pages の非公開化はリポジトリ設定から行うこと**（Settings → Pages → Source → None）
 
 **git push・PR作成・gh-pages マージは必ずユーザーの許可を得てから行う。**
 
