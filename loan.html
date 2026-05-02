@@ -155,22 +155,22 @@ h3 { color: #0f3460; margin-top: 20px; margin-bottom: 8px; font-size: 15px; }
     <h2>融資シミュレーション</h2>
 
     <label>借入額（万円）</label>
-    <input id="loan" type="number" value="300">
+    <input id="loan" type="number" value="300" min="1" max="100000" step="1" required>
 
     <label>金利（%）</label>
-    <input id="rate" type="number" value="3">
+    <input id="rate" type="number" value="3" min="0" max="50" step="0.01" required>
 
     <label>返済年数</label>
-    <input id="years" type="number" value="5">
+    <input id="years" type="number" value="5" min="1" max="30" step="1" required>
 
     <label>月収（万円）</label>
-    <input id="income" type="number" value="30">
+    <input id="income" type="number" value="30" min="1" max="10000" step="1" required>
 
     <label>生活費（万円）</label>
-    <input id="expense" type="number" value="20">
+    <input id="expense" type="number" value="20" min="0" max="9999" step="1" required>
 
     <label>既存ローン返済（万円）</label>
-    <input id="other" type="number" value="0">
+    <input id="other" type="number" value="0" min="0" max="9999" step="1" required>
 
     <button onclick="calc()">計算する</button>
 
@@ -196,37 +196,93 @@ function payment(P, r, n) {
   return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
 }
 
-function calc() {
-  let loan    = +document.getElementById("loan").value * 10000;
-  let rate    = +document.getElementById("rate").value / 100 / 12;
-  let years   = +document.getElementById("years").value;
-  let n       = years * 12;
-  let monthly = payment(loan, rate, n);
+function getNum(id) {
+  return parseFloat(document.getElementById(id).value);
+}
 
-  let income  = +document.getElementById("income").value * 10000;
-  let expense = +document.getElementById("expense").value * 10000;
-  let other   = +document.getElementById("other").value * 10000;
-  let remain  = income - expense - other - monthly;
+function validate(loan, rate, years, income, expense, other) {
+  if ([loan, rate, years, income, expense, other].some(isNaN)) return "入力値に誤りがあります。";
+  if (loan  < 1 || loan  > 100000) return "借入額は1〜100000万円で入力してください。";
+  if (rate  < 0 || rate  > 50)     return "金利は0〜50%で入力してください。";
+  if (years < 1 || years > 30)     return "返済年数は1〜30年で入力してください。";
+  if (income < 1 || income > 10000) return "月収は1〜10000万円で入力してください。";
+  if (expense < 0 || expense > 9999) return "生活費は0〜9999万円で入力してください。";
+  if (other  < 0 || other  > 9999)  return "既存ローンは0〜9999万円で入力してください。";
+  return null;
+}
+
+function calc() {
+  const loanMan   = getNum("loan");
+  const rateVal   = getNum("rate");
+  const years     = getNum("years");
+  const incomeMan = getNum("income");
+  const expMan    = getNum("expense");
+  const otherMan  = getNum("other");
+
+  const err = validate(loanMan, rateVal, years, incomeMan, expMan, otherMan);
+  const resultEl = document.getElementById("result");
+  const tableEl  = document.getElementById("tableArea");
+
+  if (err) {
+    resultEl.textContent = err;
+    tableEl.textContent = "";
+    return;
+  }
+
+  const loan    = loanMan * 10000;
+  const rate    = rateVal / 100 / 12;
+  const n       = years * 12;
+  const monthly = payment(loan, rate, n);
+  const income  = incomeMan * 10000;
+  const expense = expMan    * 10000;
+  const other   = otherMan  * 10000;
+  const remain  = income - expense - other - monthly;
 
   let status, cls;
-  if (remain > 30000)      { status = "安全"; cls = "safe"; }
-  else if (remain > 0)     { status = "注意"; cls = "warn"; }
-  else                     { status = "危険"; cls = "danger"; }
+  if (remain > 30000)  { status = "安全"; cls = "safe"; }
+  else if (remain > 0) { status = "注意"; cls = "warn"; }
+  else                 { status = "危険"; cls = "danger"; }
 
-  document.getElementById("result").innerHTML =
-    "毎月返済：約 " + Math.round(monthly / 10000).toLocaleString() + " 万円<br>" +
-    "残り余力：" + Math.round(remain / 10000).toLocaleString() + " 万円<br>" +
-    "判定：<span class='" + cls + "'>" + status + "</span>";
-
-  let plans = [3, 5, 7];
-  let html = "<h3>返済プラン比較</h3><table><tr><th>年数</th><th>月額</th><th>総支払</th></tr>";
-  plans.forEach(y => {
-    let m     = payment(loan, rate, y * 12);
-    let total = m * y * 12;
-    html += "<tr><td>" + y + "年</td><td>" + Math.round(m / 10000).toLocaleString() + "万</td><td>" + Math.round(total / 10000).toLocaleString() + "万</td></tr>";
+  resultEl.textContent = "";
+  ["毎月返済：約 " + Math.round(monthly / 10000).toLocaleString() + " 万円",
+   "残り余力：" + Math.round(remain / 10000).toLocaleString() + " 万円"].forEach(line => {
+    const p = document.createElement("p");
+    p.textContent = line;
+    resultEl.appendChild(p);
   });
-  html += "</table>";
-  document.getElementById("tableArea").innerHTML = html;
+  const judgeLine = document.createElement("p");
+  judgeLine.textContent = "判定：";
+  const span = document.createElement("span");
+  span.className = cls;
+  span.textContent = status;
+  judgeLine.appendChild(span);
+  resultEl.appendChild(judgeLine);
+
+  tableEl.textContent = "";
+  const h3 = document.createElement("h3");
+  h3.textContent = "返済プラン比較";
+  const table = document.createElement("table");
+  const thead = table.createTHead();
+  const hr = thead.insertRow();
+  ["年数", "月額", "総支払"].forEach(t => {
+    const th = document.createElement("th");
+    th.textContent = t;
+    hr.appendChild(th);
+  });
+  const tbody = table.createTBody();
+  [3, 5, 7].forEach(y => {
+    const m   = payment(loan, rate, y * 12);
+    const tot = m * y * 12;
+    const row = tbody.insertRow();
+    [y + "年",
+     Math.round(m / 10000).toLocaleString() + "万",
+     Math.round(tot / 10000).toLocaleString() + "万"].forEach(cell => {
+      const td = row.insertCell();
+      td.textContent = cell;
+    });
+  });
+  tableEl.appendChild(h3);
+  tableEl.appendChild(table);
 }
 </script>
 

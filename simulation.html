@@ -150,16 +150,16 @@
     <h2>資産シミュレーション</h2>
 
     <label>現在の資産（万円）</label>
-    <input type="number" id="initial" value="3700">
+    <input type="number" id="initial" value="3700" min="0" max="999999" step="1" required>
 
     <label>毎月の積立（万円）</label>
-    <input type="number" id="monthly" value="10">
+    <input type="number" id="monthly" value="10" min="0" max="10000" step="1" required>
 
     <label>想定利回り（%）</label>
-    <input type="number" id="rate" value="5">
+    <input type="number" id="rate" value="5" min="0" max="50" step="0.01" required>
 
     <label>運用年数（年）</label>
-    <input type="number" id="years" value="20">
+    <input type="number" id="years" value="20" min="1" max="50" step="1" required>
 
     <button onclick="calculate()">計算する</button>
 
@@ -180,20 +180,37 @@
 
 <script>
 function calculate() {
-  let initial = parseFloat(document.getElementById("initial").value) * 10000;
-  let monthly = parseFloat(document.getElementById("monthly").value) * 10000;
-  let rate = parseFloat(document.getElementById("rate").value) / 100;
-  let years = parseFloat(document.getElementById("years").value);
+  const initialMan = parseFloat(document.getElementById("initial").value);
+  const monthlyMan = parseFloat(document.getElementById("monthly").value);
+  const rateVal    = parseFloat(document.getElementById("rate").value);
+  const years      = parseFloat(document.getElementById("years").value);
+  const resultEl   = document.getElementById("result");
 
-  let months = years * 12;
-  let total = initial;
+  if ([initialMan, monthlyMan, rateVal, years].some(isNaN)) {
+    resultEl.textContent = "入力値に誤りがあります。"; return;
+  }
+  if (initialMan < 0 || initialMan > 999999) {
+    resultEl.textContent = "現在の資産は0〜999999万円で入力してください。"; return;
+  }
+  if (monthlyMan < 0 || monthlyMan > 10000) {
+    resultEl.textContent = "毎月の積立は0〜10000万円で入力してください。"; return;
+  }
+  if (rateVal < 0 || rateVal > 50) {
+    resultEl.textContent = "利回りは0〜50%で入力してください。"; return;
+  }
+  if (years < 1 || years > 50) {
+    resultEl.textContent = "運用年数は1〜50年で入力してください。"; return;
+  }
 
-  for (let i = 0; i < months; i++) {
+  const monthly = monthlyMan * 10000;
+  const rate    = rateVal / 100;
+  let   total   = initialMan * 10000;
+
+  for (let i = 0; i < years * 12; i++) {
     total = total * (1 + rate / 12) + monthly;
   }
 
-  document.getElementById("result").innerHTML =
-    "将来資産：約 " + Math.round(total / 10000).toLocaleString() + " 万円";
+  resultEl.textContent = "将来資産：約 " + Math.round(total / 10000).toLocaleString() + " 万円";
 }
 </script>
 
