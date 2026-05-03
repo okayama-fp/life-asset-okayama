@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- [CSP] XSS・不正スクリプト挿入対策 -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; form-action 'self';">
+  <!-- [Referrer-Policy] 外部サイトへのURL漏洩対策 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- [X-Frame-Options] クリックジャッキング対策 -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
   <title>パーソナル・アセット・パートナーズ｜FP資格者による資産・融資サポート</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -205,7 +211,7 @@
     </div>
     <div class="hero-image">
       <div class="hero-photo-wrapper">
-        <img src="images/advisor.jpg" alt="高橋宏之 代表" />
+        <img src="images/advisor.jpg" alt="髙月義照 代表" />
       </div>
       <div class="hero-profile-tag">
         <div class="role">FP資格者／個人資産アドバイザー</div>
@@ -326,7 +332,7 @@
       <h3>まずは<strong>無料相談</strong>で、あなたの未来を一緒に考えませんか？</h3>
       <p>初回相談は無料です。お気軽にお問い合わせください。</p>
     </div>
-    <a href="mailto:yamakaze8000@gmail.com" class="btn-gold">
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%E7%94%B3%E3%81%97%E8%BE%BC%E3%81%BF" class="btn-gold" rel="noopener noreferrer" target="_blank">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
       無料相談を申し込む &rsaquo;
     </a>
@@ -383,13 +389,9 @@
       パーソナル・アセット・パートナーズ
     </div>
     <div class="footer-contact">
-      <a href="mailto:yamakaze8000@gmail.com">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" rel="noopener noreferrer" target="_blank">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        yamakaze8000@gmail.com
-      </a>
-      <a href="tel:09010104737">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        090-1010-4737
+        lifeassetpartners@gmail.com
       </a>
     </div>
   </div>
