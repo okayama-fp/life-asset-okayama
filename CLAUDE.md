@@ -6,10 +6,10 @@
 ---
 
 ## リポジトリ情報
-- **GitHub**: `yamakaze8000-alt/123`
-- **本番URL**: `https://yamakaze8000-alt.github.io/123/`
+- **GitHub**: `okayama-fp/life-asset-okayama`
+- **本番URL**: `https://okayama-fp.github.io/life-asset-okayama/`
 - **デプロイブランチ**: `gh-pages`（本番反映はこのブランチへpush）
-- **開発ブランチ**: `claude/create-homepage-auto-approval-2lUwp`
+- **作業ブランチ**: 基本は `gh-pages` で直接作業
 
 ---
 
@@ -17,17 +17,53 @@
 
 ### 1. ライフアセットパートナーズ（金融FP サイト）
 - **ファイル**: `index.html`
-- **テーマ**: スカイブルー系、資産運用・FP相談
-- **実装済みセクション**: お客様の声、相談の流れ、お問い合わせフォーム
+- **テーマ**: スカイブルー系（`--sky: #0ea5e9` / `--navy: #0f3460`）
+- **実装済みセクション**: ヒーロー、サービス、ライフプラン、お客様の声、相談の流れ、フッター
+- **ナビゲーション**: ホーム / サービス(`service/`) / ブログ(`blog/`) / 採用情報(`recruit/`) / お問い合わせ
 
-### 2. マスカット農園サイト
-- **ファイル**: `muscat.html`
-- **テーマ**: グリーン系（`--green: #3a7d44`）、岡山マスカット直販
-- **メイン写真**: `images/chatgpt-muscat.png`（Google Driveからダウンロードした実写真、1536×1024）
-- **ヒーロー写真フレーム**: 横長オーバル 420×280px、`object-fit: cover`
+### 2. ブログ
+- **`blog/index.html`**: ブログ一覧（カテゴリーサイドバー付き）
+- **`blog/asset-building-beginner/index.html`**: 「資産形成の始め方｜初心者が最初にやるべき5つのステップ」（初記事）
 
-### 3. その他ファイル
-- `advisor.html` / `future-plans.html` / `loan.html` / `simulation.html` — 詳細未確認
+### 3. サービスページ
+- **`service/index.html`**: 3サービス（資産運用相談・ライフプラン設計・融資サポート）＋相談の流れ
+
+### 4. 採用情報
+- **`recruit/index.html`**: 代表メッセージ・求人票（FP相談員・事務アシスタント）
+
+### 5. マスカット農園サイト
+- **`muscat.html`**: グリーン系（`--green: #3a7d44`）、岡山シャインマスカット農園直販
+- **ギャラリー画像**: `images/gallery-farm.png` 他、Google Drive実写真使用
+
+### 6. その他ファイル
+- `advisor.html` / `future-plans.html` / `loan.html` / `simulation.html`
+
+---
+
+## ワークフロー（重要・厳守）
+
+### git操作ルール
+- **編集・コミット**: Claudeが行う
+- **`git push`**: ユーザーが「**pushして**」と明示的に言ったときのみ実行する
+- 「公開して」「反映して」だけでは push しない。必ず「pushして」の言葉を待つ
+
+```bash
+# Claudeが行う作業
+git add <ファイル>
+git commit -m "説明"
+
+# ユーザーが「pushして」と言ったら実行
+git push -u origin gh-pages
+```
+
+### pushが503で失敗する場合
+- プロキシポートが変わっている可能性がある
+- `/tmp/environment-manager.out` で現在のポートを確認する
+  ```bash
+  grep "Starting local git proxy" /tmp/environment-manager.out | tail -1
+  ```
+- `git remote set-url origin http://local_proxy@127.0.0.1:<PORT>/git/yamakaze8000-alt/123` で更新してリトライ
+- 503がGitHub upstream由来の場合（ユーザー名変更直後など）は数分待って再試行
 
 ---
 
@@ -40,47 +76,36 @@
 - 外部API通信は **事前にユーザーへ確認・許可を取る**
 - 確信が持てない操作は **中断してユーザーに報告**
 
+### 全ページ共通セキュリティヘッダー（必ず含める）
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Frame-Options" content="DENY">
+```
+
+### 外部リンク
+- `target="_blank"` には必ず `rel="noopener noreferrer"` を付ける
+
+### メールアドレス
+- ハードコード禁止。JavaScriptで動的生成する（ボット収集対策）
+```html
+<a href="#" id="mail-link"></a>
+<script>
+  (function(){
+    var u='lifeassetpartners',d='gmail.com';
+    document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+  })();
+</script>
+```
+
 ### 入力処理
 - すべての入力をバリデーション・サニタイズする
 - SQL / コマンドインジェクション対策必須
-
-### 認証・認可
-- 認証なしで重要機能にアクセスさせない
-- JWT・セッションは安全に管理
-- 権限チェックを必ず実装
-
-### データ保護
-- パスワードはハッシュ化（bcrypt 等）
-- 機密情報は環境変数で管理
-- HTTPS 前提
-
-### ログ
-- 重要操作はログ記録、ただし機密情報はログに出さない
 
 ### 禁止事項
 - ハードコードされた API キー
 - デバッグコードの本番残し
 - 無制限な外部入力処理
-
-### 出力ルール
-- セキュアでないコードは生成禁止
-- 不安がある場合は必ず警告を出す
-
----
-
-## ワークフロー（重要）
-- **Claude はローカル編集・コミットのみ行う**
-- **`git push` はユーザーが確認してから自分で実行する**
-- pushを求められても、ユーザーから明示的に「pushして」と言われない限り実行しない
-
-```bash
-# Claude が行う作業（ここまで）
-git add <ファイル>
-git commit -m "説明"
-
-# ユーザーが確認後に自分で実行
-git push -u origin gh-pages
-```
 
 ---
 
@@ -112,7 +137,9 @@ git push -u origin gh-pages
 
 ## 未解決タスク
 - [ ] リポジトリをPrivateに変更（MCP/API未対応のためユーザーが手動で設定）
-  - URL: `https://github.com/yamakaze8000-alt/123/settings` → Danger Zone → Make private
+  - URL: `https://github.com/okayama-fp/life-asset-okayama/settings` → Danger Zone → Make private
+- [ ] ブログ記事の追加（2記事目以降）
+- [ ] 独自ドメイン設定（検討中）
 
 ---
 
@@ -121,5 +148,8 @@ git push -u origin gh-pages
 |------|------|
 | 2026-05-02 | muscat.html 作成・デプロイ |
 | 2026-05-02 | ヒーロー写真をGoogle Drive実写真に差し替え |
-| 2026-05-02 | ヒーローフレームを画像比率に合わせ調整（420×280px） |
 | 2026-05-02 | index.html にお客様の声・相談の流れ・フォームセクション追加 |
+| 2026-05-02 | OWASP Top 10 セキュリティ対応（全ページ） |
+| 2026-05-02 | blog/service/recruit ページ追加・ナビゲーション更新 |
+| 2026-05-02 | GitHubユーザー名変更: yamakaze8000-alt → okayama-fp |
+| 2026-05-02 | リポジトリ名変更: 123 → life-asset-okayama |

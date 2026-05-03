@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <title>ブログ｜ライフアセットパートナーズ</title>
+  <meta name="description" content="FP資格者・髙月義照による資産運用・家計管理・ライフプランに関するブログ記事一覧">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sky:       #0ea5e9;
+      --sky-light: #38bdf8;
+      --sky-pale:  #e0f2fe;
+      --sky-bg:    #dff3ff;
+      --navy:      #0f3460;
+      --navy-soft: #1e4d8c;
+      --white:     #ffffff;
+      --gray-bg:   #edf8ff;
+      --text:      #1e293b;
+      --text-sub:  #64748b;
+      --border:    #e2e8f0;
+    }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
+    a { text-decoration: none; color: inherit; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--sky); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
+    .btn-cta:hover { background: var(--sky-light); }
+    .page-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 50%, #f4fbff 100%); padding: 56px 32px 48px; text-align: center; }
+    .page-hero .label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; }
+    .page-hero h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .page-hero p { font-size: 14px; color: var(--text-sub); }
+    .breadcrumb { max-width: 1100px; margin: 0 auto; padding: 16px 32px; font-size: 12px; color: var(--text-sub); display: flex; gap: 6px; align-items: center; }
+    .breadcrumb a { color: var(--sky); }
+    .breadcrumb span { opacity: 0.5; }
+    .blog-section { max-width: 1100px; margin: 0 auto; padding: 32px 32px 80px; display: grid; grid-template-columns: 1fr 300px; gap: 40px; }
+    .blog-grid { display: flex; flex-direction: column; gap: 24px; }
+    .blog-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 220px 1fr; transition: box-shadow .2s, transform .2s; }
+    .blog-card:hover { box-shadow: 0 8px 32px rgba(14,165,233,0.12); transform: translateY(-2px); }
+    .blog-card-thumb { background: linear-gradient(135deg, var(--sky-bg), #dbeafe); display: flex; align-items: center; justify-content: center; min-height: 160px; }
+    .blog-card-thumb svg { width: 52px; height: 52px; color: var(--sky); opacity: 0.6; }
+    .blog-card-body { padding: 24px; }
+    .blog-card-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+    .blog-tag { background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; }
+    .blog-date { font-size: 11px; color: var(--text-sub); }
+    .blog-card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.5; }
+    .blog-card-excerpt { font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 14px; }
+    .blog-read-more { font-size: 12px; color: var(--sky); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-bg); }
+    .category-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .category-list li a { font-size: 13px; color: var(--text); display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); transition: color .2s; }
+    .category-list li a:hover { color: var(--sky); }
+    .category-count { background: var(--sky-bg); color: var(--sky); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 50px; }
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); transition: color .2s; }
+    .footer-contact a:hover { color: #fff; }
+    @media (max-width: 768px) { nav { display: none; } .blog-section { grid-template-columns: 1fr; } .blog-card { grid-template-columns: 1fr; } .blog-card-thumb { min-height: 100px; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="../" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットパートナーズ</div></div></a>
+    <nav>
+      <a href="../">ホーム</a>
+      <a href="../service/">サービス</a>
+      <a href="./" class="active">ブログ</a>
+      <a href="../recruit/">採用情報</a>
+    </nav>
+    <a href="../#contact" class="btn-cta">無料相談</a>
+  </div>
+</header>
+<div class="page-hero">
+  <div class="label">BLOG</div>
+  <h1>お役立ちブログ</h1>
+  <p>資産運用・家計管理・ライフプランに関する情報をお届けします</p>
+</div>
+<div class="breadcrumb"><a href="../">ホーム</a><span>&rsaquo;</span><span>ブログ</span></div>
+<div class="blog-section">
+  <main class="blog-grid">
+    <a href="asset-building-beginner/" class="blog-card">
+      <div class="blog-card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="blog-card-body">
+        <div class="blog-card-meta"><span class="blog-tag">資産形成</span><span class="blog-date">2026-05-02</span></div>
+        <div class="blog-card-title">資産形成の始め方｜初心者が最初にやるべき5つのステップ</div>
+        <div class="blog-card-excerpt">「資産形成を始めたい」と思っても、何から手をつければ良いかわからない方がほとんどです。この記事では、FP資格者の視点からわかりやすく解説します。</div>
+        <span class="blog-read-more">続きを読む &rsaquo;</span>
+      </div>
+    </a>
+  </main>
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <div class="sidebar-title">カテゴリー</div>
+      <ul class="category-list">
+        <li><a href="#">資産形成 <span class="category-count">1</span></a></li>
+        <li><a href="#">家計管理 <span class="category-count">0</span></a></li>
+        <li><a href="#">ライフプラン <span class="category-count">0</span></a></li>
+        <li><a href="#">住宅・ローン <span class="category-count">0</span></a></li>
+        <li><a href="#">老後資金 <span class="category-count">0</span></a></li>
+      </ul>
+    </div>
+    <div class="sidebar-box">
+      <div class="sidebar-title">無料相談のご案内</div>
+      <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;">お金のことで悩んでいたら、まずはFPへ。初回相談は完全無料です。</p>
+      <a href="../#contact" style="display:block;background:var(--sky);color:#fff;text-align:center;padding:11px;border-radius:10px;font-size:13px;font-weight:700;">無料相談を申し込む</a>
+    </div>
+  </aside>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo-text">Life Asset</div><div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;">ライフアセットパートナーズ　代表　髙月 義照</div></div>
+    <div class="footer-contact">
+      <a href="#" id="footer-mail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><span id="footer-mail-text"></span></a>
+      <script>(function(){var u='lifeassetpartners',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
