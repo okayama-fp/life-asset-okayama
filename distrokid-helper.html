@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DistroKid 登録ヘルパー</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dk-green: #27ae60;
+      --dk-green-d: #1e8449;
+      --navy: #1a2744;
+      --bg: #f0f4f8;
+      --white: #fff;
+      --border: #d1d9e0;
+      --text: #222;
+      --text-light: #666;
+      --success: #e8f5e9;
+      --success-border: #a5d6a7;
+    }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
+
+    header { background: var(--navy); color: #fff; padding: 18px 24px; display: flex; align-items: center; gap: 14px; }
+    header .logo { font-size: 20px; font-weight: 900; color: var(--dk-green); letter-spacing: 0.02em; }
+    header .sub { font-size: 13px; opacity: 0.7; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 36px 20px 60px; }
+
+    .intro-box { background: var(--white); border-radius: 10px; border: 1px solid var(--border); padding: 24px 28px; margin-bottom: 32px; }
+    .intro-box h2 { font-size: 16px; color: var(--navy); font-weight: 800; margin-bottom: 10px; }
+    .intro-box ol { padding-left: 20px; font-size: 14px; color: var(--text-light); line-height: 2; }
+    .intro-box ol li strong { color: var(--text); }
+
+    .step { background: var(--white); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 24px; overflow: hidden; }
+    .step-header { background: var(--navy); color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+    .step-num { background: var(--dk-green); color: #fff; font-size: 12px; font-weight: 900; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-size: 15px; font-weight: 700; }
+    .step-body { padding: 24px 28px; }
+
+    .field { margin-bottom: 22px; }
+    .field:last-child { margin-bottom: 0; }
+    label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    label .hint { font-weight: 400; color: var(--text-light); font-size: 12px; margin-left: 8px; }
+    input[type="text"], select, textarea {
+      width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px;
+      font-size: 14px; font-family: inherit; background: #fafbfc; transition: border-color .2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { outline: none; border-color: var(--dk-green); background: #fff; }
+    textarea { resize: vertical; min-height: 90px; }
+
+    .output-area { margin-top: 28px; }
+    .output-area h3 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .output-area h3::before { content: '→'; color: var(--dk-green); }
+
+    .copy-block { background: #f4f8f4; border: 1px solid var(--success-border); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+    .copy-block-header { background: var(--success); padding: 8px 16px; font-size: 12px; font-weight: 700; color: #2d6a4f; display: flex; justify-content: space-between; align-items: center; }
+    .copy-btn { background: var(--dk-green); color: #fff; border: none; border-radius: 4px; padding: 4px 12px; font-size: 12px; font-weight: 700; cursor: pointer; transition: background .2s; }
+    .copy-btn:hover { background: var(--dk-green-d); }
+    .copy-btn.copied { background: #888; }
+    .copy-value { padding: 12px 16px; font-size: 14px; font-family: 'Courier New', monospace; word-break: break-all; white-space: pre-wrap; color: #1a3a2a; line-height: 1.6; }
+
+    .generate-btn { width: 100%; background: var(--dk-green); color: #fff; border: none; border-radius: 8px; padding: 14px; font-size: 15px; font-weight: 800; cursor: pointer; transition: background .2s; margin-top: 8px; letter-spacing: 0.04em; }
+    .generate-btn:hover { background: var(--dk-green-d); }
+
+    .dk-link-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 18px 22px; margin-top: 32px; font-size: 13px; }
+    .dk-link-box strong { color: var(--navy); display: block; margin-bottom: 8px; font-size: 14px; }
+    .dk-link-box ol { padding-left: 18px; line-height: 2.2; color: var(--text-light); }
+    .dk-link-box ol li strong { color: var(--text); }
+
+    .tag { display: inline-block; background: #e8f5e9; color: #2d6a4f; border-radius: 3px; padding: 1px 7px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+    .tag.req { background: #fce4ec; color: #b71c1c; }
+
+    @media (max-width: 600px) {
+      .step-body { padding: 18px 16px; }
+      .intro-box { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">DistroKid 登録ヘルパー</div>
+    <div class="sub">入力した情報から英語テキストを自動生成 → コピペするだけ</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="intro-box">
+    <h2>使い方</h2>
+    <ol>
+      <li><strong>各項目を日本語で入力</strong>してください（英語が分かる部分は英語でもOK）</li>
+      <li>「英語テキストを生成」ボタンを押すと<strong>コピペ用の英語</strong>が表示されます</li>
+      <li>DistroKid のサイトを開いて、<strong>生成されたテキストをコピペ</strong>して登録してください</li>
+    </ol>
+  </div>
+
+  <!-- STEP 1: アーティスト情報 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">アーティスト・基本情報</div>
+    </div>
+    <div class="step-body">
+      <div class="field">
+        <label>アーティスト名（日本語）<span class="tag req">必須</span><span class="hint">例：髙月義照、ライフアセットバンド</span></label>
+        <input type="text" id="artistJa" placeholder="例：髙月 義照" />
+      </div>
+      <div class="field">
+        <label>アーティスト名（英語表記）<span class="tag req">必須</span><span class="hint">ローマ字でOK。DistroKidに入力する名前</span></label>
+        <input type="text" id="artistEn" placeholder="例：Yoshiteru Takatsuki" />
+      </div>
+      <div class="field">
+        <label>メールアドレス<span class="tag req">必須</span></label>
+        <input type="text" id="email" placeholder="例：yamakaze8000@gmail.com" />
+      </div>
+      <div class="field">
+        <label>活動拠点（都市名）<span class="hint">例：岡山市</span></label>
+        <input type="text" id="city" placeholder="例：岡山市" />
+      </div>
+      <div class="field">
+        <label>音楽のジャンル<span class="hint">複数可、カンマ区切り</span></label>
+        <input type="text" id="genre" placeholder="例：J-Pop、Folk、Acoustic" />
+      </div>
+      <div class="field">
+        <label>アーティスト紹介（日本語で自由に書いてください）</label>
+        <textarea id="bioJa" placeholder="例：岡山県出身のシンガーソングライター。資産管理の知識を活かした歌詞で、日常の不安と希望を歌う。"></textarea>
+      </div>
+      <button class="generate-btn" onclick="generateStep1()">英語テキストを生成（ステップ1）</button>
+
+      <div class="output-area" id="out1" style="display:none">
+        <h3>DistroKidに入力する英語テキスト</h3>
+        <div class="copy-block">
+          <div class="copy-block-header">Artist Name（アーティスト名） <button class="copy-btn" onclick="copyText('val-artist', this)">コピー</button></div>
+          <div class="copy-value" id="val-artist"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">City / Location（活動拠点） <button class="copy-btn" onclick="copyText('val-city', this)">コピー</button></div>
+          <div class="copy-value" id="val-city"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">Genre（ジャンル） <button class="copy-btn" onclick="copyText('val-genre', this)">コピー</button></div>
+          <div class="copy-value" id="val-genre"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">Artist Bio（プロフィール英語） <button class="copy-btn" onclick="copyText('val-bio', this)">コピー</button></div>
+          <div class="copy-value" id="val-bio"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: 楽曲情報 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">楽曲・リリース情報</div>
+    </div>
+    <div class="step-body">
+      <div class="field">
+        <label>曲名（日本語）<span class="tag req">必須</span></label>
+        <input type="text" id="trackJa" placeholder="例：明日への道" />
+      </div>
+      <div class="field">
+        <label>曲名（英語）<span class="tag req">必須</span><span class="hint">DistroKidに登録する英語タイトル</span></label>
+        <input type="text" id="trackEn" placeholder="例：Road to Tomorrow" />
+      </div>
+      <div class="field">
+        <label>アルバム／EP名（日本語）<span class="hint">シングルの場合は空欄可</span></label>
+        <input type="text" id="albumJa" placeholder="例：春の光" />
+      </div>
+      <div class="field">
+        <label>アルバム／EP名（英語）<span class="hint">DistroKidに登録する英語タイトル</span></label>
+        <input type="text" id="albumEn" placeholder="例：Spring Light" />
+      </div>
+      <div class="field">
+        <label>リリース予定日</label>
+        <input type="text" id="releaseDate" placeholder="例：2026-06-01" />
+      </div>
+      <div class="field">
+        <label>楽曲の説明・コンセプト（日本語で）</label>
+        <textarea id="trackDescJa" placeholder="例：老後の資産形成をテーマに、不安を希望に変えるメッセージを込めた楽曲。"></textarea>
+      </div>
+      <div class="field">
+        <label>作詞・作曲者名（英語）<span class="hint">DistroKidはローマ字表記で登録</span></label>
+        <input type="text" id="composer" placeholder="例：Yoshiteru Takatsuki" />
+      </div>
+      <button class="generate-btn" onclick="generateStep2()">英語テキストを生成（ステップ2）</button>
+
+      <div class="output-area" id="out2" style="display:none">
+        <h3>DistroKidに入力する英語テキスト</h3>
+        <div class="copy-block">
+          <div class="copy-block-header">Track Title（曲名） <button class="copy-btn" onclick="copyText('val-track', this)">コピー</button></div>
+          <div class="copy-value" id="val-track"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">Album / EP Title（アルバム名） <button class="copy-btn" onclick="copyText('val-album', this)">コピー</button></div>
+          <div class="copy-value" id="val-album"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">Release Date（リリース日） <button class="copy-btn" onclick="copyText('val-release', this)">コピー</button></div>
+          <div class="copy-value" id="val-release"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">Track Description（楽曲説明） <button class="copy-btn" onclick="copyText('val-trackdesc', this)">コピー</button></div>
+          <div class="copy-value" id="val-trackdesc"></div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-block-header">Songwriter / Composer（作詞作曲） <button class="copy-btn" onclick="copyText('val-composer', this)">コピー</button></div>
+          <div class="copy-value" id="val-composer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DistroKid登録手順 -->
+  <div class="dk-link-box">
+    <strong>DistroKid 登録の流れ（ブラウザで手動作業）</strong>
+    <ol>
+      <li>DistroKid のサイト（distrokid.com）を開く</li>
+      <li><strong>「Sign Up」</strong>からアカウントを作成（メールアドレス＋パスワード）</li>
+      <li>プラン選択：<strong>Musician（年間約$22.99）</strong> が個人には最適</li>
+      <li><strong>Artist Name</strong> にステップ1で生成した英語名をコピペ</li>
+      <li>支払い情報を入力（クレジットカード）</li>
+      <li>登録完了後、「Upload」から楽曲をアップロード</li>
+      <li>楽曲情報フォームに<strong>ステップ2で生成したテキスト</strong>をコピペ</li>
+    </ol>
+  </div>
+
+</div>
+
+<script>
+  const GENRE_MAP = {
+    'J-Pop': 'J-Pop', 'Jポップ': 'J-Pop', 'じぇいぽっぷ': 'J-Pop',
+    'フォーク': 'Folk', 'folk': 'Folk',
+    'アコースティック': 'Acoustic', 'acoustic': 'Acoustic',
+    'ポップ': 'Pop', 'pop': 'Pop',
+    'ロック': 'Rock', 'rock': 'Rock',
+    'ジャズ': 'Jazz', 'jazz': 'Jazz',
+    'クラシック': 'Classical', 'classical': 'Classical',
+    'ボサノバ': 'Bossa Nova', 'ワールド': 'World',
+    'インスト': 'Instrumental', 'instrumental': 'Instrumental',
+    'バラード': 'Ballad', 'ballad': 'Ballad',
+    'ヒーリング': 'Healing', 'ニューエイジ': 'New Age',
+    'カントリー': 'Country', 'country': 'Country',
+    'R&B': 'R&B', 'ソウル': 'Soul', 'soul': 'Soul',
+  };
+
+  function translateGenres(jaGenres) {
+    return jaGenres.split(/[、,，]+/).map(g => {
+      const t = g.trim();
+      return GENRE_MAP[t] || t;
+    }).filter(Boolean).join(', ');
+  }
+
+  function bioTemplate(artistEn, city, genre) {
+    const cityEn = city ? ` Based in ${city}, Japan.` : ' Based in Japan.';
+    const genreEn = genre ? ` Music style: ${genre}.` : '';
+    return `${artistEn} is a Japanese musician and songwriter.${cityEn}${genreEn} With a deep understanding of everyday life and financial well-being, their songs carry heartfelt messages of hope and resilience for listeners of all ages.`;
+  }
+
+  function trackDescTemplate(trackEn, descJa) {
+    if (descJa && descJa.trim().length > 5) {
+      return `"${trackEn}" — A song about hope, everyday life, and the future. This track delivers a message of strength and encouragement for listeners navigating life's journey.`;
+    }
+    return `"${trackEn}" — An original Japanese song with heartfelt lyrics and a gentle melody.`;
+  }
+
+  function generateStep1() {
+    const artistEn = (document.getElementById('artistEn').value || '').trim();
+    const city = (document.getElementById('city').value || '').trim();
+    const genre = translateGenres(document.getElementById('genre').value || '');
+    const bioJa = (document.getElementById('bioJa').value || '').trim();
+
+    if (!artistEn) { alert('アーティスト名（英語）を入力してください'); return; }
+
+    document.getElementById('val-artist').textContent = artistEn;
+    document.getElementById('val-city').textContent = city ? `${city}, Japan` : 'Japan';
+    document.getElementById('val-genre').textContent = genre || 'J-Pop';
+    document.getElementById('val-bio').textContent = bioTemplate(artistEn, city, genre);
+
+    document.getElementById('out1').style.display = 'block';
+    document.getElementById('out1').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function generateStep2() {
+    const trackEn = (document.getElementById('trackEn').value || '').trim();
+    const albumEn = (document.getElementById('albumEn').value || '').trim();
+    const releaseDate = (document.getElementById('releaseDate').value || '').trim();
+    const trackDescJa = (document.getElementById('trackDescJa').value || '').trim();
+    const composer = (document.getElementById('composer').value || '').trim();
+
+    if (!trackEn) { alert('曲名（英語）を入力してください'); return; }
+
+    document.getElementById('val-track').textContent = trackEn;
+    document.getElementById('val-album').textContent = albumEn || trackEn + ' - Single';
+    document.getElementById('val-release').textContent = releaseDate || '（DistroKidで直接選択してください）';
+    document.getElementById('val-trackdesc').textContent = trackDescTemplate(trackEn, trackDescJa);
+    document.getElementById('val-composer').textContent = composer || document.getElementById('artistEn').value.trim() || '（作曲者名を入力してください）';
+
+    document.getElementById('out2').style.display = 'block';
+    document.getElementById('out2').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function copyText(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'コピー済！';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+    });
+  }
+</script>
+</body>
+</html>
