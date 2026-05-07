@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知らないと損する「インフレ税」の話｜あなたの預金が静かに消えていく</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --accent: #c0392b;
+    --accent-light: #f9eeec;
+    --accent2: #e67e22;
+    --text: #1a1a1a;
+    --text-light: #555;
+    --border: #e8e0d0;
+    --tag-bg: #2c3e50;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  /* ヘッダー */
+  .hero {
+    background: var(--tag-bg);
+    color: white;
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '¥';
+    position: absolute;
+    font-size: 300px;
+    opacity: 0.05;
+    right: -20px;
+    top: -40px;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    position: relative;
+  }
+
+  /* 本文エリア */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* イントロ */
+  .intro-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 24px 28px;
+    margin: 40px 0 32px;
+    border-radius: 0 8px 8px 0;
+  }
+  .intro-box p {
+    font-size: 15px;
+    color: #444;
+  }
+
+  /* セクション */
+  .section {
+    margin: 48px 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    margin-bottom: 18px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: #333;
+    font-size: 15px;
+  }
+
+  /* 数字カード */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .stat-card .num {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  /* タクシー例 */
+  .example-box {
+    background: #fffbf0;
+    border: 2px dashed var(--accent2);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 28px 0;
+  }
+  .example-box .ex-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .example-box .ex-title::before { content: '💡'; }
+
+  .taxi-flow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .taxi-step {
+    background: white;
+    border: 1px solid #f0d9a0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .taxi-step .price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent2);
+    display: block;
+  }
+  .taxi-step .desc {
+    font-size: 11px;
+    color: #888;
+  }
+  .arrow { font-size: 20px; color: #ccc; }
+
+  /* 比較テーブル */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .compare-table th {
+    background: var(--tag-bg);
+    color: white;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .compare-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f0ede6;
+    background: white;
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table .win { color: #27ae60; font-weight: 700; }
+  .compare-table .lose { color: var(--accent); font-weight: 700; }
+
+  /* 警告ボックス */
+  .warn-box {
+    background: #2c3e50;
+    color: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .warn-box::before {
+    content: '⚠';
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.05;
+    right: 10px;
+    bottom: -10px;
+  }
+  .warn-box h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: #f39c12;
+  }
+  .warn-box p { color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 10px; }
+  .warn-box p:last-child { margin-bottom: 0; }
+
+  /* まとめ */
+  .summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 40px 0;
+  }
+  .summary-box h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .summary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .summary-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.7;
+  }
+  .summary-list li::before {
+    content: '✔';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* フッター */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 12px;
+    color: #aaa;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  /* 区切り */
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin: 32px 0;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 500px) {
+    .taxi-flow { flex-direction: column; align-items: flex-start; }
+    .arrow { transform: rotate(90deg); }
+    .hero { padding: 44px 20px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-tag">経済の話をわかりやすく</div>
+  <h1>知らないと損する<br>「インフレ税」の話<br><span style="font-size:0.65em; font-weight:400; opacity:0.8">あなたの預金が静かに消えていく理由</span></h1>
+  <p class="hero-sub">元JPモルガン日本代表・藤巻健史氏の警告をわかりやすく解説</p>
+</div>
+
+<div class="container">
+
+  <!-- イントロ -->
+  <div class="intro-box">
+    <p>「インフレ税」って聞いたことありますか？税金でもないのに、じわじわとお金が取られていく仕組みのことです。日本政府の借金問題と深く関係していて、知らないでいると気づかないうちに損をするかもしれません。今回は元JPモルガン日本代表の藤巻健史さんの主張をもとに、できるだけわかりやすく解説します。</p>
+  </div>
+
+  <!-- セクション1 -->
+  <div class="section">
+    <div class="section-label">PART 01</div>
+    <h2>まず知っておきたい<br>日本政府の「借金」の規模</h2>
+
+    <p>日本政府が抱える借金は、現在なんと約<strong>1,342兆円</strong>。「兆」という単位が多すぎてピンとこないですよね。GDPの約2倍以上というのが世界的にもヤバいレベルで、先進国の中でもダントツです。</p>
+    <p>では、この借金をどうやって返すのか。普通に考えると「増税すればいい」となりますが、実はそれが全然うまくいかないんです。</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="num">1,342<span style="font-size:16px">兆円</span></span>
+        <span class="label">日本政府の借金総額</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">約223<span style="font-size:16px">%</span></span>
+        <span class="label">対GDP比の債務残高</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">約25<span style="font-size:16px">兆円</span></span>
+        <span class="label">毎年の財政赤字</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- セクション2 -->
+  <div class="section">
+    <div class="section-label">PART 02</div>
+    <h2>「増税で解決」は<br>なぜ難しいのか？</h2>
+
+    <p>所得税を上げればいいんじゃないか、と思うかもしれませんが、数字で見ると現実はシビアです。</p>
+    <p>日本で所得税を払っている人は人口の約半分、約5,300万人。さらにその約78%は税率10%以下です。一番高い45%の税率の人たちの税率を1%上げても、増える税収はたった<strong>約350億円</strong>。国の赤字が25兆円なので、焼け石に水です。</p>
+    <p>では消費税は？計算上は消費税を<strong>10%から24%</strong>まで上げれば借金は返せます。でも政治的に絶対に無理です。消費税を上げると選挙で負けるので、どの政党も踏み込めません。</p>
+
+    <div class="compare-table-wrap" style="overflow-x:auto; margin: 24px 0;">
+      <table class="compare-table">
+        <tr>
+          <th>増税の手段</th>
+          <th>1%上げたときの効果</th>
+          <th>実現性</th>
+        </tr>
+        <tr>
+          <td>所得税（富裕層45%）</td>
+          <td>約350億円の増収</td>
+          <td class="lose">ほぼ意味なし</td>
+        </tr>
+        <tr>
+          <td>所得税（最低5%）</td>
+          <td>約7,600億円の増収</td>
+          <td class="lose">逆に課税最低額を引上げ中</td>
+        </tr>
+        <tr>
+          <td>消費税（10%→24%）</td>
+          <td>年約35兆円の増収が可能</td>
+          <td class="lose">政治的に絶対ムリ</td>
+        </tr>
+      </table>
+    </div>
+
+    <p>つまり、どの方法で増税しても、借金を返せるレベルには全然届かないというのが現実なんです。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- セクション3 -->
+  <div class="section">
+    <div class="section-label">PART 03</div>
+    <h2>じゃあ残る手段は？<br>「インフレ税」の正体</h2>
+
+    <p>増税が無理なら、借金を帳消しにする方法はひとつだけ残っています。それが<strong>「インフレ税」</strong>です。</p>
+
+    <p>インフレ（物価上昇）が起きると、お金の価値が下がります。すると政府の借金の「実質的な重さ」も軽くなるんです。これを日本経済新聞は「物価上昇によって政府の借金返済負担が実質的に軽くなること」と解説しています。</p>
+
+    <div class="example-box">
+      <div class="ex-title">タクシーで考えてみよう</div>
+      <p style="font-size:14px; margin-bottom:14px; color:#555;">タクシー運転手が1,000万円の借金をしたとします。初乗りが1,000円なら返済はとても大変。でもハイパーインフレが来たら？</p>
+      <div class="taxi-flow">
+        <div class="taxi-step">
+          <span class="price">1,000円</span>
+          <span class="desc">通常の初乗り<br>返済は大変</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="taxi-step">
+          <span class="price">1万円</span>
+          <span class="desc">インフレ進行中<br>だいぶ楽に</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="taxi-step">
+          <span class="price" style="color:#c0392b;">100万円</span>
+          <span class="desc">ハイパーインフレ<br>10回乗れば完済！</span>
+        </div>
+      </div>
+      <p style="font-size:13px; color:#888; margin-top:10px; margin-bottom:0;">※これと同じことが政府の借金にも起きます。</p>
+    </div>
+
+    <p>政府にとっては「借金が勝手に軽くなる」ので万々歳。でも国民の側から見ると、預金の価値がどんどん下がっていきます。これは実質的に「国民から政府へのお金の移動」なので、税金と同じ＝<strong>インフレ税</strong>と呼ばれるわけです。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- セクション4 -->
+  <div class="section">
+    <div class="section-label">PART 04</div>
+    <h2>政府はすでに<br>動き始めているかもしれない</h2>
+
+    <p>2025年11月、高市首相は財政健全化の目標を「プライマリーバランスの黒字化」から「<strong>政府債務残高の対GDP比の低減</strong>」に変更しました。</p>
+    <p>これ、一見テクニカルな話に見えますが、実は重要な意味を持ちます。</p>
+
+    <div class="warn-box">
+      <h3>⚠ 目標変更の「真の意味」とは？</h3>
+      <p>「対GDP比」は「借金÷GDP」の計算式です。インフレが進むとGDPの金額が膨らむので、借金の額が変わらなくても「比率」は自動的に下がります。</p>
+      <p>つまり、インフレを起こすだけで目標達成できる仕組みに変えた、ということ。藤巻氏はこれを「インフレを加速させる宣言」と見ています。</p>
+      <p>7%のインフレが10年続くだけで、預金の実質価値は<strong>半分以下</strong>になります。</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- セクション5 -->
+  <div class="section">
+    <div class="section-label">PART 05</div>
+    <h2>では、私たちはどうすればいい？</h2>
+
+    <p>「最悪のシナリオ」と言われても、急に何かしなきゃいけないのかと焦る必要はありません。ただ、知っておくことが大切です。</p>
+    <p>銀行預金だけに頼っていると、インフレが進むほど実質的な価値が下がっていきます。反対に、<strong>株式・不動産・投資信託</strong>などの「実物・成長資産」はインフレに強い傾向があります。</p>
+
+    <table class="compare-table">
+      <tr>
+        <th>資産の種類</th>
+        <th>インフレへの強さ</th>
+      </tr>
+      <tr>
+        <td>銀行預金</td>
+        <td class="lose">弱い（価値が目減りする）</td>
+      </tr>
+      <tr>
+        <td>国債・債券</td>
+        <td class="lose">弱い（固定金利は特にリスク大）</td>
+      </tr>
+      <tr>
+        <td>株式・投資信託</td>
+        <td class="win">比較的強い</td>
+      </tr>
+      <tr>
+        <td>不動産</td>
+        <td class="win">比較的強い（物価と連動しやすい）</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- まとめ -->
+  <div class="summary-box">
+    <h3>📋 この記事のまとめ</h3>
+    <ul class="summary-list">
+      <li>日本政府の借金は約1,342兆円。増税だけでは到底返せない規模。</li>
+      <li>所得税も消費税も、政治的・数字的に限界がある。</li>
+      <li>「インフレ税」とは、インフレによって実質的に国民の富が政府に移動する現象のこと。</li>
+      <li>財政健全化目標の変更は、高インフレを容認する布石かもしれない。</li>
+      <li>銀行預金だけでなく、インフレに強い資産を持つことが自衛策になる。</li>
+    </ul>
+  </div>
+
+  <p style="font-size:13px; color:#888; text-align:center; margin-bottom: 8px;">※本記事は藤巻健史氏の著書・主張をもとに構成したものです。投資・資産運用は自己責任でご判断ください。</p>
+
+</div>
+
+<div class="footer">
+  © 2025 My Blog · 経済をもっと身近に
+</div>
+
+</body>
+</html>
