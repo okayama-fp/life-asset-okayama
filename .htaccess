@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^assetguardians88338\.com$ [NC]
+RewriteRule ^(.*)$ https://www.assetguardians88338.com/$1 [R=301,L]
