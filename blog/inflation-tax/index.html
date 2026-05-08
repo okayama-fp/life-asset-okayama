@@ -15,12 +15,13 @@
       --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
       --orange:#d97706; --orange-bg:#fffbeb; --orange-border:#fde68a;
     }
-    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: linear-gradient(180deg, #e8f4fd 0%, #ffffff 15%) fixed; }
     a { text-decoration: none; color: inherit; }
 
     /* Header */
     header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
     .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
     nav { display: flex; align-items: center; gap: 24px; }
@@ -36,16 +37,24 @@
     article { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
 
     /* Hero */
-    .article-hero { background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%); padding: 52px 40px; }
+    .article-hero { background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%); padding: 0; overflow: hidden; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 220px; align-items: stretch; }
+    .hero-content { padding: 48px 40px; }
     .article-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
     .article-tag { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
     .article-date { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .trust-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; padding: 5px 12px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .badge-icon { color: #7dd3fc; }
     .article-title { font-size: clamp(22px, 3vw, 32px); font-weight: 900; color: #fff; line-height: 1.4; margin-bottom: 16px; }
-    .article-lead { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.9; }
-    .article-author { display: flex; align-items: center; gap: 12px; margin-top: 24px; background: rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; }
+    .article-lead { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.9; margin-bottom: 20px; }
+    .article-author { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; }
     .article-author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; }
     .article-author .name { font-size: 14px; font-weight: 800; color: #fff; }
     .article-author .title { font-size: 11px; color: rgba(255,255,255,0.6); }
+    .hero-photo-panel { position: relative; overflow: hidden; }
+    .hero-photo-panel img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; min-height: 320px; filter: brightness(0.7); }
+    .hero-photo-panel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(26,37,47,0.8) 0%, transparent 60%); }
 
     /* Body */
     .article-body { padding: 40px; }
@@ -85,6 +94,24 @@
 
     .info-box { background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
     .info-box .box-title { font-size: 13px; font-weight: 800; color: var(--green); margin-bottom: 10px; }
+
+    /* Mascot callout */
+    .mascot-callout { display: flex; align-items: flex-start; gap: 16px; background: var(--sky-bg); border: 2px solid var(--sky-pale); border-radius: 16px; padding: 20px; margin: 24px 0; }
+    .mascot-callout img { width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; }
+    .mascot-callout-bubble { flex: 1; }
+    .mascot-callout-bubble .bubble-title { font-size: 13px; font-weight: 800; color: var(--sky); margin-bottom: 6px; }
+    .mascot-callout-bubble p { font-size: 13px; color: var(--text); line-height: 1.8; }
+    .mascot-callout-bubble strong { color: var(--navy); }
+
+    /* Mid-article CTA */
+    .mid-cta { position: relative; border-radius: 16px; overflow: hidden; margin: 44px 0; }
+    .mid-cta-img { width: 100%; height: 220px; object-fit: cover; object-position: center 30%; display: block; }
+    .mid-cta-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,52,96,0.88) 0%, rgba(30,77,140,0.75) 100%); display: flex; align-items: center; justify-content: center; padding: 32px; }
+    .mid-cta-content { text-align: center; color: #fff; }
+    .mid-cta-content .mascot-small { width: 48px; height: 48px; object-fit: contain; margin-bottom: 10px; }
+    .mid-cta-content h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+    .mid-cta-content p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 16px; }
+    .mid-cta-content a { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 12px 28px; border-radius: 50px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
 
     /* Flow */
     .flow-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
@@ -153,16 +180,20 @@
     /* Footer */
     footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo { display: flex; align-items: center; gap: 16px; }
     .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
 
     @media (max-width: 768px) {
       nav { display: none; }
       .article-wrap { grid-template-columns: 1fr; }
-      .article-hero { padding: 32px 24px; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-panel { display: none; }
+      .hero-content { padding: 32px 24px; }
       .article-body { padding: 28px 20px; }
       .flow-wrap { flex-direction: column; align-items: stretch; }
       .flow-arrow { transform: rotate(90deg); text-align: center; }
+      .mid-cta-img { height: 160px; }
     }
   </style>
 </head>
@@ -170,7 +201,7 @@
 
 <header>
   <div class="header-inner">
-    <a href="../../" style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+    <a href="../../" class="logo">
       <div class="logo-text">
         <div class="logo-main">Life Asset</div>
         <div class="tagline">ライフアセットパートナーズ</div>
@@ -193,17 +224,29 @@
 <div class="article-wrap">
   <article>
     <div class="article-hero">
-      <div class="article-meta">
-        <span class="article-tag">経済・資産防衛</span>
-        <span class="article-date">2026年5月8日</span>
-      </div>
-      <h1 class="article-title">知らないと損する「インフレ税」の話<br><span style="font-size:0.72em;font-weight:400;opacity:0.8;">あなたの預金が静かに消えていく理由</span></h1>
-      <p class="article-lead">「インフレ税」という言葉を聞いたことはありますか？税金でも罰金でもないのに、じわじわとお金の価値が奪われる仕組みです。2026年現在、年2〜3%の物価上昇が続く日本で、預金だけに頼ることは「静かな損失」を受け入れることと同じです。FP資格者が具体的な数字と歴史的背景で解説します。</p>
-      <div class="article-author">
-        <img src="../../images/fp-yoshiteru.jpg" alt="髙月義照">
-        <div>
-          <div class="name">髙月 義照</div>
-          <div class="title">ファイナンシャルプランナー（FP資格者）／ライフアセットパートナーズ 代表</div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="article-meta">
+            <span class="article-tag">経済・資産防衛</span>
+            <span class="article-date">2026年5月8日</span>
+          </div>
+          <h1 class="article-title">知らないと損する「インフレ税」の話<br><span style="font-size:0.72em;font-weight:400;opacity:0.8;">あなたの預金が静かに消えていく理由</span></h1>
+          <p class="article-lead">「インフレ税」という言葉を聞いたことはありますか？税金でも罰金でもないのに、じわじわとお金の価値が奪われる仕組みです。2026年現在、年2〜3%の物価上昇が続く日本で、預金だけに頼ることは「静かな損失」を受け入れることと同じです。FP資格者が具体的な数字と歴史的背景で解説します。</p>
+          <div class="trust-badges">
+            <span class="badge"><span class="badge-icon">✓</span>FP資格者監修</span>
+            <span class="badge"><span class="badge-icon">✓</span>2026年最新版</span>
+            <span class="badge"><span class="badge-icon">✓</span>無料相談あり</span>
+          </div>
+          <div class="article-author">
+            <img src="../../images/fp-yoshiteru.jpg" alt="髙月義照">
+            <div>
+              <div class="name">髙月 義照</div>
+              <div class="title">ファイナンシャルプランナー（FP資格者）／ライフアセットパートナーズ 代表</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-photo-panel">
+          <img src="../../images/fp-yoshiteru.jpg" alt="髙月義照 ファイナンシャルプランナー">
         </div>
       </div>
     </div>
@@ -244,9 +287,12 @@
 
       <p class="body-p">「政府の借金は国民の借金ではない」という意見もありますが、政府が財政難になれば行政サービスの削減・増税・インフレという形で必ず国民に影響が出ます。特に「インフレ」は最も気づかれにくい形での国民負担です。</p>
 
-      <div class="fp-quote">
-        <div class="quote-label">FPの現場から</div>
-        <p>「政府の借金なんて関係ない」と思っているお客様も多いのですが、インフレという形で家計に直撃しています。食料品・光熱費・外食費——あなたが感じている「最近お金が足りない感覚」は、インフレ税の影響です。</p>
+      <div class="mascot-callout">
+        <img src="../../images/life-asset-kun.png" alt="ライフアセットくん">
+        <div class="mascot-callout-bubble">
+          <div class="bubble-title">FPの現場から</div>
+          <p>「政府の借金なんて関係ない」と思っているお客様も多いのですが、インフレという形で家計に直撃しています。食料品・光熱費・外食費——あなたが感じている「<strong>最近お金が足りない感覚</strong>」は、インフレ税の影響です。</p>
+        </div>
       </div>
 
       <!-- 2. 増税の限界 -->
@@ -313,6 +359,19 @@
 
       <p class="body-p">歴史を振り返ると、<strong>「預金だけに頼ることはリスクである」</strong>ことが明確にわかります。インフレが起きるたびに、資産を実物（株・不動産・事業）で持っていた人は相対的に守られ、預金・国債のみを保有していた人は目減りを被っています。</p>
 
+      <!-- Mid-article CTA with couple-elderly.jpg -->
+      <div class="mid-cta">
+        <img src="../../images/couple-elderly.jpg" alt="老後資産防衛を考えるシニアカップル" class="mid-cta-img">
+        <div class="mid-cta-overlay">
+          <div class="mid-cta-content">
+            <img src="../../images/life-asset-kun.png" alt="ライフアセットくん" class="mascot-small">
+            <h3>一緒に考えましょう</h3>
+            <p>「老後の資産、このままで大丈夫？」インフレ対策を<br>あなたの家計に合わせてFPが無料でご提案します。</p>
+            <a href="../../#contact">無料相談を申し込む →</a>
+          </div>
+        </div>
+      </div>
+
       <!-- 5. 2026年の現状 -->
       <h2 class="section-h" id="now2026">2026年現在、すでに始まっている</h2>
       <p class="body-p">「昔の話でしょ？」と思われるかもしれません。でも2026年現在、日本のインフレはすでに現実になっています。</p>
@@ -334,9 +393,12 @@
 
       <p class="body-p">日銀は長年のマイナス金利・ゼロ金利政策を転換し、政策金利を引き上げました。しかし普通預金金利（0.1〜0.2%）はインフレ率（2〜3%）をはるかに下回っています。差し引きすると、<strong>預金者は毎年実質1.8〜2.8%ずつ資産を失っている</strong>ことになります。</p>
 
-      <div class="fp-quote">
-        <div class="quote-label">FPの現場から</div>
-        <p>「銀行に預けているから安心」というお客様に、「その100万円、10年後に何円分のものが買えますか？」とお聞きします。多くの方がそのとき、初めてインフレの怖さに気づきます。数字は嘘をつきません。</p>
+      <div class="mascot-callout">
+        <img src="../../images/life-asset-kun.png" alt="ライフアセットくん">
+        <div class="mascot-callout-bubble">
+          <div class="bubble-title">FPの現場から</div>
+          <p>「銀行に預けているから安心」というお客様に、「その100万円、10年後に何円分のものが買えますか？」とお聞きします。多くの方がそのとき、初めて<strong>インフレの怖さ</strong>に気づきます。数字は嘘をつきません。</p>
+        </div>
       </div>
 
       <!-- 6. ダメージ計算 -->
@@ -487,9 +549,13 @@
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="footer-logo">
       <div class="footer-logo-text">Life Asset</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;">ライフアセットパートナーズ　代表　髙月 義照</div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);">ライフアセットパートナーズ　代表　髙月 義照</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.6);">ファイナンシャルプランナー（FP資格者）</span>
+      </div>
+      <img src="../../images/fp-yoshiteru2.jpg" alt="髙月義照" style="width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
     </div>
     <div class="footer-contact">
       <a href="#" id="footer-mail">
