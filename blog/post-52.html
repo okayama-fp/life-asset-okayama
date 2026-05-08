@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>初心者向け！ゼロから学ぶ投資の基礎知識 | パーソナル・アセット・パートナーズ</title>
+  <style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1a2744;
+  --navy-light: #243460;
+  --gold: #b8962e;
+  --gold-light: #d4aa3a;
+  --gold-bg: #f5f0e8;
+  --white: #fff;
+  --gray-bg: #f7f8fa;
+  --text: #222;
+  --text-light: #666;
+  --border: #e5e5e5;
+}
+body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
+a { text-decoration: none; color: inherit; }
+header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+.logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+.logo-text .tagline { font-size: 10px; color: var(--text-light); }
+nav { display: flex; align-items: center; gap: 24px; }
+nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
+nav a:hover { color: var(--gold); }
+.btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+.btn-cta:hover { background: var(--navy-light); }
+footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 13px; }
+footer a { color: rgba(255,255,255,0.7); }
+footer a:hover { color: var(--gold); }
+@media (max-width:768px) {
+  nav { display: none; }
+  .header-inner { padding: 0 16px; }
+}
+
+.post-hero { background: linear-gradient(135deg, #1a2744 0%, #243460 100%); color: #fff; padding: 48px 24px 40px; }
+.post-hero-inner { max-width: 800px; margin: 0 auto; }
+.post-date { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+.post-title { font-size: clamp(22px,3.5vw,36px); font-weight: 900; line-height: 1.3; margin-bottom: 16px; }
+.post-body { max-width: 800px; margin: 48px auto; padding: 0 24px 80px; }
+.post-body h2 { font-size: 22px; font-weight: 800; color: var(--navy); border-left: 4px solid var(--gold); padding-left: 14px; margin: 36px 0 16px; line-height: 1.4; }
+.post-body h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin: 28px 0 12px; }
+.post-body h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin: 20px 0 8px; }
+.post-body p { margin-bottom: 16px; font-size: 15px; line-height: 1.9; }
+.post-body ul, .post-body ol { margin: 0 0 16px 24px; font-size: 15px; line-height: 1.9; }
+.post-body li { margin-bottom: 6px; }
+.post-body strong { font-weight: 700; }
+.post-body table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
+.post-body th { background: var(--navy); color: #fff; padding: 10px 12px; text-align: left; }
+.post-body td { border: 1px solid var(--border); padding: 10px 12px; }
+.post-body tr:nth-child(even) td { background: var(--gray-bg); }
+.post-body img { max-width: 100%; height: auto; border-radius: 4px; margin: 16px 0; }
+.post-body blockquote { border-left: 4px solid var(--gold); padding-left: 16px; margin: 20px 0; color: #555; }
+.post-back { display: inline-flex; align-items: center; gap: 6px; color: var(--navy); font-size: 13px; font-weight: 600; margin-bottom: 40px; }
+.post-back:hover { color: var(--gold); }
+.cta-box { background: var(--gold-bg); border: 2px solid var(--gold); border-radius: 8px; padding: 32px; text-align: center; margin-top: 48px; }
+.cta-box h3 { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.cta-box p { font-size: 14px; color: #555; margin-bottom: 20px; }
+.cta-box a { display: inline-block; background: var(--navy); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 4px; font-size: 15px; }
+.cta-box a:hover { background: var(--navy-light); }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/index.html">
+      <div class="logo-icon"><span>PAP</span></div>
+      <div class="logo-text">
+        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="tagline">FP資格者による資産・融資サポート</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/index.html#services">サービス</a>
+      <a href="/index.html#about">代表プロフィール</a>
+      <a href="/blog.html">ブログ</a>
+      <a href="/index.html#contact">お問い合わせ</a>
+    </nav>
+    <a class="btn-cta" href="/index.html#contact">無料相談はこちら</a>
+  </div>
+</header>
+<div class="post-hero">
+  <div class="post-hero-inner">
+    <div class="post-date">2025-02-25</div>
+    <h1 class="post-title">初心者向け！ゼロから学ぶ投資の基礎知識</h1>
+    <div style="margin-top:12px;"><span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span></div>
+  </div>
+</div>
+<div class="post-body">
+  <a class="post-back" href="/blog.html">← ブログ一覧へ戻る</a>
+<p>「投資を始めたいけど、何からやればいいの？」<br>「損をするのが怖い…」<br>「初心者でも簡単にできる方法はある？」</p>
+
+<p>こんな疑問を持っている方へ、投資歴4年の私が <strong>初心者向けに投資の基礎をわかりやすく解説</strong> します！</p>
+
+<p><strong>投資は怖くない！</strong><br>正しい知識を持って、長期的に運用すれば <strong>コツコツ資産を増やすことが可能</strong> です。</p>
+
+<hr/>
+
+<h2><strong>1. 投資ってそもそも何？貯金との違い</strong></h2>
+
+<h3><strong>✅ 貯金と投資の違い</strong></h3>
+
+<figure><table class="has-fixed-layout"><thead><tr><th></th><th>貯金</th><th>投資</th></tr></thead><tbody><tr><td><strong>目的</strong></td><td>お金を守る</td><td>お金を増やす</td></tr><tr><td><strong>リスク</strong></td><td>ほぼなし</td><td>価格の変動あり</td></tr><tr><td><strong>利息・リターン</strong></td><td>年0.001%～0.1%</td><td>年3%～7%（長期運用）</td></tr><tr><td><strong>使える場面</strong></td><td>いつでも引き出せる</td><td>長期運用が基本</td></tr></tbody></table></figure>
+
+<p><strong>ポイント</strong><br>貯金は安全だけど、お金は増えない。<br>投資はリスクはあるが、時間をかければ資産が増える可能性が高い。</p>
+
+<p><strong>だから、貯金と投資はバランスよく使うのが大事！</strong></p>
+
+<hr/>
+
+<h2><strong>2. 投資を始める前にやるべき3つのこと</strong></h2>
+
+<h3><strong>① 生活防衛資金を確保する（最低100万円）</strong></h3>
+
+<p>投資を始める前に <strong>生活費6か月分～1年分の貯金</strong> を確保しよう！</p>
+
+<p>✅ <strong>急な出費に対応できる（病気・失業など）</strong><br>✅ <strong>投資が値下がりしても焦らないで済む</strong></p>
+
+<p>目安：<strong>独身なら100万円、家族持ちは300万円～400万円</strong></p>
+
+<hr/>
+
+<h3><strong>② 借金（特にカードローン）は完済する</strong></h3>
+
+<p><strong>リボ払いやカードローンは利息が年15%超え</strong> もザラ。<br>投資の平均リターンは <strong>年3%～7%</strong> なので、<br>借金を返すほうが確実に得！</p>
+
+<p>✅ <strong>住宅ローンはOK（低金利なら）</strong><br>✅ <strong>リボ払い・キャッシングは今すぐ返済！</strong></p>
+
+<hr/>
+
+<h3><strong>③ 投資の目的を決める</strong></h3>
+
+<p>「何のために投資するのか？」を考えよう！</p>
+
+<p>✔ 老後資金を貯める（長期運用）<br>✔ 教育資金を準備する（15年～20年運用）<br>✔ 早期リタイアを目指す（FIRE）</p>
+
+<p><strong>目的によって「どの投資を選ぶべきか」が変わる！</strong></p>
+
+<hr/>
+
+<h2><strong>3. 投資の種類を知ろう！初心者におすすめの3つ</strong></h2>
+
+<h3><strong>① 株式投資（個別株）</strong></h3>
+
+<p>企業の株を買って利益を狙う方法。</p>
+
+<p>✅ <strong>メリット</strong>：大きく利益が出る可能性あり<br>✅ <strong>デメリット</strong>：企業の業績次第で大損することも</p>
+
+<p><strong>初心者にはおすすめしない！</strong> まずは投資信託から！</p>
+
+<hr/>
+
+<h3><strong>② 投資信託（インデックス投資） ←初心者向け！</strong></h3>
+
+<p>プロがいろんな企業の株をまとめて運用してくれる商品。</p>
+
+<p>✅ <strong>メリット</strong>：分散投資ができてリスクが低い<br>✅ <strong>デメリット</strong>：短期間で大きな利益は出にくい</p>
+
+<p><strong>初心者は「全世界株式（オルカン）」や「S&amp;P500」がおすすめ！</strong></p>
+
+<hr/>
+
+<h3><strong>③ 債券・金（リスク分散）</strong></h3>
+
+<p>株よりリスクが低いので、資産を守るために活用。</p>
+
+<p>✅ <strong>債券</strong>（アメリカ国債など）：価格が安定し、配当がある<br>✅ <strong>金</strong>（ゴールド）：インフレや経済不安の時に強い</p>
+
+<p>私は <strong>オルカン70%、個別株・金・アメリカ国債30%</strong> で運用中！</p>
+
+<hr/>
+
+<h2><strong>4. 初心者がやるべき投資3ステップ</strong></h2>
+
+<h3><strong>① NISA（新NISA）を活用する！</strong></h3>
+
+<p>投資で得た利益が <strong>非課税（税金ゼロ）</strong> になる超お得な制度！</p>
+
+<p>✅ <strong>つみたて投資枠</strong>：年120万円（長期投資向け）<br>✅ <strong>成長投資枠</strong>：年240万円（個別株・ETFなどもOK）</p>
+
+<p><strong>まずは「つみたてNISA」でオルカン or S&amp;P500を積み立て！</strong></p>
+
+<hr/>
+
+<h3><strong>② 少額から始める（1,000円～OK）</strong></h3>
+
+<p>いきなり大金を投資せず、<strong>月1万円～3万円からスタート！</strong></p>
+
+<p><strong>例：月3万円投資すると…</strong><br>✔ 年5%のリターンで <strong>20年後に約1,200万円</strong> に増える！</p>
+
+<hr/>
+
+<h3><strong>③ 長期運用！絶対に途中で売らない！</strong></h3>
+
+<p>投資の成功の秘訣は <strong>「売らないこと」</strong>。</p>
+
+<p>✅ <strong>短期売買はプロでも勝てない</strong><br>✅ <strong>長期運用で「複利」の力を活かす！</strong></p>
+
+<hr/>
+
+<h2><strong>5. 投資の失敗例＆注意点</strong></h2>
+
+<h3><strong>❌ 短期間で大儲けしようとする</strong></h3>
+
+<p>「1年で2倍10倍に！」は <strong>99%詐欺かギャンブル</strong> です。</p>
+
+<p>✅ <strong>投資は10年・20年単位で考える</strong><br>✅ <strong>急騰する銘柄に飛びつかない</strong></p>
+
+<hr/>
+
+<h3><strong>❌ 値下がりした時に焦って売る</strong></h3>
+
+<p>株価は <strong>短期で上がったり下がったりするのが普通</strong>。</p>
+
+<p>✅ <strong>下がっても放置！</strong>（リーマンショックでも回復している）<br>✅ <strong>下がった時こそ「安く買えるチャンス」</strong></p>
+
+<hr/>
+
+<h3><strong>❌ 分散投資せずに1つの銘柄に全額投入</strong></h3>
+
+<p>「1つの株だけに100万円！」は危険。</p>
+
+<p>✅ <strong>オルカンなどの分散投資をメインに</strong><br>✅ <strong>個別株は全資産の20～30%以内にする</strong></p>
+
+<hr/>
+
+<h2><strong>6. まとめ：投資はコツコツ続けるのが最強！</strong></h2>
+
+<p>✅ <strong>生活防衛資金を確保してから投資を始める！</strong><br>✅ <strong>NISAを活用して、長期運用する！</strong><br>✅ <strong>投資信託（オルカン or S&amp;P500）から始める！</strong><br>✅ <strong>短期間で儲けようとせず、コツコツ続ける！</strong></p>
+
+<hr/>
+
+<p>投資は <strong>「正しくやれば」お金を増やせる手段</strong> です！<br>まずは <strong>少額からスタートし、長期運用を意識して</strong> 資産を増やしていきましょう！</p>
+
+<p></p>
+
+<p></p>
+  <div class="cta-box">
+    <h3>資産運用・家計のご相談はお気軽に</h3>
+    <p>FP資格者が丁寧にサポートします。まずは無料相談をご利用ください。</p>
+    <a href="/index.html#contact">無料相談はこちら</a>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2025 パーソナル・アセット・パートナーズ</p>
+</footer>
+</body>
+</html>

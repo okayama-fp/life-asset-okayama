@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ブログ | パーソナル・アセット・パートナーズ</title>
+  <style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1a2744;
+  --navy-light: #243460;
+  --gold: #b8962e;
+  --gold-light: #d4aa3a;
+  --gold-bg: #f5f0e8;
+  --white: #fff;
+  --gray-bg: #f7f8fa;
+  --text: #222;
+  --text-light: #666;
+  --border: #e5e5e5;
+}
+body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
+a { text-decoration: none; color: inherit; }
+header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+.logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+.logo-text .tagline { font-size: 10px; color: var(--text-light); }
+nav { display: flex; align-items: center; gap: 24px; }
+nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
+nav a:hover { color: var(--gold); }
+.btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+.btn-cta:hover { background: var(--navy-light); }
+footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 13px; }
+footer a { color: rgba(255,255,255,0.7); }
+footer a:hover { color: var(--gold); }
+@media (max-width:768px) {
+  nav { display: none; }
+  .header-inner { padding: 0 16px; }
+}
+
+.blog-hero { background: linear-gradient(135deg, #1a2744 0%, #243460 100%); color: #fff; padding: 56px 24px; text-align: center; }
+.blog-hero h1 { font-size: clamp(28px,4vw,44px); font-weight: 900; margin-bottom: 10px; }
+.blog-hero p { font-size: 15px; opacity: 0.8; }
+.blog-main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+.blog-count { font-size: 13px; color: var(--text-light); margin-bottom: 24px; }
+.blog-grid { display: flex; flex-direction: column; gap: 20px; }
+.card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; transition: box-shadow .2s; }
+.card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.card-date { font-size: 12px; color: var(--text-light); }
+.card-title { font-size: 18px; font-weight: 800; color: var(--navy); line-height: 1.4; margin-bottom: 10px; }
+.card-title a:hover { color: var(--gold); }
+.card-excerpt { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 14px; }
+.card-read { font-size: 13px; font-weight: 700; color: var(--gold); }
+.card-read:hover { color: var(--navy); }
+@media (max-width:600px) {
+  .card { padding: 20px; }
+  .card-title { font-size: 16px; }
+}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/index.html">
+      <div class="logo-icon"><span>PAP</span></div>
+      <div class="logo-text">
+        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="tagline">FP資格者による資産・融資サポート</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/index.html#services">サービス</a>
+      <a href="/index.html#about">代表プロフィール</a>
+      <a href="/blog.html">ブログ</a>
+      <a href="/index.html#contact">お問い合わせ</a>
+    </nav>
+    <a class="btn-cta" href="/index.html#contact">無料相談はこちら</a>
+  </div>
+</header>
+<div class="blog-hero">
+  <h1>ブログ</h1>
+  <p>インフレ時代の資産防衛・投資・節約に役立つ情報をお届けします</p>
+</div>
+<div class="blog-main">
+  <p class="blog-count">69件の記事</p>
+  <div class="blog-grid">
+
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-02-07</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-423.html">日経平均CFD 56,508（+4.19%）</a></h2>
+      <p class="card-excerpt">なぜ“ここまで”一気に買われたのか 結論から言うと👇👉 これは業績相場でもバブルでもない👉 「政治イベント前のポジション調整＋期待の前借り」 ① CFDが先に吹いた意味（ここ重要） まずCFDで先に爆上げしたこと自体がメッセージ。 CFDは…</p>
+      <a class="card-read" href="/blog/post-423.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-02-07</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-426.html">次の成長テーマはフィジカルAIかもしれない</a></h2>
+      <p class="card-excerpt">結論から言う 日本のフィジカルAI（Physical AI）は、**日本が数少ない「世界で覇権を狙える分野」**であり、単なる技術トレンドではなく、今後の経済成長・産業構造・国家戦略の中核になり得る存在だ。 デジタルAI（生成AI・ソフトウ…</p>
+      <a class="card-read" href="/blog/post-426.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-02-03</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-411.html">投資を始めて「資本家」になろう</a></h2>
+      <p class="card-excerpt">――労働者で終わらない人生の設計図―― はじめに｜なぜ今「資本家」なのか 日本では長い間、「一生懸命働けば、いつか報われる」そんな価値観が当たり前でした。 しかし、現実はどうでしょうか。 実質賃金は30年ほぼ横ばい 年金は減額方向 物価だけ…</p>
+      <a class="card-read" href="/blog/post-411.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-02-03</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-414.html">物価高騰、インフレは止まらない</a></h2>
+      <p class="card-excerpt">――なぜ「元に戻る」と考える人ほど苦しくなるのか はじめに｜「高い」のではない、「価値が変わった」 最近よく聞く言葉があります。 物価が高すぎる いつになったら元に戻るのか 昔はもっと安かった しかし、ここで一つはっきり言います。 物価は「…</p>
+      <a class="card-read" href="/blog/post-414.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-02-03</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-417.html">なぜ国はインフレを止めないのか</a></h2>
+      <p class="card-excerpt">結論｜国にとってインフレは「都合がいい」 国は「物価高対策」を口にしますが、本気でインフレを止める気はありません。 理由は単純です。インフレは、国にとって一番痛みの少ない財政再建手段だからです。 裏側① 国の借金はインフレで“軽くなる” 日…</p>
+      <a class="card-read" href="/blog/post-417.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-02-01</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-407.html">新NISAは「今うまくいっている」からこそ危ない</a></h2>
+      <p class="card-excerpt">2024年にスタートした新NISA。開始からしばらく経ち、SNSやYouTube、ニュースでは 「ほとんどの人が利益！」 「+10〜+30％が一番多い」 「新NISAは神制度」 といった言葉が溢れています。 実際、日本経済新聞などの調査でも…</p>
+      <a class="card-read" href="/blog/post-407.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-01-31</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-404.html">日本の財政は本当に危機的なのか ― 構造から見た健全性の再評価</a></h2>
+      <p class="card-excerpt">日本の財政については、「国の借金が1,000兆円を超えている」「将来世代へのツケだ」といった表現が頻繁に用いられ、危機的であるとの印象が広く共有されている。しかし、この議論の多くは国家財政の構造を十分に考慮していない単純化された見方であり、…</p>
+      <a class="card-read" href="/blog/post-404.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-07-05</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-395.html">「お金の使い方に迷わない5つの視点」―FPが教える目的と価値で判断する方法</a></h2>
+      <p class="card-excerpt">✅ ①「消費」「浪費」「投資」に分けて考える 区分定義具体例特徴FP的ポイント消費生きていくために必要な支出食費、家賃、水道光熱費、日用品、通勤交通費、保育園費用、スマホ基本料金生活維持のための出費。節約は可能だが限度がある「固定費見直し」…</p>
+      <a class="card-read" href="/blog/post-395.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-07-03</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-391.html">暗号資産が金商法の枠組みに！分離課税20％・ETF誕生も？～学識者の見解と今後の行方～</a></h2>
+      <p class="card-excerpt">はじめに｜ついに「暗号資産×金商法」へ制度が動き出す！ 2027年施行を目指し、金融庁は暗号資産を金融商品取引法（いわゆる金商法）の枠組みに組み込む方針を明らかにしました。この動きは、単なる法制度の見直しではなく、暗号資産を「真の金融資産」…</p>
+      <a class="card-read" href="/blog/post-391.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-06-22</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-383.html">ホワイトハウスで発表予定：イランでの成功した軍事作戦</a></h2>
+      <p class="card-excerpt">2025年6月22日、午後10時（現地時間）。ホワイトハウスから、歴史的となる発表が行われます。アメリカ合衆国、イスラエル、そして世界の平和の行方を左右する重要なメッセージが、全世界へと発信されます。トランプ大統領は日本時間午前11時に演説…</p>
+      <a class="card-read" href="/blog/post-383.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-06-19</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-377.html">【6月19日】緊迫の中東情勢｜イラン×イスラエル、そしてアメリカの出方は？</a></h2>
+      <p class="card-excerpt">中東の緊張が、かつてないほど高まっています。イランとイスラエルの軍事衝突はついに“全面戦争”とも言える局面へ突入。そして、アメリカ・トランプ大統領の対応が、世界の注目を集めています。 本日はこの情勢を「今、何が起きているのか？」「これからど…</p>
+      <a class="card-read" href="/blog/post-377.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-06-19</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-380.html">【中東有事×ビットコイン】なぜ戦争懸念で仮想通貨が買われるのか？</a></h2>
+      <p class="card-excerpt">中東情勢の緊迫化が続き、マーケットは大きく揺れています。株価が不安定になる一方、注目されているのが**ビットコイン（BTC）**の動きです。今回は、「中東有事とビットコイン価格の関係性」について、初心者にもわかりやすく解説します。 🔥 中東…</p>
+      <a class="card-read" href="/blog/post-380.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-06-17</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-371.html">【2025年9月がラストチャンス】楽天ふるさと納税のポイント還元が終了！お得に寄付する最後の月を逃さないで！</a></h2>
+      <p class="card-excerpt">2025年10月から、ふるさと納税の制度が大きく変わります。これまで楽天ふるさと納税などを通じて受け取っていた「楽天ポイント」などの還元が、2025年9月末で完全に終了します。 つまり、ポイントを活用してお得にふるさと納税ができるのは202…</p>
+      <a class="card-read" href="/blog/post-371.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-05-24</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-366.html">お米が高すぎる！2020年→2025年で●％上昇した。</a></h2>
+      <p class="card-excerpt">📈 コメ価格のインフレ率（2020〜2025年）2025年のコメ価格の前年比上昇率は+64.5%と、過去に例を見ない急激な上昇を記録しています。この背景には以下の要因が挙げられます。 年度コメ価格の前年比上昇率備考2020-0.8%物価全体…</p>
+      <a class="card-read" href="/blog/post-366.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-05-18</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-362.html">米国債が格下げ！その理由と今後の影響をわかりやすく解説</a></h2>
+      <p class="card-excerpt">米国債が格下げ！その影響と長期投資家が知っておくべきポイント 🔍 1. 国債の格付けとは？ 信用格付けは、国や企業が発行する債券について「ちゃんと返済されるかどうか」を示す指標です。 格付けが高い（例：AAA） → 返済リスクが極めて低い …</p>
+      <a class="card-read" href="/blog/post-362.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-05-03</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-357.html">教育費・住宅ローン・老後資金…家計の三大不安をFPが解決！シミュレーションで未来を見える化</a></h2>
+      <p class="card-excerpt">ファイナンシャルシミュレーションを行う必要性は、将来への「不安」を「見える安心」に変えるためです。以下の理由で非常に重要です。 ✅ シミュレーションをする3つの必要性 ① お金の流れを「見える化」することで不安が軽減 家計や資産が「いつ」「…</p>
+      <a class="card-read" href="/blog/post-357.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-27</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-351.html">「お金が貯まらない」のは、実は○○が原因！ゴールデンウィークにしっかり学ぼう！</a></h2>
+      <p class="card-excerpt">「お金が貯まらない」原因！ ゴールデンウィークは、普段なかなか取れない「自分を見つめ直す時間」にぴったり。今回は特に20代・30代・40代の方に向けて、「なぜお金が貯まらないのか？」「どうすれば未来の不安を減らせるのか？」についてお話ししま…</p>
+      <a class="card-read" href="/blog/post-351.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-24</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-348.html">【為替が株価や投資リターンに与える影響】</a></h2>
+      <p class="card-excerpt">1. 為替と株価の関係 海外資産、特にS&P500やオルカン（全世界株式インデックス）などに投資する際、日本円で生活している私たちにとって重要なのが「為替変動の影響」です。たとえ株価が上昇していても、円高が進行すると、円換算でのリターンは目…</p>
+      <a class="card-read" href="/blog/post-348.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-19</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-344.html">トランプ大統領がFRB議長を解任要求!? 歴史に学ぶ「政治の金融介入」が招くスタグフレーションの恐怖</a></h2>
+      <p class="card-excerpt">トランプ大統領、FRB議長解任を要求：歴史が警告するスタグフレーションの危機 2025年4月、ドナルド・トランプ大統領が連邦準備制度理事会（FRB）のジェローム・パウエル議長の解任を検討しているとの報道がありました。​この動きは、FRBの独…</p>
+      <a class="card-read" href="/blog/post-344.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-15</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-341.html">◆ インフレ期待が6.7%に急上昇</a></h2>
+      <p class="card-excerpt">【1】今回のニュースの背景 この話は、**ミシガン大学消費者信頼感指数（University of Michigan Consumer Sentiment Index）**に基づくもので、アメリカの消費者の「心理・見通し」を毎月調査していま…</p>
+      <a class="card-read" href="/blog/post-341.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-09</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-329.html">投資恐怖こそ利益</a></h2>
+      <p class="card-excerpt">投資の恐怖は利益の源泉 ～感情との向き合い方が未来のリターンを変える～ 「怖くて買えなかった」「下がるのが不安で売ってしまった」 この言葉に心当たりのある方は多いのではないでしょうか。 投資の世界では、感情——特に「恐怖」という感情が、しば…</p>
+      <a class="card-read" href="/blog/post-329.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-09</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-333.html">関税発動！今後の世界経済はどうなるのか、世界景気後退シナリオ</a></h2>
+      <p class="card-excerpt">--- 2025年4月、トランプ前大統領が再選後の初の主要政策として、米国における対中・対世界的な包括的関税政策を発表・発動しました。この動きは、彼が2018年にも実行した強硬な貿易政策の再来であり、今回は前回以上に広範囲に渡る国・地域に対…</p>
+      <a class="card-read" href="/blog/post-333.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-09</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-337.html">トランプ関税発動と物価高騰に備える現金給付案！？国民1人あたり4万〜5万円の支援、その財源と経済への影響とは？</a></h2>
+      <p class="card-excerpt">【はじめに】 2025年4月、アメリカのトランプ大統領による中国製品への104％関税発動は、世界経済に大きな衝撃を与え、日本経済にも無視できない影響をもたらしています。特に輸入品価格の上昇を通じた物価高騰、そしてさらなる円安圧力は、家計に直…</p>
+      <a class="card-read" href="/blog/post-337.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-08</span>
+        <span style="background:#4a4a8a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">ポートフォリオ</span><span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-324.html">ポートフォリオ2025年4月8日</a></h2>
+      <p class="card-excerpt">【大暴落株リスク強要度は大丈夫？～あなたの資産が一夜で消える前に知るべきこと～】 --- はじめに 株式投資は資産形成の手段として広く知られ、NISAやiDeCoなどの制度も後押しし、多くの人々が投資に取り組むようになりました。しかし、投資…</p>
+      <a class="card-read" href="/blog/post-324.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-03</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-312.html">関税とは 誰が払う</a></h2>
+      <p class="card-excerpt">アメリカの関税とは？ 1. 関税の基本概念 関税とは、外国から輸入される商品に対して政府が課す税金のことである。アメリカでは、関税は主に以下の目的で設定される。 国内産業の保護：安価な外国製品の流入を防ぎ、国内企業の競争力を維持する。 政府…</p>
+      <a class="card-read" href="/blog/post-312.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-04-03</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-315.html">関税発動：世界経済への影響とその詳細分析</a></h2>
+      <p class="card-excerpt">1. はじめに 2025年4月2日、ドナルド・トランプ米大統領は「経済的独立宣言」として、広範な関税措置を発表しました。この新たな関税措置には、 全輸入品に対する最低10%の関税 特定の国々に対する追加関税（中国34%、欧州連合（EU）20…</p>
+      <a class="card-read" href="/blog/post-315.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-31</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-309.html">投資信託マイナス放置でも大丈夫！</a></h2>
+      <p class="card-excerpt">はじめに 投資信託を始めたばかりの人が直面しやすいのが「評価額がマイナスになった」という状況です。投資信託の評価額が下がると、「売るべきか？」「損切りした方がいいのか？」と不安になるものです。しかし、投資信託がマイナスになったからといって、…</p>
+      <a class="card-read" href="/blog/post-309.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-29</span>
+        <span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-305.html">貯金できない人が貯金する方法</a></h2>
+      <p class="card-excerpt">はじめに 「貯金しようと思っても、なかなか貯まらない」「給料が入ってもすぐになくなってしまう」と悩んでいる人は多いのではないでしょうか。貯金ができない人には、いくつかの共通した原因があります。しかし、それらを理解し、適切な方法を実践すること…</p>
+      <a class="card-read" href="/blog/post-305.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-28</span>
+        <span style="background:#4a4a8a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">ポートフォリオ</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-292.html">株式投資のポートフォリオ作成ガイド</a></h2>
+      <p class="card-excerpt">株式投資において、適切なポートフォリオを構築することはリスク管理と収益向上の両方において非常に重要です。本記事では、初心者から上級者まで役立つ、効果的なポートフォリオの作り方を詳しく解説します。 1. ポートフォリオとは？ ポートフォリオと…</p>
+      <a class="card-read" href="/blog/post-292.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-28</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-297.html">50代からのNISA活用法：投資は遅い？やめとくべき？それとも今から積み立てるべき？</a></h2>
+      <p class="card-excerpt">50代から投資を始めるのは遅い？ 「50代から投資を始めるのは遅い」「今からNISAを活用しても意味がない」といった意見を耳にすることがあります。しかし、本当にそうでしょうか？ 確かに、投資は時間を味方につけることが重要であり、20代・30…</p>
+      <a class="card-read" href="/blog/post-297.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-28</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-300.html">株 暴落です。​</a></h2>
+      <p class="card-excerpt">主要株式指数の年初来下落率比較 2025年初頭から3月28日までの期間で、各指数の年初来下落率は以下の通りです：​ S&P500指数：​約12.4%の下落​ オールカントリー（MSCI ACWI）：​約8.8%の下落​ 日経平均株価：​約約…</p>
+      <a class="card-read" href="/blog/post-300.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-27</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-282.html">NISA・積立NISA・iDeCo・ポイント投資・高配当株・米国株投資・仮想通貨・株主優待の賢い活用法</a></h2>
+      <p class="card-excerpt">投資を始めたい人や資産形成を効率的に進めたい人にとって、「NISA」「積立NISA」「iDeCo」「ポイント投資」「高配当株」「米国株投資」「仮想通貨」「株主優待」は非常に重要なテーマです。この記事では、各投資手法の特徴やメリット・デメリッ…</p>
+      <a class="card-read" href="/blog/post-282.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-27</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-287.html">2025年の日経平均株価の見通し</a></h2>
+      <p class="card-excerpt">2025年3月現在、日経平均株価は37,755円で推移しています。今後の動向を予測するためには、国内外の経済状況、政治的要因、企業業績などを考慮する必要があります。本記事では、2025年以降の日経平均株価の見通しを分析します。 --- 1.…</p>
+      <a class="card-read" href="/blog/post-287.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-26</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-269.html">40代・50代が高配当株で成功する方法｜失敗しないためのポイント、高配当株投資のメリット・デメリット</a></h2>
+      <p class="card-excerpt">はじめに 「配当金でゆとりある生活をしたい」「老後に備えて、安定した収入源を作りたい」 そう思っている方に人気なのが【高配当株投資】です。 特に40代・50代は「資産形成の後半戦」にあたる世代。 しかし、SNSなどでは「高配当株は損」「オル…</p>
+      <a class="card-read" href="/blog/post-269.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-26</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-272.html">資産 運用 おすすめ 50 代</a></h2>
+      <p class="card-excerpt">はじめに 「老後資金はとにかく貯金しておけば安心」と思っていませんか？ かつては銀行に預けておけば金利でお金が増える時代がありました。しかし、今は超低金利時代。さらに日本は物価がかなり上がり始め、円安も進行しています。もし貯蓄一択で老後資金…</p>
+      <a class="card-read" href="/blog/post-272.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-26</span>
+        <span style="background:#4a4a8a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">ポートフォリオ</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-277.html">ポートフォリオ2025年3月26日現在</a></h2>
+      <p class="card-excerpt">【修正済最新版】 1. 投資の目的を明確に 投資の最大の目的は「お金を増やすこと」と思われがちですが、本質は「将来に備えること」。 ・老後資金 ・子どもの教育費 ・住宅購入資金 ・生活防衛資金の補強 それぞれの目的に合わせて、運用方針を明確…</p>
+      <a class="card-read" href="/blog/post-277.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-25</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-263.html">【保存版】50代からの資産形成｜「もう遅い」なんてない！今からでも間に合う賢い資産形成術</a></h2>
+      <p class="card-excerpt">はじめに 「50代になってから資産形成なんて遅いのでは？」 そんな不安を感じている人は多いかもしれません。 確かに20代・30代からコツコツ積み立ててきた人と比べると、50代から始めるのは時間的なハンデがあります。しかし、50代だからこそ使…</p>
+      <a class="card-read" href="/blog/post-263.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-25</span>
+        <span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-266.html">資産形成のポイント：保険が必要な人と必要でない人の違いを徹底解説</a></h2>
+      <p class="card-excerpt">こんにちは、FP資格保持者で投資歴7年以上、3人の子を持つ家庭持ちのやまかぜです。 今回は、これから資産形成を本格的に始めたい方に向けて、非常に大切なテーマをお届けします。 それは「保険は本当に必要なのか？」「必要な人と必要でない人の違いは…</p>
+      <a class="card-read" href="/blog/post-266.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-23</span>
+        <span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-256.html">30代がやっておくべき資産形成｜将来の安心を手に入れる戦略2025年3月23日</a></h2>
+      <p class="card-excerpt">はじめに｜30代は資産形成のゴールデンタイム 20代で貯蓄や投資を始めた人も、まだ何もしていない人も、30代は本格的に資産形成を加速させる重要な時期です。結婚や子育て、住宅購入など人生の大きなライフイベントが重なる一方で、収入も安定し始め、…</p>
+      <a class="card-read" href="/blog/post-256.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-23</span>
+        <span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-259.html">［FPが教える］20代でやるべき資産形成と収入アップにつながる自己投資、2025年3月23日</a></h2>
+      <p class="card-excerpt">--- 【FPが教える】20代で絶対やるべき資産形成と収入アップのための自己投資【初心者向け徹底解説】 こんにちは、ファイナンシャルプランナー（FP）のやまかぜです。 今回は「20代でやるべき資産形成」と「収入アップにつながる自己投資」につ…</p>
+      <a class="card-read" href="/blog/post-259.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-20</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-250.html">暴落時にどうする？長期投資＆高配当株ホルダーの心得</a></h2>
+      <p class="card-excerpt">株式市場は時に激しく上下し、特に暴落時には投資家のメンタルが試されます。しかし、長期投資家や高配当株を保有する人にとって、暴落は恐怖ではなく、むしろチャンスと捉えるべきタイミングです。本記事では、暴落時に取るべき行動や心構えについて、楽しく…</p>
+      <a class="card-read" href="/blog/post-250.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-20</span>
+        <span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-253.html">「未来に不安を感じたら、今がスタートライン。40代からの本気マネープラン！」2025年03月20日</a></h2>
+      <p class="card-excerpt">40代は、人生の中で最もお金について真剣に考えるべき時期です。子供の教育費、住宅ローンの返済、そして老後資金の準備。全てを同時に考えなければならない世代です。しかし、多くの人が「何から手を付ければいいかわからない」と感じています。今回は、老…</p>
+      <a class="card-read" href="/blog/post-253.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-18</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-244.html">【徹底解説】物価上昇4%止まらない！なぜ日銀は金利を4%に上げないのか？もし上げたらどうなる？アメリカとの違いも解説！</a></h2>
+      <p class="card-excerpt">--- 結論 日銀が政策金利を4%に引き上げない最大の理由は、日本経済がその副作用に耐えられないからです。 その理由を大きく4つに分けて説明します。 --- 1. 国の借金（国債利払い）が爆発する 日本の国債残高は約1,200兆円超。 仮に…</p>
+      <a class="card-read" href="/blog/post-244.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-18</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-247.html">【2025年版】円相場の未来：130円も160円以上もあり得る？その背景と可能性を徹底分析</a></h2>
+      <p class="card-excerpt">はじめに 2025年現在、日本の実質金利はマイナス3.5%。そして日本は貿易赤字、少子高齢化、労働時間の減少という構造問題を抱えています。多くの投資家が「米国の利下げがあれば円高に戻るだろう」と考えがちですが、本当にそうでしょうか？ 本記事…</p>
+      <a class="card-read" href="/blog/post-247.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-17</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-240.html">【長期分散投資の大切さ】GPIFのポートフォリオから学ぶ投資術！あなたの資産を守る「国民の年金運用」から得られる投資の極意</a></h2>
+      <p class="card-excerpt">--- こんにちは！今日は 「長期投資の大切さ」 について、 GPIF（年金積立金管理運用独立行政法人） を例にしながら、 安全な投資術 を学んでいきましょう！ 「投資って難しそう…」 「損するのが怖い…」 「長期投資って何がいいの？」 そ…</p>
+      <a class="card-read" href="/blog/post-240.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-15</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-230.html">【2025年3月15日】損する投資家と儲かる投資家、成功するための秘訣を徹底解説！</a></h2>
+      <p class="card-excerpt">目次 1. 【第1章】損する投資家の特徴とは？ 2. 【第2章】儲かる投資家の特徴とは？ 3. 【第3章】機関投資家 vs. 個人投資家の考え方の違い 4. 【第4章】今日からできる！「儲かる投資家」になるためのステップ 5. 【まとめ】あ…</p>
+      <a class="card-read" href="/blog/post-230.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-14</span>
+        <span style="background:#4a4a8a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">ポートフォリオ</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-216.html">ポートフォリオ２０２５年３月１４日現在</a></h2>
+      <p class="card-excerpt">--- ◆ 長期投資の原則：資産は上がったり下がったりするもの 「資産が減った！！やばい！！」と思うかもしれませんが、冷静に考えれば、これは投資をする以上、誰にでも起こる普通のことです。 過去の歴史を見ても、株式市場は常に上下を繰り返しなが…</p>
+      <a class="card-read" href="/blog/post-216.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-13</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-212.html">配当収入！米国債ETFで安定配当！景気低迷でも強い投資戦略とは？</a></h2>
+      <p class="card-excerpt">はじめに 投資には「絶対」はありませんが、景気サイクルに応じた資産運用を考えることは重要だと考えています。特に、今後景気が低迷する可能性があることを考慮し、**米国債ETF（東証2621）**に注目しています。 米国債の価格は金利と逆相関の…</p>
+      <a class="card-read" href="/blog/post-212.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-12</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-207.html">銀行株投資のリアル体験！3年で100%以上の利益と配当金の魅力😁</a></h2>
+      <p class="card-excerpt">こんにちは！今回は、私が三菱UFJ銀行の株を500株購入し、3年間の保有で100%以上の利益を出した経験をシェアします。 投資の世界は奥が深いですが、「銀行株ってどうなの？」「長期投資って本当に儲かるの？」と思っている方には、リアルな実体験…</p>
+      <a class="card-read" href="/blog/post-207.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-11</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-189.html">新NISAで後悔しないための戦略｜なぜ売却する人が増えているのか？</a></h2>
+      <p class="card-excerpt">2024年からスタートした新NISAは、投資家にとって非常に魅力的な制度です。 「長期投資で資産形成をするためにNISAを始めるのに、なぜ売却するの？」と疑問に思う方も多いでしょう。 この記事では、新NISAで後悔しないための戦略を解説しつ…</p>
+      <a class="card-read" href="/blog/post-189.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-11</span>
+        <span style="background:#4a4a8a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">ポートフォリオ</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-199.html">ポートフォリオ2025年3月14日現在</a></h2>
+      <p class="card-excerpt">株式市場への影響 これらの下落は、投資家のリスクオフの姿勢が強まり、市場の不安定さを反映しています。 日経平均の下落: 日本市場の下落は、企業収益の悪化や海外市場の影響を受けています。特に、海外投資家の資金流出や為替の変動が日本株に大きく影…</p>
+      <a class="card-read" href="/blog/post-199.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-10</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-186.html">2025年2月のアメリカ雇用統計と今週発表のCPI・PPIのポイント</a></h2>
+      <p class="card-excerpt">2025年2月のアメリカ雇用統計が3月7日に発表されました。今回はその結果と、今週発表予定の消費者物価指数（CPI）および生産者物価指数（PPI）について、わかりやすく解説します。 2025年2月のアメリカ雇用統計結果 非農業部門の雇用者数…</p>
+      <a class="card-read" href="/blog/post-186.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-09</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-165.html">初心者向け！長期投資の波乱相場の乗り越え方</a></h2>
+      <p class="card-excerpt">波乱相場とは、市場が大きく変動し、株価が急落したり急騰したりする状況のことです。初心者の投資家にとっては不安に感じるかもしれませんが、正しい知識と対策を持つことで、冷静に対応し資産を守ることができます。本記事では、長期投資家が波乱相場を乗り…</p>
+      <a class="card-read" href="/blog/post-165.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-09</span>
+        <span style="background:#4a4a8a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">ポートフォリオ</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-174.html">ポートフォリオ2025年3月9日現在</a></h2>
+      <p class="card-excerpt">2025年3月9日現在：S&P500、オールカントリー（オルカン）、日本株の下落率比較 株式市場は日々変動し、投資家にとってリスクとチャンスが交錯する場です。2025年3月9日現在、S&P500、オールカントリー（オルカン）、そして日本株の…</p>
+      <a class="card-read" href="/blog/post-174.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-07</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-159.html">株主優待のメリット・デメリット😊</a></h2>
+      <p class="card-excerpt">株主優待は、企業が自社の株を持つ投資家に対して提供する特典です。食品や商品券、サービスの割引など、魅力的な特典が多いですが、メリットだけでなくデメリットもあります。今回は、株主優待の良い点と注意すべき点をわかりやすく解説します。 メリット …</p>
+      <a class="card-read" href="/blog/post-159.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-07</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-162.html">高配当株 vs. インデックス投資：どちらが良い？メリット・デメリットを徹底比較！😊</a></h2>
+      <p class="card-excerpt">資産運用を考える際、「高配当株」と「インデックス投資」は人気の投資手法です。どちらにも魅力がありますが、一方でリスクやデメリットも存在します。本記事では、それぞれのメリット・デメリットを詳しく解説し、自分に合った投資スタイルを見つけるヒント…</p>
+      <a class="card-read" href="/blog/post-162.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-06</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-148.html">賃金アップ、家計管理、そして資産形成：普通の会社員やトラックドライバーでもできる方法😊😊😊</a></h2>
+      <p class="card-excerpt">多くの人が「年収がないと資産形成を考えられない」と思っていますが、それは間違いです。私は高学歴ではありませんが、20代の頃は年収270万円からスタートし、10年以上かけて年収660万円まで上げていけました。今は人材不足なので10年もかかりま…</p>
+      <a class="card-read" href="/blog/post-148.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-06</span>
+        <span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-150.html">暴落時の対処法・資産を守る考え方😁</a></h2>
+      <p class="card-excerpt">1. 暴落時の心構え 株式市場は上下を繰り返します。焦らず、以下を意識しましょう。 市場は回復する：過去の暴落も時間とともに戻っています。 目的を忘れない：長期投資なら短期の下落に動じない。 冷静に判断する：感情的な売買は損失を広げる原因に…</p>
+      <a class="card-read" href="/blog/post-150.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-03</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-113.html">オルカンとS&P500の為替損とは？わかりやすく解説！</a></h2>
+      <p class="card-excerpt">オルカン（「eMAXIS Slim 全世界株式（オール・カントリー）」）やS&P500に投資している人の間で、「相当損が出ている…」という声を最近よく聞きます。 1. 為替損って何？ オルカンやS&P500の投資利益は、基本的に外国の株式に…</p>
+      <a class="card-read" href="/blog/post-113.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-02</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-109.html">【忙しい人向け】時間がなくてもできる！シンプル投資術</a></h2>
+      <p class="card-excerpt">1. 投資は「時間を味方につける」もの 忙しい人ほど、短期売買ではなく 長期投資 を活用しましょう。投資の基本は「買って持ち続ける」だけ。 ✅ 結論：積立投資＋ほったらかしこれなら時間がない人でも確実に資産を増やせます。 2. 具体的な行動…</p>
+      <a class="card-read" href="/blog/post-109.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-01</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-103.html">オルカン vs. S&P500｜初心者向け徹底比較！どっちを選ぶべき？</a></h2>
+      <p class="card-excerpt">長期投資を考える際に、**「オルカン（全世界株式）」と「S&P500（米国株）」のどちらを選ぶべきか？」と悩む人は多いですよね。結論を先に言うと、どちらも優れた投資先ですが、「リスクを抑えたいか」「リターンを優先するか」**で選び方が変わり…</p>
+      <a class="card-read" href="/blog/post-103.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-03-01</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-106.html">【初心者向け】ゴールドを組み入れた投資信託とは？メリット・デメリットを解説！</a></h2>
+      <p class="card-excerpt">最近、投資の世界で**「金（ゴールド）」**が注目されています。特に、投資信託を通じて金に投資する方法が人気ですが、どのような特徴があるのでしょうか？ 本記事では、ゴールドを組み入れた投資信託のメリット・デメリットをわかりやすく解説します。…</p>
+      <a class="card-read" href="/blog/post-106.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-28</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-100.html">初心者向け、目標のない投資は危険なのか？</a></h2>
+      <p class="card-excerpt">投資を始める際、多くの人が「お金を増やしたい」という思いからスタートします。しかし、明確な目標がないまま投資を続けると、思わぬ失敗を招くことがあります。本記事では、目標のない投資がなぜ危険なのか、そしてどのように目標を設定すればよいのかを詳…</p>
+      <a class="card-read" href="/blog/post-100.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-27</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-89.html">初心者向け！楽天証券＋楽天銀行 or SBI証券＋SBI銀行で投資を始める方法</a></h2>
+      <p class="card-excerpt">なぜ今、投資を始めるべきか？ 日本の銀行預金の金利は非常に低く、インフレが進むことでお金の価値が目減りするリスクがあります。そのため、投資を活用することで資産を増やし、将来の経済的な安心につなげることができます。 特に、ネット証券を利用する…</p>
+      <a class="card-read" href="/blog/post-89.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-27</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-92.html">NISAとは？初心者向けにわかりやすく解説！</a></h2>
+      <p class="card-excerpt">1. NISAとは？ NISA（ニーサ）とは、日本政府が推進する「少額投資非課税制度」のことです。通常、投資で得た利益（売却益や配当金）には約20%の税金がかかりますが、NISA口座で投資をすれば、その税金がかかりません。 NISAには主に…</p>
+      <a class="card-read" href="/blog/post-92.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-26</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-54.html">投資で成功するために大事なこと！準備を、メンタルを乗り越えよう！</a></h2>
+      <p class="card-excerpt">「投資を始めたら、株価が気になってスマホばかり見てしまう…」「夜も眠れず、朝起きたらすぐアメリカ市場をチェックしてしまう…」「投資のつもりが、気づけば賭けみたいになっている…」 こんな経験、ありませんか？ 投資で成功するためには、資産運用の…</p>
+      <a class="card-read" href="/blog/post-54.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-26</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-84.html">初心者にビットコインをおすすめできない理由とは？</a></h2>
+      <p class="card-excerpt">1. ビットコインとは？ 基本を解説！ ビットコイン（Bitcoin）は、2009年に誕生した世界初の仮想通貨（暗号資産）です。中央銀行や政府が管理しない 「非中央集権型のデジタル通貨」 であり、ブロックチェーン技術を基盤としています。 ビ…</p>
+      <a class="card-read" href="/blog/post-84.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-25</span>
+        <span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span><span style="background:#1a2744;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">増やす×投資</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-52.html">初心者向け！ゼロから学ぶ投資の基礎知識</a></h2>
+      <p class="card-excerpt">「投資を始めたいけど、何からやればいいの？」「損をするのが怖い…」「初心者でも簡単にできる方法はある？」 こんな疑問を持っている方へ、投資歴4年の私が 初心者向けに投資の基礎をわかりやすく解説 します！ 投資は怖くない！正しい知識を持って、…</p>
+      <a class="card-read" href="/blog/post-52.html">続きを読む →</a>
+    </article>
+    <article class="card">
+      <div class="card-meta">
+        <span class="card-date">2025-02-22</span>
+        <span style="background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">節約×貯める</span>
+      </div>
+      <h2 class="card-title"><a href="/blog/post-1.html">「5人家族のリアルな家計簿公開！年収600万円でどうやりくりしてる？」</a></h2>
+      <p class="card-excerpt">1. 「5人家族のリアル家計簿公開！年収600万円の節約術」 タイトル 5人家族のリアル家計簿公開！年収600万円の節約術 今日は、5人家族（夫婦＋子供3人）のリアルな家計簿を公開します。年収600万円で、どうやって家計を管理しているのか、…</p>
+      <a class="card-read" href="/blog/post-1.html">続きを読む →</a>
+    </article>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2025 パーソナル・アセット・パートナーズ</p>
+</footer>
+</body>
+</html>
