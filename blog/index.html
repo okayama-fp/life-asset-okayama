@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FPブログ｜資産形成・インフレ対策の最新情報｜ライフアセットパートナーズ</title>
+  <meta name="description" content="FP資格者・髙月義照が資産形成・NISA・iDeCo・インフレ対策をわかりやすく解説するブログ。2026年最新情報で初心者にも役立つ記事をお届けします。">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sky:#0ea5e9; --sky-light:#38bdf8; --sky-pale:#e0f2fe; --sky-bg:#dff3ff;
+      --navy:#0f3460; --navy-soft:#1e4d8c;
+      --text:#1e293b; --text-sub:#64748b; --border:#e2e8f0;
+      --green:#16a34a; --orange:#d97706; --red:#dc2626;
+    }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: linear-gradient(180deg, #d6effe 0%, #ffffff 18%) fixed; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--sky); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); transition: background .2s; }
+
+    /* Hero */
+    .blog-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 60%, #ffffff 100%); padding: 64px 32px 56px; }
+    .blog-hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px; }
+    .blog-hero-left { max-width: 560px; }
+    .hero-label { font-size: 12px; font-weight: 800; color: var(--sky); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 12px; }
+    .blog-hero h1 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; color: var(--navy); line-height: 1.35; margin-bottom: 16px; }
+    .blog-hero-desc { font-size: 15px; color: #334155; line-height: 1.85; margin-bottom: 28px; }
+    .trust-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0; }
+    .badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.85); border: 1px solid rgba(14,165,233,0.3); border-radius: 50px; padding: 6px 14px; font-size: 12px; font-weight: 700; color: var(--navy); }
+    .badge-icon { color: var(--sky); font-size: 13px; }
+    .hero-photo-wrap { position: relative; }
+    .hero-photo { width: 280px; height: 340px; object-fit: cover; object-position: center top; border-radius: 20px; box-shadow: 0 12px 40px rgba(14,165,233,0.25); display: block; }
+    .hero-photo-label { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; font-size: 12px; font-weight: 800; padding: 6px 18px; border-radius: 50px; white-space: nowrap; }
+
+    /* Mascot strip */
+    .mascot-section { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px; }
+    .mascot-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 24px; }
+    .mascot-img { width: 72px; height: 72px; object-fit: contain; flex-shrink: 0; }
+    .mascot-bubble { background: var(--sky-bg); border: 2px solid var(--sky-pale); border-radius: 16px; padding: 16px 22px; position: relative; flex: 1; }
+    .mascot-bubble::before { content: ''; position: absolute; left: -12px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-right-color: var(--sky-pale); }
+    .mascot-bubble p { font-size: 14px; color: var(--text); line-height: 1.8; }
+    .mascot-bubble strong { color: var(--sky); }
+
+    /* Main layout */
+    .blog-main { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; display: grid; grid-template-columns: 1fr 280px; gap: 48px; }
+
+    /* Category header */
+    .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .category-title { font-size: 18px; font-weight: 900; color: var(--navy); }
+    .category-count { font-size: 12px; color: var(--text-sub); background: var(--sky-bg); border: 1px solid var(--sky-pale); padding: 3px 10px; border-radius: 50px; }
+    .category-section { margin-bottom: 48px; }
+
+    /* Article cards */
+    .article-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; gap: 0; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: box-shadow .2s, transform .2s; margin-bottom: 20px; }
+    .article-card:hover { box-shadow: 0 8px 28px rgba(14,165,233,0.15); transform: translateY(-2px); }
+    .card-thumb { width: 200px; min-height: 150px; flex-shrink: 0; overflow: hidden; position: relative; }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .card-thumb-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,165,233,0.15) 0%, transparent 60%); }
+    .card-body { padding: 22px 26px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+    .card-tag { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; color: #fff; }
+    .tag-blue { background: var(--sky); }
+    .tag-red { background: var(--red); }
+    .tag-new { background: var(--green); }
+    .card-date { font-size: 11px; color: var(--text-sub); }
+    .card-title { font-size: 17px; font-weight: 900; color: var(--navy); line-height: 1.45; margin-bottom: 10px; }
+    .card-excerpt { font-size: 13px; color: var(--text-sub); line-height: 1.75; margin-bottom: 14px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card-author { display: flex; align-items: center; gap: 8px; }
+    .card-author img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; object-position: center top; }
+    .card-author span { font-size: 11px; color: var(--text-sub); font-weight: 600; }
+    .card-link { font-size: 12px; font-weight: 700; color: var(--sky); display: flex; align-items: center; gap: 4px; }
+
+    /* Sidebar */
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-bg); }
+    .sidebar-fp { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .sidebar-fp img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center top; flex-shrink: 0; }
+
+    /* Footer */
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo { display: flex; align-items: center; gap: 16px; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .blog-hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: none; }
+      .blog-main { grid-template-columns: 1fr; }
+      .article-card { flex-direction: column; }
+      .card-thumb { width: 100%; height: 160px; }
+      .mascot-inner { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">ライフアセットパートナーズ</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../">ホーム</a>
+      <a href="../service/">サービス</a>
+      <a href="./" class="active">ブログ</a>
+      <a href="../recruit/">採用情報</a>
+    </nav>
+    <a href="../#contact" class="btn-cta">無料相談</a>
+  </div>
+</header>
+
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-hero-left">
+      <div class="hero-label">FP Blog</div>
+      <h1>お金のことを、<br>もっとわかりやすく。</h1>
+      <p class="blog-hero-desc">FP資格者・髙月義照が、資産形成・NISA・iDeCo・インフレ対策について、難しい言葉を使わずに正直に解説します。2026年最新の情報で、あなたの家計をサポートします。</p>
+      <div class="trust-badges">
+        <span class="badge"><span class="badge-icon">✓</span>FP資格者監修</span>
+        <span class="badge"><span class="badge-icon">✓</span>2026年最新版</span>
+        <span class="badge"><span class="badge-icon">✓</span>無料相談あり</span>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="../images/fp-yoshiteru.jpg" alt="髙月義照 ファイナンシャルプランナー" class="hero-photo">
+      <div class="hero-photo-label">髙月 義照 FP</div>
+    </div>
+  </div>
+</div>
+
+<div class="mascot-section">
+  <div class="mascot-inner">
+    <img src="../images/life-asset-kun.png" alt="ライフアセットくん" class="mascot-img">
+    <div class="mascot-bubble">
+      <p>「老後のお金、NISAって何から始めれば？」——そんな疑問に、FPが<strong>具体的な数字と実例</strong>でお答えします。難しい話はなし、あなたの家計に役立つ情報だけをお届けします！</p>
+    </div>
+  </div>
+</div>
+
+<div class="blog-main">
+  <div>
+    <!-- 資産形成 -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-title">資産形成</div>
+        <div class="category-count">1記事</div>
+      </div>
+
+      <a href="asset-building-beginner/" class="article-card" style="display:flex;">
+        <div class="card-thumb">
+          <img src="../images/couple-young.jpg" alt="資産形成 若いカップル">
+          <div class="card-thumb-overlay"></div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta">
+              <span class="card-tag tag-blue">資産形成</span>
+              <span class="card-tag tag-new">2026年最新版</span>
+              <span class="card-date">2026年5月8日</span>
+            </div>
+            <div class="card-title">資産形成の始め方｜初心者が最初にやるべき5つのステップ</div>
+            <div class="card-excerpt">「何から始めればいいかわからない」——そんな方へ。家計の見える化から新NISA・iDeCoの活用まで、FP資格者が具体的な数字と実例でわかりやすく解説します。インフレ時代の2026年版。</div>
+          </div>
+          <div class="card-footer">
+            <div class="card-author">
+              <img src="../images/fp-yoshiteru2.jpg" alt="髙月義照">
+              <span>髙月 義照 FP</span>
+            </div>
+            <span class="card-link">続きを読む →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 経済・資産防衛 -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-title">経済・資産防衛</div>
+        <div class="category-count">1記事</div>
+      </div>
+
+      <a href="inflation-tax/" class="article-card" style="display:flex;">
+        <div class="card-thumb">
+          <img src="../images/couple-elderly.jpg" alt="老後資産防衛 シニアカップル">
+          <div class="card-thumb-overlay" style="background: linear-gradient(135deg, rgba(220,38,38,0.12) 0%, transparent 60%);"></div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="card-meta">
+              <span class="card-tag tag-red">経済・資産防衛</span>
+              <span class="card-date">2026年5月8日</span>
+            </div>
+            <div class="card-title">知らないと損する「インフレ税」の話｜あなたの預金が静かに消えていく理由</div>
+            <div class="card-excerpt">日本の借金1,400兆円とインフレの関係をFP資格者が解説。年2〜3%のインフレが続くと、預金100万円は30年後に実質55万円の価値しかなくなります。今すぐ知るべき資産防衛の具体策。</div>
+          </div>
+          <div class="card-footer">
+            <div class="card-author">
+              <img src="../images/fp-yoshiteru2.jpg" alt="髙月義照">
+              <span>髙月 義照 FP</span>
+            </div>
+            <span class="card-link">続きを読む →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <div class="sidebar-title">このブログについて</div>
+      <div class="sidebar-fp">
+        <img src="../images/fp-yoshiteru2.jpg" alt="髙月義照">
+        <div>
+          <div style="font-size:14px;font-weight:800;color:var(--navy);">髙月 義照</div>
+          <div style="font-size:11px;color:var(--text-sub);">FP資格者 / 代表</div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">ライフアセットパートナーズ代表。FP資格者として家計相談・資産運用・融資・ライフプランの相談に対応。年間100件以上の相談実績。</p>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">無料相談のご案内</div>
+      <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;">資産形成・NISA・インフレ対策について、初回相談は完全無料。オンライン対応可。</p>
+      <a href="../#contact" style="display:block;background:var(--sky);color:#fff;text-align:center;padding:12px;border-radius:10px;font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(14,165,233,0.3);">無料相談を申し込む</a>
+    </div>
+
+    <div class="sidebar-box" style="background:var(--sky-bg);border-color:var(--sky-pale);">
+      <div class="sidebar-title">人気のテーマ</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="asset-building-beginner/" style="font-size:13px;color:var(--sky);line-height:1.6;">新NISA・iDeCoの始め方</a>
+        <a href="inflation-tax/" style="font-size:13px;color:var(--sky);line-height:1.6;">インフレ対策・資産防衛</a>
+        <a href="../#contact" style="font-size:13px;color:var(--sky);line-height:1.6;">老後資金・ライフプラン相談</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-text">Life Asset</div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);">ライフアセットパートナーズ　代表　髙月 義照</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.6);">ファイナンシャルプランナー（FP資格者）</span>
+      </div>
+      <img src="../images/fp-yoshiteru2.jpg" alt="髙月義照" style="width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
+    </div>
+    <div class="footer-contact">
+      <a href="#" id="footer-mail">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        <span id="footer-mail-text"></span>
+      </a>
+      <script>(function(){var u='lifeassetpartners',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
