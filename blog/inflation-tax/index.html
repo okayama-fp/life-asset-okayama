@@ -3,96 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>知らないと損する「インフレ税」の話｜ライフアセットパートナーズ</title>
-  <meta name="description" content="インフレ税とは何か？日本の借金問題とインフレの関係をFP資格者がわかりやすく解説。2026年最新データで見る資産防衛策。">
+  <title>知らないと損する「インフレ税」の話｜あなたの預金が静かに消えていく理由【2026年版】｜ライフアセットパートナーズ</title>
+  <meta name="description" content="インフレ税とは？日本の1,400兆円の借金とインフレの関係をFP資格者が解説。2026年、年2〜3%のインフレで預金100万円は30年後55万円に。今すぐ知るべき資産防衛の具体策。">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --sky:#0ea5e9; --sky-light:#38bdf8; --sky-pale:#e0f2fe; --sky-bg:#dff3ff; --navy:#0f3460; --navy-soft:#1e4d8c; --white:#ffffff; --gray-bg:#edf8ff; --text:#1e293b; --text-sub:#64748b; --border:#e2e8f0; --red:#c0392b; --orange:#e67e22; }
+    :root {
+      --sky:#0ea5e9; --sky-light:#38bdf8; --sky-pale:#e0f2fe; --sky-bg:#dff3ff;
+      --navy:#0f3460; --navy-soft:#1e4d8c;
+      --text:#1e293b; --text-sub:#64748b; --border:#e2e8f0;
+      --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
+      --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
+      --orange:#d97706; --orange-bg:#fffbeb; --orange-border:#fde68a;
+    }
     body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
     a { text-decoration: none; color: inherit; }
     header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
     .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
     nav { display: flex; align-items: center; gap: 24px; }
     nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
     nav a:hover, nav a.active { color: var(--sky); }
-    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
     .breadcrumb { max-width: 860px; margin: 0 auto; padding: 16px 32px; font-size: 12px; color: var(--text-sub); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
     .breadcrumb a { color: var(--sky); }
     .breadcrumb span { opacity: 0.5; }
     .article-wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; display: grid; grid-template-columns: 1fr 280px; gap: 48px; }
     article { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .article-hero { background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); padding: 48px 40px; }
-    .article-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-hero { background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%); padding: 52px 40px; }
+    .article-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
     .article-tag { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
-    .article-date { font-size: 12px; color: rgba(255,255,255,0.6); }
-    .article-title { font-size: clamp(22px, 3vw, 30px); font-weight: 900; color: #fff; line-height: 1.4; margin-bottom: 16px; }
-    .article-lead { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.9; }
+    .article-date { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .article-title { font-size: clamp(22px, 3vw, 32px); font-weight: 900; color: #fff; line-height: 1.4; margin-bottom: 16px; }
+    .article-lead { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.9; }
     .article-author { display: flex; align-items: center; gap: 12px; margin-top: 24px; background: rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; }
     .article-author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; }
     .article-author .name { font-size: 14px; font-weight: 800; color: #fff; }
-    .article-author .title { font-size: 11px; color: rgba(255,255,255,0.65); }
+    .article-author .title { font-size: 11px; color: rgba(255,255,255,0.6); }
     .article-body { padding: 40px; }
-    .toc { background: var(--gray-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 40px; }
+    .toc { background: #edf8ff; border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 40px; }
     .toc-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
     .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
     .toc li { font-size: 13px; }
     .toc li a { color: var(--sky); }
-    h2.section-h { font-size: 20px; font-weight: 900; color: var(--navy); border-left: 4px solid var(--red); padding-left: 14px; margin: 40px 0 16px; }
-    h3.sub-h { font-size: 16px; font-weight: 800; color: var(--navy); margin: 28px 0 12px; }
+    h2.section-h { font-size: 20px; font-weight: 900; color: var(--navy); border-left: 4px solid var(--red); padding-left: 14px; margin: 44px 0 16px; line-height: 1.4; }
+    h3.sub-h { font-size: 16px; font-weight: 800; color: var(--navy); margin: 28px 0 12px; padding-left: 10px; border-left: 3px solid #fca5a5; }
     p.body-p { font-size: 14px; color: var(--text); line-height: 1.9; margin-bottom: 16px; }
-    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 24px 0; }
-    .stat-card { background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 20px; text-align: center; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 24px 0; }
+    .stat-card { background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 12px; padding: 20px; text-align: center; }
     .stat-card .num { font-size: 28px; font-weight: 900; color: var(--red); display: block; line-height: 1.1; margin-bottom: 6px; }
-    .stat-card .label { font-size: 12px; color: var(--text-sub); }
-    .warn-box { background: #1a252f; color: white; border-radius: 14px; padding: 28px 32px; margin: 28px 0; position: relative; overflow: hidden; }
-    .warn-box::before { content: ''; position: absolute; font-size: 120px; opacity: 0.05; right: 10px; bottom: -10px; }
-    .warn-box h3 { font-size: 17px; font-weight: 900; color: #f39c12; margin-bottom: 14px; }
-    .warn-box p { color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 10px; line-height: 1.8; }
-    .warn-box p:last-child { margin-bottom: 0; }
-    .example-box { background: #fffbf0; border: 2px dashed var(--orange); border-radius: 12px; padding: 28px; margin: 28px 0; }
-    .example-box .ex-title { font-weight: 700; font-size: 13px; color: var(--orange); letter-spacing: 1px; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
-    .taxi-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0; font-size: 14px; }
-    .taxi-step { background: white; border: 1px solid #f0d9a0; border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 120px; }
-    .taxi-step .price { font-size: 18px; font-weight: 700; color: var(--orange); display: block; }
-    .taxi-step .desc { font-size: 11px; color: #888; }
-    .arrow { font-size: 20px; color: #ccc; }
-    .compare-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-    .compare-table th { background: var(--navy); color: white; padding: 14px 18px; text-align: left; font-size: 13px; font-weight: 700; }
-    .compare-table td { padding: 14px 18px; border-bottom: 1px solid #f0ede6; background: white; vertical-align: top; font-size: 14px; }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table .win { color: #27ae60; font-weight: 700; }
-    .compare-table .lose { color: var(--red); font-weight: 700; }
-    .highlight-box { background: #fff; border: 2px solid var(--sky-pale); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
-    .highlight-box .hl-title { font-size: 14px; font-weight: 800; color: var(--sky); margin-bottom: 8px; }
-    .point-list { list-style: none; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
-    .point-list li { font-size: 13px; color: var(--text); padding-left: 20px; position: relative; line-height: 1.7; }
+    .stat-card .label { font-size: 12px; color: #666; line-height: 1.5; }
+    .crisis-box { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; border-radius: 16px; padding: 32px; margin: 28px 0; }
+    .crisis-box h3 { font-size: 17px; font-weight: 900; color: #f87171; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 14px; }
+    .crisis-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+    .crisis-row:last-child { border-bottom: none; }
+    .crisis-row .cr-label { color: rgba(255,255,255,0.7); }
+    .crisis-row .cr-bad { font-weight: 800; color: #fca5a5; }
+    .crisis-row .cr-ok { font-weight: 800; color: #86efac; }
+    .example-box { background: var(--orange-bg); border: 2px dashed var(--orange-border); border-radius: 14px; padding: 28px; margin: 28px 0; }
+    .example-box .ex-label { font-size: 11px; font-weight: 800; color: var(--orange); letter-spacing: .1em; margin-bottom: 10px; }
+    .example-box .ex-title { font-size: 17px; font-weight: 900; color: #92400e; margin-bottom: 14px; }
+    .warn-dark { background: #1e293b; color: white; border-radius: 14px; padding: 28px 32px; margin: 28px 0; }
+    .warn-dark h3 { font-size: 16px; font-weight: 900; color: #fbbf24; margin-bottom: 16px; }
+    .warn-dark p { color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 10px; line-height: 1.9; }
+    .warn-dark p:last-child { margin-bottom: 0; }
+    .info-box { background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+    .info-box .box-title { font-size: 13px; font-weight: 800; color: var(--green); margin-bottom: 10px; }
+    .flow-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+    .flow-step { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; text-align: center; min-width: 130px; flex: 1; }
+    .flow-step .fs-value { font-size: 20px; font-weight: 900; color: var(--orange); display: block; }
+    .flow-step .fs-desc { font-size: 11px; color: #888; margin-top: 4px; line-height: 1.5; }
+    .flow-arrow { font-size: 22px; color: #ccc; flex-shrink: 0; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .data-table th { background: var(--navy); color: white; padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid #f0f4f8; background: white; vertical-align: top; line-height: 1.6; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .good { color: var(--green); font-weight: 700; }
+    .data-table .bad { color: var(--red); font-weight: 700; }
+    .data-table .ok { color: var(--orange); font-weight: 700; }
+    .history-timeline { margin: 20px 0; }
+    .h-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .h-item:last-child { border-bottom: none; }
+    .h-year { font-size: 13px; font-weight: 800; color: var(--red); min-width: 70px; padding-top: 2px; flex-shrink: 0; }
+    .h-content { font-size: 13px; color: var(--text); line-height: 1.7; }
+    .h-content strong { color: var(--navy); }
+    .fp-quote { background: #f8faff; border-left: 4px solid var(--sky); border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 28px 0; }
+    .fp-quote .quote-label { font-size: 11px; font-weight: 800; color: var(--sky); margin-bottom: 8px; letter-spacing: .1em; }
+    .fp-quote p { font-size: 14px; color: var(--text); line-height: 1.9; font-style: italic; }
+    .point-list { list-style: none; margin: 10px 0; display: flex; flex-direction: column; gap: 8px; }
+    .point-list li { font-size: 13px; color: var(--text); padding-left: 22px; position: relative; line-height: 1.7; }
     .point-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
-    .cta-inline { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
-    .cta-inline h3 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 8px; }
-    .cta-inline p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
-    .cta-inline a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 36px; border-radius: 50px; }
-    .sidebar { display: flex; flex-direction: column; gap: 24px; }
-    .sidebar-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
-    .sidebar-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-bg); }
+    .action-box { background: linear-gradient(135deg, #0f3460, #1e4d8c); border-radius: 16px; padding: 28px 32px; margin: 32px 0; }
+    .action-box h3 { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 16px; }
+    .action-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .action-item:last-child { border-bottom: none; }
+    .action-num { width: 24px; height: 24px; background: var(--sky); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; flex-shrink: 0; margin-top: 1px; }
+    .action-text { font-size: 13px; color: rgba(255,255,255,0.9); line-height: 1.7; }
+    .action-text strong { color: #7dd3fc; }
     .summary-box { background: #f8faff; border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 40px 0; }
     .summary-box h3 { font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--sky-pale); }
     .summary-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .summary-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #333; line-height: 1.7; }
     .summary-list li::before { content: '\2714'; color: var(--sky); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    .cta-inline { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
+    .cta-inline h3 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .cta-inline p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; line-height: 1.8; }
+    .cta-inline a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 36px; border-radius: 50px; box-shadow: 0 4px 14px rgba(14,165,233,0.4); }
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid #dff3ff; }
+    .related-item { display: flex; flex-direction: column; gap: 4px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .related-item:last-child { border-bottom: none; }
+    .related-item a { font-size: 13px; color: var(--sky); line-height: 1.6; }
+    .related-item .tag { font-size: 10px; color: var(--text-sub); }
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
-    @media (max-width: 768px) { nav { display: none; } .article-wrap { grid-template-columns: 1fr; } .article-hero { padding: 32px 24px; } .article-body { padding: 28px 24px; } .taxi-flow { flex-direction: column; align-items: flex-start; } }
+    @media (max-width: 768px) { nav { display: none; } .article-wrap { grid-template-columns: 1fr; } .article-hero { padding: 32px 24px; } .article-body { padding: 28px 20px; } .flow-wrap { flex-direction: column; align-items: stretch; } }
   </style>
 </head>
 <body>
 <header>
   <div class="header-inner">
-    <a href="../../" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットパートナーズ</div></div></a>
+    <a href="../../" style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットパートナーズ</div></div>
+    </a>
     <nav>
       <a href="../../">ホーム</a>
       <a href="../../service/">サービス</a>
@@ -102,173 +138,183 @@
     <a href="../../#contact" class="btn-cta">無料相談</a>
   </div>
 </header>
-
 <div class="breadcrumb"><a href="../../">ホーム</a><span>&rsaquo;</span><a href="../">ブログ</a><span>&rsaquo;</span><span>知らないと損する「インフレ税」の話</span></div>
-
 <div class="article-wrap">
   <article>
     <div class="article-hero">
       <div class="article-meta"><span class="article-tag">経済・資産防衛</span><span class="article-date">2026年5月8日</span></div>
-      <h1 class="article-title">知らないと損する「インフレ税」の話<br><span style="font-size:0.7em; font-weight:400; opacity:0.85;">あなたの預金が静かに消えていく理由</span></h1>
-      <p class="article-lead">「インフレ税」という言葉を聞いたことはありますか？税金でもないのに、じわじわとお金の価値が奪われていく仕組みです。2026年現在、日本の物価上昇が続く中、預金だけに頼る資産管理は危険かもしれません。FP資格者の視点からわかりやすく解説します。</p>
+      <h1 class="article-title">知らないと損する「インフレ税」の話<br><span style="font-size:0.72em;font-weight:400;opacity:0.8;">あなたの預金が静かに消えていく理由</span></h1>
+      <p class="article-lead">「インフレ税」という言葉を聞いたことはありますか？税金でも罰金でもないのに、じわじわとお金の価値が奪われる仕組みです。2026年現在、年2〜3%の物価上昇が続く日本で、預金だけに頼ることは「静かな損失」を受け入れることと同じです。FP資格者が具体的な数字と歴史的背景で解説します。</p>
       <div class="article-author">
         <img src="../../images/fp-yoshiteru.jpg" alt="髙月義照">
         <div><div class="name">髙月 義照</div><div class="title">ファイナンシャルプランナー（FP資格者）／ライフアセットパートナーズ 代表</div></div>
       </div>
     </div>
-
     <div class="article-body">
       <div class="toc">
         <div class="toc-title">目次</div>
         <ol>
-          <li><a href="#part1">日本政府の「借金」の規模</a></li>
-          <li><a href="#part2">「増税で解決」はなぜ難しいのか？</a></li>
-          <li><a href="#part3">「インフレ税」の正体</a></li>
-          <li><a href="#part4">2026年、インフレはすでに始まっている</a></li>
-          <li><a href="#part5">私たちはどうすればいい？</a></li>
+          <li><a href="#debt">日本政府の「借金」の規模と現実</a></li>
+          <li><a href="#tax-hike">「増税で解決」がなぜ機能しないか</a></li>
+          <li><a href="#mechanism">「インフレ税」の正体と仕組み</a></li>
+          <li><a href="#history">歴史が証明する：インフレで借金は消えた</a></li>
+          <li><a href="#now2026">2026年現在、すでに始まっている</a></li>
+          <li><a href="#damage">あなたの預金はいくら目減りするか</a></li>
+          <li><a href="#defense">FPが薦める資産防衛の具体策</a></li>
         </ol>
       </div>
 
-      <h2 class="section-h" id="part1">日本政府の「借金」の規模</h2>
-      <p class="body-p">日本政府が抱える借金は2026年時点で約<strong>1,400兆円超</strong>。GDPの約230%以上という水準は先進国でダントツです。「兆」という単位が大きすぎてピンとこない方も多いですが、これは国民一人当たり約1,120万円の借金を背負っている計算になります。</p>
-      <p class="body-p">では、この借金をどうやって返すのか。普通に考えると「増税すればいい」となりますが、数字で見ると現実はシビアです。</p>
-
+      <h2 class="section-h" id="debt">日本政府の「借金」の規模と現実</h2>
+      <p class="body-p">日本政府が抱える債務残高は2026年時点で<strong>約1,400兆円超</strong>。GDPの約230%という水準は先進国でダントツの「世界一の借金大国」です。1,400兆円という数字は、日本国民全員（約1億2,500万人）が毎月3万円ずつ返し続けても30年以上かかる規模です。</p>
       <div class="stat-grid">
-        <div class="stat-card">
-          <span class="num">1,400<span style="font-size:14px">兆円超</span></span>
-          <span class="label">日本政府の借金総額（2026年）</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">約230<span style="font-size:14px">%</span></span>
-          <span class="label">対GDP比の債務残高</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">約2〜3<span style="font-size:14px">%</span></span>
-          <span class="label">2026年の物価上昇率（CPI）</span>
-        </div>
+        <div class="stat-card"><span class="num">1,400<span style="font-size:14px">兆円超</span></span><span class="label">政府の借金（2026年）</span></div>
+        <div class="stat-card"><span class="num">約230<span style="font-size:14px">%</span></span><span class="label">対GDP比（先進国最大）</span></div>
+        <div class="stat-card"><span class="num">約1,120<span style="font-size:14px">万円</span></span><span class="label">国民一人当たりの借金</span></div>
+      </div>
+      <p class="body-p">「政府の借金は国民の借金ではない」という意見もありますが、政府が財政難になれば行政サービスの削減・増税・インフレという形で必ず国民に影響が出ます。特に「インフレ」は最も気づかれにくい形での国民負担です。</p>
+      <div class="fp-quote">
+        <div class="quote-label">FPの現場から</div>
+        <p>「政府の借金なんて関係ない」と思っているお客様も多いのですが、インフレという形で家計に直撃しています。食料品・光熱費・外食費——あなたが感じている「最近お金が足りない感覚」は、インフレ税の影響です。</p>
       </div>
 
-      <h2 class="section-h" id="part2">「増税で解決」はなぜ難しいのか？</h2>
-      <p class="body-p">所得税を上げればいいんじゃないか、と思うかもしれませんが、数字で見ると現実はシビアです。日本で所得税を払っている人は約5,300万人。一番高い45%の税率の方の税率を1%上げても、増える税収はたった<strong>約350億円</strong>。国の赤字規模とは桁が違います。</p>
-      <p class="body-p">消費税は計算上は<strong>10%から24%</strong>まで上げれば借金は返せます。でも政治的に実現は不可能です。消費税を上げると選挙で負けるので、どの政党も踏み込めません。</p>
-
-      <div style="overflow-x:auto; margin: 24px 0;">
-        <table class="compare-table">
-          <tr>
-            <th>増税の手段</th>
-            <th>1%上げたときの効果</th>
-            <th>実現性</th>
-          </tr>
-          <tr>
-            <td>所得税（富裕層45%）</td>
-            <td>約350億円の増収</td>
-            <td class="lose">焼け石に水</td>
-          </tr>
-          <tr>
-            <td>所得税（最低5%）</td>
-            <td>約7,600億円の増収</td>
-            <td class="lose">課税最低額を引上げ中</td>
-          </tr>
-          <tr>
-            <td>消費税（10%→24%）</td>
-            <td>年約35兆円の増収が可能</td>
-            <td class="lose">政治的に不可能</td>
-          </tr>
-        </table>
+      <h2 class="section-h" id="tax-hike">「増税で解決」がなぜ機能しないか</h2>
+      <p class="body-p">「こんなに借金があるなら増税すればいい」——当然そう思いますが、数字で見ると現実はシビアです。</p>
+      <div class="crisis-box">
+        <h3>増税だけで1,400兆円を返せるか？</h3>
+        <div class="crisis-row"><span class="cr-label">所得税を最高税率45%→46%に上げた場合の増収</span><span class="cr-bad">約350億円/年</span></div>
+        <div class="crisis-row"><span class="cr-label">消費税を1%上げた場合の増収</span><span class="cr-bad">約3.5兆円/年</span></div>
+        <div class="crisis-row"><span class="cr-label">計算上、借金を返すのに必要な消費税率</span><span class="cr-bad">24〜30%</span></div>
+        <div class="crisis-row"><span class="cr-label">政治的に消費税30%を上げることは</span><span class="cr-bad">実質不可能</span></div>
+        <div class="crisis-row"><span class="cr-label">では、残された手段は</span><span class="cr-ok">インフレによる借金の「実質的縮小」</span></div>
       </div>
+      <p class="body-p">消費税を10%から30%に上げれば計算上は解決できますが、そんなことをすれば経済は壊滅し、どの政党も政権を失います。現実的に政府が使える「借金を軽くする手段」は、<strong>インフレ（物価上昇）による実質的な目減り</strong>しかないのです。</p>
 
-      <h2 class="section-h" id="part3">「インフレ税」の正体</h2>
-      <p class="body-p">増税が難しいなら、借金を実質的に軽くする方法がひとつあります。それが<strong>「インフレ税」</strong>です。インフレ（物価上昇）が起きるとお金の価値が下がり、政府の借金の「実質的な重さ」も軽くなります。</p>
-      <p class="body-p">これは実質的に「国民から政府へのお金の移動」です。税金として徴収されるわけではありませんが、預金の価値が目減りするという意味で「税金と同じ」効果があるため、<strong>インフレ税</strong>と呼ばれます。</p>
-
+      <h2 class="section-h" id="mechanism">「インフレ税」の正体と仕組み</h2>
+      <p class="body-p">インフレが起きると、お金の「額面」は変わらないのに「買えるもの」が減ります。政府の借金も同じです。1,400兆円という額面は変わりませんが、物価が2倍になれば借金の「実質的な重さ」は半分になります。</p>
+      <p class="body-p">一方、あなたの預金口座にある1,000万円は、物価が2倍になれば<strong>実質500万円の価値しかなくなる</strong>。この「損失」は、銀行から引き落とされるわけでも、税務署から請求されるわけでもありません。気づかないうちに「静かに」奪われていく——だから「インフレ税」と呼ばれます。</p>
       <div class="example-box">
-        <div class="ex-title">タクシーで考えてみよう</div>
-        <p style="font-size:14px; margin-bottom:14px; color:#555;">タクシー運転手が1,000万円の借金をしたとします。初乗りが1,000円なら返済はとても大変。でもインフレが来たら？</p>
-        <div class="taxi-flow">
-          <div class="taxi-step"><span class="price">1,000円</span><span class="desc">通常の初乗り<br>返済は大変</span></div>
-          <div class="arrow">→</div>
-          <div class="taxi-step"><span class="price">1万円</span><span class="desc">インフレ進行中<br>だいぶ楽に</span></div>
-          <div class="arrow">→</div>
-          <div class="taxi-step"><span class="price" style="color:#c0392b;">100万円</span><span class="desc">高インフレ<br>10回乗れば完済！</span></div>
+        <div class="ex-label">わかりやすい例：タクシーの借金</div>
+        <div class="ex-title">1,000万円の借金は、インフレでどう変わるか</div>
+        <p style="font-size:14px; color:#78350f; margin-bottom:16px; line-height:1.8;">タクシー運転手が1,000万円の借金をしたとします。初乗り料金を基準に考えてみましょう。</p>
+        <div class="flow-wrap">
+          <div class="flow-step"><span class="fs-value">1,000円</span><span class="fs-desc">通常の初乗り<br>10,000回分の売上が必要</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="fs-value">5,000円</span><span class="fs-desc">中インフレ後<br>2,000回で返済できる</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="background:#fff3e0; border-color:#f59e0b;"><span class="fs-value" style="color:#d97706;">1万円</span><span class="fs-desc">高インフレ後<br>1,000回で完済！</span></div>
         </div>
-        <p style="font-size:13px; color:#888; margin-top:10px;">※これと同じことが政府の借金にも起きます。政府には有利ですが、国民の預金価値は下がります。</p>
+        <p style="font-size:13px; color:#92400e; margin-top:16px; line-height:1.8;"><strong>政府（借り手）にはありがたい。でも国民（預金者）には？</strong><br>同じ論理で、あなたの預金100万円は、インフレ後には「100万円分のものが買えない」状態になります。</p>
       </div>
 
-      <h2 class="section-h" id="part4">2026年、インフレはすでに始まっている</h2>
-      <p class="body-p">2026年現在、日本の消費者物価指数（CPI）は前年比<strong>約2〜3%</strong>の上昇が続いています。日銀は長年のゼロ金利政策を転換し、政策金利を引き上げました。しかし普通預金の金利（約0.1〜0.2%）はインフレ率をはるかに下回っており、預金の実質価値は毎年目減りしています。</p>
+      <h2 class="section-h" id="history">歴史が証明する：インフレで借金は消えた</h2>
+      <p class="body-p">これは理論の話だけではありません。歴史上、政府がインフレで借金を実質的に消した事例は何度もあります。</p>
+      <div class="history-timeline">
+        <div class="h-item">
+          <div class="h-year">1945〜1950年代</div>
+          <div class="h-content"><strong>戦後日本のハイパーインフレ</strong><br>敗戦直後、日本はハイパーインフレを経験。1945〜1951年にかけて物価は約100倍に上昇。戦時国債を持っていた国民の資産は実質ほぼゼロになった。政府の膨大な戦時債務も事実上消滅した。</div>
+        </div>
+        <div class="h-item">
+          <div class="h-year">1970年代</div>
+          <div class="h-content"><strong>オイルショック時のインフレ</strong><br>1973〜1974年に日本の物価は年率20〜30%上昇。預金や固定給の実質価値が大幅に目減り。一方、土地・株・実物資産を持っていた人は相対的に資産を守れた。</div>
+        </div>
+        <div class="h-item">
+          <div class="h-year">2021〜現在</div>
+          <div class="h-content"><strong>コロナ後のグローバルインフレ</strong><br>コロナ禍の財政出動と供給不足で、世界的に物価が上昇。米国では一時CPI8%超。日本も2022年以降、約30年ぶりの本格的なインフレ局面に突入し、現在も継続中。</div>
+        </div>
+      </div>
+      <p class="body-p">歴史を振り返ると、<strong>「預金だけに頼ることはリスクである」</strong>ことが明確にわかります。インフレが起きるたびに、資産を実物（株・不動産・事業）で持っていた人は相対的に守られ、預金・国債のみを保有していた人は目減りを被っています。</p>
 
-      <div class="warn-box">
-        <h3>預金100万円の実質価値はどう変わるか？</h3>
-        <p>年2%のインフレが続いた場合、預金100万円の実質的な価値は：</p>
-        <p>・<strong>10年後：約82万円</strong>（約18%目減り）</p>
-        <p>・<strong>20年後：約67万円</strong>（約33%目減り）</p>
-        <p>・<strong>30年後：約55万円</strong>（約45%目減り）</p>
-        <p>普通預金の金利0.1〜0.2%では、インフレの速さに追いつけません。「何もしない」こと自体がリスクになっています。</p>
+      <h2 class="section-h" id="now2026">2026年現在、すでに始まっている</h2>
+      <p class="body-p">「昔の話でしょ？」と思われるかもしれません。でも2026年現在、日本のインフレはすでに現実になっています。</p>
+      <div class="stat-grid">
+        <div class="stat-card"><span class="num">2〜3<span style="font-size:14px">%</span></span><span class="label">2026年 消費者物価上昇率（CPI）</span></div>
+        <div class="stat-card"><span class="num">0.1〜0.2<span style="font-size:14px">%</span></span><span class="label">メガバンク普通預金金利</span></div>
+        <div class="stat-card"><span class="num">▲1.8〜2.8<span style="font-size:14px">%</span></span><span class="label">実質金利（預金者の「見えない損」）</span></div>
+      </div>
+      <p class="body-p">日銀は長年のマイナス金利・ゼロ金利政策を転換し、政策金利を引き上げました。しかし普通預金金利（0.1〜0.2%）はインフレ率（2〜3%）をはるかに下回っています。差し引きすると、<strong>預金者は毎年実質1.8〜2.8%ずつ資産を失っている</strong>ことになります。</p>
+      <div class="fp-quote">
+        <div class="quote-label">FPの現場から</div>
+        <p>「銀行に預けているから安心」というお客様に、「その100万円、10年後に何円分のものが買えますか？」とお聞きします。多くの方がそのとき、初めてインフレの怖さに気づきます。数字は嘘をつきません。</p>
       </div>
 
-      <h2 class="section-h" id="part5">私たちはどうすればいい？</h2>
-      <p class="body-p">インフレに対抗するには、お金を「増やす力のある資産」に振り向けることが重要です。銀行預金はインフレに弱く、価値が目減りします。一方、株式・不動産・投資信託などの実物・成長資産はインフレに強い傾向があります。</p>
-      <p class="body-p">2024年から始まった<strong>新NISA</strong>（年間360万円まで非課税）や<strong>iDeCo</strong>（掛金全額所得控除）は、インフレに対抗しながら資産を増やす強力な制度です。まずは非課税制度をフル活用することから始めましょう。</p>
+      <h2 class="section-h" id="damage">あなたの預金はいくら目減りするか</h2>
+      <p class="body-p">年2%のインフレが続いた場合、預金の実質価値（買える量）はこう変わります。</p>
+      <div class="warn-dark">
+        <h3>預金100万円の実質価値シミュレーション（年2%インフレ）</h3>
+        <p>・<strong>5年後：約90万円分</strong>（約10%目減り）</p>
+        <p>・<strong>10年後：約82万円分</strong>（約18%目減り）</p>
+        <p>・<strong>20年後：約67万円分</strong>（約33%目減り）</p>
+        <p>・<strong>30年後：約55万円分</strong>（約45%目減り）</p>
+        <p style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.6);">※普通預金の金利0.1〜0.2%を加味しても、差し引き実質▲1.8〜1.9%/年の目減りが続く計算です。</p>
+      </div>
+      <p class="body-p">老後のために30年間、毎月頑張って貯め続けた1,000万円の預金が、実質的には550万円の価値しかない——これが「何もしないこと」のコストです。インフレ税は、何も行動しない人ほど大きな負担を負う構造になっています。</p>
 
-      <table class="compare-table">
-        <tr>
-          <th>資産の種類</th>
-          <th>インフレへの強さ</th>
-          <th>2026年のポイント</th>
-        </tr>
-        <tr>
-          <td>銀行預金</td>
-          <td class="lose">弱い</td>
-          <td>金利0.1〜0.2%。インフレ率に追いつかない</td>
-        </tr>
-        <tr>
-          <td>国債・債券</td>
-          <td class="lose">弱い</td>
-          <td>固定金利は特にリスク大。変動型は要検討</td>
-        </tr>
-        <tr>
-          <td>株式・投資信託（NISA活用）</td>
-          <td class="win">比較的強い</td>
-          <td>新NISAで非課税。長期積立が有効</td>
-        </tr>
-        <tr>
-          <td>不動産</td>
-          <td class="win">比較的強い</td>
-          <td>物価と連動しやすい。利上げの影響も要考慮</td>
-        </tr>
+      <h2 class="section-h" id="defense">FPが薦める資産防衛の具体策</h2>
+      <p class="body-p">インフレに強い資産と弱い資産があります。まず全体像を把握しましょう。</p>
+      <table class="data-table">
+        <tr><th>資産の種類</th><th>インフレへの強さ</th><th>2026年のポイント</th></tr>
+        <tr><td>銀行預金（普通・定期）</td><td class="bad">弱い</td><td>金利0.1〜0.2%。インフレ率に大幅に負けている</td></tr>
+        <tr><td>固定金利の国債・社債</td><td class="bad">弱い</td><td>インフレで実質価値が目減り。変動型は要検討</td></tr>
+        <tr><td>個人向け国債（変動10年）</td><td class="ok">やや弱い</td><td>金利は上昇する可能性あり。元本保証あり</td></tr>
+        <tr><td>株式・投資信託（全世界・S&P500）</td><td class="good">比較的強い</td><td>企業業績はインフレと連動しやすい。新NISAで非課税</td></tr>
+        <tr><td>不動産（実物・J-REIT）</td><td class="good">比較的強い</td><td>家賃・物件価格はインフレ連動。利上げの影響も注意</td></tr>
+        <tr><td>金（ゴールド）</td><td class="good">強い</td><td>インフレヘッジとして機能。値動きが大きい点に注意</td></tr>
       </table>
-
-      <div class="highlight-box">
-        <div class="hl-title">FPからのアドバイス</div>
-        <ul class="point-list">
-          <li>まずは新NISAでインデックスファンドの積立を始める</li>
-          <li>iDeCoで老後資金を節税しながら積み立てる</li>
-          <li>預金は生活費6ヶ月分を残し、残りは運用へ</li>
-          <li>一度に動かすのが不安なら月1万円からでもOK</li>
+      <h3 class="sub-h">FPが実践で薦める3つの柱</h3>
+      <div class="info-box">
+        <div class="box-title">柱1：新NISAでインデックスファンドを積み立てる</div>
+        <ul class="point-list" style="margin-top:0;">
+          <li>年間360万円・生涯1,800万円まで運用益が永久に非課税</li>
+          <li>eMAXIS Slim 全世界株式（コスト年0.05775%）が初心者の定番</li>
+          <li>毎月3万円から自動積立を設定し、「ほったらかし」で続ける</li>
+          <li>相場が下がったときも売らずに積み続けることが最大のコツ</li>
         </ul>
+      </div>
+      <div class="info-box">
+        <div class="box-title">柱2：iDeCoで節税しながら老後資金を積み立てる</div>
+        <ul class="point-list" style="margin-top:0;">
+          <li>掛金が全額所得控除。年収500万円で月5.5万円拠出なら年間約19万円の節税</li>
+          <li>2024年12月改正で会社員（企業型DC・DBなし）の上限が月5.5万円に拡大</li>
+          <li>60歳まで引き出せないが、老後資金専用として最強の制度</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <div class="box-title">柱3：緊急予備資金は高金利ネット銀行に</div>
+        <ul class="point-list" style="margin-top:0;">
+          <li>生活費3〜6ヶ月分は「いつでも引き出せる口座」に置く必要がある</li>
+          <li>メガバンク（0.02%）ではなくネット銀行（0.1〜0.3%台）を活用する</li>
+          <li>日銀の利上げでネット銀行の金利は今後も改善が期待される</li>
+        </ul>
+      </div>
+      <div class="action-box">
+        <h3>今月中にやること：インフレ対策アクションプラン</h3>
+        <div class="action-item"><div class="action-num">1</div><div class="action-text"><strong>自分の「実質資産」を計算する</strong>：預金総額 × (1 − 0.02) を毎年かけると、今の預金が30年後にいくらになるか確認できます</div></div>
+        <div class="action-item"><div class="action-num">2</div><div class="action-text"><strong>ネット証券（SBI・楽天）の口座開設</strong>：新NISAを使うには証券口座が必要。今すぐ申し込むと1〜2週間で使えます</div></div>
+        <div class="action-item"><div class="action-num">3</div><div class="action-text"><strong>月3万円からNISAつみたて積立を開始</strong>：全世界株式インデックスを選び、毎月自動積立を設定する</div></div>
+        <div class="action-item"><div class="action-num">4</div><div class="action-text"><strong>iDeCoの掛金上限と節税額を計算</strong>：勤務先に企業型DCがあるか確認し、自分の上限額と年間節税額を試算する</div></div>
+        <div class="action-item"><div class="action-num">5</div><div class="action-text"><strong>不安・疑問があればFPに相談</strong>：「自分の場合はいくら積み立てればいいか」は個別状況によって違います。無料相談をご活用ください</div></div>
       </div>
 
       <div class="summary-box">
         <h3>この記事のまとめ</h3>
         <ul class="summary-list">
-          <li>日本政府の借金は2026年時点で1,400兆円超。増税だけでは到底返せない。</li>
-          <li>「インフレ税」とは、物価上昇によって国民の預金価値が実質的に目減りする現象。</li>
-          <li>2026年現在、年2〜3%のインフレが続いており、預金の実質価値は毎年下がっている。</li>
-          <li>新NISA・iDeCoなどの非課税制度を活用し、インフレに強い資産を持つことが自衛策になる。</li>
-          <li>「何もしない」ことが最大のリスク。少額でも今すぐ始めることが大切。</li>
+          <li>日本の借金は1,400兆円超・GDP比230%。増税だけでは返せない構造的問題がある。</li>
+          <li>政府が実質的に借金を軽くする手段が「インフレ税」——物価上昇で預金の価値を目減りさせる。</li>
+          <li>戦後日本・オイルショック・コロナ後と、歴史上インフレは繰り返されてきた。</li>
+          <li>2026年現在、年2〜3%のインフレが継続。預金者は毎年実質1.8〜2.8%ずつ資産を失っている。</li>
+          <li>預金100万円は、30年後に実質約55万円の価値しかなくなる。</li>
+          <li>対策は新NISA（インデックス積立）・iDeCo（節税）・ネット銀行の3本柱。</li>
+          <li>「何もしない」ことが最大のリスク。今日から小さく始めることが資産防衛の第一歩。</li>
         </ul>
       </div>
-
-      <p style="font-size:13px; color:#888; text-align:center; margin-bottom:8px;">※本記事はFP資格者の見解をもとに構成したものです。投資・資産運用は自己責任でご判断ください。</p>
-
+      <p style="font-size:13px; color:#888; text-align:center; margin-bottom:8px;">※本記事はFP資格者の見解をもとに構成したものです。投資・資産運用は自己責任でご判断ください。金融商品の購入にあたっては目論見書等をよくお読みください。</p>
       <div class="cta-inline">
-        <h3>インフレ対策、何から始めればいい？</h3>
-        <p>あなたの状況に合わせた資産防衛プランをFPが無料でご提案します。</p>
-        <a href="../../#contact">無料相談を申し込む</a>
+        <h3>インフレ対策、<br>あなたの場合は何から始めるべき？</h3>
+        <p>「うちの家計ではいくら積立できる？」「保険と投資、どちらを優先すべき？」<br>個別の状況に合わせた資産防衛プランをFPが無料でご提案します。</p>
+        <a href="../../#contact">無料相談を申し込む →</a>
       </div>
     </div>
   </article>
-
   <aside class="sidebar">
     <div class="sidebar-box">
       <div class="sidebar-title">この記事を書いた人</div>
@@ -276,20 +322,31 @@
         <img src="../../images/fp-yoshiteru2.jpg" alt="髙月義照" style="width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
         <div><div style="font-size:14px;font-weight:800;color:var(--navy);">髙月 義照</div><div style="font-size:11px;color:var(--text-sub);">FP資格者 / 代表</div></div>
       </div>
-      <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">ライフアセットパートナーズ代表。FP資格者として資産運用・融資・ライフプランの相談に対応。インフレ対策・資産防衛の相談も多数。</p>
+      <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">ライフアセットパートナーズ代表。FP資格者として資産運用・融資・ライフプランの相談に対応。インフレ対策・資産防衛の相談も多数実績あり。</p>
     </div>
     <div class="sidebar-box">
       <div class="sidebar-title">無料相談のご案内</div>
-      <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;">インフレ対策・資産運用について、初回相談は完全無料でご対応します。</p>
-      <a href="../../#contact" style="display:block;background:var(--sky);color:#fff;text-align:center;padding:11px;border-radius:10px;font-size:13px;font-weight:700;">無料相談を申し込む</a>
+      <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;">インフレ対策・資産運用について、初回相談は完全無料。オンライン対応可。</p>
+      <a href="../../#contact" style="display:block;background:var(--sky);color:#fff;text-align:center;padding:12px;border-radius:10px;font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(14,165,233,0.3);">無料相談を申し込む</a>
     </div>
     <div class="sidebar-box">
       <div class="sidebar-title">関連記事</div>
-      <a href="../asset-building-beginner/" style="display:block;font-size:13px;color:var(--sky);line-height:1.7;">資産形成の始め方｜初心者が最初にやるべき5つのステップ →</a>
+      <div class="related-item">
+        <span class="tag">資産形成</span>
+        <a href="../asset-building-beginner/">資産形成の始め方｜初心者が最初にやるべき5つのステップ →</a>
+      </div>
+    </div>
+    <div class="sidebar-box" style="background:#1e293b;">
+      <div class="sidebar-title" style="color:#7dd3fc;border-bottom-color:#334155;">インフレの実質コスト</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;">
+        <tr><td style="padding:6px 0;border-bottom:1px solid #334155;color:rgba(255,255,255,0.6);">現在の価値</td><td style="padding:6px 0;border-bottom:1px solid #334155;font-weight:700;color:#fff;text-align:right;">100万円</td></tr>
+        <tr><td style="padding:6px 0;border-bottom:1px solid #334155;color:rgba(255,255,255,0.6);">10年後（年2%）</td><td style="padding:6px 0;border-bottom:1px solid #334155;font-weight:700;color:#fca5a5;text-align:right;">約82万円</td></tr>
+        <tr><td style="padding:6px 0;border-bottom:1px solid #334155;color:rgba(255,255,255,0.6);">20年後（年2%）</td><td style="padding:6px 0;border-bottom:1px solid #334155;font-weight:700;color:#f87171;text-align:right;">約67万円</td></tr>
+        <tr><td style="padding:6px 0;color:rgba(255,255,255,0.6);">30年後（年2%）</td><td style="padding:6px 0;font-weight:700;color:#ef4444;text-align:right;">約55万円</td></tr>
+      </table>
     </div>
   </aside>
 </div>
-
 <footer>
   <div class="footer-inner">
     <div><div class="footer-logo-text">Life Asset</div><div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;">ライフアセットパートナーズ　代表　髙月 義照</div></div>
