@@ -15,7 +15,7 @@
       --orange:#d97706; --orange-bg:#fffbeb; --orange-border:#fde68a;
       --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
     }
-    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: linear-gradient(180deg, #d6effe 0%, #ffffff 18%) fixed; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; }
 
@@ -40,17 +40,25 @@
     article { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
 
     /* Hero */
-    .article-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 60%); padding: 48px 40px; }
+    .article-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 60%); padding: 0; overflow: hidden; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 260px; align-items: stretch; }
+    .hero-content { padding: 44px 40px; }
     .article-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
     .article-tag { background: var(--sky); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
     .article-badge { background: var(--green); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
     .article-date { font-size: 12px; color: var(--text-sub); }
     .article-title { font-size: clamp(22px, 3vw, 30px); font-weight: 900; color: var(--navy); line-height: 1.4; margin-bottom: 16px; }
-    .article-lead { font-size: 14px; color: #334155; line-height: 1.9; }
-    .article-author { display: flex; align-items: center; gap: 12px; margin-top: 24px; background: rgba(255,255,255,0.75); border-radius: 12px; padding: 12px 16px; }
+    .article-lead { font-size: 14px; color: #334155; line-height: 1.9; margin-bottom: 20px; }
+    .trust-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.85); border: 1px solid rgba(14,165,233,0.3); border-radius: 50px; padding: 5px 12px; font-size: 11px; font-weight: 700; color: var(--navy); }
+    .badge-icon { color: var(--sky); }
+    .article-author { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.75); border-radius: 12px; padding: 12px 16px; }
     .article-author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; }
     .article-author .name { font-size: 14px; font-weight: 800; color: var(--navy); }
     .article-author .title { font-size: 11px; color: var(--text-sub); }
+    .hero-photo-panel { position: relative; overflow: hidden; }
+    .hero-photo-panel img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; min-height: 320px; }
+    .hero-photo-panel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(184,228,249,0.5) 0%, transparent 40%); }
 
     /* Body */
     .article-body { padding: 40px; }
@@ -78,6 +86,24 @@
     .danger-box .box-title { font-size: 13px; font-weight: 800; color: var(--red); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
     .highlight-box { background: #fff; border: 2px solid var(--sky-pale); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
     .highlight-box .box-title { font-size: 14px; font-weight: 800; color: var(--sky); margin-bottom: 8px; }
+
+    /* Mascot callout */
+    .mascot-callout { display: flex; align-items: flex-start; gap: 16px; background: var(--sky-bg); border: 2px solid var(--sky-pale); border-radius: 16px; padding: 20px; margin: 24px 0; }
+    .mascot-callout img { width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; }
+    .mascot-callout-bubble { flex: 1; }
+    .mascot-callout-bubble .bubble-title { font-size: 13px; font-weight: 800; color: var(--sky); margin-bottom: 6px; }
+    .mascot-callout-bubble p { font-size: 13px; color: var(--text); line-height: 1.8; }
+    .mascot-callout-bubble strong { color: var(--navy); }
+
+    /* Mid-article CTA */
+    .mid-cta { position: relative; border-radius: 16px; overflow: hidden; margin: 44px 0; }
+    .mid-cta-img { width: 100%; height: 220px; object-fit: cover; object-position: center; display: block; }
+    .mid-cta-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,52,96,0.85) 0%, rgba(14,165,233,0.7) 100%); display: flex; align-items: center; justify-content: center; padding: 32px; }
+    .mid-cta-content { text-align: center; color: #fff; }
+    .mid-cta-content .mascot-small { width: 48px; height: 48px; object-fit: contain; margin-bottom: 10px; }
+    .mid-cta-content h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+    .mid-cta-content p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 16px; }
+    .mid-cta-content a { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 12px 28px; border-radius: 50px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
 
     /* Lists */
     .point-list { list-style: none; margin: 10px 0; display: flex; flex-direction: column; gap: 8px; }
@@ -153,18 +179,22 @@
     .related-item .tag { font-size: 10px; color: var(--text-sub); }
 
     /* Footer */
-    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo { display: flex; align-items: center; gap: 16px; }
     .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
 
     @media (max-width: 768px) {
       nav { display: none; }
       .article-wrap { grid-template-columns: 1fr; }
-      .article-hero { padding: 32px 24px; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-panel { display: none; }
+      .hero-content { padding: 32px 24px; }
       .article-body { padding: 28px 20px; }
       .stat-row { grid-template-columns: repeat(2, 1fr); }
       .type-grid { grid-template-columns: 1fr; }
+      .mid-cta-img { height: 160px; }
     }
   </style>
 </head>
@@ -195,18 +225,30 @@
 <div class="article-wrap">
   <article>
     <div class="article-hero">
-      <div class="article-meta">
-        <span class="article-tag">資産形成</span>
-        <span class="article-badge">2026年最新版</span>
-        <span class="article-date">2026年5月8日更新</span>
-      </div>
-      <h1 class="article-title">資産形成の始め方<br>初心者が最初にやるべき5つのステップ</h1>
-      <p class="article-lead">「何から始めればいいかわからない」——FPへの相談で最も多い言葉です。大丈夫です、順番さえ間違えなければ誰でも始められます。2026年現在、物価上昇・日銀利上げ・新NISA本格化という新しい局面で、FP資格者が具体的な数字と実例でわかりやすく解説します。</p>
-      <div class="article-author">
-        <img src="../../images/fp-removed.jpg" alt="（削除済み）">
-        <div>
-          <div class="name">（削除済み）</div>
-          <div class="title">ファイナンシャルプランナー（FP資格者）／ライフアセットパートナーズ 代表</div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="article-meta">
+            <span class="article-tag">資産形成</span>
+            <span class="article-badge">2026年最新版</span>
+            <span class="article-date">2026年5月8日更新</span>
+          </div>
+          <h1 class="article-title">資産形成の始め方<br>初心者が最初にやるべき5つのステップ</h1>
+          <p class="article-lead">「何から始めればいいかわからない」——FPへの相談で最も多い言葉です。大丈夫です、順番さえ間違えなければ誰でも始められます。2026年現在、物価上昇・日銀利上げ・新NISA本格化という新しい局面で、FP資格者が具体的な数字と実例でわかりやすく解説します。</p>
+          <div class="trust-badges">
+            <span class="badge"><span class="badge-icon">✓</span>FP資格者監修</span>
+            <span class="badge"><span class="badge-icon">✓</span>2026年最新版</span>
+            <span class="badge"><span class="badge-icon">✓</span>無料相談あり</span>
+          </div>
+          <div class="article-author">
+            <img src="../../images/fp-removed.jpg" alt="（削除済み）">
+            <div>
+              <div class="name">（削除済み）</div>
+              <div class="title">ファイナンシャルプランナー（FP資格者）／ライフアセットパートナーズ 代表</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-photo-panel">
+          <img src="../../images/fp-removed.jpg" alt="（削除済み） ファイナンシャルプランナー">
         </div>
       </div>
     </div>
@@ -280,9 +322,12 @@
         <li>給与日に自動で別口座へ振替する「<strong>先取り貯蓄</strong>」を設定する</li>
       </ul>
 
-      <div class="warn-box">
-        <div class="box-title">よくある失敗例</div>
-        <p style="font-size:13px; color:#555; line-height:1.8;">「余ったお金を貯める」方式は続きません。月末に確認すると「また使い切ってしまった」というパターンが多い。<strong>先取り貯蓄＋自動積立</strong>の仕組みを作れば、意志力に頼らず続けられます。</p>
+      <div class="mascot-callout">
+        <img src="../../images/life-asset-kun.png" alt="ライフアセットくん">
+        <div class="mascot-callout-bubble">
+          <div class="bubble-title">FPからひとこと</div>
+          <p>「余ったお金を貯める」方式は続きません。月末に確認すると「また使い切ってしまった」というパターンが多い。<strong>先取り貯蓄＋自動積立</strong>の仕組みを作れば、意志力に頼らず続けられます！</p>
+        </div>
       </div>
 
       <div class="calc-box">
@@ -334,6 +379,19 @@
         </table>
       </div>
 
+      <!-- Mid-article CTA -->
+      <div class="mid-cta">
+        <img src="../../images/couple-young.jpg" alt="一緒に資産形成を考えるカップル" class="mid-cta-img">
+        <div class="mid-cta-overlay">
+          <div class="mid-cta-content">
+            <img src="../../images/life-asset-kun.png" alt="ライフアセットくん" class="mascot-small">
+            <h3>一緒に考えましょう</h3>
+            <p>「目標額はいくら？」「毎月いくら積み立てれば届く？」<br>あなたの家計に合わせた試算をFPが無料でお手伝いします。</p>
+            <a href="../../#contact">無料相談を申し込む →</a>
+          </div>
+        </div>
+      </div>
+
       <!-- STEP 4 -->
       <h2 class="section-h" id="step4">STEP 4：新NISA・iDeCoを最優先で使う</h2>
       <div class="step-box">
@@ -373,9 +431,12 @@
         <tr><td>専業主婦（夫）</td><td>月2.3万円</td><td>所得控除なし（運用益は非課税）</td></tr>
       </table>
 
-      <div class="warn-box">
-        <div class="box-title">iDeCoの注意点</div>
-        <p style="font-size:13px; color:#555; line-height:1.8;">iDeCoは<strong>60歳まで引き出しできません</strong>。緊急予備資金が不十分な状態でiDeCoに入れすぎると、いざというときに使えません。まず緊急予備資金→新NISA→iDeCoの順に活用を検討してください。</p>
+      <div class="mascot-callout">
+        <img src="../../images/life-asset-kun.png" alt="ライフアセットくん">
+        <div class="mascot-callout-bubble">
+          <div class="bubble-title">iDeCoの注意点</div>
+          <p>iDeCoは<strong>60歳まで引き出しできません</strong>。緊急予備資金が不十分な状態でiDeCoに入れすぎると、いざというときに使えません。まず緊急予備資金→新NISA→iDeCoの順に活用を検討してください。</p>
+        </div>
       </div>
 
       <!-- STEP 5 -->
@@ -496,9 +557,13 @@
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="footer-logo">
       <div class="footer-logo-text">Life Asset</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;">ライフアセットパートナーズ　代表　（削除済み）</div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);">ライフアセットパートナーズ　代表　（削除済み）</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.6);">ファイナンシャルプランナー（FP資格者）</span>
+      </div>
+      <img src="../../images/fp-removed2.jpg" alt="（削除済み）" style="width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
     </div>
     <div class="footer-contact">
       <a href="#" id="footer-mail">
