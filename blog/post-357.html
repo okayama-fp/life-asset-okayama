@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>教育費・住宅ローン・老後資金…家計の三大不安をFPが解決！シミュレーションで未来を見える化 | パーソナル・アセット・パートナーズ</title>
+  <style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1a2744;
+  --navy-light: #243460;
+  --gold: #b8962e;
+  --gold-light: #d4aa3a;
+  --gold-bg: #f5f0e8;
+  --white: #fff;
+  --gray-bg: #f7f8fa;
+  --text: #222;
+  --text-light: #666;
+  --border: #e5e5e5;
+}
+body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
+a { text-decoration: none; color: inherit; }
+header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
+.logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+.logo-text .tagline { font-size: 10px; color: var(--text-light); }
+nav { display: flex; align-items: center; gap: 24px; }
+nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
+nav a:hover { color: var(--gold); }
+.btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+.btn-cta:hover { background: var(--navy-light); }
+footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 13px; }
+footer a { color: rgba(255,255,255,0.7); }
+footer a:hover { color: var(--gold); }
+@media (max-width:768px) {
+  nav { display: none; }
+  .header-inner { padding: 0 16px; }
+}
+
+.post-hero { background: linear-gradient(135deg, #1a2744 0%, #243460 100%); color: #fff; padding: 48px 24px 40px; }
+.post-hero-inner { max-width: 800px; margin: 0 auto; }
+.post-date { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+.post-title { font-size: clamp(22px,3.5vw,36px); font-weight: 900; line-height: 1.3; margin-bottom: 16px; }
+.post-body { max-width: 800px; margin: 48px auto; padding: 0 24px 80px; }
+.post-body h2 { font-size: 22px; font-weight: 800; color: var(--navy); border-left: 4px solid var(--gold); padding-left: 14px; margin: 36px 0 16px; line-height: 1.4; }
+.post-body h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin: 28px 0 12px; }
+.post-body h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin: 20px 0 8px; }
+.post-body p { margin-bottom: 16px; font-size: 15px; line-height: 1.9; }
+.post-body ul, .post-body ol { margin: 0 0 16px 24px; font-size: 15px; line-height: 1.9; }
+.post-body li { margin-bottom: 6px; }
+.post-body strong { font-weight: 700; }
+.post-body table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
+.post-body th { background: var(--navy); color: #fff; padding: 10px 12px; text-align: left; }
+.post-body td { border: 1px solid var(--border); padding: 10px 12px; }
+.post-body tr:nth-child(even) td { background: var(--gray-bg); }
+.post-body img { max-width: 100%; height: auto; border-radius: 4px; margin: 16px 0; }
+.post-body blockquote { border-left: 4px solid var(--gold); padding-left: 16px; margin: 20px 0; color: #555; }
+.post-back { display: inline-flex; align-items: center; gap: 6px; color: var(--navy); font-size: 13px; font-weight: 600; margin-bottom: 40px; }
+.post-back:hover { color: var(--gold); }
+.cta-box { background: var(--gold-bg); border: 2px solid var(--gold); border-radius: 8px; padding: 32px; text-align: center; margin-top: 48px; }
+.cta-box h3 { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.cta-box p { font-size: 14px; color: #555; margin-bottom: 20px; }
+.cta-box a { display: inline-block; background: var(--navy); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 4px; font-size: 15px; }
+.cta-box a:hover { background: var(--navy-light); }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/index.html">
+      <div class="logo-icon"><span>PAP</span></div>
+      <div class="logo-text">
+        <div class="name">パーソナル・アセット・パートナーズ</div>
+        <div class="tagline">FP資格者による資産・融資サポート</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/index.html#services">サービス</a>
+      <a href="/index.html#about">代表プロフィール</a>
+      <a href="/blog.html">ブログ</a>
+      <a href="/index.html#contact">お問い合わせ</a>
+    </nav>
+    <a class="btn-cta" href="/index.html#contact">無料相談はこちら</a>
+  </div>
+</header>
+<div class="post-hero">
+  <div class="post-hero-inner">
+    <div class="post-date">2025-05-03</div>
+    <h1 class="post-title">教育費・住宅ローン・老後資金…家計の三大不安をFPが解決！シミュレーションで未来を見える化</h1>
+    <div style="margin-top:12px;"><span style="background:#b8962e;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;margin-right:6px;">よく読まれている記事</span></div>
+  </div>
+</div>
+<div class="post-body">
+  <a class="post-back" href="/blog.html">← ブログ一覧へ戻る</a>
+<p>ファイナンシャルシミュレーションを行う必要性は、将来への「不安」を「見える安心」に変えるためです。以下の理由で非常に重要です。</p>
+
+<hr/>
+
+<h2>✅ シミュレーションをする3つの必要性</h2>
+
+<h3>① <strong>お金の流れを「見える化」することで不安が軽減</strong></h3>
+
+<ul>
+<li>家計や資産が「いつ」「どのように」増減するかを把握でき、将来の不確実性を減らせます。</li>
+
+<li>たとえば「教育費がかかる時期」「ローンの残高がいつ減るか」「老後資金は足りるか」などが視覚化できます。</li>
+</ul>
+
+<hr/>
+
+<h3>② <strong>ライフイベントに備えた戦略的な選択が可能に</strong></h3>
+
+<ul>
+<li>「マイホーム購入」「車の買い替え」「転職」「セミリタイア」など、将来の大きな選択に対して準備ができます。</li>
+
+<li>シミュレーションによって、「今どれくらいのリスクを取れるか」「どのタイミングで貯蓄を増やすべきか」が明確になります。</li>
+</ul>
+
+<hr/>
+
+<h3>③ <strong>老後やセミリタイア後の生活設計ができる</strong></h3>
+
+<ul>
+<li>65歳以降の収入・支出・資産の推移が見えることで、「何歳まで働くか」「年金だけで足りるか」「貯蓄をどれだけ残せるか」などの判断ができます。</li>
+
+<li>長寿リスクに備えるためにも、定期的な見直しとシナリオ比較が不可欠です。</li>
+</ul>
+
+<hr/>
+
+<h2>🔁 シミュレーションは“1回で終わり”ではありません</h2>
+
+<ul>
+<li><strong>生活状況や収入、支出は変化</strong>します。結婚、出産、転職、投資の成否…。</li>
+
+<li>定期的に見直すことで、「軌道修正」ができ、大きな失敗を未然に防げます。</li>
+</ul>
+
+<hr/>
+
+<p>「なんとなく不安」を「根拠ある安心」に変えるために、ライフシミュレーションは必要不可欠です📊</p>
+
+<p>💡例１　夫会社員　妻パート、夫婦43歳、子供３人、（中学１年，小学５年，３年)</p>
+
+<p>家計年間収入</p>
+
+<figure><table class="has-fixed-layout"><tbody><tr><td>💰 収入</td><td>4,482,418</td></tr><tr><td>💰 妻パート、子供手当</td><td>1,389,444</td></tr><tr><td>💰 賞与</td><td>833,508</td></tr></tbody></table></figure>
+
+<ul>
+<li><strong>総収入</strong>：6,705,370円</li>
+
+<li><strong>総支出</strong>：3,719,069円</li>
+
+<li><strong>年間黒字</strong>（収支差額）：<br>6,705,370円 ー 3,719,069円 ＝ <strong>2,986,301円</strong></li>
+</ul>
+
+<hr/>
+
+<h3>🌟 現在の資産・負債状況</h3>
+
+<ul>
+<li><strong>貯蓄</strong>：400万円</li>
+
+<li><strong>投資</strong>：2,800万円</li>
+
+<li><strong>資産合計</strong>：3,200万円</li>
+
+<li><strong>住宅ローン負債</strong>：1,650万円</li>
+
+<li><strong>純資産</strong>（資産−負債）：<br>3,200万円 − 1,650万円 = <strong>1,550万円</strong></li>
+</ul>
+
+<hr/>
+
+<h3>🌟 年間支出内訳</h3>
+
+<p>特に目立つところをピックアップします。</p>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>項目</th><th>金額</th><th>コメント</th></tr></thead><tbody><tr><td>食費</td><td>461,117円（1か月平均約38,400円）</td><td>家族5人としては節約できています</td></tr><tr><td>日用品、通信</td><td>536,130円、　38,930円</td><td>少し多めですが子どもが多いので妥当</td></tr><tr><td>趣味・娯楽（合計）</td><td>449,963円</td><td>家族でのレジャー費なら普通</td></tr><tr><td>教育費、保険医療</td><td>587,592円、　78,600円</td><td>中高生がいるなら妥当、今後さらに増える可能性あり</td></tr><tr><td>住宅費、税金</td><td>787,340円、　70,000円</td><td>ローン返済含むならかなり抑えられています</td></tr><tr><td>光熱、車</td><td>158,189円、　348,131円</td><td>平均的出資です</td></tr></tbody></table></figure>
+
+<hr/>
+
+<h3>🌟 健全性診断</h3>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>項目</th><th>コメント</th></tr></thead><tbody><tr><td>収支</td><td>年間250万円以上黒字で優秀✨</td></tr><tr><td>支出率</td><td>55,5%で、理想（60%以内）をクリア👍“効率的で健全”</td></tr><tr><td>貯蓄率</td><td>収入の44,5%を貯蓄できているので家計優良レベル</td></tr><tr><td>純資産</td><td>1,550万円あり、年齢によってはかなり順調</td></tr><tr><td>負債（住宅ローン）</td><td>収入に対して適正範囲内、問題なし</td></tr></tbody></table></figure>
+
+<hr/>
+
+<h3>🌟 注意点・今後のアドバイス</h3>
+
+<ul>
+<li><strong>教育費が増加傾向</strong><br>→ これから高校・大学進学で<strong>年間100万〜200万</strong>単位で増えるので、さらに備えてOK。</li>
+
+<li><strong>住宅ローン返済</strong><br>→ 繰り上げ返済は急がなくてもOK。投資（年利5%想定）を続けたほうが効果的かも。</li>
+
+<li><strong>現金・カード支出の詳細管理</strong><br>→ "現金・カード"項目が高すぎるので、細かい内訳を今後分けて管理するとさらに精度が上がります！</li>
+</ul>
+
+<hr/>
+
+<h3>🌟 総合評価</h3>
+
+<p>✅ <strong>非常に健全な家計運営です！</strong><br>このまま「長期・分散・積立」の投資を続けながら、教育資金と老後資金の準備を進めれば問題ありません。<br>お子さんの大学費用や将来の住宅修繕費にも十分対応できそうです。</p>
+
+<h1>📈 今後20年間の資産シミュレーション（43歳スタート）</h1>
+
+<p>【前提条件】</p>
+
+<ul>
+<li>収入：年1%増加</li>
+
+<li>支出：年0.5%増加（教育費ピークを考慮）</li>
+
+<li>投資運用利回り：年5%</li>
+
+<li>現在の資産総額：<strong>3,200万円</strong>（現金400万＋投資2800万）</li>
+
+<li>住宅ローン残高：<strong>1,650万円</strong>（35年ローン続行）</li>
+
+<li>教育費：今後15年で大きく支出あり</li>
+
+<li>老後開始：<strong>63歳</strong>時点想定（年金受給前）</li>
+</ul>
+
+<hr/>
+
+<h2>シミュレーション結果</h2>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>年齢</th><th>経過年数</th><th>資産概算（万円）</th><th>コメント</th></tr></thead><tbody><tr><td>43歳</td><td>現在</td><td>3,200</td><td>スタート時点</td></tr><tr><td>45歳</td><td>2年後</td><td>3,700</td><td>教育費が徐々に増加</td></tr><tr><td>48歳</td><td>5年後</td><td>4,600</td><td>高校・大学進学で教育費ピーク</td></tr><tr><td>53歳</td><td>10年後</td><td>6,500</td><td>子ども独立、支出減少</td></tr><tr><td>58歳</td><td>15年後</td><td>9,300</td><td>老後資金貯蓄を加速</td></tr><tr><td>63歳</td><td>20年後</td><td>13,000</td><td>年金受給開始前、リタイア準備完了</td></tr></tbody></table></figure>
+
+<p>✅ <strong>63歳時点で約1.3億円</strong>の資産規模が目指せます！</p>
+
+<hr/>
+
+<h1>🔥 ポイント解説</h1>
+
+<ul>
+<li><strong>教育費ピーク（子ども高校・大学進学時）</strong><br>→ 資産成長はやや緩やかになりますが、<br>それでも減らさずキープできる見込みです。</li>
+
+<li><strong>50代から加速</strong><br>→ 教育費支出が終わるため、貯蓄・運用に回せる余力が増えます。</li>
+
+<li><strong>住宅ローン</strong><br>→ 月々の支払いはそのまま続けつつ、<br>余剰資金は繰り上げ返済より<strong>運用優先</strong>が有利です（年5%運用なら借入金利より高いため）。</li>
+
+<li><strong>老後開始時の姿</strong><br>→ 1億3000万円あれば、<br>生活費月30万〜40万でも「心配ゼロ」の生活が可能です。</li>
+</ul>
+
+<hr/>
+
+<h1>📊 グラフイメージ（言葉で表現）</h1>
+
+<ul>
+<li>43〜48歳：緩やかな上昇（教育費支出）</li>
+
+<li>48〜53歳：伸びが少し大きく（教育費終了）</li>
+
+<li>53〜63歳：資産が加速して増加、山を作るイメージ</li>
+</ul>
+
+<h2>📊 毎年の資産推移表（年収630万円固定版）</h2>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>年齢</th><th>収入 (万円)</th><th>支出 (万円)</th><th>年間黒字 (万円)</th><th>投資成長 (万円)</th><th>総資産 (万円)</th></tr></thead><tbody><tr><td>43</td><td>630</td><td>456</td><td>174</td><td>140</td><td>3,200</td></tr><tr><td>44</td><td>630</td><td>458</td><td>172</td><td>155</td><td>3,525</td></tr><tr><td>45</td><td>630</td><td>461</td><td>169</td><td>170</td><td>3,865</td></tr><tr><td>46</td><td>630</td><td>463</td><td>167</td><td>185</td><td>4,215</td></tr><tr><td>47</td><td>630</td><td>465</td><td>165</td><td>200</td><td>4,580</td></tr><tr><td>48</td><td>630</td><td>468</td><td>162</td><td>215</td><td>4,960</td></tr><tr><td>49</td><td>630</td><td>470</td><td>160</td><td>230</td><td>5,350</td></tr><tr><td>50</td><td>630</td><td>472</td><td>158</td><td>245</td><td>5,750</td></tr><tr><td>51</td><td>630</td><td>475</td><td>155</td><td>265</td><td>6,170</td></tr><tr><td>52</td><td>630</td><td>477</td><td>153</td><td>280</td><td>6,600</td></tr><tr><td>53</td><td>630</td><td>479</td><td>151</td><td>300</td><td>7,050</td></tr><tr><td>54</td><td>630</td><td>481</td><td>149</td><td>320</td><td>7,520</td></tr><tr><td>55</td><td>630</td><td>484</td><td>146</td><td>340</td><td>8,010</td></tr><tr><td>56</td><td>630</td><td>486</td><td>144</td><td>360</td><td>8,520</td></tr><tr><td>57</td><td>630</td><td>488</td><td>142</td><td>380</td><td>9,050</td></tr><tr><td>58</td><td>630</td><td>491</td><td>139</td><td>400</td><td>9,600</td></tr><tr><td>59</td><td>630</td><td>493</td><td>137</td><td>420</td><td>10,170</td></tr><tr><td>60</td><td>630</td><td>495</td><td>135</td><td>440</td><td>10,760</td></tr><tr><td>61</td><td>630</td><td>498</td><td>132</td><td>460</td><td>11,370</td></tr><tr><td>62</td><td>630</td><td>500</td><td>130</td><td>480</td><td>12,000</td></tr><tr><td>63</td><td>630</td><td>502</td><td>128</td><td>500</td><td>12,650</td></tr></tbody></table></figure>
+
+<p>✅63歳時点で <strong>約1.26億円</strong> の資産形成！</p>
+
+<hr/>
+
+<h2>⚠️ 支出が増えた場合のリスクパターン</h2>
+
+<h3><strong>パターンA：教育費が大幅増（年+200万円）</strong></h3>
+
+<ul>
+<li>48〜53歳の支出が急増</li>
+
+<li>年間収支がマイナス（-40万円前後）</li>
+
+<li>資産の成長スピードが大幅に鈍化</li>
+
+<li>63歳時点の資産 → <strong>約1億円</strong>（▲2,600万円）</li>
+</ul>
+
+<p>🔹 <strong>対策</strong></p>
+
+<ul>
+<li>教育費用の別途積立</li>
+
+<li>生活費の一部削減</li>
+</ul>
+
+<hr/>
+
+<h2>🔄 住宅ローン繰上げ返済 vs 運用継続</h2>
+
+<h3>【繰上げ返済する場合】</h3>
+
+<ul>
+<li>55歳時点で1,000万円を一括繰上げ返済</li>
+
+<li>以降、月10万円分のキャッシュフロー改善</li>
+</ul>
+
+<p>→ <strong>63歳時点の資産：</strong> <strong>約1.15億円</strong></p>
+
+<hr/>
+
+<h3>【運用継続する場合】</h3>
+
+<ul>
+<li>繰上げ返済せず、毎年の余剰資金を投資</li>
+
+<li>毎年5%で複利運用</li>
+</ul>
+
+<p>→ <strong>63歳時点の資産：</strong> <strong>約1.26億円</strong></p>
+
+<hr/>
+
+<h3>✅ 結論</h3>
+
+<p><strong>やはり、繰上げ返済せずに運用を続ける方が有利！</strong><br>特に現在のローン金利が低い場合（1〜1.5%程度）なら、<strong>運用＞返済</strong>です。</p>
+
+<hr/>
+
+<h1>🎯 最適戦略まとめ（年収630万円固定版）</h1>
+
+<p>✅ 教育費と住宅修繕費の備えを別枠で用意<br>✅ 住宅ローンは無理に繰上返済せず、資産運用を続行<br>✅ 63歳時点で<strong>1.26億円超え</strong>を目指す現実的なプラン</p>
+
+<h3>🏠 住宅ローンの現状まとめ</h3>
+
+<ul>
+<li><strong>金利：1.0％（固定または変動）</strong></li>
+
+<li><strong>返済開始から2年経過（残り28年）</strong></li>
+
+<li><strong>住宅ローン控除：0.7%（あと11年適用）</strong></li>
+</ul>
+
+<p>つまり、</p>
+
+<ul>
+<li><strong>実質負担金利</strong>は「<strong>1.0％−0.7％＝0.3％</strong>」</li>
+
+<li><strong>超低コストで借りられている</strong>状態です！</li>
+</ul>
+
+<hr/>
+
+<h3>✅ 重要なポイント</h3>
+
+<ul>
+<li>控除がある<strong>11年間</strong>は、「実質金利0.3％」だから、<strong>繰上返済は全く急ぐ必要なし</strong>！</li>
+
+<li>11年後に控除終了したら、ローン金利が**実質1.0％**に戻る。</li>
+
+<li>その時点で、
+<ul>
+<li>金利の見直し（借り換え含む）</li>
+
+<li>繰上返済するかを再検討<br>するのがベストタイミングです。</li>
+</ul>
+</li>
+</ul>
+
+<hr/>
+
+<h3>🎯 結論</h3>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>項目</th><th>判断</th></tr></thead><tbody><tr><td>繰上返済</td><td><strong>今はしない</strong></td></tr><tr><td>投資</td><td><strong>年5%で運用続行が有利</strong></td></tr><tr><td>住宅ローン</td><td><strong>11年後に改めて見直し</strong></td></tr></tbody></table></figure>
+
+<hr/>
+
+<h3>📝 参考：資産運用と繰上返済の比較イメージ</h3>
+
+<ul>
+<li>投資：年5%成長</li>
+
+<li>ローン繰上返済：実質負担年0.3%</li>
+</ul>
+
+<p>この差は<strong>年率4.7%</strong>。<br>⇒ 確実に「運用のほうが得」な局面です！🔥 11年後（住宅ローン控除終了時）に考えるべきこと</p>
+
+<ol>
+<li><strong>金利リスクが本格的に発生する</strong>
+<ul>
+<li>今後11年間は大丈夫。</li>
+
+<li>11年後には、金利が上がっている可能性もあり（変動金利だから）。</li>
+</ul>
+</li>
+
+<li><strong>一括返済の判断基準</strong>
+<ul>
+<li>金利が1.5%以上なら、<strong>即一括返済</strong>が有利。</li>
+
+<li>金利が1.0%以下なら、<strong>運用と比較検討</strong>。</li>
+</ul>
+</li>
+
+<li><strong>心理的メリット</strong>
+<ul>
+<li>住宅ローンゼロ＝精神的にすごくラク。</li>
+
+<li>支出が劇的に減るので、老後設計もすごく柔軟になる。</li>
+</ul>
+</li>
+</ol>
+
+<hr/>
+
+<h3>📈「住宅ローン控除終了後の資産シミュレーション案」</h3>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>年齢</th><th>項目</th><th>ローン残高</th><th>資産残高</th><th>コメント</th></tr></thead><tbody><tr><td>54歳（控除終了）</td><td>一括返済なし</td><td>約1,200万</td><td>5,000万超</td><td>投資優先なら大きく増える</td></tr><tr><td>54歳（控除終了）</td><td>1,200万一括返済</td><td>ローンゼロ</td><td>3,800万超</td><td>安心感、固定費ダウン</td></tr><tr><td>60歳</td><td></td><td></td><td>5,000万〜6,000万台</td><td>どちらも老後十分安心水準</td></tr></tbody></table></figure>
+
+<hr/>
+
+<h3>🎯 結論</h3>
+
+<p>資産形成に支障がないなら、54歳でローン完済を目指すと良い。</p>
+
+<p>11年後に金利1.5％超なら、<strong>1200万一括返済</strong>が堅実。</p>
+
+<p>金利が上がっていなくても、<strong>一括返済すると心理的にも超ラク</strong>。</p>
+
+<h1>📊【一括返済前提】20年後までの資産推移表</h1>
+
+<p>前提条件</p>
+
+<ul>
+<li>夫婦43歳、子供3人（中1・小5・小3）</li>
+
+<li>世帯年収 630万円（今後も一定）</li>
+
+<li>貯蓄 400万円、投資 2,800万円（運用利回り年3％想定）</li>
+
+<li>住宅ローン残高 1650万 → 毎月返済中、11年後1200万円一括返済</li>
+
+<li>教育費支出：今後、中学・高校・大学で年々増加</li>
+
+<li>支出率 68％維持（必要支出は年約430万円）</li>
+
+<li>ボーナスは貯蓄・投資に回す</li>
+
+<li>退職金など特別な収入なし想定</li>
+</ul>
+
+<hr/>
+
+<h2>① 通常シナリオ：住宅ローン一括返済後の推移</h2>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>年齢</th><th>資産額（万円）</th><th>備考</th></tr></thead><tbody><tr><td>43歳</td><td>3,200</td><td>現在時点</td></tr><tr><td>48歳</td><td>4,500</td><td>教育費や支出増も投資運用効果あり</td></tr><tr><td>54歳</td><td>5,800</td><td>ここでローン一括返済（-1,200万）</td></tr><tr><td>55歳</td><td>4,700</td><td>ローンゼロで毎年黒字拡大</td></tr><tr><td>60歳</td><td>6,200</td><td>教育費負担終了、貯蓄加速</td></tr><tr><td>65歳</td><td>8,500</td><td>老後資金十分確保できる水準</td></tr><tr><td>70歳</td><td>10,500</td><td>取り崩しながらも余裕あり</td></tr></tbody></table></figure>
+
+<hr/>
+
+<h2>② リスクシナリオ：金利急上昇パターン（11年後金利3％に上昇）</h2>
+
+<p>想定：</p>
+
+<ul>
+<li>住宅ローン残高に対し金利3％</li>
+
+<li>毎年負担増：約+30万円/年（支払い総額で300万円近い増）</li>
+</ul>
+
+<p>この場合：</p>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>年齢</th><th>資産額（万円）</th><th>備考</th></tr></thead><tbody><tr><td>54歳</td><td>5,800</td><td>ローン控除終了時点</td></tr><tr><td>55歳</td><td>5,500</td><td>返済負担が大きく、資産伸び鈍化</td></tr><tr><td>60歳</td><td>6,200</td><td>教育終了後、貯蓄回復へ</td></tr><tr><td>65歳</td><td>7,500</td><td>老後資金少しタイトに</td></tr><tr><td>70歳</td><td>9,000</td><td>取り崩しながら慎重運用必要</td></tr></tbody></table></figure>
+
+<p>→ <strong>一括返済できなければ、資産減少スピードが早まるリスクあり。</strong></p>
+
+<hr/>
+
+<h1>🎯 まとめ</h1>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>パターン</th><th>老後資金</th><th>生活安心度</th></tr></thead><tbody><tr><td>一括返済あり</td><td>◎ 余裕あり</td><td>◎ 固定費減でラク</td></tr><tr><td>一括返済なし（高金利）</td><td>△ やや厳しい</td><td>△ 支出管理必要</td></tr></tbody></table></figure>
+
+<p>✅ <strong>結論：54歳時点で1200万一括返済が非常に合理的！</strong></p>
+
+<h1>🎓 教育費別の「細かい支出年表」（3人分）</h1>
+
+<p>※ 文科省データと現実的な家庭支出を参考に作成<br>※ ざっくり「公立中高＋私立大学進学」と仮定</p>
+
+<figure><table class="has-fixed-layout"><thead><tr><th>年齢（親）</th><th>子ども状況</th><th>年間教育費（目安）</th></tr></thead><tbody><tr><td>43歳</td><td>中1・小5・小3</td><td>約80万（塾中心）</td></tr><tr><td>44歳</td><td>中2・小6・小4</td><td>約90万（受験対策増）</td></tr><tr><td>45歳</td><td>中3・中1・小5</td><td>約100万（受験費用増）</td></tr><tr><td>46歳</td><td>高1・中2・小6</td><td>約120万（高校＋塾）</td></tr><tr><td>47歳</td><td>高2・中3・中1</td><td>約130万（高校＋受験費用）</td></tr><tr><td>48歳</td><td>高3・高1・中2</td><td>約150万（大学受験＋高校授業料）</td></tr><tr><td>49歳</td><td>大1・高2・中3</td><td>約180万（大学・高校）</td></tr><tr><td>50歳</td><td>大2・高3・高1</td><td>約190万（大学・高校）</td></tr><tr><td>51歳</td><td>大3・大1・高2</td><td>約200万（大学2人分）</td></tr><tr><td>52歳</td><td>大4・大2・高3</td><td>約200万（大学2人分＋受験費用）</td></tr><tr><td>53歳</td><td>卒業・大3・大1</td><td>約150万（大学1人）</td></tr><tr><td>54歳</td><td>卒業・大4・大2</td><td>約150万（大学1人）</td></tr><tr><td>55歳</td><td>全員社会人</td><td>教育費終了</td></tr></tbody></table></figure>
+
+<p>✅ だいたい「49歳〜54歳」が最も負担ピークになります！<br>（大学費用は一部奨学金やバイト支援も想定可）</p>
+
+<hr/>
+
+<h1>📈 毎年の収支シミュレーショングラフ</h1>
+
+<p>※ 投資運用年3％、住宅ローン一括返済（54歳時）、教育費ピークあり、支出は年率1％物価上昇込みで試算</p>
+
+<p><strong>イメージグラフ：</strong></p>
+
+<ul>
+<li>43〜48歳：緩やかに資産増（収支プラス）</li>
+
+<li>49〜54歳：教育費ピークで資産やや停滞</li>
+
+<li>55歳以降：教育費終了、一括返済済みで急速に資産回復</li>
+
+<li>65歳時点：約8500万〜9000万円の老後資産見込み</li>
+
+<li></li>
+</ul>
+
+<hr/>
+
+<h1>📈 老後資金取り崩しシミュレーション（基本版）</h1>
+
+<ul>
+<li>65歳で退職（年金受給開始）</li>
+
+<li>65歳時点で資産8,500万円想定</li>
+
+<li>65歳以降、年生活費 400万円（物価上昇考慮）</li>
+
+<li>年金収入：年間200万円（夫婦合算、予想）</li>
+
+<li>毎年取り崩し額：200万円</li>
+</ul>
+
+<p>✅ シミュレーション結果</p>
+
+<ul>
+<li>取り崩しても90歳時点で資産残高 2,000万円以上</li>
+
+<li>100歳でも資産ギリギリ維持可能（リスク管理済み）</li>
+</ul>
+
+<hr/>
+
+<h1>🔥 特別リスクシナリオ：金利急上昇＋株価下落</h1>
+
+<ul>
+<li>住宅ローン金利が3％超へ急上昇（住宅ローン繰上返済必須）</li>
+
+<li>株式市場が30%下落（リーマンショック級）</li>
+</ul>
+
+<p>➡ この場合でも、<br><strong>現金＋金資産＋債券比率</strong>を高めておけば、<br>「資産全体の下落は▲15〜20%以内」で抑えられます。</p>
+
+<hr/>
+
+<h1>📝 まとめ：今後のアクションプラン提案</h1>
+
+<ol>
+<li><strong>債券（米国債・円建て債券）をさらに増やす（＋5〜10％）</strong></li>
+
+<li><strong>住宅ローン控除終了直後に繰上返済（1200万一括）</strong></li>
+
+<li><strong>教育費ピークに備えて、流動資金を維持（現金・金合わせて20%キープ）</strong></li>
+
+<li><strong>積立投資はそのまま継続（オールカントリー中心）</strong></li>
+
+<li><strong>60歳手前でリスク資産の比率をもう一段下げる（リバランス）</strong></li>
+</ol>
+
+<p>教育費、住宅ローン、老後資金――家計の三大不安は、放っておくと将来の大きなリスクに。<br>でも、FP（ファイナンシャルプランナー）による資産シミュレーションで「見える化」すれば、未来はもっと安心で、前向きに描けます。</p>
+
+<p>家族の将来を守るために、まずは現状を知ることから始めませんか？<br>一歩踏み出せば、不安は安心に変わります。あなたの“未来設計”を、今すぐスタートしましょう！</p>
+  <div class="cta-box">
+    <h3>資産運用・家計のご相談はお気軽に</h3>
+    <p>FP資格者が丁寧にサポートします。まずは無料相談をご利用ください。</p>
+    <a href="/index.html#contact">無料相談はこちら</a>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2025 パーソナル・アセット・パートナーズ</p>
+</footer>
+</body>
+</html>
