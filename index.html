@@ -1,334 +1,375 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <!-- [X-Frame-Options] クリックジャッキング対策 -->
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <title>ライフアセットパートナーズ｜FP資格者による資産・融資サポート</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --sky:       #0ea5e9;
-      --sky-light: #38bdf8;
-      --sky-pale:  #e0f2fe;
-      --sky-bg:    #dff3ff;
-      --navy:      #0f3460;
-      --navy-soft: #1e4d8c;
-      --white:     #ffffff;
-      --gray-bg:   #edf8ff;
-      --text:      #1e293b;
-      --text-sub:  #64748b;
-      --border:    #e2e8f0;
-    }
-    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: linear-gradient(180deg, #d6effe 0%, #ffffff 18%) fixed; }
-    a { text-decoration: none; color: inherit; }
-
-    /* ===== HEADER ===== */
-    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-main { font-size: 22px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
-    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
-    nav { display: flex; align-items: center; gap: 28px; }
-    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
-    nav a:hover { color: var(--sky); }
-    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s, transform .15s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
-    .btn-cta:hover { background: var(--sky-light); transform: translateY(-1px); }
-
-    /* ===== HERO ===== */
-    .hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 30%, #f4fbff 65%, #ffffff 100%); padding: 80px 32px 100px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 520px; height: 520px; background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%); border-radius: 50%; }
-    .hero::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%); border-radius: 50%; }
-    .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 64px; position: relative; z-index: 1; }
-    .hero-label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 50px; margin-bottom: 20px; }
-    .hero-label::before { content: ''; width: 6px; height: 6px; background: var(--sky); border-radius: 50%; }
-    .hero-title { font-size: clamp(30px, 4vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.3; margin-bottom: 18px; }
-    .hero-title em { color: var(--sky); font-style: normal; }
-    .hero-desc { font-size: 15px; color: var(--text-sub); line-height: 1.9; margin-bottom: 36px; }
-    .hero-badges { display: flex; gap: 12px; flex-wrap: wrap; }
-    .badge { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 50px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-    .badge svg { color: var(--sky); flex-shrink: 0; }
-    .hero-img-wrap { position: relative; flex-shrink: 0; }
-    .hero-img-wrap img { width: 300px; height: 400px; object-fit: cover; object-position: center top; border-radius: 24px; box-shadow: 0 24px 60px rgba(15,52,96,0.15); display: block; }
-    .hero-profile { position: absolute; bottom: -16px; left: -24px; background: #fff; border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border-left: 4px solid var(--sky); }
-    .hero-profile .role { font-size: 10px; color: var(--sky); font-weight: 600; margin-bottom: 3px; }
-    .hero-profile .name { font-size: 17px; font-weight: 900; color: var(--navy); letter-spacing: .06em; margin-bottom: 3px; }
-    .hero-profile .title { font-size: 10px; color: var(--text-sub); line-height: 1.6; }
-
-    /* ===== CHARACTER ===== */
-    .char-strip { background: var(--sky-bg); padding: 24px 32px; display: flex; align-items: center; justify-content: center; gap: 20px; }
-    .char-strip img.char-img { width: 72px; flex-shrink: 0; }
-    .char-strip-bubble { background: #fff; border: 2px solid #bae6fd; border-radius: 14px; padding: 12px 18px; font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.7; position: relative; max-width: 480px; }
-    .char-strip-bubble::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: #bae6fd; }
-    .char-strip-bubble::after { content: ''; position: absolute; left: -7px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: #fff; z-index: 1; }
-    .char-name-small { font-size: 10px; color: #2c6fb7; font-weight: 700; text-align: center; margin-top: 4px; }
-
-    /* ===== ELDERLY COUPLE SECTION ===== */
-    .couple-section { padding: 72px 32px; background: linear-gradient(135deg, #f0faff 0%, #ffffff 60%); }
-    .couple-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-    .couple-img { width: 100%; height: 320px; object-fit: cover; border-radius: 20px; box-shadow: 0 12px 40px rgba(15,52,96,0.12); display: block; }
-    .couple-text h2 { font-size: clamp(20px,3vw,26px); font-weight: 900; color: var(--navy); margin-bottom: 16px; }
-    .couple-text p { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin-bottom: 20px; }
-    .couple-char { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
-    .couple-char img { width: 56px; flex-shrink: 0; }
-    .couple-char-speech { background: var(--sky-bg); border-left: 3px solid var(--sky); border-radius: 8px; padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--navy); line-height: 1.6; }
-
-    /* ===== BANNER ===== */
-    .banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); color: #fff; text-align: center; padding: 48px 24px; }
-    .banner h2 { font-size: clamp(18px,3vw,24px); font-weight: 700; margin-bottom: 10px; }
-    .banner p { font-size: 14px; opacity: 0.75; }
-
-    /* ===== ICON SERVICES ===== */
-    .icon-services { background: var(--white); padding: 56px 32px; }
-    .icon-services-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .icon-service-item { background: var(--sky-bg); border-radius: 16px; padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; transition: transform .2s, box-shadow .2s; }
-    .icon-service-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(14,165,233,0.12); }
-    .icon-service-icon { width: 48px; height: 48px; background: var(--sky); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .icon-service-icon svg { width: 22px; height: 22px; color: #fff; }
-    .icon-service-text h3 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .icon-service-text p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
-
-    /* ===== SERVICES ===== */
-    .services { padding: 80px 32px; background: var(--gray-bg); }
-    .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .section-sub { text-align: center; font-size: 14px; color: var(--text-sub); margin-bottom: 48px; }
-    .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
-    .card:hover { box-shadow: 0 12px 40px rgba(14,165,233,0.12); transform: translateY(-5px); }
-    .card-header { height: 120px; background: linear-gradient(135deg, var(--sky-bg), #dbeafe); display: flex; align-items: center; justify-content: center; }
-    .card-header svg { width: 52px; height: 52px; color: var(--sky); }
-    .card-body { padding: 24px; }
-    .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .card-desc { font-size: 12.5px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.7; }
-    .card-list { list-style: none; margin-bottom: 20px; }
-    .card-list li { font-size: 12.5px; color: var(--text); padding: 4px 0 4px 20px; position: relative; }
-    .card-list li::before { content: '✓'; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
-    .btn-sky { display: flex; align-items: center; justify-content: center; background: var(--sky); color: #fff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 10px; transition: background .2s; }
-    .btn-sky:hover { background: var(--sky-light); }
-
-    /* ===== LIFEPLAN BLOCKS ===== */
-    .lifeplan-section { background: linear-gradient(160deg, #dff3ff 0%, #eef9ff 50%, #f4fbff 100%); padding: 72px 32px; }
-    .lifeplan-section h2 { text-align: center; color: var(--navy); font-size: clamp(20px,3vw,28px); font-weight: 900; margin-bottom: 8px; }
-    .lifeplan-section .sub { text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 48px; }
-    .lp-wrap { max-width: 860px; margin: 0 auto; }
-    .lp-block { display: flex; gap: 20px; margin-bottom: 28px; align-items: flex-start; }
-    .lp-char { width: 72px; flex-shrink: 0; }
-    .lp-char img { width: 72px; }
-    .lp-bubble { background: #fff; padding: 20px 24px; border-radius: 14px; box-shadow: 0 4px 16px rgba(14,165,233,0.09); border-left: 4px solid var(--sky-pale); flex: 1; }
-    .lp-bubble-title { font-weight: 800; color: var(--navy); margin-bottom: 8px; font-size: 15px; }
-    .lp-bubble p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
-    .lp-bubble p + p { margin-top: 6px; }
-    .lp-bubble ul { padding-left: 18px; font-size: 13px; color: var(--text-sub); line-height: 2; }
-    .lp-what { max-width: 860px; margin: 40px auto 0; background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 4px 16px rgba(14,165,233,0.07); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
-    .lp-what h3 { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
-    .lp-what p { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
-    .lp-what-visual { background: var(--sky-bg); border-radius: 14px; padding: 24px 28px; text-align: center; }
-    .lp-what-visual .big { font-size: 36px; font-weight: 900; color: var(--sky); line-height: 1.2; }
-    .lp-what-visual small { font-size: 11px; color: var(--text-sub); display: block; margin-top: 6px; }
-    @media(max-width:640px){ .lp-block{flex-direction:column;align-items:center;} .lp-what{grid-template-columns:1fr;} }
-
-    /* ===== CTA BANNER ===== */
-    .cta-banner { padding: 48px 32px; background: linear-gradient(135deg, #eaf7ff 0%, #ffffff 60%); }
-    .cta-banner-inner { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #c8e9f8, #dff3ff); border: 1px solid #93d5f5; border-radius: 24px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-    .cta-banner-text .em { font-size: 12px; color: var(--sky); font-weight: 700; margin-bottom: 8px; }
-    .cta-banner-text h3 { font-size: clamp(17px,2.5vw,22px); font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .cta-banner-text h3 strong { color: var(--sky); }
-    .cta-banner-text p { font-size: 13px; color: var(--text-sub); }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 50px; white-space: nowrap; transition: background .2s, transform .15s; box-shadow: 0 4px 16px rgba(14,165,233,0.35); flex-shrink: 0; }
-    .btn-primary:hover { background: var(--sky-light); transform: translateY(-2px); }
-
-    /* ===== REASONS ===== */
-    .reasons { padding: 80px 32px; background: var(--gray-bg); }
-    .reasons-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .reason-item { background: var(--white); border-radius: 20px; padding: 32px 24px; text-align: center; border-top: 4px solid var(--sky); box-shadow: 0 2px 16px rgba(0,0,0,0.04); transition: transform .2s; }
-    .reason-item:hover { transform: translateY(-4px); }
-    .reason-icon { width: 56px; height: 56px; background: var(--sky-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .reason-icon svg { width: 26px; height: 26px; color: var(--sky); }
-    .reason-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .reason-desc { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
-
-    /* ===== FOOTER ===== */
-    footer { background: var(--sky-bg); border-top: 2px solid #bae6fd; color: var(--text-sub); padding: 28px 32px; font-size: 12px; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--navy); font-size: 13px; font-weight: 700; }
-    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; }
-    .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-contact a { color: var(--sky); display: flex; align-items: center; gap: 5px; transition: color .2s; }
-    .footer-contact a:hover { color: var(--navy); }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; text-align: center; padding-bottom: 60px; }
-      .hero-img-wrap { margin: 0 auto; }
-      .hero-badges { justify-content: center; }
-      .hero-profile { left: 50%; transform: translateX(-50%); bottom: -20px; white-space: nowrap; }
-      .icon-services-grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
-      .reasons-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
-      .cta-banner-inner { flex-direction: column; text-align: center; padding: 32px 24px; }
-    }
-    @media (max-width: 640px) {
-      nav { display: none; }
-      .header-inner { padding: 0 20px; }
-      .hero { padding: 60px 20px 80px; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo">
-      <div class="logo-text">
-        <div class="logo-main">Life Asset</div>
-        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImphIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0i
+VVRGLTgiIC8+CiAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13
+aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiIC8+CiAgPHRpdGxlPuODkeODvOOCveODiuODq+ODu+OC
+ouOCu+ODg+ODiOODu+ODkeODvOODiOODiuODvOOCuu+9nEZQ6LOH5qC86ICF44Gr44KI44KL6LOH
+55Sj44O76J6N6LOH44K144Od44O844OIPC90aXRsZT4KICA8c3R5bGU+CiAgICAqLCAqOjpiZWZv
+cmUsICo6OmFmdGVyIHsgYm94LXNpemluZzogYm9yZGVyLWJveDsgbWFyZ2luOiAwOyBwYWRkaW5n
+OiAwOyB9CiAgICA6cm9vdCB7CiAgICAgIC0tbmF2eTogIzFhMjc0NDsKICAgICAgLS1uYXZ5LWxp
+Z2h0OiAjMjQzNDYwOwogICAgICAtLWdvbGQ6ICNiODk2MmU7CiAgICAgIC0tZ29sZC1saWdodDog
+I2Q0YWEzYTsKICAgICAgLS1nb2xkLWJnOiAjZjVmMGU4OwogICAgICAtLXdoaXRlOiAjZmZmOwog
+ICAgICAtLWdyYXktYmc6ICNmN2Y4ZmE7CiAgICAgIC0tdGV4dDogIzIyMjsKICAgICAgLS10ZXh0
+LWxpZ2h0OiAjNjY2OwogICAgICAtLWJvcmRlcjogI2U1ZTVlNTsKICAgIH0KICAgIGJvZHkgeyBm
+b250LWZhbWlseTogJ0hpcmFnaW5vIEtha3UgR290aGljIFByb04nLCdIaXJhZ2lubyBTYW5zJywn
+Tm90byBTYW5zIEpQJyxNZWlyeW8sc2Fucy1zZXJpZjsgY29sb3I6IHZhcigtLXRleHQpOyBsaW5l
+LWhlaWdodDogMS43OyB9CiAgICBhIHsgdGV4dC1kZWNvcmF0aW9uOiBub25lOyBjb2xvcjogaW5o
+ZXJpdDsgfQoKICAgIC8qID09PT09IEhFQURFUiA9PT09PSAqLwogICAgaGVhZGVyIHsgcG9zaXRp
+b246IHN0aWNreTsgdG9wOiAwOyB6LWluZGV4OiAxMDA7IGJhY2tncm91bmQ6IHZhcigtLXdoaXRl
+KTsgYm94LXNoYWRvdzogMCAycHggOHB4IHJnYmEoMCwwLDAsMC4wOCk7IH0KICAgIC5oZWFkZXIt
+aW5uZXIgeyBtYXgtd2lkdGg6IDExMDBweDsgbWFyZ2luOiAwIGF1dG87IHBhZGRpbmc6IDAgMjRw
+eDsgaGVpZ2h0OiA2OHB4OyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0
+aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IGdhcDogMjBweDsgfQogICAgLmxvZ28geyBkaXNw
+bGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDEwcHg7IGZsZXgtc2hyaW5rOiAw
+OyB9CiAgICAubG9nby1pY29uIHsgd2lkdGg6IDQycHg7IGhlaWdodDogNDJweDsgYmFja2dyb3Vu
+ZDogdmFyKC0tbmF2eSk7IGJvcmRlci1yYWRpdXM6IDUwJTsgZGlzcGxheTogZmxleDsgYWxpZ24t
+aXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7IGZsZXgtc2hyaW5rOiAwOyB9
+CiAgICAubG9nby1pY29uIHNwYW4geyBjb2xvcjogdmFyKC0tZ29sZCk7IGZvbnQtc2l6ZTogMTRw
+eDsgZm9udC13ZWlnaHQ6IDkwMDsgbGV0dGVyLXNwYWNpbmc6IC0wLjVweDsgfQogICAgLmxvZ28t
+dGV4dCAubmFtZSB7IGZvbnQtc2l6ZTogMTRweDsgZm9udC13ZWlnaHQ6IDcwMDsgY29sb3I6IHZh
+cigtLW5hdnkpOyB9CiAgICAubG9nby10ZXh0IC50YWdsaW5lIHsgZm9udC1zaXplOiAxMHB4OyBj
+b2xvcjogdmFyKC0tdGV4dC1saWdodCk7IH0KICAgIG5hdiB7IGRpc3BsYXk6IGZsZXg7IGFsaWdu
+LWl0ZW1zOiBjZW50ZXI7IGdhcDogMjRweDsgfQogICAgbmF2IGEgeyBmb250LXNpemU6IDEzcHg7
+IGNvbG9yOiB2YXIoLS1uYXZ5KTsgZm9udC13ZWlnaHQ6IDUwMDsgd2hpdGUtc3BhY2U6IG5vd3Jh
+cDsgdHJhbnNpdGlvbjogY29sb3IgLjJzOyB9CiAgICBuYXYgYTpob3ZlciB7IGNvbG9yOiB2YXIo
+LS1nb2xkKTsgfQogICAgLmJ0bi1jdGEgeyBkaXNwbGF5OiBpbmxpbmUtZmxleDsgYWxpZ24taXRl
+bXM6IGNlbnRlcjsgZ2FwOiA2cHg7IGJhY2tncm91bmQ6IHZhcigtLW5hdnkpOyBjb2xvcjogdmFy
+KC0td2hpdGUpOyBmb250LXNpemU6IDEzcHg7IGZvbnQtd2VpZ2h0OiA3MDA7IHBhZGRpbmc6IDEw
+cHggMTZweDsgYm9yZGVyLXJhZGl1czogNHB4OyB3aGl0ZS1zcGFjZTogbm93cmFwOyB0cmFuc2l0
+aW9uOiBiYWNrZ3JvdW5kIC4yczsgZmxleC1zaHJpbms6IDA7IH0KICAgIC5idG4tY3RhOmhvdmVy
+IHsgYmFja2dyb3VuZDogdmFyKC0tbmF2eS1saWdodCk7IH0KCiAgICAvKiA9PT09PSBIRFJPID09
+PT09ICovCiAgICAuaGVybyB7IGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMzVkZWcsICNk
+NmRjZTggMCUsICNlOGVjZjUgNDAlLCAjYzhkNGU0IDEwMCUpOyBtaW4taGVpZ2h0OiA1ODBweDsg
+ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsgb3ZlcmZsb3c6IGhpZGRlbjsgcG9z
+aXRpb246IHJlbGF0aXZlOyB9CiAgICAuaGVybzo6YmVmb3JlIHsgY29udGVudDogJyc7IHBvc2l0
+aW9uOiBhYnNvbHV0ZTsgaW5zZXQ6IDA7IGJhY2tncm91bmQ6IHVybCgnaHR0cHM6Ly9pbWFnZXMu
+dW5zcGxhc2guY29tL3Bob3RvLTE0Nzc5NTk4NTg2MTctNjdmODVjZjRmMWRmP3c9MTIwMCZxPTYw
+JmZpdD1jcm9wJykgY2VudGVyL2NvdmVyIG5vLXJlcGVhdDsgb3BhY2l0eTogMC4xMjsgfQogICAg
+Lmhlcm8taW5uZXIgeyBtYXgtd2lkdGg6IDExMDBweDsgbWFyZ2luOiAwIGF1dG87IHBhZGRpbmc6
+IDYwcHggMjRweDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsgZ2FwOiA0MHB4
+OyB3aWR0aDogMTAwJTsgcG9zaXRpb246IHJlbGF0aXZlOyB6LWluZGV4OiAxOyB9CiAgICAuaGVy
+by1jb250ZW50IHsgZmxleDogMTsgfQogICAgLmhlcm8tYmFkZ2UgeyBkaXNwbGF5OiBpbmxpbmUt
+YmxvY2s7IGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCg5MGRlZywgI2I4OTYyZSwgI2Q0YWEz
+YSk7IGNvbG9yOiB2YXIoLS13aGl0ZSk7IGZvbnQtc2l6ZTogMTJweDsgZm9udC13ZWlnaHQ6IDcw
+MDsgcGFkZGluZzogNXB4IDE2cHg7IGJvcmRlci1yYWRpdXM6IDJweDsgbWFyZ2luLWJvdHRvbTog
+MjBweDsgbGV0dGVyLXNwYWNpbmc6IDAuMDVlbTsgfQogICAgLmhlcm8tdGl0bGUgeyBmb250LXNp
+emU6IGNsYW1wKDMycHgsMy41dncsMzJweCk7IGZvbnQtd2VpZ2h0OiA5MDA7IGNvbG9yOiB2YXIo
+LS1uYXZ5KTsgbGluZS1oZWlnaHQ6IDEuMjU7IG1hcmdpbi1ib3R0b206IDIwcHg7IH0KICAgIC5o
+ZXJvLWRlc2MgeyBmb250LXNpemU6IDE1cHg7IGNvbG9yOiAjNDQ0OyBtYXJnaW4tYm90dG9tOiAz
+MnB4OyBsaW5lLWhlaWdodDogMS45OyB9CiAgICAuaGVyby1sYXVyZWxzIHsgZGlzcGxheTogZmxl
+eDsgZ2FwOiAyNHB4OyBmbGV4LXdyYXA6IHdyYXA7IH0KICAgIC5sYXVyZWwgeyBkaXNwbGF5OiBm
+bGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDZw
+eDsgdGV4dC1hbGlnbjogY2VudGVyOyB9CiAgICAubGF1cmVsLWljb24gewogICAgICB3aWR0aDog
+NjRweDsgaGVpZ2h0OiA2NHB4OyBib3JkZXItcmFkaXVzOiA1MCU7CiAgICAgIGJvcmRlcjogMnB4
+IHNvbGlkIHZhcigtLWdvbGQpOwogICAgICBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2Vu
+dGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsKICAgICAgcG9zaXRpb246IHJlbGF0aXZlOyBi
+YWNrZ3JvdW5kOiByZ2JhKDE4NCwxNTAsNDYsMC4wOCk7CiAgICB9CiAgICAubGF1cmVsLWljb246
+OmJlZm9yZSwgLmxhdXJlbC1pY29uOjphZnRlciB7CiAgICAgIGNvbnRlbnQ6ICfinKcnOyBwb3Np
+dGlvbjogYWJzb2x1dGU7IGZvbnQtc2l6ZTogMThweDsgY29sb3I6IHZhcigtLWdvbGQpOyBvcGFj
+aXR5OiAwLjc7CiAgICB9CiAgICAubGF1cmVsLWljb246OmJlZm9yZSB7IGxlZnQ6IC0ycHg7IHRy
+YW5zZm9ybTogc2NhbGVYKC0xKTsgfQogICAgLmxhdXJlbC1pY29uOjphZnRlciAgeyByaWdodDog
+LTJweDsgfQogICAgLmxhdXJlbC1pY29uIHN2ZyB7IHdpZHRoOiAyMnB4OyBoZWlnaHQ6IDIycHg7
+IGNvbG9yOiB2YXIoLS1nb2xkKTsgcG9zaXRpb246IHJlbGF0aXZlOyB6LWluZGV4OiAxOyB9CiAg
+ICAubGF1cmVsLWxhYmVsIHsgZm9udC1zaXplOiAxMXB4OyBjb2xvcjogdmFyKC0tbmF2eSk7IGZv
+bnQtd2VpZ2h0OiA3MDA7IGxpbmUtaGVpZ2h0OiAxLjQ7IG1heC13aWR0aDogNzJweDsgfQogICAg
+Lmhlcm8taW1hZ2UgeyBmbGV4OiAwIDAgMzYwcHg7IHBvc2l0aW9uOiByZWxhdGl2ZTsgZGlzcGxh
+eTogZmxleDsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgfQog
+ICAgLmhlcm8tcGhvdG8td3JhcHBlciB7IHdpZHRoOiAzMjBweDsgaGVpZ2h0OiA0MjBweDsgYm9y
+ZGVyLXJhZGl1czogOHB4OyBvdmVyZmxvdzogaGlkZGVuOyB9CiAgICAuaGVyby1waG90by13cmFw
+cGVyIGltZyB7IHdpZHRoOiAxMDAlOyBoZWlnaHQ6IDEwMCU7IG9iamVjdC1maXQ6IGNvdmVyOyBv
+YmplY3QtcG9zaXRpb246IGNlbnRlciA1MCU7IH0KICAgIC5oZXJvLXByb2ZpbGUtdGFnIHsgcG9z
+aXRpb246IGFic29sdXRlOyBib3R0b206IDE2cHg7IHJpZ2h0OiAtOHB4OyBiYWNrZ3JvdW5kOiBy
+Z2JhKDI2LDM5LDY4LDAuOTIpOyBjb2xvcjogdmFyKC0td2hpdGUpOyBwYWRkaW5nOiAxNHB4IDEw
+cHg7IGJvcmRlci1yYWRpdXM6IDZweDsgYm9yZGVyLWxlZnQ6IDRweCBzb2xpZCB2YXIoLS1nb2xk
+KTsgYm94LXNoYWRvdzogMCA0cHggMjBweCByZ2JhKDAsMCwwLDAuMik7IH0KICAgIC5oZXJvLXBy
+b2ZpbGUtdGFnIC5yb2xlIHsgZm9udC1zaXplOiAxMHB4OyBjb2xvcjogdmFyKC0tZ29sZC1saWdo
+dCk7IGZvbnQtd2VpZ2h0OiA2MDA7IG1hcmdpbi1ib3R0b206IDRweDsgfQogICAgLmhlcm8tcHJv
+ZmlsZS10YWcgLnBlcnNvbi1uYW1lIHsgZm9udC1zaXplOiAyMnB4OyBmb250LXdlaWdodDogOTAw
+OyBsZXR0ZXItc3BhY2luZzogMC4wOGVtOyBtYXJnaW4tYm90dG9tOiA0cHg7IH0KICAgIC5oZXJv
+LXByb2ZpbGUtdGFnIC5wZXJzb24tc3ViIHsgZm9udC1zaXplOiAxMXB4OyBjb2xvcjogcmdiYSgy
+NTUsMjU1LDI1NSwwLjc1KTsgbGluZS1oZWlnaHQ6IDEuNjsgfQoKICAgIC8qID09PT09IERBU0sg
+QkFOTkVSID09PT09ICovCiAgICAuYmFubmVyIHsgYmFja2dyb3VuZDogdmFyKC0tbmF2eSk7IGNv
+bG9yOiB2YXIoLS13aGl0ZSk7IHRleHQtYWxpZ246IGNlbnRlcjsgcGFkZGluZzogNDRweCAyNHB4
+OyB9CiAgICAuYmFubmVyIGgyIHsgZm9udC1zaXplOiBjbGFtcCgxOHB4LDN2dywyNnB4KTsgZm9u
+dC13ZWlnaHQ6IDcwMDsgbWFyZ2luLWJvdHRvbTogMTBweDsgfQogICAgLmJhbm5lciBwIHsgZm9u
+dC1zaXplOiAxNHB4OyBvcGFjaXR5OiAwLjg7IH0KCiAgICAvKiA9PT09PSBJQ09OIFNFUlZJQ0VT
+ID09PT09ICovCiAgICAuaWNvbi1zZXJ2aWNlcyB7IGJhY2tncm91bmQ6IHZhcigtLXdoaXRlKTsg
+Ym9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHZhcigtLWJvcmRlcik7IHBhZGRpbmc6IDQ4cHggMjRw
+eDsgfQogICAgLmljb24tc2VydmljZXMtZ3JpZCB7IG1heC13aWR0aDogOTAwcHg7IG1hcmdpbjog
+MCBhdXRvOyBkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdCgzLDFm
+cik7IGdhcDogMXB4OyBiYWNrZ3JvdW5kOiB2YXIoLS1ib3JkZXIpOyBib3JkZXI6IDFweCBzb2xp
+ZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiA4cHg7IG92ZXJmbG93OiBoaWRkZW47IH0K
+ICAgIC5pY29uLXNlcnZpY2UtaXRlbSB7IGJhY2tncm91bmQ6IHZhcigtLXdoaXRlKTsgcGFkZGlu
+ZzogMjhweCAyNHB4OyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogZmxleC1zdGFydDsgZ2Fw
+OiAxNnB4OyB9CiAgICAuaWNvbi1zZXJ2aWNlLWljb24geyB3aWR0aDogNDhweDsgaGVpZ2h0OiA0
+OHB4OyBib3JkZXI6IDJweCBzb2xpZCB2YXIoLS1uYXZ5KTsgYm9yZGVyLXJhZGl1czogNTAlOyBk
+aXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRl
+cjsgZmxleC1zaHJpbms6IDA7IH0KICAgIC5pY29uLXNlcnZpY2UtaWNvbiBzdmcgeyB3aWR0aDog
+MjJweDsgaGVpZ2h0OiAyMnB4OyBjb2xvcjogdmFyKC0tbmF2eSk7IH0KICAgIC5pY29uLXNlcnZp
+Y2UtdGV4dCBoMyB7IGZvbnQtc2l6ZTogMTRweDsgZm9udC13ZWlnaHQ6IDgwMDsgY29sb3I6IHZh
+cigtLW5hdnkpOyBtYXJnaW4tYm90dG9tOiA2cHg7IH0KICAgIC5pY29uLXNlcnZpY2UtdGV4dCBw
+IHsgZm9udC1zaXplOiAxMnB4OyBjb2xvcjogdmFyKC0tdGV4dC1saWdodCk7IGxpbmUtaGVpZ2h0
+OiAxLjY7IH0KCiAgICAvKiA9PT09PSBTRVJWSUNFUSA9PT09PSAqLwogICAgLnNlcnZpY2VzIHsg
+cGFkZGluZzogNzJweCAyNHB4OyBiYWNrZ3JvdW5kOiB2YXIoLS1ncmF5LWJnKTsgfQogICAgLnNl
+Y3Rpb24tdGl0bGUgeyB0ZXh0LWFsaWduOiBjZW50ZXI7IGZvbnQtc2l6ZTogY2xhbXAoMjBweCwz
+dncsMjZweCk7IGZvbnQtd2VpZ2h0OiA4MDA7IGNvbG9yOiB2YXIoLS1uYXZ5KTsgbWFyZ2luLWJv
+dHRvbTogNDhweDsgfQogICAgLnNlY3Rpb24tdGl0bGU6OmFmdGVyIHsgY29udGVudDogJyc7IGRp
+c3BsYXk6IGJsb2NrOyB3aWR0aDogNDBweDsgaGVpZ2h0OiAzcHg7IGJhY2tncm91bmQ6IHZhcigt
+LWdvbGQpOyBtYXJnaW46IDEwcHggYXV0byAwOyBib3JkZXItcmFkaXVzOiAycHg7IH0KICAgIC5j
+YXJkcyB7IG1heC13aWR0aDogMTEwMHB4OyBtYXJnaW46IDAgYXV0bzsgZGlzcGxheTogZ3JpZDsg
+Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoMywxZnIpOyBnYXA6IDI0cHg7IH0KICAgIC5j
+YXJkIHsgYmFja2dyb3VuZDogdmFyKC0td2hpdGUpOyBib3JkZXItcmFkaXVzOiA4cHg7IG92ZXJm
+bG93OiBoaWRkZW47IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWJvcmRlcik7IHRyYW5zaXRpb246
+IGJveC1zaGFkb3cgLjI1cywgdHJhbnNmb3JtIC4yNXM7IH0KICAgIC5jYXJkOmhvdmVyIHsgYm94
+LXNoYWRvdzogMCA4cHggMzJweCByZ2JhKDI2LDM5LDY4LDAuMTIpOyB0cmFuc2Zvcm06IHRyYW5z
+bGF0ZVkoLTRweCk7IH0KICAgIC5jYXJkLWltZyB7IGhlaWdodDogMTgwcHg7IG92ZXJmbG93OiBI
+aWRkZW47IH0KICAgIC5jYXJkLWltZyBpbWcgeyB3aWR0aDogMTAwJTsgaGVpZ2h0OiAxMDAlOyBv
+YmplY3QtZml0OiBjb3ZlcjsgZGlzcGxheTogYmxvY2s7IH0KICAgIC5jYXJkLWJvZHkgeyBwYWRk
+aW5nOiAyMnB4OyB9CiAgICAuY2FyZC10aXRsZSB7IGZvbnQtc2l6ZTogMTZweDsgZm9udC13ZWln
+aHQ6IDgwMDsgY29sb3I6IHZhcigtLW5hdnkpOyBtYXJnaW4tYm90dG9tOiA4cHg7IH0KICAgIC5j
+YXJkLWRlc2MgeyBmb250LXNpemU6IDEyLjVweDsgY29sb3I6IHZhcigtLXRleHQtbGlnaHQpOyBt
+YXJnaW4tYm90dG9tOiAxNHB4OyBsaW5lLWhlaWdodDogMS43OyB9CiAgICAuY2FyZC1saXN0IHsg
+bGlzdC1zdHlsZTogbm9uZTsgbWFyZ2luLWJvdHRvbTogMThweDsgfQogICAgLmNhcmQtbGlzdCBs
+aSB7IGZvbnQtc2l6ZTogMTIuNXB4OyBjb2xvcjogdmFyKC0tdGV4dCk7IHBhZGRpbmc6IDNweCAw
+IDNweCAyMHB4OyBwb3NpdGlvbjogcmVsYXRpdmU7IH0KICAgIC5jYXJkLWxpc3QgbGk6OmJlZm9y
+ZSB7IGNvbnRlbnQ6ICfinJMnOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDA7IGNvbG9yOiB2
+YXIoLS1nb2xkKTsgZm9udC13ZWlnaHQ6IDcwMDsgfQogICAgLmJ0bi1uYXZ5IHsgZGlzcGxheTog
+ZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7IGJhY2tn
+cm91bmQ6IHZhcigtLW5hdnkpOyBjb2xvcjogdmFyKC0td2hpdGUpOyBmb250LXNpemU6IDEzcHg7
+IGZvbnQtd2VpZ2h0OiA2MDA7IHBhZGRpbmc6IDEwcHg7IGJvcmRlci1yYWRpdXM6IDRweDsgdHJh
+bnNpdGlvbjogYmFja2dyb3VuZCAuMnM7IH0KICAgIC5idG4tbmF2eTpob3ZlciB7IGJhY2tncm91
+bmQ6IHZhcigtLW5hdnktbGlnaHQpOyB9CgogICAgLyogPT09PT0gQ1RBIEJBTU5FUiA9PT09PSAq
+LwogICAgLmN0YS1iYW5uZXIgeyBwYWRkaW5nOiA0MHB4IDI0cHg7IGJhY2tncm91bmQ6IHZhcigt
+LXdoaXRlKTsgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHZhcigtLWJvcmRlcik7IGJvcmRlci1ib3R0
+b206IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyB9CiAgICAuY3RhLWJhbm5lci1pbm5lciB7IG1h
+eC13aWR0aDogOTYwcHg7IG1hcmdpbjogMCBhdXRvOyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVt
+czogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IGdhcDogMzJweDsgYmFj
+a2dyb3VuZDogdmFyKC0tZ29sZC1iZyk7IGJvcmRlcjogMXB4IHNvbGlkICNkZGQwYjA7IGJvcmRl
+ci1yYWRpdXM6IDhweDsgcGFkZGluZzogMzJweCA0MHB4OyB9CiAgICAuY3RhLWJhbm5lci10ZXh0
+IC5lbSB7IGZvbnQtc2l6ZTogMTJweDsgY29sb3I6IHZhcigtLWdvbGQpOyBmb250LXdlaWdodDog
+NzAwOyBtYXJnaW4tYm90dG9tOiA2cHg7IH0KICAgIC5jdGEtYmFubmVyLXRleHQgaDMgeyBmb250
+LXNpemU6IGNsYW1wKDE2cHgsMi41dncsMjFweCk7IGZvbnQtd2VpZ2h0OiA4MDA7IGNvbG9yOiB2
+YXIoLS1uYXZ5KTsgbWFyZ2luLWJvdHRvbTogNnB4OyB9CiAgICAuY3RhLWJhbm5lci10ZXh0IGgz
+IHN0cm9uZyB7IGNvbG9yOiB2YXIoLS1nb2xkKTsgfQogICAgLmN0YS1iYW5uZXItdGV4dCBwIHsg
+Zm9udC1zaXplOiAxMi41cHg7IGNvbG9yOiB2YXIoLS10ZXh0LWxpZ2h0KTsgfQogICAgLmJ0bi1n
+b2xkIHsgZGlzcGxheTogaW5saW5lLWZsZXg7IGFsaWduLWl0ZW1zOiBjZW50ZXI7IGdhcDogOHB4
+OyBiYWNrZ3JvdW5kOiB2YXIoLS1nb2xkKTsgY29sb3I6IHZhcigtLXdoaXRlKTsgZm9udC1zaXpl
+OiAxNHB4OyBmb250LXdlaWdodDogNzAwOyBwYWRkaW5nOiAxNHB4IDI4cHg7IGJvcmRlci1yYWRp
+dXM6IDRweDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgdHJhbnNpdGlvbjogYmFja2dyb3VuZCAuMnM7
+IGZsZXgtc2hyaW5rOiAwOyB9CiAgICAuYnRuLWdvbGQ6aG92ZXIgeyBiYWNrZ3JvdW5kOiB2YXIo
+LS1nb2xkLWxpZ2h0KTsgfQoKICAgIC8qID09PT09IFJFQVNPTNMGPT09PT0gKi8KICAgIC5yZWFz
+b25zIHsgcGFkZGluZzogNzJweCAyNHB4OyBiYWNrZ3JvdW5kOiB2YXIoLS1ncmF5LWJnKTsgfQog
+ICAgLnJlYXNvbnMtZ3JpZCB7IG1heC13aWR0aDogMTAwMHB4OyBtYXJnaW46IDAgYXV0bzsgZGlz
+cGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoMywxZnIpOyBnYXA6IDI4
+cHg7IH0KICAgIC5yZWFzb24taXRlbSB7IGJhY2tncm91bmQ6IHZhcigtLXdoaXRlKTsgYm9yZGVy
+LXJhZGl1czogOHB4OyBwYWRkaW5nOiAyOHB4IDIycHg7IHRleHQtYWxpZ246IGNlbnRlcjsgYm9y
+ZGVyLXRvcDogNHB4IHNvbGlkIHZhcigtLWdvbGQpOyBib3gtc2hhZG93OiAwIDJweCAxMnB4IHJn
+YmEoMCwwLDAsMC4wNSk7IH0KICAgIC5yZWFzb24taWNvbiB7IHdpZHRoOiA1MnB4OyBoZWlnaHQ6
+IDUycHg7IGJhY2tncm91bmQ6IHZhcigtLW5hdnkpOyBib3JkZXItcmFkaXVzOiA1MCU7IGRpc3Bs
+YXk6IGZsZXg7IGFsaWduLWl0ZW1zOiBjZW50ZXI7IGp1c3RpZnktY29udGVudDogY2VudGVyOyBt
+YXJnaW46IDAgYXV0byAxNHB4OyB9CiAgICAucmVhc29uLWljb24gc3ZnIHsgd2lkdGg6IDI2cHg7
+IGhlaWdodDogMjZweDsgY29sb3I6IHdoaXRlOyB9CiAgICAucmVhc29uLXRpdGxlIHsgZm9udC1z
+aXplOiAxNHB4OyBmb250LXdlaWdodDogODAwOyBjb2xvcjogdmFyKC0tbmF2eSk7IG1hcmdpbi1i
+b3R0b206IDhweDsgbGluZS1oZWlnaHQ6IDEuNDsgfQogICAgLnJlYXNvbi1kZXNjIHsgZm9udC1z
+aXplOiAxMnB4OyBjb2xvcjogdmFyKC0tdGV4dC1saWdodCk7IGxpbmUtaGVpZ2h0OiAxLjc7IH0K
+CiAgICAvKiA9PT09PSBCTk9HIFNFVElPTiA9PT09PSAqLwogICAgLmJsb2ctc2VjdGlvbiB7IGJh
+Y2tncm91bmQ6IHZhcigtLWdyYXktYmcpOyBwYWRkaW5nOiA2NHB4IDI0cHg7IH0KICAgIC5ibG9n
+LXNlY3Rpb24taW5uZXIgeyBtYXgtd2lkdGg6IDExMDBweDsgbWFyZ2luOiAwIGF1dG87IH0KICAg
+IC5ibG9nLWNhcmRzIHsgZGlzcGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBl
+YXQoMywxZnIpOyBnYXA6IDIwcHg7IG1hcmdpbi10b3A6IDQwcHg7IH0KICAgIC5ibG9nLWNhcmQg
+eyBiYWNrZ3JvdW5kOiB2YXIoLS13aGl0ZSk7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWJvcmRl
+cik7IGJvcmRlci1yYWRpdXM6IDhweDsgcGFkZGluZzogMjJweCAyNHB4OyB0cmFuc2l0aW9uOiBi
+b3gtc2hhZG93IC4yczsgZGlzcGxheTogZmxleDsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgfQog
+ICAgLmJsb2ctY2FyZDpob3ZlciB7IGJveC1zaGFkb3c6IDAgNHB4IDE4cHggcmdiYSgwLDAsMCww
+LjA4KTsgfQogICAgLmJsb2ctY2FyZC1kYXRlIHsgZm9udC1zaXplOiAxMXB4OyBjb2xvcjogdmFy
+KC0tdGV4dC1saWdodCk7IG1hcmdpbi1ib3R0b206IDhweDsgfQogICAgLmJsb2ctY2FyZC10aXRs
+ZSB7IGZvbnQtc2l6ZTogMTRweDsgZm9udC13ZWlnaHQ6IDgwMDsgY29sb3I6IHZhcigtLW5hdnkp
+OyBsaW5lLWhlaWdodDogMS41OyBtYXJnaW4tYm90dG9tOiAxMHB4OyBmbGV4OiAxOyB9CiAgICAu
+YmxvZy1jYXJkLXRpdGxlIGE6aG92ZXIgeyBjb2xvcjogdmFyKC0tZ29sZCk7IH0KICAgIC5ibG9n
+LWNhcmQtZXhjZXJwdCB7IGZvbnQtc2l6ZTogMTJweDsgY29sb3I6ICM2NjY7IGxpbmUtaGVpZ2h0
+OiAxLjc7IG1hcmdpbi1ib3R0b206IDE0cHg7IGRpc3BsYXk6IC13ZWJraXQtYm94OyAtd2Via2l0
+LWxpbmUtY2xhbXA6IDM7IC13ZWJraXQtYm94LW9yaWVudDogdmVydGljYWw7IG92ZXJmbG93OiBI
+aWRkZW47IH0KICAgIC5ibG9nLWNhcmQtbW9yZSB7IGZvbnQtc2l6ZTogMTJweDsgZm9udC13ZWln
+aHQ6IDcwMDsgY29sb3I6IHZhcigtLWdvbGQpOyB9CiAgICAuYmxvZy1tb3JlLWJ0biB7IGRpc3Bs
+YXk6IGJsb2NrOyB0ZXh0LWFsaWduOiBjZW50ZXI7IG1hcmdpbi10b3A6IDM2cHg7IH0KICAgIC5i
+bG9nLW1vcmUtYnRuIGEgeyBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGJvcmRlcjogMnB4IHNvbGlk
+IHZhcigtLW5hdnkpOyBjb2xvcjogdmFyKC0tbmF2eSk7IGZvbnQtd2VpZ2h0OiA3MDA7IGZvbnQt
+c2l6ZTogMTRweDsgcGFkZGluZzogMTJweCA0MHB4OyBib3JkZXItcmFkaXVzOiA0cHg7IHRyYW5z
+aXRpb246IGJhY2tncm91bmQgLjJzLCBjb2xvciAuMnM7IH0KICAgIC5ibG9nLW1vcmUtYnRuIGE6
+aG92ZXIgeyBiYWNrZ3JvdW5kOiB2YXIoLS1uYXZ5KTsgY29sb3I6IHZhcigtLXdoaXRlKTsgfQog
+ICAgQG1lZGlhIChtYXgtd2lkdGg6IDkwMHB4KSB7IC5ibG9nLWNhcmRzIHsgZ3JpZC10ZW1wbGF0
+ZS1jb2x1bW5zOiAxZnIgMWZyOyB9IH0KICAgIEBtZWRpYSAobWF4LXdpZHRoOiA2MDBweCkgeyAu
+YmxvZy1jYXJkcyB7IGdyaWQtdGVtcGxhdGUtY29sdW1uczogMWZyOyB9IH0KICAgIC5ibG9nLWNh
+cmQtdGFncyB7IGRpc3BsYXk6IGZsZXg7IGZsZXgtd3JhcDogd3JhcDsgZ2FwOiA0cHg7IG1hcmdp
+bi1ib3R0b206IDZweDsgfQogICAgLnRhZyB7IGZvbnQtc2l6ZTogMTBweDsgZm9udC13ZWlnaHQ6
+IDcwMDsgcGFkZGluZzogMnB4IDhweDsgYm9yZGVyLXJhZGl1czogMnB4OyBjb2xvcjogI2ZmZjsg
+d2hpdGUtc3BhY2U6IG5vd3JhcDsgfQogICAgLnRhZy1pbnZlc3QgeyBiYWNrZ3JvdW5kOiAjMWEy
+NzQ0OyB9CiAgICAudGFnLXBvcHVsYXIgeyBiYWNrZ3JvdW5kOiAjYjg5NjJlOyB9CiAgICAudGFn
+LXNhdmUgeyBiYWNrZ3JvdW5kOiAjMmQ2YTRmOyB9CiAgICAudGFnLXBvcnRmb2xpbyB7IGJhY2tn
+cm91bmQ6ICM0YTRhOGE7IH0KICAgIC5ibG9nLWNhcmQuaGlkZGVuLXBvc3QgeyBkaXNwbGF5OiBu
+b25lOyB9CiAgICAjYmxvZy1tb3JlLXdyYXAgYnV0dG9uOmhvdmVyIHsgYmFja2dyb3VuZDogdmFy
+KC0tbmF2eSkgIWltcG9ydGFudDsgY29sb3I6ICNmZmYgIWltcG9ydGFudDsgfQoKICAgIC8qID09
+PT09IEZPT1RFUiA9PT09PSAqLwogICAgZm9vdGVyIHsgYmFja2dyb3VuZDogIzBmMTgyNTsgY29s
+b3I6IHJnYmEoMjU1LDI1NSwyNTUsMC43KTsgcGFkZGluZzogMjRweDsgZm9udC1zaXplOiAxMnB4
+OyB9CiAgICAuZm9vdGVyLWlubmVyIHsgbWF4LXdpZHRoOiAxMTAwcHg7IG1hcmdpbjogMCBhdXRv
+OyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHNw
+YWNlLWJldHdlZW47IGZsZXgtd3JhcDogd3JhcDsgZ2FwOiAxNnB4OyB9CiAgICAuZm9vdGVyLWxv
+Z28geyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDEwcHg7IGNvbG9y
+OiB2YXIoLS13aGl0ZSk7IGZvbnQtc2l6ZTogMTNweDsgZm9udC13ZWlnaHQ6IDcwMDsgfQogICAg
+LmZvb3Rlci1sb2dvLWljb24geyB3aWR0aDogMjhweDsgaGVpZ2h0OiAyOHB4OyBiYWNrZ3JvdW5k
+OiB2YXIoLS1uYXZ5KTsgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tZ29sZCk7IGJvcmRlci1yYWRp
+dXM6IDUwJTsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250
+ZW50OiBjZW50ZXI7IH0KICAgIC5mb290ZXItbG9nby1pY29uIHNwYW4geyBjb2xvcjogdmFyKC0t
+Z29sZCk7IGZvbnQtc2l6ZTogMTBweDsgZm9udC13ZWlnaHQ6IDkwMDsgfQogICAgLmZvb3Rlci1j
+b250YWN0IHsgZGlzcGxheTogZmxleDsgZ2FwOiAyMHB4OyBmbGV4LXdyYXA6IHdyYXA7IH0KICAg
+IC5mb290ZXItY29udGFjdCBhIHsgY29sb3I6IHJnYmEoMjU1LDI1NSwyNTUsMC42NSk7IGRpc3Bs
+YXk6IGZsZXg7IGFsaWduLWl0ZW1zOiBjZW50ZXI7IGdhcDogNXB4OyB0cmFuc2l0aW9uOiBjb2xv
+ciAuMnM7IH0KICAgIC5mb290ZXItY29udGFjdCBhOmhvdmVyIHsgY29sb3I6IHZhcigtLWdvbGQt
+bGlnaHQpOyB9CgogICAgLyogPT09PT0gUkVTUE9OU0lWRSA9PT09PSAqLwogICAgQG1lZGlhICht
+YXgtd2lkdGg6IDkwMHB4KSB7CiAgICAgIC5oZXJvLWlubmVyIHsgZmxleC1kaXJlY3Rpb246IGNv
+bHVtbjsgdGV4dC1hbGlnbjogY2VudGVyOyB9CiAgICAgIC5oZXJvLWltYWdlIHsgZmxleDogMCAw
+IGF1dG87IH0KICAgICAgLmhlcm8tbGF1cmVscyB7IGp1c3RpZnktY29udGVudDogY2VudGVyOyB9
+CiAgICAgIC5oZXJvLXByb2ZpbGUtdGFnIHsgcG9zaXRpb246IHN0YXRpYzsgbWFyZ2luLXRvcDog
+MTZweDsgfQogICAgICAuaWNvbi1zZXJ2aWNlcy1ncmlkIHsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5z
+OiAxZnI7IH0KICAgICAgLmNhcmRzIHsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnI7IG1heC13
+aWR0aDogNDgwcHg7IG1hcmdpbjogMCBhdXRvOyB9CiAgICAgIC5yZWFzb25zLWdyaWQgeyBncmlk
+LXRlbXBsYXRlLWNvbHVtbnM6IDFmcjsgbWF4LXdpZHRoOiAzODBweDsgbWFyZ2luOiAwIGF1dG87
+IH0KICAgICAgLmN0YS1iYW5uZXItaW5uZXIgeyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyB0ZXh0
+LWFsaWduOiBjZW50ZXI7IH0KICAgIH0KICAgIEBtZWRpYSAobWF4LXdpZHRoOiA2NDBweCkgewog
+ICAgICBuYXYgeyBkaXNwbGF5OiBub25lOyB9CiAgICAgIC5oZXJvLXBob3RvLXdyYXBwZXIgeyB3
+aWR0aDogMjYwcHg7IGhlaWdodDogMzQwcHg7IH0KICAgIH0KICA8L3N0eWxlPgo8L2hlYWQ+Cjxi
+b2R5PgoKPCEtLSBIRUFERVIgLS0+CjxoZWFkZXI+CiAgPGRpdiBjbGFzcz0iaGVhZGVyLWlubmVy
+Ij4KICAgIDxhIGhyZWY9IiMiIGNsYXNzPSJsb2dvIj4KICAgICAgPGRpdiBjbGFzcz0ibG9nby1p
+Y29uIj48c3Bhbj5GUDwvc3Bhbj48L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0ibG9nby10ZXh0Ij4K
+ICAgICAgICA8ZGl2IGNsYXNzPSJuYW1lIj7jg5Hjgbvjgbnjg4rjg6vjg7vjgqLjgrvjg4Pjg4jj
+g7vjg5Hjgbvjgabjg4rjg7zjgqo8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJ0YWdsaW5lIj7j
+gYLjgarjgZ/jga7mnJ/mjqXjgavjgIHnoa/jgYvjgarjgZ/lronlv6vjgajmiZbjplfjgpLjgII8
+L2Rpdj4KICAgICAgPC9kaXY+CiAgICA8L2E+CiAgICA8bmF2PgogICAgICA8YSBocmVmPSIjaG9t
+ZSI+jg3jgq3jg7w8L2E+CiAgICAgIDxhIGhyZWY9IiNzZXJ2aWNlcyI+jgrjg7zjg5Pjgrljga4
+jgorjgas5YKg5YaF8WA8L2E+CiAgICAgIDxhIGhyZWY9IiNyZWFzb25zIj7pgYnjgpLjgozjgZ8z
+44Gk44Gu55CG55Sj8WA8L2E+CiAgICAgIDxhIGhyZWY9IiN2b2ljZSI+44GK5a6a5qO15pSvjgar
+jaBjaDwvYT4KICAgICAgPGEgaHJlZj0iI2Zsb3ciPueUu+eVquOBrua6luOCjTwvYT4KICAgICAgPGEg
+aHJlZj0iI2Jsb2ciPuODluODreOCsDwvYT4KICAgIDwvbmF2PgogICAgPGEgaHJlZj0iI2NvbnRh
+Y3QiIGNsYXNzPSJidG4tY3RhIj4KICAgICAgPHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTMiIHZp
+ZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9r
+ZS13aWR0aD0iMiI+PHJlY3QgeD0iMiIgeT0iNCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiByeD0i
+MiIvPjxwYXRoIGQ9Ik0yMiA3bC0xMCA3TDIgNyIvPjwvc3ZnPgogICAgICDnhKHmlaTnj77orrDj
+gYvjgZPjgaM8L2E+CiAgPC9kaXY+CjwvaGVhZGVyPgoKPCEtLSBIRVJPIC0tPgo8c2VjdGlvbiBj
+bGFzcz0iaGVybyIgaWQ9ImhvbWUiPgogIDxkaXYgY2xhc3M9Imhlcm8taW5uZXIiPgogICAgPGRp
+diBjbGFzcz0iaGVyby1jb250ZW50Ij4KICAgICAgPGRpdiBjbGFzcz0iaGVyby1iYWRnZSI+RlDq
+gIF6ocirjaar44Gr44KI44KL5a+56VqH44K144Od44O844OIPC9kaXY+CiAgICAgIDxoMSBjbGFzcz0i
+aGVyby10aXRsZSI+CiAgICAgICAgPGJyPuOBguOBquOBn+OBruiCsOeUu+OBqOacgOaqou+9nTxici8+
+5YWx44Gr5Yq55OK44Gq44OR44O844OI44OiCiAgICAgIDwvaDE+CiAgICAgIDxwIGNsYXNzPSJoZXJv
+LWRlc2MiPgogICAgICAgIOWAi+iBvuizh+eUu+eVquOBi+OCiS+jg7rlgrjlhYLjgb7jgYQsPGJyPgog
+ICAgICAgIOOBiuOS44Gq44Go44KK44Gr5pyA6YGL44GqjgorCtZyjgoU44KS44GE44Gf44GX44G+44GZ
+44CCCiAgICAgIDwvcD4KICAgICAgPGRpdiBjbGFzcz0iaGVyby1sYXVyZWxzIj4KICAgICAgICA8
+ZGl2IGNsYXNzPSJsYXVyZWwiPgogICAgICAgICAgPGRpdiBjbGFzcz0ibGF1cmVsLWljb24iPgog
+ICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJj
+dXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTEyIDJsMy4wOSA2LjI2TDIy
+IDkuMjdsLTUgNC44NyAxLjE4IDYuODhMMTIgMTcuNzdsLTYuMTggMy4yNUw3IDE0LjE0IDIgOS4y
+N2w2LjkxLTEuMDFMMTIgMnoiLz48L3N2Zz4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPHNw
+YW4gY2xhc3M9ImxhdXJlbC1sYWJlbCI+RlDqgIF6ocirjaar44GM8YnIvPuekvuaot+Wvuee7qDwvc3Bhbj4K
+ICAgICAgICA8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJsYXVyZWwiPgogICAgICAgICAgPGRp
+diBjbGFzcz0ibGF1cmVsLWljb24iPgogICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAy
+NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PHBh
+dGggZD0iTTEyIDJsMy4wOSA2LjI2TDIyIDkuMjdsLTUgNC44NyAxLjE4IDYuODhMMTIgMTcuNzds
+LTYuMTggMy4yNUw3IDE0LjE0IDIgOS4yN2w2LjkxLTEuMDFMMTIgMnoiLz48L3N2Zz4KICAgICAg
+ICAgIDwvZGl2PgogICAgICAgICAgPHNwYW4gY2xhc3M9ImxhdXJlbC1sYWJlbCI+6IKw5a+55qar5a+M
+5qiZ44GohjxiciP+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0ibGF1cmVsIj4K
+ICAgICAgICAgIDxkaXYgY2xhc3M9ImxhdXJlbC1pY29uIj4KICAgICAgICAgICAgPHN2ZyB2aWV3
+Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Ut
+d2lkdGg9IjIiPjxwYXRoIGQ9Ik0xMiAybDMuMDkgNi4yNkwyMiA5LjI3bC01IDQuODcgMS4xOCA2
+Ljg4TDEyIDE3Ljc3bC02LjE4IDMuMjVMNyAxNC4xNCAyIDkuMjdsNi45MS0xLjAxTDEyIDJ6Ii8+
+PC9zdmc+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDxzcGFuIGNsYXNzPSJsYXVyZWwtbGFi
+ZWwiPuWAm+W/g+OBrOOS5LiN5LiN5Ymy44GqPGJyLz7jgrXjg53jg7zjg4g8L3NwYW4+CiAgICAg
+ICAgPC9kaXY+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJoZXJvLWlt
+YWdlIj4KICAgICAgPGRpdiBjbGFzcz0iaGVyby1waG90by13cmFwcGVyIj4KICAgICAgICA8aW1n
+IHNyYz0iaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1NjAyNTAwOTctMGI5M2E1
+MjhjMzExYT93PTQ4MCZoPTYwMCZmaXQ9Y3JvcCZjcm9wPWZhY2VzJnE9ODAiIGFsdD0i6auY5qmL
+5a6j5LmL5Luj6KaW44CN5Luj44Gj44GpIiAvPgogICAgICA8L2Rpdj4KICAgICAgPGRpdiBjbGFz
+cz0iaGVyby1wcm9maWxlLXRhZyI+CiAgICAgICAgPGRpdiBjbGFzcz0icm9sZSI+RlDqgIF6ocir
+jaar8WFP5YC56WgpjgqLjgrCjgrSjgrTjgrHjgqLjgrDjgro8L2Rpdj4KICAgICAgICA8ZGl2
+IGNsYXNzPSJwZXJzb24tbmFtZSI+6auY5aqqCiAgICA5piO5bGTPC9kaXY+CiAgICAgICAgPGRp
+diBjbGFzcz0icGVyc29uLXN1YiI+5YCJ5Lqb6LOH55Sj566h55CG5Lya5Luj6KaW44CN5Luj44Gp
+PC9kaXY+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgPC9kaXY+Cjwvc2VjdGlvbj4KCjwhLS0g
+REFSSyBCQU5ORVIgLS0+CjxzZWN0aW9uIGNsYXNzPSJiYW5uZXIiPgogIDxoMj7jgYrph4PjgabjgZP
+44Gb44CCaS8+44YKDCaYBjgZ/j9T5niJ445lq5nqLjgY0neXh7cGxhc2g8L2g+PC9zZWN0aW9u
+PgoKPCEtLSBJQ09OIFNFUlZJQ0VSLS0+CjxzZWN0aW9uIGNsYXNzPSJpY29uLXNlcnZpY2VzIj4K
+ICA8ZGl2IGNsYXNzPSJpY29uLXNlcnZpY2VzLWdyaWQiPgogICAgPGRpdiBjbGFzcz0iaWNvbi1z
+ZXJ2aWNlLWl0ZW0iPgogICAgICA8ZGl2IGNsYXNzPSJpY29uLXNlcnZpY2UtaWNvbiI+CiAgICAg
+ICAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENv
+bG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVq
+b2luPSJyb3VuZCI+CiAgICAgICAgICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIvPjxj
+aXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjYiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIy
+Ii8+CiAgICAgICAgPC9zdmc+CiAgICAgIDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJpY29uLXNl
+cnZpY2UtdGV4dCI+CiAgICAgICAgPGgzPuWwieWkqOiouuiouOmBuuOBruWtl+eUuuazqOeVqjwv
+aDM+CiAgICAgICAgPHA+5oi044Kk5aaC44OX44Op44Oz44Gr5ZCM44KP44Gb44Gf6LOH55Sj5b2T
+5oiIyubv5pluOOODl+ODqeODs+OCkOOBlOaPiuaborjgZvjgb7jgZnjgII8L3A+CiAgICAgIDwv
+ZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJpY29uLXNlcnZpY2UtaXRlbSI+CiAgICAg
+IDxkaXYgY2xhc3M9Imljb24tc2VydmljZS1pY29uIj4KICAgICAgICA8c3ZnIHZpZXdCb3g9IjAg
+MCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0i
+MiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICAgICAg
+ICAgIDxwYXRoIGQ9Ik0zIDlsOS03IDkgN3YxMWEyIDIgMCAwIDEtMiAySDVhMiAyIDAgMCAxLTIt
+MnoiLz48cG9seWxpbmUgcG9pbnRzPSI5IDIyIDkgMTIgMTUgMTIgMTUgMjIiLz4KICAgICAgICA8
+L3N2Zz4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Imljb24tc2VydmljZS10ZXh0Ij4K
+ICAgICAgICA8aDM+5YCJ5Lqb6LOH55Sj566h55CG5Lya5Luj6KaWPC9oMz4KICAgICAgICA8cD7q
+gIF6oeirjaar44Gu5LiA5YGo566h55CG5LqhCiAgICAgICAgNem/kCzlubPnaJDkv53jgYfjhJHlh
+ojjgaa5a6z6LOH55Sj644KS44K144Od44O844OI44CCAvPgogICAgICA8L2Rpdj4KICAgIDwvZGl2
+PgogICAgPGRpdiBjbGFzcz0iaWNvbi1zZXJ2aWNlLWl0ZW0iPgogICAgICA8ZGl2IGNsYXNzPSJp
+Y29uLXNlcnZpY2UtaWNvbiI+CiAgICAgICAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9
+Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5l
+Y2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICAgICAgICA8cGF0aCBkPSJN
+MTcgMjF2LTJhNCA0IDAgMCAwLTQtNEg1YTQgNCAwIDAgMC00IDR2MiIvPjxjaXJjbGUgY3g9Ijki
+IGN5PSI3IiByPSI0Ii8+CiAgICAgICAgICA8cGF0aCBkPSJNMjMgMjF2LTJhNCA0IDAgMCAwLTMt
+My44NyIvPjxwYXRoIGQ9Ik0xNiAzLjEzYTQgNCAwIDAgMSAwIDcuNzUiLz4KICAgICAgICA8L3N2
+Zz4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Imljb24tc2VydmljZS10ZXh0Ij4KICAg
+ICAgICA8aDM+5YCJ5Lqb6Jmt6LOH44K144Od44O844OIPC9oMz4KICAgICAgICA8cD7lpKnjgaalop
+rjg7zjgK3jgrHpnqPjgabnLKLlgKDjgavlr4vjgZHjgabjjplHqLCo5YCJ5Lqb6Jmt6LOH44K1
+44O844OI44CCAvPgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L3NlY3Rpb24+Cgo8
+IS0tIFNFUlZJQ0VSLS0+CjxzZWN0aW9uIGNsYXNzPSJzZXJ2aWNlcyIgaWQ9InNlcnZpY2VzIj4K
+ICA8aDIgY2xhc3M9InNlY3Rpb24tdGl0bGUiPuOCteODvOODk+OCueOBruOBlOWQiOWH6H0KICAg
+PGRpdiBjbGFzcz0iY2FyZHMiPgoKICAgIDxkaXYgY2xhc3M9ImNhcmQiPgogICAgICA8ZGl2IGNs
+YXNzPSJjYXJkLWltZyI+CiAgICAgICAgPGltZyBzcmM9Imh0dHBzOi8vaW1hZ2VzLnVuc3BsYXNo
+LmNvbS9waG90by0xNDYwOTI1ODk1OTE3LWFmZGFiODI3YzUyZj93PTYwMCZoPTM2MCZmaXQ9Y3Jv
+cCZxPTgwIiBhbHQ9IuWAiuS6u+KmjuWkquS4iuizh+eUquazqOeVqiIgLz4KICAgICAgPC9kaXY+
+CiAgICAgIDxkaXYgY2xhc3M9ImNhcmQtYm9keSI+CiAgICAgICAgPGgzIGNsYXNzPSJjYXJkLXRp
+dGxlIj7lgIrkvpu+S7+azqOeVqjwvaDM+CiAgICAgICAgPHAgY2xhc3M9ImNhcmQtZGVzYyI+6LOH
+55Sj44Gu6KKL44GI44KL5YyW44Go5pyA6YGL5YyW44Gy44KKjGljGljGpbmljGe5Y2O44KB44Gf
+6LOH55Sj5b2T5oiI44KS5pyr5ZKM44GX44G+44GZ44CCAvwKICAgICAgICA8dWwgY2xhc3M9ImNh
+cmQtbGlzdCI+CiAgICAgICAgICA8bGk+6LOH55Sj44Od44O844OI44OV44Kp44Oq44Kq5YaF5p+m
+44CCAvxpPC9saT4KICAgICAgICAgIDxsaT7q6LOH55Sj44KZ5oiI44OX44Op44Oz44Gu6KKL5a6e
+PC9saT4KICAgICAgICAgIDxsaT7kvILmnJ/jgqTjgarjgZXqZOi26azqTKT5o6r44Gu6KKL6Ki/
+PC9saT4KICAgICAgICA8L3VsPgogICAgICAgIDxhIGhyZWY9IiNjb250YWN0IiBjbGFzcz0iYnRu
+LW5hdnkiPuaUrOOBl+OBj+iomOOCiyDCuzwvYT4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KCiAg
+ICA8ZGl2IGNsYXNzPSJjYXJkIj4KICAgICAgPGRpdiBjbGFzcz0iY2FyZC1pbWciPgogICAgICAg
+IDxpbWcgc3JjPSJodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU1NDIyNDE1NS02
+NzI2YjMxZmY4NWY/dz02MDAmaDMzNjAmZml0PWNyb3AmcT04MCIgYWx0PSLjgqLjg4njg5djgqLjgq
+Djg7wvmiU46Z+r5YKz44CC" />
+        <div class="card-body">
+          <h3 class="card-title">アドバイザー業務</h3>
+          <p class="card-desc">専門知識と経験を活かし、最適なアドバイスを提供します。</p>
+          <ul class="card-list">
+            <li>ライフプラン設計</li>
+            <li>相続・事業承継対策</li>
+            <li>保険の見直し・最適化</li>
+          </ul>
+          <a href="#contact" class="btn-navy">詳しく見る ›</a>
+        </div>
       </div>
-    </a>
-    <nav>
-      <a href="#home">ホーム</a>
-      <a href="service/">サービス</a>
-      <a href="blog/">ブログ</a>
-      <a href="recruit/">採用情報</a>
-      <a href="#contact">お問い合わせ</a>
-    </nav>
-    <a href="#contact" class="btn-cta">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-      無料相談はこちら
-    </a>
-  </div>
-</header>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-label">FP資格者による安心サポート</div>
-      <h1 class="hero-title">
-        あなたの<em>資産</em>と<em>未来</em>を<br>共に育てるパートナー
-      </h1>
-      <p class="hero-desc">
-        個人資産管理から資金調達まで、<br>
-        お一人おひとりに最適なご提案をいたします。
-      </p>
-      <div class="hero-badges">
-        <div class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>FP資格者が直接対応</div>
-        <div class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>安心・丁寧なサポート</div>
-        <div class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>豊富な実績と信頼</div>
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80" alt="個人融資サポート" />
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">個人融資サポート</h3>
+          <p class="card-desc">個人の状況に合わせた融資プランで、資金調達をサポートします。</p>
+          <ul class="card-list">
+            <li>事業資金・生活資金の融資</li>
+            <li>柔軟な返済プラン</li>
+            <li>スピーディーな審査</li>
+          </ul>
+          <a href="#contact" class="btn-navy">詳しく見る ›</a>
+        </div>
       </div>
+
     </div>
-    <div class="hero-img-wrap">
-      <img src="images/couple-young.jpg" alt="若い夫婦" />
-    </div>
-  </div>
-</section>
-
-<!-- BANNER -->
-<section class="banner">
-  <h2>お金の悩み、ひとりで抱えていませんか？</h2>
-  <p>将来への不安、資産の運用、急な資金ニーズ——　そのお悩み、私たちが解決します。</p>
-</section>
-
-<!-- ICON SERVICES -->
-<section class="icon-services">
-  <div class="icon-services-grid">
-    <div class="icon-service-item"><div class="icon-service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="icon-service-text"><h3>将来設計・資産運用</h3><p>ライフプランに合わせた資産形成・運用プランをご提案します。</p></div></div>
-    <div class="icon-service-item"><div class="icon-service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="icon-service-text"><h3>個人資産管理会社</h3><p>資産の一元管理で、効率的かつ安全な資産運用をサポート。</p></div></div>
-    <div class="icon-service-item"><div class="icon-service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="icon-service-text"><h3>個人融資サポート</h3><p>急な資金ニーズにも柔軟に対応。安心の個人融資サービス。</p></div></div>
-  </div>
-</section>
-
-<!-- CHARACTER STRIP -->
-<div class="char-strip">
-  <div><img src="images/life-asset-kun.png" alt="ライフアセットくん" class="char-img"><div class="char-name-small">ライフアセットくん</div></div>
-  <div class="char-strip-bubble">お金のこと、将来のこと——<br>一緒に考えて、カタチにします！<br>まずはお気軽にご相談ください。</div>
-</div>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <h2 class="section-title">サービスのご案内</h2>
-  <p class="section-sub">お客様の状況に合わせた最適なプランをご提供します</p>
-  <div class="cards">
-    <div class="card"><div class="card-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="card-body"><h3 class="card-title">個人資産管理</h3><p class="card-desc">資産の見える化と最適化で、将来に向けた資産形成を支援します。</p><ul class="card-list"><li>資産ポートフォリオ分析</li><li>資産運用プランの設計</li><li>定期的な資産状況の確認</li></ul><a href="simulation.html" class="btn-sky">詳しく見る &rsaquo;</a></div></div>
-    <div class="card"><div class="card-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="card-body"><h3 class="card-title">アドバイザー業務</h3><p class="card-desc">専門知識と経験を活かし、最適なアドバイスを提供します。</p><ul class="card-list"><li>ライフプラン設計</li><li>相続・事業承継対策</li><li>保険の見直し・最適化</li></ul><a href="advisor.html" class="btn-sky">詳しく見る &rsaquo;</a></div></div>
-    <div class="card"><div class="card-header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="card-body"><h3 class="card-title">個人融資サポート</h3><p class="card-desc">個人の状況に合わせた融資プランで、資金調達をサポートします。</p><ul class="card-list"><li>事業資金・生活資金の融資</li><li>柔軟な返済プラン</li><li>スピーディーな審査</li></ul><a href="loan.html" class="btn-sky">詳しく見る &rsaquo;</a></div></div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section class="cta-banner" id="contact">
-  <div class="cta-banner-inner">
-    <div class="cta-banner-text">
-      <p class="em">まずは無料相談</p>
-      <h3>まずは<strong>無料相談</strong>で、あなたの未来を一緒に考えませんか？</h3>
-      <p>初回相談は無料です。お気軽にお問い合わせください。</p>
-    </div>
-    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:center;">
-      <img src="images/life-asset-kun.png" alt="ライフアセットくん" style="width:64px; flex-shrink:0;">
-      <a href="#" id="btn-consult" class="btn-primary">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        無料相談を申し込む
-      </a>
-      <script>(function(){var u='lifeassetpartners',d='gmail.com';var url='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su='+encodeURIComponent('無料相談申し込み')+'&body='+encodeURIComponent('以下をご記入ください\r\nお名前：\r\n年齢：\r\nご相談内容：');document.getElementById('btn-consult').href=url;})();</script>
-    </div>
-  </div>
-</section>
-
-<!-- ELDERLY COUPLE SECTION -->
-<section class="couple-section">
-  <div class="couple-inner">
-    <img src="images/couple-elderly.jpg" alt="ご夫婦" class="couple-img">
-    <div class="couple-text">
-      <h2>老後も安心して、<br>笑顔で暮らせるように</h2>
-      <p>老後資金・相続・保険の見直しまで、人生の大切な節目でもライフアセットパートナーズがしっかり寄り添います。</p>
-      <p>お金のことを"見える化"して、将来の安心を今から一緒に準備しましょう。</p>
-      <div class="couple-char"><img src="images/life-asset-kun.png" alt="ライフアセットくん"><div class="couple-char-speech">老後の資金計画も<br>一緒に考えます！<br>まずは無料相談へ。</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- LIFEPLAN BLOCKS -->
-<section class="lifeplan-section">
-  <div class="lp-wrap">
-    <h2>ライフプランとは？</h2>
-    <p class="sub">あなたの未来を「見える化」して、安心へ</p>
-    <div class="lp-block"><div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div><div class="lp-bubble"><div class="lp-bubble-title">今から実現できるライフプランがあります</div><p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」するシミュレーションです。</p><p>資産形成・資産運用・将来設計まで、ライフアセットパートナーズがトータルでサポートします。</p></div></div>
-    <div class="lp-block"><div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div><div class="lp-bubble"><div class="lp-bubble-title">収入と支出のバランスがすべて</div><p>収入を増やすことだけでなく、支出とのバランスが資産形成のカギです。</p><ul><li>無駄な支出の見直し</li><li>借金を防ぐ仕組み</li><li>会社員でもできる節税対策</li></ul></div></div>
-    <div class="lp-block"><div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div><div class="lp-bubble"><div class="lp-bubble-title">不安を"数字"で解消します</div><p>将来の不安は「なんとなく」ではなく、数字で見ることで解消できます。</p><p>正しい金融知識とデータで、間違った選択を防ぎます。</p></div></div>
-    <div class="lp-block"><div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div><div class="lp-bubble"><div class="lp-bubble-title">老後資金も今から対策できます</div><p>年金や老後資金も事前にシミュレーション可能です。</p><ul><li>将来受け取れる年金</li><li>必要な生活費</li><li>2000万円問題の対策</li></ul></div></div>
-    <div class="lp-block"><div class="lp-char"><img src="images/life-asset-kun.png" alt=""></div><div class="lp-bubble"><div class="lp-bubble-title">こんな方におすすめ</div><ul><li>資産を増やしたい</li><li>老後が不安</li><li>節税を知りたい</li><li>住宅購入を考えている</li><li>資金調達をしたい</li></ul></div></div>
-    <div class="lp-what"><div><h3>ライフプランとは<br>将来の「見える化」から始まる安心</h3><p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」し、最適な行動を決めるための設計図です。</p><p style="margin-top:8px;">将来への漠然とした不安を数字に落とし込み、今の自分に何が必要かを明確にすることで、無理なく着実に資産を形成できます。</p></div><div class="lp-what-visual"><div class="big">資産<br>設計図</div><small>収入・支出・将来目標を<br>ひとつにまとめて可視化</small></div></div>
-  </div>
-</section>
-
-<!-- REASONS -->
-<section class="reasons" id="reasons">
-  <h2 class="section-title">選ばれる3つの理由</h2>
-  <p class="section-sub">多くのお客様から信頼をいただいています</p>
-  <div class="reasons-grid">
-    <div class="reason-item"><div class="reason-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h3 class="reason-title">FP資格者が直接対応</h3><p class="reason-desc">専門知識を持つFPが、最初から最後まで丁寧にサポートします。</p></div>
-    <div class="reason-item"><div class="reason-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><h3 class="reason-title">お客様第一の安心サポート</h3><p class="reason-desc">お客様の利益を最優先に考えた、誠実で透明性の高いサービス。</p></div>
-    <div class="reason-item"><div class="reason-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3 class="reason-title">豊富な実績と信頼</h3><p class="reason-desc">多くのお客様からご信頼をいただき、確かな実績を重ねています。</p></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <div class="footer-logo-text">Life Asset</div>
-      <div style="display:flex;flex-direction:column;gap:3px;"><span>ライフアセットパートナーズ　／　代表　髙月 義照</span><span style="font-size:11px;color:#64748b;font-weight:500;">ファイナンシャルプランナー（FP資格者）</span></div>
-      <img src="images/fp-yoshiteru2.jpg" alt="髙月義照" style="width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
-    </div>
-    <div class="footer-contact">
-      <a href="#" id="footer-mail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><span id="footer-mail-text"></span></a>
-      <script>(function(){var u='lifeassetpartners',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
+  </section>
