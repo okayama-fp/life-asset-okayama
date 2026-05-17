@@ -3,144 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>パーソナル・アセット・パートナーズ｜FP資格者による資産・融資サポート</title>
+  <title>Life Asset Office｜ライフアセットオフィス｜人生に寄り添う、資産のパートナー</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #1a2744;
-      --navy-light: #243460;
-      --gold: #b8962e;
-      --gold-light: #d4aa3a;
-      --gold-bg: #f5f0e8;
-      --white: #fff;
-      --gray-bg: #f7f8fa;
-      --text: #222;
+      --teal: #4ab8b8;
+      --teal-dark: #2e9090;
+      --teal-light: #e8f7f7;
+      --teal-mid: #b2e0e0;
+      --navy: #1a3a5c;
+      --text: #333;
       --text-light: #666;
-      --border: #e5e5e5;
+      --white: #fff;
+      --gray-bg: #f7fbfb;
+      --border: #ddeaea;
     }
     body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; }
     a { text-decoration: none; color: inherit; }
 
     /* ===== HEADER ===== */
-    header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-icon { width: 42px; height: 42px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .logo-icon span { color: var(--gold); font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
-    .logo-text .name { font-size: 14px; font-weight: 700; color: var(--navy); }
-    .logo-text .tagline { font-size: 10px; color: var(--text-light); }
-    nav { display: flex; align-items: center; gap: 24px; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); box-shadow: 0 2px 12px rgba(74,184,184,0.1); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo-icon { width: 44px; height: 44px; flex-shrink: 0; }
+    .logo-icon svg { width: 100%; height: 100%; }
+    .logo-text .name-en { font-size: 18px; font-weight: 700; color: var(--teal-dark); letter-spacing: 0.05em; }
+    .logo-text .name-ja { font-size: 11px; color: var(--text-light); letter-spacing: 0.08em; }
+    nav { display: flex; align-items: center; gap: 28px; }
     nav a { font-size: 13px; color: var(--navy); font-weight: 500; white-space: nowrap; transition: color .2s; }
-    nav a:hover { color: var(--gold); }
-    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
-    .btn-cta:hover { background: var(--navy-light); }
+    nav a:hover { color: var(--teal); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--teal); color: var(--white); font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 24px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
+    .btn-cta:hover { background: var(--teal-dark); }
 
     /* ===== HERO ===== */
-    .hero { background: linear-gradient(135deg, #d6dce8 0%, #e8ecf5 40%, #c8d4e4 100%); min-height: 580px; display: flex; align-items: center; overflow: hidden; position: relative; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=60&fit=crop') center/cover no-repeat; opacity: 0.12; }
-    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 60px 24px; display: flex; align-items: center; gap: 40px; width: 100%; position: relative; z-index: 1; }
-    .hero-content { flex: 1; }
-    .hero-badge { display: inline-block; background: linear-gradient(90deg, #b8962e, #d4aa3a); color: var(--white); font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 2px; margin-bottom: 20px; letter-spacing: 0.05em; }
-    .hero-title { font-size: clamp(32px, 4.5vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.25; margin-bottom: 20px; }
-    .hero-desc { font-size: 15px; color: #444; margin-bottom: 32px; line-height: 1.9; }
-    .hero-laurels { display: flex; gap: 24px; flex-wrap: wrap; }
-    .laurel { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-    .laurel-icon {
-      width: 64px; height: 64px; border-radius: 50%;
-      border: 2px solid var(--gold);
+    .hero {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #d4eef4 0%, #e8f7f7 40%, #c8e8e8 70%, #b8dce0 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=60&fit=crop') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 80px 24px; width: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .hero-logo-area { margin-bottom: 32px; }
+    .hero-logo-icon { width: 80px; height: 80px; margin: 0 auto 12px; }
+    .hero-logo-icon svg { width: 100%; height: 100%; }
+    .hero-name-en { font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.06em; margin-bottom: 4px; }
+    .hero-name-ja { font-size: 16px; color: var(--text-light); letter-spacing: 0.12em; margin-bottom: 28px; }
+    .hero-title { font-size: clamp(22px, 3.5vw, 32px); font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+    .hero-desc { font-size: 15px; color: #555; margin-bottom: 48px; }
+
+    /* ===== SERVICE ICONS ===== */
+    .hero-services { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .hero-service { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .hero-service-circle {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 2px solid var(--teal);
+      background: rgba(255,255,255,0.7);
       display: flex; align-items: center; justify-content: center;
-      position: relative; background: rgba(184,150,46,0.08);
+      transition: background .2s, transform .2s;
     }
-    .laurel-icon::before, .laurel-icon::after {
-      content: '❧'; position: absolute; font-size: 18px; color: var(--gold); opacity: 0.7;
-    }
-    .laurel-icon::before { left: -2px; transform: scaleX(-1); }
-    .laurel-icon::after  { right: -2px; }
-    .laurel-icon svg { width: 22px; height: 22px; color: var(--gold); position: relative; z-index: 1; }
-    .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
-    .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
-    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; }
-    .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; }
-    .hero-profile-tag { position: absolute; bottom: 16px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .hero-profile-tag .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 4px; }
-    .hero-profile-tag .person-name { font-size: 22px; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 4px; }
-    .hero-profile-tag .person-sub { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .hero-service:hover .hero-service-circle { background: var(--teal); transform: translateY(-4px); }
+    .hero-service:hover .hero-service-circle svg { color: var(--white); }
+    .hero-service-circle svg { width: 32px; height: 32px; color: var(--teal); transition: color .2s; }
+    .hero-service-label { font-size: 12px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
+    .hero-service-sub { font-size: 10px; color: var(--text-light); text-align: center; max-width: 90px; }
 
-    /* ===== DARK BANNER ===== */
-    .banner { background: var(--navy); color: var(--white); text-align: center; padding: 44px 24px; }
-    .banner h2 { font-size: clamp(18px,3vw,26px); font-weight: 700; margin-bottom: 10px; }
-    .banner p { font-size: 14px; opacity: 0.8; }
+    /* ===== CTA NOTE ===== */
+    .hero-cta-note { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; padding: 14px 28px; background: rgba(255,255,255,0.75); border-radius: 8px; border: 1px solid var(--teal-mid); font-size: 13px; color: #555; }
+    .hero-cta-note span { color: var(--teal-dark); font-weight: 700; }
 
-    /* ===== ICON SERVICES ===== */
-    .icon-services { background: var(--white); border-bottom: 1px solid var(--border); padding: 48px 24px; }
-    .icon-services-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .icon-service-item { background: var(--white); padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; }
-    .icon-service-icon { width: 48px; height: 48px; border: 2px solid var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .icon-service-icon svg { width: 22px; height: 22px; color: var(--navy); }
-    .icon-service-text h3 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .icon-service-text p { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+    /* ===== BANNER ===== */
+    .banner { background: var(--teal-dark); color: var(--white); text-align: center; padding: 40px 24px; }
+    .banner h2 { font-size: clamp(17px, 2.8vw, 24px); font-weight: 700; margin-bottom: 10px; }
+    .banner p { font-size: 14px; opacity: 0.85; }
 
     /* ===== SERVICES ===== */
     .services { padding: 72px 24px; background: var(--gray-bg); }
-    .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 48px; }
-    .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: var(--gold); margin: 10px auto 0; border-radius: 2px; }
-    .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .card { background: var(--white); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
-    .card:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.12); transform: translateY(-4px); }
-    .card-img { height: 180px; overflow: hidden; }
-    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card-body { padding: 22px; }
-    .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .card-desc { font-size: 12.5px; color: var(--text-light); margin-bottom: 14px; line-height: 1.7; }
-    .card-list { list-style: none; margin-bottom: 18px; }
-    .card-list li { font-size: 12.5px; color: var(--text); padding: 3px 0 3px 20px; position: relative; }
-    .card-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
-    .btn-navy { display: flex; align-items: center; justify-content: center; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 600; padding: 10px; border-radius: 4px; transition: background .2s; }
-    .btn-navy:hover { background: var(--navy-light); }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-label { display: inline-block; font-size: 12px; font-weight: 700; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .section-title { font-size: clamp(20px, 3vw, 26px); font-weight: 800; color: var(--navy); }
+    .section-title::after { content: ''; display: block; width: 36px; height: 3px; background: var(--teal); margin: 10px auto 0; border-radius: 2px; }
+    .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; text-align: center; }
+    .card:hover { box-shadow: 0 8px 32px rgba(74,184,184,0.15); transform: translateY(-4px); }
+    .card-icon-wrap { padding: 28px 24px 16px; display: flex; justify-content: center; }
+    .card-icon { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--teal); background: var(--teal-light); display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 28px; height: 28px; color: var(--teal); }
+    .card-body { padding: 0 22px 28px; }
+    .card-title { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .card-desc { font-size: 12.5px; color: var(--text-light); line-height: 1.7; }
 
-    /* ===== CTA BANNER ===== */
-    .cta-banner { padding: 40px 24px; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .cta-banner-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--gold-bg); border: 1px solid #ddd0b0; border-radius: 8px; padding: 32px 40px; }
-    .cta-banner-text .em { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
-    .cta-banner-text h3 { font-size: clamp(16px,2.5vw,21px); font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .cta-banner-text h3 strong { color: var(--gold); }
-    .cta-banner-text p { font-size: 12.5px; color: var(--text-light); }
-    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--white); font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 4px; white-space: nowrap; transition: background .2s; flex-shrink: 0; }
-    .btn-gold:hover { background: var(--gold-light); }
+    /* ===== FEATURES ===== */
+    .features { padding: 72px 24px; background: var(--white); }
+    .features-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .feature { background: var(--teal-light); border-radius: 12px; padding: 28px 22px; text-align: center; border-top: 4px solid var(--teal); }
+    .feature-num { font-size: 32px; font-weight: 900; color: var(--teal); margin-bottom: 8px; opacity: 0.6; }
+    .feature-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .feature-desc { font-size: 12px; color: var(--text-light); line-height: 1.7; }
 
-    /* ===== REASONS ===== */
-    .reasons { padding: 72px 24px; background: var(--gray-bg); }
-    .reasons-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
-    .reason-item { background: var(--white); border-radius: 8px; padding: 28px 22px; text-align: center; border-top: 4px solid var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-    .reason-icon { width: 52px; height: 52px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
-    .reason-icon svg { width: 26px; height: 26px; color: white; }
-    .reason-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.4; }
-    .reason-desc { font-size: 12px; color: var(--text-light); line-height: 1.7; }
+    /* ===== CTA ===== */
+    .cta { padding: 64px 24px; background: linear-gradient(135deg, var(--teal-dark) 0%, #1a6a6a 100%); color: var(--white); text-align: center; }
+    .cta h2 { font-size: clamp(20px, 3vw, 28px); font-weight: 800; margin-bottom: 12px; }
+    .cta p { font-size: 14px; opacity: 0.85; margin-bottom: 32px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--teal-dark); font-size: 14px; font-weight: 700; padding: 14px 32px; border-radius: 32px; transition: background .2s; }
+    .btn-white:hover { background: var(--teal-light); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; border: 2px solid rgba(255,255,255,0.7); color: var(--white); font-size: 14px; font-weight: 700; padding: 13px 32px; border-radius: 32px; transition: border-color .2s; }
+    .btn-outline:hover { border-color: var(--white); }
 
     /* ===== FOOTER ===== */
-    footer { background: #0f1825; color: rgba(255,255,255,0.7); padding: 24px; font-size: 12px; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 13px; font-weight: 700; }
-    .footer-logo-icon { width: 28px; height: 28px; background: var(--navy); border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .footer-logo-icon span { color: var(--gold); font-size: 10px; font-weight: 900; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.7); padding: 32px 24px; font-size: 12px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo .name-en { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+    .footer-logo .name-ja { font-size: 11px; color: rgba(255,255,255,0.5); }
     .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-contact a { color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; transition: color .2s; }
-    .footer-contact a:hover { color: var(--gold-light); }
+    .footer-contact a { color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 6px; transition: color .2s; }
+    .footer-contact a:hover { color: var(--teal); }
+    .footer-copy { width: 100%; text-align: center; color: rgba(255,255,255,0.35); margin-top: 16px; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-image { flex: 0 0 auto; }
-      .hero-laurels { justify-content: center; }
-      .hero-profile-tag { position: static; margin-top: 16px; }
-      .icon-services-grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-      .reasons-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
-      .cta-banner-inner { flex-direction: column; text-align: center; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     }
     @media (max-width: 640px) {
       nav { display: none; }
-      .hero-photo-wrapper { width: 260px; height: 340px; }
+      .cards { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+      .hero-services { gap: 20px; }
     }
   </style>
 </head>
@@ -150,22 +147,38 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">
-      <div class="logo-icon"><span>FP</span></div>
+      <div class="logo-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="10" r="3" fill="#4ab8b8" opacity="0.9"/>
+          <circle cx="16" cy="16" r="2.5" fill="#4ab8b8" opacity="0.8"/>
+          <circle cx="28" cy="16" r="2.5" fill="#4ab8b8" opacity="0.8"/>
+          <circle cx="11" cy="23" r="2" fill="#4ab8b8" opacity="0.7"/>
+          <circle cx="22" cy="22" r="2" fill="#4ab8b8" opacity="0.7"/>
+          <circle cx="33" cy="23" r="2" fill="#4ab8b8" opacity="0.7"/>
+          <circle cx="7" cy="30" r="1.5" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="16" cy="30" r="1.5" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="28" cy="30" r="1.5" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="37" cy="30" r="1.5" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="4" cy="37" r="1" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="11" cy="37" r="1" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="22" cy="37" r="1" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="33" cy="37" r="1" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="40" cy="37" r="1" fill="#4ab8b8" opacity="0.3"/>
+        </svg>
+      </div>
       <div class="logo-text">
-        <div class="name">パーソナル・アセット・パートナーズ</div>
-        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+        <div class="name-en">Life Asset Office</div>
+        <div class="name-ja">ライフアセットオフィス</div>
       </div>
     </a>
     <nav>
-      <a href="#home">ホーム</a>
       <a href="#services">サービス</a>
-      <a href="#reasons">選ばれる理由</a>
-      <a href="#voice">お客様の声</a>
-      <a href="#flow">相談の流れ</a>
+      <a href="#features">選ばれる理由</a>
+      <a href="#contact">お問い合わせ</a>
     </nav>
     <a href="#contact" class="btn-cta">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-      無料相談はこちら
+      無料相談
     </a>
   </div>
 </header>
@@ -173,205 +186,192 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">FP資格者による安心サポート</div>
-      <h1 class="hero-title">
-        あなたの資産と未来を<br>共に育てるパートナー
-      </h1>
-      <p class="hero-desc">
-        個人資産管理から資金調達まで、<br>
-        お一人おひとりに最適なご提案をいたします。
-      </p>
-      <div class="hero-laurels">
-        <div class="laurel">
-          <div class="laurel-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <span class="laurel-label">FP資格者が<br>直接対応</span>
+    <div class="hero-logo-area">
+      <div class="hero-logo-icon">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="14" r="6" fill="#4ab8b8" opacity="0.95"/>
+          <circle cx="28" cy="26" r="5" fill="#4ab8b8" opacity="0.85"/>
+          <circle cx="52" cy="26" r="5" fill="#4ab8b8" opacity="0.85"/>
+          <circle cx="17" cy="40" r="4" fill="#4ab8b8" opacity="0.7"/>
+          <circle cx="40" cy="40" r="4" fill="#4ab8b8" opacity="0.7"/>
+          <circle cx="63" cy="40" r="4" fill="#4ab8b8" opacity="0.7"/>
+          <circle cx="9"  cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="28" cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="52" cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="71" cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
+          <circle cx="4"  cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="17" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="40" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="63" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
+          <circle cx="76" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="hero-name-en">Life Asset Office</div>
+      <div class="hero-name-ja">ライフアセットオフィス</div>
+    </div>
+
+    <h1 class="hero-title">人生に寄り添う、資産のパートナー</h1>
+    <p class="hero-desc">将来への不安を安心に変えるお手伝いをします。</p>
+
+    <div class="hero-services">
+      <div class="hero-service">
+        <div class="hero-service-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
         </div>
-        <div class="laurel">
-          <div class="laurel-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <span class="laurel-label">豊富な実績と<br>信頼</span>
+        <div class="hero-service-label">ライフプラン相談</div>
+        <div class="hero-service-sub">安心の未来設計をサポートします</div>
+      </div>
+      <div class="hero-service">
+        <div class="hero-service-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
         </div>
-        <div class="laurel">
-          <div class="laurel-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <span class="laurel-label">安心・丁寧な<br>サポート</span>
+        <div class="hero-service-label">資産運用サポート</div>
+        <div class="hero-service-sub">あなたに合った資産形成をご提案します</div>
+      </div>
+      <div class="hero-service">
+        <div class="hero-service-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+          </svg>
         </div>
+        <div class="hero-service-label">保険の見直し</div>
+        <div class="hero-service-sub">今の保障が最適か一緒に確認します</div>
+      </div>
+      <div class="hero-service">
+        <div class="hero-service-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="hero-service-label">相続・贈与のご相談</div>
+        <div class="hero-service-sub">大切な資産を未来へつなぐお手伝いをします</div>
       </div>
     </div>
-    <div class="hero-image">
-      <div class="hero-photo-wrapper">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&fit=crop&crop=faces&q=80" alt="高橋宏之 代表" />
-      </div>
-      <div class="hero-profile-tag">
-        <div class="role">FP資格者／個人資産アドバイザー</div>
-        <div class="person-name">髙月　義照</div>
-        <div class="person-sub">個人資産管理会社 代表</div>
-      </div>
+
+    <div class="hero-cta-note">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ab8b8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>初回相談は無料です。</span>お気軽にご相談ください。
     </div>
   </div>
 </section>
 
-<!-- DARK BANNER -->
+<!-- BANNER -->
 <section class="banner">
   <h2>お金の悩み、ひとりで抱えていませんか？</h2>
-  <p>将来への不安、資産の運用、急な資金ニーズ——　そのお悩み、私たちが解決します。</p>
-</section>
-
-<!-- ICON SERVICES -->
-<section class="icon-services">
-  <div class="icon-services-grid">
-    <div class="icon-service-item">
-      <div class="icon-service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-        </svg>
-      </div>
-      <div class="icon-service-text">
-        <h3>将来設計・資産運用</h3>
-        <p>ライフプランに合わせた資産形成・運用プランをご提案します。</p>
-      </div>
-    </div>
-    <div class="icon-service-item">
-      <div class="icon-service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-      </div>
-      <div class="icon-service-text">
-        <h3>個人資産管理会社</h3>
-        <p>資産の一元管理で、効率的かつ安全な資産運用をサポート。</p>
-      </div>
-    </div>
-    <div class="icon-service-item">
-      <div class="icon-service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-      </div>
-      <div class="icon-service-text">
-        <h3>個人融資サポート</h3>
-        <p>急な資金ニーズにも柔軟に対応。安心の個人融資サービス。</p>
-      </div>
-    </div>
-  </div>
+  <p>将来への不安・資産の運用・保険・相続——　そのお悩み、一緒に解決しましょう。</p>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <h2 class="section-title">サービスのご案内</h2>
+  <div class="section-header">
+    <div class="section-label">SERVICES</div>
+    <h2 class="section-title">サービスのご案内</h2>
+  </div>
   <div class="cards">
 
     <div class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=360&fit=crop&q=80" alt="個人資産管理" />
+      <div class="card-icon-wrap">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">個人資産管理</h3>
-        <p class="card-desc">資産の見える化と最適化で、将来に向けた資産形成を支援します。</p>
-        <ul class="card-list">
-          <li>資産ポートフォリオ分析</li>
-          <li>資産運用プランの設計</li>
-          <li>定期的な資産状況の確認</li>
-        </ul>
-        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
+        <h3 class="card-title">ライフプラン相談</h3>
+        <p class="card-desc">結婚・育児・教育・老後など、人生の各ステージに合わせた資金計画を一緒に考えます。</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=360&fit=crop&q=80" alt="アドバイザー業務" />
+      <div class="card-icon-wrap">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+        </div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">アドバイザー業務</h3>
-        <p class="card-desc">専門知識と経験を活かし、最適なアドバイスを提供します。</p>
-        <ul class="card-list">
-          <li>ライフプラン設計</li>
-          <li>相続・事業承継対策</li>
-          <li>保険の見直し・最適化</li>
-        </ul>
-        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
+        <h3 class="card-title">資産運用サポート</h3>
+        <p class="card-desc">お客様のリスク許容度と目標に合わせた、最適な資産形成・運用プランをご提案します。</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=360&fit=crop&q=80" alt="個人融資サポート" />
+      <div class="card-icon-wrap">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">個人融資サポート</h3>
-        <p class="card-desc">個人の状況に合わせた融資プランで、資金調達をサポートします。</p>
-        <ul class="card-list">
-          <li>事業資金・生活資金の融資</li>
-          <li>柔軟な返済プラン</li>
-          <li>スピーディーな審査</li>
-        </ul>
-        <a href="#contact" class="btn-navy">詳しく見る &rsaquo;</a>
+        <h3 class="card-title">保険の見直し</h3>
+        <p class="card-desc">現在の保険が本当に必要な保障をカバーできているか、一緒に丁寧に確認します。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon-wrap">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">相続・贈与のご相談</h3>
+        <p class="card-desc">大切な資産を次の世代へスムーズに引き継ぐための、相続・贈与対策をサポートします。</p>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<section class="cta-banner" id="contact">
-  <div class="cta-banner-inner">
-    <div class="cta-banner-text">
-      <p class="em">まずは無料相談</p>
-      <h3>まずは<strong>無料相談</strong>で、あなたの未来を一緒に考えませんか？</h3>
-      <p>初回相談は無料です。お気軽にお問い合わせください。</p>
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-header">
+    <div class="section-label">WHY CHOOSE US</div>
+    <h2 class="section-title">選ばれる3つの理由</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-num">01</div>
+      <h3 class="feature-title">お一人おひとりに寄り添う</h3>
+      <p class="feature-desc">画一的なプランではなく、お客様の状況・価値観・目標を丁寧にお聞きしたうえで、最適なご提案をいたします。</p>
     </div>
-    <a href="mailto:yamakaze8000@gmail.com" class="btn-gold">
+    <div class="feature">
+      <div class="feature-num">02</div>
+      <h3 class="feature-title">信頼できるパートナーとして</h3>
+      <p class="feature-desc">FP資格者が直接ご対応。専門知識と誠実な姿勢で、長期的な信頼関係を大切にしています。</p>
+    </div>
+    <div class="feature">
+      <div class="feature-num">03</div>
+      <h3 class="feature-title">初回相談は無料</h3>
+      <p class="feature-desc">まずはお気軽にご相談ください。将来への不安を一緒に整理し、具体的な一歩をご提案します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <h2>まずは無料相談から</h2>
+  <p>将来への不安を安心に変える第一歩を、一緒に踏み出しましょう。</p>
+  <div class="cta-buttons">
+    <a href="mailto:yamakaze8000@gmail.com" class="btn-white">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-      無料相談を申し込む &rsaquo;
+      メールで相談する
     </a>
-  </div>
-</section>
-
-<!-- REASONS -->
-<section class="reasons" id="reasons">
-  <h2 class="section-title">選ばれる3つの理由</h2>
-  <div class="reasons-grid">
-
-    <div class="reason-item">
-      <div class="reason-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-        </svg>
-      </div>
-      <h3 class="reason-title">FP資格者が直接対応</h3>
-      <p class="reason-desc">専門知識を持つFPが、最初から最後まで丁寧にサポートします。</p>
-    </div>
-
-    <div class="reason-item">
-      <div class="reason-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 11 14 15 10"/>
-        </svg>
-      </div>
-      <h3 class="reason-title">お客様第一の安心サポート</h3>
-      <p class="reason-desc">お客様の利益を最優先に考えた、誠実で透明性の高いサービス。</p>
-    </div>
-
-    <div class="reason-item">
-      <div class="reason-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="20" x2="18" y2="10"/>
-          <line x1="12" y1="20" x2="12" y2="4"/>
-          <line x1="6" y1="20" x2="6" y2="14"/>
-        </svg>
-      </div>
-      <h3 class="reason-title">豊富な実績と信頼</h3>
-      <p class="reason-desc">多くのお客様からご信頼をいただき、確かな実績を重ねています。</p>
-    </div>
-
+    <a href="tel:09010104737" class="btn-outline">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.79-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      090-1010-4737
+    </a>
   </div>
 </section>
 
@@ -379,8 +379,8 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-icon"><span>FP</span></div>
-      パーソナル・アセット・パートナーズ
+      <div class="name-en">Life Asset Office</div>
+      <div class="name-ja">ライフアセットオフィス</div>
     </div>
     <div class="footer-contact">
       <a href="mailto:yamakaze8000@gmail.com">
@@ -392,6 +392,7 @@
         090-1010-4737
       </a>
     </div>
+    <div class="footer-copy">&copy; 2026 Life Asset Office. All rights reserved.</div>
   </div>
 </footer>
 
