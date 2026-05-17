@@ -76,6 +76,12 @@
     .hero-service-label { font-size: 12px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
     .hero-service-sub { font-size: 10px; color: var(--text-light); text-align: center; max-width: 90px; }
 
+    /* ===== PENGUIN ===== */
+    .penguin-wrap { margin: 32px auto 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .penguin-wrap svg { filter: drop-shadow(0 4px 12px rgba(74,184,184,0.25)); }
+    .penguin-speech { background: rgba(255,255,255,0.85); border: 1.5px solid var(--teal-mid); border-radius: 20px; padding: 8px 18px; font-size: 13px; color: var(--teal-dark); font-weight: 700; position: relative; }
+    .penguin-speech::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: rgba(255,255,255,0.85); }
+
     /* ===== CTA NOTE ===== */
     .hero-cta-note { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; padding: 14px 28px; background: rgba(255,255,255,0.75); border-radius: 8px; border: 1px solid var(--teal-mid); font-size: 13px; color: #555; }
     .hero-cta-note span { color: var(--teal-dark); font-weight: 700; }
@@ -251,6 +257,46 @@
         <div class="hero-service-label">相続・贈与のご相談</div>
         <div class="hero-service-sub">大切な資産を未来へつなぐお手伝いをします</div>
       </div>
+    </div>
+
+    <!-- PENGUIN CHARACTER -->
+    <div class="penguin-wrap">
+      <div class="penguin-speech">お気軽にご相談ください！</div>
+      <svg width="110" height="140" viewBox="0 0 110 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- body -->
+        <ellipse cx="55" cy="90" rx="38" ry="46" fill="#1a3a5c"/>
+        <!-- belly -->
+        <ellipse cx="55" cy="95" rx="24" ry="32" fill="#e8f7f7"/>
+        <!-- face -->
+        <ellipse cx="55" cy="52" rx="28" ry="27" fill="#1a3a5c"/>
+        <!-- face white -->
+        <ellipse cx="55" cy="55" rx="20" ry="20" fill="#e8f7f7"/>
+        <!-- left eye -->
+        <circle cx="47" cy="49" r="5" fill="white"/>
+        <circle cx="48.5" cy="49" r="3" fill="#1a3a5c"/>
+        <circle cx="49.5" cy="47.5" r="1" fill="white"/>
+        <!-- right eye -->
+        <circle cx="63" cy="49" r="5" fill="white"/>
+        <circle cx="64.5" cy="49" r="3" fill="#1a3a5c"/>
+        <circle cx="65.5" cy="47.5" r="1" fill="white"/>
+        <!-- beak -->
+        <ellipse cx="55" cy="60" rx="7" ry="4.5" fill="#f0a830"/>
+        <line x1="48" y1="60" x2="62" y2="60" stroke="#d4902a" stroke-width="1.2"/>
+        <!-- left wing -->
+        <ellipse cx="20" cy="95" rx="11" ry="26" fill="#1a3a5c" transform="rotate(-15 20 95)"/>
+        <!-- right wing -->
+        <ellipse cx="90" cy="95" rx="11" ry="26" fill="#1a3a5c" transform="rotate(15 90 95)"/>
+        <!-- left foot -->
+        <ellipse cx="42" cy="133" rx="13" ry="6" fill="#f0a830"/>
+        <!-- right foot -->
+        <ellipse cx="68" cy="133" rx="13" ry="6" fill="#f0a830"/>
+        <!-- scarf -->
+        <rect x="28" y="72" width="54" height="10" rx="5" fill="#4ab8b8"/>
+        <rect x="50" y="80" width="12" height="18" rx="4" fill="#4ab8b8"/>
+        <!-- cheeks -->
+        <ellipse cx="41" cy="60" rx="6" ry="4" fill="#f9b8c0" opacity="0.5"/>
+        <ellipse cx="69" cy="60" rx="6" ry="4" fill="#f9b8c0" opacity="0.5"/>
+      </svg>
     </div>
 
     <div class="hero-cta-note">
