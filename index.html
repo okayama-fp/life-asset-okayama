@@ -262,40 +262,60 @@
     <!-- PENGUIN CHARACTER -->
     <div class="penguin-wrap">
       <div class="penguin-speech">お気軽にご相談ください！</div>
-      <svg width="110" height="140" viewBox="0 0 110 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- shadow -->
+        <ellipse cx="60" cy="152" rx="30" ry="6" fill="#4ab8b8" opacity="0.15"/>
         <!-- body -->
-        <ellipse cx="55" cy="90" rx="38" ry="46" fill="#1a3a5c"/>
+        <ellipse cx="60" cy="100" rx="36" ry="44" fill="#4ab8b8"/>
+        <!-- body gradient overlay -->
+        <ellipse cx="60" cy="100" rx="36" ry="44" fill="url(#bodyGrad)"/>
         <!-- belly -->
-        <ellipse cx="55" cy="95" rx="24" ry="32" fill="#e8f7f7"/>
-        <!-- face -->
-        <ellipse cx="55" cy="52" rx="28" ry="27" fill="#1a3a5c"/>
+        <ellipse cx="60" cy="106" rx="22" ry="30" fill="white" opacity="0.92"/>
+        <!-- head -->
+        <ellipse cx="60" cy="58" rx="26" ry="25" fill="#4ab8b8"/>
+        <!-- head gradient overlay -->
+        <ellipse cx="60" cy="58" rx="26" ry="25" fill="url(#headGrad)"/>
         <!-- face white -->
-        <ellipse cx="55" cy="55" rx="20" ry="20" fill="#e8f7f7"/>
+        <ellipse cx="60" cy="62" rx="18" ry="18" fill="white" opacity="0.92"/>
         <!-- left eye -->
-        <circle cx="47" cy="49" r="5" fill="white"/>
-        <circle cx="48.5" cy="49" r="3" fill="#1a3a5c"/>
-        <circle cx="49.5" cy="47.5" r="1" fill="white"/>
+        <circle cx="52" cy="56" r="5" fill="#2e9090"/>
+        <circle cx="53.5" cy="55" r="2.5" fill="white"/>
         <!-- right eye -->
-        <circle cx="63" cy="49" r="5" fill="white"/>
-        <circle cx="64.5" cy="49" r="3" fill="#1a3a5c"/>
-        <circle cx="65.5" cy="47.5" r="1" fill="white"/>
+        <circle cx="68" cy="56" r="5" fill="#2e9090"/>
+        <circle cx="69.5" cy="55" r="2.5" fill="white"/>
+        <!-- smile -->
+        <path d="M53 67 Q60 73 67 67" stroke="#4ab8b8" stroke-width="2" stroke-linecap="round" fill="none"/>
         <!-- beak -->
-        <ellipse cx="55" cy="60" rx="7" ry="4.5" fill="#f0a830"/>
-        <line x1="48" y1="60" x2="62" y2="60" stroke="#d4902a" stroke-width="1.2"/>
-        <!-- left wing -->
-        <ellipse cx="20" cy="95" rx="11" ry="26" fill="#1a3a5c" transform="rotate(-15 20 95)"/>
-        <!-- right wing -->
-        <ellipse cx="90" cy="95" rx="11" ry="26" fill="#1a3a5c" transform="rotate(15 90 95)"/>
-        <!-- left foot -->
-        <ellipse cx="42" cy="133" rx="13" ry="6" fill="#f0a830"/>
-        <!-- right foot -->
-        <ellipse cx="68" cy="133" rx="13" ry="6" fill="#f0a830"/>
-        <!-- scarf -->
-        <rect x="28" y="72" width="54" height="10" rx="5" fill="#4ab8b8"/>
-        <rect x="50" y="80" width="12" height="18" rx="4" fill="#4ab8b8"/>
+        <ellipse cx="60" cy="65" rx="6" ry="3.5" fill="#f5c842"/>
         <!-- cheeks -->
-        <ellipse cx="41" cy="60" rx="6" ry="4" fill="#f9b8c0" opacity="0.5"/>
-        <ellipse cx="69" cy="60" rx="6" ry="4" fill="#f9b8c0" opacity="0.5"/>
+        <ellipse cx="44" cy="65" rx="6" ry="4" fill="#a8e6e6" opacity="0.6"/>
+        <ellipse cx="76" cy="65" rx="6" ry="4" fill="#a8e6e6" opacity="0.6"/>
+        <!-- left wing -->
+        <ellipse cx="24" cy="103" rx="10" ry="24" fill="#2e9090" opacity="0.85" transform="rotate(-12 24 103)"/>
+        <!-- right wing (slightly raised = waving) -->
+        <ellipse cx="96" cy="96" rx="10" ry="24" fill="#2e9090" opacity="0.85" transform="rotate(30 96 96)"/>
+        <!-- left foot -->
+        <ellipse cx="46" cy="142" rx="12" ry="5" fill="#f5c842"/>
+        <!-- right foot -->
+        <ellipse cx="72" cy="142" rx="12" ry="5" fill="#f5c842"/>
+        <!-- hat brim -->
+        <ellipse cx="60" cy="36" rx="30" ry="5" fill="#2e9090"/>
+        <!-- hat body -->
+        <rect x="42" y="14" width="36" height="24" rx="5" fill="#2e9090"/>
+        <!-- hat band -->
+        <rect x="42" y="32" width="36" height="5" rx="2" fill="white" opacity="0.5"/>
+        <!-- hat dot decoration -->
+        <circle cx="60" cy="22" r="3" fill="white" opacity="0.4"/>
+        <defs>
+          <radialGradient id="bodyGrad" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#2e9090" stop-opacity="0.3"/>
+          </radialGradient>
+          <radialGradient id="headGrad" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#2e9090" stop-opacity="0.3"/>
+          </radialGradient>
+        </defs>
       </svg>
     </div>
 
