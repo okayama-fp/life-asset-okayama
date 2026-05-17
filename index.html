@@ -38,53 +38,53 @@
     /* ===== HERO ===== */
     .hero {
       position: relative;
-      min-height: 600px;
+      min-height: 620px;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: linear-gradient(135deg, #d4eef4 0%, #e8f7f7 40%, #c8e8e8 70%, #b8dce0 100%);
+      background: linear-gradient(160deg, #c8ecf5 0%, #ddf3f8 30%, #e8f8f8 55%, #d0eff5 100%);
     }
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=60&fit=crop') center/cover no-repeat;
-      opacity: 0.18;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=50&fit=crop') center 60%/cover no-repeat;
+      opacity: 0.22;
     }
-    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 80px 24px; width: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .hero-logo-area { margin-bottom: 32px; }
-    .hero-logo-icon { width: 80px; height: 80px; margin: 0 auto 12px; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 60px 40px; width: 100%; position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+    /* --- left col --- */
+    .hero-left { flex: 1; max-width: 580px; }
+    .hero-tagline { font-size: 15px; color: var(--teal-dark); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .hero-tagline::before, .hero-tagline::after { content: ''; flex: 0 0 32px; height: 1px; background: var(--teal); }
+    .hero-logo-row { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
+    .hero-logo-icon { width: 70px; height: 70px; flex-shrink: 0; }
     .hero-logo-icon svg { width: 100%; height: 100%; }
-    .hero-name-en { font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.06em; margin-bottom: 4px; }
-    .hero-name-ja { font-size: 16px; color: var(--text-light); letter-spacing: 0.12em; margin-bottom: 28px; }
-    .hero-title { font-size: clamp(22px, 3.5vw, 32px); font-weight: 800; color: var(--navy); margin-bottom: 14px; }
-    .hero-desc { font-size: 15px; color: #555; margin-bottom: 48px; }
+    .hero-name-en { font-size: clamp(28px, 4vw, 46px); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.04em; }
+    .hero-name-ja { font-size: 14px; color: var(--text-light); letter-spacing: 0.14em; margin-bottom: 10px; padding-left: 86px; }
+    .hero-divider { border: none; border-top: 1px solid var(--teal-mid); margin: 14px 0 18px; }
+    .hero-desc { font-size: 14px; color: #555; line-height: 2; margin-bottom: 32px; }
+    .hero-services { display: flex; gap: 20px; flex-wrap: wrap; }
+    .hero-service { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 80px; }
+    .hero-service-circle { width: 72px; height: 72px; border-radius: 50%; border: 1.5px solid var(--teal); background: rgba(255,255,255,0.75); display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s; }
+    .hero-service:hover .hero-service-circle { background: var(--teal); transform: translateY(-3px); }
+    .hero-service:hover .hero-service-circle svg { color: white; }
+    .hero-service-circle svg { width: 28px; height: 28px; color: var(--teal); transition: color .2s; }
+    .hero-service-label { font-size: 11px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
+    .hero-service-sub { font-size: 9.5px; color: var(--text-light); text-align: center; max-width: 80px; line-height: 1.4; }
+    .hero-bottom-text { margin-top: 28px; font-size: 13px; color: #444; line-height: 1.9; border-left: 3px solid var(--teal); padding-left: 14px; }
 
-    /* ===== SERVICE ICONS ===== */
-    .hero-services { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
-    .hero-service { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .hero-service-circle {
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 2px solid var(--teal);
-      background: rgba(255,255,255,0.7);
-      display: flex; align-items: center; justify-content: center;
-      transition: background .2s, transform .2s;
-    }
-    .hero-service:hover .hero-service-circle { background: var(--teal); transform: translateY(-4px); }
-    .hero-service:hover .hero-service-circle svg { color: var(--white); }
-    .hero-service-circle svg { width: 32px; height: 32px; color: var(--teal); transition: color .2s; }
-    .hero-service-label { font-size: 12px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
-    .hero-service-sub { font-size: 10px; color: var(--text-light); text-align: center; max-width: 90px; }
-
-    /* ===== PENGUIN ===== */
-    .penguin-wrap { margin: 32px auto 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .penguin-wrap svg { filter: drop-shadow(0 4px 12px rgba(74,184,184,0.25)); }
-    .penguin-speech { background: rgba(255,255,255,0.85); border: 1.5px solid var(--teal-mid); border-radius: 20px; padding: 8px 18px; font-size: 13px; color: var(--teal-dark); font-weight: 700; position: relative; }
-    .penguin-speech::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: rgba(255,255,255,0.85); }
-
-    /* ===== CTA NOTE ===== */
-    .hero-cta-note { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; padding: 14px 28px; background: rgba(255,255,255,0.75); border-radius: 8px; border: 1px solid var(--teal-mid); font-size: 13px; color: #555; }
-    .hero-cta-note span { color: var(--teal-dark); font-weight: 700; }
+    /* --- right col --- */
+    .hero-right { flex: 0 0 420px; display: flex; flex-direction: column; align-items: center; position: relative; }
+    .penguin-speech { position: absolute; top: 10px; right: -10px; background: rgba(255,255,255,0.92); border: 1.5px solid var(--teal-mid); border-radius: 16px; padding: 10px 16px; font-size: 12px; color: var(--navy); font-weight: 700; line-height: 1.6; text-align: center; box-shadow: 0 4px 16px rgba(74,184,184,0.15); z-index: 2; }
+    .penguin-speech::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: rgba(255,255,255,0.92); }
+    .penguin-img { width: 340px; max-width: 100%; filter: drop-shadow(0 8px 24px rgba(26,58,92,0.15)); }
+    .hero-badges { display: flex; gap: 14px; margin-top: 20px; justify-content: center; }
+    .hero-badge-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .hero-badge-circle { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.82); border: 1.5px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(74,184,184,0.12); }
+    .hero-badge-circle svg { width: 26px; height: 26px; color: var(--teal); }
+    .hero-badge-label { font-size: 11px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
+    .hero-badge-sub { font-size: 9.5px; color: var(--text-light); text-align: center; max-width: 72px; line-height: 1.4; }
 
     /* ===== BANNER ===== */
     .banner { background: var(--teal-dark); color: var(--white); text-align: center; padding: 40px 24px; }
@@ -136,14 +136,25 @@
     .footer-copy { width: 100%; text-align: center; color: rgba(255,255,255,0.35); margin-top: 16px; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-left { max-width: 100%; }
+      .hero-tagline { justify-content: center; }
+      .hero-logo-row { justify-content: center; }
+      .hero-name-ja { padding-left: 0; text-align: center; }
+      .hero-bottom-text { text-align: left; }
+      .hero-right { flex: 0 0 auto; }
+      .hero-services { justify-content: center; }
+      .penguin-img { width: 260px; }
+      .penguin-speech { position: static; margin-bottom: 12px; }
       .cards { grid-template-columns: repeat(2, 1fr); }
       .features-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     }
     @media (max-width: 640px) {
       nav { display: none; }
       .cards { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
-      .hero-services { gap: 20px; }
+      .hero-services { gap: 14px; }
+      .penguin-img { width: 200px; }
     }
   </style>
 </head>
@@ -192,137 +203,99 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-logo-area">
-      <div class="hero-logo-icon">
-        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="40" cy="14" r="6" fill="#4ab8b8" opacity="0.95"/>
-          <circle cx="28" cy="26" r="5" fill="#4ab8b8" opacity="0.85"/>
-          <circle cx="52" cy="26" r="5" fill="#4ab8b8" opacity="0.85"/>
-          <circle cx="17" cy="40" r="4" fill="#4ab8b8" opacity="0.7"/>
-          <circle cx="40" cy="40" r="4" fill="#4ab8b8" opacity="0.7"/>
-          <circle cx="63" cy="40" r="4" fill="#4ab8b8" opacity="0.7"/>
-          <circle cx="9"  cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
-          <circle cx="28" cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
-          <circle cx="52" cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
-          <circle cx="71" cy="54" r="3" fill="#4ab8b8" opacity="0.5"/>
-          <circle cx="4"  cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
-          <circle cx="17" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
-          <circle cx="40" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
-          <circle cx="63" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
-          <circle cx="76" cy="68" r="2" fill="#4ab8b8" opacity="0.3"/>
-        </svg>
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-tagline">人生に寄り添う、資産のパートナー</div>
+      <div class="hero-logo-row">
+        <div class="hero-logo-icon">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="10" r="7" fill="#4ab8b8" opacity="0.95"/>
+            <circle cx="26" cy="24" r="6" fill="#4ab8b8" opacity="0.88"/>
+            <circle cx="54" cy="24" r="6" fill="#4ab8b8" opacity="0.88"/>
+            <circle cx="14" cy="40" r="5" fill="#4ab8b8" opacity="0.72"/>
+            <circle cx="40" cy="40" r="5" fill="#4ab8b8" opacity="0.72"/>
+            <circle cx="66" cy="40" r="5" fill="#4ab8b8" opacity="0.72"/>
+            <circle cx="6"  cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
+            <circle cx="26" cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
+            <circle cx="54" cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
+            <circle cx="74" cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
+            <circle cx="2"  cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
+            <circle cx="14" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
+            <circle cx="40" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
+            <circle cx="66" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
+            <circle cx="78" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
+          </svg>
+        </div>
+        <h1 class="hero-name-en">Life Asset Office</h1>
       </div>
-      <div class="hero-name-en">Life Asset Office</div>
       <div class="hero-name-ja">ライフアセットオフィス</div>
+      <hr class="hero-divider"/>
+      <p class="hero-desc">将来への不安を、安心に変えるお手伝いをします。<br>あなたの人生に寄り添い、理想の未来を一緒に描きます。</p>
+
+      <div class="hero-services">
+        <div class="hero-service">
+          <div class="hero-service-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="hero-service-label">ライフプラン相談</div>
+          <div class="hero-service-sub">安心の未来設計をサポートします</div>
+        </div>
+        <div class="hero-service">
+          <div class="hero-service-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="hero-service-label">資産運用サポート</div>
+          <div class="hero-service-sub">あなたに合った資産形成をご提案</div>
+        </div>
+        <div class="hero-service">
+          <div class="hero-service-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div class="hero-service-label">保険の見直し</div>
+          <div class="hero-service-sub">今の保障が最適か一緒に確認</div>
+        </div>
+        <div class="hero-service">
+          <div class="hero-service-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="hero-service-label">相続・贈与のご相談</div>
+          <div class="hero-service-sub">大切な資産を未来へつなぐ</div>
+        </div>
+      </div>
+
+      <p class="hero-bottom-text">お一人おひとりに寄り添い、信頼できるパートナーとして<br>長くサポートいたします。</p>
     </div>
 
-    <h1 class="hero-title">人生に寄り添う、資産のパートナー</h1>
-    <p class="hero-desc">将来への不安を安心に変えるお手伝いをします。</p>
-
-    <div class="hero-services">
-      <div class="hero-service">
-        <div class="hero-service-circle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+    <!-- RIGHT -->
+    <div class="hero-right">
+      <div class="penguin-speech">ぼく、ライフアセット君！<br>あなたの未来を<br>一緒に考えるよ！</div>
+      <img class="penguin-img" src="penguin.png" alt="ライフアセット君" />
+      <div class="hero-badges">
+        <div class="hero-badge-item">
+          <div class="hero-badge-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="hero-badge-label">信頼と実績</div>
+          <div class="hero-badge-sub">安心のサポート体制</div>
         </div>
-        <div class="hero-service-label">ライフプラン相談</div>
-        <div class="hero-service-sub">安心の未来設計をサポートします</div>
-      </div>
-      <div class="hero-service">
-        <div class="hero-service-circle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-          </svg>
+        <div class="hero-badge-item">
+          <div class="hero-badge-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="hero-badge-label">親身な対応</div>
+          <div class="hero-badge-sub">どんなことでも相談しやすい</div>
         </div>
-        <div class="hero-service-label">資産運用サポート</div>
-        <div class="hero-service-sub">あなたに合った資産形成をご提案します</div>
-      </div>
-      <div class="hero-service">
-        <div class="hero-service-circle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
-          </svg>
+        <div class="hero-badge-item">
+          <div class="hero-badge-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div class="hero-badge-label">一生涯のサポート</div>
+          <div class="hero-badge-sub">ライフステージに応じて最適なご提案</div>
         </div>
-        <div class="hero-service-label">保険の見直し</div>
-        <div class="hero-service-sub">今の保障が最適か一緒に確認します</div>
-      </div>
-      <div class="hero-service">
-        <div class="hero-service-circle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <div class="hero-service-label">相続・贈与のご相談</div>
-        <div class="hero-service-sub">大切な資産を未来へつなぐお手伝いをします</div>
       </div>
     </div>
 
-    <!-- PENGUIN CHARACTER -->
-    <div class="penguin-wrap">
-      <div class="penguin-speech">お気軽にご相談ください！</div>
-      <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- shadow -->
-        <ellipse cx="60" cy="152" rx="30" ry="6" fill="#4ab8b8" opacity="0.15"/>
-        <!-- body -->
-        <ellipse cx="60" cy="100" rx="36" ry="44" fill="#4ab8b8"/>
-        <!-- body gradient overlay -->
-        <ellipse cx="60" cy="100" rx="36" ry="44" fill="url(#bodyGrad)"/>
-        <!-- belly -->
-        <ellipse cx="60" cy="106" rx="22" ry="30" fill="white" opacity="0.92"/>
-        <!-- head -->
-        <ellipse cx="60" cy="58" rx="26" ry="25" fill="#4ab8b8"/>
-        <!-- head gradient overlay -->
-        <ellipse cx="60" cy="58" rx="26" ry="25" fill="url(#headGrad)"/>
-        <!-- face white -->
-        <ellipse cx="60" cy="62" rx="18" ry="18" fill="white" opacity="0.92"/>
-        <!-- left eye -->
-        <circle cx="52" cy="56" r="5" fill="#2e9090"/>
-        <circle cx="53.5" cy="55" r="2.5" fill="white"/>
-        <!-- right eye -->
-        <circle cx="68" cy="56" r="5" fill="#2e9090"/>
-        <circle cx="69.5" cy="55" r="2.5" fill="white"/>
-        <!-- smile -->
-        <path d="M53 67 Q60 73 67 67" stroke="#4ab8b8" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <!-- beak -->
-        <ellipse cx="60" cy="65" rx="6" ry="3.5" fill="#f5c842"/>
-        <!-- cheeks -->
-        <ellipse cx="44" cy="65" rx="6" ry="4" fill="#a8e6e6" opacity="0.6"/>
-        <ellipse cx="76" cy="65" rx="6" ry="4" fill="#a8e6e6" opacity="0.6"/>
-        <!-- left wing -->
-        <ellipse cx="24" cy="103" rx="10" ry="24" fill="#2e9090" opacity="0.85" transform="rotate(-12 24 103)"/>
-        <!-- right wing (slightly raised = waving) -->
-        <ellipse cx="96" cy="96" rx="10" ry="24" fill="#2e9090" opacity="0.85" transform="rotate(30 96 96)"/>
-        <!-- left foot -->
-        <ellipse cx="46" cy="142" rx="12" ry="5" fill="#f5c842"/>
-        <!-- right foot -->
-        <ellipse cx="72" cy="142" rx="12" ry="5" fill="#f5c842"/>
-        <!-- hat brim -->
-        <ellipse cx="60" cy="36" rx="30" ry="5" fill="#2e9090"/>
-        <!-- hat body -->
-        <rect x="42" y="14" width="36" height="24" rx="5" fill="#2e9090"/>
-        <!-- hat band -->
-        <rect x="42" y="32" width="36" height="5" rx="2" fill="white" opacity="0.5"/>
-        <!-- hat dot decoration -->
-        <circle cx="60" cy="22" r="3" fill="white" opacity="0.4"/>
-        <defs>
-          <radialGradient id="bodyGrad" cx="40%" cy="35%" r="60%">
-            <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
-            <stop offset="100%" stop-color="#2e9090" stop-opacity="0.3"/>
-          </radialGradient>
-          <radialGradient id="headGrad" cx="40%" cy="35%" r="60%">
-            <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
-            <stop offset="100%" stop-color="#2e9090" stop-opacity="0.3"/>
-          </radialGradient>
-        </defs>
-      </svg>
-    </div>
-
-    <div class="hero-cta-note">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ab8b8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span>初回相談は無料です。</span>お気軽にご相談ください。
-    </div>
   </div>
 </section>
 
