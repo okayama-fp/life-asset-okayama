@@ -36,55 +36,8 @@
     .btn-cta:hover { background: var(--teal-dark); }
 
     /* ===== HERO ===== */
-    .hero {
-      position: relative;
-      min-height: 620px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: linear-gradient(160deg, #c8ecf5 0%, #ddf3f8 30%, #e8f8f8 55%, #d0eff5 100%);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=50&fit=crop') center 60%/cover no-repeat;
-      opacity: 0.22;
-    }
-    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 60px 40px; width: 100%; position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-
-    /* --- left col --- */
-    .hero-left { flex: 1; max-width: 580px; }
-    .hero-tagline { font-size: 15px; color: var(--teal-dark); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .hero-tagline::before, .hero-tagline::after { content: ''; flex: 0 0 32px; height: 1px; background: var(--teal); }
-    .hero-logo-row { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
-    .hero-logo-icon { width: 70px; height: 70px; flex-shrink: 0; }
-    .hero-logo-icon svg { width: 100%; height: 100%; }
-    .hero-name-en { font-size: clamp(28px, 4vw, 46px); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.04em; }
-    .hero-name-ja { font-size: 14px; color: var(--text-light); letter-spacing: 0.14em; margin-bottom: 10px; padding-left: 86px; }
-    .hero-divider { border: none; border-top: 1px solid var(--teal-mid); margin: 14px 0 18px; }
-    .hero-desc { font-size: 14px; color: #555; line-height: 2; margin-bottom: 32px; }
-    .hero-services { display: flex; gap: 20px; flex-wrap: wrap; }
-    .hero-service { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 80px; }
-    .hero-service-circle { width: 72px; height: 72px; border-radius: 50%; border: 1.5px solid var(--teal); background: rgba(255,255,255,0.75); display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s; }
-    .hero-service:hover .hero-service-circle { background: var(--teal); transform: translateY(-3px); }
-    .hero-service:hover .hero-service-circle svg { color: white; }
-    .hero-service-circle svg { width: 28px; height: 28px; color: var(--teal); transition: color .2s; }
-    .hero-service-label { font-size: 11px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
-    .hero-service-sub { font-size: 9.5px; color: var(--text-light); text-align: center; max-width: 80px; line-height: 1.4; }
-    .hero-bottom-text { margin-top: 28px; font-size: 13px; color: #444; line-height: 1.9; border-left: 3px solid var(--teal); padding-left: 14px; }
-
-    /* --- right col --- */
-    .hero-right { flex: 0 0 420px; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .penguin-speech { position: absolute; top: 10px; right: -10px; background: rgba(255,255,255,0.92); border: 1.5px solid var(--teal-mid); border-radius: 16px; padding: 10px 16px; font-size: 12px; color: var(--navy); font-weight: 700; line-height: 1.6; text-align: center; box-shadow: 0 4px 16px rgba(74,184,184,0.15); z-index: 2; }
-    .penguin-speech::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: rgba(255,255,255,0.92); }
-    .penguin-img { width: 340px; max-width: 100%; filter: drop-shadow(0 8px 24px rgba(26,58,92,0.15)); }
-    .hero-badges { display: flex; gap: 14px; margin-top: 20px; justify-content: center; }
-    .hero-badge-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .hero-badge-circle { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.82); border: 1.5px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(74,184,184,0.12); }
-    .hero-badge-circle svg { width: 26px; height: 26px; color: var(--teal); }
-    .hero-badge-label { font-size: 11px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.4; }
-    .hero-badge-sub { font-size: 9.5px; color: var(--text-light); text-align: center; max-width: 72px; line-height: 1.4; }
+    .hero { width: 100%; line-height: 0; }
+    .hero img { width: 100%; height: auto; display: block; }
 
     /* ===== BANNER ===== */
     .banner { background: var(--teal-dark); color: var(--white); text-align: center; padding: 40px 24px; }
@@ -136,25 +89,13 @@
     .footer-copy { width: 100%; text-align: center; color: rgba(255,255,255,0.35); margin-top: 16px; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 960px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-left { max-width: 100%; }
-      .hero-tagline { justify-content: center; }
-      .hero-logo-row { justify-content: center; }
-      .hero-name-ja { padding-left: 0; text-align: center; }
-      .hero-bottom-text { text-align: left; }
-      .hero-right { flex: 0 0 auto; }
-      .hero-services { justify-content: center; }
-      .penguin-img { width: 260px; }
-      .penguin-speech { position: static; margin-bottom: 12px; }
+    @media (max-width: 900px) {
       .cards { grid-template-columns: repeat(2, 1fr); }
       .features-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     }
     @media (max-width: 640px) {
       nav { display: none; }
       .cards { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
-      .hero-services { gap: 14px; }
-      .penguin-img { width: 200px; }
     }
   </style>
 </head>
@@ -202,101 +143,7 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-inner">
-
-    <!-- LEFT -->
-    <div class="hero-left">
-      <div class="hero-tagline">人生に寄り添う、資産のパートナー</div>
-      <div class="hero-logo-row">
-        <div class="hero-logo-icon">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="10" r="7" fill="#4ab8b8" opacity="0.95"/>
-            <circle cx="26" cy="24" r="6" fill="#4ab8b8" opacity="0.88"/>
-            <circle cx="54" cy="24" r="6" fill="#4ab8b8" opacity="0.88"/>
-            <circle cx="14" cy="40" r="5" fill="#4ab8b8" opacity="0.72"/>
-            <circle cx="40" cy="40" r="5" fill="#4ab8b8" opacity="0.72"/>
-            <circle cx="66" cy="40" r="5" fill="#4ab8b8" opacity="0.72"/>
-            <circle cx="6"  cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
-            <circle cx="26" cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
-            <circle cx="54" cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
-            <circle cx="74" cy="56" r="3.5" fill="#4ab8b8" opacity="0.5"/>
-            <circle cx="2"  cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
-            <circle cx="14" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
-            <circle cx="40" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
-            <circle cx="66" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
-            <circle cx="78" cy="70" r="2" fill="#4ab8b8" opacity="0.28"/>
-          </svg>
-        </div>
-        <h1 class="hero-name-en">Life Asset Office</h1>
-      </div>
-      <div class="hero-name-ja">ライフアセットオフィス</div>
-      <hr class="hero-divider"/>
-      <p class="hero-desc">将来への不安を、安心に変えるお手伝いをします。<br>あなたの人生に寄り添い、理想の未来を一緒に描きます。</p>
-
-      <div class="hero-services">
-        <div class="hero-service">
-          <div class="hero-service-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="hero-service-label">ライフプラン相談</div>
-          <div class="hero-service-sub">安心の未来設計をサポートします</div>
-        </div>
-        <div class="hero-service">
-          <div class="hero-service-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div class="hero-service-label">資産運用サポート</div>
-          <div class="hero-service-sub">あなたに合った資産形成をご提案</div>
-        </div>
-        <div class="hero-service">
-          <div class="hero-service-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <div class="hero-service-label">保険の見直し</div>
-          <div class="hero-service-sub">今の保障が最適か一緒に確認</div>
-        </div>
-        <div class="hero-service">
-          <div class="hero-service-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div class="hero-service-label">相続・贈与のご相談</div>
-          <div class="hero-service-sub">大切な資産を未来へつなぐ</div>
-        </div>
-      </div>
-
-      <p class="hero-bottom-text">お一人おひとりに寄り添い、信頼できるパートナーとして<br>長くサポートいたします。</p>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="hero-right">
-      <div class="penguin-speech">ぼく、ライフアセット君！<br>あなたの未来を<br>一緒に考えるよ！</div>
-      <img class="penguin-img" src="penguin.png" alt="ライフアセット君" />
-      <div class="hero-badges">
-        <div class="hero-badge-item">
-          <div class="hero-badge-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div class="hero-badge-label">信頼と実績</div>
-          <div class="hero-badge-sub">安心のサポート体制</div>
-        </div>
-        <div class="hero-badge-item">
-          <div class="hero-badge-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="hero-badge-label">親身な対応</div>
-          <div class="hero-badge-sub">どんなことでも相談しやすい</div>
-        </div>
-        <div class="hero-badge-item">
-          <div class="hero-badge-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <div class="hero-badge-label">一生涯のサポート</div>
-          <div class="hero-badge-sub">ライフステージに応じて最適なご提案</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <img src="hero.png" alt="Life Asset Office - 人生に寄り添う、資産のパートナー" />
 </section>
 
 <!-- BANNER -->
