@@ -16,8 +16,9 @@
 | 代表者 | 髙月 義照（ファイナンシャルプランナー・FP資格者） |
 | メール | lifeassetpartners@gmail.com |
 | 電話 | 090-1010-4737 |
-| 公開URL | https://yamakaze8000-alt.github.io/123/ |
-| リポジトリ | yamakaze8000-alt/123 |
+| 公開URL | https://lifeassetoffice.net/ |
+| 旧URL | https://okayama-fp.github.io/life-asset-okayama/ |
+| リポジトリ | okayama-fp/life-asset-okayama |
 
 ---
 
