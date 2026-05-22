@@ -1,8 +1,7 @@
 # プロジェクト管理 — ライフアセットパートナーズ
 
-## 私の役割
-私（Claude）がこのプロジェクトの **管理責任者** です。  
-ユーザーからの指示を受け、設計・実装・PR管理・デプロイ判断をすべて主導します。  
+## AIエージェントの役割
+このプロジェクトの **管理責任者** として、ユーザーの指示に基づきすべての開発・デプロイ・運用を一元管理します。  
 不明点・リスクがある場合は必ず作業を中断してユーザーに報告します。
 
 ---
@@ -43,7 +42,7 @@
 |----------|------|------|
 | `gh-pages` | **本番（GitHub Pages）** | 最新デザイン |
 | `claude/build-website-ZtKcV` | 旧ベースブランチ | 旧デザイン（navy/gold） |
-| `claude/change-default-to-local-Rlmws` | 現在の作業ブランチ | 画像をローカルパスへ変更 |
+| `claude/change-default-to-local-Rlmws` | 作業ブランチ | 画像をローカルパスへ変更 |
 
 > **開発ルール**: 必ず専用ブランチで作業し、`gh-pages` へ PR を通してマージする。
 
@@ -54,32 +53,12 @@
 | ファイル | 内容 |
 |----------|------|
 | `index.html` | トップページ |
-| `future-plans.html` | ライフプランニング |
-| `simulation.html` | 資産シミュレーター |
-| `advisor.html` | アドバイザー業務（老後・相続・保険） |
-| `loan.html` | 融資シミュレーター |
+| `blog/index.html` | ブログ一覧 |
+| `blog/asset-building-beginner/index.html` | ブログ記事1 |
+| `service/index.html` | サービス案内 |
+| `recruit/index.html` | 採用情報 |
 | `muscat.html` | 別サービス：極上マスカット農園 |
 | `images/` | ローカル画像フォルダ |
-
----
-
-## オープンPR一覧（2026-05-02時点）
-
-| PR# | タイトル | 優先度 | 状態 |
-|-----|----------|--------|------|
-| #14 | 外部画像URLをローカルフォルダパスに変更 | 高 | Draft |
-| #13 | ライフアセットパートナーズへリブランド | 高 | Open |
-| #12 | ホームページ完成（お客様の声・相談の流れ・フォーム追加） | 中 | Open |
-| #10 | CLAUDE.md追加（役割ベースセッション） | 低 | Draft |
-| #9 | Buffalo HDD 自動修復スクリプト | 低 | Draft |
-| #8 | 写真・動画 自動整理スクリプト | 低 | Draft |
-| #7 | Cloudflare APIトークン無効化スクリプト | 低 | Open |
-| #6 | ConoHa → Cloudflare 移行スクリプト | 低 | Draft |
-| #5 | ライフアセットパートナーズ ホームページ完成版 | 低 | Draft |
-| #4 | フッターを削除 | 低 | Draft |
-| #3 | Revert プロフィールタグ | 低 | Draft |
-| #2 | 株・経済ニュース自動取得 | 低 | Draft |
-| #1 | ファミリーアセットデザイン完成版 | 低 | Draft |
 
 ---
 
@@ -111,6 +90,30 @@
 | 禁止事項 | APIキーのハードコード禁止・デバッグコードの本番残し禁止・無制限な外部入力処理禁止 |
 | 出力ルール | セキュアでないコードは書かない。不安がある場合は必ず警告を出す |
 
+### 全ページ共通セキュリティヘッダー（必ず含める）
+
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Frame-Options" content="DENY">
+```
+
+### 外部リンク
+- `target="_blank"` には必ず `rel="noopener noreferrer"` を付ける
+
+### メールアドレス
+- ハードコード禁止。JavaScriptで動的生成する（ボット収集対策）
+
+```html
+<a href="#" id="mail-link"></a>
+<script>
+  (function(){
+    var u='lifeassetpartners',d='gmail.com';
+    document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+  })();
+</script>
+```
+
 ---
 
 ## 作業フロー
@@ -134,7 +137,7 @@
 
 ---
 
-## 私の判断基準
+## 判断基準
 
 1. **ユーザーへの確認が必要**: `git push`、PR作成・マージ、外部API通信、破壊的変更
 2. **自律的に実行してよい**: ローカルでの実装・バグ修正・デザイン改善・コミット
@@ -142,7 +145,7 @@
 
 ---
 
-## 次のアクション（私が把握している課題）
+## 次のアクション（把握している課題）
 
 - [ ] `images/` フォルダに実際の画像ファイルを配置（ユーザー作業）
 - [ ] PR #14 をレビュー → `gh-pages` へマージ
