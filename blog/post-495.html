@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>子育て世代が知らないと損する：税金・補助金・控除の完全まとめ2026年版｜Life Asset ブログ</title>
+  <meta name="description" content="2026年版の児童手当拡充（第3子5万円）・子ども医療費助成・教育費非課税制度・ひとり親控除・配偶者控除の注意点を表形式で整理。確定申告で取り返せる控除チェックリスト付き。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--sky:#0ea5e9;--sl:#38bdf8;--sb:#f0f9ff;--sp:#e0f2fe;--navy:#0f3460;--nl:#1e4d8c;--w:#fff;--gb:#f8fafc;--t:#1e293b;--tl:#64748b;--b:#e2e8f0}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;color:var(--t);background:var(--gb);line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+    #pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--sky),var(--sl));z-index:9999;transition:width .1s linear}
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--b);box-shadow:0 1px 8px rgba(14,165,233,0.07)}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo-text .name{font-size:1.25rem;font-weight:700;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .logo-text .tagline{font-size:0.62rem;color:var(--tl);white-space:nowrap}
+    nav{display:flex;gap:4px;margin-left:auto}
+    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,0.3);transition:opacity .2s}
+    .btn-cta:hover{opacity:.85}
+    .breadcrumb{max-width:760px;margin:0 auto;padding:16px 24px 0;font-size:0.8rem;color:var(--tl);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .breadcrumb a{color:var(--sky)}
+    .breadcrumb a:hover{text-decoration:underline}
+    .article-header{max-width:760px;margin:0 auto;padding:20px 24px 16px}
+    .article-tag{display:inline-block;padding:4px 14px;border-radius:14px;font-size:0.78rem;font-weight:700;margin-bottom:14px}
+    .tag-tax{background:#fef3c7;color:#92400e}
+    .article-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:16px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:0.82rem;color:var(--tl);flex-wrap:wrap}
+    .article-meta span{display:flex;align-items:center;gap:5px}
+    .action-bar{max-width:760px;margin:12px auto 0;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap}
+    .action-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;border:1.5px solid var(--b);background:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;color:var(--t)}
+    .action-btn:hover{border-color:var(--sky);color:var(--sky)}
+    .action-btn.bm-active{background:var(--sb);border-color:var(--sky);color:var(--sky)}
+    .action-btn.liked{background:#fce7f3;border-color:#fb7185;color:#e11d48}
+    .toc{max-width:760px;margin:24px auto 32px;padding:0 24px}
+    .toc-box{background:#fff;border:1.5px solid var(--sp);border-radius:14px;padding:20px 24px;border-left:4px solid var(--sky)}
+    .toc-box h2{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .toc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .toc-list li a{font-size:0.875rem;color:var(--sky);display:flex;align-items:baseline;gap:7px;transition:opacity .2s}
+    .toc-list li a:hover{opacity:.7;text-decoration:underline}
+    .toc-list li a::before{content:'▸';font-size:0.7rem;flex-shrink:0}
+    .article-content{max-width:760px;margin:0 auto;padding:0 24px 48px}
+    .article-content h2{font-size:1.2rem;font-weight:700;color:var(--navy);margin:36px 0 14px;padding:10px 16px;border-left:4px solid var(--sky);background:var(--sb);border-radius:0 8px 8px 0;line-height:1.4}
+    .article-content p{margin-bottom:16px;font-size:0.97rem;line-height:1.85}
+    .article-content ul,.article-content ol{padding-left:1.4em;margin-bottom:16px}
+    .article-content li{font-size:0.97rem;margin-bottom:6px;line-height:1.7}
+    .note-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:15px 18px;margin:16px 0;display:flex;gap:10px;align-items:flex-start}
+    .note-box::before{content:'💡';flex-shrink:0}
+    .note-box p{margin:0;font-size:0.88rem;color:#92400e}
+    .point-box{background:var(--sb);border:1.5px solid var(--sp);border-radius:10px;padding:15px 18px;margin:16px 0}
+    .point-box p{margin:0;font-size:0.88rem;color:var(--nl)}
+    .compare-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.88rem}
+    .compare-table th{padding:10px 14px;text-align:left;border:1px solid var(--b);font-weight:600;background:var(--sb);color:var(--navy)}
+    .compare-table td{padding:10px 14px;border:1px solid var(--b);color:var(--t)}
+    .compare-table tr:nth-child(even) td{background:var(--gb)}
+    .chat-widget{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .chat-box{background:#fff;border:1.5px solid var(--sp);border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(14,165,233,0.08)}
+    .chat-box-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .fp-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .fp-info strong{display:block;font-size:0.9rem;font-weight:700;color:var(--navy)}
+    .fp-info span{font-size:0.78rem;color:var(--tl)}
+    .chat-bubble{background:var(--sb);border-radius:0 14px 14px 14px;padding:14px 18px;font-size:0.9rem;line-height:1.7;color:var(--t);margin-bottom:16px;border:1px solid var(--sp)}
+    .chat-topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+    .chat-topic{padding:6px 14px;border-radius:20px;border:1.5px solid var(--sp);background:#fff;font-size:0.82rem;cursor:pointer;font-family:inherit;color:var(--nl);transition:all .2s}
+    .chat-topic:hover{background:var(--sb);border-color:var(--sky)}
+    .chat-input-wrap{display:flex;flex-direction:column;gap:10px}
+    .chat-input-wrap textarea{width:100%;border:1.5px solid var(--b);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:0.9rem;color:var(--t);resize:vertical;min-height:80px;outline:none;transition:border-color .2s}
+    .chat-input-wrap textarea:focus{border-color:var(--sky)}
+    .btn-send{align-self:flex-end;padding:10px 24px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;border:none;font-size:0.875rem;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(14,165,233,0.25);transition:opacity .2s}
+    .btn-send:hover{opacity:.85}
+    .share-section{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .share-section h2{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .share-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:22px;font-size:0.875rem;font-weight:600;color:#fff;cursor:pointer;text-decoration:none;transition:opacity .2s;border:none;font-family:inherit}
+    .share-btn:hover{opacity:.85}
+    .share-x{background:#000}
+    .share-line{background:#06c755}
+    .share-copy{background:#64748b}
+    .related{max-width:760px;margin:0 auto 32px;padding:0 24px}
+    .related h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--sp)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+    .related-card{background:#fff;border-radius:12px;border:1px solid var(--b);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform .2s;display:block}
+    .related-card:hover{transform:translateY(-3px)}
+    .related-card-top{height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    .bg-blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .bg-amber{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+    .bg-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+    .bg-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .bg-indigo{background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}
+    .related-card-body{padding:12px}
+    .related-card-body span{font-size:0.72rem;color:var(--sky);font-weight:600}
+    .related-card-body p{font-size:0.82rem;color:var(--navy);font-weight:600;margin-top:4px;line-height:1.4}
+    .post-nav{max-width:760px;margin:0 auto 48px;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:500px){.post-nav{grid-template-columns:1fr}}
+    .post-nav-btn{display:block;background:#fff;border:1.5px solid var(--b);border-radius:12px;padding:14px 18px;transition:all .2s}
+    .post-nav-btn:hover{border-color:var(--sky);box-shadow:0 4px 12px rgba(14,165,233,.1)}
+    .nav-dir{font-size:0.75rem;color:var(--tl);margin-bottom:4px}
+    .nav-title{font-size:0.88rem;font-weight:600;color:var(--navy);line-height:1.4}
+    footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:40px 24px 28px;margin-top:24px}
+    .footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;font-size:1.1rem;font-weight:700}
+    .footer-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff}
+    .footer-contact{margin:10px 0}
+    .footer-contact a{font-size:0.85rem;color:var(--sl);text-decoration:underline}
+    footer p{font-size:0.78rem;opacity:.6;margin-top:16px}
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>›</span>
+  <a href="index.html">ブログ</a>
+  <span>›</span>
+  <span>子育て世代の税金・補助金・控除まとめ2026年版</span>
+</div>
+
+<div class="article-header">
+  <div class="article-tag tag-tax">🧾 節税・控除</div>
+  <h1 class="article-title">子育て世代が知らないと損する：税金・補助金・控除の完全まとめ2026年版</h1>
+  <div class="article-meta">
+    <span>📅 2026年5月13日</span>
+    <span>⏱ 約6分で読めます</span>
+    <span>👨‍💼 髙月 義照（FP）</span>
+  </div>
+</div>
+
+<div class="action-bar">
+  <button class="action-btn" id="bm-btn" onclick="toggleBookmark(this,'post-495','子育て世代の税金・補助金・控除まとめ2026年版','tax')">🔖 ブックマーク</button>
+  <button class="action-btn" id="like-btn" onclick="toggleLike(this,'post-495')">👍 参考になった</button>
+</div>
+
+<div class="toc">
+  <div class="toc-box">
+    <h2>📋 目次</h2>
+    <ul class="toc-list">
+      <li><a href="#sec1">1. 児童手当・子育て支援（2026年版）</a></li>
+      <li><a href="#sec2">2. 医療費控除と子ども医療費助成</a></li>
+      <li><a href="#sec3">3. 教育費の節税制度</a></li>
+      <li><a href="#sec4">4. 働き方別の控除ポイント</a></li>
+      <li><a href="#sec5">FPまとめ：確定申告チェックリスト</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="article-content">
+  <p>子育て世代には、知っておくだけで年間数十万円の差になる制度が数多くあります。しかし「難しそう」「どこで調べればいいか分からない」という理由で活用できていない家庭も多いのが現実です。<strong>この記事では2026年時点の最新情報を踏まえ、子育て世代が使える制度を一覧でわかりやすく解説します。</strong></p>
+
+  <h2 id="sec1">1. 児童手当・子育て支援（2026年版）</h2>
+  <p>2024〜2025年の児童手当改革で、支給額と対象年齢が大幅に拡充されました。2026年時点の主な内容は以下の通りです。</p>
+  <table class="compare-table">
+    <thead><tr><th>対象</th><th>月額支給額</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>0〜2歳（第1子・第2子）</td><td>月15,000円</td><td>旧制度から引き上げ</td></tr>
+      <tr><td>3歳〜高校生（第1子・第2子）</td><td>月10,000円</td><td>高校生まで延長（旧制度は中学生まで）</td></tr>
+      <tr><td>第3子以降（0〜高校生）</td><td>月30,000円</td><td>2024年改正で大幅増額</td></tr>
+      <tr><td>支給対象年齢</td><td>0歳〜18歳（高校3年生）</td><td>旧制度は中学生まで</td></tr>
+      <tr><td>所得制限</td><td>撤廃（2024年改正）</td><td>高所得世帯も受給可能に</td></tr>
+    </tbody>
+  </table>
+  <div class="point-box"><p>3人の子どもがいる家庭では、第3子が0〜2歳の間、月30,000円×3子＝月55,000円（第1・2子合計）以上の手当が受け取れます。3子で高校卒業まで受け取ると、累計1,000万円を超えることもあります。</p></div>
+  <p>また、<strong>育児休業給付金</strong>（雇用保険から支給、休業前賃金の67%程度）や、<strong>出産育児一時金</strong>（1児あたり50万円）も見逃せません。これらは申請しないと受け取れないため、出産前後の手続きを確認しておきましょう。</p>
+
+  <h2 id="sec2">2. 医療費控除と子ども医療費助成</h2>
+  <p><strong>子ども医療費助成制度（自治体別）：</strong>多くの自治体で中学生まで（一部は高校生まで）の医療費を無料または少額負担にする制度があります。住んでいる市区町村の窓口または公式サイトで確認できます。</p>
+  <p><strong>医療費控除：</strong>年間の医療費が10万円を超えた場合（または総所得金額の5%を超えた場合）、確定申告で医療費控除が使えます。子どもの矯正歯科・入院費・処方薬代なども対象です。</p>
+  <table class="compare-table">
+    <thead><tr><th>対象になる医療費</th><th>対象にならない医療費</th></tr></thead>
+    <tbody>
+      <tr><td>病院・診療所での診察・治療費</td><td>健康診断（疾病が発見された場合は対象）</td></tr>
+      <tr><td>処方薬（調剤薬局）</td><td>美容目的の医療</td></tr>
+      <tr><td>歯の矯正（医師が必要と認めた場合）</td><td>予防接種（一部例外あり）</td></tr>
+      <tr><td>入院費・付添費</td><td>市販薬（セルフメディケーション税制の対象は別途）</td></tr>
+    </tbody>
+  </table>
+  <div class="note-box"><p>医療費控除はレシート・領収書を1年分集めておく必要があります。マイナポータルと連携するとデータが自動取得できるので、2026年以降は紙の領収書不要で手続きが簡単になります。</p></div>
+
+  <h2 id="sec3">3. 教育費の節税制度</h2>
+  <p>子どもの教育費に使える節税制度を整理します。</p>
+  <table class="compare-table">
+    <thead><tr><th>制度名</th><th>概要</th><th>メリット</th></tr></thead>
+    <tbody>
+      <tr><td>新NISA（学資目的）</td><td>年360万円まで非課税で運用</td><td>高い期待リターン・いつでも引き出せる</td></tr>
+      <tr><td>教育資金一括贈与の非課税制度</td><td>祖父母から孫への1,500万円まで非課税贈与</td><td>相続対策にも有効（2026年3月末まで延長）</td></tr>
+      <tr><td>扶養控除（16歳以上の子）</td><td>年38〜63万円の所得控除</td><td>高校・大学生の子がいると大きな節税</td></tr>
+      <tr><td>学校教育費の医療費控除</td><td>特別支援学校などの費用が対象の場合あり</td><td>確定申告で還付</td></tr>
+    </tbody>
+  </table>
+  <p>特に注目したいのが<strong>新NISAの学資活用</strong>です。従来の「学資保険」と比べて、新NISAは返戻率が高く（期待リターン5%以上）、途中解約も自由です。10〜15年の積立で教育費を準備するなら、学資保険よりNISAの方が有利になるケースがほとんどです。</p>
+
+  <h2 id="sec4">4. 働き方別の控除ポイント</h2>
+  <p><strong>配偶者控除・配偶者特別控除：</strong>配偶者の年収が150万円以下であれば、配偶者控除38万円（所得控除）が適用されます。ただし、配偶者の年収が増えると段階的に控除額が減るため、「103万円の壁」「150万円の壁」の扱いには注意が必要です。</p>
+  <div class="note-box"><p>「106万円の壁」「130万円の壁」は社会保険の加入基準です。配偶者が一定以上の収入を得ると社会保険料の自己負担が発生し、手取りが一時的に下がることがあります。家庭の状況に応じて働き方を設計することが重要です。</p></div>
+  <p><strong>ひとり親控除：</strong>離別・死別・未婚を問わず、「ひとり親」に該当する場合は35万円の所得控除が受けられます（合計所得500万円以下が条件）。旧「寡婦控除」「寡夫控除」から改正され、現在はひとり親控除として一本化されています。</p>
+  <table class="compare-table">
+    <thead><tr><th>控除の種類</th><th>控除額</th><th>適用条件</th></tr></thead>
+    <tbody>
+      <tr><td>配偶者控除</td><td>38万円（最大）</td><td>配偶者の年収103万円以下</td></tr>
+      <tr><td>配偶者特別控除</td><td>1〜38万円</td><td>配偶者の年収103〜201.6万円</td></tr>
+      <tr><td>扶養控除（16〜18歳）</td><td>38万円</td><td>高校生の子ども</td></tr>
+      <tr><td>扶養控除（19〜22歳）</td><td>63万円</td><td>大学生の子ども（特定扶養）</td></tr>
+      <tr><td>ひとり親控除</td><td>35万円</td><td>ひとり親世帯（合計所得500万円以下）</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="sec5">FPまとめ：確定申告チェックリスト</h2>
+  <p>子育て世代が確定申告で取り返せる可能性がある控除のチェックリストです。年末調整だけでは申告できない項目もあるため、確認してください。</p>
+  <ul>
+    <li>医療費（年間10万円超の場合）→ 医療費控除</li>
+    <li>扶養する子どもが16歳以上（高校・大学生）→ 扶養控除</li>
+    <li>ひとり親世帯 → ひとり親控除（年末調整でも申請可能）</li>
+    <li>住宅ローン初年度 → 住宅ローン控除（1年目は確定申告必須）</li>
+    <li>iDeCoに加入している → 小規模企業共済等掛金控除</li>
+    <li>ふるさと納税（5自治体超または確定申告が必要な場合）→ 寄付金控除</li>
+    <li>生命保険・地震保険の支払い → 保険料控除（年末調整で対応可）</li>
+  </ul>
+  <div class="point-box"><p>確定申告は「税金を多く払い過ぎた分を取り返す手続き」です。子育て世代は医療費や教育費などで対象になりやすく、申告することで数万〜数十万円の還付を受けられるケースがあります。e-Taxを使えば自宅から数十分で完了します。</p></div>
+  <p>子育て家計の最適化は、受けられる給付・補助・控除をすべて活用することが第一歩です。複雑に見える制度ですが、一つひとつ確認して申請するだけで、家計に大きなプラスをもたらします。ご不明な点はFPへのご相談をお気軽にどうぞ。</p>
+</div>
+
+<div class="chat-widget">
+  <div class="chat-box">
+    <div class="chat-box-head">
+      <div class="fp-avatar">👨‍💼</div>
+      <div class="fp-info">
+        <strong>髙月 義照（FP）</strong>
+        <span>ファイナンシャルプランナー｜岡山</span>
+      </div>
+    </div>
+    <div class="chat-bubble">
+      この記事を読んで、お金のことで気になることはありましたか？気軽にご相談ください。
+    </div>
+    <div class="chat-topics">
+      <button class="chat-topic" onclick="setTopic('自分が受け取れる補助金・控除を教えてほしい')">受け取れる補助金・控除を教えてほしい</button>
+      <button class="chat-topic" onclick="setTopic('確定申告で何を申告すべきか相談したい')">確定申告で何を申告すべきか相談したい</button>
+      <button class="chat-topic" onclick="setTopic('子育て世代の教育費の準備方法を教えてほしい')">教育費の準備方法を聞きたい</button>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea id="chat-msg" placeholder="例：NISAの始め方を教えてください"></textarea>
+      <button class="btn-send" onclick="openGmail()">✉️ FPに相談する</button>
+    </div>
+  </div>
+</div>
+
+<div class="share-section">
+  <h2>この記事をシェアする</h2>
+  <div class="share-btns">
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=%E5%AD%90%E8%82%B2%E3%81%A6%E4%B8%96%E4%BB%A3%E3%81%8C%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%A8%E6%90%8D%EF%BC%9A%E7%A8%8E%E9%87%91%E3%83%BB%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E6%8E%A7%E9%99%A4%E3%81%AE%E5%AE%8C%E5%85%A8%E3%81%BE%E3%81%A8%E3%82%8120262026%E5%B9%B4%E7%89%88%20%23LifeAsset&url=https%3A%2F%2Fyamakaze8000-alt.github.io%2F123%2Fblog%2Fpost-495.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyamakaze8000-alt.github.io%2F123%2Fblog%2Fpost-495.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
+    <button class="share-btn share-copy" onclick="copyLink()">🔗 リンクをコピー</button>
+  </div>
+</div>
+
+<div class="related">
+  <h2>関連記事</h2>
+  <div class="related-grid">
+    <a href="post-435.html" class="related-card">
+      <div class="related-card-top bg-indigo">🎓</div>
+      <div class="related-card-body">
+        <span>ライフプラン</span>
+        <p>教育費の備え方：学資保険より賢い選択をFPが解説</p>
+      </div>
+    </a>
+    <a href="post-429.html" class="related-card">
+      <div class="related-card-top bg-amber">🎁</div>
+      <div class="related-card-body">
+        <span>節税・控除</span>
+        <p>ふるさと納税の活用術：返礼品と節税を両立する賢い使い方</p>
+      </div>
+    </a>
+    <a href="post-453.html" class="related-card">
+      <div class="related-card-top bg-indigo">💡</div>
+      <div class="related-card-body">
+        <span>節税・控除</span>
+        <p>節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<nav class="post-nav">
+  <a href="post-489.html" class="post-nav-btn">
+    <div class="nav-dir">← 前の記事</div>
+    <div class="nav-title">インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由</div>
+  </a>
+  <a href="post-411.html" class="post-nav-btn" style="text-align:right">
+    <div class="nav-dir">次の記事 →</div>
+    <div class="nav-title">給料だけに頼らない家計へ。FPが教える資産形成の始め方</div>
+  </a>
+</nav>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">lifeassetpartners@gmail.com</a>
+    </div>
+    <p>© 2026 Life Asset Partners.</p>
+  </div>
+</footer>
+
+<script>
+  const POST_ID = 'post-495';
+  const BMKey = 'lap_bm';
+  const ReadKey = 'lap_read';
+  const RateKey = 'lap_rate';
+  const StreakKey = 'lap_streak';
+
+  function markAsRead(id) {
+    const read = JSON.parse(localStorage.getItem(ReadKey) || '[]');
+    if (!read.includes(id)) { read.push(id); localStorage.setItem(ReadKey, JSON.stringify(read)); }
+  }
+  function toggleBookmark(btn, id, title, cat) {
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const idx = bms.findIndex(b => b.id === id);
+    if (idx >= 0) { bms.splice(idx,1); btn.textContent = '🔖 ブックマーク'; btn.classList.remove('bm-active'); }
+    else { bms.push({id,title,cat,url:location.pathname}); btn.textContent = '✅ 保存済み'; btn.classList.add('bm-active'); }
+    localStorage.setItem(BMKey, JSON.stringify(bms));
+  }
+  function toggleLike(btn, id) {
+    const rates = JSON.parse(localStorage.getItem(RateKey) || '{}');
+    if (rates[id]) { delete rates[id]; btn.textContent = '👍 参考になった'; btn.classList.remove('liked'); }
+    else { rates[id] = true; btn.textContent = '✅ 役に立った！'; btn.classList.add('liked'); }
+    localStorage.setItem(RateKey, JSON.stringify(rates));
+  }
+  function updateStreak() {
+    const today = new Date().toISOString().split('T')[0];
+    const s = JSON.parse(localStorage.getItem(StreakKey) || '{"count":0,"lastDate":""}');
+    const yesterday = new Date(Date.now()-86400000).toISOString().split('T')[0];
+    if (s.lastDate === today) return;
+    if (s.lastDate === yesterday) { s.count++; } else if (s.lastDate !== today) { s.count = 1; }
+    s.lastDate = today;
+    localStorage.setItem(StreakKey, JSON.stringify(s));
+  }
+  function openGmail() {
+    const msg = document.getElementById('chat-msg').value;
+    const subj = encodeURIComponent('ブログ記事からのご相談：' + document.title);
+    const body = encodeURIComponent(msg + '\n\n---\n記事URL: ' + location.href);
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
+  }
+  function setTopic(t) { document.getElementById('chat-msg').value = t; }
+  function copyLink() {
+    navigator.clipboard.writeText(location.href).then(function(){ alert('リンクをコピーしました！'); });
+  }
+  window.addEventListener('scroll', function(){
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('pb').style.width = pct + '%';
+    if (pct > 70) markAsRead(POST_ID);
+  });
+  window.addEventListener('DOMContentLoaded', function(){
+    updateStreak();
+    markAsRead(POST_ID);
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const btn = document.getElementById('bm-btn');
+    if (btn && bms.find(b => b.id === POST_ID)) { btn.textContent='✅ 保存済み'; btn.classList.add('bm-active'); }
+    const rates = JSON.parse(localStorage.getItem(RateKey) || '{}');
+    const lbtn = document.getElementById('like-btn');
+    if (lbtn && rates[POST_ID]) { lbtn.textContent='✅ 役に立った！'; lbtn.classList.add('liked'); }
+  });
+</script>
+</body>
+</html>
