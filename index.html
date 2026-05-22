@@ -123,6 +123,8 @@
     .blog-section-header p { color: var(--text-light); font-size: 12px; }
     .blog-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 40px; }
     .blog-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; transition: box-shadow .2s, transform .2s; display: flex; flex-direction: column; }
+    .blog-cards .blog-card { display: none; }
+    .blog-cards .blog-card:nth-child(-n+3) { display: flex; }
     .blog-card:hover { box-shadow: 0 10px 30px rgba(14,165,233,0.12); transform: translateY(-3px); }
     .blog-card-date { font-size: 11px; color: var(--text-light); margin-bottom: 8px; }
     .blog-card-title { font-size: 14px; font-weight: 800; color: var(--navy); line-height: 1.5; margin-bottom: 10px; flex: 1; }
@@ -136,7 +138,7 @@
     .tag-save { background: #2d6a4f; }
     .tag-portfolio { background: #4a4a8a; }
     .hidden-post { display: none !important; }
-    #blog-more-wrap { text-align: center; margin-top: 36px; }
+    #blog-more-wrap { display: none; text-align: center; margin-top: 36px; }
     #blog-more-wrap button { border: 2px solid var(--navy); background: transparent; color: var(--navy); font-weight: 700; font-size: 14px; padding: 12px 40px; border-radius: 4px; cursor: pointer; transition: background .2s, color .2s; }
     #blog-more-wrap button:hover { background: var(--navy); color: #fff; }
     footer { background: var(--sky-bg); border-top: 2px solid #bae6fd; color: var(--text-light); padding: 28px 32px; font-size: 12px; }
@@ -313,23 +315,23 @@
   <div class="blog-section-inner">
     <div class="blog-kicker">MONEY BLOG</div>
     <h2 class="section-title">ブログ記事</h2>
-    <p class="blog-lead">インフレ時代の資産防衛・投資・節約に役立つ情報を、実生活に落とし込みやすくお届けします（全69件）。</p>
+    <p class="blog-lead">相場ニュースを追うだけの記事は整理し、家計管理・新NISA・物価高対策に役立つFPブログへ作り直しています。まずは厳選3本からお読みください。</p>
     <div class="blog-hub">
       <div class="blog-feature">
         <div class="feature-badge"><span>まず読む</span><strong>01</strong></div>
         <div>
-          <h3>新NISAは「今うまくいっている」からこそ危ない</h3>
-          <p>利益が出ている時ほど見落としやすいリスクを、FP目線でわかりやすく整理。投資初心者にも読まれやすい入口記事です。</p>
-          <a href="blog/post-407.html">注目記事を読む →</a>
+          <h3>株価が上がった今、新NISAを始めても大丈夫？</h3>
+          <p>投資のタイミングではなく、家計に合った積立額と続け方をFP目線で整理。初めて読む人にもわかりやすい入口記事です。</p>
+          <a href="blog/post-423.html">注目記事を読む →</a>
         </div>
       </div>
       <div class="blog-side">
         <div class="ranking-box">
           <h3>人気記事ランキング</h3>
           <ol class="ranking-list">
-            <li><span>1</span><a href="blog/post-426.html">次の成長テーマはフィジカルAIかもしれない</a></li>
-            <li><span>2</span><a href="blog/post-411.html">投資を始めて「資本家」になろう</a></li>
-            <li><span>3</span><a href="blog/post-395.html">お金の使い方に迷わない5つの視点</a></li>
+            <li><span>1</span><a href="blog/post-423.html">株価が上がった今、新NISAを始めても大丈夫？</a></li>
+            <li><span>2</span><a href="blog/post-417.html">物価高が続く家庭が見直すべき支出</a></li>
+            <li><span>3</span><a href="blog/post-411.html">給料だけに頼らない家計の作り方</a></li>
           </ol>
         </div>
         <div class="category-box">
@@ -349,11 +351,11 @@
       <p>気になるタイトルからすぐ読めます</p>
     </div>
     <div class="blog-cards" id="blog-cards">
-      <div class="blog-card"><div class="blog-card-date">2026-02-07</div><div class="blog-card-tags"><span class="tag tag-invest">増やす×投資</span></div><h3 class="blog-card-title"><a href="blog/post-423.html">日経平均CFD 56,508（+4.19%）</a></h3><p class="blog-card-excerpt">なぜ"ここまで"一気に買われたのか。CFDが先に吹いた意味（ここ重要）まずCFDで先に爆上げしたこと自体がメッセージ。</p><a class="blog-card-more" href="blog/post-423.html">続きを読む →</a></div>
-      <div class="blog-card"><div class="blog-card-date">2026-02-07</div><div class="blog-card-tags"><span class="tag tag-popular">よく読まれている記事</span></div><h3 class="blog-card-title"><a href="blog/post-426.html">次の成長テーマはフィジカルAIかもしれない</a></h3><p class="blog-card-excerpt">日本のフィジカルAIは、日本が数少ない「世界で覇権を狙える分野」であり、今後の経済成長・産業構造・国家戦略の中核になり得る存在です。</p><a class="blog-card-more" href="blog/post-426.html">続きを読む →</a></div>
-      <div class="blog-card"><div class="blog-card-date">2026-02-03</div><div class="blog-card-tags"><span class="tag tag-invest">増やす×投資</span></div><h3 class="blog-card-title"><a href="blog/post-411.html">投資を始めて「資本家」になろう</a></h3><p class="blog-card-excerpt">労働者で終わらない人生の設計図。実質賃金30年横ばい、年金減額の時代に「資本家」として生きる方法を解説。</p><a class="blog-card-more" href="blog/post-411.html">続きを読む →</a></div>
+      <div class="blog-card"><div class="blog-card-date">2026-02-07</div><div class="blog-card-tags"><span class="tag tag-invest">新NISA・資産形成</span></div><h3 class="blog-card-title"><a href="blog/post-423.html">株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説</a></h3><p class="blog-card-excerpt">株価そのものより、家計に余力があるかが大切。生活防衛資金、積立額、投資目的の順番をFPが解説します。</p><a class="blog-card-more" href="blog/post-423.html">続きを読む →</a></div>
+      <div class="blog-card"><div class="blog-card-date">2026-02-03</div><div class="blog-card-tags"><span class="tag tag-popular">物価高・家計防衛</span></div><h3 class="blog-card-title"><a href="blog/post-417.html">物価高が続く家庭が、今すぐ見直すべき支出と資産防衛</a></h3><p class="blog-card-excerpt">食費を我慢する前に、固定費と長期資金の置き場所を確認。物価高に負けない家計の守り方をFPが解説します。</p><a class="blog-card-more" href="blog/post-417.html">続きを読む →</a></div>
+      <div class="blog-card"><div class="blog-card-date">2026-02-03</div><div class="blog-card-tags"><span class="tag tag-invest">家計改善・資産形成</span></div><h3 class="blog-card-title"><a href="blog/post-411.html">給料だけに頼らない家計へ。FPが教える資産形成の始め方</a></h3><p class="blog-card-excerpt">投資を急ぐ前に、固定費、貯金、生活防衛資金を整える。普通の家庭が無理なく資産形成を始める順番を解説します。</p><a class="blog-card-more" href="blog/post-411.html">続きを読む →</a></div>
       <div class="blog-card"><div class="blog-card-date">2026-02-03</div><div class="blog-card-tags"><span class="tag tag-popular">よく読まれている記事</span></div><h3 class="blog-card-title"><a href="blog/post-414.html">物価高騰、インフレは止まらない</a></h3><p class="blog-card-excerpt">「高い」のではない、「価値が変わった」。物価は「元に戻る」のではなく、これが新しい水準です。インフレ時代の正しい認識と対策。</p><a class="blog-card-more" href="blog/post-414.html">続きを読む →</a></div>
-      <div class="blog-card"><div class="blog-card-date">2026-02-03</div><div class="blog-card-tags"><span class="tag tag-popular">よく読まれている記事</span></div><h3 class="blog-card-title"><a href="blog/post-417.html">なぜ国はインフレを止めないのか</a></h3><p class="blog-card-excerpt">国は「物価高対策」を口にしますが、本気でインフレを止める気はありません。インフレは国にとって一番痛みの少ない財政再建手段だからです。</p><a class="blog-card-more" href="blog/post-417.html">続きを読む →</a></div>
+      <div class="blog-card"><div class="blog-card-date">2026-02-03</div><div class="blog-card-tags"><span class="tag tag-popular">物価高・家計防衛</span></div><h3 class="blog-card-title"><a href="blog/post-417.html">物価高が続く家庭が、今すぐ見直すべき支出と資産防衛</a></h3><p class="blog-card-excerpt">食費を我慢する前に、固定費と長期資金の置き場所を確認。物価高に負けない家計の守り方をFPが解説します。</p><a class="blog-card-more" href="blog/post-417.html">続きを読む →</a></div>
       <div class="blog-card"><div class="blog-card-date">2026-02-01</div><div class="blog-card-tags"><span class="tag tag-popular">よく読まれている記事</span><span class="tag tag-invest">増やす×投資</span></div><h3 class="blog-card-title"><a href="blog/post-407.html">新NISAは「今うまくいっている」からこそ危ない</a></h3><p class="blog-card-excerpt">2024年スタートの新NISA。SNSでは「+10〜+30%が一番多い」「神制度」の声が溢れています。しかしだからこそ知っておきたいリスクがあります。</p><a class="blog-card-more" href="blog/post-407.html">続きを読む →</a></div>
       <div class="blog-card"><div class="blog-card-date">2026-01-31</div><div class="blog-card-tags"><span class="tag tag-invest">増やす×投資</span></div><h3 class="blog-card-title"><a href="blog/post-404.html">日本の財政は本当に危機的なのか ― 構造から見た健全性の再評価</a></h3><p class="blog-card-excerpt">「国の借金が1,000兆円を超えている」という表現が頻繁に用いられますが、この議論の多くは国家財政の構造を十分に考慮していない単純化された見方です。</p><a class="blog-card-more" href="blog/post-404.html">続きを読む →</a></div>
       <div class="blog-card"><div class="blog-card-date">2025-07-05</div><div class="blog-card-tags"><span class="tag tag-popular">よく読まれている記事</span></div><h3 class="blog-card-title"><a href="blog/post-395.html">「お金の使い方に迷わない5つの視点」―FPが教える目的と価値で判断する方法</a></h3><p class="blog-card-excerpt">「消費」「浪費」「投資」に分けて考える。FPが教えるお金の使い方の5つの視点。</p><a class="blog-card-more" href="blog/post-395.html">続きを読む →</a></div>
