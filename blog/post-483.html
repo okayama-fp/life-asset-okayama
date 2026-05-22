@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/post-483.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NISAとiDeCoを同時に使うコツ：年収別の最適な掛け金配分を解説｜Life Asset ブログ</title>
+  <meta name="description" content="NISAとiDeCoの違いを整理し、年収300〜700万円別の最適な月額配分をFPが解説。引き出せる自由度と節税効果の両立で老後資産を効率的に増やす方法を紹介します。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--sky:#0ea5e9;--sl:#38bdf8;--sb:#f0f9ff;--sp:#e0f2fe;--navy:#0f3460;--nl:#1e4d8c;--w:#fff;--gb:#f8fafc;--t:#1e293b;--tl:#64748b;--b:#e2e8f0}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;color:var(--t);background:var(--gb);line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+    #pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--sky),var(--sl));z-index:9999;transition:width .1s linear}
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--b);box-shadow:0 1px 8px rgba(14,165,233,0.07)}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo-text .name{font-size:1.25rem;font-weight:700;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .logo-text .tagline{font-size:0.62rem;color:var(--tl);white-space:nowrap}
+    nav{display:flex;gap:4px;margin-left:auto}
+    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,0.3);transition:opacity .2s}
+    .btn-cta:hover{opacity:.85}
+    .breadcrumb{max-width:760px;margin:0 auto;padding:16px 24px 0;font-size:0.8rem;color:var(--tl);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .breadcrumb a{color:var(--sky)}
+    .breadcrumb a:hover{text-decoration:underline}
+    .article-header{max-width:760px;margin:0 auto;padding:20px 24px 16px}
+    .article-tag{display:inline-block;padding:4px 14px;border-radius:14px;font-size:0.78rem;font-weight:700;margin-bottom:14px}
+    .tag-nisa{background:#dbeafe;color:#1d4ed8}
+    .article-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:16px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:0.82rem;color:var(--tl);flex-wrap:wrap}
+    .article-meta span{display:flex;align-items:center;gap:5px}
+    .action-bar{max-width:760px;margin:12px auto 0;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap}
+    .action-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;border:1.5px solid var(--b);background:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;color:var(--t)}
+    .action-btn:hover{border-color:var(--sky);color:var(--sky)}
+    .action-btn.bm-active{background:var(--sb);border-color:var(--sky);color:var(--sky)}
+    .action-btn.liked{background:#fce7f3;border-color:#fb7185;color:#e11d48}
+    .toc{max-width:760px;margin:24px auto 32px;padding:0 24px}
+    .toc-box{background:#fff;border:1.5px solid var(--sp);border-radius:14px;padding:20px 24px;border-left:4px solid var(--sky)}
+    .toc-box h2{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .toc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .toc-list li a{font-size:0.875rem;color:var(--sky);display:flex;align-items:baseline;gap:7px;transition:opacity .2s}
+    .toc-list li a:hover{opacity:.7;text-decoration:underline}
+    .toc-list li a::before{content:'▸';font-size:0.7rem;flex-shrink:0}
+    .article-content{max-width:760px;margin:0 auto;padding:0 24px 48px}
+    .article-content h2{font-size:1.2rem;font-weight:700;color:var(--navy);margin:36px 0 14px;padding:10px 16px;border-left:4px solid var(--sky);background:var(--sb);border-radius:0 8px 8px 0;line-height:1.4}
+    .article-content p{margin-bottom:16px;font-size:0.97rem;line-height:1.85}
+    .article-content ul,.article-content ol{padding-left:1.4em;margin-bottom:16px}
+    .article-content li{font-size:0.97rem;margin-bottom:6px;line-height:1.7}
+    .note-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:15px 18px;margin:16px 0;display:flex;gap:10px;align-items:flex-start}
+    .note-box::before{content:'💡';flex-shrink:0}
+    .note-box p{margin:0;font-size:0.88rem;color:#92400e}
+    .point-box{background:var(--sb);border:1.5px solid var(--sp);border-radius:10px;padding:15px 18px;margin:16px 0}
+    .point-box p{margin:0;font-size:0.88rem;color:var(--nl)}
+    .compare-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.88rem}
+    .compare-table th{padding:10px 14px;text-align:left;border:1px solid var(--b);font-weight:600;background:var(--sb);color:var(--navy)}
+    .compare-table td{padding:10px 14px;border:1px solid var(--b);color:var(--t)}
+    .compare-table tr:nth-child(even) td{background:var(--gb)}
+    .chat-widget{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .chat-box{background:#fff;border:1.5px solid var(--sp);border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(14,165,233,0.08)}
+    .chat-box-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .fp-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .fp-info strong{display:block;font-size:0.9rem;font-weight:700;color:var(--navy)}
+    .fp-info span{font-size:0.78rem;color:var(--tl)}
+    .chat-bubble{background:var(--sb);border-radius:0 14px 14px 14px;padding:14px 18px;font-size:0.9rem;line-height:1.7;color:var(--t);margin-bottom:16px;border:1px solid var(--sp)}
+    .chat-topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+    .chat-topic{padding:6px 14px;border-radius:20px;border:1.5px solid var(--sp);background:#fff;font-size:0.82rem;cursor:pointer;font-family:inherit;color:var(--nl);transition:all .2s}
+    .chat-topic:hover{background:var(--sb);border-color:var(--sky)}
+    .chat-input-wrap{display:flex;flex-direction:column;gap:10px}
+    .chat-input-wrap textarea{width:100%;border:1.5px solid var(--b);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:0.9rem;color:var(--t);resize:vertical;min-height:80px;outline:none;transition:border-color .2s}
+    .chat-input-wrap textarea:focus{border-color:var(--sky)}
+    .btn-send{align-self:flex-end;padding:10px 24px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;border:none;font-size:0.875rem;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(14,165,233,0.25);transition:opacity .2s}
+    .btn-send:hover{opacity:.85}
+    .share-section{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .share-section h2{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .share-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:22px;font-size:0.875rem;font-weight:600;color:#fff;cursor:pointer;text-decoration:none;transition:opacity .2s;border:none;font-family:inherit}
+    .share-btn:hover{opacity:.85}
+    .share-x{background:#000}
+    .share-line{background:#06c755}
+    .share-copy{background:#64748b}
+    .related{max-width:760px;margin:0 auto 32px;padding:0 24px}
+    .related h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--sp)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+    .related-card{background:#fff;border-radius:12px;border:1px solid var(--b);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform .2s;display:block}
+    .related-card:hover{transform:translateY(-3px)}
+    .related-card-top{height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    .bg-blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .bg-amber{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+    .bg-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+    .bg-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .bg-indigo{background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}
+    .related-card-body{padding:12px}
+    .related-card-body span{font-size:0.72rem;color:var(--sky);font-weight:600}
+    .related-card-body p{font-size:0.82rem;color:var(--navy);font-weight:600;margin-top:4px;line-height:1.4}
+    .post-nav{max-width:760px;margin:0 auto 48px;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:500px){.post-nav{grid-template-columns:1fr}}
+    .post-nav-btn{display:block;background:#fff;border:1.5px solid var(--b);border-radius:12px;padding:14px 18px;transition:all .2s}
+    .post-nav-btn:hover{border-color:var(--sky);box-shadow:0 4px 12px rgba(14,165,233,.1)}
+    .nav-dir{font-size:0.75rem;color:var(--tl);margin-bottom:4px}
+    .nav-title{font-size:0.88rem;font-weight:600;color:var(--navy);line-height:1.4}
+    footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:40px 24px 28px;margin-top:24px}
+    .footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;font-size:1.1rem;font-weight:700}
+    .footer-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff}
+    .footer-contact{margin:10px 0}
+    .footer-contact a{font-size:0.85rem;color:var(--sl);text-decoration:underline}
+    footer p{font-size:0.78rem;opacity:.6;margin-top:16px}
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>›</span>
+  <a href="index.html">ブログ</a>
+  <span>›</span>
+  <span>NISAとiDeCoを同時に使うコツ</span>
+</div>
+
+<div class="article-header">
+  <div class="article-tag tag-nisa">💡 NISA・投資</div>
+  <h1 class="article-title">NISAとiDeCoを同時に使うコツ：年収別の最適な掛け金配分を解説</h1>
+  <div class="article-meta">
+    <span>📅 2026年5月15日</span>
+    <span>⏱ 約5分で読めます</span>
+    <span>👨‍💼 （削除済み）（FP）</span>
+  </div>
+</div>
+
+<div class="action-bar">
+  <button class="action-btn" id="bm-btn" onclick="toggleBookmark(this,'post-483','NISAとiDeCoを同時に使うコツ','nisa')">🔖 ブックマーク</button>
+  <button class="action-btn" id="like-btn" onclick="toggleLike(this,'post-483')">👍 参考になった</button>
+</div>
+
+<div class="toc">
+  <div class="toc-box">
+    <h2>📋 目次</h2>
+    <ul class="toc-list">
+      <li><a href="#sec1">1. NISAとiDeCoの違いを整理する</a></li>
+      <li><a href="#sec2">2. 年収別の最適な組み合わせ</a></li>
+      <li><a href="#sec3">3. 掛け金の優先順位の考え方</a></li>
+      <li><a href="#sec4">FPまとめ</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="article-content">
+  <p>「NISAもiDeCoも使いたいが、両方に資金を回せるか不安」「どちらを先に満額にすべきか」という質問をよく受けます。結論から言えば、<strong>NISAとiDeCoは目的が違う「補完関係」にあるため、年収や状況に合わせて両方を組み合わせるのが最適解</strong>です。この記事では年収別の具体的な掛け金配分をご提案します。</p>
+
+  <h2 id="sec1">1. NISAとiDeCoの違いを整理する</h2>
+  <p>まず両制度の特徴を整理します。</p>
+  <table class="compare-table">
+    <thead><tr><th>比較項目</th><th>新NISA</th><th>iDeCo</th></tr></thead>
+    <tbody>
+      <tr><td>目的</td><td>自由な資産形成</td><td>老後専用の資産形成</td></tr>
+      <tr><td>引き出し</td><td>いつでも可（非課税）</td><td>60歳まで原則不可</td></tr>
+      <tr><td>節税（積立時）</td><td>なし</td><td>掛け金全額が所得控除</td></tr>
+      <tr><td>運用益</td><td>非課税（恒久）</td><td>非課税</td></tr>
+      <tr><td>年間上限</td><td>360万円</td><td>職種により14.4〜81.6万円</td></tr>
+      <tr><td>生涯非課税枠</td><td>1,800万円</td><td>上限なし（所得控除の恩恵）</td></tr>
+    </tbody>
+  </table>
+  <p>簡単にまとめると、NISAは「引き出せる・非課税枠大・灵活」、iDeCoは「節税効果大・老後まで引き出せない・強制貯蓄」です。前者は教育費や住宅など老後以外の目標にも使えますが、後者は老後専用の確実な積み立てに最適です。</p>
+  <div class="note-box"><p>iDeCoの「引き出せない」は一見デメリットですが、逆に言えば「老後まで確実に守られる」メリットでもあります。意志力に頼らずに老後資金を守れる仕組みとして、計画性が高い制度です。</p></div>
+
+  <h2 id="sec2">2. 年収別の最適な組み合わせ</h2>
+  <p>FPとして提案する年収別の月額配分目安です（会社員・企業年金なしの場合）。</p>
+  <table class="compare-table">
+    <thead><tr><th>年収</th><th>iDeCo月額</th><th>新NISA月額</th><th>合計</th><th>ポイント</th></tr></thead>
+    <tbody>
+      <tr><td>〜300万円</td><td>5,000〜10,000円</td><td>10,000〜20,000円</td><td>1.5〜3万円</td><td>NISA優先で柔軟性を確保</td></tr>
+      <tr><td>300〜400万円</td><td>10,000円</td><td>20,000〜30,000円</td><td>3〜4万円</td><td>iDeCoは少額でも所得控除の効果あり</td></tr>
+      <tr><td>400〜600万円</td><td>20,000円</td><td>30,000〜50,000円</td><td>5〜7万円</td><td>節税効果が最大の年収帯。iDeCo重視</td></tr>
+      <tr><td>600〜800万円</td><td>23,000円（上限）</td><td>50,000〜100,000円</td><td>7.3〜12.3万円</td><td>iDeCo満額＋NISAで二刀流</td></tr>
+      <tr><td>800万円〜</td><td>23,000円（上限）</td><td>100,000円〜</td><td>12.3万円〜</td><td>高所得税率ほどiDeCoの節税価値が高い</td></tr>
+    </tbody>
+  </table>
+  <div class="point-box"><p>年収300万円以下の方は「まずNISAを月1万円から」が王道です。iDeCoは所得控除の効果が薄く、60歳まで引き出せない制約が家計の柔軟性を損なう可能性があります。生活防衛資金が3ヶ月分貯まってからiDeCoを追加しましょう。</p></div>
+
+  <h2 id="sec3">3. 掛け金の優先順位の考え方</h2>
+  <p>月の積立可能額が限られている場合、以下の優先順位で考えることをおすすめします。</p>
+  <ol>
+    <li><strong>まず生活防衛資金を貯める</strong>（生活費の3〜6ヶ月分を現金で確保）</li>
+    <li><strong>iDeCoを月5,000〜20,000円で開始</strong>（会社員は掛け金が全額所得控除。節税効果が高い年収ほど優先度高）</li>
+    <li><strong>新NISA積立を月10,000〜33,333円で開始</strong>（iDeCoと同時並行でOK。教育費・住宅・老後の目標を設定）</li>
+    <li><strong>余裕が出たらNISAを増額</strong>（年間360万円の上限まで）</li>
+  </ol>
+  <p>重要なのは<strong>「完璧な金額から始めようとしない」</strong>ことです。月5,000円でも始めることが最優先です。複利効果と継続性が長期的な資産形成の鍵であり、多少少ない金額でも10〜20年続けることで大きな差になります。</p>
+  <div class="note-box"><p>「iDeCoとNISAをどちらもやると資金が足りない」と感じる場合は、固定費（通信費・保険・サブスク）の見直しを先に行いましょう。月1〜2万円の固定費削減が、積立の原資になります。</p></div>
+
+  <h2 id="sec4">FPまとめ</h2>
+  <p>NISAとiDeCoは「どちらか一方」ではなく「両方を目的に応じて使い分ける」のが正解です。年収400〜600万円の会社員なら「iDeCo月2万円＋新NISA月3万円」で月5万円の積立が、節税と資産形成のバランスの取れた黄金比率です。</p>
+  <p>大切なのは「自分の年収・家族構成・老後の目標金額」に合った配分を定期的に見直すことです。ライフイベント（結婚・出産・転職）に合わせて調整しながら、長期的に継続することが最も重要です。</p>
+  <p>具体的な配分のご相談は、ぜひFP相談をご活用ください。</p>
+</div>
+
+<div class="chat-widget">
+  <div class="chat-box">
+    <div class="chat-box-head">
+      <div class="fp-avatar">👨‍💼</div>
+      <div class="fp-info">
+        <strong>（削除済み）（FP）</strong>
+        <span>ファイナンシャルプランナー｜岡山</span>
+      </div>
+    </div>
+    <div class="chat-bubble">
+      この記事を読んで、お金のことで気になることはありましたか？気軽にご相談ください。
+    </div>
+    <div class="chat-topics">
+      <button class="chat-topic" onclick="setTopic('自分の年収でのNISAとiDeCoの最適配分を知りたい')">最適配分を相談したい</button>
+      <button class="chat-topic" onclick="setTopic('iDeCoとNISAを同時に始める際の注意点を教えてほしい')">同時に始める際の注意点を聞きたい</button>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea id="chat-msg" placeholder="例：NISAの始め方を教えてください"></textarea>
+      <button class="btn-send" onclick="openGmail()">✉️ FPに相談する</button>
+    </div>
+  </div>
+</div>
+
+<div class="share-section">
+  <h2>この記事をシェアする</h2>
+  <div class="share-btns">
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=NISA%E3%81%A8iDeCo%E3%82%92%E5%90%8C%E6%99%82%E3%81%AB%E4%BD%BF%E3%81%86%E3%82%B3%E3%83%84%EF%BC%9A%E5%B9%B4%E5%8F%8E%E5%88%A5%E3%81%AE%E6%9C%80%E9%81%A9%E3%81%AA%E6%8E%9B%E3%81%91%E9%87%91%E9%85%8D%E5%88%86%20%23LifeAsset&url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-483.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-483.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
+    <button class="share-btn share-copy" onclick="copyLink()">🔗 リンクをコピー</button>
+  </div>
+</div>
+
+<div class="related">
+  <h2>関連記事</h2>
+  <div class="related-grid">
+    <a href="post-423.html" class="related-card">
+      <div class="related-card-top bg-blue">📈</div>
+      <div class="related-card-body">
+        <span>NISA・投資</span>
+        <p>株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説</p>
+      </div>
+    </a>
+    <a href="post-447.html" class="related-card">
+      <div class="related-card-top bg-blue">📊</div>
+      <div class="related-card-body">
+        <span>NISA・投資</span>
+        <p>iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法</p>
+      </div>
+    </a>
+    <a href="post-453.html" class="related-card">
+      <div class="related-card-top bg-indigo">💡</div>
+      <div class="related-card-body">
+        <span>節税・控除</span>
+        <p>節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<nav class="post-nav">
+  <a href="post-477.html" class="post-nav-btn">
+    <div class="nav-dir">← 前の記事</div>
+    <div class="nav-title">固定費を月2万円削減する方法：通信費・サブスク・光熱費を一気に見直す</div>
+  </a>
+  <a href="post-489.html" class="post-nav-btn" style="text-align:right">
+    <div class="nav-dir">次の記事 →</div>
+    <div class="nav-title">インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由</div>
+  </a>
+</nav>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">lifeassetpartners@gmail.com</a>
+    </div>
+    <p>© 2026 Life Asset Partners.</p>
+  </div>
+</footer>
+
+<script>
+  const POST_ID = 'post-483';
+  const BMKey = 'lap_bm';
+  const ReadKey = 'lap_read';
+  const RateKey = 'lap_rate';
+  const StreakKey = 'lap_streak';
+
+  function markAsRead(id) {
+    const read = JSON.parse(localStorage.getItem(ReadKey) || '[]');
+    if (!read.includes(id)) { read.push(id); localStorage.setItem(ReadKey, JSON.stringify(read)); }
+  }
+  function toggleBookmark(btn, id, title, cat) {
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const idx = bms.findIndex(b => b.id === id);
+    if (idx >= 0) { bms.splice(idx,1); btn.textContent = '🔖 ブックマーク'; btn.classList.remove('bm-active'); }
+    else { bms.push({id,title,cat,url:location.pathname}); btn.textContent = '✅ 保存済み'; btn.classList.add('bm-active'); }
+    localStorage.setItem(BMKey, JSON.stringify(bms));
+  }
+  function toggleLike(btn, id) {
+    const rates = JSON.parse(localStorage.getItem(RateKey) || '{}');
+    if (rates[id]) { delete rates[id]; btn.textContent = '👍 参考になった'; btn.classList.remove('liked'); }
+    else { rates[id] = true; btn.textContent = '✅ 役に立った！'; btn.classList.add('liked'); }
+    localStorage.setItem(RateKey, JSON.stringify(rates));
+  }
+  function updateStreak() {
+    const today = new Date().toISOString().split('T')[0];
+    const s = JSON.parse(localStorage.getItem(StreakKey) || '{"count":0,"lastDate":""}');
+    const yesterday = new Date(Date.now()-86400000).toISOString().split('T')[0];
+    if (s.lastDate === today) return;
+    if (s.lastDate === yesterday) { s.count++; } else if (s.lastDate !== today) { s.count = 1; }
+    s.lastDate = today;
+    localStorage.setItem(StreakKey, JSON.stringify(s));
+  }
+  function openGmail() {
+    const msg = document.getElementById('chat-msg').value;
+    const subj = encodeURIComponent('ブログ記事からのご相談：' + document.title);
+    const body = encodeURIComponent(msg + '\n\n---\n記事URL: ' + location.href);
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
+  }
+  function setTopic(t) { document.getElementById('chat-msg').value = t; }
+  function copyLink() {
+    navigator.clipboard.writeText(location.href).then(function(){ alert('リンクをコピーしました！'); });
+  }
+  window.addEventListener('scroll', function(){
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('pb').style.width = pct + '%';
+    if (pct > 70) markAsRead(POST_ID);
+  });
+  window.addEventListener('DOMContentLoaded', function(){
+    updateStreak();
+    markAsRead(POST_ID);
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const btn = document.getElementById('bm-btn');
+    if (btn && bms.find(b => b.id === POST_ID)) { btn.textContent='✅ 保存済み'; btn.classList.add('bm-active'); }
+    const rates = JSON.parse(localStorage.getItem(RateKey) || '{}');
+    const lbtn = document.getElementById('like-btn');
+    if (lbtn && rates[POST_ID]) { lbtn.textContent='✅ 役に立った！'; lbtn.classList.add('liked'); }
+  });
+</script>
+</body>
+</html>
