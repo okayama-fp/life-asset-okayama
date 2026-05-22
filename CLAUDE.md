@@ -16,8 +16,9 @@
 | 代表者 | 髙月 義照（ファイナンシャルプランナー・FP資格者） |
 | メール | lifeassetpartners@gmail.com |
 | 電話 | 090-1010-4737 |
-| 公開URL | https://yamakaze8000-alt.github.io/123/ |
-| リポジトリ | yamakaze8000-alt/123 |
+| 公開URL | https://lifeassetoffice.net/ |
+| 旧URL | https://okayama-fp.github.io/life-asset-okayama/ |
+| リポジトリ | okayama-fp/life-asset-okayama |
 
 ---
 
@@ -54,19 +55,20 @@
 | ファイル | 内容 |
 |----------|------|
 | `index.html` | トップページ |
-| `blog/post-411.html` | 給料だけに頼らない家計へ |
-| `blog/post-417.html` | 物価高が続く家庭の支出見直し |
-| `blog/post-423.html` | 新NISA・株価タイミング解説 |
+| `future-plans.html` | ライフプランニング |
+| `simulation.html` | 資産シミュレーター |
+| `advisor.html` | アドバイザー業務（老後・相続・保険） |
+| `loan.html` | 融資シミュレーター |
 | `muscat.html` | 別サービス：極上マスカット農園 |
 | `images/` | ローカル画像フォルダ |
 
 ---
 
-## オープンPR一覧（2026-05-22時点）
+## オープンPR一覧（2026-05-02時点）
 
 | PR# | タイトル | 優先度 | 状態 |
 |-----|----------|--------|------|
-| #14 | 外部画像URLをローカルフォルダパスに変更 | 高 | Open（マージ済み相当） |
+| #14 | 外部画像URLをローカルフォルダパスに変更 | 高 | Draft |
 | #13 | ライフアセットパートナーズへリブランド | 高 | Open |
 | #12 | ホームページ完成（お客様の声・相談の流れ・フォーム追加） | 中 | Open |
 | #10 | CLAUDE.md追加（役割ベースセッション） | 低 | Draft |
@@ -133,6 +135,27 @@
 
 ---
 
+## 作業フロー
+
+```
+ユーザーから指示
+  → ローカルで実装・コミット（自律）
+  → ユーザーが確認
+  → ユーザーの許可後 → git push → PR作成（feature branch のみ）
+  → 公開してよいか確認 → ユーザーOK後 → gh-pages へマージ → 自動公開
+```
+
+### 公開ルール（GitHub Pages）
+- `gh-pages` ブランチに push / merge すると **自動で公開**される
+- **`gh-pages` への直接 push は絶対にしない**
+- PR を `gh-pages` へマージする前に必ず「公開してよいですか？」と確認する
+- feature branch への push は公開に影響しない（安全）
+- **GitHub Pages の非公開化はリポジトリ設定から行うこと**（Settings → Pages → Source → None）
+
+**git push・PR作成・gh-pages マージは必ずユーザーの許可を得てから行う。**
+
+---
+
 ## 私の判断基準
 
 1. **ユーザーへの確認が必要**: `git push`、PR作成・マージ、外部API通信、破壊的変更
@@ -144,4 +167,6 @@
 ## 次のアクション（私が把握している課題）
 
 - [ ] `images/` フォルダに実際の画像ファイルを配置（ユーザー作業）
+- [ ] PR #14 をレビュー → `gh-pages` へマージ
+- [ ] PR #13 の内容を確認して整理
 - [ ] 古いDraft PRの整理（クローズ検討）
