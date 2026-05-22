@@ -53,10 +53,10 @@
 | ファイル | 内容 |
 |----------|------|
 | `index.html` | トップページ |
-| `blog/index.html` | ブログ一覧 |
-| `blog/asset-building-beginner/index.html` | ブログ記事1 |
-| `service/index.html` | サービス案内 |
-| `recruit/index.html` | 採用情報 |
+| `future-plans.html` | ライフプランニング |
+| `simulation.html` | 資産シミュレーター |
+| `advisor.html` | アドバイザー業務（老後・相続・保険） |
+| `loan.html` | 融資シミュレーター |
 | `muscat.html` | 別サービス：極上マスカット農園 |
 | `images/` | ローカル画像フォルダ |
 
