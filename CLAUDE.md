@@ -17,6 +17,7 @@
 | メール | lifeassetpartners@gmail.com |
 | 電話 | 090-1010-4737 |
 | 公開URL | https://lifeassetoffice.net/ |
+| 旧URL | https://okayama-fp.github.io/life-asset-okayama/ |
 | リポジトリ | okayama-fp/life-asset-okayama |
 
 ---
