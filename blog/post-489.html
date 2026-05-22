@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由｜Life Asset ブログ</title>
+  <meta name="description" content="インフレ率2%が20年続くと現金の価値が30%以上下落する仕組みを解説。インフレに強い資産（株式・不動産・外貨・NISA）と月1万円から始めるポートフォリオ例をFPが紹介します。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--sky:#0ea5e9;--sl:#38bdf8;--sb:#f0f9ff;--sp:#e0f2fe;--navy:#0f3460;--nl:#1e4d8c;--w:#fff;--gb:#f8fafc;--t:#1e293b;--tl:#64748b;--b:#e2e8f0}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;color:var(--t);background:var(--gb);line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+    #pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--sky),var(--sl));z-index:9999;transition:width .1s linear}
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--b);box-shadow:0 1px 8px rgba(14,165,233,0.07)}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo-text .name{font-size:1.25rem;font-weight:700;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .logo-text .tagline{font-size:0.62rem;color:var(--tl);white-space:nowrap}
+    nav{display:flex;gap:4px;margin-left:auto}
+    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,0.3);transition:opacity .2s}
+    .btn-cta:hover{opacity:.85}
+    .breadcrumb{max-width:760px;margin:0 auto;padding:16px 24px 0;font-size:0.8rem;color:var(--tl);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .breadcrumb a{color:var(--sky)}
+    .breadcrumb a:hover{text-decoration:underline}
+    .article-header{max-width:760px;margin:0 auto;padding:20px 24px 16px}
+    .article-tag{display:inline-block;padding:4px 14px;border-radius:14px;font-size:0.78rem;font-weight:700;margin-bottom:14px}
+    .tag-nisa{background:#dbeafe;color:#1d4ed8}
+    .article-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:16px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:0.82rem;color:var(--tl);flex-wrap:wrap}
+    .article-meta span{display:flex;align-items:center;gap:5px}
+    .action-bar{max-width:760px;margin:12px auto 0;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap}
+    .action-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;border:1.5px solid var(--b);background:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;color:var(--t)}
+    .action-btn:hover{border-color:var(--sky);color:var(--sky)}
+    .action-btn.bm-active{background:var(--sb);border-color:var(--sky);color:var(--sky)}
+    .action-btn.liked{background:#fce7f3;border-color:#fb7185;color:#e11d48}
+    .toc{max-width:760px;margin:24px auto 32px;padding:0 24px}
+    .toc-box{background:#fff;border:1.5px solid var(--sp);border-radius:14px;padding:20px 24px;border-left:4px solid var(--sky)}
+    .toc-box h2{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .toc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .toc-list li a{font-size:0.875rem;color:var(--sky);display:flex;align-items:baseline;gap:7px;transition:opacity .2s}
+    .toc-list li a:hover{opacity:.7;text-decoration:underline}
+    .toc-list li a::before{content:'▸';font-size:0.7rem;flex-shrink:0}
+    .article-content{max-width:760px;margin:0 auto;padding:0 24px 48px}
+    .article-content h2{font-size:1.2rem;font-weight:700;color:var(--navy);margin:36px 0 14px;padding:10px 16px;border-left:4px solid var(--sky);background:var(--sb);border-radius:0 8px 8px 0;line-height:1.4}
+    .article-content p{margin-bottom:16px;font-size:0.97rem;line-height:1.85}
+    .article-content ul,.article-content ol{padding-left:1.4em;margin-bottom:16px}
+    .article-content li{font-size:0.97rem;margin-bottom:6px;line-height:1.7}
+    .note-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:15px 18px;margin:16px 0;display:flex;gap:10px;align-items:flex-start}
+    .note-box::before{content:'💡';flex-shrink:0}
+    .note-box p{margin:0;font-size:0.88rem;color:#92400e}
+    .point-box{background:var(--sb);border:1.5px solid var(--sp);border-radius:10px;padding:15px 18px;margin:16px 0}
+    .point-box p{margin:0;font-size:0.88rem;color:var(--nl)}
+    .compare-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.88rem}
+    .compare-table th{padding:10px 14px;text-align:left;border:1px solid var(--b);font-weight:600;background:var(--sb);color:var(--navy)}
+    .compare-table td{padding:10px 14px;border:1px solid var(--b);color:var(--t)}
+    .compare-table tr:nth-child(even) td{background:var(--gb)}
+    .chat-widget{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .chat-box{background:#fff;border:1.5px solid var(--sp);border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(14,165,233,0.08)}
+    .chat-box-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .fp-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .fp-info strong{display:block;font-size:0.9rem;font-weight:700;color:var(--navy)}
+    .fp-info span{font-size:0.78rem;color:var(--tl)}
+    .chat-bubble{background:var(--sb);border-radius:0 14px 14px 14px;padding:14px 18px;font-size:0.9rem;line-height:1.7;color:var(--t);margin-bottom:16px;border:1px solid var(--sp)}
+    .chat-topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+    .chat-topic{padding:6px 14px;border-radius:20px;border:1.5px solid var(--sp);background:#fff;font-size:0.82rem;cursor:pointer;font-family:inherit;color:var(--nl);transition:all .2s}
+    .chat-topic:hover{background:var(--sb);border-color:var(--sky)}
+    .chat-input-wrap{display:flex;flex-direction:column;gap:10px}
+    .chat-input-wrap textarea{width:100%;border:1.5px solid var(--b);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:0.9rem;color:var(--t);resize:vertical;min-height:80px;outline:none;transition:border-color .2s}
+    .chat-input-wrap textarea:focus{border-color:var(--sky)}
+    .btn-send{align-self:flex-end;padding:10px 24px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;border:none;font-size:0.875rem;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(14,165,233,0.25);transition:opacity .2s}
+    .btn-send:hover{opacity:.85}
+    .share-section{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .share-section h2{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .share-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:22px;font-size:0.875rem;font-weight:600;color:#fff;cursor:pointer;text-decoration:none;transition:opacity .2s;border:none;font-family:inherit}
+    .share-btn:hover{opacity:.85}
+    .share-x{background:#000}
+    .share-line{background:#06c755}
+    .share-copy{background:#64748b}
+    .related{max-width:760px;margin:0 auto 32px;padding:0 24px}
+    .related h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--sp)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+    .related-card{background:#fff;border-radius:12px;border:1px solid var(--b);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform .2s;display:block}
+    .related-card:hover{transform:translateY(-3px)}
+    .related-card-top{height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    .bg-blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .bg-amber{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+    .bg-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+    .bg-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .bg-indigo{background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}
+    .related-card-body{padding:12px}
+    .related-card-body span{font-size:0.72rem;color:var(--sky);font-weight:600}
+    .related-card-body p{font-size:0.82rem;color:var(--navy);font-weight:600;margin-top:4px;line-height:1.4}
+    .post-nav{max-width:760px;margin:0 auto 48px;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:500px){.post-nav{grid-template-columns:1fr}}
+    .post-nav-btn{display:block;background:#fff;border:1.5px solid var(--b);border-radius:12px;padding:14px 18px;transition:all .2s}
+    .post-nav-btn:hover{border-color:var(--sky);box-shadow:0 4px 12px rgba(14,165,233,.1)}
+    .nav-dir{font-size:0.75rem;color:var(--tl);margin-bottom:4px}
+    .nav-title{font-size:0.88rem;font-weight:600;color:var(--navy);line-height:1.4}
+    footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:40px 24px 28px;margin-top:24px}
+    .footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;font-size:1.1rem;font-weight:700}
+    .footer-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff}
+    .footer-contact{margin:10px 0}
+    .footer-contact a{font-size:0.85rem;color:var(--sl);text-decoration:underline}
+    footer p{font-size:0.78rem;opacity:.6;margin-top:16px}
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>›</span>
+  <a href="index.html">ブログ</a>
+  <span>›</span>
+  <span>インフレに負けない資産運用の基本</span>
+</div>
+
+<div class="article-header">
+  <div class="article-tag tag-nisa">📈 NISA・投資</div>
+  <h1 class="article-title">インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由</h1>
+  <div class="article-meta">
+    <span>📅 2026年5月14日</span>
+    <span>⏱ 約4分で読めます</span>
+    <span>👨‍💼 髙月 義照（FP）</span>
+  </div>
+</div>
+
+<div class="action-bar">
+  <button class="action-btn" id="bm-btn" onclick="toggleBookmark(this,'post-489','インフレに負けない資産運用の基本','nisa')">🔖 ブックマーク</button>
+  <button class="action-btn" id="like-btn" onclick="toggleLike(this,'post-489')">👍 参考になった</button>
+</div>
+
+<div class="toc">
+  <div class="toc-box">
+    <h2>📋 目次</h2>
+    <ul class="toc-list">
+      <li><a href="#sec1">1. インフレで現金の価値が下がる仕組み</a></li>
+      <li><a href="#sec2">2. インフレに強い資産とは</a></li>
+      <li><a href="#sec3">3. 少額から始める資産防衛ポートフォリオ</a></li>
+      <li><a href="#sec4">FPまとめ</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="article-content">
+  <p>「貯金していれば安心」という感覚は、インフレ時代には危険かもしれません。物価が上がり続ける環境では、現金の「名目額」は変わらなくても「実質的な購買力」は年々下がっていきます。<strong>インフレが続く物価高時代に現金だけで資産を持ち続けることは、静かに損をし続けることと同義です。</strong></p>
+
+  <h2 id="sec1">1. インフレで現金の価値が下がる仕組み</h2>
+  <p>インフレとは「物の値段が上がること」＝「お金の価値が下がること」です。具体的な数字で見てみましょう。</p>
+  <table class="compare-table">
+    <thead><tr><th>インフレ率</th><th>10年後の購買力</th><th>20年後の購買力</th><th>30年後の購買力</th></tr></thead>
+    <tbody>
+      <tr><td>年1%</td><td>約90.5万円</td><td>約81.9万円</td><td>約74.1万円</td></tr>
+      <tr><td>年2%</td><td>約82.0万円</td><td>約67.3万円</td><td>約55.2万円</td></tr>
+      <tr><td>年3%</td><td>約74.4万円</td><td>約55.4万円</td><td>約41.2万円</td></tr>
+    </tbody>
+  </table>
+  <p>現在100万円の現金があったとして、インフレ率2%が20年続くと、その購買力は約67万円に下落します。つまり<strong>「何もしていないのに30万円以上損をしている」</strong>のと同じ状況です。</p>
+  <div class="note-box"><p>日本はデフレからインフレに転換しつつあります。2022〜2025年にかけて消費者物価指数は3〜4%程度上昇しており、今後も1〜2%程度のインフレが続くとみられています。「インフレは他人事」という感覚は改めましょう。</p></div>
+
+  <h2 id="sec2">2. インフレに強い資産とは</h2>
+  <p>インフレ時代に資産を守るためには、「インフレに強い資産」を保有することが重要です。代表的な4つの選択肢を解説します。</p>
+  <ol>
+    <li><strong>株式インデックスファンド（最もバランスが良い）</strong><br>全世界株式や米国株のインデックスファンドは、長期的にインフレ率を上回るリターンを出してきました。過去30年の全世界株式の年率リターンは約8〜10%（ドルベース）。新NISAやiDeCoで積立投資するのが最適な方法です。</li>
+    <li><strong>不動産（現物・REIT）</strong><br>現物不動産は物価上昇とともに資産価値が上がりやすい特性があります。ただし流動性が低く初期投資も大きい。REITなら少額から分散投資が可能です。</li>
+    <li><strong>外貨建て資産</strong><br>円が弱くなる（円安になる）局面では、外貨建て資産の円換算価値が上がります。米ドル建ての投資信託・ETFがアクセスしやすい選択肢です。</li>
+    <li><strong>iDeCo・NISA（節税しながら投資）</strong><br>iDeCoとNISAは「税制優遇 + インフレ対策投資」を同時に実現できる最も効率的な手段です。インフレに強い株式ファンドをこれらの非課税口座で持つことが理想的です。</li>
+  </ol>
+  <div class="point-box"><p>「現金ゼロで全部投資に」という極端な話ではありません。生活防衛資金（生活費3〜6ヶ月分）は現金で確保しつつ、それ以外の余裕資金をインフレ対策資産に振り向けることが重要です。</p></div>
+
+  <h2 id="sec3">3. 少額から始める資産防衛ポートフォリオ</h2>
+  <p>「月1万円しか余裕がない」という方でも始められる、シンプルなインフレ対策ポートフォリオをご提案します。</p>
+  <table class="compare-table">
+    <thead><tr><th>月額</th><th>配分先</th><th>商品例</th><th>目的</th></tr></thead>
+    <tbody>
+      <tr><td>月5,000円</td><td>新NISA（積立投資枠）</td><td>eMAXIS Slim全世界株式</td><td>長期のインフレ対策・資産成長</td></tr>
+      <tr><td>月3,000円</td><td>iDeCo</td><td>同上または米国株ファンド</td><td>節税しながら老後資金を積立</td></tr>
+      <tr><td>月2,000円</td><td>現金貯蓄</td><td>高金利普通預金・定期</td><td>緊急時の流動性確保</td></tr>
+    </tbody>
+  </table>
+  <p>月1万円という少額でも、30年間続けると（年利5%として）約830万円になります。インフレ率2%を引いた「実質リターン」は年3%と控えめに見ても、30年後には約490万円の実質的な資産増加が見込めます。</p>
+  <div class="note-box"><p>投資は「たくさんあるから始める」ものではなく「早く始めるほど有利」なものです。月5,000円でも、今日始めることが10年後に大きな差を生みます。完璧なタイミングを待っていては永遠に始められません。</p></div>
+
+  <h2 id="sec4">FPまとめ</h2>
+  <p>物価高・インフレが続く現代において、「全財産を現金で持つ」ことは安全ではなくリスクです。インフレに強い資産（株式ファンド・REIT・外貨資産）を新NISAやiDeCoを使って積み立てることが、資産防衛の基本です。</p>
+  <p>「投資は怖い」という気持ちはよくわかります。しかし、<strong>「何もしないこと」もリスクです</strong>。インフレによる目に見えない損失を防ぐために、今日から一歩を踏み出してみてください。月5,000円から始めるNISA積立が、30年後のあなたを守ります。</p>
+</div>
+
+<div class="chat-widget">
+  <div class="chat-box">
+    <div class="chat-box-head">
+      <div class="fp-avatar">👨‍💼</div>
+      <div class="fp-info">
+        <strong>髙月 義照（FP）</strong>
+        <span>ファイナンシャルプランナー｜岡山</span>
+      </div>
+    </div>
+    <div class="chat-bubble">
+      この記事を読んで、お金のことで気になることはありましたか？気軽にご相談ください。
+    </div>
+    <div class="chat-topics">
+      <button class="chat-topic" onclick="setTopic('インフレ対策のポートフォリオを相談したい')">インフレ対策ポートフォリオを相談したい</button>
+      <button class="chat-topic" onclick="setTopic('現金をどのくらい持てばよいか教えてほしい')">現金の適切な保有額を教えてほしい</button>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea id="chat-msg" placeholder="例：NISAの始め方を教えてください"></textarea>
+      <button class="btn-send" onclick="openGmail()">✉️ FPに相談する</button>
+    </div>
+  </div>
+</div>
+
+<div class="share-section">
+  <h2>この記事をシェアする</h2>
+  <div class="share-btns">
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=%E3%82%A4%E3%83%B3%E3%83%95%E3%83%AC%E3%81%AB%E8%B2%A0%E3%81%91%E3%81%AA%E3%81%84%E8%B3%87%E7%94%A3%E9%81%8B%E7%94%A8%E3%81%AE%E5%9F%BA%E6%9C%AC%EF%BC%9A%E7%89%A9%E4%BE%A1%E9%AB%98%E6%99%82%E4%BB%A3%E3%81%AB%E7%8F%BE%E9%87%91%E3%81%A0%E3%81%91%E3%81%A7%E3%81%AF%E6%90%8D%20%23LifeAsset&url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-489.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-489.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
+    <button class="share-btn share-copy" onclick="copyLink()">🔗 リンクをコピー</button>
+  </div>
+</div>
+
+<div class="related">
+  <h2>関連記事</h2>
+  <div class="related-grid">
+    <a href="post-423.html" class="related-card">
+      <div class="related-card-top bg-blue">📈</div>
+      <div class="related-card-body">
+        <span>NISA・投資</span>
+        <p>株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説</p>
+      </div>
+    </a>
+    <a href="post-447.html" class="related-card">
+      <div class="related-card-top bg-blue">📊</div>
+      <div class="related-card-body">
+        <span>NISA・投資</span>
+        <p>iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法</p>
+      </div>
+    </a>
+    <a href="post-417.html" class="related-card">
+      <div class="related-card-top bg-amber">🛒</div>
+      <div class="related-card-body">
+        <span>節約・物価高</span>
+        <p>物価高が続く家庭が見直すべき支出と資産防衛</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<nav class="post-nav">
+  <a href="post-483.html" class="post-nav-btn">
+    <div class="nav-dir">← 前の記事</div>
+    <div class="nav-title">NISAとiDeCoを同時に使うコツ：年収別の最適な掛け金配分を解説</div>
+  </a>
+  <a href="post-495.html" class="post-nav-btn" style="text-align:right">
+    <div class="nav-dir">次の記事 →</div>
+    <div class="nav-title">子育て世代が知らないと損する：税金・補助金・控除の完全まとめ2026年版</div>
+  </a>
+</nav>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">lifeassetpartners@gmail.com</a>
+    </div>
+    <p>© 2026 Life Asset Partners.</p>
+  </div>
+</footer>
+
+<script>
+  const POST_ID = 'post-489';
+  const BMKey = 'lap_bm';
+  const ReadKey = 'lap_read';
+  const RateKey = 'lap_rate';
+  const StreakKey = 'lap_streak';
+
+  function markAsRead(id) {
+    const read = JSON.parse(localStorage.getItem(ReadKey) || '[]');
+    if (!read.includes(id)) { read.push(id); localStorage.setItem(ReadKey, JSON.stringify(read)); }
+  }
+  function toggleBookmark(btn, id, title, cat) {
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const idx = bms.findIndex(b => b.id === id);
+    if (idx >= 0) { bms.splice(idx,1); btn.textContent = '🔖 ブックマーク'; btn.classList.remove('bm-active'); }
+    else { bms.push({id,title,cat,url:location.pathname}); btn.textContent = '✅ 保存済み'; btn.classList.add('bm-active'); }
+    localStorage.setItem(BMKey, JSON.stringify(bms));
+  }
+  function toggleLike(btn, id) {
+    const rates = JSON.parse(localStorage.getItem(RateKey) || '{}');
+    if (rates[id]) { delete rates[id]; btn.textContent = '👍 参考になった'; btn.classList.remove('liked'); }
+    else { rates[id] = true; btn.textContent = '✅ 役に立った！'; btn.classList.add('liked'); }
+    localStorage.setItem(RateKey, JSON.stringify(rates));
+  }
+  function updateStreak() {
+    const today = new Date().toISOString().split('T')[0];
+    const s = JSON.parse(localStorage.getItem(StreakKey) || '{"count":0,"lastDate":""}');
+    const yesterday = new Date(Date.now()-86400000).toISOString().split('T')[0];
+    if (s.lastDate === today) return;
+    if (s.lastDate === yesterday) { s.count++; } else if (s.lastDate !== today) { s.count = 1; }
+    s.lastDate = today;
+    localStorage.setItem(StreakKey, JSON.stringify(s));
+  }
+  function openGmail() {
+    const msg = document.getElementById('chat-msg').value;
+    const subj = encodeURIComponent('ブログ記事からのご相談：' + document.title);
+    const body = encodeURIComponent(msg + '\n\n---\n記事URL: ' + location.href);
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
+  }
+  function setTopic(t) { document.getElementById('chat-msg').value = t; }
+  function copyLink() {
+    navigator.clipboard.writeText(location.href).then(function(){ alert('リンクをコピーしました！'); });
+  }
+  window.addEventListener('scroll', function(){
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('pb').style.width = pct + '%';
+    if (pct > 70) markAsRead(POST_ID);
+  });
+  window.addEventListener('DOMContentLoaded', function(){
+    updateStreak();
+    markAsRead(POST_ID);
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const btn = document.getElementById('bm-btn');
+    if (btn && bms.find(b => b.id === POST_ID)) { btn.textContent='✅ 保存済み'; btn.classList.add('bm-active'); }
+    const rates = JSON.parse(localStorage.getItem(RateKey) || '{}');
+    const lbtn = document.getElementById('like-btn');
+    if (lbtn && rates[POST_ID]) { lbtn.textContent='✅ 役に立った！'; lbtn.classList.add('liked'); }
+  });
+</script>
+</body>
+</html>
