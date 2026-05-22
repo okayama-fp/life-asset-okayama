@@ -1,54 +1,297 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>株価が上がった今、新NISAを始めても大丈夫？｜Life Asset</title>
-  <meta name="description" content="株価が高く見える時に新NISAを始めてもよいのか。岡山のFPが家計目線で、投資前に確認したい3つのポイントを解説します。" />
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/post-423.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説｜Life Asset ブログ</title>
+  <meta name="description" content="株価上昇中の今、新NISAを始めるべきか迷っていますか？FPが家計の余力・積立の仕方・投資の目的設定まで、家庭目線でわかりやすく解説します。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif;color:#1e293b;line-height:1.9;background:#f8fafc}
-    a{color:inherit;text-decoration:none}.wrap{max-width:860px;margin:0 auto;padding:32px 22px 72px}.back{display:inline-block;color:#0ea5e9;font-weight:800;margin-bottom:24px}
-    article{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:clamp(24px,5vw,48px);box-shadow:0 18px 45px rgba(15,52,96,.08)}
-    .tag{display:inline-block;background:#e0f2fe;color:#0ea5e9;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:900;margin-bottom:18px}
-    h1{font-size:clamp(28px,5vw,42px);line-height:1.35;color:#0f3460;margin:0 0 18px}h2{font-size:22px;color:#0f3460;margin-top:36px;border-left:5px solid #0ea5e9;padding-left:12px}
-    .lead{font-size:17px;color:#475569}.note{background:#f0f9ff;border-left:4px solid #0ea5e9;border-radius:12px;padding:16px 18px;margin:24px 0;font-weight:700}
-    ul{padding-left:1.3em}.cta{margin-top:34px;background:linear-gradient(135deg,#e0f2fe,#fff);border:1px solid #bae6fd;border-radius:18px;padding:22px}
-    .cta a{display:inline-block;margin-top:10px;background:#0ea5e9;color:white;border-radius:999px;padding:10px 18px;font-weight:900}
+    :root{--sky:#0ea5e9;--sl:#38bdf8;--sb:#f0f9ff;--sp:#e0f2fe;--navy:#0f3460;--nl:#1e4d8c;--w:#fff;--gb:#f8fafc;--t:#1e293b;--tl:#64748b;--b:#e2e8f0}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;color:var(--t);background:var(--gb);line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+
+    /* PROGRESS BAR */
+    #pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--sky),var(--sl));z-index:9999;transition:width .1s linear}
+
+    /* HEADER */
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--b);box-shadow:0 1px 8px rgba(14,165,233,0.07)}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo-text .name{font-size:1.25rem;font-weight:700;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .logo-text .tagline{font-size:0.62rem;color:var(--tl);white-space:nowrap}
+    nav{display:flex;gap:4px;margin-left:auto}
+    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,0.3);transition:opacity .2s}
+    .btn-cta:hover{opacity:.85}
+
+    /* BREADCRUMB */
+    .breadcrumb{max-width:760px;margin:0 auto;padding:16px 24px 0;font-size:0.8rem;color:var(--tl);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .breadcrumb a{color:var(--sky)}
+    .breadcrumb a:hover{text-decoration:underline}
+
+    /* ARTICLE HEADER */
+    .article-header{max-width:760px;margin:0 auto;padding:20px 24px 28px}
+    .article-tag{display:inline-block;padding:4px 14px;border-radius:14px;background:var(--sp);color:var(--sky);font-size:0.78rem;font-weight:700;margin-bottom:14px}
+    .article-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:16px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:0.82rem;color:var(--tl);flex-wrap:wrap}
+    .article-meta span{display:flex;align-items:center;gap:5px}
+
+    /* TOC */
+    .toc{max-width:760px;margin:0 auto 32px;padding:0 24px}
+    .toc-box{background:#fff;border:1.5px solid var(--sp);border-radius:14px;padding:20px 24px;border-left:4px solid var(--sky)}
+    .toc-box h2{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .toc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .toc-list li a{font-size:0.875rem;color:var(--sky);display:flex;align-items:baseline;gap:7px;transition:opacity .2s}
+    .toc-list li a:hover{opacity:.7;text-decoration:underline}
+    .toc-list li a::before{content:'▸';font-size:0.7rem;flex-shrink:0}
+
+    /* ARTICLE CONTENT */
+    .article-content{max-width:760px;margin:0 auto;padding:0 24px 48px}
+    .article-content h2{font-size:1.25rem;font-weight:700;color:var(--navy);margin:36px 0 14px;padding-left:14px;border-left:4px solid var(--sky);line-height:1.4}
+    .article-content p{margin-bottom:16px;font-size:0.97rem}
+    .article-content ul,.article-content ol{padding-left:1.4em;margin-bottom:16px}
+    .article-content li{font-size:0.97rem;margin-bottom:6px}
+    .note{background:var(--sb);border:1px solid var(--sp);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:0.88rem;color:var(--nl);display:flex;gap:10px;align-items:flex-start}
+    .note::before{content:'💡';flex-shrink:0}
+    .highlight-box{background:linear-gradient(135deg,var(--sb),#fff);border:1.5px solid var(--sp);border-radius:12px;padding:18px 20px;margin:20px 0}
+    .highlight-box h3{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+
+    /* CHAT WIDGET */
+    .chat-widget{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .chat-box{background:#fff;border:1.5px solid var(--sp);border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(14,165,233,0.08)}
+    .chat-box-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .fp-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .fp-info strong{display:block;font-size:0.9rem;font-weight:700;color:var(--navy)}
+    .fp-info span{font-size:0.78rem;color:var(--tl)}
+    .chat-bubble{background:var(--sb);border-radius:0 14px 14px 14px;padding:14px 18px;font-size:0.9rem;line-height:1.7;color:var(--t);margin-bottom:16px;border:1px solid var(--sp)}
+    .chat-bubble-tip{position:relative}
+    .chat-input-wrap{display:flex;flex-direction:column;gap:10px}
+    .chat-input-wrap textarea{width:100%;border:1.5px solid var(--b);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:0.9rem;color:var(--t);resize:vertical;min-height:80px;outline:none;transition:border-color .2s}
+    .chat-input-wrap textarea:focus{border-color:var(--sky)}
+    .btn-send{align-self:flex-end;padding:10px 24px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;border:none;font-size:0.875rem;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(14,165,233,0.25);transition:opacity .2s}
+    .btn-send:hover{opacity:.85}
+
+    /* SHARE */
+    .share-section{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .share-section h2{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .share-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:22px;font-size:0.875rem;font-weight:600;color:#fff;cursor:pointer;text-decoration:none;transition:opacity .2s}
+    .share-btn:hover{opacity:.85}
+    .share-x{background:#000}
+    .share-line{background:#06c755}
+
+    /* RELATED */
+    .related{max-width:760px;margin:0 auto 48px;padding:0 24px}
+    .related h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--sp)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+    .related-card{background:#fff;border-radius:12px;border:1px solid var(--b);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform .2s}
+    .related-card:hover{transform:translateY(-3px)}
+    .related-card-top{height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    .bg-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+    .bg-amber{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+    .bg-indigo{background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}
+    .related-card-body{padding:12px}
+    .related-card-body span{font-size:0.72rem;color:var(--sky);font-weight:600}
+    .related-card-body p{font-size:0.82rem;color:var(--navy);font-weight:600;margin-top:4px;line-height:1.4}
+
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:40px 24px 28px;margin-top:24px}
+    .footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+    .footer-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff}
+    .footer-logo{font-size:1.1rem;font-weight:700}
+    .footer-contact{margin:10px 0}
+    .footer-contact a{font-size:0.85rem;color:var(--sl);text-decoration:underline}
+    footer p{font-size:0.78rem;opacity:.6;margin-top:16px}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <a class="back" href="../index.html#blog">← ブログ一覧へ戻る</a>
-    <article>
-      <div class="tag">新NISA・資産形成</div>
-      <h1>株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説</h1>
-      <p class="lead">ニュースで「株価上昇」「最高値更新」と聞くと、今から投資を始めるのは遅いのではないかと不安になります。けれど、FPとして見るべきポイントは株価そのものよりも、あなたの家計が長く続けられる状態かどうかです。</p>
+<div id="pb"></div>
 
-      <div class="note">結論：生活防衛資金があり、毎月無理なく積み立てられるなら、新NISAは「タイミングを当てる投資」ではなく「家計の仕組み化」として始める価値があります。</div>
-
-      <h2>1. まず確認するのは株価ではなく家計の余力</h2>
-      <p>投資で一番避けたいのは、生活費が足りなくなって値下がり時に売ってしまうことです。新NISAを始める前に、最低でも生活費の3か月から6か月分を預貯金で確保しておきましょう。</p>
-      <ul>
-        <li>毎月の固定費を払っても黒字が残る</li>
-        <li>急な出費に備える預貯金がある</li>
-        <li>積立額を途中で無理なく調整できる</li>
-      </ul>
-
-      <h2>2. 一括投資より、続けられる積立が家庭向き</h2>
-      <p>まとまった資金を一度に入れると、値動きが気になりやすくなります。家計相談では、まず少額からの積立をおすすめすることが多いです。金額よりも「やめずに続けられる仕組み」の方が大切です。</p>
-
-      <h2>3. 上がった時ほど目的を決めておく</h2>
-      <p>教育費、住宅購入、老後資金など、目的によって投資期間とリスクの取り方は変わります。目的がないまま始めると、SNSやニュースに振り回されやすくなります。</p>
-
-      <h2>FPとしての答え</h2>
-      <p>新NISAは「今が高いか安いか」を当てる制度ではありません。家庭のお金を、預金だけに偏らせず、将来に向けて育てるための制度です。家計に余力がある人は少額から始め、余力がない人はまず固定費と貯金の仕組み作りから始めましょう。</p>
-
-      <div class="cta">
-        <strong>自分の家計でいくら積み立ててよいか迷う方へ</strong>
-        <p>収入、固定費、教育費、老後資金を一緒に整理すると、無理のない積立額が見えてきます。</p>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">お問い合わせはこちら</a>
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
-    </article>
-  </main>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>›</span>
+  <a href="index.html">ブログ</a>
+  <span>›</span>
+  <span>株価が上がった今、新NISAを始めても大丈夫？</span>
+</div>
+
+<div class="article-header">
+  <div class="article-tag">📈 NISA・投資</div>
+  <h1 class="article-title">株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説</h1>
+  <div class="article-meta">
+    <span>📅 2026年2月7日</span>
+    <span>⏱ 約4分で読めます</span>
+    <span>👨‍💼 髙月 義照（FP）</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-box">
+    <h2>📋 目次</h2>
+    <ul class="toc-list">
+      <li><a href="#sec1">1. まず確認するのは株価ではなく家計の余力</a></li>
+      <li><a href="#sec2">2. 一括投資より続けられる積立が家庭向き</a></li>
+      <li><a href="#sec3">3. 上がった時ほど目的を決めておく</a></li>
+      <li><a href="#sec4">FPとしての答え</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ARTICLE CONTENT -->
+<div class="article-content">
+  <p>「株価が上がっている今、乗り遅れないうちに新NISAを始めるべきでしょうか？」という相談をよくいただきます。気持ちはよくわかります。ただ、FPとして正直に言うと、<strong>始めるかどうかの判断基準は「株価」ではなく「家計の状態」です。</strong></p>
+
+  <h2 id="sec1">1. まず確認するのは株価ではなく家計の余力</h2>
+  <p>新NISAを始める前に、最初に確認してほしいのが「生活防衛資金」の有無です。一般的には<strong>生活費の3〜6ヶ月分</strong>を現金で手元に置いておくことが基本とされています。この防衛資金があれば、万が一のときにNISA口座を慌てて解約する必要がなくなります。</p>
+  <p>以下の3つが揃っていれば、株価が高い今でも積立を始める準備が整っています：</p>
+  <ul>
+    <li>毎月の収支が黒字になっている</li>
+    <li>預貯金が生活費の3ヶ月分以上ある</li>
+    <li>急な出費があっても積立額を調整できる</li>
+  </ul>
+  <div class="note">生活防衛資金は「使わないお金」ではなく「安心して投資するための土台」です。まずここを整えてから、NISA口座を使いましょう。</div>
+
+  <h2 id="sec2">2. 一括投資より続けられる積立が家庭向き</h2>
+  <p>株価が上がっているとき、「今すぐ大きく入れた方が得では？」と考える方もいます。しかし一般の家庭にとって、<strong>一括投資よりも毎月少額を続けることの方がリスクが低く、長く続けやすい</strong>のが現実です。</p>
+  <p>積立投資（ドルコスト平均法）の最大の利点は、価格が下がったときに多く買える仕組みになっている点です。高値でスタートしても、その後下がった時期にも買い続けることで、長期的に平均取得価格を落とすことができます。</p>
+  <div class="highlight-box">
+    <h3>💰 少額積立のすすめ</h3>
+    <p>月5,000円〜10,000円から始めて、家計に余裕ができたら増額する方法が、無理なく続けやすいです。最初から満額（月3.3万円）を入れる必要はありません。</p>
+  </div>
+
+  <h2 id="sec3">3. 上がった時ほど目的を決めておく</h2>
+  <p>投資を続けるうえで一番大切なのは、<strong>「何のためにお金を増やしたいのか」という目的の明確化</strong>です。株価が上がっているときは気持ちが盛り上がりやすいですが、下がったときに目的が曖昧だと売りたくなってしまいます。</p>
+  <p>よくある目的の例：</p>
+  <ul>
+    <li><strong>教育費</strong>：子どもが大学入学する〇年後に〇〇万円</li>
+    <li><strong>住宅購入</strong>：頭金として〇年後に〇〇万円</li>
+    <li><strong>老後資金</strong>：60歳までに2,000万円の資産形成</li>
+  </ul>
+  <p>目的と期間が決まれば、毎月いくら積み立てればよいかが計算できます。それが「今の家計で無理なくできる金額かどうか」が、スタートの判断基準になります。</p>
+
+  <h2 id="sec4">FPとしての答え</h2>
+  <p>「株価が高い今、新NISAを始めていいですか？」という問いへの私の答えは次の通りです：</p>
+  <ul>
+    <li><strong>家計に余力がある方</strong>→ 今すぐ少額から始めてください。株価より「始めるかどうか」の方が長期的な影響が大きいです。</li>
+    <li><strong>まだ家計の余力が不安な方</strong>→ まず固定費の見直しから。毎月の黒字を作ることが最優先です。</li>
+  </ul>
+  <div class="note">株価のタイミングを見計らうよりも、「毎月続けられる金額で積み立てを始めること」の方が、結果的に資産を育てます。大切なのはスタートの株価より、継続する仕組みです。</div>
+</div>
+
+<!-- CHAT WIDGET -->
+<div class="chat-widget">
+  <div class="chat-box">
+    <div class="chat-box-head">
+      <div class="fp-avatar">👨‍💼</div>
+      <div class="fp-info">
+        <strong>髙月 義照（FP）</strong>
+        <span>ファイナンシャルプランナー｜岡山</span>
+      </div>
+    </div>
+    <div class="chat-bubble">
+      株価が気になって新NISAを始めるか迷っていませんか？まずはあなたの家計の余力を一緒に確認しましょう。毎月いくらなら無理なく積み立てられるか、具体的な数字で整理します。
+    </div>
+    <div class="chat-input-wrap">
+      <textarea id="chat-input" placeholder="ご質問・ご相談内容をご記入ください（例：毎月2万円で始めたいが、どうすればいい？）"></textarea>
+      <button class="btn-send" onclick="sendToFP()">✉️ FPに送る</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE -->
+<div class="share-section">
+  <h2>この記事をシェアする</h2>
+  <div class="share-btns">
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=%E6%A0%AA%E4%BE%A1%E3%81%8C%E4%B8%8A%E3%81%8C%E3%81%A3%E3%81%9F%E4%BB%8A%E3%80%81%E6%96%B0NISA%E3%82%92%E5%A7%8B%E3%82%81%E3%81%A6%E3%82%82%E5%A4%A7%E4%B8%88%E5%A4%AB%EF%BC%9F%E3%80%80%23Life_Asset%20%23NISA&url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-423.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-423.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="related">
+  <h2>関連記事</h2>
+  <div class="related-grid">
+    <a href="post-411.html" class="related-card">
+      <div class="related-card-top bg-green">🏠</div>
+      <div class="related-card-body">
+        <span>家計管理</span>
+        <p>給料だけに頼らない家計へ。FPが教える資産形成の始め方</p>
+      </div>
+    </a>
+    <a href="post-417.html" class="related-card">
+      <div class="related-card-top bg-amber">🛒</div>
+      <div class="related-card-body">
+        <span>節約・物価高</span>
+        <p>物価高が続く家庭が見直すべき支出と資産防衛</p>
+      </div>
+    </a>
+    <a href="post-435.html" class="related-card">
+      <div class="related-card-top bg-indigo">🎓</div>
+      <div class="related-card-body">
+        <span>ライフプラン</span>
+        <p>教育費の備え方：学資保険より賢い選択をFPが解説</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">lifeassetpartners@gmail.com</a>
+    </div>
+    <p>© 2026 Life Asset Partners.</p>
+  </div>
+</footer>
+
+<script>
+  function sendToFP() {
+    const msg = document.getElementById('chat-input').value.trim();
+    const sub = encodeURIComponent('Life Assetブログ お問い合わせ：' + document.title.split('｜')[0]);
+    const body = encodeURIComponent(msg || 'ブログを拝見しました。詳しく教えていただけますか？');
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + sub + '&body=' + body, '_blank');
+  }
+  window.addEventListener('scroll', function(){
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('pb').style.width = pct + '%';
+  });
+</script>
 </body>
 </html>

@@ -1,55 +1,304 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>物価高が続く家庭が見直すべき支出｜Life Asset</title>
-  <meta name="description" content="物価高が続く中で家庭ができる資産防衛とは。FPが固定費、貯金、投資の見直しポイントを解説します。" />
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/post-417.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>物価高が続く家庭が、今すぐ見直すべき支出と資産防衛｜Life Asset ブログ</title>
+  <meta name="description" content="食料品・光熱費の値上がりが続く今、FPが「何から見直すべきか」を家計目線でわかりやすく解説。固定費削減から資産防衛の順番まで。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif;color:#1e293b;line-height:1.9;background:#f8fafc}
-    a{color:inherit;text-decoration:none}.wrap{max-width:860px;margin:0 auto;padding:32px 22px 72px}.back{display:inline-block;color:#0ea5e9;font-weight:800;margin-bottom:24px}
-    article{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:clamp(24px,5vw,48px);box-shadow:0 18px 45px rgba(15,52,96,.08)}
-    .tag{display:inline-block;background:#e0f2fe;color:#0ea5e9;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:900;margin-bottom:18px}
-    h1{font-size:clamp(28px,5vw,42px);line-height:1.35;color:#0f3460;margin:0 0 18px}h2{font-size:22px;color:#0f3460;margin-top:36px;border-left:5px solid #0ea5e9;padding-left:12px}
-    .lead{font-size:17px;color:#475569}.check{background:#f0f9ff;border-radius:16px;padding:18px;margin:24px 0}.check li{margin:6px 0}.cta{margin-top:34px;background:linear-gradient(135deg,#e0f2fe,#fff);border:1px solid #bae6fd;border-radius:18px;padding:22px}.cta a{display:inline-block;margin-top:10px;background:#0ea5e9;color:#fff;border-radius:999px;padding:10px 18px;font-weight:900}
+    :root{--sky:#0ea5e9;--sl:#38bdf8;--sb:#f0f9ff;--sp:#e0f2fe;--navy:#0f3460;--nl:#1e4d8c;--w:#fff;--gb:#f8fafc;--t:#1e293b;--tl:#64748b;--b:#e2e8f0}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;color:var(--t);background:var(--gb);line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+
+    /* PROGRESS BAR */
+    #pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--sky),var(--sl));z-index:9999;transition:width .1s linear}
+
+    /* HEADER */
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--b);box-shadow:0 1px 8px rgba(14,165,233,0.07)}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo-text .name{font-size:1.25rem;font-weight:700;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .logo-text .tagline{font-size:0.62rem;color:var(--tl);white-space:nowrap}
+    nav{display:flex;gap:4px;margin-left:auto}
+    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,0.3);transition:opacity .2s}
+    .btn-cta:hover{opacity:.85}
+
+    /* BREADCRUMB */
+    .breadcrumb{max-width:760px;margin:0 auto;padding:16px 24px 0;font-size:0.8rem;color:var(--tl);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .breadcrumb a{color:var(--sky)}
+    .breadcrumb a:hover{text-decoration:underline}
+
+    /* ARTICLE HEADER */
+    .article-header{max-width:760px;margin:0 auto;padding:20px 24px 28px}
+    .article-tag{display:inline-block;padding:4px 14px;border-radius:14px;background:#fef3c7;color:#d97706;font-size:0.78rem;font-weight:700;margin-bottom:14px}
+    .article-title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:16px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:0.82rem;color:var(--tl);flex-wrap:wrap}
+    .article-meta span{display:flex;align-items:center;gap:5px}
+
+    /* TOC */
+    .toc{max-width:760px;margin:0 auto 32px;padding:0 24px}
+    .toc-box{background:#fff;border:1.5px solid var(--sp);border-radius:14px;padding:20px 24px;border-left:4px solid var(--sky)}
+    .toc-box h2{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .toc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .toc-list li a{font-size:0.875rem;color:var(--sky);display:flex;align-items:baseline;gap:7px;transition:opacity .2s}
+    .toc-list li a:hover{opacity:.7;text-decoration:underline}
+    .toc-list li a::before{content:'▸';font-size:0.7rem;flex-shrink:0}
+
+    /* ARTICLE CONTENT */
+    .article-content{max-width:760px;margin:0 auto;padding:0 24px 48px}
+    .article-content h2{font-size:1.25rem;font-weight:700;color:var(--navy);margin:36px 0 14px;padding-left:14px;border-left:4px solid var(--sky);line-height:1.4}
+    .article-content p{margin-bottom:16px;font-size:0.97rem}
+    .article-content ul,.article-content ol{padding-left:1.4em;margin-bottom:16px}
+    .article-content li{font-size:0.97rem;margin-bottom:6px}
+    .note{background:var(--sb);border:1px solid var(--sp);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:0.88rem;color:var(--nl);display:flex;gap:10px;align-items:flex-start}
+    .note::before{content:'💡';flex-shrink:0}
+    .highlight-box{background:linear-gradient(135deg,var(--sb),#fff);border:1.5px solid var(--sp);border-radius:12px;padding:18px 20px;margin:20px 0}
+    .highlight-box h3{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+    .effect-box{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1.5px solid #fde68a;border-radius:12px;padding:18px 20px;margin:20px 0}
+    .effect-box p{color:#78350f;font-size:0.9rem}
+    .effect-box strong{color:#b45309;font-size:1.1rem}
+
+    /* CHAT WIDGET */
+    .chat-widget{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .chat-box{background:#fff;border:1.5px solid var(--sp);border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(14,165,233,0.08)}
+    .chat-box-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .fp-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .fp-info strong{display:block;font-size:0.9rem;font-weight:700;color:var(--navy)}
+    .fp-info span{font-size:0.78rem;color:var(--tl)}
+    .chat-bubble{background:var(--sb);border-radius:0 14px 14px 14px;padding:14px 18px;font-size:0.9rem;line-height:1.7;color:var(--t);margin-bottom:16px;border:1px solid var(--sp)}
+    .chat-input-wrap{display:flex;flex-direction:column;gap:10px}
+    .chat-input-wrap textarea{width:100%;border:1.5px solid var(--b);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:0.9rem;color:var(--t);resize:vertical;min-height:80px;outline:none;transition:border-color .2s}
+    .chat-input-wrap textarea:focus{border-color:var(--sky)}
+    .btn-send{align-self:flex-end;padding:10px 24px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;border:none;font-size:0.875rem;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(14,165,233,0.25);transition:opacity .2s}
+    .btn-send:hover{opacity:.85}
+
+    /* SHARE */
+    .share-section{max-width:760px;margin:0 auto 40px;padding:0 24px}
+    .share-section h2{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .share-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:22px;font-size:0.875rem;font-weight:600;color:#fff;cursor:pointer;text-decoration:none;transition:opacity .2s}
+    .share-btn:hover{opacity:.85}
+    .share-x{background:#000}
+    .share-line{background:#06c755}
+
+    /* RELATED */
+    .related{max-width:760px;margin:0 auto 48px;padding:0 24px}
+    .related h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--sp)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+    .related-card{background:#fff;border-radius:12px;border:1px solid var(--b);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform .2s}
+    .related-card:hover{transform:translateY(-3px)}
+    .related-card-top{height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    .bg-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+    .bg-blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .bg-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .related-card-body{padding:12px}
+    .related-card-body span{font-size:0.72rem;color:var(--sky);font-weight:600}
+    .related-card-body p{font-size:0.82rem;color:var(--navy);font-weight:600;margin-top:4px;line-height:1.4}
+
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:40px 24px 28px;margin-top:24px}
+    .footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+    .footer-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff}
+    .footer-logo{font-size:1.1rem;font-weight:700}
+    .footer-contact{margin:10px 0}
+    .footer-contact a{font-size:0.85rem;color:var(--sl);text-decoration:underline}
+    footer p{font-size:0.78rem;opacity:.6;margin-top:16px}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <a class="back" href="../index.html#blog">← ブログ一覧へ戻る</a>
-    <article>
-      <div class="tag">物価高・家計防衛</div>
-      <h1>物価高が続く家庭が、今すぐ見直すべき支出と資産防衛</h1>
-      <p class="lead">物価高のニュースを見ても、家庭にとって大切なのは「国がどうするか」より「自分の家計をどう守るか」です。FPとして、まず見直したい順番をまとめます。</p>
+<div id="pb"></div>
 
-      <h2>1. 食費より先に固定費を見る</h2>
-      <p>節約というと食費を削りがちですが、無理な食費削減は長続きしません。まずは通信費、保険、サブスク、住宅ローン、車関連費など、毎月自動で出ていく固定費を確認しましょう。</p>
-
-      <div class="check">
-        <strong>見直しチェック</strong>
-        <ul>
-          <li>使っていないサブスクはないか</li>
-          <li>保険料が今の家族構成に合っているか</li>
-          <li>スマホ料金を下げられないか</li>
-          <li>住宅ローンや車の維持費が家計を圧迫していないか</li>
-        </ul>
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
 
-      <h2>2. 預金だけでは守れないお金もある</h2>
-      <p>生活費や近い将来使うお金は預金で守るべきです。一方で、10年以上先の老後資金や教育費の一部は、物価上昇に負けないよう運用を考える余地があります。</p>
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>›</span>
+  <a href="index.html">ブログ</a>
+  <span>›</span>
+  <span>物価高が続く家庭が今すぐ見直すべき支出と資産防衛</span>
+</div>
 
-      <h2>3. 投資は家計を守る手段として考える</h2>
-      <p>投資は一発逆転の方法ではありません。物価高に対して、長い時間をかけてお金の価値を守るための選択肢です。新NISAを使う場合も、毎月の黒字の範囲内で行うことが大切です。</p>
+<div class="article-header">
+  <div class="article-tag">🛒 節約・物価高</div>
+  <h1 class="article-title">物価高が続く家庭が、今すぐ見直すべき支出と資産防衛</h1>
+  <div class="article-meta">
+    <span>📅 2026年2月3日</span>
+    <span>⏱ 約4分で読めます</span>
+    <span>👨‍💼 髙月 義照（FP）</span>
+  </div>
+</div>
 
-      <h2>FPとしての結論</h2>
-      <p>物価高対策は、我慢だけでは続きません。固定費を整え、生活防衛資金を確保し、長期資金だけを少しずつ運用する。この順番が、普通の家庭にとって現実的な資産防衛です。</p>
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-box">
+    <h2>📋 目次</h2>
+    <ul class="toc-list">
+      <li><a href="#sec1">1. 食費より先に固定費を見直す</a></li>
+      <li><a href="#sec2">2. 物価高に負けない「現金の置き場所」</a></li>
+      <li><a href="#sec3">3. 家計防衛の優先順位</a></li>
+      <li><a href="#sec4">FPからの一言</a></li>
+    </ul>
+  </div>
+</div>
 
-      <div class="cta">
-        <strong>物価高で家計が苦しくなっている方へ</strong>
-        <p>支出の優先順位を整理すると、無理なく続けられる改善策が見えてきます。</p>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">お問い合わせはこちら</a>
+<!-- ARTICLE CONTENT -->
+<div class="article-content">
+  <p>食料品や光熱費の値上がりが続く中、「節約しなきゃ」と思いつつも何から手をつければよいかわからない方が増えています。FPとして見ると、<strong>食費を我慢する前に見直すべき支出が必ずあります。</strong>今日はその順番と考え方を整理します。</p>
+
+  <h2 id="sec1">1. 食費より先に固定費を見直す</h2>
+  <p>物価高の対策として「食費を削ろう」と考える方は多いですが、FPの立場からすると食費の節約は最後の手段です。なぜなら、食費は削りすぎると生活の質や健康に影響するからです。</p>
+  <div class="note">固定費は一度見直すだけで毎月効果が続きます。変動費（食費など）と違い、手間も少なく再現性が高いのが特徴です。</div>
+  <p>固定費で特に見直し効果が大きい3つの項目：</p>
+  <ul>
+    <li><strong>通信費</strong>：大手キャリアから格安SIMへ乗り換えで月3,000〜5,000円削減可能</li>
+    <li><strong>保険料</strong>：不要な特約の削除、重複している保障の整理</li>
+    <li><strong>サブスク整理</strong>：使っていない定額サービスを棚卸しして解約</li>
+  </ul>
+  <div class="effect-box">
+    <p>例えば月2万円の固定費を削減できると…</p>
+    <p><strong>年間24万円</strong>の効果が毎年続きます。</p>
+    <p style="font-size:0.82rem;margin-top:6px">この「見直した1回」が、毎年働き続ける節約になります。</p>
+  </div>
+
+  <h2 id="sec2">2. 物価高に負けない「現金の置き場所」</h2>
+  <p>食料品が値上がりしている中で、<strong>現金を普通預金にそのまま置いておくことも実はリスク</strong>です。インフレが続くと、同じ金額のお金で買えるものが減っていく「実質的な価値の低下」が起きます。</p>
+  <p>FPが推奨する現金の置き方：</p>
+  <ul>
+    <li><strong>生活防衛資金（生活費3〜6ヶ月分）</strong>：普通預金や高金利の普通預金に置く。これはすぐ使えることが最優先。</li>
+    <li><strong>余剰資金（防衛資金を超えた分）</strong>：新NISAの積立に回すことを検討。長期で運用することでインフレに対抗できます。</li>
+  </ul>
+  <div class="highlight-box">
+    <h3>🏦 お金の分け方の考え方</h3>
+    <p>「今すぐ使う可能性があるお金」と「10年以上使わないお金」を分けて考えることが大切です。前者は流動性優先、後者は成長性優先で置き場所を変えましょう。</p>
+  </div>
+
+  <h2 id="sec3">3. 家計防衛の優先順位</h2>
+  <p>物価高への対策は、次の順番で進めると最も効果的です：</p>
+  <ol>
+    <li><strong>固定費を見直して毎月の支出を減らす</strong>（通信・保険・サブスク）</li>
+    <li><strong>毎月の収支を黒字にする</strong>（収入 &gt; 支出の状態をつくる）</li>
+    <li><strong>生活防衛資金を確保する</strong>（生活費3〜6ヶ月を普通預金に）</li>
+    <li><strong>余裕ができたら積立を始める</strong>（新NISAで少額から）</li>
+  </ol>
+  <div class="note">焦って投資を始めても、防衛資金がなければ急な出費で解約することになります。まず「土台」を作ることが最短ルートです。</div>
+
+  <h2 id="sec4">FPからの一言</h2>
+  <p>物価高は確かに家計を圧迫しますが、見方を変えれば<strong>家計の「弱い部分」を見せてくれる機会</strong>でもあります。「苦しくなってきた」と感じたとき、それは家計を整えるサインかもしれません。</p>
+  <p>固定費の見直しは、知識があれば自分でもできます。ただ、保険の特約整理や積立の順番については、家族構成や収入・支出の状況によって最適解が変わります。不安な方は一度FPに相談していただくと、あなたの状況に合わせた道筋が見えます。</p>
+</div>
+
+<!-- CHAT WIDGET -->
+<div class="chat-widget">
+  <div class="chat-box">
+    <div class="chat-box-head">
+      <div class="fp-avatar">👨‍💼</div>
+      <div class="fp-info">
+        <strong>髙月 義照（FP）</strong>
+        <span>ファイナンシャルプランナー｜岡山</span>
       </div>
-    </article>
-  </main>
+    </div>
+    <div class="chat-bubble">
+      物価高で家計が苦しくなってきた、という方のご相談が増えています。固定費の見直し、保険の整理、積立の順番について、あなたの家計を見ながら一緒に整理しましょう。
+    </div>
+    <div class="chat-input-wrap">
+      <textarea id="chat-input" placeholder="ご質問・ご相談内容をご記入ください（例：保険料が高くて困っている。見直し方を教えてほしい。）"></textarea>
+      <button class="btn-send" onclick="sendToFP()">✉️ FPに送る</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE -->
+<div class="share-section">
+  <h2>この記事をシェアする</h2>
+  <div class="share-btns">
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=%E7%89%A9%E4%BE%A1%E9%AB%98%E3%81%8C%E7%B6%9A%E3%81%8F%E5%AE%B6%E5%BA%AD%E3%81%8C%E4%BB%8A%E3%81%99%E3%81%90%E8%A6%8B%E7%9B%B4%E3%81%99%E3%81%B9%E3%81%8D%E6%94%AF%E5%87%BA%E3%80%80%23Life_Asset%20%23%E5%AE%B6%E8%A8%88&url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-417.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Flifeassetoffice.net%2Fblog%2Fpost-417.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="related">
+  <h2>関連記事</h2>
+  <div class="related-grid">
+    <a href="post-411.html" class="related-card">
+      <div class="related-card-top bg-green">🏠</div>
+      <div class="related-card-body">
+        <span>家計管理</span>
+        <p>給料だけに頼らない家計へ。FPが教える資産形成の始め方</p>
+      </div>
+    </a>
+    <a href="post-423.html" class="related-card">
+      <div class="related-card-top bg-blue">📈</div>
+      <div class="related-card-body">
+        <span>NISA・投資</span>
+        <p>株価が上がった今、新NISAを始めても大丈夫？</p>
+      </div>
+    </a>
+    <a href="post-429.html" class="related-card">
+      <div class="related-card-top bg-pink">🎁</div>
+      <div class="related-card-body">
+        <span>節税・控除</span>
+        <p>ふるさと納税2026年版：家計への活用法と注意点</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">lifeassetpartners@gmail.com</a>
+    </div>
+    <p>© 2026 Life Asset Partners.</p>
+  </div>
+</footer>
+
+<script>
+  function sendToFP() {
+    const msg = document.getElementById('chat-input').value.trim();
+    const sub = encodeURIComponent('Life Assetブログ お問い合わせ：' + document.title.split('｜')[0]);
+    const body = encodeURIComponent(msg || 'ブログを拝見しました。詳しく教えていただけますか？');
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + sub + '&body=' + body, '_blank');
+  }
+  window.addEventListener('scroll', function(){
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('pb').style.width = pct + '%';
+  });
+</script>
 </body>
 </html>

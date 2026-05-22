@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Asset ブログ｜FPが家計・NISA・節税をわかりやすく解説</title>
+  <meta name="description" content="岡山のFP資格者・髙月義照が、家計管理・新NISA・節税・ライフプランについてわかりやすく解説するブログです。毎日更新。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--sky:#0ea5e9;--sl:#38bdf8;--sb:#f0f9ff;--sp:#e0f2fe;--navy:#0f3460;--nl:#1e4d8c;--w:#fff;--gb:#f8fafc;--t:#1e293b;--tl:#64748b;--b:#e2e8f0}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;color:var(--t);background:var(--gb);line-height:1.7}
+    a{color:inherit;text-decoration:none}
+
+    /* HEADER */
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--b);box-shadow:0 1px 8px rgba(14,165,233,0.07)}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo-text .name{font-size:1.25rem;font-weight:700;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .logo-text .tagline{font-size:0.62rem;color:var(--tl);white-space:nowrap}
+    nav{display:flex;gap:4px;margin-left:auto}
+    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,0.3);transition:opacity .2s}
+    .btn-cta:hover{opacity:.85}
+    @media(max-width:640px){nav{display:none}}
+
+    /* HERO */
+    .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--nl) 60%,#1a6bbf 100%);color:#fff;padding:52px 24px 48px}
+    .hero-inner{max-width:1100px;margin:0 auto}
+    .hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin-bottom:12px;line-height:1.3}
+    .hero-sub{font-size:1rem;opacity:.85;margin-bottom:20px}
+    .hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:5px 14px;font-size:0.8rem;font-weight:600}
+    .badge-green{background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.5);color:#6ee7b7}
+    .badge-yellow{background:rgba(251,191,36,0.2);border:1px solid rgba(251,191,36,0.5);color:#fde68a}
+    .search-wrap{max-width:520px;position:relative}
+    .search-wrap input{width:100%;padding:13px 48px 13px 18px;border-radius:28px;border:none;font-size:0.95rem;font-family:inherit;outline:none;color:var(--t)}
+    .search-wrap button{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--sky);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem}
+
+    /* CATEGORY TABS */
+    .cat-tabs-outer{background:#fff;border-bottom:1px solid var(--b);position:sticky;top:64px;z-index:100}
+    .cat-tabs{max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+    .cat-tabs::-webkit-scrollbar{display:none}
+    .cat-btn{padding:7px 18px;border-radius:20px;border:1.5px solid var(--b);background:#fff;font-size:0.85rem;font-weight:500;color:var(--tl);cursor:pointer;white-space:nowrap;transition:all .2s;font-family:inherit}
+    .cat-btn:hover{border-color:var(--sky);color:var(--sky)}
+    .cat-btn.active{background:var(--sky);border-color:var(--sky);color:#fff;box-shadow:0 2px 8px rgba(14,165,233,0.25)}
+
+    /* TODAY'S ARTICLE */
+    .today-section{max-width:1100px;margin:32px auto 0;padding:0 24px}
+    .today-label{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,#f43f5e,#fb7185);color:#fff;font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:12px;margin-bottom:12px}
+    .today-card{display:flex;gap:20px;background:#fff;border-radius:16px;border:2px solid var(--sky);box-shadow:0 4px 20px rgba(14,165,233,0.12);overflow:hidden;transition:box-shadow .2s}
+    .today-card:hover{box-shadow:0 8px 32px rgba(14,165,233,0.2)}
+    .today-thumb{width:160px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}
+    .today-body{padding:20px;flex:1}
+    .today-body .tag{display:inline-block;padding:3px 10px;border-radius:10px;background:var(--sp);color:var(--sky);font-size:0.75rem;font-weight:700;margin-bottom:8px}
+    .today-body h2{font-size:1.1rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:8px}
+    .today-body p{font-size:0.88rem;color:var(--tl);margin-bottom:12px}
+    .today-body .read-link{display:inline-flex;align-items:center;gap:6px;color:var(--sky);font-weight:600;font-size:0.88rem}
+    @media(max-width:600px){.today-thumb{width:80px;font-size:2rem}.today-body h2{font-size:0.95rem}}
+
+    /* MAIN LAYOUT */
+    .main-wrap{max-width:1100px;margin:32px auto 0;padding:0 24px 64px;display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start}
+    @media(max-width:860px){.main-wrap{grid-template-columns:1fr}.sidebar{display:none}}
+
+    /* ARTICLE GRID */
+    .articles-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+    .articles-header h2{font-size:1.1rem;font-weight:700;color:var(--navy)}
+    .articles-count{font-size:0.82rem;color:var(--tl)}
+    .sort-tabs{display:flex;gap:6px}
+    .sort-btn{padding:5px 14px;border-radius:16px;border:1.5px solid var(--b);background:#fff;font-size:0.8rem;font-weight:500;color:var(--tl);cursor:pointer;font-family:inherit;transition:all .2s}
+    .sort-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+    .article-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    @media(max-width:600px){.article-grid{grid-template-columns:1fr}}
+
+    /* ARTICLE CARD */
+    .card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid var(--b);transition:transform .2s,box-shadow .2s;position:relative}
+    .card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(14,165,233,0.15)}
+    .card-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative}
+    .bg-blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .bg-amber{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+    .bg-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+    .bg-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .bg-indigo{background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}
+    .card-new{position:absolute;top:8px;left:8px;background:linear-gradient(90deg,#f43f5e,#fb7185);color:#fff;font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:8px}
+    .card-read-mark{position:absolute;top:8px;right:8px;background:rgba(16,185,129,0.9);color:#fff;font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:8px;display:none}
+    .card-bm-btn{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,0.9);border:1px solid var(--b);border-radius:8px;padding:3px 8px;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:all .2s;z-index:2}
+    .card-bm-btn:hover{border-color:var(--sky);background:var(--sb)}
+    .card-bm-btn.bm-on{background:var(--sb);border-color:var(--sky);color:var(--sky)}
+    .card-body{padding:16px}
+    .card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+    .card-tag{font-size:0.73rem;font-weight:600;padding:2px 10px;border-radius:10px;background:var(--sp);color:var(--sky)}
+    .card-date{font-size:0.75rem;color:var(--tl)}
+    .card h3{font-size:0.95rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:8px}
+    .card h3 a{display:block}
+    .card-link{display:inline-flex;align-items:center;gap:4px;font-size:0.8rem;color:var(--sky);font-weight:600}
+    .no-results{grid-column:1/-1;text-align:center;padding:48px;color:var(--tl)}
+
+    /* SIDEBAR */
+    .sidebar{display:flex;flex-direction:column;gap:24px;position:sticky;top:136px}
+    .s-box{background:#fff;border-radius:14px;border:1px solid var(--b);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+    .s-box-head{padding:14px 18px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px}
+    .s-box-head h3{font-size:0.9rem;font-weight:700;color:var(--navy)}
+    .s-box-body{padding:16px 18px}
+
+    /* My Library */
+    .my-library{background:linear-gradient(135deg,var(--sb),var(--sp));border:1.5px solid var(--sky);border-radius:14px;padding:18px;box-shadow:0 2px 12px rgba(14,165,233,0.1)}
+    .my-library h3{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:7px}
+    .lib-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+    .lib-stat{background:rgba(255,255,255,0.8);border-radius:10px;padding:12px;text-align:center}
+    .lib-stat-num{font-size:1.4rem;font-weight:700;color:var(--sky);line-height:1}
+    .lib-stat-label{font-size:0.72rem;color:var(--tl);margin-top:3px}
+    .streak-bar{background:rgba(255,255,255,0.8);border-radius:10px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+    .streak-icon{font-size:1.6rem}
+    .streak-text strong{display:block;font-size:1rem;font-weight:700;color:var(--navy)}
+    .streak-text span{font-size:0.75rem;color:var(--tl)}
+    .bm-list{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto}
+    .bm-list:empty::before{content:'まだ保存した記事はありません';font-size:0.8rem;color:var(--tl)}
+    .bm-item{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--navy)}
+    .bm-item a{flex:1;font-size:0.8rem;color:var(--nl);line-height:1.3}
+    .bm-item a:hover{color:var(--sky);text-decoration:underline}
+    .bm-del{background:none;border:none;cursor:pointer;font-size:0.9rem;color:var(--tl);padding:2px;flex-shrink:0}
+
+    /* Ranking */
+    .rank-list{display:flex;flex-direction:column;gap:10px}
+    .rank-item{display:flex;align-items:flex-start;gap:10px}
+    .rank-num{width:24px;height:24px;border-radius:50%;background:var(--sky);color:#fff;font-size:0.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+    .rank-num.gold{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+    .rank-num.silver{background:linear-gradient(135deg,#94a3b8,#cbd5e1)}
+    .rank-num.bronze{background:linear-gradient(135deg,#b45309,#d97706)}
+    .rank-item a{font-size:0.82rem;color:var(--t);line-height:1.4}
+    .rank-item a:hover{color:var(--sky)}
+
+    /* Category chips */
+    .cat-chips{display:flex;flex-wrap:wrap;gap:8px}
+    .cat-chip{padding:5px 12px;border-radius:14px;border:1.5px solid var(--b);font-size:0.78rem;font-weight:500;color:var(--tl);cursor:pointer;background:#fff;font-family:inherit;transition:all .2s}
+    .cat-chip:hover{border-color:var(--sky);color:var(--sky);background:var(--sb)}
+
+    /* Email sub */
+    .btn-sky-s{display:block;text-align:center;padding:10px;border-radius:10px;background:var(--sky);color:#fff;font-size:0.85rem;font-weight:600;transition:opacity .2s}
+    .btn-sky-s:hover{opacity:.85}
+
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:40px 24px 28px;margin-top:0}
+    .footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;font-size:1.1rem;font-weight:700}
+    .footer-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff}
+    .footer-contact{margin:10px 0}
+    .footer-contact a{font-size:0.85rem;color:var(--sl);text-decoration:underline}
+    footer p{font-size:0.78rem;opacity:.6;margin-top:16px}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Life Asset ブログ</h1>
+    <p class="hero-sub">FP資格者・髙月義照が、お金の疑問をわかりやすく解説します</p>
+    <div class="hero-badges">
+      <span class="hero-badge badge-green">🗓 毎日更新中</span>
+      <span class="hero-badge badge-yellow">📚 全15記事公開</span>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="キーワードで記事を検索…" oninput="filterArticles()" aria-label="記事を検索">
+      <button type="button" aria-label="検索" onclick="filterArticles()">🔍</button>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY TABS -->
+<div class="cat-tabs-outer">
+  <div class="cat-tabs" role="tablist">
+    <button class="cat-btn active" onclick="setCategory(this,'all')" role="tab">全て</button>
+    <button class="cat-btn" onclick="setCategory(this,'nisa')" role="tab">NISA・投資</button>
+    <button class="cat-btn" onclick="setCategory(this,'kakeibo')" role="tab">家計管理</button>
+    <button class="cat-btn" onclick="setCategory(this,'savings')" role="tab">節約・物価高</button>
+    <button class="cat-btn" onclick="setCategory(this,'life')" role="tab">ライフプラン</button>
+    <button class="cat-btn" onclick="setCategory(this,'tax')" role="tab">節税・控除</button>
+  </div>
+</div>
+
+<!-- TODAY'S ARTICLE -->
+<div class="today-section">
+  <div class="today-label">🔥 本日の記事</div>
+  <a href="post-453.html" class="today-card">
+    <div class="today-thumb">💡</div>
+    <div class="today-body">
+      <span class="tag">節税・控除</span>
+      <h2>節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた</h2>
+      <p>年収500万サラリーマンが両方使うと年間約8万円の節税に。具体的な数字で解説します。</p>
+      <span class="read-link">今日の記事を読む →</span>
+    </div>
+  </a>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+  <!-- ARTICLE GRID -->
+  <div>
+    <div class="articles-header">
+      <h2 id="section-title">新着記事</h2>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span class="articles-count" id="articles-count">15件</span>
+        <div class="sort-tabs">
+          <button class="sort-btn active" onclick="sortArticles(this,'new')">新着順</button>
+          <button class="sort-btn" onclick="sortArticles(this,'pop')">人気順</button>
+        </div>
+      </div>
+    </div>
+    <div class="article-grid" id="article-grid">
+
+      <!-- 記事1: 節税コンビ 2026-05-22 -->
+      <article class="card" data-cat="tax" data-date="2026-05-22" data-pop="8" data-id="post-453" data-title="節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた">
+        <a href="post-453.html">
+          <div class="card-thumb bg-indigo">💡<span class="card-new">🆕NEW</span></div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-453" onclick="cardBookmark(event,'post-453','節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた','tax')">🔖</button>
+        <span class="card-read-mark" id="read-post-453">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">節税・控除</span><span class="card-date">2026-05-22</span></div>
+          <h3><a href="post-453.html">節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた</a></h3>
+          <a href="post-453.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事2: iDeCo 2026-05-21 -->
+      <article class="card" data-cat="nisa" data-date="2026-05-21" data-pop="12" data-id="post-447" data-title="iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法">
+        <a href="post-447.html">
+          <div class="card-thumb bg-blue">📊<span class="card-new">🆕NEW</span></div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-447" onclick="cardBookmark(event,'post-447','iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法','nisa')">🔖</button>
+        <span class="card-read-mark" id="read-post-447">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">NISA・投資</span><span class="card-date">2026-05-21</span></div>
+          <h3><a href="post-447.html">iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法</a></h3>
+          <a href="post-447.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事3: 老後2000万 2026-05-20 -->
+      <article class="card" data-cat="life" data-date="2026-05-20" data-pop="15" data-id="post-441" data-title="老後2000万円問題の真実：FPが試算する本当に必要な老後資金">
+        <a href="post-441.html">
+          <div class="card-thumb bg-amber">💴<span class="card-new">🆕NEW</span></div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-441" onclick="cardBookmark(event,'post-441','老後2000万円問題の真実：FPが試算する本当に必要な老後資金','life')">🔖</button>
+        <span class="card-read-mark" id="read-post-441">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">ライフプラン</span><span class="card-date">2026-05-20</span></div>
+          <h3><a href="post-441.html">老後2000万円問題の真実：FPが試算する本当に必要な老後資金</a></h3>
+          <a href="post-441.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事4: 住宅ローン 2026-05-19 -->
+      <article class="card" data-cat="life" data-date="2026-05-19" data-pop="11" data-id="post-459" data-title="住宅ローンの繰り上げ返済vs投資：FPが教える正しい優先順位">
+        <a href="post-459.html">
+          <div class="card-thumb bg-green">🏡</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-459" onclick="cardBookmark(event,'post-459','住宅ローンの繰り上げ返済vs投資：FPが教える正しい優先順位','life')">🔖</button>
+        <span class="card-read-mark" id="read-post-459">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">ライフプラン</span><span class="card-date">2026-05-19</span></div>
+          <h3><a href="post-459.html">住宅ローンの繰り上げ返済vs投資：FPが教える正しい優先順位</a></h3>
+          <a href="post-459.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事5: 年金の現実 2026-05-18 -->
+      <article class="card" data-cat="life" data-date="2026-05-18" data-pop="14" data-id="post-465" data-title="年金だけで老後を乗り切れるか？40代が今知るべき年金の現実">
+        <a href="post-465.html">
+          <div class="card-thumb bg-amber">👴</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-465" onclick="cardBookmark(event,'post-465','年金だけで老後を乗り切れるか？40代が今知るべき年金の現実','life')">🔖</button>
+        <span class="card-read-mark" id="read-post-465">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">ライフプラン</span><span class="card-date">2026-05-18</span></div>
+          <h3><a href="post-465.html">年金だけで老後を乗り切れるか？40代が今知るべき年金の現実</a></h3>
+          <a href="post-465.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事6: 保険見直し 2026-05-17 -->
+      <article class="card" data-cat="kakeibo" data-date="2026-05-17" data-pop="9" data-id="post-471" data-title="保険料を月1万円節約する方法：FPが実践する保険の見直し術">
+        <a href="post-471.html">
+          <div class="card-thumb bg-indigo">🛡</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-471" onclick="cardBookmark(event,'post-471','保険料を月1万円節約する方法：FPが実践する保険の見直し術','kakeibo')">🔖</button>
+        <span class="card-read-mark" id="read-post-471">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">家計管理</span><span class="card-date">2026-05-17</span></div>
+          <h3><a href="post-471.html">保険料を月1万円節約する方法：FPが実践する保険の見直し術</a></h3>
+          <a href="post-471.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事7: 固定費 2026-05-16 -->
+      <article class="card" data-cat="savings" data-date="2026-05-16" data-pop="7" data-id="post-477" data-title="固定費を月2万円削減する方法：通信費・サブスク・光熱費を一気に見直す">
+        <a href="post-477.html">
+          <div class="card-thumb bg-pink">📱</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-477" onclick="cardBookmark(event,'post-477','固定費を月2万円削減する方法：通信費・サブスク・光熱費を一気に見直す','savings')">🔖</button>
+        <span class="card-read-mark" id="read-post-477">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">節約・物価高</span><span class="card-date">2026-05-16</span></div>
+          <h3><a href="post-477.html">固定費を月2万円削減する方法：通信費・サブスク・光熱費を一気に見直す</a></h3>
+          <a href="post-477.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事8: NISA+iDeCo 2026-05-15 -->
+      <article class="card" data-cat="nisa" data-date="2026-05-15" data-pop="10" data-id="post-483" data-title="NISAとiDeCoを同時に使うコツ：年収別の最適な掛け金配分を解説">
+        <a href="post-483.html">
+          <div class="card-thumb bg-blue">💡</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-483" onclick="cardBookmark(event,'post-483','NISAとiDeCoを同時に使うコツ：年収別の最適な掛け金配分を解説','nisa')">🔖</button>
+        <span class="card-read-mark" id="read-post-483">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">NISA・投資</span><span class="card-date">2026-05-15</span></div>
+          <h3><a href="post-483.html">NISAとiDeCoを同時に使うコツ：年収別の最適な掛け金配分を解説</a></h3>
+          <a href="post-483.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事9: インフレ 2026-05-14 -->
+      <article class="card" data-cat="nisa" data-date="2026-05-14" data-pop="6" data-id="post-489" data-title="インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由">
+        <a href="post-489.html">
+          <div class="card-thumb bg-amber">📈</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-489" onclick="cardBookmark(event,'post-489','インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由','nisa')">🔖</button>
+        <span class="card-read-mark" id="read-post-489">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">NISA・投資</span><span class="card-date">2026-05-14</span></div>
+          <h3><a href="post-489.html">インフレに負けない資産運用の基本：物価高時代に現金だけでは損をする理由</a></h3>
+          <a href="post-489.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事10: 子育て税金 2026-05-13 -->
+      <article class="card" data-cat="tax" data-date="2026-05-13" data-pop="5" data-id="post-495" data-title="子育て世代が知らないと損する：税金・補助金・控除の完全まとめ2026年版">
+        <a href="post-495.html">
+          <div class="card-thumb bg-green">🧾</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-495" onclick="cardBookmark(event,'post-495','子育て世代が知らないと損する：税金・補助金・控除の完全まとめ2026年版','tax')">🔖</button>
+        <span class="card-read-mark" id="read-post-495">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">節税・控除</span><span class="card-date">2026-05-13</span></div>
+          <h3><a href="post-495.html">子育て世代が知らないと損する：税金・補助金・控除の完全まとめ2026年版</a></h3>
+          <a href="post-495.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事11: ふるさと納税 2026-05-12 -->
+      <article class="card" data-cat="tax" data-date="2026-05-12" data-pop="13" data-id="post-429" data-title="ふるさと納税2026年版：FPが教える家計への活用法と注意点">
+        <a href="post-429.html">
+          <div class="card-thumb bg-pink">🎁</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-429" onclick="cardBookmark(event,'post-429','ふるさと納税2026年版：FPが教える家計への活用法と注意点','tax')">🔖</button>
+        <span class="card-read-mark" id="read-post-429">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">節税・控除</span><span class="card-date">2026-05-12</span></div>
+          <h3><a href="post-429.html">ふるさと納税2026年版：FPが教える家計への活用法と注意点</a></h3>
+          <a href="post-429.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事12: 教育費 2026-05-19 -->
+      <article class="card" data-cat="life" data-date="2026-05-19" data-pop="16" data-id="post-435" data-title="教育費の備え方：学資保険より賢い選択をFPが解説">
+        <a href="post-435.html">
+          <div class="card-thumb bg-indigo">🎓</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-435" onclick="cardBookmark(event,'post-435','教育費の備え方：学資保険より賢い選択をFPが解説','life')">🔖</button>
+        <span class="card-read-mark" id="read-post-435">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">ライフプラン</span><span class="card-date">2026-05-19</span></div>
+          <h3><a href="post-435.html">教育費の備え方：学資保険より賢い選択をFPが解説</a></h3>
+          <a href="post-435.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事13: NISA 2026-02-07 -->
+      <article class="card" data-cat="nisa" data-date="2026-02-07" data-pop="20" data-id="post-423" data-title="株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説">
+        <a href="post-423.html">
+          <div class="card-thumb bg-blue">📈</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-423" onclick="cardBookmark(event,'post-423','株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説','nisa')">🔖</button>
+        <span class="card-read-mark" id="read-post-423">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">NISA・投資</span><span class="card-date">2026-02-07</span></div>
+          <h3><a href="post-423.html">株価が上がった今、新NISAを始めても大丈夫？FPが家計目線で解説</a></h3>
+          <a href="post-423.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事14: 物価高 2026-02-03 -->
+      <article class="card" data-cat="savings" data-date="2026-02-03" data-pop="18" data-id="post-417" data-title="物価高が続く家庭が、今すぐ見直すべき支出と資産防衛">
+        <a href="post-417.html">
+          <div class="card-thumb bg-amber">🛒</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-417" onclick="cardBookmark(event,'post-417','物価高が続く家庭が、今すぐ見直すべき支出と資産防衛','savings')">🔖</button>
+        <span class="card-read-mark" id="read-post-417">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">節約・物価高</span><span class="card-date">2026-02-03</span></div>
+          <h3><a href="post-417.html">物価高が続く家庭が、今すぐ見直すべき支出と資産防衛</a></h3>
+          <a href="post-417.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事15: 家計管理 2026-02-03 -->
+      <article class="card" data-cat="kakeibo" data-date="2026-02-03" data-pop="17" data-id="post-411" data-title="給料だけに頼らない家計へ。FPが教える資産形成の始め方">
+        <a href="post-411.html">
+          <div class="card-thumb bg-green">🏠</div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-411" onclick="cardBookmark(event,'post-411','給料だけに頼らない家計へ。FPが教える資産形成の始め方','kakeibo')">🔖</button>
+        <span class="card-read-mark" id="read-post-411">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">家計管理</span><span class="card-date">2026-02-03</span></div>
+          <h3><a href="post-411.html">給料だけに頼らない家計へ。FPが教える資産形成の始め方</a></h3>
+          <a href="post-411.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
+
+      <div class="no-results" id="no-results" style="display:none">
+        <p style="font-size:1.5rem;margin-bottom:8px">🔍</p>
+        <p>検索結果がありません。別のキーワードをお試しください。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- My Library -->
+    <div class="my-library">
+      <h3>📚 マイライブラリ</h3>
+      <div class="lib-stats">
+        <div class="lib-stat">
+          <div class="lib-stat-num" id="read-count">0</div>
+          <div class="lib-stat-label">読んだ記事</div>
+        </div>
+        <div class="lib-stat">
+          <div class="lib-stat-num" id="bm-count">0</div>
+          <div class="lib-stat-label">保存済み</div>
+        </div>
+      </div>
+      <div class="streak-bar">
+        <div class="streak-icon">🔥</div>
+        <div class="streak-text">
+          <strong id="streak-count">0日</strong>
+          <span>連続アクセス中</span>
+        </div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--nl);font-weight:600;margin-bottom:6px">🔖 保存した記事</div>
+      <div class="bm-list" id="bm-list"></div>
+    </div>
+
+    <!-- 人気記事 -->
+    <div class="s-box">
+      <div class="s-box-head"><span>🏆</span><h3>人気記事ランキング</h3></div>
+      <div class="s-box-body">
+        <div class="rank-list">
+          <div class="rank-item"><div class="rank-num gold">1</div><a href="post-423.html">株価が上がった今、新NISAを始めても大丈夫？</a></div>
+          <div class="rank-item"><div class="rank-num silver">2</div><a href="post-435.html">教育費の備え方：学資保険より賢い選択</a></div>
+          <div class="rank-item"><div class="rank-num bronze">3</div><a href="post-441.html">老後2000万円問題の真実</a></div>
+          <div class="rank-item"><div class="rank-num">4</div><a href="post-417.html">物価高が続く家庭の支出見直しと資産防衛</a></div>
+          <div class="rank-item"><div class="rank-num">5</div><a href="post-465.html">年金だけで老後を乗り切れるか？</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- カテゴリ -->
+    <div class="s-box">
+      <div class="s-box-head"><span>🏷</span><h3>カテゴリから探す</h3></div>
+      <div class="s-box-body">
+        <div class="cat-chips">
+          <button class="cat-chip" onclick="setCategory(null,'nisa')">NISA・投資</button>
+          <button class="cat-chip" onclick="setCategory(null,'kakeibo')">家計管理</button>
+          <button class="cat-chip" onclick="setCategory(null,'savings')">節約・物価高</button>
+          <button class="cat-chip" onclick="setCategory(null,'life')">ライフプラン</button>
+          <button class="cat-chip" onclick="setCategory(null,'tax')">節税・控除</button>
+          <button class="cat-chip" onclick="setCategory(null,'all')">全て表示</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ブックマーク案内 -->
+    <div style="background:linear-gradient(135deg,#fefce8,#fef9c3);border:1.5px solid #fde68a;border-radius:14px;padding:18px">
+      <h3 style="font-size:0.9rem;font-weight:700;color:#92400e;margin-bottom:8px">📌 毎日更新！読み忘れゼロに</h3>
+      <p style="font-size:0.8rem;color:#78350f;line-height:1.5">気に入った記事は🔖ボタンで保存できます。左の「マイライブラリ」でいつでも確認できます。</p>
+      <span style="display:inline-block;margin-top:8px;background:#fff;border:1px solid #fde68a;border-radius:8px;padding:4px 10px;font-size:0.75rem;color:#92400e;font-weight:600">💻 PC: Ctrl+D でブックマーク</span>
+    </div>
+
+    <!-- メール登録 -->
+    <div class="s-box">
+      <div class="s-box-head"><span>✉️</span><h3>新着記事をメールで受け取る</h3></div>
+      <div class="s-box-body" style="display:flex;flex-direction:column;gap:10px">
+        <p style="font-size:0.82rem;color:var(--tl)">毎朝届く「今日のFPアドバイス」。登録は無料・解除も自由。</p>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=%E3%83%96%E3%83%AD%E3%82%B0%E6%96%B0%E7%9D%80%E9%80%9A%E7%9F%A5%E7%99%BB%E9%8C%B2%E5%B8%8C%E6%9C%9B&body=%E6%AF%8E%E6%97%A5%E3%81%AEFP%E3%82%A2%E3%83%89%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E3%83%A1%E3%83%BC%E3%83%AB%E9%80%9A%E7%9F%A5%E3%82%92%E5%B8%8C%E6%9C%9B%E3%81%97%E3%81%BE%E3%81%99%E3%80%82" target="_blank" rel="noopener noreferrer" class="btn-sky-s">📬 無料で通知を受け取る</a>
+      </div>
+    </div>
+
+    <!-- FP相談 -->
+    <div style="background:linear-gradient(135deg,var(--sb),var(--sp));border:1.5px solid var(--sl);border-radius:14px;padding:18px;text-align:center">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sl));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 10px">👨‍💼</div>
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:6px">FPに無料相談</h3>
+      <p style="font-size:0.78rem;color:var(--tl);margin-bottom:12px">記事を読んで気になることはFPに直接ご相談いただけます。</p>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=FP%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%E5%B8%8C%E6%9C%9B" target="_blank" rel="noopener noreferrer" class="btn-sky-s">✉️ 無料相談を申し込む</a>
+    </div>
+
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com" target="_blank" rel="noopener noreferrer">lifeassetpartners@gmail.com</a>
+    </div>
+    <p>© 2026 Life Asset Partners. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const BMKey = 'lap_bm';
+  const ReadKey = 'lap_read';
+  const StreakKey = 'lap_streak';
+  let currentCat = 'all';
+  let currentSort = 'new';
+
+  // ---- STREAK ----
+  function updateStreak() {
+    const today = new Date().toISOString().split('T')[0];
+    const s = JSON.parse(localStorage.getItem(StreakKey) || '{"count":0,"lastDate":""}');
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    if (s.lastDate === today) return;
+    s.count = (s.lastDate === yesterday) ? s.count + 1 : 1;
+    s.lastDate = today;
+    localStorage.setItem(StreakKey, JSON.stringify(s));
+  }
+
+  // ---- READ MARKS ----
+  function applyReadMarks() {
+    const read = JSON.parse(localStorage.getItem(ReadKey) || '[]');
+    document.querySelectorAll('#article-grid .card').forEach(function(card) {
+      const id = card.getAttribute('data-id');
+      const mark = document.getElementById('read-' + id);
+      if (mark && read.includes(id)) mark.style.display = 'block';
+    });
+    document.getElementById('read-count').textContent = read.length;
+  }
+
+  // ---- BOOKMARKS ----
+  function cardBookmark(e, id, title, cat) {
+    e.preventDefault(); e.stopPropagation();
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const idx = bms.findIndex(function(b){ return b.id === id; });
+    const btn = document.getElementById('bm-' + id);
+    if (idx >= 0) {
+      bms.splice(idx, 1);
+      if (btn) { btn.textContent = '🔖'; btn.classList.remove('bm-on'); }
+    } else {
+      bms.push({ id: id, title: title, cat: cat });
+      if (btn) { btn.textContent = '✅'; btn.classList.add('bm-on'); }
+    }
+    localStorage.setItem(BMKey, JSON.stringify(bms));
+    renderBmList();
+  }
+
+  function applyBookmarkStates() {
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    bms.forEach(function(b) {
+      const btn = document.getElementById('bm-' + b.id);
+      if (btn) { btn.textContent = '✅'; btn.classList.add('bm-on'); }
+    });
+    document.getElementById('bm-count').textContent = bms.length;
+    renderBmList();
+  }
+
+  function renderBmList() {
+    const bms = JSON.parse(localStorage.getItem(BMKey) || '[]');
+    const list = document.getElementById('bm-list');
+    document.getElementById('bm-count').textContent = bms.length;
+    list.innerHTML = '';
+    if (bms.length === 0) return;
+    bms.forEach(function(b) {
+      const item = document.createElement('div');
+      item.className = 'bm-item';
+      const a = document.createElement('a');
+      a.href = b.id + '.html';
+      a.textContent = b.title.length > 28 ? b.title.slice(0, 28) + '…' : b.title;
+      const del = document.createElement('button');
+      del.className = 'bm-del';
+      del.textContent = '×';
+      del.onclick = function(e) { cardBookmark(e, b.id, b.title, b.cat); };
+      item.appendChild(a);
+      item.appendChild(del);
+      list.appendChild(item);
+    });
+  }
+
+  // ---- FILTER / SORT ----
+  function setCategory(btn, cat) {
+    currentCat = cat;
+    document.querySelectorAll('.cat-btn').forEach(function(b){ b.classList.remove('active'); });
+    if (btn) { btn.classList.add('active'); }
+    else {
+      document.querySelectorAll('.cat-btn').forEach(function(b){
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + cat + "'")) b.classList.add('active');
+      });
+    }
+    filterArticles();
+    document.getElementById('article-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function sortArticles(btn, mode) {
+    currentSort = mode;
+    document.querySelectorAll('.sort-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    filterArticles();
+  }
+
+  function filterArticles() {
+    const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
+    const grid = document.getElementById('article-grid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    let visible = [];
+    cards.forEach(function(card) {
+      const cat = card.getAttribute('data-cat');
+      const title = (card.getAttribute('data-title') || '').toLowerCase();
+      const catMatch = (currentCat === 'all') || (cat === currentCat);
+      const searchMatch = (!q) || title.includes(q) || card.textContent.toLowerCase().includes(q);
+      if (catMatch && searchMatch) { card.style.display = ''; visible.push(card); }
+      else card.style.display = 'none';
+    });
+    // Sort
+    visible.sort(function(a, b) {
+      if (currentSort === 'new') return b.getAttribute('data-date').localeCompare(a.getAttribute('data-date'));
+      return parseInt(b.getAttribute('data-pop')) - parseInt(a.getAttribute('data-pop'));
+    });
+    visible.forEach(function(c){ grid.appendChild(c); });
+    const noRes = document.getElementById('no-results');
+    noRes.style.display = (visible.length === 0) ? 'block' : 'none';
+    document.getElementById('articles-count').textContent = visible.length + '件';
+  }
+
+  // ---- INIT ----
+  window.addEventListener('DOMContentLoaded', function() {
+    updateStreak();
+    applyReadMarks();
+    applyBookmarkStates();
+    const s = JSON.parse(localStorage.getItem(StreakKey) || '{"count":0}');
+    document.getElementById('streak-count').textContent = s.count + '日';
+    filterArticles();
+  });
+</script>
+</body>
+</html>
