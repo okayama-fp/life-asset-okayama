@@ -7,7 +7,7 @@
 - GitHub Actions の GITHUB_OUTPUT に結果を出力
 """
 
-import google.generativeai as genai
+from google import genai
 import feedparser
 import os
 import json
@@ -76,8 +76,7 @@ def fetch_news():
 # Gemini で note 記事生成
 # ───────────────────────────────────────────
 def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> str:
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     if IS_PAID_NOTE:
         note_type = "有料記事（深掘り・実践編）"
@@ -114,7 +113,7 @@ def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> st
 見出しは ## を使い、箇条書きは - を使ってください。
 """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return response.text.strip()
 
 
@@ -133,8 +132,7 @@ def save_note_draft(content: str) -> str:
 # Gemini で記事生成
 # ───────────────────────────────────────────
 def generate_article(news_text: str) -> dict:
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     prompt = f"""あなたはライフアセットパートナーズのFPブログライターです。
 今日は{DATE_JP} {TIME_STR} です。
@@ -164,7 +162,7 @@ def generate_article(news_text: str) -> dict:
 本文の見出しは ## 見出しテキスト の形式で書いてください。
 """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     raw = response.text.strip()
 
     # JSON を抽出
@@ -581,27 +579,34 @@ def main():
     # blog/index.html 更新
     update_blog_index(meta)
 
-    # note 記事生成
+    # GitHub Actions 出力（note生成の前に書いておく）
+    set_github_output(meta)
+
+    # note 記事生成（失敗してもブログ投稿は続行）
     print("note記事を生成中...")
     note_type = "有料" if IS_PAID_NOTE else "無料"
     print(f"note種別: {note_type}記事")
-    note_content = generate_note_article(news, meta["title"], body)
-    note_draft   = save_note_draft(note_content)
-    print(f"note下書き保存: {NOTE_DRAFT_PATH}")
+    try:
+        note_content = generate_note_article(news, meta["title"], body)
+        note_draft   = save_note_draft(note_content)
+        print(f"note下書き保存: {NOTE_DRAFT_PATH}")
 
-    # GitHub Actions 出力
-    set_github_output(meta)
+        # note情報もGITHUB_OUTPUTに追加
+        github_output = os.environ.get("GITHUB_OUTPUT", "")
+        if github_output:
+            with open(github_output, "a", encoding="utf-8") as f:
+                f.write(f"note_type={note_type}\n")
+                f.write(f"note_draft_path={NOTE_DRAFT_PATH}\n")
 
-    # note情報もGITHUB_OUTPUTに追加
-    github_output = os.environ.get("GITHUB_OUTPUT", "")
-    if github_output:
-        with open(github_output, "a", encoding="utf-8") as f:
-            f.write(f"note_type={note_type}\n")
-            f.write(f"note_draft_path={NOTE_DRAFT_PATH}\n")
-
-    # note本文をファイルに書き出し（メール用）
-    with open("note_draft_for_email.txt", "w", encoding="utf-8") as f:
-        f.write(note_draft)
+        # note本文をファイルに書き出し（メール用）
+        with open("note_draft_for_email.txt", "w", encoding="utf-8") as f:
+            f.write(note_draft)
+    except Exception as e:
+        print(f"⚠️ note記事生成をスキップしました: {e}")
+        github_output = os.environ.get("GITHUB_OUTPUT", "")
+        if github_output:
+            with open(github_output, "a", encoding="utf-8") as f:
+                f.write(f"note_type=（生成失敗）\n")
 
     print("✅ 完了")
 
