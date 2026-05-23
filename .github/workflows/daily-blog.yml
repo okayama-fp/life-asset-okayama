@@ -25,7 +25,7 @@ jobs:
           python-version: '3.11'
 
       - name: 依存ライブラリをインストール
-        run: pip install google-generativeai feedparser requests pytz
+        run: pip install google-genai feedparser requests pytz
 
       - name: 記事を生成
         id: gen
