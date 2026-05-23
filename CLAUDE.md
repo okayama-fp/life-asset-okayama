@@ -13,9 +13,7 @@
 |------|------|
 | サービス名 | ライフアセットパートナーズ |
 | 英語名 | Life Asset Partners |
-| 代表者 | （削除済み）（ファイナンシャルプランナー・FP資格者） |
 | メール | lifeassetpartners@gmail.com |
-| 電話 | 090-1010-4737 |
 | 公開URL | https://lifeassetoffice.net/ |
 | 旧URL | https://okayama-fp.github.io/life-asset-okayama/ |
 | リポジトリ | okayama-fp/life-asset-okayama |
