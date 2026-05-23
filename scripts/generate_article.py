@@ -21,17 +21,22 @@ import pytz
 # ───────────────────────────────────────────
 JST = pytz.timezone('Asia/Tokyo')
 NOW = datetime.now(JST)
-DATE_STR   = NOW.strftime('%Y-%m-%d')          # 2026-05-24
-DATE_JP    = NOW.strftime('%Y年%-m月%-d日')     # 2026年5月24日
-TIME_STR   = NOW.strftime('%H:%M')             # 07:00
+DATE_STR   = NOW.strftime('%Y-%m-%d')
+DATE_JP    = NOW.strftime('%Y年%-m月%-d日')
+TIME_STR   = NOW.strftime('%H:%M')
 YEAR_MONTH = NOW.strftime('%Y年%-m月')
 
 ARTICLE_FILENAME = f"{DATE_STR}.html"
 ARTICLE_PATH     = f"blog/{ARTICLE_FILENAME}"
 BLOG_INDEX_PATH  = "blog/index.html"
+NOTE_DRAFT_PATH  = f"note-drafts/{DATE_STR}.md"
 
 CONTACT_EMAIL = "lifeassetpartners@gmail.com"
 SITE_URL      = "https://lifeassetoffice.net"
+NOTE_URL      = "https://note.com/lifeasset_fp"
+
+# 月の日付が3の倍数なら有料記事（月に約10回有料）
+IS_PAID_NOTE  = (NOW.day % 3 == 0)
 
 # カテゴリとスタイルの対応
 CATEGORY_STYLES = {
@@ -65,6 +70,69 @@ def fetch_news():
         except Exception:
             pass
     return "\n".join(items[:10]) if items else "本日の経済・政治ニュースを確認中"
+
+
+# ───────────────────────────────────────────
+# Gemini で note 記事生成
+# ───────────────────────────────────────────
+def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> str:
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+    if IS_PAID_NOTE:
+        note_type = "有料記事（深掘り・実践編）"
+        length_req = "2000〜3000文字"
+        extra_req = """
+- 具体的な数字・シミュレーション例を必ず含める
+- 「すぐに使えるチェックリスト」か「穴埋め式ワークシート」を1つ含める
+- 読者が行動できるような具体的なアクションプランで締める
+- 有料記事にふさわしい深い内容にすること"""
+    else:
+        note_type = "無料記事（入門・気づき編）"
+        length_req = "800〜1200文字"
+        extra_req = """
+- 読みやすく短くまとめる
+- 最後に「続きは有料マガジンで詳しく解説」と誘導する
+- フォロワーが増えるよう、役立つ豆知識か気づきを1つ入れる"""
+
+    prompt = f"""あなたはFP資格者が運営するnoteマガジン「ライフアセットFP通信」のライターです。
+今日は{DATE_JP}です。
+
+以下のブログ記事をベースに、note用の記事を書いてください。
+ブログと完全に同じにならず、note読者向けに書き直してください。
+
+【参考ブログタイトル】{blog_title}
+【参考ブログ内容（抜粋）】
+{blog_body[:800]}
+
+【記事種別】{note_type}
+【文字数】{length_req}
+【要件】{extra_req}
+
+【出力形式】
+タイトル行（# から始める）を最初に書き、その後に本文を書いてください。
+見出しは ## を使い、箇条書きは - を使ってください。
+"""
+
+    response = model.generate_content(prompt)
+    return response.text.strip()
+
+
+def save_note_draft(content: str) -> str:
+    os.makedirs("note-drafts", exist_ok=True)
+    note_type_label = "【有料】" if IS_PAID_NOTE else "【無料】"
+    header = f"""---
+date: {DATE_JP}
+type: {"paid" if IS_PAID_NOTE else "free"}
+label: {note_type_label}
+note_url: {NOTE_URL}
+---
+
+"""
+    full_content = header + content
+    with open(NOTE_DRAFT_PATH, "w", encoding="utf-8") as f:
+        f.write(full_content)
+    return full_content
 
 
 # ───────────────────────────────────────────
@@ -511,8 +579,27 @@ def main():
     # blog/index.html 更新
     update_blog_index(meta)
 
+    # note 記事生成
+    print("note記事を生成中...")
+    note_type = "有料" if IS_PAID_NOTE else "無料"
+    print(f"note種別: {note_type}記事")
+    note_content = generate_note_article(news, meta["title"], body)
+    note_draft   = save_note_draft(note_content)
+    print(f"note下書き保存: {NOTE_DRAFT_PATH}")
+
     # GitHub Actions 出力
     set_github_output(meta)
+
+    # note情報もGITHUB_OUTPUTに追加
+    github_output = os.environ.get("GITHUB_OUTPUT", "")
+    if github_output:
+        with open(github_output, "a", encoding="utf-8") as f:
+            f.write(f"note_type={note_type}\n")
+            f.write(f"note_draft_path={NOTE_DRAFT_PATH}\n")
+
+    # note本文をファイルに書き出し（メール用）
+    with open("note_draft_for_email.txt", "w", encoding="utf-8") as f:
+        f.write(note_draft)
 
     print("✅ 完了")
 
