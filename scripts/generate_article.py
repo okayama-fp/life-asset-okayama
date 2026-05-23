@@ -218,11 +218,13 @@ def build_html(meta: dict, body_html: str, toc: list) -> str:
 
     # AdSense 枠
     adsense_html = """
-<!-- Google AdSense ▼ 審査通過後にコードを差し替えてください -->
-<div style="background:#f1f5f9;border:2px dashed #cbd5e1;border-radius:8px;padding:20px;text-align:center;color:#94a3b8;font-size:0.78rem;margin:24px 0">
-  広告スペース（AdSense 設定後に自動表示）
-</div>
-<!-- Google AdSense ▲ -->"""
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1266918303152498"
+     data-ad-slot="auto"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>"""
 
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -232,8 +234,8 @@ def build_html(meta: dict, body_html: str, toc: list) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}｜Life Asset ブログ</title>
   <meta name="description" content="{description}">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none';">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
