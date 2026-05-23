@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- [X-Frame-Options] クリックジャッキング対策 -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+<title>融資シミュレーター｜ライフアセットパートナーズ</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f9ff;
+  padding: 20px;
+  min-height: 100vh;
+}
+.page-wrapper {
+  display: flex;
+  gap: 28px;
+  max-width: 760px;
+  margin: auto;
+  align-items: flex-start;
+}
+.box {
+  flex: 1;
+  background: white;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(14,165,233,0.10);
+  border-top: 4px solid #0ea5e9;
+}
+h2 { text-align: center; color: #0f3460; margin-bottom: 16px; font-size: 18px; }
+label { display: block; font-size: 13px; color: #444; margin-top: 10px; margin-bottom: 2px; }
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #bae6fd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  background: #f0f9ff;
+}
+input:focus { outline: none; border-color: #0ea5e9; background: #fff; }
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: opacity .2s;
+}
+button:hover { opacity: 0.88; }
+.result {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 2;
+  text-align: center;
+  color: #0f3460;
+}
+.safe   { color: #16a34a; }
+.warn   { color: #d97706; }
+.danger { color: #dc2626; }
+table {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: collapse;
+}
+td, th {
+  border: 1px solid #bae6fd;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+th { background: #0ea5e9; color: white; }
+h3 { color: #0f3460; margin-top: 20px; margin-bottom: 8px; font-size: 15px; }
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  color: #0ea5e9;
+  text-decoration: none;
+  font-size: 13px;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* キャラクター */
+.character-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 48px;
+  min-width: 130px;
+}
+.speech-bubble {
+  background: #fff;
+  border: 2px solid #bae6fd;
+  border-radius: 14px;
+  padding: 10px 13px;
+  font-size: 12px;
+  color: #0f3460;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(14,165,233,0.10);
+}
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #bae6fd;
+}
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #fff;
+  z-index: 1;
+}
+.character {
+  text-align: center;
+  font-size: 13px;
+  color: #2c6fb7;
+  font-weight: 700;
+}
+.character p { margin: 6px 0 0; }
+
+@media (max-width: 580px) {
+  .page-wrapper { flex-direction: column; align-items: center; }
+  .character-col { flex-direction: row; gap: 12px; align-items: center; padding-top: 0; order: -1; }
+  .speech-bubble::after, .speech-bubble::before { display: none; }
+  .speech-bubble { margin-bottom: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+  <!-- シミュレーター -->
+  <div class="box">
+    <h2>融資シミュレーション</h2>
+
+    <label>借入額（万円）</label>
+    <input id="loan" type="number" value="300" min="1" max="100000" step="1" required>
+
+    <label>金利（%）</label>
+    <input id="rate" type="number" value="3" min="0" max="50" step="0.01" required>
+
+    <label>返済年数</label>
+    <input id="years" type="number" value="5" min="1" max="30" step="1" required>
+
+    <label>月収（万円）</label>
+    <input id="income" type="number" value="30" min="1" max="10000" step="1" required>
+
+    <label>生活費（万円）</label>
+    <input id="expense" type="number" value="20" min="0" max="9999" step="1" required>
+
+    <label>既存ローン返済（万円）</label>
+    <input id="other" type="number" value="0" min="0" max="9999" step="1" required>
+
+    <button onclick="calc()">計算する</button>
+
+    <div class="result" id="result"></div>
+    <div id="tableArea"></div>
+
+    <a href="index.html" class="back-link">← トップページに戻る</a>
+  </div>
+
+  <!-- キャラクター -->
+  <div class="character-col">
+    <div class="speech-bubble">最適な返済プランを<br>一緒に探しましょう！</div>
+    <div class="character">
+      <img src="images/life-asset-kun.png" width="110" alt="ライフアセットくん">
+      <p>ライフアセットくん</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function payment(P, r, n) {
+  if (r === 0) return P / n;
+  return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+}
+
+function getNum(id) {
+  return parseFloat(document.getElementById(id).value);
+}
+
+function validate(loan, rate, years, income, expense, other) {
+  if ([loan, rate, years, income, expense, other].some(isNaN)) return "入力値に誤りがあります。";
+  if (loan  < 1 || loan  > 100000) return "借入額は1〜100000万円で入力してください。";
+  if (rate  < 0 || rate  > 50)     return "金利は0〜50%で入力してください。";
+  if (years < 1 || years > 30)     return "返済年数は1〜30年で入力してください。";
+  if (income < 1 || income > 10000) return "月収は1〜10000万円で入力してください。";
+  if (expense < 0 || expense > 9999) return "生活費は0〜9999万円で入力してください。";
+  if (other  < 0 || other  > 9999)  return "既存ローンは0〜9999万円で入力してください。";
+  return null;
+}
+
+function calc() {
+  const loanMan   = getNum("loan");
+  const rateVal   = getNum("rate");
+  const years     = getNum("years");
+  const incomeMan = getNum("income");
+  const expMan    = getNum("expense");
+  const otherMan  = getNum("other");
+
+  const err = validate(loanMan, rateVal, years, incomeMan, expMan, otherMan);
+  const resultEl = document.getElementById("result");
+  const tableEl  = document.getElementById("tableArea");
+
+  if (err) {
+    resultEl.textContent = err;
+    tableEl.textContent = "";
+    return;
+  }
+
+  const loan    = loanMan * 10000;
+  const rate    = rateVal / 100 / 12;
+  const n       = years * 12;
+  const monthly = payment(loan, rate, n);
+  const income  = incomeMan * 10000;
+  const expense = expMan    * 10000;
+  const other   = otherMan  * 10000;
+  const remain  = income - expense - other - monthly;
+
+  let status, cls;
+  if (remain > 30000)  { status = "安全"; cls = "safe"; }
+  else if (remain > 0) { status = "注意"; cls = "warn"; }
+  else                 { status = "危険"; cls = "danger"; }
+
+  resultEl.textContent = "";
+  ["毎月返済：約 " + Math.round(monthly / 10000).toLocaleString() + " 万円",
+   "残り余力：" + Math.round(remain / 10000).toLocaleString() + " 万円"].forEach(line => {
+    const p = document.createElement("p");
+    p.textContent = line;
+    resultEl.appendChild(p);
+  });
+  const judgeLine = document.createElement("p");
+  judgeLine.textContent = "判定：";
+  const span = document.createElement("span");
+  span.className = cls;
+  span.textContent = status;
+  judgeLine.appendChild(span);
+  resultEl.appendChild(judgeLine);
+
+  tableEl.textContent = "";
+  const h3 = document.createElement("h3");
+  h3.textContent = "返済プラン比較";
+  const table = document.createElement("table");
+  const thead = table.createTHead();
+  const hr = thead.insertRow();
+  ["年数", "月額", "総支払"].forEach(t => {
+    const th = document.createElement("th");
+    th.textContent = t;
+    hr.appendChild(th);
+  });
+  const tbody = table.createTBody();
+  [3, 5, 7].forEach(y => {
+    const m   = payment(loan, rate, y * 12);
+    const tot = m * y * 12;
+    const row = tbody.insertRow();
+    [y + "年",
+     Math.round(m / 10000).toLocaleString() + "万",
+     Math.round(tot / 10000).toLocaleString() + "万"].forEach(cell => {
+      const td = row.insertCell();
+      td.textContent = cell;
+    });
+  });
+  tableEl.appendChild(h3);
+  tableEl.appendChild(table);
+}
+</script>
+
+</body>
+</html>
