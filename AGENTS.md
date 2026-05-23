@@ -12,9 +12,7 @@
 |------|------|
 | サービス名 | ライフアセットパートナーズ |
 | 英語名 | Life Asset Partners |
-| 代表者 | 髙月 義照（ファイナンシャルプランナー・FP資格者） |
 | メール | lifeassetpartners@gmail.com |
-| 電話 | 090-1010-4737 |
 | 公開URL | https://yamakaze8000-alt.github.io/123/ |
 | リポジトリ | yamakaze8000-alt/123 |
 
