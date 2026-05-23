@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <title>採用情報｜ライフアセットパートナーズ</title>
+  <meta name="description" content="ライフアセットパートナーズの採用情報。FP・金融業界に関心のある方を歓迎します。">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --sky:#0ea5e9; --sky-light:#38bdf8; --sky-pale:#e0f2fe; --sky-bg:#dff3ff; --navy:#0f3460; --navy-soft:#1e4d8c; --white:#ffffff; --gray-bg:#edf8ff; --text:#1e293b; --text-sub:#64748b; --border:#e2e8f0; }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
+    a { text-decoration: none; color: inherit; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--sky); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
+    .page-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 50%, #f4fbff 100%); padding: 56px 32px 48px; text-align: center; }
+    .page-hero .label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; }
+    .page-hero h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .page-hero p { font-size: 14px; color: var(--text-sub); }
+    .breadcrumb { max-width: 1100px; margin: 0 auto; padding: 16px 32px; font-size: 12px; color: var(--text-sub); display: flex; gap: 6px; align-items: center; }
+    .breadcrumb a { color: var(--sky); }
+    .breadcrumb span { opacity: 0.5; }
+    .recruit-section { max-width: 900px; margin: 0 auto; padding: 32px 32px 80px; }
+    .message-box { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-bottom: 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .message-box h2 { font-size: clamp(20px,3vw,26px); font-weight: 900; color: var(--navy); margin-bottom: 14px; }
+    .message-box p { font-size: 14px; color: var(--text-sub); line-height: 1.9; }
+    .message-portrait img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; object-position: center top; border: 3px solid var(--sky-pale); }
+    .values-section { margin-bottom: 40px; }
+    .values-section h2 { font-size: clamp(18px,2.5vw,22px); font-weight: 900; color: var(--navy); margin-bottom: 24px; text-align: center; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .value-item { background: var(--sky-bg); border-radius: 16px; padding: 24px; text-align: center; }
+    .value-icon { width: 56px; height: 56px; background: var(--sky); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .value-icon svg { width: 26px; height: 26px; color: #fff; }
+    .value-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .value-desc { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
+    .jobs-section { margin-bottom: 40px; }
+    .jobs-section h2 { font-size: clamp(18px,2.5vw,22px); font-weight: 900; color: var(--navy); margin-bottom: 24px; text-align: center; }
+    .job-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+    .job-tag { display: inline-block; background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; }
+    .job-title { font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 16px; }
+    .job-table { width: 100%; border-collapse: collapse; }
+    .job-table tr { border-bottom: 1px solid var(--border); }
+    .job-table tr:last-child { border-bottom: none; }
+    .job-table th { width: 120px; font-size: 12px; font-weight: 700; color: var(--text-sub); padding: 10px 0; text-align: left; vertical-align: top; }
+    .job-table td { font-size: 13px; color: var(--text); padding: 10px 0; line-height: 1.7; }
+    .cta-banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 20px; padding: 48px 40px; text-align: center; }
+    .cta-banner h2 { font-size: clamp(18px,3vw,22px); font-weight: 900; color: #fff; margin-bottom: 10px; }
+    .cta-banner p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+    .cta-banner a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 40px; border-radius: 50px; box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
+    @media (max-width: 768px) { nav { display: none; } .message-box { grid-template-columns: 1fr; } .values-grid { grid-template-columns: 1fr; } .cta-banner { padding: 32px 24px; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="../" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットパートナーズ</div></div></a>
+    <nav>
+      <a href="../">ホーム</a>
+      <a href="../service/">サービス</a>
+      <a href="../blog/">ブログ</a>
+      <a href="./" class="active">採用情報</a>
+    </nav>
+    <a href="../#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+<div class="page-hero"><div class="label">RECRUIT</div><h1>採用情報</h1><p>お客様の人生設計に本気で向き合える方を求めています</p></div>
+<div class="breadcrumb"><a href="../">ホーム</a><span>&rsaquo;</span><span>採用情報</span></div>
+<div class="recruit-section">
+  <div class="message-box">
+    <div>
+      <h2>代表からのメッセージ</h2>
+      <p>ライフアセットパートナーズは、「お客様の人生全体をサポートする」という理念のもと、資産運用・ライフプラン・融資の各分野でFP相談を提供しています。</p>
+      <p>私たちは規模より質を重視しています。一人ひとりのお客様に真摯に向き合い、長期的な信頼関係を築いていくことが私たちの強みです。</p>
+      
+    </div>
+    <div class="message-portrait"><img src="../images/fp-yoshiteru.jpg" alt="代表"></div>
+  </div>
+  <div class="values-section">
+    <h2>求める人物像</h2>
+    <div class="values-grid">
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="value-title">誠実さ</div><div class="value-desc">お客様の利益を最優先に、正直なアドバイスができる方</div></div>
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="value-title">学習意欲</div><div class="value-desc">金融・税務・法律などの知識を継続的に学ぶ意欲がある方</div></div>
+      <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="value-title">コミュニケーション力</div><div class="value-desc">複雑な金融知識をわかりやすく伝えられる力</div></div>
+    </div>
+  </div>
+  <div class="jobs-section">
+    <h2>募集職種</h2>
+    <div class="job-card">
+      <span class="job-tag">正社員 / 業務委託</span>
+      
+      <table class="job-table">
+        <tr><th>業務内容</th><td>個人・法人のお客様への資産運用・ライフプラン・融資に関するFP相談対応</td></tr>
+        <tr><th>応募資格</th><td>FP2級以上取得者（AFP・CFP優遇）、金融機関勤務経験者歓迎</td></tr>
+        <tr><th>勤務地</th><td>応相談（オンライン相談対応可）</td></tr>
+        <tr><th>待遇</th><td>経験・スキルを考慮の上、個別にご相談</td></tr>
+      </table>
+    </div>
+    <div class="job-card">
+      <span class="job-tag">パート / アルバイト</span>
+      <div class="job-title">事務アシスタント（未経験歓迎）</div>
+      <table class="job-table">
+        <tr><th>業務内容</th><td>相談予約の管理・資料作成・メール対応・その他一般事務</td></tr>
+        <tr><th>応募資格</th><td>基本的なPC操作ができる方。金融業界未経験歓迎</td></tr>
+        <tr><th>勤務地</th><td>応相談</td></tr>
+        <tr><th>待遇</th><td>時給・日数等は応相談</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="cta-banner">
+    <h2>まずはお気軽にご連絡ください</h2>
+    <p>採用に関するお問い合わせは、メールにてお受けしています。</p>
+    <a href="#" id="recruit-mail">採用担当へメールを送る</a>
+    <script>(function(){var u='lifeassetpartners',d='gmail.com';var el=document.getElementById('recruit-mail');el.href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=採用についてのお問い合わせ';el.target='_blank';el.rel='noopener noreferrer';})();</script>
+  </div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo-text">Life Asset</div></div>
+    <div class="footer-contact">
+      <a href="#" id="footer-mail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><span id="footer-mail-text"></span></a>
+      <script>(function(){var u='lifeassetpartners',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
