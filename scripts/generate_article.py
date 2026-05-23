@@ -356,6 +356,17 @@ def build_html(meta: dict, body_html: str, toc: list) -> str:
   </div>
 </div>
 
+<div style="background:linear-gradient(135deg,#fffbeb,#fef3c7);border-top:2px solid #fde68a;padding:40px 24px;text-align:center">
+  <div style="max-width:640px;margin:0 auto">
+    <p style="font-size:0.75rem;font-weight:700;color:#d97706;margin-bottom:8px">📓 NOTE 有料マガジン</p>
+    <h2 style="font-size:1.3rem;font-weight:900;color:#92400e;margin-bottom:10px">ライフアセットFP通信</h2>
+    <p style="font-size:0.88rem;color:#78350f;margin-bottom:20px;line-height:1.7">ブログでは語れない深掘り解説・家計診断シート・読者限定Q&amp;Aを月額980円でお届け</p>
+    <a href="https://note.com/yamakaze8000" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-size:0.9rem;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none">
+      📓 noteマガジンを見る
+    </a>
+  </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
@@ -364,6 +375,8 @@ def build_html(meta: dict, body_html: str, toc: list) -> str:
     </div>
     <div class="footer-contact">
       <a href="https://mail.google.com/mail/?view=cm&fs=1&to={CONTACT_EMAIL}" target="_blank" rel="noopener noreferrer">{CONTACT_EMAIL}</a>
+      ｜<a href="../contact.html">お問い合わせ</a>
+      ｜<a href="../privacy.html">プライバシーポリシー</a>
     </div>
     <p>© 2026 Life Asset Partners. 本記事はAIによる自動生成コンテンツです。</p>
   </div>
