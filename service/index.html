@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <title>サービス一覧｜ライフアセットパートナーズ</title>
+  <meta name="description" content="ライフアセットパートナーズのサービス詳細。資産運用相談・ライフプラン設計・融資サポートを直接対応します。">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --sky:#0ea5e9; --sky-light:#38bdf8; --sky-pale:#e0f2fe; --sky-bg:#dff3ff; --navy:#0f3460; --navy-soft:#1e4d8c; --white:#ffffff; --gray-bg:#edf8ff; --text:#1e293b; --text-sub:#64748b; --border:#e2e8f0; }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
+    a { text-decoration: none; color: inherit; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--sky); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
+    .btn-cta:hover { background: var(--sky-light); }
+    .page-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 50%, #f4fbff 100%); padding: 56px 32px 48px; text-align: center; }
+    .page-hero .label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; }
+    .page-hero h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .page-hero p { font-size: 14px; color: var(--text-sub); }
+    .breadcrumb { max-width: 1100px; margin: 0 auto; padding: 16px 32px; font-size: 12px; color: var(--text-sub); display: flex; gap: 6px; align-items: center; }
+    .breadcrumb a { color: var(--sky); }
+    .breadcrumb span { opacity: 0.5; }
+    .services-section { max-width: 1100px; margin: 0 auto; padding: 32px 32px 80px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 64px; }
+    .service-card { background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .service-card:hover { box-shadow: 0 12px 40px rgba(14,165,233,0.12); transform: translateY(-4px); }
+    .service-card-top { height: 130px; background: linear-gradient(135deg, var(--sky-bg), #dbeafe); display: flex; align-items: center; justify-content: center; }
+    .service-card-top svg { width: 56px; height: 56px; color: var(--sky); }
+    .service-card-body { padding: 24px; }
+    .service-card-title { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .service-card-desc { font-size: 13px; color: var(--text-sub); line-height: 1.8; margin-bottom: 16px; }
+    .service-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .service-list li { font-size: 12.5px; color: var(--text); padding-left: 18px; position: relative; }
+    .service-list li::before { content: '✓'; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
+    .service-free { display: inline-block; background: var(--sky-pale); color: var(--sky); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; margin-bottom: 16px; }
+    .btn-service { display: block; text-align: center; background: var(--navy); color: #fff; font-size: 13px; font-weight: 700; padding: 11px; border-radius: 10px; transition: background .2s; }
+    .btn-service:hover { background: var(--navy-soft); }
+    .flow-section { background: var(--gray-bg); border-radius: 20px; padding: 48px; margin-bottom: 48px; }
+    .flow-section h2 { font-size: clamp(20px,3vw,26px); font-weight: 900; color: var(--navy); text-align: center; margin-bottom: 8px; }
+    .flow-section .sub { text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 40px; }
+    .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+    .flow-steps::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--sky-pale), var(--sky)); z-index: 0; }
+    .flow-step { background: #fff; border-radius: 14px; padding: 24px 16px; text-align: center; position: relative; z-index: 1; border: 1px solid var(--border); }
+    .flow-num { width: 48px; height: 48px; background: var(--sky); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; margin: 0 auto 14px; }
+    .flow-step h3 { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .flow-step p { font-size: 11.5px; color: var(--text-sub); line-height: 1.6; }
+    .cta-banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 20px; padding: 48px 40px; text-align: center; }
+    .cta-banner h2 { font-size: clamp(18px,3vw,24px); font-weight: 900; color: #fff; margin-bottom: 10px; }
+    .cta-banner p { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 24px; }
+    .cta-banner a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 40px; border-radius: 50px; box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); transition: color .2s; }
+    .footer-contact a:hover { color: #fff; }
+    @media (max-width: 768px) { nav { display: none; } .services-grid { grid-template-columns: 1fr; } .flow-steps { grid-template-columns: 1fr 1fr; } .flow-steps::before { display: none; } .flow-section { padding: 32px 24px; } .cta-banner { padding: 32px 24px; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="../" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットパートナーズ</div></div></a>
+    <nav>
+      <a href="../">ホーム</a>
+      <a href="./" class="active">サービス</a>
+      <a href="../blog/">ブログ</a>
+      <a href="../recruit/">採用情報</a>
+    </nav>
+    <a href="../#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+<div class="page-hero"><div class="label">SERVICE</div><h1>サービス一覧</h1><p>あなたの状況に合わせたサポートをご提供します</p></div>
+<div class="breadcrumb"><a href="../">ホーム</a><span>&rsaquo;</span><span>サービス一覧</span></div>
+<div class="services-section">
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-card-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="service-card-body">
+        <span class="service-free">初回無料</span>
+        <div class="service-card-title">資産運用相談</div>
+        <div class="service-card-desc">NISA・iDeCo・投資信託など、お客様の目標とリスク許容度に合った資産形成プランをご提案します。</div>
+        <ul class="service-list"><li>ポートフォリオ設計・見直し</li><li>NISA / iDeCo 活用サポート</li><li>長期・積立・分散投資の実践方法</li><li>老後資金シミュレーション</li></ul>
+        <a href="../#contact" class="btn-service">相談を申し込む</a>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-card-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="service-card-body">
+        <span class="service-free">初回無料</span>
+        <div class="service-card-title">ライフプラン設計</div>
+        <div class="service-card-desc">結婚・出産・住宅購入・老後など、人生の節目に向けたキャッシュフロー表を作成し、資金計画を見える化します。</div>
+        <ul class="service-list"><li>キャッシュフロー表の作成</li><li>教育資金・住宅資金の計画</li><li>保険の見直しと最適化</li><li>家計改善アドバイス</li></ul>
+        <a href="../#contact" class="btn-service">相談を申し込む</a>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-card-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <div class="service-card-body">
+        <span class="service-free">初回無料</span>
+        <div class="service-card-title">融資・ローンサポート</div>
+        <div class="service-card-desc">住宅ローン・事業資金調達など、お客様の状況に合った融資のご相談を承ります。</div>
+        <ul class="service-list"><li>住宅ローン選択・借り換え相談</li><li>フラット35 / 変動金利比較</li><li>団信・火災保険の見直し</li><li>事業資金調達サポート</li></ul>
+        <a href="../#contact" class="btn-service">相談を申し込む</a>
+      </div>
+    </div>
+  </div>
+  <div class="flow-section">
+    <h2>ご相談の流れ</h2><p class="sub">初めての方でも安心してご相談いただけます</p>
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-num">1</div><h3>お問い合わせ</h3><p>メールフォームまたはGmailでお気軽にご連絡ください</p></div>
+      <div class="flow-step"><div class="flow-num">2</div><h3>ヒアリング</h3><p>現状と目標をお聞きし、相談内容を整理します</p></div>
+      <div class="flow-step"><div class="flow-num">3</div><h3>プランご提案</h3><p>あなたの状況に合わせた具体的なプランをご提案</p></div>
+      <div class="flow-step"><div class="flow-num">4</div><h3>継続サポート</h3><p>実行後も定期的な見直しでサポートを継続します</p></div>
+    </div>
+  </div>
+  <div class="cta-banner"><h2>まずはお問い合わせからどうぞ</h2><p>「何から始めればいいかわからない」という方も大歓迎。お気軽にご相談ください。</p><a href="../#contact">お問い合わせはこちら</a></div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo-text">Life Asset</div></div>
+    <div class="footer-contact">
+      <a href="#" id="footer-mail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><span id="footer-mail-text"></span></a>
+      <script>(function(){var u='lifeassetpartners',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

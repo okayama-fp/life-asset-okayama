@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- [X-Frame-Options] クリックジャッキング対策 -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+<title>アドバイザー業務｜ライフアセットパートナーズ</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f9ff;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #0f3460;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* キャラクター帯 */
+  .character-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto 28px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 10px rgba(14,165,233,0.08);
+    border-left: 4px solid #38bdf8;
+  }
+  .character-row svg { flex-shrink: 0; }
+  .character-row .char-name {
+    font-size: 11px;
+    color: #2c6fb7;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .character-row .char-speech {
+    font-size: 13px;
+    color: #0f3460;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+
+  .box {
+    max-width: 500px;
+    margin: 0 auto 24px;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(14,165,233,0.09);
+    border-top: 4px solid #0ea5e9;
+  }
+  h3 {
+    color: #0f3460;
+    margin-bottom: 16px;
+    font-size: 17px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: #444;
+    margin-top: 10px;
+    margin-bottom: 2px;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #bae6fd;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #f0f9ff;
+  }
+  input:focus { outline: none; border-color: #0ea5e9; background: #fff; }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: opacity .2s;
+  }
+  button:hover { opacity: 0.88; }
+  .result {
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    color: #0f3460;
+    line-height: 2;
+  }
+  .back-link {
+    display: block;
+    text-align: center;
+    margin: 8px auto 32px;
+    color: #0ea5e9;
+    text-decoration: none;
+    font-size: 13px;
+    max-width: 500px;
+  }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>アドバイザー業務</h1>
+<p class="subtitle">専門知識を活かした各種シミュレーション</p>
+
+<!-- キャラクター帯 -->
+<div class="character-row">
+  <div>
+    <img src="images/life-asset-kun.png" width="64" alt="ライフアセットくん">
+    <div class="char-name">ライフアセットくん</div>
+  </div>
+  <div class="char-speech">老後・相続・保険のこと、<br>一緒にシミュレーションしましょう！</div>
+</div>
+
+<!-- ライフプラン -->
+<div class="box">
+  <h3>ライフプラン（老後資金）</h3>
+
+  <label>現在の年齢</label>
+  <input id="age" type="number" placeholder="例：45">
+
+  <label>引退年齢</label>
+  <input id="retire" type="number" placeholder="例：60">
+
+  <label>寿命（想定）</label>
+  <input id="life" type="number" placeholder="例：90">
+
+  <label>月の生活費（万円）</label>
+  <input id="monthlyCost" type="number" placeholder="例：25">
+
+  <label>年金（万円/年）</label>
+  <input id="pension" type="number" placeholder="例：150">
+
+  <button onclick="lifePlan()">計算する</button>
+  <div class="result" id="lifeResult"></div>
+</div>
+
+<!-- 相続シミュレーション -->
+<div class="box">
+  <h3>相続シミュレーション</h3>
+
+  <label>総資産（万円）</label>
+  <input id="asset" type="number" placeholder="例：8000">
+
+  <label>相続人数</label>
+  <input id="heirs" type="number" placeholder="例：3">
+
+  <button onclick="inheritCalc()">計算する</button>
+  <div class="result" id="inheritResult"></div>
+</div>
+
+<!-- 保険見直し -->
+<div class="box">
+  <h3>保険見直し診断</h3>
+
+  <label>年収（万円）</label>
+  <input id="income" type="number" placeholder="例：600">
+
+  <label>現在の保険料（万円/年）</label>
+  <input id="insurance" type="number" placeholder="例：40">
+
+  <button onclick="insuranceCheck()">診断する</button>
+  <div class="result" id="insuranceResult"></div>
+</div>
+
+<a href="index.html" class="back-link">← トップページに戻る</a>
+
+<script>
+function lifePlan() {
+  let age      = +document.getElementById("age").value;
+  let retire   = +document.getElementById("retire").value;
+  let life     = +document.getElementById("life").value;
+  let monthly  = +document.getElementById("monthlyCost").value * 10000;
+  let pension  = +document.getElementById("pension").value * 10000;
+
+  let years        = life - retire;
+  let totalCost    = monthly * 12 * years;
+  let totalPension = pension * years;
+  let shortage     = totalCost - totalPension;
+
+  document.getElementById("lifeResult").innerHTML =
+    "老後必要資金：約 " + Math.round(totalCost / 10000).toLocaleString() + " 万円<br>" +
+    "年金総額：約 " + Math.round(totalPension / 10000).toLocaleString() + " 万円<br>" +
+    "不足額：約 " + Math.round(shortage / 10000).toLocaleString() + " 万円";
+}
+
+function inheritCalc() {
+  let asset  = +document.getElementById("asset").value * 10000;
+  let heirs  = +document.getElementById("heirs").value;
+
+  let base    = (3000 + 600 * heirs) * 10000;
+  let taxable = Math.max(asset - base, 0);
+  let tax     = taxable * 0.1;
+
+  document.getElementById("inheritResult").innerHTML =
+    "基礎控除額：約 " + Math.round(base / 10000).toLocaleString() + " 万円<br>" +
+    "課税対象額：約 " + Math.round(taxable / 10000).toLocaleString() + " 万円<br>" +
+    "相続税（目安）：約 " + Math.round(tax / 10000).toLocaleString() + " 万円";
+}
+
+function insuranceCheck() {
+  let income    = +document.getElementById("income").value;
+  let insurance = +document.getElementById("insurance").value;
+
+  let ideal = income * 0.05;
+  let diff  = insurance - ideal;
+
+  let msg = diff > 0
+    ? "払いすぎの可能性があります（約 " + Math.round(diff) + " 万円/年）"
+    : diff < 0
+    ? "保障が不足している可能性があります（約 " + Math.round(Math.abs(diff)) + " 万円/年）"
+    : "適正な保険料です";
+
+  document.getElementById("insuranceResult").innerHTML =
+    "適正保険料：約 " + Math.round(ideal).toLocaleString() + " 万円/年<br>" +
+    msg;
+}
+</script>
+
+</body>
+</html>

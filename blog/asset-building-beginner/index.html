@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <title>資産形成の始め方｜初心者が最初にやるべき5つのステップ｜ライフアセットパートナーズ</title>
+  <meta name="description" content="資産形成を始めたい初心者向けに、5つのステップをわかりやすく解説。家計管理から積立投資まで、正しい順番で学べます。">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --sky:#0ea5e9; --sky-light:#38bdf8; --sky-pale:#e0f2fe; --sky-bg:#dff3ff; --navy:#0f3460; --navy-soft:#1e4d8c; --white:#ffffff; --gray-bg:#edf8ff; --text:#1e293b; --text-sub:#64748b; --border:#e2e8f0; }
+    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: #f8fbff; }
+    a { text-decoration: none; color: inherit; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-main { font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--sky); }
+    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
+    .breadcrumb { max-width: 860px; margin: 0 auto; padding: 16px 32px; font-size: 12px; color: var(--text-sub); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--sky); }
+    .breadcrumb span { opacity: 0.5; }
+    .article-wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; display: grid; grid-template-columns: 1fr 280px; gap: 48px; }
+    article { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .article-hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 60%); padding: 48px 40px; }
+    .article-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-tag { background: var(--sky); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
+    .article-date { font-size: 12px; color: var(--text-sub); }
+    .article-title { font-size: clamp(22px, 3vw, 30px); font-weight: 900; color: var(--navy); line-height: 1.4; margin-bottom: 16px; }
+    .article-lead { font-size: 14px; color: var(--text-sub); line-height: 1.9; }
+    .article-author { display: flex; align-items: center; gap: 12px; margin-top: 24px; background: rgba(255,255,255,0.7); border-radius: 12px; padding: 12px 16px; }
+    .article-author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; }
+    .article-author .name { font-size: 14px; font-weight: 800; color: var(--navy); }
+    .article-author .title { font-size: 11px; color: var(--text-sub); }
+    .article-body { padding: 40px; }
+    .toc { background: var(--gray-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 40px; }
+    .toc-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+    .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+    .toc li { font-size: 13px; }
+    .toc li a { color: var(--sky); }
+    h2.section-h { font-size: 20px; font-weight: 900; color: var(--navy); border-left: 4px solid var(--sky); padding-left: 14px; margin: 40px 0 16px; }
+    h3.sub-h { font-size: 16px; font-weight: 800; color: var(--navy); margin: 28px 0 12px; }
+    p.body-p { font-size: 14px; color: var(--text); line-height: 1.9; margin-bottom: 16px; }
+    .step-box { background: var(--sky-bg); border-radius: 14px; padding: 24px 28px; margin: 20px 0; }
+    .step-num { font-size: 11px; font-weight: 800; color: var(--sky); margin-bottom: 6px; letter-spacing: .1em; }
+    .step-title { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .step-body { font-size: 13px; color: var(--text); line-height: 1.8; }
+    .point-list { list-style: none; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
+    .point-list li { font-size: 13px; color: var(--text); padding-left: 20px; position: relative; line-height: 1.7; }
+    .point-list li::before { content: '✓'; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
+    .highlight-box { background: #fff; border: 2px solid var(--sky-pale); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+    .highlight-box .hl-title { font-size: 14px; font-weight: 800; color: var(--sky); margin-bottom: 8px; }
+    .cta-inline { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
+    .cta-inline h3 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .cta-inline p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+    .cta-inline a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 36px; border-radius: 50px; }
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .sidebar-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-bg); }
+    footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
+    @media (max-width: 768px) { nav { display: none; } .article-wrap { grid-template-columns: 1fr; } .article-hero { padding: 32px 24px; } .article-body { padding: 28px 24px; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="../../" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットパートナーズ</div></div></a>
+    <nav>
+      <a href="../../">ホーム</a>
+      <a href="../../service/">サービス</a>
+      <a href="../" class="active">ブログ</a>
+      <a href="../../recruit/">採用情報</a>
+    </nav>
+    <a href="../../#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+<div class="breadcrumb"><a href="../../">ホーム</a><span>&rsaquo;</span><a href="../">ブログ</a><span>&rsaquo;</span><span>資産形成の始め方</span></div>
+<div class="article-wrap">
+  <article>
+    <div class="article-hero">
+      <div class="article-meta"><span class="article-tag">資産形成</span><span class="article-date">2026年5月2日</span></div>
+      <h1 class="article-title">資産形成の始め方｜初心者が最初にやるべき5つのステップ</h1>
+      <p class="article-lead">「老後2,000万円問題」が話題になり、「資産形成を始めなければ」と感じている方は多いはず。でも、何から始めればいいかわからない——そんな初心者の方へ、お金の専門家の視点からわかりやすく解説します。</p>
+      <div class="article-author">
+        <img src="../../images/fp-removed.jpg" alt="代表">
+        <div></div>
+      </div>
+    </div>
+    <div class="article-body">
+      <div class="toc">
+        <div class="toc-title">目次</div>
+        <ol>
+          <li><a href="#step1">STEP 1：現在の家計を「見える化」する</a></li>
+          <li><a href="#step2">STEP 2：緊急予備資金を確保する</a></li>
+          <li><a href="#step3">STEP 3：目標と期間を明確にする</a></li>
+          <li><a href="#step4">STEP 4：非課税制度（NISA・iDeCo）を活用する</a></li>
+          <li><a href="#step5">STEP 5：少額から積立を始める</a></li>
+          <li><a href="#summary">まとめ：大切なのは「続けること」</a></li>
+        </ol>
+      </div>
+      <p class="body-p">資産形成とは、将来の目標（老後の生活、住宅購入、教育費など）に向けてお金を積み上げていく行動です。正しい順番で、一歩ずつ進めば誰でも始められます。</p>
+      <h2 class="section-h" id="step1">STEP 1：現在の家計を「見える化」する</h2>
+      <div class="step-box"><div class="step-num">STEP 01</div><div class="step-title">収入・支出・貯蓄を把握する</div><div class="step-body">まず最初に行うべきは、毎月の収入と支出を整理することです。「お金が貯まらない」という方の多くは、支出の中身を把握していません。</div></div>
+      <p class="body-p">家計簿アプリ（マネーフォワード ME など）を使うと、銀行口座やクレジットカードと連携して自動で集計できます。1ヶ月でいいので、まず現状を把握することから始めましょう。</p>
+      <ul class="point-list"><li>固定費（家賃・保険・サブスク）は真っ先に見直す</li><li>変動費（食費・交際費）は週単位で管理する</li><li>「先取り貯蓄」として給与日に自動振替を設定する</li></ul>
+      <h2 class="section-h" id="step2">STEP 2：緊急予備資金を確保する</h2>
+      <div class="step-box"><div class="step-num">STEP 02</div><div class="step-title">生活費3〜6ヶ月分を普通預金に確保する</div><div class="step-body">投資を始める前に、まず「いざとなれば使えるお金」を確保することが重要です。急な病気やリストラに備えた緊急予備資金がないと、投資中に急落した際に損を出して売却せざるを得なくなります。</div></div>
+      <p class="body-p">目安は生活費の3〜6ヶ月分。月25万円の生活費なら75万〜150万円を普通預金に確保してから、残りを投資に回しましょう。</p>
+      <h2 class="section-h" id="step3">STEP 3：目標と期間を明確にする</h2>
+      <div class="step-box"><div class="step-num">STEP 03</div><div class="step-title">「いつまでに・いくら」を決める</div><div class="step-body">「なんとなく貯める」では続きません。具体的な目標があると行動が変わります。</div></div>
+      <div class="highlight-box"><div class="hl-title">目標設定の例</div><ul class="point-list"><li>老後資金：65歳までに2,000万円を目標に、月3万円を30年積立</li><li>住宅購入：5年後の頭金500万円を目標に、月8万円を積立</li><li>子どもの教育費：18年後の大学費用300万円を目標に、月1.5万円を積立</li></ul></div>
+      <h2 class="section-h" id="step4">STEP 4：非課税制度（NISA・iDeCo）を活用する</h2>
+      <div class="step-box"><div class="step-num">STEP 04</div><div class="step-title">税制優遇を最大限に使う</div><div class="step-body">投資で利益が出ると通常は約20%の税金がかかりますが、NISAやiDeCoを使えば非課税になります。</div></div>
+      <h3 class="sub-h">新NISA（2024年〜）</h3>
+      <p class="body-p">年間360万円まで投資でき、運用益が非課税。生涯非課税枠は1,800万円。長期・積立・分散投資に最適な制度です。</p>
+      <h3 class="sub-h">iDeCo（個人型確定拠出年金）</h3>
+      <p class="body-p">掛金が全額所得控除になるため、節税効果が高い老後資金制度。60歳まで引き出せないルールがありますが、老後資金専用口座として非常に有利です。</p>
+      <h2 class="section-h" id="step5">STEP 5：少額から積立を始める</h2>
+      <div class="step-box"><div class="step-num">STEP 05</div><div class="step-title">月1,000円からでも始める</div><div class="step-body">投資は早く始めるほど複利効果が大きくなります。月1,000円でも今日から始めることが大切です。</div></div>
+      <div class="highlight-box"><div class="hl-title">積立投資のポイント</div><ul class="point-list"><li>ドルコスト平均法で価格変動リスクを分散できる</li><li>自動積立設定で「ほったらかし投資」が実現できる</li><li>相場が下がっても安い価格でたくさん買えるチャンス</li><li>20〜30年の長期投資で複利の恩恵を最大化する</li></ul></div>
+      <h2 class="section-h" id="summary">まとめ：大切なのは「続けること」</h2>
+      <p class="body-p">資産形成は正しい知識と仕組みを作れば、あとは時間が味方になります。少額からでも今すぐ始めること、そして途中で相場が下がっても焦らず続けることが大切です。</p>
+      <div class="cta-inline"><h3>お気軽にお問い合わせください</h3><p>あなたの状況に合わせた資産形成プランをご提案します。</p><a href="../../#contact">お問い合わせはこちら</a></div>
+    </div>
+  </article>
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <div class="sidebar-title">この記事を書いた人</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><img src="../../images/fp-removed2.jpg" alt="代表" style="width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;"><div></div></div>
+      
+    </div>
+    <div class="sidebar-box"><div class="sidebar-title">お問い合わせのご案内</div><p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;"></p><a href="../../#contact" style="display:block;background:var(--sky);color:#fff;text-align:center;padding:11px;border-radius:10px;font-size:13px;font-weight:700;">お問い合わせはこちら</a></div>
+  </aside>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo-text">Life Asset</div></div>
+    <div class="footer-contact">
+      <a href="#" id="footer-mail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><span id="footer-mail-text"></span></a>
+      <script>(function(){var u='lifeassetpartners',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
