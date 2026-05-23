@@ -121,14 +121,8 @@ def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> st
 def save_note_draft(content: str) -> str:
     os.makedirs("note-drafts", exist_ok=True)
     note_type_label = "【有料】" if IS_PAID_NOTE else "【無料】"
-    header = f"""---
-date: {DATE_JP}
-type: {"paid" if IS_PAID_NOTE else "free"}
-label: {note_type_label}
-note_url: {NOTE_URL}
----
-
-"""
+    note_type_str   = 'paid' if IS_PAID_NOTE else 'free'
+    header = f"---\ndate: {DATE_JP}\ntype: {note_type_str}\nlabel: {note_type_label}\nnote_url: {NOTE_URL}\n---\n\n"
     full_content = header + content
     with open(NOTE_DRAFT_PATH, "w", encoding="utf-8") as f:
         f.write(full_content)
