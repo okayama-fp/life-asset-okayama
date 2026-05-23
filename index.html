@@ -66,11 +66,11 @@
     .laurel-icon svg { width: 22px; height: 22px; color: var(--gold); position: relative; z-index: 1; }
     .laurel-label { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.4; max-width: 72px; }
     .hero-image { flex: 0 0 360px; position: relative; display: flex; flex-direction: column; align-items: center; }
-    .hero-photo-wrapper { width: 320px; height: 420px; border-radius: 8px; overflow: hidden; }
-    .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; }
-    .hero-profile-tag { position: absolute; bottom: 16px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .hero-photo-wrapper { width: 320px; height: 340px; display: flex; align-items: center; justify-content: center; }
+    .hero-photo-wrapper img { width: 100%; height: 100%; object-fit: contain; drop-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+    .hero-profile-tag { position: absolute; bottom: -8px; right: -8px; background: rgba(26,39,68,0.92); color: var(--white); padding: 14px 18px; border-radius: 6px; border-left: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
     .hero-profile-tag .role { font-size: 10px; color: var(--gold-light); font-weight: 600; margin-bottom: 4px; }
-    .hero-profile-tag .person-name { font-size: 22px; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .hero-profile-tag .person-name { font-size: 16px; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 4px; }
     .hero-profile-tag .person-sub { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
     /* ===== DARK BANNER ===== */
@@ -235,12 +235,12 @@
     </div>
     <div class="hero-image">
       <div class="hero-photo-wrapper">
-        <img src="images/advisor.jpg" alt="代表" />
+        <img src="images/life-asset-kun.png" alt="ライフアセットくん" style="filter: drop-shadow(0 8px 24px rgba(0,0,0,0.18));" />
       </div>
       <div class="hero-profile-tag">
-        
-        
-        <div class="person-sub">個人資産管理会社 代表</div>
+        <div class="role">マスコットキャラクター</div>
+        <div class="person-name">ライフアセットくん</div>
+        <div class="person-sub">あなたの資産を一緒に守ります</div>
       </div>
     </div>
   </div>
