@@ -41,6 +41,17 @@ jobs:
           git diff --staged --quiet || git commit -m "自動投稿：${{ steps.gen.outputs.date }} ${{ steps.gen.outputs.title }}"
           git push
 
+      - name: Xに自動ポスト
+        if: success()
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: |
+          pip install tweepy -q
+          python scripts/post_to_x.py "${{ steps.gen.outputs.title }}" "${{ steps.gen.outputs.filename }}" "${{ steps.gen.outputs.category }}"
+
       - name: note下書き本文を読み込み
         id: note
         if: success()
