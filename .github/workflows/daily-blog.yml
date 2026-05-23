@@ -1,0 +1,87 @@
+name: 毎日自動ブログ投稿
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # 毎日 22:00 UTC = 翌朝 7:00 JST
+  workflow_dispatch:         # 手動実行ボタン（テスト用）
+
+permissions:
+  contents: write
+
+jobs:
+  post-article:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: gh-pages をチェックアウト
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 依存ライブラリをインストール
+        run: pip install google-generativeai feedparser requests pytz
+
+      - name: 記事を生成
+        id: gen
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/generate_article.py
+
+      - name: 変更をコミット＆プッシュ
+        run: |
+          git config user.name "Life Asset Bot"
+          git config user.email "lifeassetpartners@gmail.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "自動投稿：${{ steps.gen.outputs.date }} ${{ steps.gen.outputs.title }}"
+          git push
+
+      - name: 投稿完了メール通知
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "✅ ブログ記事を自動投稿しました [${{ steps.gen.outputs.date }}]"
+          to: lifeassetpartners@gmail.com
+          from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
+          body: |
+            本日のブログ記事を自動投稿しました。
+
+            ■ タイトル：${{ steps.gen.outputs.title }}
+            ■ カテゴリ：${{ steps.gen.outputs.category }}
+            ■ 投稿日時：${{ steps.gen.outputs.date }} 07:00 JST
+            ■ URL：https://lifeassetoffice.net/blog/${{ steps.gen.outputs.filename }}
+
+            ─────────────────────
+            ライフアセットパートナーズ 自動投稿システム
+            このメールは自動送信されています。
+
+      - name: 失敗時メール通知
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "⚠️ ブログ自動投稿が失敗しました [${{ steps.gen.outputs.date }}]"
+          to: lifeassetpartners@gmail.com
+          from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
+          body: |
+            本日の自動投稿でエラーが発生しました。
+
+            GitHub Actions のログを確認してください：
+            https://github.com/okayama-fp/life-asset-okayama/actions
+
+            ─────────────────────
+            ライフアセットパートナーズ 自動投稿システム
