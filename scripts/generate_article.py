@@ -30,7 +30,7 @@ ARTICLE_FILENAME = f"{DATE_STR}.html"
 ARTICLE_PATH     = f"blog/{ARTICLE_FILENAME}"
 BLOG_INDEX_PATH  = "blog/index.html"
 
-CONTACT_EMAIL = "lifeassetpartners@gmail.com"
+CONTACT_EMAIL = "yamakaze8000@gmail.com"
 SITE_URL      = "https://lifeassetoffice.net"
 
 # カテゴリとスタイルの対応
