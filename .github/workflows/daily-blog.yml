@@ -41,7 +41,16 @@ jobs:
           git diff --staged --quiet || git commit -m "自動投稿：${{ steps.gen.outputs.date }} ${{ steps.gen.outputs.title }}"
           git push
 
-      - name: 投稿完了メール通知
+      - name: note下書き本文を読み込み
+        id: note
+        if: success()
+        run: |
+          NOTE_BODY=$(cat note_draft_for_email.txt 2>/dev/null || echo "（生成に失敗しました）")
+          echo "note_body<<NOTE_EOF" >> $GITHUB_OUTPUT
+          echo "$NOTE_BODY" >> $GITHUB_OUTPUT
+          echo "NOTE_EOF" >> $GITHUB_OUTPUT
+
+      - name: 投稿完了メール通知（note下書き付き）
         if: success()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -50,20 +59,30 @@ jobs:
           secure: false
           username: ${{ secrets.GMAIL_USERNAME }}
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "✅ ブログ記事を自動投稿しました [${{ steps.gen.outputs.date }}]"
+          subject: "✅ [${{ steps.gen.outputs.note_type }}] note下書き + ブログ自動投稿 [${{ steps.gen.outputs.date }}]"
           to: lifeassetpartners@gmail.com
           from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
           body: |
-            本日のブログ記事を自動投稿しました。
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            📝 note記事（${{ steps.gen.outputs.note_type }}）下書き
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+            ↓↓ 以下をnoteにコピー＆ペーストしてください ↓↓
+
+            ${{ steps.note.outputs.note_body }}
+
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            📰 ブログ自動投稿 完了
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
             ■ タイトル：${{ steps.gen.outputs.title }}
             ■ カテゴリ：${{ steps.gen.outputs.category }}
             ■ 投稿日時：${{ steps.gen.outputs.date }} 07:00 JST
-            ■ URL：https://lifeassetoffice.net/blog/${{ steps.gen.outputs.filename }}
+            ■ ブログURL：https://lifeassetoffice.net/blog/${{ steps.gen.outputs.filename }}
+            ■ note管理：https://note.com/lifeasset_fp
 
             ─────────────────────
             ライフアセットパートナーズ 自動投稿システム
-            このメールは自動送信されています。
 
       - name: 失敗時メール通知
         if: failure()
