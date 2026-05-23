@@ -545,6 +545,14 @@ def set_github_output(meta: dict):
 def main():
     print(f"[{DATE_JP} {TIME_STR}] 記事生成開始...")
 
+    # シークレット確認
+    api_key = os.environ.get("GEMINI_API_KEY", "")
+    print(f"GEMINI_API_KEY: {'✅ 設定済み (' + str(len(api_key)) + '文字)' if api_key else '❌ 未設定'}")
+    if not api_key:
+        raise SystemExit("エラー: GEMINI_API_KEY が設定されていません。\n"
+                         "GitHub リポジトリの Settings > Secrets > Actions に追加してください。\n"
+                         "取得先: https://aistudio.google.com/app/apikey")
+
     # ニュース取得
     print("ニュースを取得中...")
     news = fetch_news()
