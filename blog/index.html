@@ -193,7 +193,7 @@
     <p class="hero-sub">お金の専門家が、お金の疑問をわかりやすく解説します</p>
     <div class="hero-badges">
       <span class="hero-badge badge-green">🗓 毎日更新中</span>
-      <span class="hero-badge badge-yellow">📚 全17記事公開</span>
+      <span class="hero-badge badge-yellow">📚 全18記事公開</span>
     </div>
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="キーワードで記事を検索…" oninput="filterArticles()" aria-label="記事を検索">
@@ -235,7 +235,7 @@
     <div class="articles-header">
       <h2 id="section-title">新着記事</h2>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <span class="articles-count" id="articles-count">17件</span>
+        <span class="articles-count" id="articles-count">18件</span>
         <div class="sort-tabs">
           <button class="sort-btn active" onclick="sortArticles(this,'new')">新着順</button>
           <button class="sort-btn" onclick="sortArticles(this,'pop')">人気順</button>
@@ -243,6 +243,20 @@
       </div>
     </div>
     <div class="article-grid" id="article-grid">
+
+      <!-- 記事0c: 高額療養費 2026-05-25 -->
+      <article class="card" data-cat="kakeibo" data-date="2026-05-25" data-pop="3" data-id="post-513" data-title="高額療養費制度2026年改正：値上がりで損する人・得する人をFPが解説">
+        <a href="post-513.html">
+          <div class="card-thumb bg-pink">🏥<span class="card-new">🆕NEW</span></div>
+        </a>
+        <button class="card-bm-btn" id="bm-post-513" onclick="cardBookmark(event,'post-513','高額療養費制度2026年改正：値上がりで損する人・得する人をFPが解説','kakeibo')">🔖</button>
+        <span class="card-read-mark" id="read-post-513">✓ 読済</span>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">家計管理</span><span class="card-date">2026-05-25</span></div>
+          <h3><a href="post-513.html">高額療養費制度2026年改正：値上がりで損する人・得する人をFPが解説</a></h3>
+          <a href="post-513.html" class="card-link">続きを読む →</a>
+        </div>
+      </article>
 
       <!-- 記事0b: NISA貧乏 2026-05-25 -->
       <article class="card" data-cat="nisa" data-date="2026-05-25" data-pop="2" data-id="post-507" data-title="「NISA貧乏」に陥っていませんか？投資を頑張りすぎて今を犠牲にしている人へ">
