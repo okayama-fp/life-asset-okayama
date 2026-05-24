@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ライフアセットパートナーズ 自動ブログ記事生成スクリプト
+ライフアセットオフィス 自動ブログ記事生成スクリプト
 - Gemini API でFP専門記事を生成（3000〜5000文字）
 - blog/YYYY-MM-DD.html として保存
 - blog/index.html の先頭に記事カードを追加
@@ -156,7 +156,7 @@ def save_note_draft(content: str) -> str:
 def generate_article(news_text: str) -> dict:
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-    prompt = f"""あなたはライフアセットパートナーズの人気FPブログライターです。
+    prompt = f"""あなたはライフアセットオフィスの人気FPブログライターです。
 今日は{DATE_JP}です。
 
 【今日の記事フォーマット】{ARTICLE_FORMAT_NAME}形式
