@@ -135,7 +135,7 @@ def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> st
 見出しは ## を使い、箇条書きは - を使ってください。
 """
 
-    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
     return response.text.strip()
 
 
@@ -200,7 +200,7 @@ def generate_article(news_text: str) -> dict:
 本文の見出しは ## 見出しテキスト の形式で書いてください。
 """
 
-    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
     raw = response.text.strip()
 
     # JSON を抽出
