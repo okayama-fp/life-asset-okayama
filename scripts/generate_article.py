@@ -13,6 +13,7 @@ import os
 import json
 import re
 import random
+import time
 from datetime import datetime
 import pytz
 
@@ -96,6 +97,19 @@ def fetch_news():
 
 # ───────────────────────────────────────────
 # Gemini で note 記事生成
+def gemini_generate(client, prompt: str, retries: int = 3) -> str:
+    for attempt in range(retries):
+        try:
+            response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
+            return response.text.strip()
+        except Exception as e:
+            if attempt < retries - 1:
+                wait = 65 * (attempt + 1)
+                print(f"[Gemini] エラー: {e} → {wait}秒後リトライ ({attempt+1}/{retries})")
+                time.sleep(wait)
+            else:
+                raise
+
 # ───────────────────────────────────────────
 def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> str:
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
@@ -135,8 +149,7 @@ def generate_note_article(news_text: str, blog_title: str, blog_body: str) -> st
 見出しは ## を使い、箇条書きは - を使ってください。
 """
 
-    response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
-    return response.text.strip()
+    return gemini_generate(client, prompt)
 
 
 def save_note_draft(content: str) -> str:
@@ -200,8 +213,7 @@ def generate_article(news_text: str) -> dict:
 本文の見出しは ## 見出しテキスト の形式で書いてください。
 """
 
-    response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
-    raw = response.text.strip()
+    raw = gemini_generate(client, prompt)
 
     # JSON を抽出
     meta = {
