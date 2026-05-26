@@ -79,6 +79,18 @@ SCRIPT = {
 WORK_DIR = Path("output/demo")
 VIDEO_W, VIDEO_H = 1280, 720
 
+GHIBLI_PALETTES = [
+    {"sky_top": (255, 100, 50),  "sky_bot": (255, 200, 120), "hill1": (34, 100, 34),   "hill2": (60, 140, 50),   "mood": "dawn"},
+    {"sky_top": (30, 120, 210),  "sky_bot": (160, 220, 255), "hill1": (30, 130, 30),   "hill2": (70, 170, 60),   "mood": "day"},
+    {"sky_top": (200, 60, 20),   "sky_bot": (255, 160, 60),  "hill1": (60, 40, 20),    "hill2": (90, 70, 20),    "mood": "dusk"},
+    {"sky_top": (60, 150, 220),  "sky_bot": (180, 230, 255), "hill1": (40, 170, 40),   "hill2": (80, 210, 70),   "mood": "meadow"},
+    {"sky_top": (200, 150, 40),  "sky_bot": (255, 210, 90),  "hill1": (110, 80, 20),   "hill2": (150, 120, 30),  "mood": "autumn"},
+    {"sky_top": (190, 210, 240), "sky_bot": (235, 248, 255), "hill1": (90, 140, 90),   "hill2": (120, 170, 120), "mood": "fog"},
+    {"sky_top": (10, 15, 70),    "sky_bot": (25, 40, 110),   "hill1": (10, 50, 10),    "hill2": (20, 70, 20),    "mood": "night"},
+    {"sky_top": (255, 175, 200), "sky_bot": (255, 220, 235), "hill1": (70, 140, 55),   "hill2": (100, 180, 75),  "mood": "spring"},
+    {"sky_top": (40, 140, 220),  "sky_bot": (140, 205, 255), "hill1": (195, 175, 125), "hill2": (215, 195, 145), "mood": "coast"},
+]
+
 
 def check_and_install():
     """必要なパッケージを確認してインストールする。"""
@@ -200,116 +212,212 @@ def generate_voice(text: str, output_path: str):
         _tts_espeak(text, output_path)
 
 
+def _draw_ghibli_background(scene_num: int):
+    """ジブリ風の水彩タッチ背景をPillow+numpyで生成する。"""
+    import math
+    import random
+    from PIL import Image, ImageDraw, ImageFilter
+    import numpy as np
+
+    palette = GHIBLI_PALETTES[scene_num % len(GHIBLI_PALETTES)]
+    mood = palette["mood"]
+    rng = random.Random(scene_num * 7919)
+
+    # ── 空のグラデーション ──────────────────────────────────
+    img = Image.new("RGB", (VIDEO_W, VIDEO_H))
+    pixels = img.load()
+    st = palette["sky_top"]
+    sb = palette["sky_bot"]
+    for y in range(VIDEO_H):
+        t = y / VIDEO_H
+        r = int(st[0] + (sb[0] - st[0]) * t)
+        g = int(st[1] + (sb[1] - st[1]) * t)
+        b = int(st[2] + (sb[2] - st[2]) * t)
+        for x in range(VIDEO_W):
+            pixels[x, y] = (r, g, b)
+
+    draw = ImageDraw.Draw(img, "RGBA")
+
+    # ── 星（夜モード） ──────────────────────────────────────
+    if mood == "night":
+        num_stars = rng.randint(25, 45)
+        for _ in range(num_stars):
+            sx = rng.randint(0, VIDEO_W)
+            sy = rng.randint(0, int(VIDEO_H * 0.65))
+            sr = rng.randint(1, 3)
+            alpha = rng.randint(160, 255)
+            draw.ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill=(255, 255, 240, alpha))
+
+    # ── 太陽/光線（dawn・dusk） ──────────────────────────────
+    if mood in ("dawn", "dusk"):
+        horizon_y = int(VIDEO_H * 0.58)
+        sun_x = VIDEO_W // 2 + rng.randint(-80, 80)
+        sun_r = 48
+        if mood == "dawn":
+            sun_color = (255, 240, 160, 200)
+            ray_color = (255, 220, 80, 30)
+        else:
+            sun_color = (255, 140, 40, 200)
+            ray_color = (255, 100, 20, 25)
+        # 光線
+        num_rays = 12
+        for ri in range(num_rays):
+            angle = math.radians(ri * (360 / num_rays))
+            ray_len = rng.randint(180, 320)
+            ex = int(sun_x + math.cos(angle) * ray_len)
+            ey = int(horizon_y + math.sin(angle) * ray_len)
+            draw.line([(sun_x, horizon_y), (ex, ey)], fill=ray_color, width=rng.randint(3, 10))
+        # 太陽
+        draw.ellipse(
+            [sun_x - sun_r, horizon_y - sun_r, sun_x + sun_r, horizon_y + sun_r],
+            fill=sun_color,
+        )
+
+    # ── 雲（3〜5個） ──────────────────────────────────────
+    num_clouds = rng.randint(3, 5)
+    for _ in range(num_clouds):
+        cx = rng.randint(80, VIDEO_W - 80)
+        cy = rng.randint(30, int(VIDEO_H * 0.4))
+        num_puffs = rng.randint(3, 6)
+        for pi in range(num_puffs):
+            px = cx + rng.randint(-80, 80)
+            py = cy + rng.randint(-20, 20)
+            pw = rng.randint(60, 130)
+            ph = rng.randint(35, 70)
+            alpha = rng.randint(160, 220)
+            cloud_color = (255, 252, 245, alpha) if mood != "night" else (200, 210, 240, 80)
+            draw.ellipse([px - pw, py - ph, px + pw, py + ph], fill=cloud_color)
+
+    # ── 丘（2層、サイン波輪郭） ───────────────────────────
+    hill_y_base1 = int(VIDEO_H * 0.72)
+    hill_y_base2 = int(VIDEO_H * 0.82)
+
+    def make_hill_polygon(base_y, amplitude, freq_mult, x_offset, color):
+        pts = [(0, VIDEO_H)]
+        for xi in range(0, VIDEO_W + 1, 4):
+            wave = math.sin((xi + x_offset) * freq_mult * math.pi / VIDEO_W)
+            yi = int(base_y - amplitude * (0.5 + 0.5 * wave))
+            pts.append((xi, yi))
+        pts.append((VIDEO_W, VIDEO_H))
+        draw.polygon(pts, fill=color + (255,))
+
+    amp1 = rng.randint(55, 100)
+    amp2 = rng.randint(35, 65)
+    freq1 = rng.uniform(1.5, 3.0)
+    freq2 = rng.uniform(2.0, 4.0)
+    xoff1 = rng.randint(0, 300)
+    xoff2 = rng.randint(0, 300)
+
+    make_hill_polygon(hill_y_base1, amp1, freq1, xoff1, palette["hill2"])
+    make_hill_polygon(hill_y_base2, amp2, freq2, xoff2, palette["hill1"])
+
+    # ── 木（3〜8本） ──────────────────────────────────────
+    num_trees = rng.randint(3, 8)
+    for _ in range(num_trees):
+        tx = rng.randint(30, VIDEO_W - 30)
+        # 木は丘の上あたりに配置
+        ty_base = int(hill_y_base2 - amp2 * 0.5 - rng.randint(0, 40))
+        trunk_h = rng.randint(30, 70)
+        trunk_w = rng.randint(6, 14)
+        leaf_rx = rng.randint(20, 45)
+        leaf_ry = rng.randint(25, 55)
+        # 幹色
+        trunk_color = (
+            max(0, palette["hill1"][0] - 30),
+            max(0, palette["hill1"][1] - 50),
+            max(0, palette["hill1"][2] - 20),
+            220,
+        )
+        # 葉色
+        leaf_color = palette["hill2"] + (200,)
+        # 幹
+        draw.rectangle(
+            [tx - trunk_w // 2, ty_base - trunk_h, tx + trunk_w // 2, ty_base],
+            fill=trunk_color,
+        )
+        # 葉
+        leaf_cy = ty_base - trunk_h - leaf_ry // 2
+        draw.ellipse(
+            [tx - leaf_rx, leaf_cy - leaf_ry, tx + leaf_rx, leaf_cy + leaf_ry],
+            fill=leaf_color,
+        )
+
+    # ── 水彩テクスチャ: ガウスぼかし ────────────────────
+    img = img.filter(ImageFilter.GaussianBlur(radius=1.5))
+
+    # ── numpy ノイズ（std=8）でテクスチャ感 ────────────
+    arr = np.array(img).astype(np.int16)
+    noise = np.random.RandomState(scene_num).normal(0, 8, arr.shape)
+    arr = np.clip(arr + noise, 0, 255).astype(np.uint8)
+    img = Image.fromarray(arr, "RGB")
+
+    return img
+
+
 def generate_image(scene: dict, scene_num: int, output_path: str):
-    """Pollinations.ai（無料・APIキー不要）でAI画像を生成し、テロップを重ねる。"""
-    import urllib.request, urllib.parse
+    """ジブリ風水彩背景を生成し、テロップを重ねる。外部APIは使用しない。"""
     from PIL import Image, ImageDraw, ImageFont
-    import io
 
-    # ── 写真取得（Unsplash Source → フォールバック） ────────
-    prompt = scene.get("image_prompt", scene["caption"])
-    # キーワードを英単語のみ抽出してUnsplashクエリに使用
-    keywords = ",".join(w for w in prompt.split() if w.isascii())[:60]
-    url = f"https://source.unsplash.com/{VIDEO_W}x{VIDEO_H}/?{urllib.parse.quote(keywords)}&sig={scene_num}"
-    ai_ok = False
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=20) as r:
-            img_data = r.read()
-        img = Image.open(io.BytesIO(img_data)).convert("RGB").resize((VIDEO_W, VIDEO_H), Image.LANCZOS)
-        ai_ok = True
-    except Exception:
-        # AI生成失敗時はカラーカードにフォールバック
-        accent_hex = scene.get("accent", "#0ea5e9")
-        accent = tuple(int(accent_hex.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
-        img = Image.new("RGB", (VIDEO_W, VIDEO_H), scene.get("color", "#0f3460"))
-        draw_bg = ImageDraw.Draw(img)
-        for i in range(8):
-            draw_bg.line([(0, VIDEO_H - 80 + i * 2), (VIDEO_W, VIDEO_H - 80 + i * 2)],
-                         fill=accent + (int(255 * (1 - i / 8)),), width=2)
+    # ── ジブリ背景生成 ──────────────────────────────────────
+    img = _draw_ghibli_background(scene_num)
+    print(f"    → ジブリ風背景（{GHIBLI_PALETTES[scene_num % len(GHIBLI_PALETTES)]['mood']}）")
 
-    # ── テロップを重ねる ────────────────────────────────────
-    draw = ImageDraw.Draw(img)
-    caption = scene["caption"]
-    font_size = 52
-    try:
-        font = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", font_size)
-        font_small = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", 28)
-    except OSError:
-        try:
-            font = ImageFont.truetype("C:/Windows/Fonts/msgothic.ttc", font_size)
-            font_small = ImageFont.truetype("C:/Windows/Fonts/msgothic.ttc", 28)
-        except OSError:
-            font = font_small = ImageFont.load_default()
+    # ── テキスト描画 ──────────────────────────────────────
+    draw = ImageDraw.Draw(img, "RGBA")
+    accent_hex = scene.get("accent", "#0ea5e9")
+    accent = tuple(int(accent_hex.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
 
-    bbox = draw.textbbox((0, 0), caption, font=font)
-    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-    x = (VIDEO_W - tw) // 2
-    y = VIDEO_H - th - 50
-    pad = 18
-
-    # 半透明背景
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    odraw = ImageDraw.Draw(overlay)
-    odraw.rectangle([x - pad, y - pad, x + tw + pad, y + th + pad], fill=(0, 0, 0, 170))
-    img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
-    draw = ImageDraw.Draw(img)
-
-    # テキスト（影＋本文）
-    draw.text((x + 2, y + 2), caption, font=font, fill=(0, 0, 0))
-    draw.text((x, y), caption, font=font, fill=(255, 255, 255))
-
-    # ロゴ
-    logo = "Life Asset Partners"
-    lbbox = draw.textbbox((0, 0), logo, font=font_small)
-    draw.text((VIDEO_W - (lbbox[2] - lbbox[0]) - 20, VIDEO_H - (lbbox[3] - lbbox[1]) - 20),
-              logo, font=font_small, fill=(200, 200, 200))
-
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    img.save(output_path)
-    status = "AI画像" if ai_ok else "カラーカード（フォールバック）"
-    print(f"    → {status}")
-
-    # グラデーション風の装飾ライン
-    accent = tuple(int(scene["accent"].lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
-    for i in range(8):
-        draw.line([(0, VIDEO_H - 80 + i * 2), (VIDEO_W, VIDEO_H - 80 + i * 2)],
-                  fill=accent + (int(255 * (1 - i / 8)),), width=2)
-
-    # シーン番号の丸バッジ
-    if scene_num > 0:
-        r = 45
-        cx, cy = 100, 100
-        draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=accent)
-
-    # テキスト描画
     try:
         font_large = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc", 52)
         font_small = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc", 32)
         font_num = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc", 40)
     except OSError:
-        font_large = font_small = font_num = ImageFont.load_default()
+        try:
+            font_large = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", 52)
+            font_small = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", 32)
+            font_num = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", 40)
+        except OSError:
+            font_large = font_small = font_num = ImageFont.load_default()
 
-    # キャプション（中央）
+    # シーン番号バッジ（左上）
+    if scene_num > 0:
+        r = 45
+        cx, cy = 100, 100
+        badge_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        bdraw = ImageDraw.Draw(badge_overlay)
+        bdraw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=accent + (210,))
+        img = Image.alpha_composite(img.convert("RGBA"), badge_overlay).convert("RGB")
+        draw = ImageDraw.Draw(img, "RGBA")
+
+        num_text = str(scene_num)
+        bbox3 = draw.textbbox((0, 0), num_text, font=font_num)
+        nw = bbox3[2] - bbox3[0]
+        nh = bbox3[3] - bbox3[1]
+        draw.text((100 - nw // 2, 100 - nh // 2), num_text, font=font_num, fill=(255, 255, 255, 255))
+
+    # キャプション（画面中央下寄り）
     caption = scene["caption"]
     bbox = draw.textbbox((0, 0), caption, font=font_large)
-    tw = bbox[2] - bbox[0]
-    draw.text(((VIDEO_W - tw) // 2 + 2, VIDEO_H // 2 - 26 + 2), caption, font=font_large, fill=(0, 0, 0))
-    draw.text(((VIDEO_W - tw) // 2, VIDEO_H // 2 - 26), caption, font=font_large, fill=(255, 255, 255))
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    tx = (VIDEO_W - tw) // 2
+    ty = int(VIDEO_H * 0.72) - th - 20
+    pad = 16
+    # 半透明背景
+    cap_overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    cdraw = ImageDraw.Draw(cap_overlay)
+    cdraw.rectangle([tx - pad, ty - pad, tx + tw + pad, ty + th + pad], fill=(0, 0, 0, 160))
+    img = Image.alpha_composite(img.convert("RGBA"), cap_overlay).convert("RGB")
+    draw = ImageDraw.Draw(img)
+
+    # テキスト影＋本文（温かいクリーム色）
+    draw.text((tx + 2, ty + 2), caption, font=font_large, fill=(0, 0, 0))
+    draw.text((tx, ty), caption, font=font_large, fill=(255, 245, 180))
 
     # ロゴ（右下）
     logo = "Life Asset Partners"
     bbox2 = draw.textbbox((0, 0), logo, font=font_small)
     lw = bbox2[2] - bbox2[0]
     draw.text((VIDEO_W - lw - 30, VIDEO_H - 55), logo, font=font_small, fill=accent)
-
-    # シーン番号（左上バッジ内）
-    if scene_num > 0:
-        num_text = str(scene_num)
-        bbox3 = draw.textbbox((0, 0), num_text, font=font_num)
-        nw = bbox3[2] - bbox3[0]
-        nh = bbox3[3] - bbox3[1]
-        draw.text((100 - nw // 2, 100 - nh // 2), num_text, font=font_num, fill=(255, 255, 255))
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     img.save(output_path)
@@ -349,7 +457,8 @@ def _get_font(size: int):
 
 
 def _draw_phrase_overlay(frame_np, phrases, timings, t):
-    """現在時刻 t に合わせてフレーズをフレームに描画する。"""
+    """現在時刻 t に合わせてフレーズをフレームに描画する。ジブリ風テキストと輝く粒子付き。"""
+    import random
     from PIL import Image, ImageDraw
     import numpy as np
 
@@ -368,7 +477,7 @@ def _draw_phrase_overlay(frame_np, phrases, timings, t):
     if current_idx == -1 and t >= timings[-1][1]:
         current_idx = len(phrases) - 1
 
-    # 表示: 現在フレーズ（黄色・大）＋ 直前（白・小・薄）
+    # 表示: 現在フレーズ（クリーム色・大）＋ 直前（白・小・薄）
     show = []
     if current_idx > 0:
         show.append((phrases[current_idx - 1], False, timings[current_idx - 1]))
@@ -385,11 +494,14 @@ def _draw_phrase_overlay(frame_np, phrases, timings, t):
         # フェードイン
         if is_current:
             fade = min((t - s) / 0.25, 1.0)
-            color = (255, 230, 30, int(255 * fade))
+            # ウォームクリーム色（harsh yellowからソフトなクリームへ）
+            color = (255, 245, 180, int(255 * fade))
             shadow = (0, 0, 0, int(220 * fade))
+            glow = (200, 150, 20, int(80 * fade))
         else:
             color = (200, 200, 200, 140)
             shadow = (0, 0, 0, 80)
+            glow = None
 
         bbox = draw.textbbox((0, 0), phrase, font=font)
         tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
@@ -397,19 +509,49 @@ def _draw_phrase_overlay(frame_np, phrases, timings, t):
         pad = 12
         draw.rectangle([x - pad, y - pad, x + tw + pad, y + th + pad], fill=(0, 0, 0, 120))
         draw.text((x + 2, y + 2), phrase, font=font, fill=shadow)
+
+        # ウォームグロー（現在フレーズのみ、4方向オフセットで柔らかい輝き）
+        if glow is not None:
+            for ox, oy in [(-2, -2), (2, -2), (-2, 2), (2, 2)]:
+                draw.text((x + ox, y + oy), phrase, font=font, fill=glow)
+
         draw.text((x, y), phrase, font=font, fill=color)
+
+    # ── 浮かび上がる輝く粒子（ジブリのすすたまり・ホタル風） ──
+    rng = random.Random(int(t * 30))  # 時間で変化するシード
+    num_particles = rng.randint(15, 25)
+    for _ in range(num_particles):
+        px = rng.randint(0, VIDEO_W)
+        # 時間とともに上昇: y = H - (t * 40) % H
+        base_py = VIDEO_H - (t * 40) % VIDEO_H
+        py = int(base_py + rng.randint(-30, 30)) % VIDEO_H
+        pr = rng.randint(2, 4)
+        alpha = rng.randint(80, 200)
+        # 温かい黄色〜クリーム色
+        pr_color_choices = [
+            (255, 240, 100, alpha),
+            (255, 220, 60, alpha),
+            (255, 255, 200, alpha),
+            (255, 200, 80, alpha),
+        ]
+        pcolor = rng.choice(pr_color_choices)
+        draw.ellipse([px - pr, py - pr, px + pr, py + pr], fill=pcolor)
 
     base = Image.fromarray(frame_np).convert("RGBA")
     result = Image.alpha_composite(base, overlay)
-    import numpy as np
     return np.array(result.convert("RGB"))
 
 
 def _make_ken_burns_frame(img_big, effect, progress):
-    """Ken Burns エフェクトの1フレームを生成する。"""
+    """Ken Burns エフェクトの1フレームを生成する。イーズイン・アウト曲線適用。"""
+    import math
     import numpy as np
     from PIL import Image
     big_h, big_w = img_big.shape[:2]
+
+    # イーズイン・アウト（コサイン補間）
+    eased = 0.5 - 0.5 * math.cos(math.pi * progress)
+    progress = eased
 
     if effect == "zoom_in":
         s = 1.0 + 0.25 * progress
