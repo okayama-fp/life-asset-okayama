@@ -81,7 +81,14 @@ VIDEO_W, VIDEO_H = 1280, 720
 
 def check_and_install():
     """必要なパッケージを確認してインストールする。"""
-    packages = {"gtts": "gTTS", "moviepy": "moviepy", "PIL": "Pillow", "numpy": "numpy"}
+    packages = {
+        "moviepy": "moviepy",
+        "PIL": "Pillow",
+        "numpy": "numpy",
+        "openai": "openai",
+        "httpx": "httpx",
+        "dotenv": "python-dotenv",
+    }
     missing = []
     for module, pkg in packages.items():
         try:
