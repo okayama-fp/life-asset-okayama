@@ -21,56 +21,57 @@ SCRIPT = {
         {
             "narration": "今日は、お金持ちが毎日実践している7つの習慣をご紹介します。これを知るだけで、あなたの人生は大きく変わるかもしれません。",
             "caption": "金持ちの習慣 トップ7",
+            "image_prompt": "luxury penthouse living room golden sunrise cityscape cinematic 4K",
             "color": "#0f3460",
             "accent": "#0ea5e9",
         },
         {
             "narration": "習慣その1。早起きです。富裕層の90パーセントは、朝5時から6時の間に起床します。静かな朝の時間を使って、思考を整え、一日の計画を立てます。",
             "caption": "習慣1: 早起き（朝5〜6時）",
-            "color": "#0a2240",
-            "accent": "#38bdf8",
+            "image_prompt": "successful businessman waking up early sunrise window golden light modern bedroom cinematic",
+            "color": "#0a2240", "accent": "#38bdf8",
         },
         {
             "narration": "習慣その2。毎日読書をすること。お金持ちは平均して月に4冊以上の本を読みます。ビジネス書・自己啓発・歴史書など、知識への投資を欠かしません。",
             "caption": "習慣2: 毎日読書（月4冊以上）",
-            "color": "#1a1a2e",
-            "accent": "#f59e0b",
+            "image_prompt": "wealthy person reading books luxury home library wood shelves warm light cinematic 4K",
+            "color": "#1a1a2e", "accent": "#f59e0b",
         },
         {
             "narration": "習慣その3。運動を継続することです。富裕層の76パーセントが毎日30分以上の有酸素運動をしています。体を動かすことで、頭も冴え、集中力が上がります。",
             "caption": "習慣3: 毎日30分以上の運動",
-            "color": "#0f3460",
-            "accent": "#10b981",
+            "image_prompt": "fit businessman running morning park sunrise motivation healthy lifestyle cinematic",
+            "color": "#0f3460", "accent": "#10b981",
         },
         {
             "narration": "習慣その4。複数の収入源を持つこと。お金持ちは平均7つの収入源を持っています。給料だけに頼らず、投資・副業・不動産など多角化します。",
             "caption": "習慣4: 収入源を複数持つ",
-            "color": "#1a1a2e",
-            "accent": "#f59e0b",
+            "image_prompt": "stock market investment portfolio gold coins real estate multiple income streams cinematic 4K",
+            "color": "#1a1a2e", "accent": "#f59e0b",
         },
         {
             "narration": "習慣その5。お金の記録をつけることです。支出を管理し、毎月の収支を把握することで、無駄遣いをなくし、投資に回せるお金を増やします。",
             "caption": "習慣5: 毎月の収支を記録する",
-            "color": "#0a2240",
-            "accent": "#0ea5e9",
+            "image_prompt": "businessman reviewing financial charts laptop modern office wealth management cinematic",
+            "color": "#0a2240", "accent": "#0ea5e9",
         },
         {
             "narration": "習慣その6。優れた人脈を築くこと。成功者の周りには成功者が集まります。メンターを持ち、自分より優秀な人と積極的に交流しましょう。",
             "caption": "習慣6: 良い人脈への投資",
-            "color": "#0f3460",
-            "accent": "#a855f7",
+            "image_prompt": "successful business people networking luxury event handshake professional cinematic 4K",
+            "color": "#0f3460", "accent": "#a855f7",
         },
         {
             "narration": "習慣その7。感謝の気持ちを持つことです。毎朝・毎晩、感謝できることを3つ書き出す習慣が、ポジティブな思考を育て、チャンスを引き寄せます。",
             "caption": "習慣7: 毎日3つの感謝を書く",
-            "color": "#1a1a2e",
-            "accent": "#f59e0b",
+            "image_prompt": "person writing gratitude journal peaceful morning sunlight notebook zen mindfulness cinematic",
+            "color": "#1a1a2e", "accent": "#f59e0b",
         },
         {
             "narration": "以上が、金持ちの7つの習慣でした。どれか一つでも今日から始めてみてください。チャンネル登録と高評価もよろしくお願いします！",
             "caption": "チャンネル登録をお願いします！",
-            "color": "#0f3460",
-            "accent": "#0ea5e9",
+            "image_prompt": "luxury success wealth achievement gold trophy celebration motivation cinematic 4K",
+            "color": "#0f3460", "accent": "#0ea5e9",
         },
     ],
 }
@@ -200,11 +201,73 @@ def generate_voice(text: str, output_path: str):
 
 
 def generate_image(scene: dict, scene_num: int, output_path: str):
+    """Pollinations.ai（無料・APIキー不要）でAI画像を生成し、テロップを重ねる。"""
+    import urllib.request, urllib.parse
     from PIL import Image, ImageDraw, ImageFont
-    import textwrap
+    import io
 
-    img = Image.new("RGB", (VIDEO_W, VIDEO_H), scene["color"])
+    # ── AI画像生成（Pollinations.ai） ──────────────────────
+    prompt = scene.get("image_prompt", scene["caption"])
+    encoded = urllib.parse.quote(prompt)
+    url = f"https://image.pollinations.ai/prompt/{encoded}?width={VIDEO_W}&height={VIDEO_H}&nologo=true&seed={scene_num}"
+    ai_ok = False
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            img_data = r.read()
+        img = Image.open(io.BytesIO(img_data)).convert("RGB").resize((VIDEO_W, VIDEO_H), Image.LANCZOS)
+        ai_ok = True
+    except Exception:
+        # AI生成失敗時はカラーカードにフォールバック
+        accent_hex = scene.get("accent", "#0ea5e9")
+        accent = tuple(int(accent_hex.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
+        img = Image.new("RGB", (VIDEO_W, VIDEO_H), scene.get("color", "#0f3460"))
+        draw_bg = ImageDraw.Draw(img)
+        for i in range(8):
+            draw_bg.line([(0, VIDEO_H - 80 + i * 2), (VIDEO_W, VIDEO_H - 80 + i * 2)],
+                         fill=accent + (int(255 * (1 - i / 8)),), width=2)
+
+    # ── テロップを重ねる ────────────────────────────────────
     draw = ImageDraw.Draw(img)
+    caption = scene["caption"]
+    font_size = 52
+    try:
+        font = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", font_size)
+        font_small = ImageFont.truetype("C:/Windows/Fonts/meiryo.ttc", 28)
+    except OSError:
+        try:
+            font = ImageFont.truetype("C:/Windows/Fonts/msgothic.ttc", font_size)
+            font_small = ImageFont.truetype("C:/Windows/Fonts/msgothic.ttc", 28)
+        except OSError:
+            font = font_small = ImageFont.load_default()
+
+    bbox = draw.textbbox((0, 0), caption, font=font)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    x = (VIDEO_W - tw) // 2
+    y = VIDEO_H - th - 50
+    pad = 18
+
+    # 半透明背景
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    odraw = ImageDraw.Draw(overlay)
+    odraw.rectangle([x - pad, y - pad, x + tw + pad, y + th + pad], fill=(0, 0, 0, 170))
+    img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
+    draw = ImageDraw.Draw(img)
+
+    # テキスト（影＋本文）
+    draw.text((x + 2, y + 2), caption, font=font, fill=(0, 0, 0))
+    draw.text((x, y), caption, font=font, fill=(255, 255, 255))
+
+    # ロゴ
+    logo = "Life Asset Partners"
+    lbbox = draw.textbbox((0, 0), logo, font=font_small)
+    draw.text((VIDEO_W - (lbbox[2] - lbbox[0]) - 20, VIDEO_H - (lbbox[3] - lbbox[1]) - 20),
+              logo, font=font_small, fill=(200, 200, 200))
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    img.save(output_path)
+    status = "AI画像" if ai_ok else "カラーカード（フォールバック）"
+    print(f"    → {status}")
 
     # グラデーション風の装飾ライン
     accent = tuple(int(scene["accent"].lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
