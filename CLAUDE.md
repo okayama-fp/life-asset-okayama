@@ -13,7 +13,7 @@
 |------|------|
 | サービス名 | ライフアセットオフィス |
 | 英語名 | Life Asset Partners |
-| メール | lifeassetpartners@gmail.com |
+| メール | yamakaze8000@gmail.com |
 | 公開URL | https://lifeassetoffice.net/ |
 | 旧URL | https://okayama-fp.github.io/life-asset-okayama/ |
 | リポジトリ | okayama-fp/life-asset-okayama |
