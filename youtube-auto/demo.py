@@ -95,20 +95,46 @@ def check_and_install():
         print("✓ インストール完了")
 
 
-def generate_voice(text: str, output_path: str):
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    wav_path = output_path.replace(".mp3", ".wav")
+def _tts_openai(text: str, output_path: str):
+    """OpenAI TTS（高品質）で音声を生成する。OPENAI_API_KEY が必要。"""
+    import httpx
+    from openai import OpenAI
+    from dotenv import load_dotenv
+    load_dotenv()
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    client = OpenAI(api_key=api_key, http_client=httpx.Client(verify=False))
+    response = client.audio.speech.create(
+        model="tts-1",
+        voice="nova",
+        input=text,
+        response_format="wav",
+    )
+    with open(output_path, "wb") as f:
+        f.write(response.content)
+
+
+def _tts_espeak(text: str, output_path: str):
+    """espeak-ng（オフライン）で音声を生成する。APIキー不要。"""
+    wav_path = output_path if output_path.endswith(".wav") else output_path + ".wav"
     result = subprocess.run(
         ["espeak-ng", "-v", "jpx/ja", "-s", "140", "-p", "55", "-w", wav_path, text],
         capture_output=True,
     )
     if result.returncode != 0:
         raise RuntimeError(f"espeak-ng failed: {result.stderr.decode()}")
-    # mp3 パスが指定された場合は wav に置き換える
-    if output_path.endswith(".mp3"):
-        os.rename(wav_path, output_path.replace(".mp3", ".wav"))
-        return output_path.replace(".mp3", ".wav")
-    return output_path
+    if output_path != wav_path:
+        os.rename(wav_path, output_path)
+
+
+def generate_voice(text: str, output_path: str):
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    from dotenv import load_dotenv
+    load_dotenv()
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    if api_key and api_key != "sk-...":
+        _tts_openai(text, output_path)
+    else:
+        _tts_espeak(text, output_path)
 
 
 def generate_image(scene: dict, scene_num: int, output_path: str):
