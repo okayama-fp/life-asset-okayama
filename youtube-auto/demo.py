@@ -206,14 +206,15 @@ def generate_image(scene: dict, scene_num: int, output_path: str):
     from PIL import Image, ImageDraw, ImageFont
     import io
 
-    # ── AI画像生成（Pollinations.ai） ──────────────────────
+    # ── 写真取得（Unsplash Source → フォールバック） ────────
     prompt = scene.get("image_prompt", scene["caption"])
-    encoded = urllib.parse.quote(prompt)
-    url = f"https://image.pollinations.ai/prompt/{encoded}?width={VIDEO_W}&height={VIDEO_H}&nologo=true&seed={scene_num}"
+    # キーワードを英単語のみ抽出してUnsplashクエリに使用
+    keywords = ",".join(w for w in prompt.split() if w.isascii())[:60]
+    url = f"https://source.unsplash.com/{VIDEO_W}x{VIDEO_H}/?{urllib.parse.quote(keywords)}&sig={scene_num}"
     ai_ok = False
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=20) as r:
             img_data = r.read()
         img = Image.open(io.BytesIO(img_data)).convert("RGB").resize((VIDEO_W, VIDEO_H), Image.LANCZOS)
         ai_ok = True
