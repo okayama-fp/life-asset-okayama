@@ -315,16 +315,66 @@ def generate_image(scene: dict, scene_num: int, output_path: str):
     img.save(output_path)
 
 
+EFFECTS = ["zoom_in", "pan_right", "zoom_out", "pan_left", "zoom_pan"]
+
+
+def _make_ken_burns_frame(img_big, effect, progress):
+    """Ken Burns エフェクトの1フレームを生成する。"""
+    import numpy as np
+    from PIL import Image
+    big_h, big_w = img_big.shape[:2]
+
+    if effect == "zoom_in":
+        s = 1.0 + 0.25 * progress
+        sw, sh = int(VIDEO_W / s), int(VIDEO_H / s)
+        x, y = (big_w - sw) // 2, (big_h - sh) // 2
+    elif effect == "zoom_out":
+        s = 1.25 - 0.25 * progress
+        sw, sh = int(VIDEO_W / s), int(VIDEO_H / s)
+        x, y = (big_w - sw) // 2, (big_h - sh) // 2
+    elif effect == "pan_right":
+        sw, sh = VIDEO_W, VIDEO_H
+        x = int((big_w - VIDEO_W) * progress)
+        y = (big_h - VIDEO_H) // 2
+    elif effect == "pan_left":
+        sw, sh = VIDEO_W, VIDEO_H
+        x = int((big_w - VIDEO_W) * (1 - progress))
+        y = (big_h - VIDEO_H) // 2
+    else:  # zoom_pan
+        s = 1.0 + 0.2 * progress
+        sw, sh = int(VIDEO_W / s), int(VIDEO_H / s)
+        x = int((big_w - sw) * progress * 0.5)
+        y = (big_h - sh) // 2
+
+    x = max(0, min(x, big_w - sw))
+    y = max(0, min(y, big_h - sh))
+    crop = img_big[y:y+sh, x:x+sw]
+    return np.array(Image.fromarray(crop).resize((VIDEO_W, VIDEO_H), Image.LANCZOS))
+
+
 def create_video(scenes_data: list, output_path: str):
-    from moviepy import ImageClip, AudioFileClip, concatenate_videoclips
+    from moviepy import VideoClip, AudioFileClip, concatenate_videoclips
+    from PIL import Image
     import numpy as np
 
     clips = []
-    for s in scenes_data:
+    for idx, s in enumerate(scenes_data):
         audio = AudioFileClip(s["audio"])
         duration = audio.duration + 0.8
-        clip = ImageClip(s["image"], duration=duration).with_fps(24).with_audio(audio)
+        effect = EFFECTS[idx % len(EFFECTS)]
+
+        # Ken Burns 用に画像を 1.3 倍に拡大
+        img_pil = Image.open(s["image"]).convert("RGB")
+        big = img_pil.resize((int(VIDEO_W * 1.3), int(VIDEO_H * 1.3)), Image.LANCZOS)
+        img_big = np.array(big)
+
+        def make_frame(t, _img=img_big, _dur=duration, _eff=effect):
+            progress = min(t / _dur, 1.0)
+            return _make_ken_burns_frame(_img, _eff, progress)
+
+        clip = VideoClip(make_frame, duration=duration).with_fps(24).with_audio(audio)
         clips.append(clip)
+        print(f"  シーン {idx+1}: {effect}")
 
     final = concatenate_videoclips(clips, method="compose")
     os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
