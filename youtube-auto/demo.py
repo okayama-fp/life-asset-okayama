@@ -88,6 +88,7 @@ def check_and_install():
         "openai": "openai",
         "httpx": "httpx",
         "dotenv": "python-dotenv",
+        "pyttsx3": "pyttsx3",
     }
     missing = []
     for module, pkg in packages.items():
@@ -121,16 +122,31 @@ def _tts_openai(text: str, output_path: str):
 
 
 def _tts_espeak(text: str, output_path: str):
-    """espeak-ng（オフライン）で音声を生成する。APIキー不要。"""
-    wav_path = output_path if output_path.endswith(".wav") else output_path + ".wav"
-    result = subprocess.run(
-        ["espeak-ng", "-v", "jpx/ja", "-s", "140", "-p", "55", "-w", wav_path, text],
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"espeak-ng failed: {result.stderr.decode()}")
-    if output_path != wav_path:
-        os.rename(wav_path, output_path)
+    """Windows: pyttsx3（SAPI）/ Linux: espeak-ng でオフライン音声生成。"""
+    import platform
+    if platform.system() == "Windows":
+        import pyttsx3
+        engine = pyttsx3.init()
+        # 日本語音声を探して設定
+        for voice in engine.getProperty("voices"):
+            name = (voice.name or "").lower()
+            vid = (voice.id or "").lower()
+            if any(k in name or k in vid for k in ["japanese", "haruka", "ja-jp", "keita"]):
+                engine.setProperty("voice", voice.id)
+                break
+        engine.setProperty("rate", 150)
+        engine.save_to_file(text, output_path)
+        engine.runAndWait()
+    else:
+        wav_path = output_path if output_path.endswith(".wav") else output_path + ".wav"
+        result = subprocess.run(
+            ["espeak-ng", "-v", "jpx/ja", "-s", "140", "-p", "55", "-w", wav_path, text],
+            capture_output=True,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"espeak-ng failed: {result.stderr.decode()}")
+        if output_path != wav_path:
+            os.rename(wav_path, output_path)
 
 
 def generate_voice(text: str, output_path: str):
