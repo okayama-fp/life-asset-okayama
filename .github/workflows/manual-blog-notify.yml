@@ -1,0 +1,95 @@
+name: 手動記事：X自動投稿 + note下書きメール
+
+on:
+  push:
+    branches: [gh-pages]
+    paths: ['blog/post-*.html']
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: gh-pages をチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 新規 post-*.html を検出
+        run: |
+          git diff HEAD~1 HEAD --name-only --diff-filter=A \
+            | grep 'blog/post-.*\.html' > new_posts.txt || true
+          echo "=== 新規記事 ==="
+          cat new_posts.txt
+
+      - name: Python 3.11 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 依存ライブラリをインストール
+        run: pip install google-genai beautifulsoup4 tweepy
+
+      - name: X投稿 + note下書き生成
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: python scripts/notify_manual_post.py
+
+      - name: note下書きを読み込み
+        id: note
+        run: |
+          NOTE_BODY=$(cat note_draft_for_email.txt 2>/dev/null || echo "（生成に失敗しました）")
+          echo "note_body<<NOTE_EOF" >> $GITHUB_OUTPUT
+          echo "$NOTE_BODY" >> $GITHUB_OUTPUT
+          echo "NOTE_EOF" >> $GITHUB_OUTPUT
+
+      - name: note下書きをメール通知
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "📝 X投稿完了 + note下書き | 手動ブログ記事"
+          to: lifeassetpartners@gmail.com
+          from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
+          body: |
+            手動ブログ記事が公開されました。
+            X投稿は自動で完了しています。
+
+            以下のnote下書きをnoteにコピー＆ペーストしてください。
+
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            📝 note下書き
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+            ${{ steps.note.outputs.note_body }}
+
+            ─────────────────────
+            ライフアセットオフィス 自動投稿システム
+
+      - name: 失敗時メール通知
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "⚠️ 手動記事の自動通知が失敗しました"
+          to: lifeassetpartners@gmail.com
+          from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
+          body: |
+            手動ブログ記事の自動通知でエラーが発生しました。
+
+            GitHub Actions のログを確認してください：
+            https://github.com/okayama-fp/life-asset-okayama/actions
+
+            ─────────────────────
+            ライフアセットオフィス 自動投稿システム
