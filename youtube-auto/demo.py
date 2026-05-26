@@ -108,7 +108,8 @@ def _tts_openai(text: str, output_path: str):
     import requests
     from dotenv import load_dotenv
     load_dotenv()
-    api_key = os.environ.get("OPENAI_API_KEY", "")
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    api_key = api_key.encode("ascii", errors="ignore").decode("ascii")
     resp = requests.post(
         "https://api.openai.com/v1/audio/speech",
         headers={
