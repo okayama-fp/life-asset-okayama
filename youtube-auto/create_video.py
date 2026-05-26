@@ -3,13 +3,12 @@ import os
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-from moviepy.editor import (
+from moviepy import (
     ImageClip,
     AudioFileClip,
     TextClip,
     CompositeVideoClip,
     concatenate_videoclips,
-    AudioFileClip,
 )
 from config import VIDEO_WIDTH, VIDEO_HEIGHT, FPS, SCENE_BUFFER_SEC
 
@@ -62,8 +61,7 @@ def build_scene_clip(image_path: str, audio_path: str, caption: str) -> Composit
     duration = audio.duration + SCENE_BUFFER_SEC
 
     frame = add_caption_overlay(image_path, caption)
-    image_clip = ImageClip(frame, duration=duration).set_fps(FPS)
-    image_clip = image_clip.set_audio(audio)
+    image_clip = ImageClip(frame, duration=duration).with_fps(FPS).with_audio(audio)
 
     return image_clip
 
