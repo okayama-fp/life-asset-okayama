@@ -152,12 +152,48 @@ def _tts_espeak(text: str, output_path: str):
             os.rename(wav_path, output_path)
 
 
+def _tts_voicevox(text: str, output_path: str, speaker: int = 1):
+    """VOICEVOX（無料・高品質日本語）で音声生成。事前にVOICEVOXを起動しておくこと。"""
+    import urllib.request, json, urllib.parse
+    base = "http://localhost:50021"
+    # クエリ生成
+    params = urllib.parse.urlencode({"text": text, "speaker": speaker})
+    req = urllib.request.Request(f"{base}/audio_query?{params}", method="POST")
+    with urllib.request.urlopen(req, timeout=10) as r:
+        query = r.read()
+    # 音声合成
+    req2 = urllib.request.Request(
+        f"{base}/synthesis?speaker={speaker}",
+        data=query,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req2, timeout=30) as r:
+        wav = r.read()
+    with open(output_path, "wb") as f:
+        f.write(wav)
+
+
+def _voicevox_running() -> bool:
+    import urllib.request
+    try:
+        urllib.request.urlopen("http://localhost:50021/version", timeout=2)
+        return True
+    except Exception:
+        return False
+
+
 def generate_voice(text: str, output_path: str):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    # 優先順位: VOICEVOX → OpenAI TTS → pyttsx3
+    if _voicevox_running():
+        _tts_voicevox(text, output_path)
+        return
     from dotenv import load_dotenv
     load_dotenv()
-    api_key = os.environ.get("OPENAI_API_KEY", "")
-    if api_key and api_key != "sk-...":
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    api_key = api_key.encode("ascii", errors="ignore").decode("ascii")
+    if api_key and not api_key.startswith("sk-ここ"):
         _tts_openai(text, output_path)
     else:
         _tts_espeak(text, output_path)
