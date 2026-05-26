@@ -105,19 +105,22 @@ def check_and_install():
 
 def _tts_openai(text: str, output_path: str):
     """OpenAI TTS（高品質）で音声を生成する。OPENAI_API_KEY が必要。"""
-    from openai import OpenAI
+    import requests
     from dotenv import load_dotenv
     load_dotenv()
     api_key = os.environ.get("OPENAI_API_KEY", "")
-    client = OpenAI(api_key=api_key)
-    response = client.audio.speech.create(
-        model="tts-1",
-        voice="nova",
-        input=text,
-        response_format="wav",
+    resp = requests.post(
+        "https://api.openai.com/v1/audio/speech",
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        json={"model": "tts-1", "voice": "nova", "input": text, "response_format": "wav"},
+        timeout=60,
     )
+    resp.raise_for_status()
     with open(output_path, "wb") as f:
-        f.write(response.read())
+        f.write(resp.content)
 
 
 def _tts_espeak(text: str, output_path: str):
