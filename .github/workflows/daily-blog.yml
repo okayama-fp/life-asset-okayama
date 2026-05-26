@@ -15,9 +15,7 @@ jobs:
     steps:
       - name: gh-pages をチェックアウト
         uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Python 3.11 をセットアップ
         uses: actions/setup-python@v5
@@ -70,5 +68,21 @@ jobs:
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          MAIL_MODE: failure
-        run: python scripts/send_email.py
+        run: |
+          python3 - <<'PYEOF'
+          import smtplib, os
+          from email.mime.text import MIMEText
+          from email.mime.multipart import MIMEMultipart
+          u = os.environ["GMAIL_USERNAME"]
+          p = os.environ["GMAIL_APP_PASSWORD"]
+          msg = MIMEMultipart()
+          msg["From"] = f"ライフアセット自動投稿 <{u}>"
+          msg["To"] = "lifeassetpartners@gmail.com"
+          msg["Subject"] = "⚠️ ブログ自動投稿が失敗しました"
+          msg.attach(MIMEText("本日の自動投稿でエラーが発生しました。\nhttps://github.com/okayama-fp/life-asset-okayama/actions", "plain", "utf-8"))
+          with smtplib.SMTP("smtp.gmail.com", 587) as s:
+              s.starttls()
+              s.login(u, p)
+              s.send_message(msg)
+          print("✅ 失敗通知送信完了")
+          PYEOF
