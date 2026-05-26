@@ -318,6 +318,93 @@ def generate_image(scene: dict, scene_num: int, output_path: str):
 EFFECTS = ["zoom_in", "pan_right", "zoom_out", "pan_left", "zoom_pan"]
 
 
+def _split_phrases(text: str) -> list:
+    """ナレーションを句読点で短いフレーズに分割する。"""
+    import re
+    parts = re.split(r'(?<=[。、！？!?,．，])', text)
+    phrases = []
+    buf = ""
+    for p in parts:
+        buf += p
+        if len(buf) >= 8 and buf.strip():
+            phrases.append(buf.strip())
+            buf = ""
+    if buf.strip():
+        phrases.append(buf.strip())
+    return [p for p in phrases if p]
+
+
+def _get_font(size: int):
+    from PIL import ImageFont
+    for path in [
+        "C:/Windows/Fonts/meiryo.ttc",
+        "C:/Windows/Fonts/msgothic.ttc",
+        "C:/Windows/Fonts/YuGothB.ttc",
+    ]:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            pass
+    return ImageFont.load_default()
+
+
+def _draw_phrase_overlay(frame_np, phrases, timings, t):
+    """現在時刻 t に合わせてフレーズをフレームに描画する。"""
+    from PIL import Image, ImageDraw
+    import numpy as np
+
+    overlay = Image.new("RGBA", (VIDEO_W, VIDEO_H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    font_big = _get_font(54)
+    font_small = _get_font(38)
+
+    # 現在・直前のフレーズを特定
+    current_idx = -1
+    for i, (s, e) in enumerate(timings):
+        if s <= t < e:
+            current_idx = i
+            break
+    if current_idx == -1 and t >= timings[-1][1]:
+        current_idx = len(phrases) - 1
+
+    # 表示: 現在フレーズ（黄色・大）＋ 直前（白・小・薄）
+    show = []
+    if current_idx > 0:
+        show.append((phrases[current_idx - 1], False, timings[current_idx - 1]))
+    if current_idx >= 0:
+        show.append((phrases[current_idx], True, timings[current_idx]))
+
+    line_h = 64
+    base_y = VIDEO_H - line_h * len(show) - 70
+
+    for i, (phrase, is_current, (s, e)) in enumerate(show):
+        y = base_y + i * line_h
+        font = font_big if is_current else font_small
+
+        # フェードイン
+        if is_current:
+            fade = min((t - s) / 0.25, 1.0)
+            color = (255, 230, 30, int(255 * fade))
+            shadow = (0, 0, 0, int(220 * fade))
+        else:
+            color = (200, 200, 200, 140)
+            shadow = (0, 0, 0, 80)
+
+        bbox = draw.textbbox((0, 0), phrase, font=font)
+        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        x = (VIDEO_W - tw) // 2
+        pad = 12
+        draw.rectangle([x - pad, y - pad, x + tw + pad, y + th + pad], fill=(0, 0, 0, 120))
+        draw.text((x + 2, y + 2), phrase, font=font, fill=shadow)
+        draw.text((x, y), phrase, font=font, fill=color)
+
+    base = Image.fromarray(frame_np).convert("RGBA")
+    result = Image.alpha_composite(base, overlay)
+    import numpy as np
+    return np.array(result.convert("RGB"))
+
+
 def _make_ken_burns_frame(img_big, effect, progress):
     """Ken Burns エフェクトの1フレームを生成する。"""
     import numpy as np
@@ -362,19 +449,32 @@ def create_video(scenes_data: list, output_path: str):
         audio = AudioFileClip(s["audio"])
         duration = audio.duration + 0.8
         effect = EFFECTS[idx % len(EFFECTS)]
+        narration = s.get("narration", "")
 
         # Ken Burns 用に画像を 1.3 倍に拡大
         img_pil = Image.open(s["image"]).convert("RGB")
         big = img_pil.resize((int(VIDEO_W * 1.3), int(VIDEO_H * 1.3)), Image.LANCZOS)
         img_big = np.array(big)
 
-        def make_frame(t, _img=img_big, _dur=duration, _eff=effect):
+        # フレーズ分割とタイミング計算（文字数比例）
+        phrases = _split_phrases(narration) if narration else [s.get("caption", "")]
+        total_chars = max(sum(len(p) for p in phrases), 1)
+        timings = []
+        cur = 0.2
+        for phrase in phrases:
+            span = (len(phrase) / total_chars) * (duration - 0.5)
+            timings.append((cur, cur + span))
+            cur += span
+
+        def make_frame(t, _img=img_big, _dur=duration, _eff=effect,
+                       _phrases=phrases, _timings=timings):
             progress = min(t / _dur, 1.0)
-            return _make_ken_burns_frame(_img, _eff, progress)
+            bg = _make_ken_burns_frame(_img, _eff, progress)
+            return _draw_phrase_overlay(bg, _phrases, _timings, t)
 
         clip = VideoClip(make_frame, duration=duration).with_fps(24).with_audio(audio)
         clips.append(clip)
-        print(f"  シーン {idx+1}: {effect}")
+        print(f"  シーン {idx+1}: {effect} / {len(phrases)}フレーズ")
 
     final = concatenate_videoclips(clips, method="compose")
     os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
@@ -419,6 +519,7 @@ def main():
         scenes_data.append({
             "audio": str(WORK_DIR / f"scene_{i:02d}.wav"),
             "image": image_path,
+            "narration": scene["narration"],
         })
     print("✓ 画像生成完了")
 
