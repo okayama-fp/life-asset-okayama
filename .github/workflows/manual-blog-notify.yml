@@ -39,57 +39,17 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
         run: python scripts/notify_manual_post.py
 
-      - name: note下書きを読み込み
-        id: note
-        run: |
-          NOTE_BODY=$(cat note_draft_for_email.txt 2>/dev/null || echo "（生成に失敗しました）")
-          echo "note_body<<NOTE_EOF" >> $GITHUB_OUTPUT
-          echo "$NOTE_BODY" >> $GITHUB_OUTPUT
-          echo "NOTE_EOF" >> $GITHUB_OUTPUT
-
       - name: note下書きをメール通知
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          secure: false
-          username: ${{ secrets.GMAIL_USERNAME }}
-          password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "📝 X投稿完了 + note下書き | 手動ブログ記事"
-          to: yamakaze8000@gmail.com
-          from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
-          body: |
-            手動ブログ記事が公開されました。
-            X投稿は自動で完了しています。
-
-            以下のnote下書きをnoteにコピー＆ペーストしてください。
-
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            📝 note下書き
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-            ${{ steps.note.outputs.note_body }}
-
-            ─────────────────────
-            ライフアセットオフィス 自動投稿システム
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_MODE: manual_success
+        run: python scripts/send_email.py
 
       - name: 失敗時メール通知
         if: failure()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          secure: false
-          username: ${{ secrets.GMAIL_USERNAME }}
-          password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "⚠️ 手動記事の自動通知が失敗しました"
-          to: yamakaze8000@gmail.com
-          from: "ライフアセット自動投稿 <${{ secrets.GMAIL_USERNAME }}>"
-          body: |
-            手動ブログ記事の自動通知でエラーが発生しました。
-
-            GitHub Actions のログを確認してください：
-            https://github.com/okayama-fp/life-asset-okayama/actions
-
-            ─────────────────────
-            ライフアセットオフィス 自動投稿システム
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_MODE: manual_failure
+        run: python scripts/send_email.py
