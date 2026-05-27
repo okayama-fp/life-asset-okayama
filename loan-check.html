@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/loan-check.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>住宅ローン金利リスク診断｜無料ツール｜ライフアセットオフィス</title>
+  <meta name="description" content="変動金利で住宅ローンを借りている方へ。借入額・金利・年収を入力するだけで、金利上昇リスクと返済負担率を即診断。無料・登録不要。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="住宅ローン金利リスク診断｜ライフアセットオフィス">
+  <meta property="og:description" content="変動金利のリスクを今すぐ診断。借入額・金利・年収を入力するだけ。無料・登録不要。">
+  <meta property="og:url" content="https://lifeassetoffice.net/loan-check.html">
+  <meta property="og:site_name" content="ライフアセットオフィス">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="住宅ローン金利リスク診断｜ライフアセットオフィス">
+  <meta name="twitter:description" content="変動金利のリスクを今すぐ診断。借入額・金利・年収を入力するだけ。無料・登録不要。">
+  <meta name="twitter:site" content="@lifeasset_fp">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PKDH2DR522');
+  </script>
+  <style>
+    :root {
+      --sky: #0ea5e9; --sky-light: #38bdf8; --sky-pale: #e0f2fe;
+      --navy: #0f3460; --navy-soft: #1e4d8c;
+      --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+      --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+      --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+      --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--sky), var(--sky-light)); z-index: 9999; }
+
+    header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 20px; }
+    .logo-text .name { font-size: 1.2rem; font-weight: 700; background: linear-gradient(90deg,#4facfe,#00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo-text .tagline { font-size: 0.6rem; color: var(--text-light); }
+    nav { display: flex; gap: 4px; margin-left: auto; }
+    nav a { padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; color: var(--text); transition: all .2s; }
+    nav a:hover { background: var(--sky-pale); color: var(--sky); }
+    .btn-cta { padding: 7px 16px; border-radius: 20px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 60%, #1a5fac 100%); color: #fff; padding: 48px 24px 40px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+    .hero h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(1.5rem, 4.5vw, 2.2rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+    .hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 24px; line-height: 1.85; }
+    .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
+
+    /* MAIN */
+    .main { max-width: 820px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* TOOL WRAPPER */
+    .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    @media(max-width:680px){ .tool-grid { grid-template-columns: 1fr; } }
+
+    /* INPUT PANEL */
+    .input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .input-panel h2 { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+
+    .field { margin-bottom: 20px; }
+    .field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+    .field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+    .field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+
+    .field-num { display: flex; align-items: center; gap: 8px; }
+    .field-num input[type=number] { flex: 1; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; font-weight: 700; color: var(--navy); outline: none; transition: border-color .2s; text-align: right; }
+    .field-num input[type=number]:focus { border-color: var(--sky); }
+    .field-unit { font-size: 13px; color: var(--text-light); white-space: nowrap; }
+
+    .seg { display: flex; gap: 4px; }
+    .seg-btn { flex: 1; padding: 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; }
+    .seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
+
+    /* RESULT PANEL */
+    .result-panel { position: sticky; top: 76px; }
+    .result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+
+    .risk-header { padding: 20px 22px 16px; text-align: center; transition: background .4s; }
+    .risk-header.low  { background: var(--greenl); border-bottom: 2px solid var(--greenb); }
+    .risk-header.mid  { background: var(--amberl); border-bottom: 2px solid var(--amberb); }
+    .risk-header.high { background: var(--redl);   border-bottom: 2px solid var(--redb); }
+    .risk-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; margin-bottom: 6px; }
+    .risk-header.low  .risk-label { color: var(--green); }
+    .risk-header.mid  .risk-label { color: var(--amber); }
+    .risk-header.high .risk-label { color: var(--red); }
+    .risk-emoji { font-size: 36px; margin-bottom: 4px; }
+    .risk-title { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 900; color: var(--navy); }
+    .risk-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+    .result-body { padding: 18px 20px; }
+
+    .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-k { font-size: 12.5px; color: var(--text-light); }
+    .stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .stat-v.bad { color: var(--red); }
+    .stat-v.warn { color: var(--amber); }
+    .stat-v.good { color: var(--green); }
+
+    .rate-table-wrap { margin: 14px 0; }
+    .rate-table-ttl { font-size: 11px; font-weight: 700; color: var(--text-light); letter-spacing: .1em; margin-bottom: 8px; }
+    .rate-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .rate-table th { background: var(--navy); color: #fff; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 11.5px; }
+    .rate-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: center; background: #fff; }
+    .rate-table tr.current td { background: var(--sky-pale); font-weight: 700; }
+    .rate-table tr.warn td { background: var(--amberl); }
+    .rate-table tr.danger td { background: var(--redl); }
+
+    .advice-box { border-radius: 10px; padding: 14px 16px; margin: 14px 0 0; }
+    .advice-box.low  { background: var(--greenl); border: 1px solid var(--greenb); }
+    .advice-box.mid  { background: var(--amberl); border: 1px solid var(--amberb); }
+    .advice-box.high { background: var(--redl);   border: 1px solid var(--redb); }
+    .advice-ttl { font-size: 11px; font-weight: 700; letter-spacing: .1em; margin-bottom: 7px; }
+    .advice-box.low  .advice-ttl { color: var(--green); }
+    .advice-box.mid  .advice-ttl { color: var(--amber); }
+    .advice-box.high .advice-ttl { color: var(--red); }
+    .advice-box p { font-size: 13px; color: var(--text); line-height: 1.8; margin: 0; }
+
+    /* SHARE + CTA */
+    .share-row { display: flex; gap: 8px; margin-top: 14px; }
+    .share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+    .share-x { background: #000; }
+    .cta-btn-full { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 10px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; border: none; font-family: inherit; margin-top: 10px; }
+
+    /* INFO SECTION */
+    .info-section { margin-top: 40px; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 32px; }
+    .info-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .info-card-icon { font-size: 22px; margin-bottom: 8px; }
+    .info-card h3 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .info-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; }
+
+    .blog-link-section h2 { font-family: 'Noto Serif JP', serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+    .blog-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .blog-link-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; transition: border-color .2s; }
+    .blog-link-card:hover { border-color: var(--sky); }
+    .blog-link-card .tag { font-size: 11px; color: var(--sky); font-weight: 700; margin-bottom: 4px; }
+    .blog-link-card h3 { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+    .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .footer-contact a { font-size: 0.82rem; color: var(--sky-light); text-decoration: underline; }
+    footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+
+    @media(max-width:480px){
+      .main { padding: 20px 14px 60px; }
+      .result-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog/index.html">ブログ</a>
+    </nav>
+    <a href="index.html#contact" class="btn-cta">無料相談</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span> 無料・登録不要・30秒で診断</div>
+  <h1>あなたの住宅ローン、<br>金利が上がったら大丈夫？</h1>
+  <p class="hero-lead">借入額・金利・年収を入力するだけ。返済負担率と金利上昇リスクを今すぐ診断します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">📊 返済負担率チェック</span>
+    <span class="hero-tag">📈 金利上昇シミュレーション</span>
+    <span class="hero-tag">🎯 リスクレベル判定</span>
+  </div>
+</div>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="main">
+  <div class="tool-grid">
+
+    <!-- INPUT PANEL -->
+    <div class="input-panel">
+      <h2>📋 あなたの情報を入力</h2>
+
+      <div class="field">
+        <div class="field-label">借入残高<span class="field-val" id="lbl-principal">2,500万円</span></div>
+        <input type="range" id="sl-principal" min="500" max="8000" step="100" value="2500" oninput="sync('principal',this.value);calc()">
+        <div class="field-ticks"><span>500万</span><span>4,000万</span><span>8,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">現在の金利<span class="field-val" id="lbl-rate">1.05%</span></div>
+        <input type="range" id="sl-rate" min="0.1" max="3.5" step="0.05" value="1.05" oninput="sync('rate',this.value);calc()">
+        <div class="field-ticks"><span>0.1%</span><span>1.8%</span><span>3.5%</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">返済残年数<span class="field-val" id="lbl-years">25年</span></div>
+        <input type="range" id="sl-years" min="1" max="35" step="1" value="25" oninput="sync('years',this.value);calc()">
+        <div class="field-ticks"><span>1年</span><span>18年</span><span>35年</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">現在の年齢<span class="field-val" id="lbl-age">40歳</span></div>
+        <input type="range" id="sl-age" min="20" max="65" step="1" value="40" oninput="sync('age',this.value);calc()">
+        <div class="field-ticks"><span>20歳</span><span>42歳</span><span>65歳</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">月の手取り収入</div>
+        <div class="field-num">
+          <input type="number" id="in-income" value="30" min="10" max="200" step="1" oninput="calc()">
+          <span class="field-unit">万円 / 月</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label" style="margin-bottom:8px">金利タイプ</div>
+        <div class="seg">
+          <button class="seg-btn on" id="type-var" onclick="setType('var')">変動金利</button>
+          <button class="seg-btn" id="type-fix" onclick="setType('fix')">固定金利</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="risk-header low" id="risk-header">
+          <div class="risk-label" id="risk-label">RISK LEVEL</div>
+          <div class="risk-emoji" id="risk-emoji">🟢</div>
+          <div class="risk-title" id="risk-title">安心ゾーン</div>
+          <div class="risk-sub" id="risk-sub">返済負担率・金利耐性ともに良好</div>
+        </div>
+
+        <div class="result-body">
+          <div class="stat-row">
+            <span class="stat-k">月返済額（現在）</span>
+            <span class="stat-v" id="r-monthly">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">うち利息</span>
+            <span class="stat-v" id="r-interest">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">返済負担率</span>
+            <span class="stat-v" id="r-ratio">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">完済予定年齢</span>
+            <span class="stat-v" id="r-age">—</span>
+          </div>
+
+          <div class="rate-table-wrap" id="rate-table-wrap">
+            <div class="rate-table-ttl">📈 金利上昇シミュレーション</div>
+            <table class="rate-table">
+              <thead>
+                <tr><th>金利</th><th>月返済額</th><th>うち利息</th><th>負担率</th></tr>
+              </thead>
+              <tbody id="rate-tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="advice-box low" id="advice-box">
+            <div class="advice-ttl" id="advice-ttl">FPからのアドバイス</div>
+            <p id="advice-text">—</p>
+          </div>
+
+          <div class="share-row">
+            <button class="share-btn share-x" onclick="shareResult()">𝕏 結果をシェア</button>
+          </div>
+          <button class="cta-btn-full" onclick="openConsult()">📩 無料FP相談でさらに詳しく →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="info-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">📌</div>
+        <h3>5年ルールとは？</h3>
+        <p>変動金利でも月返済額は5年間変わりません。ただし金利が上がると、毎月の返済のうち利息が増え元本の減り方が遅くなります。</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📌</div>
+        <h3>125%ルールとは？</h3>
+        <p>5年後に月返済額が変わる場合でも、前回の125%が上限です。ただしその分、利息分として繰り越されるリスクがあります。</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📌</div>
+        <h3>返済負担率の目安</h3>
+        <p>月手取りに占める返済額の割合。25%未満が安心、25〜35%は注意、35%超は危険信号です。</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📌</div>
+        <h3>定年後のローンリスク</h3>
+        <p>完済が65歳を超えると退職後も返済が続きます。収入が激減する中での返済は家計を直撃します。</p>
+      </div>
+    </div>
+
+    <div class="blog-link-section">
+      <h2>📚 関連記事を読む</h2>
+      <div class="blog-links">
+        <a href="blog/post-537.html" class="blog-link-card">
+          <div class="tag">🏠 Aさんシリーズ 第三弾</div>
+          <h3>繰上返済と教育費積立、どっちが先？42歳・子ども3人のAさんがFPに聞いた本音</h3>
+        </a>
+        <a href="blog/post-531.html" class="blog-link-card">
+          <div class="tag">⚠️ 変動金利の落とし穴</div>
+          <h3>「月の返済額は変わってないから大丈夫」は危ない</h3>
+        </a>
+        <a href="blog/post-538.html" class="blog-link-card">
+          <div class="tag">📊 資産形成</div>
+          <h3>あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Life Asset — ライフアセットオフィス</div>
+  <div class="footer-contact">
+    <a href="#" id="mail-link">無料相談・お問い合わせ</a>
+    ｜<a href="privacy.html">プライバシーポリシー</a>
+  </div>
+  <p>© 2026 ライフアセットオフィス. 本ツールの計算結果は参考値です。実際の返済額はご契約の金融機関にご確認ください。投資・ローンにはリスクが伴います。</p>
+</footer>
+
+<script>
+var loanType = 'var';
+
+function setType(t) {
+  loanType = t;
+  document.getElementById('type-var').className = 'seg-btn' + (t==='var' ? ' on' : '');
+  document.getElementById('type-fix').className = 'seg-btn' + (t==='fix' ? ' on' : '');
+  document.getElementById('rate-table-wrap').style.display = t==='var' ? '' : 'none';
+  calc();
+}
+
+function sync(key, val) {
+  val = parseFloat(val);
+  if (key === 'principal') {
+    document.getElementById('lbl-principal').textContent = val.toLocaleString() + '万円';
+  } else if (key === 'rate') {
+    document.getElementById('lbl-rate').textContent = val.toFixed(2) + '%';
+  } else if (key === 'years') {
+    document.getElementById('lbl-years').textContent = val + '年';
+  } else if (key === 'age') {
+    document.getElementById('lbl-age').textContent = val + '歳';
+  }
+}
+
+function monthly(principal10k, annualRate, years) {
+  var P = principal10k * 10000;
+  if (annualRate <= 0) return P / (years * 12);
+  var r = annualRate / 100 / 12;
+  var n = years * 12;
+  return P * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1);
+}
+
+function fmt(yen) {
+  return Math.round(yen).toLocaleString() + '円';
+}
+
+function calc() {
+  var P    = parseFloat(document.getElementById('sl-principal').value);
+  var rate = parseFloat(document.getElementById('sl-rate').value);
+  var yrs  = parseInt(document.getElementById('sl-years').value);
+  var age  = parseInt(document.getElementById('sl-age').value);
+  var inc  = parseFloat(document.getElementById('in-income').value) || 30;
+
+  var m       = monthly(P, rate, yrs);
+  var interestM = P * 10000 * (rate / 100 / 12);
+  var ratio   = (m / (inc * 10000)) * 100;
+  var endAge  = age + yrs;
+
+  document.getElementById('r-monthly').textContent  = fmt(m);
+  document.getElementById('r-interest').textContent = fmt(interestM);
+
+  var ratioEl = document.getElementById('r-ratio');
+  ratioEl.textContent = ratio.toFixed(1) + '%';
+  ratioEl.className = 'stat-v' + (ratio >= 35 ? ' bad' : ratio >= 25 ? ' warn' : ' good');
+
+  var ageEl = document.getElementById('r-age');
+  ageEl.textContent = endAge + '歳';
+  ageEl.className = 'stat-v' + (endAge >= 70 ? ' bad' : endAge >= 65 ? ' warn' : ' good');
+
+  // rate table
+  if (loanType === 'var') {
+    var rows = '';
+    var scenarios = [
+      {delta: 0, label: rate.toFixed(2)+'%（現在）', cls: 'current'},
+      {delta: 0.5, label: (rate+0.5).toFixed(2)+'%（+0.5%）', cls: ''},
+      {delta: 1.0, label: (rate+1.0).toFixed(2)+'%（+1.0%）', cls: 'warn'},
+      {delta: 1.5, label: (rate+1.5).toFixed(2)+'%（+1.5%）', cls: 'danger'},
+    ];
+    scenarios.forEach(function(s){
+      var sm = monthly(P, rate + s.delta, yrs);
+      var si = P * 10000 * ((rate + s.delta) / 100 / 12);
+      var sr = (sm / (inc * 10000)) * 100;
+      rows += '<tr class="'+s.cls+'"><td>'+s.label+'</td><td>'+fmt(sm)+'</td><td>'+fmt(si)+'</td><td>'+sr.toFixed(1)+'%</td></tr>';
+    });
+    document.getElementById('rate-tbody').innerHTML = rows;
+  }
+
+  // Risk level
+  var riskM15 = monthly(P, rate + 1.5, yrs);
+  var ratio15 = (riskM15 / (inc * 10000)) * 100;
+  var level;
+  if (ratio >= 35 || (loanType==='var' && ratio15 >= 40) || endAge >= 70) {
+    level = 'high';
+  } else if (ratio >= 25 || (loanType==='var' && ratio15 >= 35) || endAge >= 65) {
+    level = 'mid';
+  } else {
+    level = 'low';
+  }
+
+  var hdr = document.getElementById('risk-header');
+  hdr.className = 'risk-header ' + level;
+  document.getElementById('risk-label').textContent = level==='high'?'⚠️ 要注意レベル':level==='mid'?'📌 注意レベル':'✅ 安心レベル';
+  document.getElementById('risk-emoji').textContent = level==='high'?'🔴':level==='mid'?'🟡':'🟢';
+  document.getElementById('risk-title').textContent = level==='high'?'早めの対策が必要':level==='mid'?'注意が必要なゾーン':'安心ゾーン';
+  document.getElementById('risk-sub').textContent = level==='high'?'返済負担が大きく、金利上昇リスクに要注意':level==='mid'?'金利上昇・定年後ローンのリスクあり':'返済負担率・金利耐性ともに良好';
+
+  var adviceBox = document.getElementById('advice-box');
+  adviceBox.className = 'advice-box ' + level;
+  document.getElementById('advice-ttl').textContent = 'FPからのアドバイス';
+
+  var adviceTexts = {
+    low: 'このまま繰上返済を年1〜2回続けると完済を早められます。余裕資金はNISAで運用しながら、老後資金の積み立ても今から始めましょう。',
+    mid: '金利が1%以上上昇すると負担が増します。固定金利への借り換えシミュレーション、または繰上返済で残高を減らすことを検討してください。年1回FPに相談することをおすすめします。',
+    high: '現状の返済負担が大きく、金利上昇・定年後のリスクが高い状態です。早急に固定金利への借り換え・繰上返済・ライフプランの見直しが必要です。FPへの無料相談をお早めにどうぞ。'
+  };
+  document.getElementById('advice-text').textContent = adviceTexts[level];
+}
+
+function shareResult() {
+  var ratio = document.getElementById('r-ratio').textContent;
+  var risk  = document.getElementById('risk-title').textContent;
+  var text  = '住宅ローン金利リスク診断をしてみました。\n返済負担率：'+ratio+'、判定：'+risk+'\n\nあなたも診断してみてください👇';
+  var url   = 'https://lifeassetoffice.net/loan-check.html';
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+}
+
+function openConsult() {
+  var u='yamakaze8000', d='gmail.com';
+  location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=住宅ローン無料相談希望';
+}
+
+(function(){
+  var u='yamakaze8000', d='gmail.com';
+  document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+  calc();
+})();
+
+window.addEventListener('scroll', function(){
+  var el = document.documentElement;
+  document.getElementById('pb').style.width = (el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+});
+</script>
+</body>
+</html>
