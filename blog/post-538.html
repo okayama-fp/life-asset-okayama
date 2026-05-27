@@ -6,9 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ｜Life Asset ブログ</title>
   <meta name="description" content="資産100万・500万・1000万・3000万・5000万円——ステージによってやるべきことはまったく違います。独立系FPが各レベルで本当に必要な行動だけを解説。自己診断チェックリスト付き。">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; form-action 'self'; upgrade-insecure-requests">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ">
+  <meta property="og:description" content="資産100万〜5000万円超まで、レベル別にやること・やらないことを解説。B〜Kさんの実体験（成功・失敗）付き。">
+  <meta property="og:url" content="https://lifeassetoffice.net/blog/post-538.html">
+  <meta property="og:site_name" content="ライフアセットオフィス">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ">
+  <meta name="twitter:description" content="資産100万〜5000万円超まで、レベル別にやること・やらないことを解説。B〜Kさんの実体験（成功・失敗）付き。">
+  <meta name="twitter:site" content="@lifeasset_fp">
+  <!-- CSP: GA・AdSense の通信を許可 -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -998,7 +1010,7 @@
 <div class="share-section">
   <h2>この記事をシェアする</h2>
   <div class="share-btns">
-    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ&url=https://lifeassetoffice.net/blog/post-538.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <button class="share-btn share-x" onclick="shareX()">𝕏 Xでシェア</button>
     <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https://lifeassetoffice.net/blog/post-538.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
     <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href).then(function(){alert('リンクをコピーしました！');})">🔗 リンクをコピー</button>
   </div>
@@ -1041,6 +1053,11 @@
 </footer>
 
 <script>
+function shareX(){
+  var text = 'あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ';
+  var url  = 'https://lifeassetoffice.net/blog/post-538.html';
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+}
 (function(){
   var u='yamakaze8000',d='gmail.com';
   document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
