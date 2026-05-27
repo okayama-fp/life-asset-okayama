@@ -60,22 +60,12 @@
     .no-jobs-text { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
     .future-jobs-label { text-align: center; margin: 32px 0 20px; font-size: 12px; font-weight: 700; color: var(--text-sub); letter-spacing: .1em; display: flex; align-items: center; gap: 10px; }
     .future-jobs-label::before, .future-jobs-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .white-section { background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%); border: 1.5px solid #bbf7d0; border-radius: 20px; padding: 36px 32px; margin-bottom: 40px; }
-    .white-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-    .white-badge { background: #16a34a; color: #fff; font-size: 11px; font-weight: 800; padding: 5px 14px; border-radius: 50px; white-space: nowrap; }
-    .white-section h2 { font-size: clamp(17px,2.5vw,20px); font-weight: 900; color: #166534; }
-    .white-section .subtitle { font-size: 13px; color: #166534; opacity: .75; margin-bottom: 24px; }
-    .white-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .white-item { background: #fff; border-radius: 14px; padding: 20px; border: 1px solid #bbf7d0; }
-    .white-item-icon { font-size: 24px; margin-bottom: 8px; }
-    .white-item-title { font-size: 13px; font-weight: 800; color: #166534; margin-bottom: 6px; }
-    .white-item-desc { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
     .cta-banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 20px; padding: 48px 40px; text-align: center; }
     .cta-banner h2 { font-size: clamp(18px,3vw,22px); font-weight: 900; color: #fff; margin-bottom: 10px; }
     .cta-banner p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
     .cta-banner a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 40px; border-radius: 50px; box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
     footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
-    @media (max-width: 768px) { .white-grid { grid-template-columns: 1fr; } .no-jobs-banner { flex-direction: column; align-items: flex-start; } }
+    @media (max-width: 768px) { .no-jobs-banner { flex-direction: column; align-items: flex-start; } }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
@@ -117,47 +107,6 @@
       <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="value-title">コミュニケーション力</div><div class="value-desc">複雑な金融知識をわかりやすく伝えられる力</div></div>
     </div>
   </div>
-  <!-- ホワイト企業宣言 -->
-  <div class="white-section">
-    <div class="white-section-header">
-      <span class="white-badge">✅ ホワイト企業宣言</span>
-      <h2>働きやすさにこだわっています</h2>
-    </div>
-    <p class="subtitle">小さな事務所だからこそ、一人ひとりを大切にする働き方を実現しています。</p>
-    <div class="white-grid">
-      <div class="white-item">
-        <div class="white-item-icon">🕐</div>
-        <div class="white-item-title">残業ほぼゼロ</div>
-        <div class="white-item-desc">月平均残業10時間未満。お客様への誠実な対応を大切にしているため、無駄な業務は徹底的に排除しています。</div>
-      </div>
-      <div class="white-item">
-        <div class="white-item-icon">📅</div>
-        <div class="white-item-title">完全週休2日制</div>
-        <div class="white-item-desc">土日祝休み（相談対応時は代休取得）。プライベートとの両立を重視した勤務スタイル。</div>
-      </div>
-      <div class="white-item">
-        <div class="white-item-icon">🏠</div>
-        <div class="white-item-title">リモート勤務対応</div>
-        <div class="white-item-desc">オンライン相談・在宅ワーク対応可。通勤負担を減らし、集中できる環境で働けます。</div>
-      </div>
-      <div class="white-item">
-        <div class="white-item-icon">🎓</div>
-        <div class="white-item-title">資格取得支援</div>
-        <div class="white-item-desc">FP1・2級、CFPなどの受験費用を全額補助。スキルアップを会社全力でバックアップします。</div>
-      </div>
-      <div class="white-item">
-        <div class="white-item-icon">🚫</div>
-        <div class="white-item-title">ノルマ・押し売りなし</div>
-        <div class="white-item-desc">商品販売ノルマは一切なし。お客様ファーストを徹底し、長期的な信頼関係を築くことを大切にしています。</div>
-      </div>
-      <div class="white-item">
-        <div class="white-item-icon">🌱</div>
-        <div class="white-item-title">有給取得を推奨</div>
-        <div class="white-item-desc">有給休暇は取得しやすい環境。申請しにくい雰囲気は一切ありません。リフレッシュを大切にしています。</div>
-      </div>
-    </div>
-  </div>
-
   <div class="jobs-section">
     <h2>募集職種</h2>
 
