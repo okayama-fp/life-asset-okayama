@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <link rel="canonical" href="https://lifeassetoffice.net/loan-check.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>住宅ローン金利リスク診断｜無料ツール｜ライフアセットオフィス</title>
-  <meta name="description" content="変動金利で住宅ローンを借りている方へ。借入額・金利・年収を入力するだけで、金利上昇リスクと返済負担率を即診断。無料・登録不要。">
+  <title>住宅ローン金利リスク診断｜控除チェック付き｜ライフアセットオフィス</title>
+  <meta name="description" content="借入額・金利・年収を入力するだけ。返済負担率・金利上昇リスク・住宅ローン控除（旧1%・新0.7%）を即診断。登録不要。">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="住宅ローン金利リスク診断｜ライフアセットオフィス">
-  <meta property="og:description" content="変動金利のリスクを今すぐ診断。借入額・金利・年収を入力するだけ。無料・登録不要。">
+  <meta property="og:title" content="住宅ローン金利リスク診断｜控除チェック付き｜ライフアセットオフィス">
+  <meta property="og:description" content="金利上昇リスクと住宅ローン控除をまとめて診断。逆ざや判定・実質金利も即確認。登録不要。">
   <meta property="og:url" content="https://lifeassetoffice.net/loan-check.html">
   <meta property="og:site_name" content="ライフアセットオフィス">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="住宅ローン金利リスク診断｜ライフアセットオフィス">
-  <meta name="twitter:description" content="変動金利のリスクを今すぐ診断。借入額・金利・年収を入力するだけ。無料・登録不要。">
+  <meta name="twitter:title" content="住宅ローン金利リスク診断｜控除チェック付き｜ライフアセットオフィス">
+  <meta name="twitter:description" content="金利上昇リスクと住宅ローン控除をまとめて診断。逆ざや判定・実質金利も即確認。登録不要。">
   <meta name="twitter:site" content="@lifeasset_fp">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -36,6 +36,7 @@
       --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
       --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
       --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+      --purple: #7c3aed; --purplel: #f5f3ff; --purpleb: #ddd6fe;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -53,7 +54,6 @@
     nav a:hover { background: var(--sky-pale); color: var(--sky); }
     .btn-cta { padding: 7px 16px; border-radius: 20px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
 
-    /* HERO */
     .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 60%, #1a5fac 100%); color: #fff; padding: 48px 24px 40px; text-align: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
     .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
@@ -63,14 +63,11 @@
     .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
     .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
 
-    /* MAIN */
-    .main { max-width: 820px; margin: 0 auto; padding: 32px 24px 80px; }
+    .main { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
 
-    /* TOOL WRAPPER */
     .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
     @media(max-width:680px){ .tool-grid { grid-template-columns: 1fr; } }
 
-    /* INPUT PANEL */
     .input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
     .input-panel h2 { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
 
@@ -86,10 +83,10 @@
     .field-unit { font-size: 13px; color: var(--text-light); white-space: nowrap; }
 
     .seg { display: flex; gap: 4px; }
-    .seg-btn { flex: 1; padding: 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; }
+    .seg-btn { flex: 1; padding: 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; line-height: 1.4; }
     .seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
+    .seg-btn small { font-size: 10px; font-weight: 400; display: block; }
 
-    /* RESULT PANEL */
     .result-panel { position: sticky; top: 76px; }
     .result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
 
@@ -125,24 +122,49 @@
     .rate-table tr.danger td { background: var(--redl); }
 
     .advice-box { border-radius: 10px; padding: 14px 16px; margin: 14px 0 0; }
-    .advice-box.low  { background: var(--greenl); border: 1px solid var(--greenb); }
-    .advice-box.mid  { background: var(--amberl); border: 1px solid var(--amberb); }
-    .advice-box.high { background: var(--redl);   border: 1px solid var(--redb); }
+    .advice-box.low    { background: var(--greenl);  border: 1px solid var(--greenb); }
+    .advice-box.mid    { background: var(--amberl);  border: 1px solid var(--amberb); }
+    .advice-box.high   { background: var(--redl);    border: 1px solid var(--redb); }
+    .advice-box.purple { background: var(--purplel); border: 1px solid var(--purpleb); }
     .advice-ttl { font-size: 11px; font-weight: 700; letter-spacing: .1em; margin-bottom: 7px; }
-    .advice-box.low  .advice-ttl { color: var(--green); }
-    .advice-box.mid  .advice-ttl { color: var(--amber); }
-    .advice-box.high .advice-ttl { color: var(--red); }
+    .advice-box.low    .advice-ttl { color: var(--green); }
+    .advice-box.mid    .advice-ttl { color: var(--amber); }
+    .advice-box.high   .advice-ttl { color: var(--red); }
+    .advice-box.purple .advice-ttl { color: var(--purple); }
     .advice-box p { font-size: 13px; color: var(--text); line-height: 1.8; margin: 0; }
+    .advice-list { font-size: 13px; color: var(--text); line-height: 1.8; margin: 0; padding-left: 16px; }
+    .advice-list li { margin-bottom: 3px; }
 
-    /* SHARE + CTA */
     .share-row { display: flex; gap: 8px; margin-top: 14px; }
     .share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
     .share-x { background: #000; }
-    .cta-btn-full { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 10px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; border: none; font-family: inherit; margin-top: 10px; }
+    .cta-btn-full { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 10px; background: #fff; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); font-family: inherit; margin-top: 8px; transition: border-color .2s; }
+    .cta-btn-full:hover { border-color: var(--sky); }
 
-    /* INFO SECTION */
+    /* 住宅ローン控除セクション */
+    .deduction-section { margin-top: 28px; }
+    .deduction-card { background: #fff; border: 1px solid var(--purpleb); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(124,58,237,.06); }
+    .deduction-card-header { background: linear-gradient(90deg, var(--purple), #9333ea); color: #fff; padding: 14px 22px; display: flex; align-items: center; gap: 10px; }
+    .deduction-card-header h2 { font-size: 15px; font-weight: 700; }
+    .deduction-card-header span { font-size: 11px; opacity: .8; margin-left: auto; }
+    .deduction-body { padding: 20px 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media(max-width:600px){ .deduction-body { grid-template-columns: 1fr; } }
+
+    .ded-inputs .field { margin-bottom: 16px; }
+    .ded-label-hint { font-size: 10.5px; color: var(--text-light); margin-top: 3px; }
+
+    .ded-result-empty { font-size: 13px; color: var(--text-light); text-align: center; padding: 32px 0; }
+    .ded-stats { }
+    .ded-stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .ded-stat-row:last-child { border-bottom: none; }
+    .ded-stat-k { font-size: 12px; color: var(--text-light); }
+    .ded-stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .ded-stat-v.gyaku { color: var(--purple); }
+    .ded-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+    .ded-badge.gyaku { background: var(--purplel); color: var(--purple); border: 1px solid var(--purpleb); }
+
     .info-section { margin-top: 40px; }
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 32px; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 32px; }
     .info-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
     .info-card-icon { font-size: 22px; margin-bottom: 8px; }
     .info-card h3 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
@@ -179,21 +201,21 @@
     </a>
     <nav>
       <a href="index.html">ホーム</a>
+      <a href="simulation.html">資産シミュレーター</a>
       <a href="blog/index.html">ブログ</a>
     </nav>
-    <a href="index.html#contact" class="btn-cta">無料相談</a>
+    <a href="index.html#contact" class="btn-cta">お問い合わせ</a>
   </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge"><span class="hero-badge-dot"></span> 無料・登録不要・30秒で診断</div>
+  <div class="hero-badge"><span class="hero-badge-dot"></span> 登録不要・30秒で診断</div>
   <h1>あなたの住宅ローン、<br>金利が上がったら大丈夫？</h1>
-  <p class="hero-lead">借入額・金利・年収を入力するだけ。返済負担率と金利上昇リスクを今すぐ診断します。</p>
+  <p class="hero-lead">借入額・金利・年収を入力するだけ。返済負担率・金利上昇リスク・住宅ローン控除の逆ざやを一括診断します。</p>
   <div class="hero-badges">
     <span class="hero-tag">📊 返済負担率チェック</span>
     <span class="hero-tag">📈 金利上昇シミュレーション</span>
-    <span class="hero-tag">🎯 リスクレベル判定</span>
+    <span class="hero-tag">🏦 控除・逆ざや判定</span>
   </div>
 </div>
 
@@ -288,14 +310,83 @@
 
           <div class="advice-box low" id="advice-box">
             <div class="advice-ttl" id="advice-ttl">FPからのアドバイス</div>
-            <p id="advice-text">—</p>
+            <ul class="advice-list" id="advice-list"></ul>
           </div>
 
           <div class="share-row">
             <button class="share-btn share-x" onclick="shareResult()">𝕏 結果をシェア</button>
           </div>
-          <button class="cta-btn-full" onclick="openConsult()">📩 無料FP相談でさらに詳しく →</button>
+          <button class="cta-btn-full" onclick="openContact()">📩 お問い合わせ →</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 住宅ローン控除セクション -->
+  <div class="deduction-section">
+    <div class="deduction-card">
+      <div class="deduction-card-header">
+        <span>🏦</span>
+        <h2>住宅ローン控除チェック</h2>
+        <span>逆ざや・実質金利を確認</span>
+      </div>
+      <div class="deduction-body">
+
+        <!-- 控除入力 -->
+        <div class="ded-inputs">
+          <div class="field">
+            <div class="field-label" style="margin-bottom:8px">控除制度</div>
+            <div class="seg">
+              <button class="seg-btn on" id="ded-none" onclick="setDed('none')">なし</button>
+              <button class="seg-btn" id="ded-old" onclick="setDed('old')">旧制度<small>1%・10年</small></button>
+              <button class="seg-btn" id="ded-new" onclick="setDed('new')">新制度<small>0.7%・13年</small></button>
+            </div>
+            <div class="ded-label-hint">旧＝2021年以前入居／新＝2022年以降入居</div>
+          </div>
+
+          <div id="ded-extra" style="display:none">
+            <div class="field">
+              <div class="field-label">残り控除年数<span class="field-val" id="lbl-ded-yrs">10年</span></div>
+              <input type="range" id="sl-ded-yrs" min="1" max="13" step="1" value="10" oninput="syncDed();calc()">
+              <div class="field-ticks"><span>1年</span><span>—</span><span>13年</span></div>
+            </div>
+
+            <div class="field">
+              <div class="field-label" style="margin-bottom:8px">住宅タイプ</div>
+              <div class="seg">
+                <button class="seg-btn on" id="cap-general" onclick="setCap('general')">一般住宅</button>
+                <button class="seg-btn" id="cap-premium" onclick="setCap('premium')">長期優良・ZEH</button>
+              </div>
+              <div class="ded-label-hint" id="cap-hint">上限：旧4,000万円 / 新4,500万円</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 控除結果 -->
+        <div id="ded-result-area">
+          <div class="ded-result-empty" id="ded-empty">
+            控除制度を選択すると<br>結果が表示されます
+          </div>
+          <div class="ded-stats" id="ded-stats" style="display:none">
+            <div class="ded-stat-row">
+              <span class="ded-stat-k">今年の控除額（概算）</span>
+              <span class="ded-stat-v good" id="r-ded-annual">—</span>
+            </div>
+            <div class="ded-stat-row">
+              <span class="ded-stat-k">残り控除総額（概算）</span>
+              <span class="ded-stat-v good" id="r-ded-total">—</span>
+            </div>
+            <div class="ded-stat-row">
+              <span class="ded-stat-k">実質金利（控除後）</span>
+              <span class="ded-stat-v" id="r-real-rate">—</span>
+            </div>
+            <div class="advice-box low" id="ded-advice-box" style="margin-top:12px">
+              <div class="advice-ttl" id="ded-advice-ttl">控除アドバイス</div>
+              <ul class="advice-list" id="ded-advice-list"></ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -323,6 +414,16 @@
         <h3>定年後のローンリスク</h3>
         <p>完済が65歳を超えると退職後も返済が続きます。収入が激減する中での返済は家計を直撃します。</p>
       </div>
+      <div class="info-card">
+        <div class="info-card-icon">🏦</div>
+        <h3>逆ざやとは？</h3>
+        <p>住宅ローン金利が控除率（旧1%・新0.7%）を下回る状態。控除で受け取る額が利息より多いため、繰上返済より資産運用が有利になります。</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">⚠️</div>
+        <h3>12月繰上返済に注意</h3>
+        <p>住宅ローン控除は12月末残高が基準です。12月に繰上返済すると翌年の控除額が減ります。繰上返済は1月以降が有利です。</p>
+      </div>
     </div>
 
     <div class="blog-link-section">
@@ -348,14 +449,21 @@
 <footer>
   <div class="footer-logo">Life Asset — ライフアセットオフィス</div>
   <div class="footer-contact">
-    <a href="#" id="mail-link">無料相談・お問い合わせ</a>
+    <a href="#" id="mail-link">お問い合わせ</a>
     ｜<a href="privacy.html">プライバシーポリシー</a>
   </div>
-  <p>© 2026 ライフアセットオフィス. 本ツールの計算結果は参考値です。実際の返済額はご契約の金融機関にご確認ください。投資・ローンにはリスクが伴います。</p>
+  <p>© 2026 ライフアセットオフィス. 本ツールの計算結果は参考値です。実際の返済額・控除額はご契約の金融機関・税務署にご確認ください。投資・ローンにはリスクが伴います。</p>
 </footer>
 
 <script>
 var loanType = 'var';
+var dedType  = 'none';
+var capType  = 'general';
+
+var DED = {
+  old: { rate: 0.01,  maxYrs: 10, caps: { general: 4000, premium: 4000 } },
+  new: { rate: 0.007, maxYrs: 13, caps: { general: 4500, premium: 5000 } }
+};
 
 function setType(t) {
   loanType = t;
@@ -363,6 +471,44 @@ function setType(t) {
   document.getElementById('type-fix').className = 'seg-btn' + (t==='fix' ? ' on' : '');
   document.getElementById('rate-table-wrap').style.display = t==='var' ? '' : 'none';
   calc();
+}
+
+function setDed(t) {
+  dedType = t;
+  ['none','old','new'].forEach(function(k){
+    document.getElementById('ded-'+k).className = 'seg-btn' + (k===t ? ' on' : '');
+  });
+  var extra = document.getElementById('ded-extra');
+  extra.style.display = t==='none' ? 'none' : '';
+  if (t !== 'none') {
+    var maxY = DED[t].maxYrs;
+    var sl = document.getElementById('sl-ded-yrs');
+    sl.max = maxY;
+    if (parseInt(sl.value) > maxY) sl.value = maxY;
+    syncDed();
+    updateCapHint();
+  }
+  calc();
+}
+
+function setCap(c) {
+  capType = c;
+  document.getElementById('cap-general').className = 'seg-btn' + (c==='general' ? ' on' : '');
+  document.getElementById('cap-premium').className = 'seg-btn' + (c==='premium' ? ' on' : '');
+  updateCapHint();
+  calc();
+}
+
+function updateCapHint() {
+  if (dedType === 'none') return;
+  var caps = DED[dedType].caps;
+  document.getElementById('cap-hint').textContent =
+    '控除上限額：' + caps[capType].toLocaleString() + '万円';
+}
+
+function syncDed() {
+  var v = document.getElementById('sl-ded-yrs').value;
+  document.getElementById('lbl-ded-yrs').textContent = v + '年';
 }
 
 function sync(key, val) {
@@ -383,12 +529,11 @@ function monthly(principal10k, annualRate, years) {
   if (annualRate <= 0) return P / (years * 12);
   var r = annualRate / 100 / 12;
   var n = years * 12;
-  return P * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1);
+  return P * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
 }
 
-function fmt(yen) {
-  return Math.round(yen).toLocaleString() + '円';
-}
+function fmt(yen) { return Math.round(yen).toLocaleString() + '円'; }
+function fmtMan(yen) { return Math.round(yen / 10000) + '万円'; }
 
 function calc() {
   var P    = parseFloat(document.getElementById('sl-principal').value);
@@ -397,10 +542,10 @@ function calc() {
   var age  = parseInt(document.getElementById('sl-age').value);
   var inc  = parseFloat(document.getElementById('in-income').value) || 30;
 
-  var m       = monthly(P, rate, yrs);
+  var m        = monthly(P, rate, yrs);
   var interestM = P * 10000 * (rate / 100 / 12);
-  var ratio   = (m / (inc * 10000)) * 100;
-  var endAge  = age + yrs;
+  var ratio    = (m / (inc * 10000)) * 100;
+  var endAge   = age + yrs;
 
   document.getElementById('r-monthly').textContent  = fmt(m);
   document.getElementById('r-interest').textContent = fmt(interestM);
@@ -413,27 +558,20 @@ function calc() {
   ageEl.textContent = endAge + '歳';
   ageEl.className = 'stat-v' + (endAge >= 70 ? ' bad' : endAge >= 65 ? ' warn' : ' good');
 
-  // rate table
   if (loanType === 'var') {
     var rows = '';
-    var scenarios = [
-      {delta: 0, label: rate.toFixed(2)+'%（現在）', cls: 'current'},
-      {delta: 0.5, label: (rate+0.5).toFixed(2)+'%（+0.5%）', cls: ''},
-      {delta: 1.0, label: (rate+1.0).toFixed(2)+'%（+1.0%）', cls: 'warn'},
-      {delta: 1.5, label: (rate+1.5).toFixed(2)+'%（+1.5%）', cls: 'danger'},
-    ];
-    scenarios.forEach(function(s){
-      var sm = monthly(P, rate + s.delta, yrs);
-      var si = P * 10000 * ((rate + s.delta) / 100 / 12);
-      var sr = (sm / (inc * 10000)) * 100;
-      rows += '<tr class="'+s.cls+'"><td>'+s.label+'</td><td>'+fmt(sm)+'</td><td>'+fmt(si)+'</td><td>'+sr.toFixed(1)+'%</td></tr>';
+    [{delta:0,cls:'current'},{delta:0.5,cls:''},{delta:1.0,cls:'warn'},{delta:1.5,cls:'danger'}].forEach(function(s){
+      var label = (rate+s.delta).toFixed(2) + '% ' + (s.delta===0?'（現在）':'（+'+s.delta.toFixed(1)+'%）');
+      var sm = monthly(P, rate+s.delta, yrs);
+      var si = P*10000*((rate+s.delta)/100/12);
+      var sr = (sm/(inc*10000))*100;
+      rows += '<tr class="'+s.cls+'"><td>'+label+'</td><td>'+fmt(sm)+'</td><td>'+fmt(si)+'</td><td>'+sr.toFixed(1)+'%</td></tr>';
     });
     document.getElementById('rate-tbody').innerHTML = rows;
   }
 
-  // Risk level
-  var riskM15 = monthly(P, rate + 1.5, yrs);
-  var ratio15 = (riskM15 / (inc * 10000)) * 100;
+  var riskM15 = monthly(P, rate+1.5, yrs);
+  var ratio15 = (riskM15 / (inc*10000)) * 100;
   var level;
   if (ratio >= 35 || (loanType==='var' && ratio15 >= 40) || endAge >= 70) {
     level = 'high';
@@ -443,23 +581,97 @@ function calc() {
     level = 'low';
   }
 
-  var hdr = document.getElementById('risk-header');
-  hdr.className = 'risk-header ' + level;
-  document.getElementById('risk-label').textContent = level==='high'?'⚠️ 要注意レベル':level==='mid'?'📌 注意レベル':'✅ 安心レベル';
-  document.getElementById('risk-emoji').textContent = level==='high'?'🔴':level==='mid'?'🟡':'🟢';
-  document.getElementById('risk-title').textContent = level==='high'?'早めの対策が必要':level==='mid'?'注意が必要なゾーン':'安心ゾーン';
-  document.getElementById('risk-sub').textContent = level==='high'?'返済負担が大きく、金利上昇リスクに要注意':level==='mid'?'金利上昇・定年後ローンのリスクあり':'返済負担率・金利耐性ともに良好';
+  document.getElementById('risk-header').className = 'risk-header ' + level;
+  document.getElementById('risk-label').textContent  = level==='high'?'⚠️ 要注意レベル':level==='mid'?'📌 注意レベル':'✅ 安心レベル';
+  document.getElementById('risk-emoji').textContent  = level==='high'?'🔴':level==='mid'?'🟡':'🟢';
+  document.getElementById('risk-title').textContent  = level==='high'?'早めの対策が必要':level==='mid'?'注意が必要なゾーン':'安心ゾーン';
+  document.getElementById('risk-sub').textContent    = level==='high'?'返済負担が大きく、金利上昇リスクに要注意':level==='mid'?'金利上昇・定年後ローンのリスクあり':'返済負担率・金利耐性ともに良好';
 
-  var adviceBox = document.getElementById('advice-box');
-  adviceBox.className = 'advice-box ' + level;
-  document.getElementById('advice-ttl').textContent = 'FPからのアドバイス';
+  document.getElementById('advice-box').className = 'advice-box ' + level;
 
-  var adviceTexts = {
-    low: 'このまま繰上返済を年1〜2回続けると完済を早められます。余裕資金はNISAで運用しながら、老後資金の積み立ても今から始めましょう。',
-    mid: '金利が1%以上上昇すると負担が増します。固定金利への借り換えシミュレーション、または繰上返済で残高を減らすことを検討してください。年1回FPに相談することをおすすめします。',
-    high: '現状の返済負担が大きく、金利上昇・定年後のリスクが高い状態です。早急に固定金利への借り換え・繰上返済・ライフプランの見直しが必要です。FPへの無料相談をお早めにどうぞ。'
+  var adviceMap = {
+    low: [
+      '返済負担率は適正範囲です。',
+      '繰上返済を年1〜2回実施すると総利息を削減できます（1万円/月の追加返済で25年ローンなら利息約70万円削減）。',
+      '余裕資金はNISA（つみたて投資枠）で長期運用しながら老後資金の積み立てを今から始めましょう。',
+      '住宅ローン控除期間中は繰上返済より資産形成優先が効果的です（下の控除チェックで確認）。'
+    ],
+    mid: [
+      '金利が1%以上上昇すると返済負担が増します。',
+      '① 固定金利への借り換えを検討（借り換えコストの目安：手数料+登記費用=約50〜100万円と利息削減額を比較）。',
+      '② 繰上返済で残高を減らし金利リスクを低減する。',
+      '③ 定年までの残年数と完済年齢を確認し、完済が65歳を超える場合は繰上返済を優先しましょう。',
+      '住宅ローン控除期間中は12月の繰上返済を避けると翌年の控除額が減りません。'
+    ],
+    high: [
+      '返済負担率が高く、金利上昇・定年後のリスクが高い状態です。',
+      '① 固定金利への借り換えを至急シミュレーション（変動→固定で月返済額の安定化）。',
+      '② 毎月1万円の繰上返済で25年ローンなら総利息を約100万円削減できます。',
+      '③ 定年前10年間で残高を大幅に減らす計画を立てましょう。',
+      '④ 保険・通信費など固定費の見直しで月2〜3万円の捻出を目標にしてください。'
+    ]
   };
-  document.getElementById('advice-text').textContent = adviceTexts[level];
+
+  var ul = document.getElementById('advice-list');
+  ul.innerHTML = adviceMap[level].map(function(t){ return '<li>'+t+'</li>'; }).join('');
+
+  calcDeduction(P, rate, inc);
+}
+
+function calcDeduction(P, rate, inc) {
+  if (dedType === 'none') {
+    document.getElementById('ded-empty').style.display  = '';
+    document.getElementById('ded-stats').style.display  = 'none';
+    return;
+  }
+
+  var cfg      = DED[dedType];
+  var dedYrs   = parseInt(document.getElementById('sl-ded-yrs').value);
+  var cap      = cfg.caps[capType];
+  var effP     = Math.min(P, cap);
+  var annualDed = effP * 10000 * cfg.rate;
+  var totalDed  = annualDed * dedYrs;
+  var realRate  = rate - cfg.rate * 100;
+  var isGyaku   = realRate < 0;
+
+  document.getElementById('ded-empty').style.display = 'none';
+  document.getElementById('ded-stats').style.display = '';
+
+  document.getElementById('r-ded-annual').textContent = fmtMan(annualDed) + ' / 年';
+  document.getElementById('r-ded-total').textContent  = '約' + fmtMan(totalDed) + '（残り' + dedYrs + '年）';
+
+  var realRateEl = document.getElementById('r-real-rate');
+  realRateEl.textContent = realRate.toFixed(2) + '%';
+  realRateEl.className = 'ded-stat-v' + (isGyaku ? ' gyaku' : '');
+  if (isGyaku) {
+    realRateEl.innerHTML = realRate.toFixed(2) + '% <span class="ded-badge gyaku">逆ざや</span>';
+  }
+
+  var adviceBox = document.getElementById('ded-advice-box');
+  var adviceList = document.getElementById('ded-advice-list');
+  var ttl = document.getElementById('ded-advice-ttl');
+
+  var items;
+  if (isGyaku) {
+    adviceBox.className = 'advice-box purple';
+    ttl.textContent = '🟣 逆ざや状態です';
+    items = [
+      '金利（'+rate.toFixed(2)+'%）が控除率（'+(cfg.rate*100).toFixed(1)+'%）を下回っています。',
+      '控除期間中は繰上返済を急がず、余裕資金はNISAや預金で運用する方が家計全体で有利です。',
+      '控除終了後に残高が多ければ、そのタイミングで繰上返済をまとめて検討しましょう。',
+      '繰上返済するなら1月〜11月が有利です。12月に繰上返済すると12月末残高が減り翌年の控除額が下がります。'
+    ];
+  } else {
+    adviceBox.className = 'advice-box low';
+    ttl.textContent = '✅ 控除活用アドバイス';
+    items = [
+      '実質金利は'+realRate.toFixed(2)+'%です（控除後）。',
+      '控除終了後は金利負担が増えるため、終了前から繰上返済の準備をしておきましょう。',
+      '12月末の残高が翌年の控除基準になります。12月の繰上返済は避けるのがベターです。',
+      '控除の上限は所得税＋住民税（住民税は上限あり）の範囲内です。税額が低い方は控除が全額使えない場合があります。'
+    ];
+  }
+  adviceList.innerHTML = items.map(function(t){ return '<li>'+t+'</li>'; }).join('');
 }
 
 function shareResult() {
@@ -470,14 +682,14 @@ function shareResult() {
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
 }
 
-function openConsult() {
+function openContact() {
   var u='yamakaze8000', d='gmail.com';
-  location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=住宅ローン無料相談希望';
+  location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=住宅ローンお問い合わせ';
 }
 
 (function(){
   var u='yamakaze8000', d='gmail.com';
-  document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+  document.getElementById('mail-link').href = 'https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
   calc();
 })();
 
