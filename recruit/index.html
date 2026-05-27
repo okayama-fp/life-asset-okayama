@@ -51,6 +51,10 @@
     .job-table tr:last-child { border-bottom: none; }
     .job-table th { width: 120px; font-size: 12px; font-weight: 700; color: var(--text-sub); padding: 10px 0; text-align: left; vertical-align: top; }
     .job-table td { font-size: 13px; color: var(--text); padding: 10px 0; line-height: 1.7; }
+    .no-jobs-box { background: #fff; border: 1.5px dashed var(--border); border-radius: 16px; padding: 48px 32px; text-align: center; }
+    .no-jobs-icon { font-size: 40px; margin-bottom: 14px; }
+    .no-jobs-title { font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+    .no-jobs-text { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
     .cta-banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 20px; padding: 48px 40px; text-align: center; }
     .cta-banner h2 { font-size: clamp(18px,3vw,22px); font-weight: 900; color: #fff; margin-bottom: 10px; }
     .cta-banner p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
@@ -99,30 +103,15 @@
   </div>
   <div class="jobs-section">
     <h2>募集職種</h2>
-    <div class="job-card">
-      <span class="job-tag">正社員 / 業務委託</span>
-      
-      <table class="job-table">
-        <tr><th>業務内容</th><td>個人・法人のお客様への資産運用・ライフプラン・融資に関するFP相談対応</td></tr>
-        <tr><th>応募資格</th><td>FP2級以上取得者（AFP・CFP優遇）、金融機関勤務経験者歓迎</td></tr>
-        <tr><th>勤務地</th><td>応相談（オンライン相談対応可）</td></tr>
-        <tr><th>待遇</th><td>経験・スキルを考慮の上、個別にご相談</td></tr>
-      </table>
-    </div>
-    <div class="job-card">
-      <span class="job-tag">パート / アルバイト</span>
-      <div class="job-title">事務アシスタント（未経験歓迎）</div>
-      <table class="job-table">
-        <tr><th>業務内容</th><td>相談予約の管理・資料作成・メール対応・その他一般事務</td></tr>
-        <tr><th>応募資格</th><td>基本的なPC操作ができる方。金融業界未経験歓迎</td></tr>
-        <tr><th>勤務地</th><td>応相談</td></tr>
-        <tr><th>待遇</th><td>時給・日数等は応相談</td></tr>
-      </table>
+    <div class="no-jobs-box">
+      <div class="no-jobs-icon">📋</div>
+      <div class="no-jobs-title">現在、募集中の求人はございません</div>
+      <p class="no-jobs-text">新たな採用が決まりましたら、このページにてお知らせします。<br>ご関心をお持ちの方は、お気軽にお問い合わせください。</p>
     </div>
   </div>
   <div class="cta-banner">
-    <h2>まずはお気軽にご連絡ください</h2>
-    <p>採用に関するお問い合わせは、メールにてお受けしています。</p>
+    <h2>採用に関するお問い合わせ</h2>
+    <p>今後の求人情報に関心のある方は、メールにてご連絡ください。</p>
     <a href="#" id="recruit-mail">採用担当へメールを送る</a>
     <script>(function(){var u='yamakaze8000',d='gmail.com';var el=document.getElementById('recruit-mail');el.href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=採用についてのお問い合わせ';el.target='_blank';el.rel='noopener noreferrer';})();</script>
   </div>
