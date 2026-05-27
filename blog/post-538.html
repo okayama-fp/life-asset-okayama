@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/post-538.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ｜Life Asset ブログ</title>
+  <meta name="description" content="資産100万・500万・1000万・3000万・5000万円——ステージによってやるべきことはまったく違います。独立系FPが各レベルで本当に必要な行動だけを解説。自己診断チェックリスト付き。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PKDH2DR522');
+  </script>
+  <style>
+    :root {
+      --sky: #0ea5e9; --sky-light: #38bdf8; --sky-pale: #e0f2fe;
+      --navy: #0f3460; --navy-soft: #1e4d8c;
+      --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+      --paper: #fdfbf8;
+
+      --lv1: #3b82f6; --lv1l: #eff6ff; --lv1b: #bfdbfe;
+      --lv2: #16a34a; --lv2l: #f0fdf4; --lv2b: #bbf7d0;
+      --lv3: #d97706; --lv3l: #fffbeb; --lv3b: #fde68a;
+      --lv4: #dc2626; --lv4l: #fff1f2; --lv4b: #fecdd3;
+      --lv5: #7c3aed; --lv5l: #f5f3ff; --lv5b: #ddd6fe;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif; color: var(--text); background: var(--bg); line-height: 1.9; font-weight: 300; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--lv1), var(--lv2), var(--lv3), var(--lv4), var(--lv5)); z-index: 9999; transition: width .1s linear; }
+
+    /* SITE HEADER */
+    .site-header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(14,165,233,0.07); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 24px; }
+    .logo-text .name { font-size: 1.2rem; font-weight: 700; background: linear-gradient(90deg,#4facfe,#00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo-text .tagline { font-size: 0.6rem; color: var(--text-light); }
+    nav { display: flex; gap: 4px; margin-left: auto; }
+    nav a { padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; color: var(--text); transition: all .2s; }
+    nav a:hover, nav a.active { background: var(--sky-pale); color: var(--sky); }
+    .btn-cta { padding: 7px 18px; border-radius: 22px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+
+    /* LEVEL NAV */
+    .lvnav { position: sticky; top: 60px; z-index: 100; background: rgba(253,251,248,.97); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .lvnav-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; height: 44px; display: flex; align-items: center; gap: 6px; overflow-x: auto; }
+    .nb { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 16px; border: 1.5px solid var(--border); color: var(--text-light); text-decoration: none; transition: all .2s; white-space: nowrap; }
+    .nb.c1:hover, .nb.c1.on { background: var(--lv1l); border-color: var(--lv1); color: var(--lv1); }
+    .nb.c2:hover, .nb.c2.on { background: var(--lv2l); border-color: var(--lv2); color: var(--lv2); }
+    .nb.c3:hover, .nb.c3.on { background: var(--lv3l); border-color: var(--lv3); color: var(--lv3); }
+    .nb.c4:hover, .nb.c4.on { background: var(--lv4l); border-color: var(--lv4); color: var(--lv4); }
+    .nb.c5:hover, .nb.c5.on { background: var(--lv5l); border-color: var(--lv5); color: var(--lv5); }
+
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 760px; margin: 0 auto; padding: 14px 24px 0; font-size: 0.8rem; color: var(--text-light); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--sky); }
+
+    /* HERO */
+    .hero { max-width: 760px; margin: 0 auto; padding: 20px 24px 32px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 20px; padding: 4px 13px; font-size: 11px; color: var(--text-light); letter-spacing: .08em; margin-bottom: 20px; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #16a34a; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+    .hero-h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; line-height: 1.3; color: var(--navy); margin-bottom: 16px; }
+    .hero-h1 .hl { background: linear-gradient(180deg,transparent 55%,#fde68a 55%); }
+    .hero-meta { font-size: 0.82rem; color: var(--text-light); margin-bottom: 20px; }
+    .hero-lead { font-size: 15px; color: var(--text-light); line-height: 2; margin-bottom: 28px; }
+
+    /* FP CARD */
+    .fp-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .fp-avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg,var(--sky),var(--sky-light)); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .fp-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .fp-title { font-size: 11px; color: var(--text-light); margin-bottom: 8px; }
+    .fp-msg { font-size: 13.5px; color: var(--text-light); line-height: 1.8; }
+
+    /* SELF CHECK */
+    .selfcheck { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 28px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .sc-title { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .sc-sub { font-size: 12px; color: var(--text-light); margin-bottom: 16px; }
+    .sc-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 7px; cursor: pointer; transition: background .15s; }
+    .sc-item:hover { background: var(--sky-pale); }
+    .sc-item input { width: 15px; height: 15px; cursor: pointer; accent-color: var(--sky); }
+    .sc-item label { font-size: 13.5px; color: var(--text); cursor: pointer; flex: 1; }
+    .sc-result { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 13.5px; display: none; }
+    .sc-result.show { display: block; }
+
+    /* LEVEL INDEX */
+    .lv-row { display: grid; grid-template-columns: repeat(5,1fr); gap: 4px; margin-bottom: 12px; }
+    .lv-card { padding: 12px 6px 10px; border: 1.5px solid var(--border); border-radius: 8px; text-align: center; text-decoration: none; transition: all .2s; background: #fff; }
+    .lv-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+    .lv-n { font-size: 24px; font-weight: 900; line-height: 1; margin-bottom: 3px; }
+    .lv-sub { font-size: 9px; color: var(--text-light); line-height: 1.4; margin-bottom: 2px; }
+    .lv-amt { font-size: 10px; font-weight: 700; }
+    .c1 .lv-n, .c1 .lv-amt { color: var(--lv1); } .c1:hover, .c1.on { border-color: var(--lv1); background: var(--lv1l); }
+    .c2 .lv-n, .c2 .lv-amt { color: var(--lv2); } .c2:hover, .c2.on { border-color: var(--lv2); background: var(--lv2l); }
+    .c3 .lv-n, .c3 .lv-amt { color: var(--lv3); } .c3:hover, .c3.on { border-color: var(--lv3); background: var(--lv3l); }
+    .c4 .lv-n, .c4 .lv-amt { color: var(--lv4); } .c4:hover, .c4.on { border-color: var(--lv4); background: var(--lv4l); }
+    .c5 .lv-n, .c5 .lv-amt { color: var(--lv5); } .c5:hover, .c5.on { border-color: var(--lv5); background: var(--lv5l); }
+    .hero-note { font-size: 11px; color: var(--text-light); line-height: 1.8; }
+
+    /* MAIN */
+    main { max-width: 760px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* LEVEL SECTION */
+    .ls { margin-bottom: 72px; scroll-margin-top: 110px; }
+
+    /* LEVEL HEADER */
+    .lhd { border-radius: 14px; padding: 24px; margin-bottom: 4px; position: relative; overflow: hidden; }
+    .c1 .lhd { background: var(--lv1l); border: 1.5px solid var(--lv1b); }
+    .c2 .lhd { background: var(--lv2l); border: 1.5px solid var(--lv2b); }
+    .c3 .lhd { background: var(--lv3l); border: 1.5px solid var(--lv3b); }
+    .c4 .lhd { background: var(--lv4l); border: 1.5px solid var(--lv4b); }
+    .c5 .lhd { background: var(--lv5l); border: 1.5px solid var(--lv5b); }
+    .lhd-deco { position: absolute; right: -16px; top: -16px; font-size: 90px; opacity: .07; line-height: 1; pointer-events: none; }
+    .lhd-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
+    .lhd-badge { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; flex-shrink: 0; color: #fff; }
+    .c1 .lhd-badge { background: var(--lv1); } .c2 .lhd-badge { background: var(--lv2); }
+    .c3 .lhd-badge { background: var(--lv3); } .c4 .lhd-badge { background: var(--lv4); }
+    .c5 .lhd-badge { background: var(--lv5); }
+    .lhd-label { font-size: 10px; font-weight: 700; letter-spacing: .15em; margin-bottom: 4px; }
+    .c1 .lhd-label { color: var(--lv1); } .c2 .lhd-label { color: var(--lv2); }
+    .c3 .lhd-label { color: var(--lv3); } .c4 .lhd-label { color: var(--lv4); }
+    .c5 .lhd-label { color: var(--lv5); }
+    .lhd-title { font-family: 'Noto Serif JP', serif; font-size: clamp(16px,3vw,22px); font-weight: 900; color: var(--navy); line-height: 1.35; }
+    .lhd-range { font-size: 12.5px; color: var(--text-light); margin-top: 4px; }
+
+    /* VOICE */
+    .voice { background: #f8fafc; border-left: 3px solid; border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 4px 0; display: flex; gap: 10px; align-items: flex-start; }
+    .c1 .voice { border-color: var(--lv1); } .c2 .voice { border-color: var(--lv2); }
+    .c3 .voice { border-color: var(--lv3); } .c4 .voice { border-color: var(--lv4); }
+    .c5 .voice { border-color: var(--lv5); }
+    .voice-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .voice-text { font-size: 13.5px; color: var(--text-light); font-style: italic; line-height: 1.8; }
+    .voice-name { font-size: 11px; color: #94a3b8; margin-top: 5px; }
+
+    /* CONTENT CARD */
+    .ccard { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; margin-bottom: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+    .ccard-ttl { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 7px; }
+    .ccard p { font-size: 14px; color: var(--text); line-height: 1.95; margin-bottom: 12px; }
+    .ccard p:last-child { margin-bottom: 0; }
+    .ccard strong { font-weight: 700; }
+    .ccard em { font-style: normal; font-weight: 700; }
+    .c1 .ccard em { color: var(--lv1); } .c2 .ccard em { color: var(--lv2); }
+    .c3 .ccard em { color: var(--lv3); } .c4 .ccard em { color: var(--lv4); }
+    .c5 .ccard em { color: var(--lv5); }
+
+    /* CALC BLOCK */
+    .calc { border-radius: 8px; padding: 14px 16px; margin: 12px 0 4px; }
+    .c1 .calc { background: var(--lv1l); border: 1px solid var(--lv1b); }
+    .c2 .calc { background: var(--lv2l); border: 1px solid var(--lv2b); }
+    .c3 .calc { background: var(--lv3l); border: 1px solid var(--lv3b); }
+    .c4 .calc { background: var(--lv4l); border: 1px solid var(--lv4b); }
+    .c5 .calc { background: var(--lv5l); border: 1px solid var(--lv5b); }
+    .calc-ttl { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--text-light); margin-bottom: 8px; }
+    .calc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-k { color: var(--text-light); }
+    .calc-v { font-weight: 700; }
+    .c1 .calc-v { color: var(--lv1); } .c2 .calc-v { color: var(--lv2); }
+    .c3 .calc-v { color: var(--lv3); } .c4 .calc-v { color: var(--lv4); }
+    .c5 .calc-v { color: var(--lv5); }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 8px; }
+    .step { display: flex; gap: 14px; align-items: flex-start; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; transition: box-shadow .2s; }
+    .step:hover { box-shadow: 0 3px 10px rgba(0,0,0,.07); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; color: #fff; margin-top: 2px; }
+    .c1 .step-num { background: var(--lv1); } .c2 .step-num { background: var(--lv2); }
+    .c3 .step-num { background: var(--lv3); } .c4 .step-num { background: var(--lv4); }
+    .c5 .step-num { background: var(--lv5); }
+    .step-when { font-size: 10px; font-weight: 700; letter-spacing: .1em; margin-bottom: 3px; }
+    .c1 .step-when { color: var(--lv1); } .c2 .step-when { color: var(--lv2); }
+    .c3 .step-when { color: var(--lv3); } .c4 .step-when { color: var(--lv4); }
+    .c5 .step-when { color: var(--lv5); }
+    .step-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; line-height: 1.4; }
+    .step-desc { font-size: 12.5px; color: var(--text-light); line-height: 1.8; }
+
+    /* MINDSET */
+    .mset { border-radius: 10px; padding: 18px 20px; margin-bottom: 4px; display: flex; gap: 12px; }
+    .c1 .mset { background: var(--lv1l); border: 1px solid var(--lv1b); }
+    .c2 .mset { background: var(--lv2l); border: 1px solid var(--lv2b); }
+    .c3 .mset { background: var(--lv3l); border: 1px solid var(--lv3b); }
+    .c4 .mset { background: var(--lv4l); border: 1px solid var(--lv4b); }
+    .c5 .mset { background: var(--lv5l); border: 1px solid var(--lv5b); }
+    .mset-icon { font-size: 22px; flex-shrink: 0; }
+    .mset-label { font-size: 10px; font-weight: 700; letter-spacing: .15em; margin-bottom: 5px; }
+    .c1 .mset-label { color: var(--lv1); } .c2 .mset-label { color: var(--lv2); }
+    .c3 .mset-label { color: var(--lv3); } .c4 .mset-label { color: var(--lv4); }
+    .c5 .mset-label { color: var(--lv5); }
+    .mset p { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.85; margin: 0; }
+
+    /* FP COMMENT */
+    .fp-comment { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 4px; display: flex; gap: 12px; align-items: flex-start; }
+    .fp-ico { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--sky), var(--sky-light)); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .fp-who { font-size: 11px; font-weight: 700; color: var(--text-light); margin-bottom: 5px; }
+    .fp-say { font-size: 13.5px; color: var(--text); line-height: 1.85; }
+    .fp-say strong { font-weight: 700; }
+
+    /* TRAP */
+    .trap { background: #fff5f5; border: 1px solid #fecdd3; border-radius: 10px; padding: 14px 18px; margin-bottom: 4px; display: flex; gap: 10px; }
+    .trap-ico { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .trap-ttl { font-size: 10px; font-weight: 700; color: #dc2626; letter-spacing: .12em; margin-bottom: 5px; }
+    .trap p { font-size: 13px; color: #7f1d1d; line-height: 1.8; margin: 0; }
+
+    /* NEXT STEP */
+    .nxt { background: var(--sky-pale); border: 1.5px dashed #7dd3fc; border-radius: 10px; padding: 12px 18px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-light); margin-top: 4px; }
+    .nxt strong { color: var(--navy); }
+
+    /* SUMMARY TABLE */
+    .sum-wrap { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 40px; }
+    .sum-hdr { padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .sum-hdr h2 { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+    .sum-hdr p { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+    .sum-tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .sum-tbl th { padding: 9px 12px; background: var(--bg); border-bottom: 1px solid var(--border); text-align: left; color: var(--text-light); font-weight: 500; white-space: nowrap; }
+    .sum-tbl td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text); line-height: 1.7; }
+    .sum-tbl tr:last-child td { border-bottom: none; }
+    .lvdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    /* CTA */
+    .cta-box { background: linear-gradient(135deg, var(--navy), var(--navy-soft)); border-radius: 16px; padding: 28px 24px; text-align: center; margin: 40px 0; color: #fff; }
+    .cta-box h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .cta-box p { font-size: 0.875rem; opacity: .85; margin-bottom: 18px; }
+    .cta-btn { display: inline-block; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-weight: 700; padding: 11px 28px; border-radius: 22px; font-size: 0.9rem; cursor: pointer; border: none; font-family: inherit; }
+
+    /* SHARE */
+    .share-section { margin: 0 0 36px; }
+    .share-section h2 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+    .share-x { background: #000; } .share-line { background: #06c755; } .share-copy { background: #64748b; }
+
+    /* RELATED */
+    .related h2 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .related-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .related-card .tag { font-size: 0.7rem; color: var(--sky); font-weight: 700; margin-bottom: 4px; }
+    .related-card h3 { font-size: 0.85rem; font-weight: 700; color: var(--navy); line-height: 1.4; }
+    .related-card:hover { border-color: var(--sky); }
+
+    footer { background: var(--navy); color: rgba(255,255,255,0.85); padding: 36px 24px 24px; margin-top: 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 1rem; font-weight: 700; }
+    .footer-logo-icon { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--sky), var(--sky-light)); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; }
+    .footer-contact { margin: 8px 0; }
+    .footer-contact a { font-size: 0.83rem; color: var(--sky-light); text-decoration: underline; }
+    footer p { font-size: 0.75rem; opacity: .6; margin-top: 14px; }
+
+    @media(max-width:580px) {
+      main { padding: 0 16px 60px; }
+      .hero { padding: 16px 16px 28px; }
+      .lv-n { font-size: 20px; } .lv-amt { font-size: 9px; }
+      .lvnav-inner { padding: 0 12px; gap: 4px; }
+      .nb { font-size: 10px; padding: 3px 9px; }
+      .sum-tbl { font-size: 11.5px; }
+    }
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="../index.html#services">サービス</a>
+      <a href="index.html" class="active">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- LEVEL NAV -->
+<div class="lvnav">
+  <div class="lvnav-inner">
+    <a href="#lv1" class="nb c1">Lv.1 〜100万</a>
+    <a href="#lv2" class="nb c2">Lv.2 〜500万</a>
+    <a href="#lv3" class="nb c3">Lv.3 〜1000万</a>
+    <a href="#lv4" class="nb c4">Lv.4 〜3000万</a>
+    <a href="#lv5" class="nb c5">Lv.5 5000万〜</a>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a><span>›</span>
+  <a href="index.html">ブログ</a><span>›</span>
+  <span>資産レベル別ロードマップ</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span> FPが本音で書く資産形成ガイド 2026年版</div>
+  <h1 class="hero-h1">あなたの資産、今<span class="hl">どのステージ</span>？<br>FPが本音で教えるレベル別ロードマップ</h1>
+  <div class="hero-meta">📅 2026年5月27日 ｜ ⏱ 約10分で読めます ｜ ✍️ ライフアセットオフィス FP</div>
+  <p class="hero-lead">「投資したいけど何から始めればいい？」「このペースで老後は大丈夫？」——よく聞くこの質問、実は<strong>今の資産額によって答えがまったく違います</strong>。自分のレベルを確認して、そこに書いてあることだけやる。それが最短ルートです。</p>
+
+  <div class="fp-card">
+    <div class="fp-avatar">🧑‍💼</div>
+    <div>
+      <div class="fp-name">ライフアセットオフィス FP 髙月 義照</div>
+      <div class="fp-title">ファイナンシャルプランナー ／ マネー相談歴10年以上</div>
+      <div class="fp-msg">「相談に来る方の9割は、今の自分に必要ないことで悩んでいます。レベルに合った行動だけを取る——それだけで資産は着実に増えていきます」</div>
+    </div>
+  </div>
+
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+  <!-- SELF CHECK -->
+  <div class="selfcheck">
+    <div class="sc-title">📋 まず自分のレベルを確認する</div>
+    <div class="sc-sub">当てはまるものにチェックを入れてください</div>
+    <div class="sc-item"><input type="checkbox" id="d1" onchange="calcLevel()"><label for="d1">リボ払い・カードローンが残っている</label></div>
+    <div class="sc-item"><input type="checkbox" id="d2" onchange="calcLevel()"><label for="d2">毎月の固定費（保険・スマホ・サブスク）を正確に言えない</label></div>
+    <div class="sc-item"><input type="checkbox" id="d3" onchange="calcLevel()"><label for="d3">生活費3ヶ月分の現金が手元にない</label></div>
+    <div class="sc-item"><input type="checkbox" id="d4" onchange="calcLevel()"><label for="d4">NISAの口座をまだ持っていない（または使っていない）</label></div>
+    <div class="sc-item"><input type="checkbox" id="d5" onchange="calcLevel()"><label for="d5">金融資産の合計が100万円未満</label></div>
+    <div class="sc-item"><input type="checkbox" id="d6" onchange="calcLevel()"><label for="d6">金融資産が100〜500万円ある</label></div>
+    <div class="sc-item"><input type="checkbox" id="d7" onchange="calcLevel()"><label for="d7">金融資産が500万円〜1,000万円ある</label></div>
+    <div class="sc-item"><input type="checkbox" id="d8" onchange="calcLevel()"><label for="d8">金融資産が1,000万円〜3,000万円ある</label></div>
+    <div class="sc-item"><input type="checkbox" id="d9" onchange="calcLevel()"><label for="d9">金融資産が3,000万円以上ある</label></div>
+    <div id="sc-res" class="sc-result"></div>
+  </div>
+
+  <!-- LEVEL INDEX -->
+  <div class="lv-row">
+    <a href="#lv1" class="lv-card c1"><div class="lv-n">1</div><div class="lv-sub">スタート期</div><div class="lv-amt">〜100万円</div></a>
+    <a href="#lv2" class="lv-card c2"><div class="lv-n">2</div><div class="lv-sub">土台完成期</div><div class="lv-amt">〜500万円</div></a>
+    <a href="#lv3" class="lv-card c3"><div class="lv-n">3</div><div class="lv-sub">複利加速期</div><div class="lv-amt">〜1,000万円</div></a>
+    <a href="#lv4" class="lv-card c4"><div class="lv-n">4</div><div class="lv-sub">資産拡大期</div><div class="lv-amt">〜3,000万円</div></a>
+    <a href="#lv5" class="lv-card c5"><div class="lv-n">5</div><div class="lv-sub">自由設計期</div><div class="lv-amt">5,000万円〜</div></a>
+  </div>
+  <p class="hero-note">※ 金融資産＝現金・預金・株・投信・iDeCo等の合計。不動産・ローン残高は含みません。<br>※ 運用シミュレーションはすべて年利5%の参考値です。投資にはリスクが伴います。</p>
+</div>
+
+<main>
+
+<!-- ══════ LV1 ══════ -->
+<section class="ls c1" id="lv1">
+  <div class="lhd c1">
+    <div class="lhd-deco">💰</div>
+    <div class="lhd-top">
+      <div class="lhd-badge">1</div>
+      <div>
+        <div class="lhd-label">LEVEL 1 ／ スタート期</div>
+        <div class="lhd-title">「投資の前にやること」が<br>たくさんある段階</div>
+        <div class="lhd-range">資産額の目安：0 〜 100万円</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice c1">
+    <span class="voice-icon">💬</span>
+    <div>
+      <div class="voice-text">「毎月ギリギリで、投資なんて夢のまた夢。でも老後が不安で…何から始めればいいですか？」</div>
+      <div class="voice-name">── よくある相談（30代・子育て中）</div>
+    </div>
+  </div>
+
+  <div class="ccard c1">
+    <div class="ccard-ttl">📌 このステージの本当の問題</div>
+    <p>このレベルで「投資を始めよう」と焦るのは、家の基礎が傾いているのに壁紙を貼り替えようとするようなものです。まず土台を整えることが先。<strong>土台が整えば、投資は自然に始められます。</strong></p>
+    <p>お金が貯まらない理由は、意志の弱さでも収入の低さでもないことがほとんど。<em>「見えていない支出」と「仕組みのなさ」</em>が原因です。</p>
+    <div class="calc">
+      <div class="calc-ttl">📊 固定費削減 vs 運用益 どちらが効果的か</div>
+      <div class="calc-row"><span class="calc-k">スマホを格安SIMへ（月▲5,000円）</span><span class="calc-v">年 ▲6万円の削減</span></div>
+      <div class="calc-row"><span class="calc-k">不要な保険を整理（月▲8,000円）</span><span class="calc-v">年 ▲9.6万円の削減</span></div>
+      <div class="calc-row"><span class="calc-k">100万円を年5%で運用した場合</span><span class="calc-v">年 ＋5万円の運用益</span></div>
+      <div class="calc-row"><span class="calc-k">💡 結論</span><span class="calc-v">資産100万未満は固定費削減の方が即効性が高い</span></div>
+    </div>
+  </div>
+
+  <div class="ccard c1">
+    <div class="ccard-ttl">✅ 今すぐやること（この順番で）</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-when">最優先</div>
+          <div class="step-title">高金利の借金を全額返済する</div>
+          <div class="step-desc">リボ払い・カードローン・消費者金融の金利は年15〜18%。どんな投資より先に返すことが最高の「利回り15%の投資」になります。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-when">1〜2ヶ月目</div>
+          <div class="step-title">固定費を月1万円削減する</div>
+          <div class="step-desc">スマホ（格安SIM）・保険・サブスク・光熱費を見直し。「見直した瞬間から永遠に節約が続く」のが固定費削減の威力です。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-when">2〜3ヶ月目</div>
+          <div class="step-title">生活費3ヶ月分（60〜90万円）を現金で確保する</div>
+          <div class="step-desc">この緊急資金があるから、投資で慌てて売らずに済みます。普通預金でOK。まずここを目標に積み立てる。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-when">緊急資金確保後</div>
+          <div class="step-title">NISAの口座を開設して月1万円から始める</div>
+          <div class="step-desc">証券会社（楽天・SBI）でNISA口座を開設。最初は月1万円でOK。全世界株インデックスを積み立て設定して終わり。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mset c1">
+    <span class="mset-icon">💡</span>
+    <div>
+      <div class="mset-label">LEVEL 1 のマインドセット</div>
+      <p>「仕組み化が全て」。意志の力に頼らず、自動的にお金が増える仕組みを1つ作る。それだけでLevel 2は見えてきます。</p>
+    </div>
+  </div>
+
+  <div class="fp-comment">
+    <div class="fp-ico">🧑‍💼</div>
+    <div>
+      <div class="fp-who">FP 髙月からひと言</div>
+      <div class="fp-say">「月3万円の固定費削減は、月収3万円アップより簡単です。<strong>収入を増やすのは時間がかかりますが、固定費の削減は今日から始められます。</strong>まずここから。」</div>
+    </div>
+  </div>
+
+  <div class="nxt">
+    <span>📈</span>
+    <div>緊急資金60万円＋NISA開設が完了したら → <strong>Level 2へ進む</strong></div>
+  </div>
+</section>
+
+<!-- ══════ LV2 ══════ -->
+<section class="ls c2" id="lv2">
+  <div class="lhd c2">
+    <div class="lhd-deco">🌱</div>
+    <div class="lhd-top">
+      <div class="lhd-badge">2</div>
+      <div>
+        <div class="lhd-label">LEVEL 2 ／ 土台完成期</div>
+        <div class="lhd-title">NISAを「本気」で<br>使い始める段階</div>
+        <div class="lhd-range">資産額の目安：100 〜 500万円</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice c2">
+    <span class="voice-icon">💬</span>
+    <div>
+      <div class="voice-text">「NISAは始めました。でも月3万円で本当に老後に間に合うんですか？何か他にもやるべきことがありますか？」</div>
+      <div class="voice-name">── よくある相談（30代・共働き）</div>
+    </div>
+  </div>
+
+  <div class="ccard c2">
+    <div class="ccard-ttl">📌 このステージでやるべきこと・やらないこと</div>
+    <p>このレベルは「積み立てを続けるだけ」が正解のステージです。ただし、多くの人がここで<em>「個別株・FX・仮想通貨」</em>に浮気して資産をリセットしてしまいます。</p>
+    <p>月5万円をNISAで全世界株に積み立て、年利5%で10年続けると——</p>
+    <div class="calc">
+      <div class="calc-ttl">📊 月5万円積み立て・年利5%のシミュレーション</div>
+      <div class="calc-row"><span class="calc-k">5年後</span><span class="calc-v">約340万円（元本300万円）</span></div>
+      <div class="calc-row"><span class="calc-k">10年後</span><span class="calc-v">約776万円（元本600万円）</span></div>
+      <div class="calc-row"><span class="calc-k">20年後</span><span class="calc-v">約2,055万円（元本1,200万円）</span></div>
+      <div class="calc-row"><span class="calc-k">💡 ポイント</span><span class="calc-v">何もしないことが最大の戦略</span></div>
+    </div>
+  </div>
+
+  <div class="ccard c2">
+    <div class="ccard-ttl">✅ このステージでやること</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-when">最優先</div>
+          <div class="step-title">NISA積立額を月5〜10万円に引き上げる</div>
+          <div class="step-desc">新NISAの年間投資枠は120万円（積立）。月10万円で年120万円フル活用が最終目標。固定費削減分を自動的にNISAへ回す仕組みを作る。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-when">会社員の場合</div>
+          <div class="step-title">iDeCoを始める（節税効果が大きい）</div>
+          <div class="step-desc">iDeCoは掛け金が全額所得控除。年収500万円の人が月2万円積み立てると、年間約4万8千円の節税効果があります。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-when">配偶者がいる場合</div>
+          <div class="step-title">配偶者のNISA口座も開設する</div>
+          <div class="step-desc">夫婦でNISAを使えば年間投資枠が2倍（最大360万円）になります。家計全体の非課税枠を最大化。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-when">定期的に</div>
+          <div class="step-title">保険を見直す（不要な保険は解約）</div>
+          <div class="step-desc">貯蓄型保険・終身保険は多くの場合コスパが悪い。「保険は必要な保障だけ掛け捨てで」が基本。浮いたお金をNISAへ。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trap">
+    <span class="trap-ico">⚠️</span>
+    <div>
+      <div class="trap-ttl">Level 2 でよくある失敗</div>
+      <p>「全世界株が退屈で、個別株や仮想通貨に乗り換えた」→ 相場急落で半減、積み立てをやめる。このパターンが最も多い。<strong>退屈なインデックス積み立てこそが最強の戦略</strong>です。</p>
+    </div>
+  </div>
+
+  <div class="mset c2">
+    <span class="mset-icon">🌱</span>
+    <div>
+      <div class="mset-label">LEVEL 2 のマインドセット</div>
+      <p>「積み立てて、忘れる」。相場を気にするほどパフォーマンスが下がります。設定したら見ない勇気が最大のリターンをもたらします。</p>
+    </div>
+  </div>
+
+  <div class="fp-comment">
+    <div class="fp-ico">🧑‍💼</div>
+    <div>
+      <div class="fp-who">FP 髙月からひと言</div>
+      <div class="fp-say">「このステージで一番危険なのは、SNSで見た『月100万円稼ぐ方法』です。<strong>地味に積み立てた人が、10年後に圧倒的な差をつけています。</strong>退屈なくらいでちょうどいい。」</div>
+    </div>
+  </div>
+
+  <div class="nxt">
+    <span>📈</span>
+    <div>NISA＋iDeCoが自動化され、資産500万円を超えたら → <strong>Level 3へ進む</strong></div>
+  </div>
+</section>
+
+<!-- ══════ LV3 ══════ -->
+<section class="ls c3" id="lv3">
+  <div class="lhd c3">
+    <div class="lhd-deco">⚡</div>
+    <div class="lhd-top">
+      <div class="lhd-badge">3</div>
+      <div>
+        <div class="lhd-label">LEVEL 3 ／ 複利加速期</div>
+        <div class="lhd-title">資産が「勝手に増える」<br>感覚が生まれる段階</div>
+        <div class="lhd-range">資産額の目安：500 〜 1,000万円</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice c3">
+    <span class="voice-icon">💬</span>
+    <div>
+      <div class="voice-text">「NISAで順調に増えてきました。でも500万円を超えたら次に何をすべきか分からなくて。もっと積極的に動いた方がいいですか？」</div>
+      <div class="voice-name">── よくある相談（40代・会社員）</div>
+    </div>
+  </div>
+
+  <div class="ccard c3">
+    <div class="ccard-ttl">📌 このステージは「何もしないことが最善」の時期</div>
+    <p>500万円を超えると、<em>複利の効果が目に見えて実感できる</em>ようになります。年利5%の運用益が年25万円——毎月2万円以上、お金が「働いて稼いでくれる」感覚が生まれます。</p>
+    <p>このステージで一番やってはいけないのが「もっと増やそう」と欲を出すこと。<strong>積み立てを続けるだけで1,000万円は見えてきます。</strong></p>
+    <div class="calc">
+      <div class="calc-ttl">📊 500万円スタート・月5万円追加積み立て・年利5%</div>
+      <div class="calc-row"><span class="calc-k">3年後</span><span class="calc-v">約775万円</span></div>
+      <div class="calc-row"><span class="calc-k">5年後</span><span class="calc-v">約978万円（1,000万円が見えてくる）</span></div>
+      <div class="calc-row"><span class="calc-k">10年後</span><span class="calc-v">約1,629万円</span></div>
+      <div class="calc-row"><span class="calc-k">15年後</span><span class="calc-v">約2,457万円</span></div>
+    </div>
+  </div>
+
+  <div class="ccard c3">
+    <div class="ccard-ttl">✅ このステージでやること</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-when">最優先</div>
+          <div class="step-title">NISA・iDeCoを満額継続する（手を加えない）</div>
+          <div class="step-desc">相場が下がっても売らない。積み立てをやめない。ここで売った人が一番損をします。「暴落は安く買えるチャンス」と捉える。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-when">余裕資金がある場合</div>
+          <div class="step-title">配偶者のNISAも満額活用する</div>
+          <div class="step-desc">夫婦合算でNISA年360万円・生涯投資枠3,600万円。この非課税枠を最大化することが最大の節税対策です。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-when">年に1回</div>
+          <div class="step-title">ライフプランを数字で確認する</div>
+          <div class="step-desc">老後資金の目標額、子どもの教育費、住宅ローンの残債——数字で整理することで「あといくら必要か」が見える。FPへの相談が効果的なタイミングです。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trap">
+    <span class="trap-ico">⚠️</span>
+    <div>
+      <div class="trap-ttl">Level 3 でよくある失敗</div>
+      <p>「相場が下がって怖くなり、全部売ってしまった」——このステージで最も多いミスです。長期積み立てには必ず下落局面があります。<strong>売らずに持ち続けた人だけが複利の恩恵を受けられます。</strong></p>
+    </div>
+  </div>
+
+  <div class="mset c3">
+    <span class="mset-icon">⚡</span>
+    <div>
+      <div class="mset-label">LEVEL 3 のマインドセット</div>
+      <p>「下落は敵ではなく仕入れのチャンス」。暴落時に積み立てをやめずに続けた人が、5年後に圧倒的な差をつけています。</p>
+    </div>
+  </div>
+
+  <div class="fp-comment">
+    <div class="fp-ico">🧑‍💼</div>
+    <div>
+      <div class="fp-who">FP 髙月からひと言</div>
+      <div class="fp-say">「500万円を超えた方に私がよく言うのは、『おめでとうございます、あとは待つだけです』。<strong>このステージで追加で何かをやる必要はほとんどありません。</strong>強いて言えば、ライフプランの確認だけ。」</div>
+    </div>
+  </div>
+
+  <div class="nxt">
+    <span>📈</span>
+    <div>NISA・iDeCoを満額継続し、資産1,000万円を超えたら → <strong>Level 4へ進む</strong></div>
+  </div>
+</section>
+
+<!-- ══════ LV4 ══════ -->
+<section class="ls c4" id="lv4">
+  <div class="lhd c4">
+    <div class="lhd-deco">🏰</div>
+    <div class="lhd-top">
+      <div class="lhd-badge">4</div>
+      <div>
+        <div class="lhd-label">LEVEL 4 ／ 資産拡大期</div>
+        <div class="lhd-title">「増やす」から<br>「守りながら増やす」への転換期</div>
+        <div class="lhd-range">資産額の目安：1,000 〜 3,000万円</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice c4">
+    <span class="voice-icon">💬</span>
+    <div>
+      <div class="voice-text">「資産が1,500万円になりました。このまま同じことを続ければいいのか、もっと大胆に動くべきか迷っています。税金対策とかも必要ですか？」</div>
+      <div class="voice-name">── よくある相談（50代・会社員）</div>
+    </div>
+  </div>
+
+  <div class="ccard c4">
+    <div class="ccard-ttl">📌 このステージは「税効率」と「分散」が重要になる</div>
+    <p>1,000万円を超えると、<em>「増やす」だけでなく「税金をいかに減らすか」</em>が大きな差を生み出します。同じ資産でも、税の使い方で老後の手取りが数百万円変わります。</p>
+    <p>また、資産が大きくなるほど一点集中のリスクが高まります。<strong>国内・海外・株・債券への分散</strong>を改めて見直す時期です。</p>
+    <div class="calc">
+      <div class="calc-ttl">📊 1,500万円・年利5%運用の10年シミュレーション</div>
+      <div class="calc-row"><span class="calc-k">5年後（積み立て継続なし）</span><span class="calc-v">約1,914万円</span></div>
+      <div class="calc-row"><span class="calc-k">5年後（月5万円追加積み立て）</span><span class="calc-v">約2,253万円</span></div>
+      <div class="calc-row"><span class="calc-k">10年後（積み立て継続なし）</span><span class="calc-v">約2,443万円</span></div>
+      <div class="calc-row"><span class="calc-k">10年後（月5万円追加積み立て）</span><span class="calc-v">約3,218万円</span></div>
+    </div>
+  </div>
+
+  <div class="ccard c4">
+    <div class="ccard-ttl">✅ このステージでやること</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-when">必須</div>
+          <div class="step-title">NISA非課税枠を最大限活用する（夫婦で年360万円）</div>
+          <div class="step-desc">資産規模が大きいほど、課税口座の運用益にかかる20.315%の税金が重くなります。NISA枠の中に資産を移していく戦略が有効。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-when">50代の場合</div>
+          <div class="step-title">退職金・iDeCo受取の税金シミュレーションをする</div>
+          <div class="step-desc">退職所得控除やiDeCoの受取タイミングで税負担が大きく変わります。定年の5〜10年前にFPへ相談し、最適な受取設計をすることが重要。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-when">相続を意識する年齢なら</div>
+          <div class="step-title">相続・贈与の基本知識を整理する</div>
+          <div class="step-desc">相続税の基礎控除は「3,000万円＋600万円×法定相続人数」。1,500万円以上の資産があれば、早めに家族でお金の話をしておくことが大切。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-when">余裕資金がある場合</div>
+          <div class="step-title">不動産投資の検討（ただし慎重に）</div>
+          <div class="step-desc">レバレッジを使った不動産投資は資産を加速させる可能性がある一方、リスクも大きい。必ず専門家に相談のうえ、全体の資産の20〜30%以内に留める。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trap">
+    <span class="trap-ico">⚠️</span>
+    <div>
+      <div class="trap-ttl">Level 4 でよくある失敗</div>
+      <p>「資産が増えたので、もっと大きなリターンを求めてハイリスク商品へ」——レバレッジETF・新興国個別株・ヘッジファンドへの集中投資で資産を大きく減らすケースが増えます。<strong>1,000万円以上は「守りながら増やす」が基本です。</strong></p>
+    </div>
+  </div>
+
+  <div class="mset c4">
+    <span class="mset-icon">🏰</span>
+    <div>
+      <div class="mset-label">LEVEL 4 のマインドセット</div>
+      <p>「増やすより、減らさないことが大事になる」。リターンを追いかけるより、税金・手数料・リスクを下げることが資産を守る最大の武器になります。</p>
+    </div>
+  </div>
+
+  <div class="fp-comment">
+    <div class="fp-ico">🧑‍💼</div>
+    <div>
+      <div class="fp-who">FP 髙月からひと言</div>
+      <div class="fp-say">「1,000万円を超えたら、FPへの相談が最もコスパの高い投資になります。<strong>税金・退職金・相続の設計を間違えると、数百万円単位で損をする可能性があります。</strong>一度しっかり整理しましょう。」</div>
+    </div>
+  </div>
+
+  <div class="nxt">
+    <span>📈</span>
+    <div>税効率を最大化しながら資産3,000万円を超えたら → <strong>Level 5へ進む</strong></div>
+  </div>
+</section>
+
+<!-- ══════ LV5 ══════ -->
+<section class="ls c5" id="lv5">
+  <div class="lhd c5">
+    <div class="lhd-deco">🌟</div>
+    <div class="lhd-top">
+      <div class="lhd-badge">5</div>
+      <div>
+        <div class="lhd-label">LEVEL 5 ／ 自由設計期</div>
+        <div class="lhd-title">「お金の心配」から<br>「どう生きるか」の話へ</div>
+        <div class="lhd-range">資産額の目安：3,000万円 〜 5,000万円以上</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice c5">
+    <span class="voice-icon">💬</span>
+    <div>
+      <div class="voice-text">「資産が4,000万円を超えました。仕事を辞めて自由に生きることはできますか？これ以上増やす必要はありますか？」</div>
+      <div class="voice-name">── よくある相談（55歳・会社員）</div>
+    </div>
+  </div>
+
+  <div class="ccard c5">
+    <div class="ccard-ttl">📌 このステージは「お金より人生設計」の段階</div>
+    <p>資産5,000万円・年利4%の取り崩しで年200万円、生活費の補填が可能になります。<em>「働かなくても生きていける」選択肢が現実になる</em>のがこのステージです。</p>
+    <p>しかしここで多くの方が気づくのが——<strong>「お金の問題が解決したら、次は何のために生きるかが問題になる」</strong>ということ。資産形成はゴールではなく、豊かな人生のための手段です。</p>
+    <div class="calc">
+      <div class="calc-ttl">📊 5,000万円・年利4%での取り崩しシミュレーション</div>
+      <div class="calc-row"><span class="calc-k">年間取り崩し額（4%ルール）</span><span class="calc-v">約200万円（月約16万円）</span></div>
+      <div class="calc-row"><span class="calc-k">30年後の残高（年利4%・年200万取り崩し）</span><span class="calc-v">約4,700万円（ほぼ減らない）</span></div>
+      <div class="calc-row"><span class="calc-k">公的年金（夫婦・65歳から）</span><span class="calc-v">月約22〜28万円を加算</span></div>
+      <div class="calc-row"><span class="calc-k">💡 結論</span><span class="calc-v">生活費次第でFIREは現実的な選択肢</span></div>
+    </div>
+  </div>
+
+  <div class="ccard c5">
+    <div class="ccard-ttl">✅ このステージで考えること</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-when">最重要</div>
+          <div class="step-title">月の生活費を正確に把握し「必要な資産額」を計算する</div>
+          <div class="step-desc">月30万円で生活するなら必要資産は約9,000万円（4%ルール）。月20万円なら6,000万円。自分の「自由になる数字」を明確にする。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-when">必須</div>
+          <div class="step-title">相続対策・遺言書の作成を検討する</div>
+          <div class="step-desc">3,000万円以上の資産は相続税の対象になる可能性があります。生前贈与（年110万円の非課税枠）・遺言書・信託の活用を専門家と相談。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-when">健康・医療</div>
+          <div class="step-title">介護・医療費の備えを確認する</div>
+          <div class="step-desc">老後の医療・介護費用は平均で夫婦1,000万円超とも言われます。公的介護保険の仕組みを理解し、補完的な備えを検討。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-when">人生設計</div>
+          <div class="step-title">「お金をどう使うか」の設計をする</div>
+          <div class="step-desc">旅行・趣味・家族への支援・社会貢献——資産が十分あるなら「使う設計」こそが豊かな老後を決めます。「増やす」から「使う・渡す」へ発想を転換する。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mset c5">
+    <span class="mset-icon">🌟</span>
+    <div>
+      <div class="mset-label">LEVEL 5 のマインドセット</div>
+      <p>「資産形成は終わり。次は人生の設計を楽しむ番」。お金は十分にある。大事なのはそのお金を使って何を実現するか——これがFPに相談する本当の意味です。</p>
+    </div>
+  </div>
+
+  <div class="fp-comment">
+    <div class="fp-ico">🧑‍💼</div>
+    <div>
+      <div class="fp-who">FP 髙月からひと言</div>
+      <div class="fp-say">「このレベルまで来た方に私が最初に聞くのは、『老後、何をしたいですか？』という質問です。<strong>お金の問題は解決した。次はあなたの人生をどう設計するか——それを一緒に考えるのが私の仕事です。</strong>」</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY TABLE -->
+<div class="sum-wrap">
+  <div class="sum-hdr">
+    <h2>5レベルまとめ一覧</h2>
+    <p>自分のステージに集中して、余計なことはやらない。それが最短ルート。</p>
+  </div>
+  <table class="sum-tbl">
+    <thead>
+      <tr>
+        <th>レベル</th>
+        <th>資産目安</th>
+        <th>最優先アクション</th>
+        <th>やってはいけないこと</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="lvdot" style="background:var(--lv1)"></span><strong>Lv.1</strong></td>
+        <td>〜100万円</td>
+        <td>借金返済→固定費削減→緊急資金→NISA開設</td>
+        <td>投資から始める・借金のまま放置</td>
+      </tr>
+      <tr>
+        <td><span class="lvdot" style="background:var(--lv2)"></span><strong>Lv.2</strong></td>
+        <td>〜500万円</td>
+        <td>NISA月5〜10万円・iDeCo・自動化</td>
+        <td>個別株・FX・仮想通貨への浮気</td>
+      </tr>
+      <tr>
+        <td><span class="lvdot" style="background:var(--lv3)"></span><strong>Lv.3</strong></td>
+        <td>〜1,000万円</td>
+        <td>NISA・iDeCo満額継続・売らない</td>
+        <td>暴落時に売る・積み立てをやめる</td>
+      </tr>
+      <tr>
+        <td><span class="lvdot" style="background:var(--lv4)"></span><strong>Lv.4</strong></td>
+        <td>〜3,000万円</td>
+        <td>非課税枠最大化・退職金・相続設計</td>
+        <td>ハイリスク商品への集中投資</td>
+      </tr>
+      <tr>
+        <td><span class="lvdot" style="background:var(--lv5)"></span><strong>Lv.5</strong></td>
+        <td>5,000万円〜</td>
+        <td>取り崩し設計・相続対策・人生設計</td>
+        <td>増やすことへの執着</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cta-box">
+  <h2>「自分のレベルに合った相談をしたい」と思ったら</h2>
+  <p>資産100万円でも5,000万円でも、今のステージに合ったアドバイスをします。<br>地方在住・会社員・子育て世代のご相談、お気軽にどうぞ。</p>
+  <button class="cta-btn" onclick="(function(){var u='yamakaze8000',d='gmail.com';location.href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;})()">無料相談はこちら →</button>
+</div>
+
+<!-- SHARE -->
+<div class="share-section">
+  <h2>この記事をシェアする</h2>
+  <div class="share-btns">
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ&url=https://lifeassetoffice.net/blog/post-538.html" target="_blank" rel="noopener noreferrer">𝕏 Xでシェア</a>
+    <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https://lifeassetoffice.net/blog/post-538.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
+    <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href).then(function(){alert('リンクをコピーしました！');})">🔗 リンクをコピー</button>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="related">
+  <h2>📚 合わせて読む</h2>
+  <div class="related-grid">
+    <a href="post-537.html" class="related-card">
+      <div class="tag">🏠 住宅ローン × 教育費</div>
+      <h3>繰上返済と教育費積立、どっちが先？42歳・子ども3人のAさんがFPに聞いた本音</h3>
+    </a>
+    <a href="post-531.html" class="related-card">
+      <div class="tag">⚠️ 変動金利</div>
+      <h3>「月の返済額は変わってないから大丈夫」は危ない</h3>
+    </a>
+    <a href="post-525.html" class="related-card">
+      <div class="tag">📊 住宅ローン数字編</div>
+      <h3>変動金利、どう向き合う？42歳Aさんのケース</h3>
+    </a>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"><span>LA</span></div>
+      Life Asset
+    </div>
+    <div class="footer-contact">
+      <a href="#" id="mail-link">お問い合わせはこちら</a>
+      ｜<a href="../contact.html">お問い合わせフォーム</a>
+      ｜<a href="../privacy.html">プライバシーポリシー</a>
+    </div>
+    <p>© 2026 ライフアセットオフィス. 本記事は情報提供を目的としており、特定の金融商品・不動産の勧誘を行うものではありません。投資にはリスクが伴います。</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var u='yamakaze8000',d='gmail.com';
+  document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+})();
+
+window.addEventListener('scroll', function(){
+  var el = document.documentElement;
+  var pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+  document.getElementById('pb').style.width = pct + '%';
+
+  // Level nav highlight
+  var lvs = ['lv1','lv2','lv3','lv4','lv5'];
+  var nbs = document.querySelectorAll('.nb');
+  var current = '';
+  lvs.forEach(function(id){
+    var sec = document.getElementById(id);
+    if(sec && sec.getBoundingClientRect().top <= 120) current = id;
+  });
+  nbs.forEach(function(nb){
+    nb.classList.remove('on');
+    if(nb.getAttribute('href') === '#' + current) nb.classList.add('on');
+  });
+});
+
+function calcLevel(){
+  var debt   = document.getElementById('d1').checked || document.getElementById('d2').checked || document.getElementById('d3').checked || document.getElementById('d4').checked || document.getElementById('d5').checked;
+  var lv2    = document.getElementById('d6').checked;
+  var lv3    = document.getElementById('d7').checked;
+  var lv4    = document.getElementById('d8').checked;
+  var lv5    = document.getElementById('d9').checked;
+  var res    = document.getElementById('sc-res');
+  var msg    = '';
+  var bg     = '';
+  var color  = '';
+
+  if(lv5){       msg='✅ あなたは <strong>Level 5（自由設計期）</strong>です。相続・取り崩し・人生設計の相談が最優先です。'; bg='var(--lv5l)'; color='var(--lv5)'; }
+  else if(lv4){  msg='✅ あなたは <strong>Level 4（資産拡大期）</strong>です。税効率・退職金・相続設計を今すぐ始めましょう。'; bg='var(--lv4l)'; color='var(--lv4)'; }
+  else if(lv3){  msg='✅ あなたは <strong>Level 3（複利加速期）</strong>です。NISA・iDeCoを満額継続して、売らずに待つだけです。'; bg='var(--lv3l)'; color='var(--lv3)'; }
+  else if(lv2){  msg='✅ あなたは <strong>Level 2（土台完成期）</strong>です。NISAを月5〜10万円に引き上げてiDeCoを始めましょう。'; bg='var(--lv2l)'; color='var(--lv2)'; }
+  else if(debt){ msg='✅ あなたは <strong>Level 1（スタート期）</strong>です。借金返済→固定費削減→緊急資金→NISAの順番で進めましょう。'; bg='var(--lv1l)'; color='var(--lv1)'; }
+  else{ return; }
+
+  res.innerHTML = msg;
+  res.style.background = bg;
+  res.style.borderLeft = '3px solid ' + color;
+  res.style.paddingLeft = '14px';
+  res.classList.add('show');
+}
+</script>
+</body>
+</html>
