@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/post-539.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>繰上返済より「逆ざや確認」が先。住宅ローン金利リスク診断ツールの使い方｜Life Asset ブログ</title>
+  <meta name="description" content="「とりあえず繰上返済」は損をしている可能性があります。住宅ローン控除の逆ざや・金利上昇シミュレーション・返済負担率を30秒で診断できるツールをリリース。使い方を解説します。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="繰上返済より「逆ざや確認」が先。住宅ローン金利リスク診断ツールの使い方">
+  <meta property="og:description" content="住宅ローン控除の逆ざや・金利上昇シミュレーション・返済負担率を30秒で診断。ツールの使い方と見方を解説します。">
+  <meta property="og:url" content="https://lifeassetoffice.net/blog/post-539.html">
+  <meta property="og:site_name" content="ライフアセットオフィス">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="繰上返済より「逆ざや確認」が先。住宅ローン金利リスク診断ツールの使い方">
+  <meta name="twitter:description" content="住宅ローン控除の逆ざや・金利上昇シミュレーション・返済負担率を30秒で診断。ツールの使い方と見方を解説。">
+  <meta name="twitter:site" content="@lifeasset_fp">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PKDH2DR522');
+  </script>
+  <style>
+    :root {
+      --sky: #0ea5e9; --sky-light: #38bdf8; --sky-pale: #e0f2fe;
+      --navy: #0f3460; --navy-soft: #1e4d8c;
+      --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+      --paper: #fdfbf8;
+      --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+      --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+      --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+      --purple: #7c3aed; --purplel: #f5f3ff; --purpleb: #ddd6fe;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif; color: var(--text); background: var(--bg); line-height: 1.9; font-weight: 300; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--sky), var(--sky-light)); z-index: 9999; }
+
+    .site-header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 24px; }
+    .logo-text .name { font-size: 1.2rem; font-weight: 700; background: linear-gradient(90deg,#4facfe,#00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo-text .tagline { font-size: 0.6rem; color: var(--text-light); }
+    nav { display: flex; gap: 4px; margin-left: auto; }
+    nav a { padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; color: var(--text); transition: all .2s; }
+    nav a:hover { background: var(--sky-pale); color: var(--sky); }
+    .btn-consult { padding: 7px 16px; border-radius: 20px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 0.85rem; font-weight: 600; }
+
+    .article-hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 60%, #1a5fac 100%); color: #fff; padding: 52px 24px 44px; }
+    .hero-inner { max-width: 720px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; flex-wrap: wrap; }
+    .article-cat { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 3px 12px; font-size: 11px; font-weight: 700; }
+    .article-date { font-size: 11px; opacity: .7; }
+    .article-hero h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; line-height: 1.4; margin-bottom: 16px; }
+    .article-hero .lead { font-size: 14px; opacity: .85; line-height: 1.9; max-width: 600px; }
+
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    .article-body h2 { font-family: 'Noto Serif JP', serif; font-size: clamp(1.15rem, 3vw, 1.4rem); font-weight: 700; color: var(--navy); margin: 40px 0 16px; padding-left: 14px; border-left: 4px solid var(--sky); line-height: 1.5; }
+    .article-body h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin: 28px 0 10px; }
+    .article-body p { font-size: 15px; margin-bottom: 18px; line-height: 1.95; }
+    .article-body strong { font-weight: 700; color: var(--navy); }
+    .article-body ul { padding-left: 20px; margin-bottom: 18px; }
+    .article-body ul li { font-size: 15px; margin-bottom: 6px; line-height: 1.8; }
+
+    .tool-cta-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 16px; padding: 32px; margin: 32px 0; text-align: center; color: #fff; }
+    .tool-cta-box p { font-size: 13px; opacity: .8; margin-bottom: 16px; }
+    .tool-cta-box a { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 50px; box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
+    .tool-cta-box .cta-title { font-family: 'Noto Serif JP', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 20px 0 28px; }
+    .feature-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .feature-card .icon { font-size: 24px; margin-bottom: 8px; }
+    .feature-card h4 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .feature-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; margin: 0; }
+
+    .step-list { counter-reset: step; margin: 20px 0 28px; }
+    .step-item { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+    .step-num { counter-increment: step; min-width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .step-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .step-body p { font-size: 13.5px; color: var(--text-light); line-height: 1.8; margin: 0; }
+
+    .case-box { background: var(--purplel); border: 1px solid var(--purpleb); border-radius: 12px; padding: 20px 22px; margin: 20px 0 28px; }
+    .case-box .case-label { font-size: 11px; font-weight: 700; color: var(--purple); letter-spacing: .1em; margin-bottom: 8px; }
+    .case-box h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .case-box p { font-size: 13.5px; color: var(--text); line-height: 1.85; margin: 0; }
+
+    .point-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 12px; padding: 18px 20px; margin: 20px 0 28px; }
+    .point-box .point-label { font-size: 11px; font-weight: 700; color: var(--amber); letter-spacing: .1em; margin-bottom: 8px; }
+    .point-box p { font-size: 13.5px; color: var(--text); line-height: 1.85; margin: 0; }
+
+    .summary-box { background: var(--greenl); border: 1px solid var(--greenb); border-radius: 12px; padding: 20px 22px; margin: 28px 0; }
+    .summary-box h3 { font-size: 14px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+    .summary-box ul { padding-left: 18px; }
+    .summary-box ul li { font-size: 14px; margin-bottom: 6px; line-height: 1.8; }
+
+    .fp-comment { display: flex; gap: 14px; background: var(--sky-pale); border-radius: 12px; padding: 18px 20px; margin: 28px 0; align-items: flex-start; }
+    .fp-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy-soft)); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .fp-text { flex: 1; }
+    .fp-name { font-size: 11px; font-weight: 700; color: var(--sky); margin-bottom: 5px; }
+    .fp-text p { font-size: 13.5px; color: var(--text); line-height: 1.85; margin: 0; }
+
+    .share-section { border-top: 1px solid var(--border); padding-top: 28px; margin-top: 40px; }
+    .share-section h3 { font-size: 14px; font-weight: 700; color: var(--text-light); margin-bottom: 12px; }
+    .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+    .share-x { background: #000; }
+
+    .related-section { margin-top: 40px; }
+    .related-section h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .related-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; transition: border-color .2s; }
+    .related-card:hover { border-color: var(--sky); }
+    .related-card .tag { font-size: 11px; color: var(--sky); font-weight: 700; margin-bottom: 4px; }
+    .related-card h4 { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+    .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+
+    @media(max-width:600px){
+      .article-wrap { padding: 28px 16px 60px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .tool-cta-box { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html">
+      <div class="logo-text">
+        <div class="name">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="../index.html">ホーム</a>
+      <a href="index.html">ブログ</a>
+    </nav>
+    <a href="../index.html#contact" class="btn-consult">お問い合わせ</a>
+  </div>
+</header>
+
+<div class="article-hero">
+  <div class="hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">🏠 住宅ローン</span>
+      <span class="article-date">2026年5月27日</span>
+    </div>
+    <h1>繰上返済より「逆ざや確認」が先。<br>住宅ローン金利リスク診断ツールの使い方</h1>
+    <p class="lead">「余裕ができたら繰上返済しよう」——それ、損をしているかもしれません。住宅ローン控除の逆ざや・金利上昇リスク・返済負担率を30秒で確認できるツールをリリースしました。</p>
+  </div>
+</div>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="article-wrap">
+  <div class="article-body">
+
+    <h2>「繰上返済＝正義」という思い込みが危ない</h2>
+
+    <p>住宅ローンを抱えている方の多くが「余裕ができたら繰上返済したい」と考えています。確かに繰上返済は利息を減らす効果があります。でも、<strong>今すぐやることが本当に最適なのか</strong>、確認できていますか？</p>
+
+    <p>実は、住宅ローン控除を受けている期間中、金利よりも控除率のほうが高い「<strong>逆ざや</strong>」状態になっている方が多くいます。この状態では、繰上返済で残高を減らすと、翌年の控除額がその分下がってしまいます。</p>
+
+    <div class="case-box">
+      <div class="case-label">💡 具体例で考える</div>
+      <h4>Lさん（38歳・変動金利0.5%・新制度控除中）</h4>
+      <p>金利0.5%のローンで毎月利息を払っているが、住宅ローン控除（新制度0.7%）を受けている。控除率が金利を上回っているため、実質的には「借りていることで得をしている」逆ざや状態。繰上返済で残高を100万円減らすと、翌年の控除額が7,000円減る計算になる。</p>
+    </div>
+
+    <p>こういったケースを計算なしに直感で判断するのは難しいため、今回ツールを作りました。</p>
+
+    <h2>住宅ローン金利リスク診断ツールでできること</h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">📊</div>
+        <h4>返済負担率チェック</h4>
+        <p>月手取りに対する返済額の割合を即算出。25%・35%の危険ラインを色で判定。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📈</div>
+        <h4>金利上昇シミュレーション</h4>
+        <p>変動金利が+0.5%/+1.0%/+1.5%上昇した場合の月返済額・利息・負担率を一覧表示。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🏦</div>
+        <h4>住宅ローン控除チェック</h4>
+        <p>旧制度（1%・10年）と新制度（0.7%・13年）に対応。逆ざや判定・実質金利・残り控除総額を表示。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🎯</div>
+        <h4>リスクレベル判定</h4>
+        <p>🟢安心 / 🟡注意 / 🔴要対策の3段階で判定。状況別の具体的行動アドバイス付き。</p>
+      </div>
+    </div>
+
+    <div class="tool-cta-box">
+      <div class="cta-title">住宅ローン金利リスク診断ツール</div>
+      <p>登録不要・無料・30秒で診断できます</p>
+      <a href="../loan-check.html">今すぐ診断する →</a>
+    </div>
+
+    <h2>3ステップで診断できます</h2>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>基本情報を入力（スライダーを動かすだけ）</h4>
+          <p>借入残高・現在の金利・返済残年数・年齢・月の手取り収入、変動/固定の選択。すべてスライダーかボタンで操作できます。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>リスク診断結果を確認</h4>
+          <p>月返済額・返済負担率・完済予定年齢がリアルタイムで表示されます。変動金利の方は金利上昇シミュレーション表も自動で出ます。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>住宅ローン控除セクションで逆ざやを確認（任意）</h4>
+          <p>「旧制度（1%・10年）」または「新制度（0.7%・13年）」を選び、残り控除年数と住宅タイプを設定。逆ざやかどうかと実質金利が即表示されます。</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>逆ざやだった場合のアドバイス</h2>
+
+    <p>ツールが逆ざやを検出すると、次のアドバイスが表示されます。</p>
+
+    <div class="point-box">
+      <div class="point-label">📌 逆ざや時のポイント</div>
+      <p>控除期間中は繰上返済を急がず、余裕資金はNISAや預金で運用する方が家計全体で有利です。繰上返済をするなら1月〜11月が有利。12月に繰上返済すると12月末残高が減り、翌年の控除額が下がります。</p>
+    </div>
+
+    <p>「12月の繰上返済は避ける」というのは、意外と知られていないポイントです。12月末の残高が翌年の控除計算の基準になるためです。同じ金額を繰上返済するなら、<strong>1月以降のほうが控除への影響がなく有利</strong>です。</p>
+
+    <h2>金利上昇リスクが高かった場合は</h2>
+
+    <p>🔴高リスクと判定された場合、ツールは次の行動を提示します。</p>
+
+    <ul>
+      <li>① 固定金利への借り換えを検討（手数料+登記費用の目安：50〜100万円と利息削減額を比較）</li>
+      <li>② 毎月1万円の繰上返済（25年ローンで総利息を約100万円削減）</li>
+      <li>③ 定年前に完済する計画を立てる</li>
+      <li>④ 保険・通信費など固定費の見直しで月2〜3万円を捻出</li>
+    </ul>
+
+    <p>ツールのアドバイス欄に状況に応じた具体的な数字が表示されるので、「何をすればいいかわからない」という状態にならずに済みます。</p>
+
+    <div class="fp-comment">
+      <div class="fp-avatar">🏠</div>
+      <div class="fp-text">
+        <div class="fp-name">ライフアセットオフィス FP</div>
+        <p>住宅ローンは長期間の契約なので「今の状況がずっと続く」という前提で考えがちです。でも金利は変わる、収入も変わる。年に一度このツールで確認する習慣をつけると、手を打つタイミングを逃しません。特に控除が終わる1〜2年前は要注意です。</p>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>✅ この記事のまとめ</h3>
+      <ul>
+        <li>住宅ローン控除の逆ざや状態では、繰上返済より資産形成が有利</li>
+        <li>12月の繰上返済は翌年の控除を減らすため避けるべき</li>
+        <li>変動金利は5年ルール・125%ルールで月返済額が変わらなくても利息は増えている</li>
+        <li>返済負担率25%超・完済65歳超は「注意ゾーン」、35%超・70歳超は「要対策ゾーン」</li>
+        <li>ツールで年1回チェックする習慣が最も大切</li>
+      </ul>
+    </div>
+
+    <div class="tool-cta-box">
+      <div class="cta-title">あなたの住宅ローン、今すぐ診断</div>
+      <p>返済負担率・金利上昇リスク・控除の逆ざやを30秒で確認</p>
+      <a href="../loan-check.html">住宅ローン金利リスク診断ツールへ →</a>
+    </div>
+
+  </div>
+
+  <div class="share-section">
+    <h3>この記事をシェアする</h3>
+    <div class="share-btns">
+      <button class="share-btn share-x" onclick="shareX()">𝕏 Xでシェア</button>
+    </div>
+  </div>
+
+  <div class="related-section">
+    <h3>📚 関連記事</h3>
+    <div class="related-grid">
+      <a href="post-537.html" class="related-card">
+        <div class="tag">🏠 Aさんシリーズ 第三弾</div>
+        <h4>繰上返済と教育費積立、どっちが先？42歳・子ども3人のAさんがFPに聞いた本音</h4>
+      </a>
+      <a href="post-531.html" class="related-card">
+        <div class="tag">⚠️ 変動金利の落とし穴</div>
+        <h4>「月の返済額は変わってないから大丈夫」は危ない</h4>
+      </a>
+      <a href="post-538.html" class="related-card">
+        <div class="tag">📊 資産形成</div>
+        <h4>あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ</h4>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Life Asset — ライフアセットオフィス</div>
+  <p>© 2026 ライフアセットオフィス. 本記事は情報提供を目的としており、投資・ローンに関する最終判断はご自身の責任において行ってください。</p>
+</footer>
+
+<script>
+function shareX() {
+  var text = '繰上返済より「逆ざや確認」が先という話。\n住宅ローン控除中は繰上返済で損する可能性があります。\n\n金利リスク診断ツールで今すぐチェック👇';
+  var url = 'https://lifeassetoffice.net/blog/post-539.html';
+  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+}
+
+window.addEventListener('scroll', function(){
+  var el = document.documentElement;
+  document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
+});
+</script>
+</body>
+</html>
