@@ -224,6 +224,18 @@
     .sum-tbl tr:last-child td { border-bottom: none; }
     .lvdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
 
+    /* EXAMPLE BOXES */
+    .example { border-radius: 10px; padding: 16px 20px; margin-bottom: 4px; display: flex; gap: 12px; align-items: flex-start; }
+    .example-fail { background: #fff5f5; border: 1px solid #fecdd3; }
+    .example-ok   { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .example-ico  { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .example-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; margin-bottom: 5px; }
+    .example-fail .example-label { color: #dc2626; }
+    .example-ok   .example-label { color: #16a34a; }
+    .example-name { font-size: 11.5px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .example p    { font-size: 13.5px; color: var(--text); line-height: 1.85; margin: 0; }
+    .example p strong { font-weight: 700; }
+
     /* CTA */
     .cta-box { background: linear-gradient(135deg, var(--navy), var(--navy-soft)); border-radius: 16px; padding: 28px 24px; text-align: center; margin: 40px 0; color: #fff; }
     .cta-box h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
@@ -438,6 +450,24 @@
     </div>
   </div>
 
+  <div class="example example-fail">
+    <span class="example-ico">😰</span>
+    <div>
+      <div class="example-label">失敗例</div>
+      <div class="example-name">Bさん（29歳・会社員）</div>
+      <p>カードローン残高30万円を抱えたまま、「投資で早く増やそう」とNISAをスタート。年利5%の運用益より、カードローンの金利15%が上回り続け、2年後に「投資しながら借金が膨らんでいた」ことに気づいた。<strong>まず借金を完済してから再スタートし、今は順調に積み立て中。</strong></p>
+    </div>
+  </div>
+
+  <div class="example example-ok">
+    <span class="example-ico">😊</span>
+    <div>
+      <div class="example-label">成功例</div>
+      <div class="example-name">Cさん（33歳・共働き）</div>
+      <p>固定費の見直しだけで月2.8万円を捻出（スマホ格安SIM化・不要な保険2本解約・サブスク整理）。半年で緊急資金70万円を確保し、その後NISAを開始。<strong>「何も我慢せずに投資できるお金が生まれた」と話していた。</strong></p>
+    </div>
+  </div>
+
   <div class="nxt">
     <span>📈</span>
     <div>緊急資金60万円＋NISA開設が完了したら → <strong>Level 2へ進む</strong></div>
@@ -541,6 +571,24 @@
     </div>
   </div>
 
+  <div class="example example-fail">
+    <span class="example-ico">😰</span>
+    <div>
+      <div class="example-label">失敗例</div>
+      <div class="example-name">Dさん（36歳・会社員）</div>
+      <p>全世界株の積み立てを2年続けて180万円まで増えたが、「もっと早く増やしたい」と個別株・FXに乗り換えた。半年でマイナス80万円。積み立てを再開したが、「あの2年間を無駄にした」と後悔している。<strong>その後5年間積み立てを継続し、現在は500万円台に到達。</strong></p>
+    </div>
+  </div>
+
+  <div class="example example-ok">
+    <span class="example-ico">😊</span>
+    <div>
+      <div class="example-label">成功例</div>
+      <div class="example-name">Eさん（38歳・パート主婦）</div>
+      <p>夫のNISAに加えて自分のNISA口座も開設し、月3万円ずつ積み立て開始。「設定したら通知も切って、ほとんど見ていない」という徹底ぶり。<strong>4年後に残高を確認したら、夫婦合計で380万円になっていた。</strong>「見ない勇気が一番大事だった」と話してくれた。</p>
+    </div>
+  </div>
+
   <div class="nxt">
     <span>📈</span>
     <div>NISA＋iDeCoが自動化され、資産500万円を超えたら → <strong>Level 3へ進む</strong></div>
@@ -633,6 +681,24 @@
     <div>
       <div class="fp-who">FP （削除済み）からひと言</div>
       <div class="fp-say">「500万円を超えた方に私がよく言うのは、『おめでとうございます、あとは待つだけです』。<strong>このステージで追加で何かをやる必要はほとんどありません。</strong>強いて言えば、ライフプランの確認だけ。」</div>
+    </div>
+  </div>
+
+  <div class="example example-fail">
+    <span class="example-ico">😰</span>
+    <div>
+      <div class="example-label">失敗例</div>
+      <div class="example-name">Fさん（44歳・会社員）</div>
+      <p>コロナショックで資産が600万円→380万円に急落。「もう無理だ」と全額売却してしまった。その後相場は回復したが、売却後は現金のまま。<strong>「あのとき売らなければ今頃1,000万円を超えていた」と悔やんでいる。</strong>現在は少額から再スタート中。</p>
+    </div>
+  </div>
+
+  <div class="example example-ok">
+    <span class="example-ico">😊</span>
+    <div>
+      <div class="example-label">成功例</div>
+      <div class="example-name">Gさん（41歳・共働き）</div>
+      <p>コロナショック時に資産が560万円→350万円へ急落。「積み立てをやめずむしろ増額した」という。「安い値段でたくさん買えていると思った」と話す。<strong>3年後に資産は1,050万円へ。「暴落を経験した人だけが1,000万円を超えられる」と実感している。</strong></p>
     </div>
   </div>
 
@@ -739,6 +805,24 @@
     </div>
   </div>
 
+  <div class="example example-fail">
+    <span class="example-ico">😰</span>
+    <div>
+      <div class="example-label">失敗例</div>
+      <div class="example-name">Hさん（58歳・会社員）</div>
+      <p>退職金2,000万円を受け取った直後、証券会社の担当者に勧められるまま高コストのアクティブファンドへ一括投資。手数料と運用不振で3年後に残高が1,550万円に。<strong>「相談する相手を間違えた」と話していた。</strong>その後FPと組み直し、低コストインデックスへ切り替え中。</p>
+    </div>
+  </div>
+
+  <div class="example example-ok">
+    <span class="example-ico">😊</span>
+    <div>
+      <div class="example-label">成功例</div>
+      <div class="example-name">Iさん（54歳・会社員）</div>
+      <p>定年6年前にFPへ相談し、iDeCoと退職金の受取タイミングを設計。退職所得控除を最大活用することで、<strong>税負担を約220万円削減できた。</strong>「早めに相談しておいてよかった。1年遅れていたら使える控除が変わっていた」と話してくれた。</p>
+    </div>
+  </div>
+
   <div class="nxt">
     <span>📈</span>
     <div>税効率を最大化しながら資産3,000万円を超えたら → <strong>Level 5へ進む</strong></div>
@@ -833,6 +917,25 @@
       <div class="fp-say">「このレベルまで来た方に私が最初に聞くのは、『老後、何をしたいですか？』という質問です。<strong>お金の問題は解決した。次はあなたの人生をどう設計するか——それを一緒に考えるのが私の仕事です。</strong>」</div>
     </div>
   </div>
+
+  <div class="example example-fail">
+    <span class="example-ico">😰</span>
+    <div>
+      <div class="example-label">失敗例（というより後悔）</div>
+      <div class="example-name">Jさん（63歳・元会社員）</div>
+      <p>資産4,500万円を持ちながら「まだ不安」と感じ続け、55歳から8年間働き続けた。65歳で振り返ったとき「あの8年間、旅行も趣味も後回しにしていた。数字は十分だったのに」と話した。<strong>お金の不安が解消されても、「いくらあれば安心か」の答えを自分で決めていなかったことが原因だった。</strong></p>
+    </div>
+  </div>
+
+  <div class="example example-ok">
+    <span class="example-ico">😊</span>
+    <div>
+      <div class="example-label">成功例</div>
+      <div class="example-name">Kさん（52歳・会社員）</div>
+      <p>FPと一緒に月の生活費・旅行費・医療費を試算したところ、資産5,200万円＋年金で「55歳で仕事をやめても問題ない」という数字が出た。<strong>翌年退職し、現在は農業と旅行の二拠点生活を満喫中。</strong>「数字を見える化したら、怖くなくなった」と話してくれた。</p>
+    </div>
+  </div>
+
 </section>
 
 <!-- SUMMARY TABLE -->
