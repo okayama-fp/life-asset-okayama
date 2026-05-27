@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VTuber デモ — Webカメラトラッキング</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0d0d1a; color: #fff; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+
+#container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 左: Webカメラ + ランドマーク */
+#webcam-panel {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: #111122;
+  border-right: 1px solid #333;
+}
+#webcam-wrap {
+  position: relative;
+  width: 320px;
+  height: 240px;
+}
+#webcam {
+  width: 320px;
+  height: 240px;
+  object-fit: cover;
+  transform: scaleX(-1);
+  display: block;
+}
+#landmark-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 320px;
+  height: 240px;
+  transform: scaleX(-1);
+}
+#stats {
+  padding: 12px;
+  font-size: 11px;
+  color: #aaa;
+  line-height: 1.8;
+  flex: 1;
+  overflow-y: auto;
+}
+#stats span { color: #7cf; }
+#start-btn {
+  margin: 12px;
+  padding: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+#start-btn:hover { opacity: 0.85; }
+#start-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* 右: アバターキャンバス */
+#avatar-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 30%, #1a1a3e, #0d0d1a);
+  position: relative;
+}
+#avatar-canvas {
+  width: 100%;
+  height: 100%;
+}
+#badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #ccc;
+}
+#loading-msg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #666;
+  pointer-events: none;
+}
+#loading-msg .icon { font-size: 48px; margin-bottom: 12px; }
+#loading-msg p { font-size: 14px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <!-- 左パネル: カメラ -->
+  <div id="webcam-panel">
+    <div id="webcam-wrap">
+      <video id="webcam" autoplay muted playsinline></video>
+      <canvas id="landmark-canvas" width="320" height="240"></canvas>
+    </div>
+    <div id="stats">
+      <div>顔検出: <span id="s-face">待機中</span></div>
+      <div>左手: <span id="s-lhand">-</span></div>
+      <div>右手: <span id="s-rhand">-</span></div>
+      <hr style="border-color:#333;margin:8px 0">
+      <div>まばたき左: <span id="s-blink-l">-</span></div>
+      <div>まばたき右: <span id="s-blink-r">-</span></div>
+      <div>口の開き: <span id="s-mouth">-</span></div>
+      <div>眉上げ: <span id="s-brow">-</span></div>
+      <div>顔の傾き: <span id="s-roll">-</span></div>
+      <div>上下向き: <span id="s-pitch">-</span></div>
+      <div>左右向き: <span id="s-yaw">-</span></div>
+      <hr style="border-color:#333;margin:8px 0">
+      <div>左手グー: <span id="s-fist-l">-</span></div>
+      <div>右手グー: <span id="s-fist-r">-</span></div>
+    </div>
+    <button id="start-btn" onclick="startCamera()">📷 カメラ開始</button>
+  </div>
+
+  <!-- 右パネル: アバター -->
+  <div id="avatar-panel">
+    <div id="badge">🎭 VTuber デモ</div>
+    <div id="loading-msg">
+      <div class="icon">📷</div>
+      <p>「カメラ開始」を押してください<br>Webカメラが顔・手をトラッキングします</p>
+    </div>
+    <canvas id="avatar-canvas"></canvas>
+  </div>
+</div>
+
+<!-- MediaPipe CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+<script>
+// ────── 状態管理 ──────
+const state = {
+  face: null,
+  leftHand: null,
+  rightHand: null,
+  blinkL: 0, blinkR: 0,
+  mouth: 0,
+  brow: 0,
+  roll: 0, pitch: 0, yaw: 0,
+  fistL: 0, fistR: 0,
+  // スムージング用
+  _blinkL: 0.2, _blinkR: 0.2,
+  _mouth: 0,
+  _brow: 0,
+  _roll: 0, _pitch: 0, _yaw: 0,
+};
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function smoothState() {
+  const s = 0.2;
+  state._blinkL = lerp(state._blinkL, state.blinkL, s);
+  state._blinkR = lerp(state._blinkR, state.blinkR, s);
+  state._mouth  = lerp(state._mouth,  state.mouth,  s);
+  state._brow   = lerp(state._brow,   state.brow,   s);
+  state._roll   = lerp(state._roll,   state.roll,   0.15);
+  state._pitch  = lerp(state._pitch,  state.pitch,  0.15);
+  state._yaw    = lerp(state._yaw,    state.yaw,    0.15);
+}
+
+// ────── ランドマーク解析 ──────
+// EAR (Eye Aspect Ratio) でまばたき検出
+function eyeAR(pts, indices) {
+  const p = i => pts[i];
+  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  // 縦2本 / 横1本
+  const v1 = dist(p(indices[1]), p(indices[5]));
+  const v2 = dist(p(indices[2]), p(indices[4]));
+  const h  = dist(p(indices[0]), p(indices[3]));
+  return (v1 + v2) / (2.0 * h);
+}
+
+// FaceMesh の目のインデックス（468点モデル）
+const LEFT_EYE  = [362, 385, 387, 263, 373, 380];
+const RIGHT_EYE = [33,  160, 158, 133, 153, 144];
+const MOUTH_TOP = 13, MOUTH_BOT = 14, MOUTH_L = 78, MOUTH_R = 308;
+const L_BROW = [70, 63, 105, 66, 107];
+const R_BROW = [300, 293, 334, 296, 336];
+const EYE_CENTER_L = [159, 145];
+const EYE_CENTER_R = [386, 374];
+
+function analyzeFace(landmarks) {
+  const pts = landmarks;
+
+  // まばたき
+  const earL = eyeAR(pts, LEFT_EYE);
+  const earR = eyeAR(pts, RIGHT_EYE);
+  state.blinkL = Math.max(0, Math.min(1, 1 - earL / 0.25));
+  state.blinkR = Math.max(0, Math.min(1, 1 - earR / 0.25));
+
+  // 口の開き
+  const mTop = pts[MOUTH_TOP], mBot = pts[MOUTH_BOT];
+  const mL = pts[MOUTH_L], mR = pts[MOUTH_R];
+  const mOpen = Math.abs(mTop.y - mBot.y);
+  const mWide = Math.abs(mL.x - mR.x);
+  state.mouth = Math.max(0, Math.min(1, mOpen / mWide * 3));
+
+  // 眉上げ（眉と目の距離）
+  const browAvgY = (pts[66].y + pts[296].y) / 2;
+  const eyeAvgY  = (pts[159].y + pts[386].y) / 2;
+  const browDist = eyeAvgY - browAvgY;
+  state.brow = Math.max(-1, Math.min(1, (browDist - 0.07) / 0.04));
+
+  // 顔の角度（鼻先→眉中心ベクトルで近似）
+  const nose = pts[1];
+  const chin = pts[152];
+  const leftEar  = pts[234];
+  const rightEar = pts[454];
+
+  // Yaw（左右）: 左耳〜右耳の中点と鼻
+  const earMidX = (leftEar.x + rightEar.x) / 2;
+  state.yaw = Math.max(-1, Math.min(1, (nose.x - earMidX) / 0.15));
+
+  // Pitch（上下）
+  const earMidY = (leftEar.y + rightEar.y) / 2;
+  state.pitch = Math.max(-1, Math.min(1, (nose.y - earMidY) / 0.12));
+
+  // Roll（傾き）
+  const dx = rightEar.x - leftEar.x;
+  const dy = rightEar.y - leftEar.y;
+  state.roll = Math.max(-1, Math.min(1, dy / dx * 3));
+}
+
+// 手のグー/パー検出
+function analyzeHand(landmarks, side) {
+  const pts = landmarks;
+  // 各指: 先端と根本のy比較
+  const fingers = [
+    [8, 5], [12, 9], [16, 13], [20, 17]   // 人差し〜小指
+  ];
+  let closed = 0;
+  for (const [tip, base] of fingers) {
+    if (pts[tip].y > pts[base].y) closed++;
+  }
+  const fist = closed / 4;
+  if (side === 'Left') state.fistL = fist;
+  else state.fistR = fist;
+}
+
+// ────── MediaPipe 初期化 ──────
+let faceMesh, handsDetector;
+let cameraStarted = false;
+
+async function startCamera() {
+  document.getElementById('start-btn').disabled = true;
+  document.getElementById('start-btn').textContent = '読み込み中...';
+  document.getElementById('loading-msg').innerHTML =
+    '<div class="icon">⏳</div><p>MediaPipeを読み込んでいます...</p>';
+
+  const video = document.getElementById('webcam');
+
+  try {
+    // FaceMesh
+    faceMesh = new FaceMesh({ locateFile: f =>
+      `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}` });
+    faceMesh.setOptions({
+      maxNumFaces: 1,
+      refineLandmarks: true,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    });
+    faceMesh.onResults(onFaceResults);
+
+    // Hands
+    handsDetector = new Hands({ locateFile: f =>
+      `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}` });
+    handsDetector.setOptions({
+      maxNumHands: 2,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    });
+    handsDetector.onResults(onHandResults);
+
+    // カメラ
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { width: 640, height: 480, facingMode: 'user' }
+    });
+    video.srcObject = stream;
+    await new Promise(r => video.onloadedmetadata = r);
+    video.play();
+
+    document.getElementById('loading-msg').style.display = 'none';
+    document.getElementById('start-btn').textContent = '✅ トラッキング中';
+
+    cameraStarted = true;
+    processFrame();
+    requestAnimationFrame(drawAvatar);
+
+  } catch(e) {
+    document.getElementById('start-btn').disabled = false;
+    document.getElementById('start-btn').textContent = '📷 カメラ開始';
+    document.getElementById('loading-msg').innerHTML =
+      `<div class="icon">❌</div><p>${e.message}</p>`;
+  }
+}
+
+// フレームを MediaPipe に送る
+let lastSend = 0;
+async function processFrame() {
+  if (!cameraStarted) return;
+  const video = document.getElementById('webcam');
+  const now = performance.now();
+  if (now - lastSend > 33 && video.readyState >= 2) {
+    lastSend = now;
+    await faceMesh.send({ image: video });
+    await handsDetector.send({ image: video });
+  }
+  requestAnimationFrame(processFrame);
+}
+
+// ────── MediaPipe コールバック ──────
+const lmCanvas = document.getElementById('landmark-canvas');
+const lmCtx = lmCanvas.getContext('2d');
+
+function onFaceResults(results) {
+  lmCtx.clearRect(0, 0, 320, 240);
+  if (!results.multiFaceLandmarks || results.multiFaceLandmarks.length === 0) {
+    document.getElementById('s-face').textContent = '未検出';
+    state.face = null;
+    return;
+  }
+  document.getElementById('s-face').textContent = '検出中 ✓';
+  const lms = results.multiFaceLandmarks[0];
+  state.face = lms;
+  analyzeFace(lms);
+
+  // ランドマーク描画（目・口・輪郭のみ）
+  lmCtx.fillStyle = 'rgba(100,200,255,0.6)';
+  const KEY_PTS = [...LEFT_EYE, ...RIGHT_EYE, MOUTH_TOP, MOUTH_BOT, MOUTH_L, MOUTH_R,
+    1, 152, 234, 454, 70, 300, 66, 296];
+  for (const idx of KEY_PTS) {
+    const p = lms[idx];
+    lmCtx.beginPath();
+    lmCtx.arc(p.x * 320, p.y * 240, 2, 0, Math.PI*2);
+    lmCtx.fill();
+  }
+
+  // 統計更新
+  document.getElementById('s-blink-l').textContent = (state.blinkL * 100).toFixed(0) + '%';
+  document.getElementById('s-blink-r').textContent = (state.blinkR * 100).toFixed(0) + '%';
+  document.getElementById('s-mouth').textContent   = (state.mouth  * 100).toFixed(0) + '%';
+  document.getElementById('s-brow').textContent    = state.brow.toFixed(2);
+  document.getElementById('s-roll').textContent    = (state.roll  * 45).toFixed(1) + '°';
+  document.getElementById('s-pitch').textContent   = (state.pitch * 30).toFixed(1) + '°';
+  document.getElementById('s-yaw').textContent     = (state.yaw   * 45).toFixed(1) + '°';
+}
+
+function onHandResults(results) {
+  state.leftHand = null;
+  state.rightHand = null;
+  if (!results.multiHandLandmarks) return;
+
+  lmCtx.fillStyle = 'rgba(255,180,80,0.7)';
+  for (let i = 0; i < results.multiHandLandmarks.length; i++) {
+    const lms = results.multiHandLandmarks[i];
+    const label = results.multiHandedness[i].label; // 'Left' or 'Right'
+
+    analyzeHand(lms, label);
+    if (label === 'Left')  { state.leftHand = lms;  document.getElementById('s-lhand').textContent = '検出 ✓'; }
+    if (label === 'Right') { state.rightHand = lms; document.getElementById('s-rhand').textContent = '検出 ✓'; }
+
+    for (const p of lms) {
+      lmCtx.beginPath();
+      lmCtx.arc(p.x * 320, p.y * 240, 2, 0, Math.PI*2);
+      lmCtx.fill();
+    }
+  }
+  if (!state.leftHand)  document.getElementById('s-lhand').textContent = '-';
+  if (!state.rightHand) document.getElementById('s-rhand').textContent = '-';
+  document.getElementById('s-fist-l').textContent = state.fistL > 0.6 ? 'グー ✊' : 'パー 🖐️';
+  document.getElementById('s-fist-r').textContent = state.fistR > 0.6 ? 'グー ✊' : 'パー 🖐️';
+}
+
+// ────── アバター描画 ──────
+const avatarCanvas = document.getElementById('avatar-canvas');
+const ctx = avatarCanvas.getContext('2d');
+
+// パーティクル（背景キラキラ）
+const particles = Array.from({length: 40}, () => ({
+  x: Math.random(), y: Math.random(),
+  vx: (Math.random() - 0.5) * 0.001,
+  vy: -Math.random() * 0.001 - 0.0003,
+  r: Math.random() * 2 + 1,
+  a: Math.random(),
+}));
+
+function drawAvatar() {
+  const W = avatarCanvas.width  = avatarCanvas.clientWidth;
+  const H = avatarCanvas.height = avatarCanvas.clientHeight;
+
+  smoothState();
+  const s = state;
+
+  // 背景
+  const bg = ctx.createRadialGradient(W/2, H*0.3, 0, W/2, H/2, W*0.8);
+  bg.addColorStop(0, '#1a1a4e');
+  bg.addColorStop(1, '#0d0d1a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // パーティクル更新
+  for (const p of particles) {
+    p.x += p.vx; p.y += p.vy;
+    if (p.y < 0) { p.y = 1; p.x = Math.random(); }
+    if (p.x < 0 || p.x > 1) p.vx *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(180,200,255,${p.a * 0.4})`;
+    ctx.fill();
+  }
+
+  // ── アバター中心 ──
+  const cx = W / 2 + s._yaw * W * 0.06;
+  const cy = H * 0.38 + s._pitch * H * 0.05;
+  const headR = Math.min(W, H) * 0.16;
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(s._roll * 0.25);
+
+  // 髪（後ろ）
+  drawHairBack(headR);
+
+  // 首
+  ctx.fillStyle = '#f5c5a0';
+  ctx.fillRect(-headR*0.22, headR*0.85, headR*0.44, headR*0.5);
+
+  // 体（シンプルな服）
+  drawBody(headR, H, s);
+
+  // 顔ベース（楕円）
+  ctx.fillStyle = '#f5c5a0';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, headR, headR*1.1, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // 頬っぺた
+  ctx.fillStyle = 'rgba(255,150,120,0.35)';
+  ctx.beginPath(); ctx.ellipse(-headR*0.5, headR*0.18, headR*0.22, headR*0.12, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse( headR*0.5, headR*0.18, headR*0.22, headR*0.12, 0, 0, Math.PI*2); ctx.fill();
+
+  // 目
+  drawEye(ctx, -headR*0.32, -headR*0.06, headR*0.22, headR*0.16, s._blinkL, s._brow, false);
+  drawEye(ctx,  headR*0.32, -headR*0.06, headR*0.22, headR*0.16, s._blinkR, s._brow, true);
+
+  // 鼻（小さい点）
+  ctx.fillStyle = 'rgba(180,100,80,0.5)';
+  ctx.beginPath(); ctx.arc(0, headR*0.12, headR*0.04, 0, Math.PI*2); ctx.fill();
+
+  // 口
+  drawMouth(ctx, 0, headR*0.38, headR, s._mouth);
+
+  // 眉毛
+  drawBrows(ctx, headR, s._brow, s._yaw);
+
+  // 前髪・髪（前）
+  drawHairFront(headR);
+
+  ctx.restore();
+
+  // 手のオーバーレイ
+  if (state.leftHand || state.rightHand) {
+    drawHandOverlay(W, H);
+  }
+
+  requestAnimationFrame(drawAvatar);
+}
+
+function drawBody(headR, H, s) {
+  const bodyY = headR * 1.1;
+  const bodyH = headR * 2.0;
+
+  // 肩〜胴体
+  ctx.fillStyle = '#5566cc';
+  ctx.beginPath();
+  ctx.moveTo(-headR*0.9, bodyY);
+  ctx.quadraticCurveTo(-headR*1.1, bodyY + bodyH*0.4, -headR*0.7, bodyY + bodyH);
+  ctx.lineTo( headR*0.7, bodyY + bodyH);
+  ctx.quadraticCurveTo(headR*1.1, bodyY + bodyH*0.4, headR*0.9, bodyY);
+  ctx.closePath();
+  ctx.fill();
+
+  // 襟
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.moveTo(-headR*0.25, bodyY);
+  ctx.lineTo(0, bodyY + headR*0.4);
+  ctx.lineTo( headR*0.25, bodyY);
+  ctx.closePath();
+  ctx.fill();
+
+  // 腕（グーで動く）
+  drawArm(ctx, -headR*0.9, bodyY + headR*0.2, -1, s.fistL);
+  drawArm(ctx,  headR*0.9, bodyY + headR*0.2,  1, s.fistR);
+}
+
+function drawArm(ctx, x, y, dir, fist) {
+  const wave = Math.sin(Date.now() * 0.002 + dir) * 0.05;
+  const raise = fist > 0.6 ? -0.4 : 0;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(dir * (0.3 + wave + raise));
+  // 上腕
+  ctx.fillStyle = '#5566cc';
+  ctx.beginPath();
+  const hr = 40;
+  ctx.ellipse(0, hr*0.5, hr*0.35, hr*0.55, 0, 0, Math.PI*2);
+  ctx.fill();
+  // 手
+  ctx.translate(0, hr*1.0);
+  ctx.fillStyle = '#f5c5a0';
+  ctx.beginPath();
+  ctx.arc(0, 0, hr*0.3, 0, Math.PI*2);
+  ctx.fill();
+  // 指（グーだと丸く）
+  if (fist < 0.5) {
+    for (let i = -1; i <= 1; i++) {
+      ctx.beginPath();
+      ctx.ellipse(i * hr*0.12, -hr*0.28, hr*0.08, hr*0.22, i*0.15, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+function drawEye(ctx, x, y, rx, ry, blink, brow, isRight) {
+  ctx.save();
+  ctx.translate(x, y);
+
+  // 目の白
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // まばたきクリップ
+  const openH = ry * Math.max(0.03, 1 - blink);
+  ctx.beginPath();
+  ctx.ellipse(0, 0, rx, openH, 0, 0, Math.PI*2);
+  ctx.clip();
+
+  // 虹彩（青紫グラデ）
+  const irisGrad = ctx.createRadialGradient(rx*0.1, -ry*0.15, 0, 0, 0, ry*0.7);
+  irisGrad.addColorStop(0, '#7090ff');
+  irisGrad.addColorStop(0.5, '#3355cc');
+  irisGrad.addColorStop(1, '#1122aa');
+  ctx.fillStyle = irisGrad;
+  ctx.beginPath();
+  ctx.arc(0, 0, ry*0.65, 0, Math.PI*2);
+  ctx.fill();
+
+  // 瞳孔
+  ctx.fillStyle = '#111';
+  ctx.beginPath();
+  ctx.arc(0, 0, ry*0.38, 0, Math.PI*2);
+  ctx.fill();
+
+  // ハイライト
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.beginPath(); ctx.arc(-ry*0.18, -ry*0.22, ry*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc( ry*0.22,  ry*0.1,  ry*0.08, 0, Math.PI*2); ctx.fill();
+
+  ctx.restore();
+
+  // まつ毛（上）
+  ctx.strokeStyle = '#2233aa';
+  ctx.lineWidth = ry * 0.18;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.ellipse(x, y, rx, ry, 0, Math.PI, Math.PI*2);
+  ctx.stroke();
+
+  // まつ毛のピョン先
+  const lashCount = 5;
+  for (let i = 0; i < lashCount; i++) {
+    const angle = Math.PI + (i / (lashCount-1)) * Math.PI;
+    const lx = x + Math.cos(angle) * rx;
+    const ly = y + Math.sin(angle) * ry;
+    const nx = lx + Math.cos(angle - 0.3) * ry * 0.35;
+    const ny = ly + Math.sin(angle - 0.3) * ry * 0.35;
+    ctx.strokeStyle = '#1a2a88';
+    ctx.lineWidth = ry * 0.12;
+    ctx.beginPath();
+    ctx.moveTo(lx, ly);
+    ctx.lineTo(nx, ny);
+    ctx.stroke();
+  }
+}
+
+function drawMouth(ctx, x, y, headR, openAmt) {
+  ctx.save();
+  ctx.translate(x, y);
+  const mw = headR * 0.35;
+  const mh = headR * 0.12 + openAmt * headR * 0.18;
+
+  // 口輪郭
+  ctx.strokeStyle = '#c06060';
+  ctx.lineWidth = headR * 0.04;
+  ctx.fillStyle = openAmt > 0.1 ? '#cc3333' : 'rgba(200,60,60,0)';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, mw, mh, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.stroke();
+
+  if (openAmt > 0.15) {
+    // 歯
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.ellipse(0, -mh*0.1, mw*0.75, mh*0.55, 0, 0, Math.PI);
+    ctx.fill();
+
+    // 舌
+    ctx.fillStyle = '#ff9090';
+    ctx.beginPath();
+    ctx.ellipse(0, mh*0.4, mw*0.4, mh*0.35, 0, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // 口角の笑み
+  ctx.strokeStyle = '#c06060';
+  ctx.lineWidth = headR*0.03;
+  ctx.beginPath();
+  ctx.moveTo(-mw, 0);
+  ctx.quadraticCurveTo(-mw*1.25, mh*0.6, -mw*0.9, mh*0.7);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo( mw, 0);
+  ctx.quadraticCurveTo( mw*1.25, mh*0.6,  mw*0.9, mh*0.7);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawBrows(ctx, headR, brow, yaw) {
+  const lift = brow * headR * 0.06;
+  const tilt = yaw * headR * 0.04;
+
+  ctx.strokeStyle = '#5533aa';
+  ctx.lineWidth = headR * 0.06;
+  ctx.lineCap = 'round';
+
+  // 左眉
+  ctx.beginPath();
+  ctx.moveTo(-headR*0.56, -headR*0.27 - lift - tilt);
+  ctx.quadraticCurveTo(-headR*0.32, -headR*0.32 - lift - tilt*0.5, -headR*0.1, -headR*0.26 - lift);
+  ctx.stroke();
+
+  // 右眉
+  ctx.beginPath();
+  ctx.moveTo( headR*0.1,  -headR*0.26 - lift);
+  ctx.quadraticCurveTo(headR*0.32, -headR*0.32 - lift + tilt*0.5, headR*0.56, -headR*0.27 - lift + tilt);
+  ctx.stroke();
+}
+
+function drawHairBack(headR) {
+  ctx.fillStyle = '#221155';
+  // 後ろ髪
+  ctx.beginPath();
+  ctx.ellipse(0, headR*0.2, headR*1.1, headR*1.25, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // サイドの髪
+  ctx.beginPath();
+  ctx.moveTo(-headR, headR*0.0);
+  ctx.quadraticCurveTo(-headR*1.35, headR*0.6, -headR*0.9, headR*1.4);
+  ctx.quadraticCurveTo(-headR*0.5, headR*1.6, -headR*0.4, headR*1.0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo( headR, headR*0.0);
+  ctx.quadraticCurveTo( headR*1.35, headR*0.6,  headR*0.9, headR*1.4);
+  ctx.quadraticCurveTo( headR*0.5, headR*1.6,  headR*0.4, headR*1.0);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawHairFront(headR) {
+  ctx.fillStyle = '#2e1a6e';
+  // 前髪
+  const fringe = [
+    [-headR, -headR*0.3], [-headR*0.8, -headR*1.15], [-headR*0.5, -headR*0.9],
+    [-headR*0.2, -headR*1.2], [headR*0.2, -headR*1.0], [headR*0.5, -headR*1.15],
+    [headR*0.8, -headR*0.85], [headR, -headR*0.3],
+  ];
+  ctx.beginPath();
+  ctx.moveTo(fringe[0][0], fringe[0][1]);
+  for (let i = 1; i < fringe.length; i++) {
+    const mid = [(fringe[i-1][0]+fringe[i][0])/2, (fringe[i-1][1]+fringe[i][1])/2];
+    ctx.quadraticCurveTo(fringe[i-1][0], fringe[i-1][1], mid[0], mid[1]);
+  }
+  ctx.lineTo(fringe[fringe.length-1][0], fringe[fringe.length-1][1]);
+  ctx.lineTo(headR*1.05, headR*0.2);
+  ctx.quadraticCurveTo(0, headR*1.3, -headR*1.05, headR*0.2);
+  ctx.closePath();
+  ctx.fill();
+
+  // アホ毛（特徴的なくるりん）
+  ctx.strokeStyle = '#2e1a6e';
+  ctx.lineWidth = headR*0.06;
+  ctx.beginPath();
+  ctx.moveTo(headR*0.15, -headR*1.1);
+  ctx.quadraticCurveTo(headR*0.4, -headR*1.5, headR*0.2, -headR*1.6);
+  ctx.quadraticCurveTo(headR*0.0, -headR*1.7, headR*0.1, -headR*1.5);
+  ctx.stroke();
+}
+
+function drawHandOverlay(W, H) {
+  // 手のシルエットを右上に小さく表示
+  const hands = [
+    { data: state.leftHand,  label: 'L', ox: W*0.05, fist: state.fistL },
+    { data: state.rightHand, label: 'R', ox: W*0.12, fist: state.fistR },
+  ];
+
+  for (const hand of hands) {
+    if (!hand.data) continue;
+    const pts = hand.data;
+    const oy = H * 0.87;
+    const scale = H * 0.18;
+
+    ctx.save();
+    ctx.translate(hand.ox, oy);
+
+    // 接続線
+    const CONNECTIONS = [
+      [0,1],[1,2],[2,3],[3,4],
+      [0,5],[5,6],[6,7],[7,8],
+      [5,9],[9,10],[10,11],[11,12],
+      [9,13],[13,14],[14,15],[15,16],
+      [13,17],[17,18],[18,19],[19,20],[0,17]
+    ];
+    ctx.strokeStyle = hand.fist > 0.6 ? 'rgba(255,100,100,0.8)' : 'rgba(100,200,255,0.8)';
+    ctx.lineWidth = 2;
+    for (const [a, b] of CONNECTIONS) {
+      ctx.beginPath();
+      ctx.moveTo((pts[a].x - 0.5) * scale * 1.5, (pts[a].y - 0.5) * scale * 1.5);
+      ctx.lineTo((pts[b].x - 0.5) * scale * 1.5, (pts[b].y - 0.5) * scale * 1.5);
+      ctx.stroke();
+    }
+
+    // 関節点
+    ctx.fillStyle = '#fff';
+    for (const p of pts) {
+      ctx.beginPath();
+      ctx.arc((p.x - 0.5)*scale*1.5, (p.y - 0.5)*scale*1.5, 3, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+}
+</script>
+</body>
+</html>
