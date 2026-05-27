@@ -51,11 +51,21 @@
     .job-table tr:last-child { border-bottom: none; }
     .job-table th { width: 120px; font-size: 12px; font-weight: 700; color: var(--text-sub); padding: 10px 0; text-align: left; vertical-align: top; }
     .job-table td { font-size: 13px; color: var(--text); padding: 10px 0; line-height: 1.7; }
+    .no-jobs-banner { background: #fff; border: 2px solid #fde68a; border-radius: 16px; padding: 20px 24px; margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+    .no-jobs-badge { background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 50px; white-space: nowrap; border: 1px solid #fde68a; }
+    .no-jobs-banner p { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+    .no-jobs-box { background: #fff; border: 1.5px dashed var(--border); border-radius: 16px; padding: 48px 32px; text-align: center; }
+    .no-jobs-icon { font-size: 40px; margin-bottom: 14px; }
+    .no-jobs-title { font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+    .no-jobs-text { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
+    .future-jobs-label { text-align: center; margin: 32px 0 20px; font-size: 12px; font-weight: 700; color: var(--text-sub); letter-spacing: .1em; display: flex; align-items: center; gap: 10px; }
+    .future-jobs-label::before, .future-jobs-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
     .cta-banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); border-radius: 20px; padding: 48px 40px; text-align: center; }
     .cta-banner h2 { font-size: clamp(18px,3vw,22px); font-weight: 900; color: #fff; margin-bottom: 10px; }
     .cta-banner p { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
     .cta-banner a { display: inline-block; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 40px; border-radius: 50px; box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
     footer { background: linear-gradient(135deg, #0f3460 0%, #1e4d8c 100%); color: #fff; padding: 32px 32px; }
+    @media (max-width: 768px) { .no-jobs-banner { flex-direction: column; align-items: flex-start; } }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
@@ -99,30 +109,47 @@
   </div>
   <div class="jobs-section">
     <h2>募集職種</h2>
+
+    <!-- 現在募集なし告知 -->
+    <div class="no-jobs-banner">
+      <span class="no-jobs-badge">⚠️ 現在募集停止中</span>
+      <p>現時点では求人は行っておりません。採用が決まり次第このページでお知らせします。<br>「ぜひ働きたい」という方はお気軽にメールでご連絡ください。</p>
+    </div>
+
+    <div class="future-jobs-label">将来の採用予定ポジション（参考）</div>
+
     <div class="job-card">
       <span class="job-tag">正社員 / 業務委託</span>
-      
+      <div class="job-title">FPアドバイザー（資産運用・ライフプラン相談）</div>
       <table class="job-table">
         <tr><th>業務内容</th><td>個人・法人のお客様への資産運用・ライフプラン・融資に関するFP相談対応</td></tr>
-        <tr><th>応募資格</th><td>FP2級以上取得者（AFP・CFP優遇）、金融機関勤務経験者歓迎</td></tr>
-        <tr><th>勤務地</th><td>応相談（オンライン相談対応可）</td></tr>
-        <tr><th>待遇</th><td>経験・スキルを考慮の上、個別にご相談</td></tr>
+        <tr><th>応募資格</th><td>FP2級以上取得者（AFP・CFP優遇）、金融機関勤務経験者歓迎。未経験でも学ぶ意欲がある方を歓迎します。</td></tr>
+        <tr><th>年収</th><td><strong style="color:var(--navy)">400万〜650万円</strong>（経験・資格・実績により変動。CFP・金融機関経験者は優遇）</td></tr>
+        <tr><th>勤務地</th><td>応相談（オンライン相談対応可・リモートワーク相談可）</td></tr>
+        <tr><th>勤務時間</th><td>9:00〜18:00（残業月10時間以内）</td></tr>
+        <tr><th>休日・休暇</th><td>完全週休2日（土日祝）、有給休暇、特別休暇</td></tr>
+        <tr><th>福利厚生</th><td>社会保険完備（健康保険・厚生年金・雇用保険・労災）、資格取得費用全額補助、服装・髪型自由</td></tr>
       </table>
     </div>
+
     <div class="job-card">
       <span class="job-tag">パート / アルバイト</span>
       <div class="job-title">事務アシスタント（未経験歓迎）</div>
       <table class="job-table">
         <tr><th>業務内容</th><td>相談予約の管理・資料作成・メール対応・その他一般事務</td></tr>
-        <tr><th>応募資格</th><td>基本的なPC操作ができる方。金融業界未経験歓迎</td></tr>
-        <tr><th>勤務地</th><td>応相談</td></tr>
-        <tr><th>待遇</th><td>時給・日数等は応相談</td></tr>
+        <tr><th>応募資格</th><td>基本的なPC操作ができる方。金融業界未経験歓迎。Excel・Wordが使える方優遇。</td></tr>
+        <tr><th>時給</th><td><strong style="color:var(--navy)">1,100円〜</strong>（経験・スキルにより応相談）</td></tr>
+        <tr><th>勤務地</th><td>応相談（在宅勤務相談可）</td></tr>
+        <tr><th>勤務時間</th><td>週2日〜、1日4〜6時間（シフト制・相談可）</td></tr>
+        <tr><th>休日・休暇</th><td>シフト制、有給休暇あり</td></tr>
+        <tr><th>福利厚生</th><td>交通費支給（規定内）、雇用保険・労災適用、服装自由、残業なし</td></tr>
       </table>
     </div>
   </div>
+
   <div class="cta-banner">
-    <h2>まずはお気軽にご連絡ください</h2>
-    <p>採用に関するお問い合わせは、メールにてお受けしています。</p>
+    <h2>「いつか一緒に働きたい」方、大歓迎です</h2>
+    <p>現在募集はありませんが、ご関心のある方はお気軽にメールください。求人開始時に優先的にご連絡します。</p>
     <a href="#" id="recruit-mail">採用担当へメールを送る</a>
     <script>(function(){var u='lifeassetpartners',d='gmail.com';var el=document.getElementById('recruit-mail');el.href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=採用についてのお問い合わせ';el.target='_blank';el.rel='noopener noreferrer';})();</script>
   </div>
