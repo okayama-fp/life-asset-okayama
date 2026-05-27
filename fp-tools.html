@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;">
+  <title>FPツール集｜ライフアセットオフィス</title>
+  <meta name="description" content="家計診断・老後資金・NISA複利・相続税・保険診断・FP用語辞典。ライフアセットオフィスの無料FPツール集。">
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FPツール集｜ライフアセットオフィス">
+  <meta property="og:description" content="家計診断・老後資金・NISA複利・相続税・保険診断・FP用語辞典。6つの無料FPツールで家計を可視化。">
+  <meta property="og:url" content="https://lifeassetoffice.net/fp-tools.html">
+  <meta property="og:image" content="https://lifeassetoffice.net/images/fp-avatar.png">
+  <meta property="og:site_name" content="ライフアセットオフィス">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FPツール集｜ライフアセットオフィス">
+  <meta name="twitter:description" content="家計診断・老後資金・NISA複利・相続税・保険診断・FP用語辞典。6つの無料FPツール。">
+  <meta name="twitter:image" content="https://lifeassetoffice.net/images/fp-avatar.png">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PKDH2DR522');</script>
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --sky:#0ea5e9;--sky-light:#38bdf8;--sky-pale:#e0f2fe;--sky-bg:#dff3ff;
+      --navy:#0f3460;--navy-soft:#1e4d8c;--white:#fff;
+      --gray-bg:#f1f5f9;--text:#1e293b;--text-sub:#64748b;--border:#e2e8f0;
+      --green:#16a34a;--green-l:#dcfce7;--green-bg:#f0fdf4;
+      --orange:#ea580c;--orange-l:#ffedd5;
+      --red:#dc2626;--red-l:#fee2e2;
+      --purple:#7c3aed;--purple-l:#ede9fe;--purple-b:#ddd6fe;
+      --yellow:#d97706;--yellow-l:#fef3c7;
+    }
+    body{font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif;color:var(--text);line-height:1.7;background:#f8fbff;}
+    a{text-decoration:none;color:inherit;}
+    /* Header */
+    header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+    .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .logo-main{font-size:20px;font-weight:900;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .logo-text .tagline{font-size:10px;color:var(--text-sub);}
+    nav{display:flex;align-items:center;gap:20px;}
+    nav a{font-size:13px;color:var(--text-sub);font-weight:500;transition:color .2s;}
+    nav a:hover,nav a.active{color:var(--sky);}
+    .btn-cta{display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:50px;flex-shrink:0;box-shadow:0 4px 14px rgba(14,165,233,.3);}
+    /* Hero */
+    .page-hero{background:linear-gradient(135deg,#b8e4f9 0%,#dff3ff 50%,#f4fbff 100%);padding:48px 24px 40px;text-align:center;}
+    .page-hero .label{display:inline-flex;align-items:center;gap:6px;background:var(--sky-pale);color:var(--sky);font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;margin-bottom:14px;}
+    .page-hero h1{font-size:clamp(22px,4vw,34px);font-weight:900;color:var(--navy);margin-bottom:8px;}
+    .page-hero p{font-size:13px;color:var(--text-sub);}
+    /* Breadcrumb */
+    .breadcrumb{max-width:1100px;margin:0 auto;padding:14px 24px;font-size:12px;color:var(--text-sub);display:flex;gap:6px;}
+    .breadcrumb a{color:var(--sky);}
+    .breadcrumb span{opacity:.5;}
+    /* Main layout */
+    .main-wrap{max-width:960px;margin:0 auto;padding:0 20px 80px;}
+    /* Tab nav */
+    .tab-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-bottom:24px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:8px;}
+    .tab-nav::-webkit-scrollbar{display:none;}
+    .tab-btn{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:10px 16px;border-radius:10px;border:none;background:transparent;font-size:13px;font-weight:700;color:var(--text-sub);cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .tab-btn:hover{background:var(--sky-bg);color:var(--sky);}
+    .tab-btn.active{background:var(--sky);color:#fff;box-shadow:0 2px 8px rgba(14,165,233,.35);}
+    .tab-btn .icon{font-size:16px;}
+    /* Tab pane */
+    .tab-pane{display:none;}
+    .tab-pane.active{display:block;}
+    /* Section title */
+    .sec-title{font-size:clamp(16px,2.5vw,20px);font-weight:900;color:var(--navy);margin-bottom:20px;}
+    .sec-sub{font-size:13px;color:var(--text-sub);margin-bottom:20px;line-height:1.8;}
+    /* Card */
+    .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;}
+    .card-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:16px;}
+    /* Input grid */
+    .input-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:20px;}
+    .input-group{display:flex;flex-direction:column;gap:6px;}
+    .input-group label{font-size:12px;font-weight:700;color:var(--text-sub);}
+    .input-group input,.input-group select{border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--text);background:#fff;transition:border .2s;font-family:inherit;}
+    .input-group input:focus,.input-group select:focus{outline:none;border-color:var(--sky);}
+    .input-hint{font-size:11px;color:var(--text-sub);}
+    /* Calc btn */
+    .calc-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--sky),var(--sky-light));color:#fff;font-size:14px;font-weight:700;padding:12px 28px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(14,165,233,.35);transition:transform .15s,box-shadow .15s;}
+    .calc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(14,165,233,.45);}
+    /* Result panel */
+    .result-panel{background:var(--gray-bg);border-radius:14px;padding:20px;margin-top:20px;}
+    .result-panel.hidden{display:none;}
+    .result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .result-row:last-child{border-bottom:none;}
+    .result-row .lbl{color:var(--text-sub);}
+    .result-row .val{font-weight:700;color:var(--navy);}
+    /* Badge */
+    .badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;}
+    .badge-green{background:var(--green-l);color:var(--green);}
+    .badge-red{background:var(--red-l);color:var(--red);}
+    .badge-orange{background:var(--orange-l);color:var(--orange);}
+    .badge-purple{background:var(--purple-l);color:var(--purple);}
+    .badge-yellow{background:var(--yellow-l);color:var(--yellow);}
+    /* Donut */
+    #donut-canvas{display:block;margin:0 auto 16px;}
+    /* Progress bar */
+    .prog-wrap{margin:8px 0;}
+    .prog-label{display:flex;justify-content:space-between;font-size:12px;color:var(--text-sub);margin-bottom:4px;}
+    .prog-bar{height:10px;border-radius:99px;background:var(--gray-bg);overflow:hidden;}
+    .prog-fill{height:100%;border-radius:99px;transition:width .6s ease;}
+    /* Advice box */
+    .advice-box{border-radius:12px;padding:16px 18px;margin-top:12px;}
+    .advice-box.info{background:var(--sky-bg);border-left:4px solid var(--sky);}
+    .advice-box.ok{background:var(--green-bg);border-left:4px solid var(--green);}
+    .advice-box.warn{background:var(--orange-l);border-left:4px solid var(--orange);}
+    .advice-box.danger{background:var(--red-l);border-left:4px solid var(--red);}
+    .advice-box .advice-title{font-size:13px;font-weight:800;margin-bottom:8px;}
+    .advice-box ul{padding-left:18px;font-size:13px;color:var(--text);line-height:1.9;}
+    /* Chart canvas */
+    #nisa-canvas,#hobo-canvas{display:block;margin:0 auto;}
+    /* Tabs 4: grid */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    /* Dictionary */
+    .dict-search{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;font-size:14px;font-family:inherit;margin-bottom:16px;}
+    .dict-search:focus{outline:none;border-color:var(--sky);}
+    .dict-item{border-bottom:1px solid var(--border);padding:14px 0;}
+    .dict-item:last-child{border-bottom:none;}
+    .dict-term{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+    .dict-cat{font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;margin-left:8px;background:var(--sky-pale);color:var(--sky);}
+    .dict-def{font-size:13px;color:var(--text-sub);line-height:1.8;}
+    .dict-hidden{display:none;}
+    /* Legend */
+    .legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:10px;}
+    .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-sub);}
+    .legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+    /* Seg */
+    .seg{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+    .seg-btn{padding:7px 14px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;color:var(--text-sub);cursor:pointer;transition:all .2s;}
+    .seg-btn.active{background:var(--sky);color:#fff;border-color:var(--sky);}
+    /* Insurance */
+    .ins-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .ins-row:last-child{border-bottom:none;}
+    /* CTA */
+    .cta-box{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:20px;padding:36px 28px;text-align:center;margin-top:40px;}
+    .cta-box h2{font-size:18px;font-weight:900;color:#fff;margin-bottom:8px;}
+    .cta-box p{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:18px;}
+    .cta-box a{display:inline-block;background:var(--sky);color:#fff;font-size:14px;font-weight:700;padding:12px 32px;border-radius:50px;box-shadow:0 4px 14px rgba(14,165,233,.4);}
+    /* Share */
+    .share-area{text-align:center;margin-top:20px;}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-size:13px;font-weight:700;padding:10px 22px;border-radius:50px;border:none;cursor:pointer;}
+    /* Footer */
+    footer{background:linear-gradient(135deg,#0f3460 0%,#1e4d8c 100%);color:#fff;padding:28px 24px;}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer-logo-text{font-size:18px;font-weight:900;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .footer-contact a{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.75);}
+    /* Highlight number */
+    .big-num{font-size:28px;font-weight:900;color:var(--navy);}
+    .big-num-unit{font-size:14px;color:var(--text-sub);}
+    /* Knowledge box */
+    .know-box{background:var(--yellow-l);border-radius:12px;padding:16px;border-left:4px solid var(--yellow);margin:12px 0;}
+    .know-box .know-title{font-size:12px;font-weight:800;color:var(--yellow);margin-bottom:6px;}
+    .know-box p{font-size:13px;color:var(--text);line-height:1.8;}
+    /* Risk meter */
+    .risk-meter{height:16px;border-radius:99px;background:linear-gradient(90deg,#16a34a 0%,#d97706 50%,#dc2626 100%);position:relative;margin:12px 0;}
+    .risk-needle{position:absolute;top:-4px;width:24px;height:24px;background:#fff;border:3px solid var(--navy);border-radius:50%;transform:translateX(-50%);transition:left .6s ease;}
+    @media(max-width:768px){
+      nav{display:none;}
+      .two-col{grid-template-columns:1fr;}
+      .input-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:480px){
+      .input-grid{grid-template-columns:1fr;}
+      .tab-btn{padding:8px 12px;font-size:12px;}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットオフィス</div></div></a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="/service/">サービス</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/recruit/">採用情報</a>
+    </nav>
+    <a href="/#contact" class="btn-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="label">🛠 FP TOOLS</div>
+  <h1>FPツール集</h1>
+  <p>家計・老後・NISA・相続・保険を、プロ視点で一括チェック</p>
+</div>
+<div class="breadcrumb"><a href="/">ホーム</a><span>&rsaquo;</span><span>FPツール集</span></div>
+
+<div class="main-wrap">
+  <!-- Tab nav -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" onclick="switchTab('kakeibo')" role="tab"><span class="icon">💰</span>家計診断</button>
+    <button class="tab-btn" onclick="switchTab('roago')" role="tab"><span class="icon">👴</span>老後資金</button>
+    <button class="tab-btn" onclick="switchTab('nisa')" role="tab"><span class="icon">📈</span>NISA複利</button>
+    <button class="tab-btn" onclick="switchTab('sozoku')" role="tab"><span class="icon">🏦</span>相続・贈与税</button>
+    <button class="tab-btn" onclick="switchTab('hoken')" role="tab"><span class="icon">🛡️</span>保険診断</button>
+    <button class="tab-btn" onclick="switchTab('jiten')" role="tab"><span class="icon">📚</span>FP用語辞典</button>
+  </nav>
+
+  <!-- ===== TAB 1: 家計診断 ===== -->
+  <div id="tab-kakeibo" class="tab-pane active">
+    <p class="sec-sub">収入と支出を入力すると、貯蓄率・固定費比率・カテゴリ別アドバイスをリアルタイム表示します。マネーフォワード感覚で家計を可視化しましょう。</p>
+    <div class="card">
+      <div class="card-title">📥 月次収支を入力</div>
+      <div class="input-grid">
+        <div class="input-group"><label>手取り月収（万円）</label><input type="number" id="kk-income" value="30" min="1" max="200" oninput="calcKakeibo()"><span class="input-hint">副業・配偶者収入は合算</span></div>
+        <div class="input-group"><label>住居費（万円）</label><input type="number" id="kk-house" value="8" min="0" max="100" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>食費（万円）</label><input type="number" id="kk-food" value="5" min="0" max="50" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>通信費（万円）</label><input type="number" id="kk-comm" value="1.5" min="0" max="20" step="0.1" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>保険料（万円）</label><input type="number" id="kk-ins" value="2" min="0" max="30" step="0.1" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>光熱費（万円）</label><input type="number" id="kk-util" value="1.5" min="0" max="20" step="0.1" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>交通費（万円）</label><input type="number" id="kk-trans" value="1" min="0" max="20" step="0.1" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>娯楽・交際費（万円）</label><input type="number" id="kk-enter" value="2" min="0" max="30" step="0.1" oninput="calcKakeibo()"></div>
+        <div class="input-group"><label>その他（万円）</label><input type="number" id="kk-other" value="1" min="0" max="50" step="0.1" oninput="calcKakeibo()"></div>
+      </div>
+      <div id="kk-result" class="result-panel">
+        <canvas id="donut-canvas" width="200" height="200"></canvas>
+        <div class="legend" id="kk-legend"></div>
+        <div class="result-row"><span class="lbl">手取り月収</span><span class="val" id="kk-r-income">―</span></div>
+        <div class="result-row"><span class="lbl">支出合計</span><span class="val" id="kk-r-expense">―</span></div>
+        <div class="result-row"><span class="lbl">月次収支</span><span class="val" id="kk-r-balance">―</span></div>
+        <div class="result-row"><span class="lbl">貯蓄率</span><span class="val" id="kk-r-rate">―</span></div>
+        <div class="result-row"><span class="lbl">固定費比率</span><span class="val" id="kk-r-fixed">―</span></div>
+        <div class="result-row"><span class="lbl">変動費比率</span><span class="val" id="kk-r-var">―</span></div>
+        <div class="result-row"><span class="lbl">診断</span><span class="val" id="kk-r-diag">―</span></div>
+      </div>
+    </div>
+
+    <!-- Progress bars -->
+    <div class="card" id="kk-bars-card" style="display:none;">
+      <div class="card-title">📊 支出内訳</div>
+      <div id="kk-bars"></div>
+    </div>
+
+    <!-- Advice -->
+    <div id="kk-advice-area"></div>
+
+    <div class="know-box">
+      <div class="know-title">💡 リベ大的・家計最適化の考え方</div>
+      <p>固定費の削減が最大の効果。通信費は格安SIM（月3000円以下が目安）、保険は掛け捨て・必要最低限、住居費は手取りの25〜30%以内が基準。食費は変動費なので削りすぎは逆効果。まず固定費を見直してから変動費を管理しましょう。</p>
+    </div>
+    <div class="share-area"><button class="share-btn" onclick="shareX('家計診断ツール','家計の貯蓄率・固定費比率をチェックしました。')">𝕏 でシェア</button></div>
+  </div>
+
+  <!-- ===== TAB 2: 老後資金診断 ===== -->
+  <div id="tab-roago" class="tab-pane">
+    <p class="sec-sub">65歳時点で必要な老後資金と、現在の積立ペースでの予測資産を比較。月々いくら積み立てれば安心できるかを計算します。</p>
+    <div class="card">
+      <div class="card-title">📋 あなたの情報</div>
+      <div class="input-grid">
+        <div class="input-group"><label>現在の年齢</label><input type="number" id="ro-age" value="35" min="20" max="64" oninput="calcRoago()"></div>
+        <div class="input-group"><label>現在の貯蓄額（万円）</label><input type="number" id="ro-savings" value="200" min="0" max="10000" oninput="calcRoago()"></div>
+        <div class="input-group"><label>月の積立額（万円）</label><input type="number" id="ro-monthly" value="3" min="0" max="100" step="0.5" oninput="calcRoago()"></div>
+        <div class="input-group"><label>年金見込み月額（万円）</label><input type="number" id="ro-nenkin" value="15" min="0" max="30" step="0.5" oninput="calcRoago()"><span class="input-hint">ねんきん定期便で確認</span></div>
+        <div class="input-group"><label>老後の月生活費（万円）</label><input type="number" id="ro-expense" value="25" min="10" max="60" step="0.5" oninput="calcRoago()"><span class="input-hint">総務省調査：夫婦26万/月</span></div>
+        <div class="input-group"><label>想定運用利回り（%）</label><input type="number" id="ro-rate" value="4" min="0" max="10" step="0.1" oninput="calcRoago()"><span class="input-hint">インデックス投資参考値：3〜5%</span></div>
+        <div class="input-group"><label>老後生活年数（年）</label><input type="number" id="ro-years" value="30" min="10" max="40" oninput="calcRoago()"><span class="input-hint">65歳〜95歳 = 30年</span></div>
+      </div>
+    </div>
+    <div id="ro-result" class="result-panel hidden">
+      <canvas id="hobo-canvas" width="560" height="180"></canvas>
+      <div style="margin-top:16px;">
+        <div class="result-row"><span class="lbl">65歳時点の予測資産</span><span class="val" id="ro-r-asset">―</span></div>
+        <div class="result-row"><span class="lbl">老後の必要資金総額</span><span class="val" id="ro-r-need">―</span></div>
+        <div class="result-row"><span class="lbl">年金総受取額（30年）</span><span class="val" id="ro-r-nenkin">―</span></div>
+        <div class="result-row"><span class="lbl">不足額</span><span class="val" id="ro-r-gap">―</span></div>
+        <div class="result-row"><span class="lbl">不足を埋める月積立（今から）</span><span class="val" id="ro-r-need-monthly">―</span></div>
+        <div class="result-row"><span class="lbl">診断</span><span class="val" id="ro-r-diag">―</span></div>
+      </div>
+    </div>
+    <div id="ro-advice-area"></div>
+    <div class="know-box">
+      <div class="know-title">💡 老後2000万円問題の本当の意味</div>
+      <p>金融庁報告書（2019）の2000万円は「夫婦・平均的生活費・年金の差額5.5万円×360ヶ月」の試算。あくまで平均値。実際は年金額・生活費・運用次第で変わります。大切なのは「自分の数字」を把握すること。インデックス投資の複利効果で30年後に大きな差が生まれます。</p>
+    </div>
+    <div class="share-area"><button class="share-btn" onclick="shareX('老後資金診断','老後の必要資金と現在の積立ペースを確認しました。')">𝕏 でシェア</button></div>
+  </div>
+
+  <!-- ===== TAB 3: NISA複利シミュレーター ===== -->
+  <div id="tab-nisa" class="tab-pane">
+    <p class="sec-sub">つみたてNISA・新NISAの非課税メリットを可視化。課税口座との差額を確認して、長期積立の力を体感しましょう。</p>
+    <div class="card">
+      <div class="card-title">📋 積立条件</div>
+      <div class="input-grid">
+        <div class="input-group"><label>月積立額（万円）</label><input type="number" id="ns-monthly" value="3" min="0.1" max="30" step="0.1" oninput="calcNisa()"><span class="input-hint">新NISA：月30万まで（年360万）</span></div>
+        <div class="input-group"><label>積立期間（年）</label><input type="number" id="ns-years" value="20" min="1" max="40" oninput="calcNisa()"></div>
+        <div class="input-group"><label>年利回り（%）</label><input type="number" id="ns-rate" value="5" min="0.1" max="15" step="0.1" oninput="calcNisa()"><span class="input-hint">S&amp;P500過去平均：約7%（名目）</span></div>
+        <div class="input-group"><label>課税口座の税率（%）</label><input type="number" id="ns-tax" value="20.315" min="1" max="50" step="0.001" oninput="calcNisa()"><span class="input-hint">所得税+住民税+復興: 20.315%</span></div>
+      </div>
+    </div>
+    <div id="ns-result" class="result-panel hidden">
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#0ea5e9;"></div>元本</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7c3aed;"></div>NISA運用益（非課税）</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#e2e8f0;"></div>課税口座の税金ロス</div>
+      </div>
+      <canvas id="nisa-canvas" width="560" height="220"></canvas>
+      <div style="margin-top:16px;">
+        <div class="result-row"><span class="lbl">積立元本総額</span><span class="val" id="ns-r-principal">―</span></div>
+        <div class="result-row"><span class="lbl">NISA口座の最終資産</span><span class="val" id="ns-r-nisa">―</span></div>
+        <div class="result-row"><span class="lbl">課税口座の最終資産</span><span class="val" id="ns-r-taxed">―</span></div>
+        <div class="result-row"><span class="lbl">NISA非課税メリット</span><span class="val" id="ns-r-benefit">―</span></div>
+        <div class="result-row"><span class="lbl">NISA利回り（実質）</span><span class="val" id="ns-r-eff">―</span></div>
+      </div>
+    </div>
+    <div id="ns-advice-area"></div>
+    <div class="know-box">
+      <div class="know-title">💡 新NISA（2024年〜）のポイント</div>
+      <p>年間投資枠：つみたて枠120万＋成長投資枠240万＝計360万円。生涯非課税枠1800万円。期間無制限・非課税。売却後は翌年に枠が復活。長期・分散・低コストのインデックスファンドが基本。信託報酬0.1%以下を目安に選ぶと20年で大きな差になります。</p>
+    </div>
+    <div class="share-area"><button class="share-btn" onclick="shareX('NISA複利シミュレーター','NISAの非課税メリットをシミュレーションしました。')">𝕏 でシェア</button></div>
+  </div>
+
+  <!-- ===== TAB 4: 相続・贈与税 ===== -->
+  <div id="tab-sozoku" class="tab-pane">
+    <p class="sec-sub">相続税の基礎控除と相続税額、贈与税の計算を行います。事前の対策で節税できる金額を把握しましょう。</p>
+    <div class="two-col">
+      <!-- 相続税 -->
+      <div class="card">
+        <div class="card-title">🏛 相続税シミュレーター</div>
+        <div class="input-grid" style="grid-template-columns:1fr;">
+          <div class="input-group"><label>遺産総額（万円）</label><input type="number" id="so-estate" value="8000" min="0" max="200000" oninput="calcSozoku()"></div>
+          <div class="input-group"><label>法定相続人の数（人）</label><input type="number" id="so-heirs" value="2" min="1" max="10" oninput="calcSozoku()"></div>
+          <div class="input-group"><label>うち配偶者（有=1/無=0）</label><select id="so-spouse" onchange="calcSozoku()"><option value="1">配偶者あり</option><option value="0">配偶者なし</option></select></div>
+          <div class="input-group"><label>配偶者の取得割合（%）</label><input type="number" id="so-spouse-share" value="50" min="0" max="100" oninput="calcSozoku()"></div>
+        </div>
+        <div id="so-result" class="result-panel hidden">
+          <div class="result-row"><span class="lbl">基礎控除額</span><span class="val" id="so-r-deduct">―</span></div>
+          <div class="result-row"><span class="lbl">課税遺産総額</span><span class="val" id="so-r-taxbase">―</span></div>
+          <div class="result-row"><span class="lbl">相続税総額（目安）</span><span class="val" id="so-r-total">―</span></div>
+          <div class="result-row"><span class="lbl">配偶者控除後</span><span class="val" id="so-r-after">―</span></div>
+          <div class="result-row"><span class="lbl">実効税率</span><span class="val" id="so-r-rate">―</span></div>
+          <div class="result-row"><span class="lbl">診断</span><span class="val" id="so-r-diag">―</span></div>
+        </div>
+      </div>
+      <!-- 贈与税 -->
+      <div class="card">
+        <div class="card-title">🎁 贈与税シミュレーター</div>
+        <div class="seg" id="zoyo-seg">
+          <button class="seg-btn active" onclick="setZoyoType('rekinen')">暦年贈与</button>
+          <button class="seg-btn" onclick="setZoyoType('seisan')">相続時精算課税</button>
+        </div>
+        <div id="zoyo-rekinen">
+          <div class="input-grid" style="grid-template-columns:1fr;">
+            <div class="input-group"><label>1年間の贈与額（万円）</label><input type="number" id="zo-gift" value="300" min="0" max="10000" oninput="calcZoyo()"></div>
+            <div class="input-group"><label>贈与者との関係</label><select id="zo-rel" onchange="calcZoyo()"><option value="special">直系尊属（親・祖父母）</option><option value="general">その他</option></select></div>
+          </div>
+          <div id="zo-result" class="result-panel hidden">
+            <div class="result-row"><span class="lbl">暦年控除額</span><span class="val">110万円</span></div>
+            <div class="result-row"><span class="lbl">課税対象額</span><span class="val" id="zo-r-taxbase">―</span></div>
+            <div class="result-row"><span class="lbl">贈与税額</span><span class="val" id="zo-r-tax">―</span></div>
+            <div class="result-row"><span class="lbl">実効税率</span><span class="val" id="zo-r-rate">―</span></div>
+          </div>
+        </div>
+        <div id="zoyo-seisan" style="display:none;">
+          <div class="input-grid" style="grid-template-columns:1fr;">
+            <div class="input-group"><label>贈与累計額（万円）</label><input type="number" id="zo-seisan-total" value="2500" min="0" max="10000" oninput="calcSeisan()"></div>
+          </div>
+          <div id="zo-seisan-result" class="result-panel hidden">
+            <div class="result-row"><span class="lbl">非課税枠</span><span class="val">2,500万円</span></div>
+            <div class="result-row"><span class="lbl">課税対象額</span><span class="val" id="zo-s-taxbase">―</span></div>
+            <div class="result-row"><span class="lbl">贈与税額（精算課税）</span><span class="val" id="zo-s-tax">―</span></div>
+            <div class="result-row"><span class="lbl">注意</span><span class="val" style="font-size:11px;color:var(--orange);">相続時に合算課税あり</span></div>
+          </div>
+        </div>
+        <div class="know-box" style="margin-top:12px;">
+          <div class="know-title">💡 2024年改正のポイント</div>
+          <p>暦年贈与：死亡前7年以内の贈与が相続財産に加算（旧3年）。早めの計画的贈与が重要。相続時精算課税：年110万円の基礎控除が新設（改正後）。</p>
+        </div>
+      </div>
+    </div>
+    <div id="so-advice-area"></div>
+    <div class="share-area"><button class="share-btn" onclick="shareX('相続・贈与税シミュレーター','相続税と贈与税をシミュレーションしました。')">𝕏 でシェア</button></div>
+  </div>
+
+  <!-- ===== TAB 5: 保険診断 ===== -->
+  <div id="tab-hoken" class="tab-pane">
+    <p class="sec-sub">必要保障額を診断します。保険に入りすぎていないか、逆に保障が足りていないかを確認しましょう。高額療養費制度も解説します。</p>
+    <div class="card">
+      <div class="card-title">🛡️ 必要保障額診断（死亡保険）</div>
+      <div class="input-grid">
+        <div class="input-group"><label>現在の年齢</label><input type="number" id="hk-age" value="35" min="18" max="70" oninput="calcHoken()"></div>
+        <div class="input-group"><label>末子が独立するまでの年数</label><input type="number" id="hk-child-yrs" value="20" min="0" max="30" oninput="calcHoken()"><span class="input-hint">子がいない場合は0</span></div>
+        <div class="input-group"><label>遺族の月生活費（万円）</label><input type="number" id="hk-fam-exp" value="22" min="5" max="80" step="0.5" oninput="calcHoken()"></div>
+        <div class="input-group"><label>遺族年金見込み（月/万円）</label><input type="number" id="hk-nenkin" value="10" min="0" max="30" step="0.5" oninput="calcHoken()"><span class="input-hint">国民年金遺族基礎年金等</span></div>
+        <div class="input-group"><label>教育費総額（万円）</label><input type="number" id="hk-edu" value="500" min="0" max="5000" oninput="calcHoken()"><span class="input-hint">子1人あたり国公立:500万/私立:800万</span></div>
+        <div class="input-group"><label>住宅ローン残債（万円）</label><input type="number" id="hk-loan" value="2500" min="0" max="10000" oninput="calcHoken()"><span class="input-hint">団信あれば0</span></div>
+        <div class="input-group"><label>現在の金融資産（万円）</label><input type="number" id="hk-assets" value="300" min="0" max="10000" oninput="calcHoken()"></div>
+        <div class="input-group"><label>現在の死亡保険金額（万円）</label><input type="number" id="hk-current" value="1000" min="0" max="10000" oninput="calcHoken()"></div>
+      </div>
+      <div id="hk-result" class="result-panel hidden">
+        <div class="result-row"><span class="lbl">遺族生活費の総必要額</span><span class="val" id="hk-r-living">―</span></div>
+        <div class="result-row"><span class="lbl">遺族年金総受取（推計）</span><span class="val" id="hk-r-nenkin">―</span></div>
+        <div class="result-row"><span class="lbl">教育費</span><span class="val" id="hk-r-edu">―</span></div>
+        <div class="result-row"><span class="lbl">住宅ローン残債</span><span class="val" id="hk-r-loan">―</span></div>
+        <div class="result-row"><span class="lbl">必要保障額</span><span class="val" id="hk-r-need">―</span></div>
+        <div class="result-row"><span class="lbl">現在の保障</span><span class="val" id="hk-r-cur">―</span></div>
+        <div class="result-row"><span class="lbl">不足 / 余剰</span><span class="val" id="hk-r-gap">―</span></div>
+        <div class="result-row"><span class="lbl">診断</span><span class="val" id="hk-r-diag">―</span></div>
+      </div>
+    </div>
+    <div id="hk-advice-area"></div>
+
+    <!-- 高額療養費 -->
+    <div class="card">
+      <div class="card-title">🏥 高額療養費シミュレーター</div>
+      <p style="font-size:13px;color:var(--text-sub);margin-bottom:14px;">1ヶ月にかかった医療費の自己負担上限を計算します。入院・手術でも大きな金額にはなりにくいです。</p>
+      <div class="input-grid">
+        <div class="input-group"><label>医療費総額（万円）</label><input type="number" id="ht-cost" value="100" min="0" max="2000" oninput="calcKoryoYohi()"></div>
+        <div class="input-group"><label>所得区分</label>
+          <select id="ht-income" onchange="calcKoryoYohi()">
+            <option value="1">区分ア：年収1160万円超</option>
+            <option value="2">区分イ：年収770〜1160万円</option>
+            <option value="3" selected>区分ウ：年収370〜770万円</option>
+            <option value="4">区分エ：年収370万円以下</option>
+            <option value="5">区分オ：住民税非課税</option>
+          </select>
+        </div>
+      </div>
+      <div id="ht-result" class="result-panel hidden">
+        <div class="result-row"><span class="lbl">医療費総額（3割自己負担）</span><span class="val" id="ht-r-nominal">―</span></div>
+        <div class="result-row"><span class="lbl">高額療養費の自己負担上限</span><span class="val" id="ht-r-cap">―</span></div>
+        <div class="result-row"><span class="lbl">還付見込み額</span><span class="val" id="ht-r-refund">―</span></div>
+        <div class="result-row"><span class="lbl">医療保険の必要性</span><span class="val" id="ht-r-diag">―</span></div>
+      </div>
+      <div class="know-box" style="margin-top:14px;">
+        <div class="know-title">💡 高額療養費制度を知れば医療保険は最小限でOK</div>
+        <p>一般的な年収（約370〜770万）の場合、1ヶ月の医療費の自己負担上限は約8〜9万円。長期入院でも月ごとにリセット。貯金が100万円以上あれば医療保険の優先度は低い。就労不能の長期療養リスクには就業不能保険や傷病手当金の確認を。</p>
+      </div>
+    </div>
+    <div class="share-area"><button class="share-btn" onclick="shareX('保険診断ツール','必要保障額と高額療養費をシミュレーションしました。')">𝕏 でシェア</button></div>
+  </div>
+
+  <!-- ===== TAB 6: FP用語辞典 ===== -->
+  <div id="tab-jiten" class="tab-pane">
+    <p class="sec-sub">FP試験・家計管理で頻出する用語を解説。検索ボックスで絞り込めます。</p>
+    <input type="text" class="dict-search" id="dict-search" placeholder="🔍 用語を検索（例：NISA、控除、複利）" oninput="filterDict()">
+    <div id="dict-list"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>数字がわかったら、次のステップへ</h2>
+    <p>診断結果をもとに、具体的なプランを相談したい方はお気軽にどうぞ。</p>
+    <a href="/#contact" id="cta-mail">お問い合わせ</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo-text">Life Asset</div></div>
+    <div class="footer-contact">
+      <a href="#" id="footer-mail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><span id="footer-mail-text"></span></a>
+      <script>(function(){var u='yamakaze8000',d='gmail.com';document.getElementById('footer-mail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;document.getElementById('footer-mail-text').textContent=u+'@'+d;})();</script>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== TAB SWITCHING ===== */
+function switchTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  var pane = document.getElementById('tab-'+id);
+  if(pane) pane.classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  var idx = ['kakeibo','roago','nisa','sozoku','hoken','jiten'].indexOf(id);
+  if(btns[idx]) btns[idx].classList.add('active');
+  if(id==='kakeibo') calcKakeibo();
+  if(id==='roago') calcRoago();
+  if(id==='nisa') calcNisa();
+  if(id==='sozoku'){calcSozoku();calcZoyo();}
+  if(id==='hoken'){calcHoken();calcKoryoYohi();}
+}
+
+/* ===== SHARE ===== */
+function shareX(toolName, msg) {
+  var text = '【'+toolName+'】\n'+msg+'\nライフアセットオフィスのFPツール集で試せます。\n';
+  var url = 'https://lifeassetoffice.net/fp-tools.html';
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url),'_blank','noopener,noreferrer');
+}
+
+/* ===== DONUT CHART ===== */
+function drawDonut(canvas, segments) {
+  var ctx = canvas.getContext('2d');
+  var cx = canvas.width/2, cy = canvas.height/2, r = 76, inner = 44;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  var total = segments.reduce(function(s,seg){return s+seg.value;},0);
+  if(total===0) return;
+  var angle = -Math.PI/2;
+  segments.forEach(function(seg){
+    var sweep = (seg.value/total)*2*Math.PI;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,angle,angle+sweep);
+    ctx.closePath();
+    ctx.fillStyle = seg.color;
+    ctx.fill();
+    angle += sweep;
+  });
+  ctx.beginPath();
+  ctx.arc(cx,cy,inner,0,2*Math.PI);
+  ctx.fillStyle = '#f1f5f9';
+  ctx.fill();
+}
+
+/* ===== 家計診断 ===== */
+var KK_COLORS = ['#0ea5e9','#f59e0b','#10b981','#a855f7','#ef4444','#64748b','#06b6d4','#f97316','#6366f1'];
+var KK_LABELS = ['住居費','食費','通信費','保険料','光熱費','交通費','娯楽・交際費','その他'];
+var KK_IDS    = ['kk-house','kk-food','kk-comm','kk-ins','kk-util','kk-trans','kk-enter','kk-other'];
+var KK_FIXED  = [true,false,true,true,false,true,false,false];
+
+function calcKakeibo() {
+  var inc = parseFloat(document.getElementById('kk-income').value)||0;
+  var vals = KK_IDS.map(function(id){return parseFloat(document.getElementById(id).value)||0;});
+  var exp = vals.reduce(function(s,v){return s+v;},0);
+  var balance = inc - exp;
+  var savRate = inc>0 ? (balance/inc*100) : 0;
+  var fixedExp = vals.reduce(function(s,v,i){return s+(KK_FIXED[i]?v:0);},0);
+  var fixedRate = inc>0 ? (fixedExp/inc*100) : 0;
+  var varRate = inc>0 ? ((exp-fixedExp)/inc*100) : 0;
+
+  document.getElementById('kk-r-income').textContent = inc.toFixed(1)+'万円';
+  document.getElementById('kk-r-expense').textContent = exp.toFixed(1)+'万円';
+  document.getElementById('kk-r-balance').textContent = balance.toFixed(1)+'万円';
+  document.getElementById('kk-r-rate').textContent = savRate.toFixed(1)+'%';
+  document.getElementById('kk-r-fixed').textContent = fixedRate.toFixed(1)+'%';
+  document.getElementById('kk-r-var').textContent = varRate.toFixed(1)+'%';
+
+  var diagEl = document.getElementById('kk-r-diag');
+  var advEl = document.getElementById('kk-advice-area');
+
+  if(savRate >= 30) {
+    diagEl.innerHTML = '<span class="badge badge-green">優秀 🏆</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">✅ 貯蓄率'+savRate.toFixed(1)+'%：優秀な家計です</div><ul><li>貯蓄率30%以上は上位10%レベル。この調子を維持しましょう</li><li>余剰資金はNISA・iDeCoで非課税運用に回すのがベスト</li><li>緊急予備資金（生活費6ヶ月分）は確保できていますか？</li><li>固定費はすでに最適化されている可能性が高い</li></ul></div>';
+  } else if(savRate >= 20) {
+    diagEl.innerHTML = '<span class="badge badge-green">良好 👍</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">👍 貯蓄率'+savRate.toFixed(1)+'%：良好です</div><ul><li>目標は手取りの20%以上。今まさにその水準</li><li>固定費比率'+(fixedRate.toFixed(1))+'%をさらに下げると余裕が生まれます</li><li>通信費が1.5万円超なら格安SIMで月1万円削減も可能</li><li>保険は掛け捨て最小限に整理すると固定費が下がります</li></ul></div>';
+  } else if(savRate >= 10) {
+    diagEl.innerHTML = '<span class="badge badge-yellow">改善余地あり</span>';
+    advEl.innerHTML = '<div class="advice-box warn"><div class="advice-title">⚠️ 貯蓄率'+savRate.toFixed(1)+'%：改善の余地あり</div><ul><li>固定費から見直しを。通信費・保険料・サブスクの棚卸しを実施</li><li>住居費が収入の35%超なら引越しまたは収入アップを検討</li><li>先取り貯蓄（給与日に自動引落）で支出より先に貯蓄を確定させる</li><li>食費は外食を週1回減らすだけで月2〜3万円の改善も可能</li></ul></div>';
+  } else if(balance >= 0) {
+    diagEl.innerHTML = '<span class="badge badge-orange">要改善</span>';
+    advEl.innerHTML = '<div class="advice-box warn"><div class="advice-title">🔶 貯蓄率'+savRate.toFixed(1)+'%：固定費削減が急務</div><ul><li>固定費比率'+(fixedRate.toFixed(1))+'%が高い可能性。通信費・保険・サブスクを見直す</li><li>家計簿アプリで支出を「見える化」し、無意識の出費をカット</li><li>老後・緊急時に備えた積立ができていない状態。まず月1万円から</li><li>ふるさと納税で実質的な節税（返礼品分の節約）も活用を</li></ul></div>';
+  } else {
+    diagEl.innerHTML = '<span class="badge badge-red">赤字 ⚠️</span>';
+    advEl.innerHTML = '<div class="advice-box danger"><div class="advice-title">🔴 月次赤字'+(Math.abs(balance).toFixed(1))+'万円：緊急対応が必要</div><ul><li>まず固定費の全リストアップ。不要なサブスクリプションを即解約</li><li>格安SIM（月1000〜3000円）に切り替えで通信費を最小化</li><li>生命保険を掛け捨て最小限に見直し（貯蓄型・終身はいったん停止）</li><li>収入増（副業・転職）と支出削減を同時に進める</li><li>クレジットカードの一括払い確認。リボ・分割払いは最優先で解消</li></ul></div>';
+  }
+
+  var canvas = document.getElementById('donut-canvas');
+  var segments = vals.map(function(v,i){return {value:v,color:KK_COLORS[i],label:KK_LABELS[i]};});
+  if(balance>0) segments.push({value:balance,color:'#cbd5e1',label:'貯蓄'});
+  drawDonut(canvas, segments);
+
+  var legend = document.getElementById('kk-legend');
+  legend.innerHTML = segments.map(function(s,i){
+    return '<div class="legend-item"><div class="legend-dot" style="background:'+s.color+';"></div>'+s.label+'</div>';
+  }).join('');
+
+  var bars = document.getElementById('kk-bars');
+  bars.innerHTML = KK_LABELS.map(function(lbl,i){
+    var v = vals[i];
+    var pct = inc>0 ? Math.min(v/inc*100,100) : 0;
+    return '<div class="prog-wrap"><div class="prog-label"><span>'+lbl+'</span><span>'+v.toFixed(1)+'万円（'+pct.toFixed(0)+'%）</span></div><div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%;background:'+KK_COLORS[i]+';"></div></div></div>';
+  }).join('');
+
+  document.getElementById('kk-bars-card').style.display = 'block';
+
+  var commWarn = parseFloat(document.getElementById('kk-comm').value)||0;
+  if(commWarn > 1.5) {
+    bars.innerHTML += '<div class="advice-box warn" style="margin-top:8px;"><div class="advice-title">📱 通信費が高め</div><ul><li>通信費'+commWarn.toFixed(1)+'万円は相場より高い可能性。格安SIM（月2000〜3000円）で年間'+((commWarn-0.3)*12).toFixed(0)+'万円の節約が見込めます</li></ul></div>';
+  }
+}
+
+/* ===== 老後資金 ===== */
+function fmtMan(v){return Math.round(v).toLocaleString()+'万円';}
+
+function calcRoago() {
+  var age    = parseFloat(document.getElementById('ro-age').value)||35;
+  var savings= parseFloat(document.getElementById('ro-savings').value)||0;
+  var monthly= parseFloat(document.getElementById('ro-monthly').value)||0;
+  var nenkin = parseFloat(document.getElementById('ro-nenkin').value)||0;
+  var expense= parseFloat(document.getElementById('ro-expense').value)||25;
+  var rate   = (parseFloat(document.getElementById('ro-rate').value)||4)/100;
+  var lifeYrs= parseFloat(document.getElementById('ro-years').value)||30;
+
+  var yrsToRetire = Math.max(65 - age, 0);
+  var monthlyRate = rate/12;
+  var months = yrsToRetire*12;
+
+  // FV of current savings
+  var fvSavings = savings * Math.pow(1+rate, yrsToRetire);
+  // FV of monthly contributions (annuity)
+  var fvMonthly = monthlyRate>0
+    ? monthly * ((Math.pow(1+monthlyRate,months)-1)/monthlyRate)
+    : monthly * months;
+  var totalAsset = fvSavings + fvMonthly;
+
+  var totalNeed  = expense * 12 * lifeYrs;
+  var totalNenkin= nenkin  * 12 * lifeYrs;
+  var gap = totalNeed - totalNenkin - totalAsset;
+
+  // Required monthly to fill gap
+  var reqMonthly = 0;
+  if(gap > 0 && months > 0) {
+    reqMonthly = monthlyRate > 0
+      ? gap / ((Math.pow(1+monthlyRate,months)-1)/monthlyRate)
+      : gap / months;
+  }
+
+  document.getElementById('ro-r-asset').textContent  = fmtMan(totalAsset);
+  document.getElementById('ro-r-need').textContent   = fmtMan(totalNeed);
+  document.getElementById('ro-r-nenkin').textContent = fmtMan(totalNenkin);
+  document.getElementById('ro-r-gap').textContent    = gap>0 ? '<span style="color:var(--red);">'+fmtMan(gap)+'不足</span>' : '<span style="color:var(--green);">'+fmtMan(-gap)+'余剰</span>';
+  document.getElementById('ro-r-gap').innerHTML      = gap>0 ? '<span style="color:var(--red);">'+fmtMan(gap)+' 不足</span>' : '<span style="color:var(--green);">'+fmtMan(-gap)+' 余剰</span>';
+  document.getElementById('ro-r-need-monthly').textContent = gap>0 ? '月'+Math.ceil(reqMonthly)+'万円以上' : '現ペースで達成可能';
+
+  var diagEl = document.getElementById('ro-r-diag');
+  var advEl  = document.getElementById('ro-advice-area');
+  var surplus = totalAsset + totalNenkin - totalNeed;
+
+  if(surplus >= 500) {
+    diagEl.innerHTML = '<span class="badge badge-green">安心 ✅</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">✅ 老後資金は安心の見通しです</div><ul><li>現在の積立ペースで老後を十分カバーできる見通し</li><li>余裕資金はNISA・iDeCoで非課税運用に。税メリットが大きい</li><li>運用リスクに備え、老後10年以内に現金比率を段階的に高める</li><li>インフレ（年2%想定）にも対応できる運用配分を意識する</li></ul></div>';
+  } else if(surplus >= 0) {
+    diagEl.innerHTML = '<span class="badge badge-yellow">やや安心</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">👍 概ね安心ですが、念のため</div><ul><li>ゆとりは少なめ。インフレや長生きリスクに備えて積立を少し増やすと安心</li><li>iDeCo（個人型確定拠出年金）は所得控除あり。節税しながら老後資金を増やせる</li><li>年金の繰下げ受給（66歳〜75歳）で月額を最大84%増やせる可能性</li></ul></div>';
+  } else if(gap <= 500) {
+    diagEl.innerHTML = '<span class="badge badge-orange">やや不足</span>';
+    advEl.innerHTML = '<div class="advice-box warn"><div class="advice-title">⚠️ やや不足の見通し。積立増を検討</div><ul><li>月'+Math.ceil(reqMonthly)+'万円以上の積立で対応可能</li><li>iDeCo（会社員は月2.3万円まで全額控除）の活用が有効</li><li>家計の固定費見直しで積立原資を生み出しましょう</li><li>年金受給を繰り下げる（66歳〜）と月額が増え、不足を補いやすい</li></ul></div>';
+  } else {
+    diagEl.innerHTML = '<span class="badge badge-red">大幅不足 ⚠️</span>';
+    advEl.innerHTML = '<div class="advice-box danger"><div class="advice-title">🔴 大幅不足。今すぐ対策を</div><ul><li>月'+Math.ceil(reqMonthly)+'万円以上の積立が必要。まず家計改善から</li><li>収入増（副業・転職・スキルアップ）も並行して検討</li><li>iDeCoは節税効果が大きい。年収500万で月2万積立なら年4〜5万円の節税</li><li>老後の生活費を見直し、支出の小さいライフスタイルの設計も有効</li><li>住宅の売却・ダウンサイジング等の選択肢も視野に</li></ul></div>';
+  }
+
+  var result = document.getElementById('ro-result');
+  result.classList.remove('hidden');
+
+  // Simple bar chart
+  var canvas = document.getElementById('hobo-canvas');
+  drawRoagoChart(canvas, totalAsset, totalNenkin, totalNeed);
+}
+
+function drawRoagoChart(canvas, asset, nenkin, need) {
+  var ctx = canvas.getContext('2d');
+  var W = canvas.offsetWidth || 560;
+  canvas.width = W;
+  ctx.clearRect(0,0,W,canvas.height);
+  var maxV = Math.max(asset+nenkin, need, 1);
+  var barH = 48; var gap = 20; var labelW = 100; var pad = 20;
+  var barW = W - labelW - pad - 20;
+  var colors = [['#0ea5e9','#7c3aed'],['#16a34a']];
+  var items = [
+    {label:'予測資産＋年金', value: asset+nenkin, parts:[{v:asset,c:'#0ea5e9'},{v:nenkin,c:'#7c3aed'}]},
+    {label:'必要資金総額',    value: need,         parts:[{v:need,c:'#dc2626'}]}
+  ];
+  items.forEach(function(item,i){
+    var y = pad + i*(barH+gap);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '12px sans-serif';
+    ctx.fillText(item.label, 0, y+barH/2+4);
+    var x = labelW;
+    item.parts.forEach(function(p){
+      var w = (p.v/maxV)*barW;
+      ctx.fillStyle = p.c;
+      ctx.beginPath();
+      if(ctx.roundRect) ctx.roundRect(x, y, w, barH, 6);
+      else ctx.rect(x, y, w, barH);
+      ctx.fill();
+      x += w;
+    });
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.fillText(Math.round(item.value).toLocaleString()+'万円', x+6, y+barH/2+4);
+  });
+  // legend
+  var ly = pad + 2*(barH+gap) + 10;
+  [{c:'#0ea5e9',l:'積立資産'},{c:'#7c3aed',l:'年金受取（推計）'},{c:'#dc2626',l:'必要資金'}].forEach(function(leg,i){
+    ctx.fillStyle = leg.c; ctx.fillRect(labelW+i*110, ly, 14, 14);
+    ctx.fillStyle = '#64748b'; ctx.font = '11px sans-serif';
+    ctx.fillText(leg.l, labelW+i*110+18, ly+11);
+  });
+}
+
+/* ===== NISA複利 ===== */
+function calcNisa() {
+  var monthly = parseFloat(document.getElementById('ns-monthly').value)||3;
+  var years   = parseFloat(document.getElementById('ns-years').value)||20;
+  var rate    = (parseFloat(document.getElementById('ns-rate').value)||5)/100;
+  var tax     = (parseFloat(document.getElementById('ns-tax').value)||20.315)/100;
+
+  var principal = monthly * 12 * years;
+  var monthlyRate = rate/12;
+  var months = years*12;
+  var nisaFV = monthly * ((Math.pow(1+monthlyRate,months)-1)/monthlyRate);
+  var nisaGain = nisaFV - principal;
+
+  // taxed: tax on gain
+  var taxedFV = principal + nisaGain * (1-tax);
+  var benefit = nisaFV - taxedFV;
+  var effRate = Math.pow(nisaFV/principal, 1/years) - 1;
+
+  document.getElementById('ns-r-principal').textContent = fmtMan(principal);
+  document.getElementById('ns-r-nisa').textContent = fmtMan(nisaFV);
+  document.getElementById('ns-r-taxed').textContent = fmtMan(taxedFV);
+  document.getElementById('ns-r-benefit').innerHTML = '<span style="color:var(--purple);font-weight:900;">'+fmtMan(benefit)+'（非課税）</span>';
+  document.getElementById('ns-r-eff').textContent = (effRate*100).toFixed(2)+'%';
+
+  var advEl = document.getElementById('ns-advice-area');
+  if(nisaFV > principal * 1.5) {
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">📈 複利の力が発揮されています</div><ul><li>'+years+'年間で元本'+fmtMan(principal)+'が'+fmtMan(nisaFV)+'に成長</li><li>課税口座との差額'+fmtMan(benefit)+'が非課税になるのがNISAの最大のメリット</li><li>長期・分散・低コスト（信託報酬0.1%以下）が鉄則</li><li>新NISA：年360万円（月30万）まで。生涯非課税枠1800万円</li></ul></div>';
+  } else {
+    advEl.innerHTML = '<div class="advice-box info"><div class="advice-title">💡 長期積立ほど複利効果が高まります</div><ul><li>積立期間を延ばすほど複利の恩恵が大きくなります</li><li>利回り5%以上を目指すなら全世界株・S&amp;P500インデックスが候補</li><li>毎月の積立額を増やすか、積立期間を延ばすことで資産が大きく変わります</li></ul></div>';
+  }
+
+  document.getElementById('ns-result').classList.remove('hidden');
+
+  // Draw bar chart
+  var canvas = document.getElementById('nisa-canvas');
+  drawNisaChart(canvas, principal, nisaGain, nisaGain*tax, years);
+}
+
+function drawNisaChart(canvas, principal, nisaGain, taxLoss, years) {
+  var ctx = canvas.getContext('2d');
+  var W = canvas.offsetWidth || 560;
+  canvas.width = W;
+  ctx.clearRect(0,0,W,canvas.height);
+  var H = canvas.height;
+  var padL=40,padR=20,padT=20,padB=30;
+  var chartW = W-padL-padR;
+  var chartH = H-padT-padB;
+  var maxV = principal + nisaGain;
+  var numBars = Math.min(years, 10);
+  var barW = chartW/numBars - 6;
+
+  for(var i=1;i<=numBars;i++){
+    var yr = Math.round(years/numBars*i);
+    var months = yr*12;
+    var rate = parseFloat(document.getElementById('ns-rate').value)||5;
+    var mRate = rate/100/12;
+    var monthly = parseFloat(document.getElementById('ns-monthly').value)||3;
+    var fv = monthly*((Math.pow(1+mRate,months)-1)/mRate);
+    var prin = monthly*12*yr;
+    var gain = fv - prin;
+    var tax = (parseFloat(document.getElementById('ns-tax').value)||20.315)/100;
+    var taxLossV = gain*tax;
+    var x = padL + (i-1)*(barW+6);
+    var maxH = maxV > 0 ? maxV : 1;
+    var prinH = (prin/maxH)*chartH;
+    var gainH = (gain/maxH)*chartH;
+    var lossH = (taxLossV/maxH)*chartH;
+    // NISA bar: principal + gain
+    var y0 = padT+chartH;
+    ctx.fillStyle='#0ea5e9';
+    ctx.fillRect(x, y0-prinH, barW, prinH);
+    ctx.fillStyle='#7c3aed';
+    ctx.fillRect(x, y0-prinH-gainH, barW, gainH);
+    // tax-loss overlay (lighter, dashed-ish)
+    ctx.fillStyle='rgba(226,232,240,0.7)';
+    ctx.fillRect(x, y0-prinH-gainH, barW, lossH);
+    // year label
+    ctx.fillStyle='#64748b';
+    ctx.font='10px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText(yr+'年', x+barW/2, H-4);
+  }
+  // y-axis
+  ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=1;
+  [0,.25,.5,.75,1].forEach(function(p){
+    var y = padT + chartH*(1-p);
+    ctx.beginPath(); ctx.moveTo(padL-4,y); ctx.lineTo(W-padR,y); ctx.stroke();
+    ctx.fillStyle='#94a3b8'; ctx.font='10px sans-serif'; ctx.textAlign='right';
+    ctx.fillText(Math.round(maxV*p)+'万', padL-6, y+4);
+  });
+  ctx.textAlign='left';
+}
+
+/* ===== 相続税 ===== */
+var SO_TABLE = [
+  {limit:1000, rate:0.10, ded:0},
+  {limit:3000, rate:0.15, ded:50},
+  {limit:5000, rate:0.20, ded:200},
+  {limit:10000,rate:0.30, ded:700},
+  {limit:20000,rate:0.40, ded:1700},
+  {limit:30000,rate:0.45, ded:2700},
+  {limit:60000,rate:0.50, ded:4200},
+  {limit:Infinity,rate:0.55, ded:7200}
+];
+
+function sozokuTax(base) {
+  for(var i=0;i<SO_TABLE.length;i++){
+    if(base <= SO_TABLE[i].limit) return base*SO_TABLE[i].rate - SO_TABLE[i].ded;
+  }
+  return 0;
+}
+
+function calcSozoku() {
+  var estate  = parseFloat(document.getElementById('so-estate').value)||0;
+  var heirs   = parseInt(document.getElementById('so-heirs').value)||1;
+  var hasSpouse = parseInt(document.getElementById('so-spouse').value);
+  var spShare = (parseFloat(document.getElementById('so-spouse-share').value)||50)/100;
+
+  var deduct = 3000 + 600*heirs;
+  var taxBase = Math.max(estate - deduct, 0);
+
+  // Legal share per heir (simplified: spouse 1/2, children rest)
+  var totalTax = 0;
+  if(taxBase > 0) {
+    if(heirs === 1) {
+      totalTax = sozokuTax(taxBase);
+    } else if(hasSpouse) {
+      var childCount = heirs - 1;
+      var spShare2 = 0.5;
+      var childShare = childCount>0 ? 0.5/childCount : 0;
+      totalTax += sozokuTax(taxBase * spShare2);
+      for(var c=0;c<childCount;c++) totalTax += sozokuTax(taxBase * childShare);
+    } else {
+      var perHeir = 1/heirs;
+      for(var h=0;h<heirs;h++) totalTax += sozokuTax(taxBase * perHeir);
+    }
+  }
+
+  // Spouse deduction: tax amount * min(spouse share, max(1.6億, half))
+  var spouseTaxDed = 0;
+  if(hasSpouse && totalTax > 0) {
+    var spouseActualShare = Math.min(spShare, 0.5);
+    spouseTaxDed = totalTax * Math.min(spouseActualShare / 0.5, 1);
+    // Simplified: actual spouse deduction is min of proportional tax or (tax on 160M)
+    spouseTaxDed = Math.min(totalTax * spShare / (hasSpouse ? 0.5 : 1), totalTax);
+  }
+
+  var afterSpouse = Math.max(totalTax - spouseTaxDed, 0);
+  var effRate = estate>0 ? (totalTax/estate*100) : 0;
+
+  document.getElementById('so-r-deduct').textContent  = fmtMan(deduct);
+  document.getElementById('so-r-taxbase').textContent = fmtMan(taxBase);
+  document.getElementById('so-r-total').textContent   = fmtMan(Math.round(totalTax));
+  document.getElementById('so-r-after').textContent   = fmtMan(Math.round(afterSpouse));
+  document.getElementById('so-r-rate').textContent    = effRate.toFixed(2)+'%';
+
+  var diagEl = document.getElementById('so-r-diag');
+  var advEl  = document.getElementById('so-advice-area');
+
+  if(taxBase <= 0) {
+    diagEl.innerHTML = '<span class="badge badge-green">基礎控除内 ✅</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">✅ 基礎控除内で相続税はかかりません</div><ul><li>相続財産'+estate+'万円は基礎控除'+deduct+'万円以内</li><li>ただし今後の資産増加により課税対象になる可能性あり</li><li>相続税の申告は不要ですが、財産一覧（エンディングノート等）の整理は重要</li></ul></div>';
+  } else if(totalTax < 500) {
+    diagEl.innerHTML = '<span class="badge badge-yellow">課税あり・低額</span>';
+    advEl.innerHTML = '<div class="advice-box warn"><div class="advice-title">⚠️ 課税対象。計画的な対策を</div><ul><li>毎年110万円以内の暦年贈与で少しずつ資産を移転</li><li>生命保険の非課税枠（500万円×法定相続人）を活用</li><li>相続時精算課税（2500万円非課税枠）も選択肢の一つ</li></ul></div>';
+  } else {
+    diagEl.innerHTML = '<span class="badge badge-red">高額課税</span>';
+    advEl.innerHTML = '<div class="advice-box danger"><div class="advice-title">🔴 高額の相続税が見込まれます。早期対策を</div><ul><li>7年以上前からの計画的な贈与で課税財産を圧縮</li><li>生命保険（死亡保険金の非課税枠：500万×法定相続人）を最大活用</li><li>小規模宅地等の特例（最大80%減額）の適用可否を確認</li><li>遺産分割協議書の事前準備で配偶者控除を確実に適用</li></ul></div>';
+  }
+
+  document.getElementById('so-result').classList.remove('hidden');
+}
+
+/* ===== 贈与税 ===== */
+var ZO_TYPE = 'rekinen';
+function setZoyoType(t) {
+  ZO_TYPE = t;
+  document.querySelectorAll('#zoyo-seg .seg-btn').forEach(function(b,i){b.classList.toggle('active',i===(t==='rekinen'?0:1));});
+  document.getElementById('zoyo-rekinen').style.display = t==='rekinen' ? '' : 'none';
+  document.getElementById('zoyo-seisan').style.display  = t==='seisan'  ? '' : 'none';
+  if(t==='rekinen') calcZoyo(); else calcSeisan();
+}
+
+var ZO_SPECIAL = [{limit:200,rate:0.10,ded:0},{limit:400,rate:0.15,ded:10},{limit:600,rate:0.20,ded:30},{limit:1000,rate:0.30,ded:90},{limit:1500,rate:0.40,ded:190},{limit:3000,rate:0.45,ded:265},{limit:4500,rate:0.50,ded:415},{limit:Infinity,rate:0.55,ded:640}];
+var ZO_GENERAL = [{limit:200,rate:0.10,ded:0},{limit:300,rate:0.15,ded:10},{limit:400,rate:0.20,ded:25},{limit:600,rate:0.30,ded:65},{limit:1000,rate:0.40,ded:125},{limit:1500,rate:0.45,ded:175},{limit:3000,rate:0.50,ded:250},{limit:Infinity,rate:0.55,ded:400}];
+
+function zoyoTax(base, tbl) {
+  for(var i=0;i<tbl.length;i++) { if(base<=tbl[i].limit) return base*tbl[i].rate - tbl[i].ded; }
+  return 0;
+}
+
+function calcZoyo() {
+  var gift = parseFloat(document.getElementById('zo-gift').value)||0;
+  var rel  = document.getElementById('zo-rel').value;
+  var taxBase = Math.max(gift - 110, 0);
+  var tbl = rel==='special' ? ZO_SPECIAL : ZO_GENERAL;
+  var tax = zoyoTax(taxBase, tbl);
+  var effRate = gift>0 ? (tax/gift*100) : 0;
+  document.getElementById('zo-r-taxbase').textContent = fmtMan(taxBase);
+  document.getElementById('zo-r-tax').textContent = fmtMan(Math.round(tax));
+  document.getElementById('zo-r-rate').textContent = effRate.toFixed(2)+'%';
+  document.getElementById('zo-result').classList.remove('hidden');
+}
+
+function calcSeisan() {
+  var total = parseFloat(document.getElementById('zo-seisan-total').value)||0;
+  var taxBase = Math.max(total - 2500, 0);
+  var tax = taxBase * 0.20;
+  document.getElementById('zo-s-taxbase').textContent = fmtMan(taxBase);
+  document.getElementById('zo-s-tax').textContent = fmtMan(Math.round(tax));
+  document.getElementById('zo-seisan-result').classList.remove('hidden');
+}
+
+/* ===== 保険診断 ===== */
+function calcHoken() {
+  var childYrs = parseFloat(document.getElementById('hk-child-yrs').value)||0;
+  var famExp   = parseFloat(document.getElementById('hk-fam-exp').value)||22;
+  var nenkin   = parseFloat(document.getElementById('hk-nenkin').value)||10;
+  var edu      = parseFloat(document.getElementById('hk-edu').value)||500;
+  var loan     = parseFloat(document.getElementById('hk-loan').value)||2500;
+  var assets   = parseFloat(document.getElementById('hk-assets').value)||300;
+  var current  = parseFloat(document.getElementById('hk-current').value)||1000;
+  var childYrs2 = Math.max(childYrs, 0);
+  var lifeYrs   = Math.max(childYrs2, 1); // need coverage until child independent
+
+  var livingNeed  = famExp * 12 * lifeYrs;
+  var nenkinTotal = nenkin * 12 * lifeYrs;
+  var required = livingNeed + edu + loan - nenkinTotal - assets;
+  required = Math.max(required, 0);
+  var gap = required - current;
+
+  document.getElementById('hk-r-living').textContent = fmtMan(livingNeed);
+  document.getElementById('hk-r-nenkin').textContent = fmtMan(nenkinTotal);
+  document.getElementById('hk-r-edu').textContent    = fmtMan(edu);
+  document.getElementById('hk-r-loan').textContent   = fmtMan(loan);
+  document.getElementById('hk-r-need').textContent   = fmtMan(required);
+  document.getElementById('hk-r-cur').textContent    = fmtMan(current);
+  document.getElementById('hk-r-gap').innerHTML = gap>0
+    ? '<span style="color:var(--red);">'+fmtMan(gap)+' 不足</span>'
+    : '<span style="color:var(--green);">'+fmtMan(-gap)+' 余剰</span>';
+
+  var diagEl = document.getElementById('hk-r-diag');
+  var advEl  = document.getElementById('hk-advice-area');
+
+  if(gap > 1000) {
+    diagEl.innerHTML = '<span class="badge badge-red">保障不足 ⚠️</span>';
+    advEl.innerHTML = '<div class="advice-box danger"><div class="advice-title">🔴 保障が大幅に不足しています</div><ul><li>定期死亡保険（掛け捨て）で'+fmtMan(gap)+'をカバーすること</li><li>定期保険は月数千円〜1万円程度で大きな保障が持てる</li><li>住宅ローンに団体信用生命保険（団信）があれば残債はカバーされます（要確認）</li><li>勤務先の団体保険（グループ保険）も活用できる場合あり</li></ul></div>';
+  } else if(gap > 0) {
+    diagEl.innerHTML = '<span class="badge badge-yellow">やや不足</span>';
+    advEl.innerHTML = '<div class="advice-box warn"><div class="advice-title">⚠️ やや不足。見直しを検討</div><ul><li>定期保険の増額か、収入保障保険で補う方法が費用対効果良</li><li>保障が必要な期間（子の独立まで）を明確にし、必要な期間のみカバー</li><li>貯蓄型・終身保険は保険料が高い割に保障が少ない場合あり</li></ul></div>';
+  } else if(-gap < 1000) {
+    diagEl.innerHTML = '<span class="badge badge-green">適正 ✅</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">✅ 保障は適正です</div><ul><li>現在の保障で遺族の生活費・教育費・ローンをカバーできています</li><li>子が独立したら保険の減額・解約で保険料を節約できます</li><li>高額療養費制度と預金100万円以上があれば医療保険の優先度は低い</li></ul></div>';
+  } else {
+    diagEl.innerHTML = '<span class="badge badge-purple">余剰（保険料見直し推奨）</span>';
+    advEl.innerHTML = '<div class="advice-box ok"><div class="advice-title">💡 保険が過剰です。保険料を節約しましょう</div><ul><li>必要保障額より'+fmtMan(-gap)+'も保障が多い状態</li><li>保険料の節約分をNISAやiDeCoの積立に回す方が効率的</li><li>終身保険・貯蓄型保険は解約返戻金も含めて見直しを検討</li><li>自動車保険・火災保険は必要だが、それ以外は最小限に</li></ul></div>';
+  }
+
+  document.getElementById('hk-result').classList.remove('hidden');
+}
+
+/* ===== 高額療養費 ===== */
+var KT_TABLE = [
+  {a:252600, b:0.01, min:252600},   // ア
+  {a:167400, b:0.01, min:167400},   // イ
+  {a:80100,  b:0.01, min:80100 },   // ウ
+  {a:57600,  b:0,    min:57600 },   // エ
+  {a:35400,  b:0,    min:35400 }    // オ
+];
+
+function calcKoryoYohi() {
+  var cost    = (parseFloat(document.getElementById('ht-cost').value)||0) * 10000;
+  var incType = parseInt(document.getElementById('ht-income').value)||3;
+  var tbl = KT_TABLE[incType-1];
+  var nominal = cost * 0.3; // 3割負担
+  var cap;
+  if(incType <= 3) {
+    cap = tbl.a + (cost - tbl.a/0.01) * 0.01; // 超過分1%
+    cap = Math.max(cap, tbl.min);
+  } else {
+    cap = tbl.a;
+  }
+  cap = Math.min(cap, nominal); // can't exceed 3-koku
+  var refund = Math.max(nominal - cap, 0);
+
+  document.getElementById('ht-r-nominal').textContent = Math.round(nominal/10000)+'万円';
+  document.getElementById('ht-r-cap').textContent = Math.round(cap/10000)+'万円';
+  document.getElementById('ht-r-refund').textContent = Math.round(refund/10000)+'万円';
+
+  var diagEl = document.getElementById('ht-r-diag');
+  var capM = cap/10000;
+  if(capM <= 5) {
+    diagEl.innerHTML = '<span class="badge badge-green">医療保険不要の可能性高</span>';
+  } else if(capM <= 9) {
+    diagEl.innerHTML = '<span class="badge badge-yellow">最小限の保険で対応可</span>';
+  } else {
+    diagEl.innerHTML = '<span class="badge badge-orange">長期入院リスクは別途考慮を</span>';
+  }
+
+  document.getElementById('ht-result').classList.remove('hidden');
+}
+
+/* ===== FP用語辞典 ===== */
+var DICT = [
+  {term:'複利',cat:'基礎',def:'利子にも利子がつく仕組み。元本×(1+利率)^年数で計算。長期になるほど効果が大きくなる（複利効果）。'},
+  {term:'単利',cat:'基礎',def:'元本にのみ利子がつく計算方式。複利に比べ長期では資産の伸びが小さい。'},
+  {term:'NISA（ニーサ）',cat:'NISA',def:'少額投資非課税制度。新NISA（2024年〜）は年360万円、生涯1800万円まで運用益が非課税。期間無制限。'},
+  {term:'つみたてNISA',cat:'NISA',def:'旧NISAの積立専用枠（2023年以前）。新NISAのつみたて投資枠（年120万円）に引き継がれる。'},
+  {term:'iDeCo（イデコ）',cat:'年金',def:'個人型確定拠出年金。掛金が全額所得控除になり、節税しながら老後資産を作れる。60歳まで引き出し不可。'},
+  {term:'インデックスファンド',cat:'投資',def:'日経平均やS&P500など市場指数に連動する投資信託。低コストで分散投資できる。アクティブファンドより長期成績が良いことが多い。'},
+  {term:'信託報酬',cat:'投資',def:'投資信託を保有し続ける限り発生するコスト。年率で表示。0.1%以下が低コストの目安。'},
+  {term:'ドルコスト平均法',cat:'投資',def:'定期・定額で投資を続ける手法。価格が低い時に多く、高い時に少なく買えるため、平均取得単価が下がりやすい。'},
+  {term:'分散投資',cat:'投資',def:'複数の資産・地域・時間軸に投資を分散してリスクを下げる考え方。「卵を一つのかごに盛るな」。'},
+  {term:'リスク許容度',cat:'投資',def:'どの程度の資産価値変動（下落）に耐えられるかの度合い。年齢・収入・資産・投資目的によって異なる。'},
+  {term:'リバランス',cat:'投資',def:'資産配分が目標値からズレたときに売買して元に戻す作業。年1回程度が目安。'},
+  {term:'相続税',cat:'相続',def:'亡くなった人から財産を取得した場合に課される税。基礎控除は3000万円＋600万円×法定相続人数。'},
+  {term:'基礎控除（相続税）',cat:'相続',def:'相続税の非課税枠。3000万円＋600万円×法定相続人数。例：相続人2人なら4200万円。'},
+  {term:'法定相続人',cat:'相続',def:'民法で定められた相続人の範囲。配偶者は常に相続人。子・直系尊属・兄弟姉妹の順に相続権がある。'},
+  {term:'配偶者控除（相続税）',cat:'相続',def:'配偶者が相続する財産が、1億6000万円または配偶者の法定相続分のいずれか大きい金額まで非課税。'},
+  {term:'贈与税',cat:'贈与',def:'個人から財産をもらったときに課される税。暦年課税と相続時精算課税の2方式がある。'},
+  {term:'暦年贈与',cat:'贈与',def:'1月1日〜12月31日の1年間に受けた贈与に対して課税。年110万円の基礎控除あり。死亡前7年以内分は相続財産に加算（2024年改正）。'},
+  {term:'相続時精算課税',cat:'贈与',def:'60歳以上の親・祖父母から18歳以上の子・孫への贈与。累計2500万円まで非課税。超過分は20%課税。相続時に合算される。'},
+  {term:'住宅ローン控除',cat:'税金',def:'住宅ローンの年末残高×控除率を所得税から控除できる制度。新制度（2022年〜）は0.7%×13年。旧制度は1%×10年。'},
+  {term:'逆ざや',cat:'住宅',def:'住宅ローン金利が控除率を下回る状態。例：金利0.5%＜控除率0.7%。繰上返済より資産形成が有利になる。'},
+  {term:'繰上返済',cat:'住宅',def:'定期返済以外に元本を追加返済すること。利息軽減・期間短縮の効果。住宅ローン控除期間中は逆効果になる場合がある。'},
+  {term:'元利均等返済',cat:'住宅',def:'毎月の返済額（元本＋利息）が一定の返済方式。家計管理しやすい。序盤は利息の割合が高い。'},
+  {term:'元金均等返済',cat:'住宅',def:'毎月の元本返済額が一定で、利息が逓減していく返済方式。総利息が少ないが、初期返済額が多い。'},
+  {term:'変動金利',cat:'住宅',def:'市場金利に連動して定期的に見直される住宅ローン金利。通常固定より低いが将来の金利上昇リスクあり。'},
+  {term:'固定金利',cat:'住宅',def:'借入期間中（または一定期間）金利が変わらない住宅ローン。返済計画が立てやすいが、変動より金利は高め。'},
+  {term:'団体信用生命保険（団信）',cat:'住宅',def:'住宅ローン契約者が死亡・高度障害になった場合にローン残債が保険で完済される仕組み。'},
+  {term:'高額療養費制度',cat:'医療',def:'1ヶ月の医療費の自己負担が一定額（所得に応じた上限）を超えた分を健康保険が払い戻す制度。'},
+  {term:'傷病手当金',cat:'医療',def:'会社員・公務員が病気・けがで4日以上連続して働けない場合に支給される健保の給付。標準報酬月額の2/3×最大18ヶ月。'},
+  {term:'就業不能保険',cat:'保険',def:'病気・けがで長期間働けなくなった場合に月々の収入を補う保険。医療保険より長期間・高額の補償が可能。'},
+  {term:'掛け捨て保険',cat:'保険',def:'満期や解約時に返戻金がない代わりに保険料が安い保険。定期保険・収入保障保険が代表例。'},
+  {term:'終身保険',cat:'保険',def:'保障が一生涯続く生命保険。保険料は割高だが解約返戻金がある。貯蓄目的で使われることもあるが、投資目的としては非効率なことが多い。'},
+  {term:'収入保障保険',cat:'保険',def:'死亡した場合に残りの期間、月額を受け取れる保険。子が独立するまでの保障に向いている。掛け捨てで安価。'},
+  {term:'ふるさと納税',cat:'税金',def:'地方自治体に寄付することで、2000円の自己負担で寄付額-2000円分を所得税・住民税から控除できる制度。返礼品も受け取れる。'},
+  {term:'医療費控除',cat:'税金',def:'1年間の医療費が10万円（または所得の5%）を超えた場合、超過分を所得から控除できる制度。確定申告が必要。'},
+  {term:'セルフメディケーション税制',cat:'税金',def:'市販の特定医薬品（OTC）購入が年1.2万円超の場合、超過分（最大8.8万円）を控除できる制度。医療費控除との選択適用。'},
+  {term:'所得控除',cat:'税金',def:'所得税を計算する際に所得額から差し引ける項目。基礎控除・配偶者控除・扶養控除・社会保険料控除などがある。'},
+  {term:'確定申告',cat:'税金',def:'1月1日〜12月31日の所得を翌年2〜3月に税務署に申告する手続き。サラリーマンでも副業収入20万円超・医療費控除・ふるさと納税（ワンストップ外）等で必要。'},
+  {term:'年末調整',cat:'税金',def:'会社が行う従業員の年間税額の精算。源泉徴収された税額と実際の税額の差額を調整する。扶養・生命保険料控除等を反映。'},
+  {term:'社会保険料控除',cat:'税金',def:'健康保険・厚生年金・雇用保険等の社会保険料を全額所得から控除できる制度。'},
+  {term:'老齢基礎年金',cat:'年金',def:'国民年金に加入した全ての人が65歳から受け取れる年金。満額は年約80万円（2024年度）。加入期間によって変動。'},
+  {term:'老齢厚生年金',cat:'年金',def:'会社員・公務員が加入する厚生年金から支給される年金。報酬比例で計算。老齢基礎年金に上乗せされる。'},
+  {term:'繰下げ受給',cat:'年金',def:'年金を65歳より遅く受け取ること。1ヶ月遅らせるごとに0.7%増額。75歳まで繰下げると84%増。長生きするほど有利。'},
+  {term:'繰上げ受給',cat:'年金',def:'年金を65歳より早く（60〜64歳）受け取ること。1ヶ月繰り上げるごとに0.4%減額（永続的）。短命の場合にのみ有利。'},
+  {term:'ねんきん定期便',cat:'年金',def:'毎年誕生月に送られてくる年金加入状況の通知書。これ年金見込み額が確認できる。50歳以上は特に重要。'},
+  {term:'FP（ファイナンシャルプランナー）',cat:'FP資格',def:'顧客の資産・家計・ライフプランを総合的にアドバイスする専門家。FP1〜3級、AFP、CFPの資格がある。'},
+  {term:'CFP',cat:'FP資格',def:'Certified Financial Planner。FP資格の最高位。世界27ヵ国で認定される国際資格。6分野すべての試験合格が必要。'},
+  {term:'AFP',cat:'FP資格',def:'Affiliated Financial Planner。FP2級相当の日本FP協会認定資格。継続教育（認定研修）が必要。'},
+  {term:'資産配分（アセットアロケーション）',cat:'投資',def:'国内株・外国株・債券・不動産等の資産クラスへの投資比率の決め方。リターンの8割程度がアセットアロケーションで決まると言われる。'},
+  {term:'リスク（投資）',cat:'投資',def:'投資における不確実性・価格変動の大きさ。プラス・マイナス両方向への振れを指す。リターンとトレードオフの関係。'},
+  {term:'期待リターン',cat:'投資',def:'投資から期待される収益率の長期平均。全世界株式は年率5〜7%程度（名目）。リスクが高いほど期待リターンも高い。'},
+  {term:'S&P500',cat:'投資',def:'米国の代表的な株価指数。500社で構成。過去30年の平均年利約10%（名目）。新NISAでも人気の投資先。'},
+  {term:'オルカン（全世界株）',cat:'投資',def:'eMAXIS Slim 全世界株式（オール・カントリー）の通称。約50ヵ国3000銘柄に分散。信託報酬0.0577%（2024年時点）と超低コスト。'},
+  {term:'4%ルール',cat:'FIRE',def:'運用資産の4%を毎年取り崩せば30年以上資産が枯渇しない、という米国の研究に基づくルール。FIREの目安。生活費×25倍が目標資産額。'},
+  {term:'FIRE',cat:'FIRE',def:'Financial Independence, Retire Early。経済的自立と早期退職。4%ルールを基に生活費×25倍の資産を目標とする。サイドFIREなど派生型も多い。'},
+  {term:'緊急予備資金',cat:'基礎',def:'失業・病気などの緊急時に使える現金。生活費の3〜6ヶ月分が目安。ここを確保してから投資を始めるのが鉄則。'},
+  {term:'手取り収入',cat:'基礎',def:'給与から税金・社会保険料を引いた実際に受け取れる金額。額面の75〜80%程度が目安。家計管理は手取りを基準にする。'},
+  {term:'固定費',cat:'家計',def:'毎月ほぼ一定額かかる費用。住居費・通信費・保険料・サブスク等。削減効果が持続するため最優先で見直す。'},
+  {term:'変動費',cat:'家計',def:'月によって金額が変わる費用。食費・交際費・被服費等。固定費削減ほど効果は大きくないが、日々の意識でコントロールしやすい。'}
+];
+
+function renderDict() {
+  var el = document.getElementById('dict-list');
+  el.innerHTML = DICT.map(function(d,i){
+    return '<div class="dict-item" id="dict-'+i+'"><div class="dict-term">'+d.term+'<span class="dict-cat">'+d.cat+'</span></div><div class="dict-def">'+d.def+'</div></div>';
+  }).join('');
+}
+
+function filterDict() {
+  var q = document.getElementById('dict-search').value.toLowerCase();
+  DICT.forEach(function(d,i){
+    var el = document.getElementById('dict-'+i);
+    var match = !q || d.term.toLowerCase().includes(q) || d.def.toLowerCase().includes(q) || d.cat.toLowerCase().includes(q);
+    el.classList.toggle('dict-hidden', !match);
+  });
+}
+
+/* ===== INIT ===== */
+renderDict();
+calcKakeibo();
+window.addEventListener('resize', function(){
+  var active = document.querySelector('.tab-pane.active');
+  if(!active) return;
+  var id = active.id.replace('tab-','');
+  if(id==='roago') calcRoago();
+  if(id==='nisa') calcNisa();
+});
+</script>
+</body>
+</html>
