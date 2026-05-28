@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>NISA管理 — ライフアセットオフィス</title>
+<meta name="description" content="NISAの枠使用状況・保有ファンド・将来シミュレーションを一画面で管理。ライフアセットオフィスが提供する無料ツール。">
+<meta property="og:title" content="NISA管理 — ライフアセットオフィス">
+<meta property="og:description" content="NISAの枠使用状況・保有ファンド・将来シミュレーションを一画面で管理。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lifeassetoffice.net/nisa.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NISA管理 — ライフアセットオフィス">
+<meta name="twitter:description" content="NISAの枠使用状況・保有ファンド・将来シミュレーションを一画面で管理。">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-PKDH2DR522');</script>
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --g1:#10b981;--g2:#059669;--g3:#d1fae5;
+  --b1:#3b82f6;--b2:#1d4ed8;--b3:#dbeafe;
+  --p1:#8b5cf6;--p3:#ede9fe;
+  --a1:#f59e0b;--a3:#fef3c7;
+  --text-p:#0f172a;--text-s:#475569;--text-t:#94a3b8;
+  --bg:#f8fafc;--bg2:#f1f5f9;
+  --card:rgba(255,255,255,0.88);--card-border:rgba(255,255,255,0.65);
+  --sh-sm:0 2px 8px rgba(15,23,42,0.06);
+  --sh-md:0 8px 32px rgba(15,23,42,0.08);
+  --sh-lg:0 20px 60px rgba(15,23,42,0.12);
+  --r:20px;--r-lg:28px;--r-xl:36px;
+  --font-en:'Outfit',sans-serif;--font-jp:'Noto Sans JP',sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#0a0f1e;--bg2:#111827;
+  --card:rgba(18,26,46,0.88);--card-border:rgba(255,255,255,0.07);
+  --text-p:#f1f5f9;--text-s:#94a3b8;--text-t:#374151;
+  --sh-sm:0 2px 8px rgba(0,0,0,0.35);
+  --sh-md:0 8px 32px rgba(0,0,0,0.45);
+  --sh-lg:0 20px 60px rgba(0,0,0,0.55);
+  --g3:rgba(16,185,129,0.1);--b3:rgba(59,130,246,0.1);
+  --p3:rgba(139,92,246,0.1);--a3:rgba(245,158,11,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-jp);background:var(--bg);color:var(--text-p);min-height:100vh;overflow-x:hidden;transition:background .35s,color .35s}
+
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-mesh::before{content:'';position:absolute;top:-30%;left:-5%;width:65%;height:65%;background:radial-gradient(ellipse,rgba(16,185,129,0.06) 0%,transparent 70%);animation:m1 14s ease-in-out infinite alternate}
+.bg-mesh::after{content:'';position:absolute;top:30%;right:-15%;width:55%;height:55%;background:radial-gradient(ellipse,rgba(139,92,246,0.06) 0%,transparent 70%);animation:m2 18s ease-in-out infinite alternate}
+@keyframes m1{0%{transform:translate(0,0)}100%{transform:translate(4%,6%)}}
+@keyframes m2{0%{transform:translate(0,0)}100%{transform:translate(-5%,-4%)}}
+
+.page-wrap{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}
+
+nav{position:sticky;top:0;z-index:100;height:64px;display:flex;align-items:center;padding:0 20px;gap:12px;background:rgba(248,250,252,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,0,0,0.04);transition:background .35s}
+[data-theme="dark"] nav{background:rgba(10,15,30,0.82);border-bottom-color:rgba(255,255,255,0.05)}
+.back-btn{width:38px;height:38px;border-radius:12px;border:none;background:var(--card);box-shadow:var(--sh-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-s);transition:all .2s;flex-shrink:0;backdrop-filter:blur(12px)}
+.back-btn:active{transform:scale(0.93)}
+.back-btn svg{width:18px;height:18px}
+.nav-title{flex:1;font-family:var(--font-en);font-size:17px;font-weight:700;color:var(--text-p);letter-spacing:-.3px}
+.nav-title small{display:block;font-size:10px;color:var(--text-t);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-top:-1px}
+.nav-btn{width:38px;height:38px;border-radius:12px;border:none;background:var(--card);box-shadow:var(--sh-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-s);transition:all .2s;backdrop-filter:blur(12px)}
+.nav-btn:active{transform:scale(0.93)}
+.nav-btn svg{width:18px;height:18px}
+
+main{padding:20px 20px 0}
+
+.year-row{display:flex;align-items:center;gap:8px;margin-bottom:20px;opacity:0;animation:fu .55s .05s ease forwards}
+.year-btn{padding:7px 16px;border-radius:100px;border:1.5px solid transparent;font-family:var(--font-en);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;background:var(--card);color:var(--text-t)}
+.year-btn.active{background:linear-gradient(135deg,var(--g1),var(--b1));color:white;border-color:transparent;box-shadow:0 4px 16px rgba(16,185,129,0.3)}
+.year-btn:active{transform:scale(0.94)}
+.year-limit{margin-left:auto;font-size:11px;color:var(--text-t);font-family:var(--font-en)}
+.year-limit strong{color:var(--g1);font-weight:700}
+
+.hero-card{background:linear-gradient(155deg,#0d1f3c,#0f2d2a,#0d1f3c);border-radius:var(--r-xl);padding:24px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 24px 56px rgba(0,0,0,0.28);opacity:0;animation:fu .55s .08s ease forwards}
+.hero-card::before{content:'';position:absolute;top:-60%;right:-25%;width:320px;height:320px;background:radial-gradient(circle,rgba(16,185,129,0.22) 0%,transparent 60%);pointer-events:none}
+.hero-card::after{content:'';position:absolute;bottom:-50%;left:-15%;width:280px;height:280px;background:radial-gradient(circle,rgba(139,92,246,0.16) 0%,transparent 60%);pointer-events:none}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;position:relative;z-index:1}
+.hero-left .hero-label{font-size:11px;color:rgba(255,255,255,0.45);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;font-family:var(--font-en)}
+.hero-left .hero-amount{font-family:var(--font-en);font-size:36px;font-weight:800;color:white;letter-spacing:-1.5px;line-height:1}
+.hero-left .hero-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-top:5px}
+.hero-badge{background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:5px 12px;font-family:var(--font-en);font-size:12px;font-weight:700;color:#34d399;white-space:nowrap}
+
+.rings-wrap{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+.ring-chart-area{position:relative;width:130px;height:130px;flex-shrink:0}
+.ring-chart-area canvas{width:100%!important;height:100%!important}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.ring-center-pct{font-family:var(--font-en);font-size:26px;font-weight:800;color:white;line-height:1}
+.ring-center-label{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
+.ring-stats{flex:1}
+.ring-stat-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,0.06);margin-bottom:6px;border:1px solid rgba(255,255,255,0.07)}
+.ring-stat-dot{width:8px;height:8px;border-radius:4px;flex-shrink:0}
+.ring-stat-info{flex:1}
+.ring-stat-name{font-size:10px;color:rgba(255,255,255,0.45);font-weight:500}
+.ring-stat-val{font-family:var(--font-en);font-size:15px;font-weight:700;color:white}
+.ring-stat-pct{font-size:11px;font-weight:700}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-title{font-size:14px;font-weight:700;color:var(--text-p);letter-spacing:-.2px}
+.section-more{font-size:12px;color:var(--g1);font-weight:600;cursor:pointer;font-family:var(--font-en)}
+
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;box-shadow:var(--sh-sm);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:box-shadow .3s;opacity:0;animation:fu .55s ease forwards}
+
+.dual-prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+.prog-box{border-radius:16px;padding:14px 15px}
+.pb-tsumitate{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.03));border:1px solid rgba(16,185,129,0.18)}
+.pb-seichyo{background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(59,130,246,0.03));border:1px solid rgba(59,130,246,0.18)}
+.pb-label{font-size:10px;font-weight:700;letter-spacing:.05em;margin-bottom:8px}
+.pb-tsumitate .pb-label{color:var(--g2)}
+.pb-seichyo .pb-label{color:var(--b2)}
+[data-theme="dark"] .pb-tsumitate .pb-label{color:#34d399}
+[data-theme="dark"] .pb-seichyo .pb-label{color:#60a5fa}
+.pb-amounts{margin-bottom:8px}
+.pb-used{font-family:var(--font-en);font-size:20px;font-weight:800;color:var(--text-p);line-height:1}
+.pb-total{font-size:10px;color:var(--text-t);margin-top:2px}
+.pb-bar{height:7px;background:rgba(0,0,0,0.07);border-radius:100px;overflow:hidden;margin-bottom:5px}
+[data-theme="dark"] .pb-bar{background:rgba(255,255,255,0.08)}
+.pb-fill{height:100%;border-radius:100px;transition:width 1.6s cubic-bezier(.4,0,.2,1)}
+.pb-tsumitate .pb-fill{background:linear-gradient(90deg,#10b981,#34d399)}
+.pb-seichyo .pb-fill{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.pb-pct{font-family:var(--font-en);font-size:11px;font-weight:700}
+.pb-tsumitate .pb-pct{color:var(--g1)}
+.pb-seichyo .pb-pct{color:var(--b1)}
+.pb-remain{font-size:10px;color:var(--text-t);margin-top:1px}
+.nisa-total-bar-wrap{margin-top:6px}
+.ntb-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-t);margin-bottom:5px}
+.ntb-label strong{color:var(--text-p)}
+.ntb-bar{height:10px;background:rgba(0,0,0,0.07);border-radius:100px;overflow:hidden}
+[data-theme="dark"] .ntb-bar{background:rgba(255,255,255,0.08)}
+.ntb-fill{height:100%;background:linear-gradient(90deg,var(--g1),var(--b1));border-radius:100px;transition:width 1.6s .1s cubic-bezier(.4,0,.2,1)}
+
+.holding-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.05);cursor:pointer;transition:all .2s;border-radius:0}
+[data-theme="dark"] .holding-row{border-bottom-color:rgba(255,255,255,0.05)}
+.holding-row:last-child{border-bottom:none}
+.holding-row:active{transform:scale(0.98);opacity:.8}
+.h-icon{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:11px;font-weight:800;flex-shrink:0;color:white}
+.h-info{flex:1;min-width:0}
+.h-name{font-size:13px;font-weight:700;color:var(--text-p);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-type{font-size:10px;color:var(--text-t);font-weight:500;margin-top:1px}
+.h-amounts{text-align:right}
+.h-val{font-family:var(--font-en);font-size:15px;font-weight:700;color:var(--text-p)}
+.h-gain{font-size:11px;font-weight:700;margin-top:1px}
+.gain-pos{color:#10b981}
+.gain-neg{color:#ef4444}
+.h-share{margin-left:8px;text-align:right;min-width:40px}
+.h-share-pct{font-family:var(--font-en);font-size:13px;font-weight:700;color:var(--text-s)}
+.h-share-bar{height:3px;border-radius:2px;margin-top:4px;transition:width .8s ease}
+
+.chart-tabs{display:flex;gap:4px;background:var(--bg2);border-radius:12px;padding:4px;margin-bottom:14px}
+.chart-tab{flex:1;padding:7px;border-radius:8px;border:none;background:transparent;font-family:var(--font-jp);font-size:12px;font-weight:600;color:var(--text-t);cursor:pointer;transition:all .22s}
+.chart-tab.active{background:var(--card);color:var(--text-p);box-shadow:var(--sh-sm)}
+.chart-wrap{height:170px;position:relative}
+
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.proj-box{background:var(--bg2);border-radius:14px;padding:12px 10px;text-align:center;border:1px solid transparent;transition:all .25s;cursor:pointer}
+.proj-box.selected{border-color:var(--g1);background:var(--g3)}
+.proj-year{font-size:10px;font-weight:700;color:var(--text-t);margin-bottom:4px;font-family:var(--font-en);letter-spacing:.05em}
+.proj-val{font-family:var(--font-en);font-size:17px;font-weight:800;color:var(--text-p)}
+.proj-gain{font-size:10px;font-weight:700;color:var(--g1);margin-top:2px}
+.proj-detail{background:linear-gradient(135deg,rgba(16,185,129,0.07),rgba(59,130,246,0.07));border:1px solid rgba(16,185,129,0.15);border-radius:14px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.proj-d-label{font-size:12px;font-weight:600;color:var(--text-s)}
+.proj-d-sub{font-size:10px;color:var(--text-t);margin-top:2px}
+.proj-d-val{font-family:var(--font-en);font-size:22px;font-weight:800;color:var(--text-p)}
+.proj-d-gain{font-size:11px;font-weight:700;color:var(--g1);text-align:right;margin-top:2px}
+
+.accum-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.accum-toggle{display:flex;gap:4px;background:var(--bg2);border-radius:10px;padding:3px}
+.accum-tab{padding:5px 12px;border-radius:7px;border:none;background:transparent;font-size:11px;font-weight:600;color:var(--text-t);cursor:pointer;font-family:var(--font-en);transition:all .2s}
+.accum-tab.active{background:var(--card);color:var(--text-p);box-shadow:var(--sh-sm)}
+.fund-row{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg2);border-radius:14px;margin-bottom:8px;cursor:pointer;transition:all .2s;position:relative}
+.fund-row:active{transform:scale(0.98)}
+.fund-row:last-child{margin-bottom:0}
+.fund-rank{width:22px;height:22px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:11px;font-weight:800;color:var(--text-t);flex-shrink:0;box-shadow:var(--sh-sm)}
+.fund-info{flex:1;min-width:0}
+.fund-name{font-size:12px;font-weight:700;color:var(--text-p);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fund-meta{display:flex;gap:6px;margin-top:3px;flex-wrap:wrap}
+.fund-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.03em}
+.ft-tsumi{background:var(--g3);color:var(--g2)}
+.ft-seichyo{background:var(--b3);color:var(--b2)}
+.ft-index{background:var(--a3);color:#92400e}
+[data-theme="dark"] .ft-tsumi{color:#34d399}
+[data-theme="dark"] .ft-seichyo{color:#60a5fa}
+[data-theme="dark"] .ft-index{color:#fbbf24}
+.fund-right{text-align:right}
+.fund-monthly{font-family:var(--font-en);font-size:13px;font-weight:700;color:var(--text-p)}
+.fund-total{font-size:10px;color:var(--text-t);margin-top:1px}
+
+.tax-card{background:linear-gradient(145deg,rgba(139,92,246,0.08),rgba(59,130,246,0.06));border:1px solid rgba(139,92,246,0.2);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;opacity:0;animation:fu .55s ease forwards}
+.tax-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.tax-icon{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--p1),var(--b1));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(139,92,246,0.3)}
+.tax-icon svg{width:18px;height:18px;color:white}
+.tax-title{font-size:14px;font-weight:700;color:var(--text-p)}
+.tax-sub{font-size:11px;color:var(--text-t);margin-top:1px}
+.tax-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tax-box{background:rgba(255,255,255,0.5);border-radius:13px;padding:12px}
+[data-theme="dark"] .tax-box{background:rgba(255,255,255,0.04)}
+.tax-box-label{font-size:10px;color:var(--text-t);font-weight:600;margin-bottom:4px}
+.tax-box-val{font-family:var(--font-en);font-size:20px;font-weight:800;color:var(--text-p)}
+.tax-box-val.purple{color:var(--p1)}
+.tax-box-sub{font-size:10px;color:var(--text-t);margin-top:2px}
+.tax-note{font-size:11px;color:var(--text-t);margin-top:10px;line-height:1.6;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06)}
+[data-theme="dark"] .tax-note{border-top-color:rgba(255,255,255,0.06)}
+
+.lifetime-bar-wrap{margin-bottom:16px}
+.ltb-header{display:flex;justify-content:space-between;margin-bottom:8px}
+.ltb-title{font-size:12px;font-weight:700;color:var(--text-p)}
+.ltb-max{font-size:11px;color:var(--text-t);font-family:var(--font-en)}
+.ltb-bar{height:28px;background:var(--bg2);border-radius:10px;overflow:hidden;display:flex;position:relative}
+.ltb-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;transition:width .8s ease}
+.ltb-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.ltb-leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-s)}
+.ltb-dot{width:8px;height:8px;border-radius:4px;flex-shrink:0}
+
+.ai-card{background:linear-gradient(150deg,rgba(15,23,42,0.95),rgba(22,45,60,0.95));border:1px solid rgba(255,255,255,0.07);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;position:relative;overflow:hidden;opacity:0;animation:fu .55s ease forwards;box-shadow:var(--sh-lg)}
+.ai-card::before{content:'';position:absolute;top:-50%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(16,185,129,0.18) 0%,transparent 65%);pointer-events:none}
+.ai-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ai-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--g1),var(--b1));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(16,185,129,0.35);flex-shrink:0}
+.ai-icon svg{width:17px;height:17px;color:white}
+.ai-title{font-size:13px;font-weight:700;color:white}
+.ai-sub{font-size:10px;color:rgba(255,255,255,0.38);margin-top:1px}
+.ai-tips{display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
+.ai-tip{display:flex;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:12px}
+.ai-tip-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.ai-tip-text{font-size:12px;line-height:1.75;color:rgba(255,255,255,0.75)}
+.ai-tip-text strong{color:#34d399}
+.ai-cta{display:flex;gap:8px;margin-top:12px;position:relative;z-index:1}
+.ai-btn{flex:1;padding:10px;border-radius:12px;border:none;font-family:var(--font-jp);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.ai-btn:active{transform:scale(0.96)}
+.ai-btn.primary{background:linear-gradient(135deg,var(--g1),var(--b1));color:white;box-shadow:0 4px 16px rgba(16,185,129,0.3)}
+.ai-btn.secondary{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.1)}
+
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:100;padding:0 16px 20px;background:linear-gradient(to top,var(--bg) 65%,transparent)}
+.bottom-nav-inner{background:var(--card);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--card-border);border-radius:24px;display:flex;align-items:center;padding:8px 16px;box-shadow:var(--sh-lg)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;cursor:pointer;border-radius:14px;transition:all .2s}
+.nav-item:active{transform:scale(0.92)}
+.nav-item.active{background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(59,130,246,0.1))}
+.nav-item svg{width:22px;height:22px;color:var(--text-t);transition:color .2s}
+.nav-item.active svg{color:var(--g1)}
+.nav-item-label{font-size:9px;font-weight:600;color:var(--text-t);transition:color .2s}
+.nav-item.active .nav-item-label{color:var(--g1)}
+.nav-center-btn{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,var(--g1),var(--b1));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(16,185,129,0.4);cursor:pointer;flex-shrink:0;transition:all .2s;margin:0 4px}
+.nav-center-btn:active{transform:scale(0.92)}
+.nav-center-btn svg{width:24px;height:24px;color:white}
+
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:0}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="page-wrap">
+
+<nav>
+  <button class="back-btn" onclick="location.href='/'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="nav-title">
+    NISA管理
+    <small>Life Asset Office</small>
+  </div>
+  <button class="nav-btn" id="themeBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <button class="nav-btn" onclick="location.href='/fp-tools.html'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+  </button>
+</nav>
+
+<main>
+
+<div class="year-row">
+  <button class="year-btn" onclick="setYear(this,2023)">2023</button>
+  <button class="year-btn" onclick="setYear(this,2024)">2024</button>
+  <button class="year-btn active" onclick="setYear(this,2025)">2025</button>
+  <span class="year-limit">生涯枠 <strong id="lifetimeUsed">180</strong>/1800万</span>
+</div>
+
+<div class="hero-card">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div class="hero-label">2025年 使用済み枠</div>
+      <div class="hero-amount">¥<span id="heroAmt">180</span>万</div>
+      <div class="hero-sub">上限 360万円 / 年　残り <strong style="color:#34d399" id="heroRemain">180</strong>万円</div>
+    </div>
+    <div class="hero-badge" id="heroBadge">50% 使用</div>
+  </div>
+  <div class="rings-wrap">
+    <div class="ring-chart-area">
+      <canvas id="ringChart"></canvas>
+      <div class="ring-center">
+        <div class="ring-center-pct" id="ringPct">50%</div>
+        <div class="ring-center-label">進捗</div>
+      </div>
+    </div>
+    <div class="ring-stats">
+      <div class="ring-stat-row">
+        <div class="ring-stat-dot" style="background:#10b981"></div>
+        <div class="ring-stat-info">
+          <div class="ring-stat-name">つみたて投資枠</div>
+          <div class="ring-stat-val">120万円</div>
+        </div>
+        <span class="ring-stat-pct" style="color:#10b981">50%</span>
+      </div>
+      <div class="ring-stat-row">
+        <div class="ring-stat-dot" style="background:#3b82f6"></div>
+        <div class="ring-stat-info">
+          <div class="ring-stat-name">成長投資枠</div>
+          <div class="ring-stat-val">60万円</div>
+        </div>
+        <span class="ring-stat-pct" style="color:#3b82f6">50%</span>
+      </div>
+      <div class="ring-stat-row">
+        <div class="ring-stat-dot" style="background:rgba(255,255,255,0.15)"></div>
+        <div class="ring-stat-info">
+          <div class="ring-stat-name">残り枠合計</div>
+          <div class="ring-stat-val">180万円</div>
+        </div>
+        <span class="ring-stat-pct" style="color:rgba(255,255,255,0.3)">50%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.12s">
+  <div class="section-head" style="margin-bottom:14px">
+    <span class="section-title">枠の内訳</span>
+    <span class="section-more">設定変更</span>
+  </div>
+  <div class="dual-prog-grid">
+    <div class="prog-box pb-tsumitate">
+      <div class="pb-label">つみたて投資枠</div>
+      <div class="pb-amounts">
+        <div class="pb-used">120万</div>
+        <div class="pb-total">上限 240万円 / 年</div>
+      </div>
+      <div class="pb-bar"><div class="pb-fill" id="tsumiFill" style="width:0%"></div></div>
+      <div class="pb-pct">50%</div>
+      <div class="pb-remain">残り 120万円</div>
+    </div>
+    <div class="prog-box pb-seichyo">
+      <div class="pb-label">成長投資枠</div>
+      <div class="pb-amounts">
+        <div class="pb-used">60万</div>
+        <div class="pb-total">上限 120万円 / 年</div>
+      </div>
+      <div class="pb-bar"><div class="pb-fill" id="seichyoFill" style="width:0%"></div></div>
+      <div class="pb-pct">50%</div>
+      <div class="pb-remain">残り 60万円</div>
+    </div>
+  </div>
+  <div class="nisa-total-bar-wrap">
+    <div class="ntb-label"><span>年間合計</span><strong>180万 / 360万円</strong></div>
+    <div class="ntb-bar"><div class="ntb-fill" id="totalFill" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.18s">
+  <div class="section-head">
+    <span class="section-title">保有ファンド</span>
+    <span class="section-more">全件</span>
+  </div>
+  <div id="holdingsWrap"></div>
+</div>
+
+<div class="card" style="animation-delay:.22s">
+  <div class="section-head">
+    <span class="section-title">評価額推移</span>
+  </div>
+  <div class="chart-tabs">
+    <button class="chart-tab active" onclick="switchGrowth(this,'1y')">1年</button>
+    <button class="chart-tab" onclick="switchGrowth(this,'3y')">3年</button>
+    <button class="chart-tab" onclick="switchGrowth(this,'all')">全期間</button>
+  </div>
+  <div class="chart-wrap"><canvas id="growthChart"></canvas></div>
+</div>
+
+<div class="card" style="animation-delay:.26s">
+  <div class="section-head" style="margin-bottom:14px">
+    <span class="section-title">将来シミュレーション</span>
+    <span class="section-more">前提変更</span>
+  </div>
+  <div class="proj-grid" id="projGrid"></div>
+  <div class="proj-detail" id="projDetail">
+    <div>
+      <div class="proj-d-label" id="pdLabel">10年後（2035年）</div>
+      <div class="proj-d-sub">想定利回り 年率5%・月10万積立継続</div>
+    </div>
+    <div>
+      <div class="proj-d-val" id="pdVal">¥2,271万</div>
+      <div class="proj-d-gain" id="pdGain">+1,071万（+89%）</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.3s">
+  <div class="section-head">
+    <span class="section-title">生涯投資枠の状況</span>
+    <span class="section-more">詳細</span>
+  </div>
+  <div class="lifetime-bar-wrap">
+    <div class="ltb-header">
+      <span class="ltb-title">生涯非課税枠 1,800万円</span>
+      <span class="ltb-max">残り <strong style="color:var(--g1)">1,620万</strong></span>
+    </div>
+    <div class="ltb-bar" id="ltBar">
+      <div class="ltb-seg" style="width:0%;background:#10b981;transition:width 1.2s ease" id="ltTsumi">積立</div>
+      <div class="ltb-seg" style="width:0%;background:#3b82f6;transition:width 1.2s .1s ease" id="ltSeichyo">成長</div>
+    </div>
+    <div class="ltb-legend">
+      <div class="ltb-leg-item"><div class="ltb-dot" style="background:#10b981"></div>つみたて 120万</div>
+      <div class="ltb-leg-item"><div class="ltb-dot" style="background:#3b82f6"></div>成長 60万</div>
+      <div class="ltb-leg-item"><div class="ltb-dot" style="background:var(--bg2)"></div>残り 1,620万</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.34s">
+  <div class="accum-header">
+    <span class="section-title">積立スケジュール</span>
+    <div class="accum-toggle">
+      <button class="accum-tab active" onclick="switchAccum(this,'monthly')">月次</button>
+      <button class="accum-tab" onclick="switchAccum(this,'annual')">年次</button>
+    </div>
+  </div>
+  <div id="fundSchedule"></div>
+</div>
+
+<div class="tax-card" style="animation-delay:.38s">
+  <div class="tax-header">
+    <div class="tax-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div>
+      <div class="tax-title">非課税メリット試算</div>
+      <div class="tax-sub">課税口座との比較（税率20.315%）</div>
+    </div>
+  </div>
+  <div class="tax-grid">
+    <div class="tax-box">
+      <div class="tax-box-label">累計非課税利益</div>
+      <div class="tax-box-val purple">+812万</div>
+      <div class="tax-box-sub">評価益合計</div>
+    </div>
+    <div class="tax-box">
+      <div class="tax-box-label">節税効果（推定）</div>
+      <div class="tax-box-val purple">+165万</div>
+      <div class="tax-box-sub">課税なら支払う税金</div>
+    </div>
+    <div class="tax-box">
+      <div class="tax-box-label">今年の非課税受取</div>
+      <div class="tax-box-val">+24.6万</div>
+      <div class="tax-box-sub">2025年分配・売却益</div>
+    </div>
+    <div class="tax-box">
+      <div class="tax-box-label">生涯節税シミュレーション</div>
+      <div class="tax-box-val">+810万</div>
+      <div class="tax-box-sub">枠満額・30年保有想定</div>
+    </div>
+  </div>
+  <div class="tax-note">💡 毎年360万円を満額活用し年率5%で30年間保有した場合、課税口座と比べて<strong>約810万円</strong>の節税効果が見込まれます。</div>
+</div>
+
+<div class="ai-card" style="animation-delay:.42s">
+  <div class="ai-header">
+    <div class="ai-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 1 8 8c0 3-1.5 5.5-4 7l-4 5-4-5c-2.5-1.5-4-4-4-7a8 8 0 0 1 8-8z"/><circle cx="12" cy="10" r="2"/></svg>
+    </div>
+    <div>
+      <div class="ai-title">NISA AIアドバイス</div>
+      <div class="ai-sub">ライフアセットオフィス FP による最適化提案</div>
+    </div>
+  </div>
+  <div class="ai-tips">
+    <div class="ai-tip">
+      <span class="ai-tip-icon">📊</span>
+      <div class="ai-tip-text"><strong>成長投資枠が50%未使用です。</strong>今月中にeMAXIS Slim 全世界（除く日本）を60万円追加投資すると年間枠を最大化できます。</div>
+    </div>
+    <div class="ai-tip">
+      <span class="ai-tip-icon">🔄</span>
+      <div class="ai-tip-text"><strong>再バランスの好機：</strong>国内株式の比率が目標より+4.2%過剰です。次回積立でスリム外国株の比率を一時的に引き上げることを推奨します。</div>
+    </div>
+    <div class="ai-tip">
+      <span class="ai-tip-icon">⚡</span>
+      <div class="ai-tip-text">毎月の積立額を<strong>+1万円増額</strong>すると、10年後の試算が+230万円改善されます（複利効果）。</div>
+    </div>
+  </div>
+  <div class="ai-cta">
+    <button class="ai-btn primary" onclick="location.href='/fp-tools.html'">FPツールで試算する</button>
+    <button class="ai-btn secondary" onclick="location.href='/#contact'">FPに相談する</button>
+  </div>
+</div>
+
+</main>
+</div>
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <div class="nav-item" onclick="location.href='/'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+      <span class="nav-item-label">ホーム</span>
+    </div>
+    <div class="nav-item" onclick="location.href='/fp-tools.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span class="nav-item-label">分析</span>
+    </div>
+    <div class="nav-center-btn" onclick="location.href='/loan-check.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </div>
+    <div class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <span class="nav-item-label">NISA</span>
+    </div>
+    <div class="nav-item" onclick="location.href='/#contact'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="nav-item-label">相談</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const themeBtn = document.getElementById('themeBtn');
+let dark = false;
+themeBtn.onclick = () => {
+  dark = !dark;
+  document.body.setAttribute('data-theme', dark ? 'dark' : '');
+  updateChartColors();
+};
+
+const yearData = {
+  2023: { tsumi: 80, tsumiMax: 120, seichyo: 40, seichyoMax: 240, total: 120, totalMax: 360 },
+  2024: { tsumi: 120, tsumiMax: 120, seichyo: 80, seichyoMax: 240, total: 200, totalMax: 360 },
+  2025: { tsumi: 120, tsumiMax: 240, seichyo: 60, seichyoMax: 120, total: 180, totalMax: 360 }
+};
+let curYear = 2025;
+
+function setYear(btn, yr) {
+  document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  curYear = yr;
+  const d = yearData[yr];
+  document.getElementById('heroAmt').textContent = d.total;
+  document.getElementById('heroRemain').textContent = d.totalMax - d.total;
+  document.getElementById('heroBadge').textContent = Math.round(d.total / d.totalMax * 100) + '% 使用';
+  document.getElementById('ringPct').textContent = Math.round(d.total / d.totalMax * 100) + '%';
+  ringChart.data.datasets[0].data = [d.total, d.totalMax - d.total];
+  ringChart.update();
+  setTimeout(() => {
+    document.getElementById('tsumiFill').style.width = (d.tsumi / d.tsumiMax * 100) + '%';
+    document.getElementById('seichyoFill').style.width = (d.seichyo / d.seichyoMax * 100) + '%';
+    document.getElementById('totalFill').style.width = (d.total / d.totalMax * 100) + '%';
+  }, 60);
+}
+
+const ringCtx = document.getElementById('ringChart').getContext('2d');
+const ringChart = new Chart(ringCtx, {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data: [180, 180],
+      backgroundColor: ['#10b981', 'rgba(255,255,255,0.07)'],
+      borderWidth: 0,
+      hoverOffset: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    cutout: '75%',
+    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+    animation: { duration: 1400, easing: 'easeInOutQuart' }
+  }
+});
+
+const holdings = [
+  { name: 'eMAXIS Slim 全世界株式', type: 'つみたて / 成長', val: '892万', gain: '+241万', gainPct: '+37.0%', pos: true, pct: 55, color: '#10b981', abbr: '全世' },
+  { name: 'eMAXIS Slim 米国株式 S&P500', type: 'つみたて', val: '486万', gain: '+132万', gainPct: '+37.3%', pos: true, pct: 30, color: '#3b82f6', abbr: 'SP5' },
+  { name: '日本株高配当 ETF', type: '成長投資枠', val: '198万', gain: '+24万', gainPct: '+13.8%', pos: true, pct: 12, color: '#f59e0b', abbr: '高配' },
+  { name: 'グローバル REIT', type: '成長投資枠', val: '52万', gain: '-6万', gainPct: '-10.3%', pos: false, pct: 3, color: '#ef4444', abbr: 'REIT' },
+];
+const hw = document.getElementById('holdingsWrap');
+holdings.forEach(h => {
+  hw.innerHTML += `
+  <div class="holding-row">
+    <div class="h-icon" style="background:linear-gradient(135deg,${h.color},${h.color}88)">${h.abbr}</div>
+    <div class="h-info">
+      <div class="h-name">${h.name}</div>
+      <div class="h-type">${h.type}</div>
+    </div>
+    <div class="h-amounts">
+      <div class="h-val">${h.val}</div>
+      <div class="h-gain ${h.pos ? 'gain-pos' : 'gain-neg'}">${h.gain} (${h.gainPct})</div>
+    </div>
+    <div class="h-share">
+      <div class="h-share-pct">${h.pct}%</div>
+      <div class="h-share-bar" style="width:${h.pct}%;background:${h.color}55;max-width:40px"></div>
+    </div>
+  </div>`;
+});
+
+const gCtx = document.getElementById('growthChart').getContext('2d');
+const gData1y = [1420,1510,1460,1580,1650,1720,1810,1760,1880,1970,2050,2120];
+const gData3y = [800,870,840,920,880,980,1050,1120,1080,1200,1350,2120];
+const gDataAll = [300,420,510,680,750,900,1050,1200,1350,1580,1800,2120];
+const gLabels1y = ['6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月'];
+const gLabels3y = ['2023/1','2023/4','2023/7','2023/10','2024/1','2024/4','2024/7','2024/10','2025/1','2025/2','2025/4','2025/5'];
+const gLabelsAll = ['2022/1','2022/4','2022/7','2022/10','2023/1','2023/4','2023/7','2023/10','2024/1','2024/4','2024/10','2025/5'];
+
+const gradient = gCtx.createLinearGradient(0, 0, 0, 170);
+gradient.addColorStop(0, 'rgba(16,185,129,0.18)');
+gradient.addColorStop(1, 'rgba(16,185,129,0.01)');
+
+let growthChart = new Chart(gCtx, {
+  type: 'line',
+  data: {
+    labels: gLabels1y,
+    datasets: [{
+      data: gData1y,
+      borderColor: '#10b981',
+      backgroundColor: gradient,
+      borderWidth: 2.5,
+      pointRadius: 0,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: '#10b981',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        mode: 'index', intersect: false,
+        backgroundColor: 'rgba(15,23,42,0.92)',
+        padding: 12, cornerRadius: 12,
+        titleFont: { family: 'Outfit', size: 12 },
+        bodyFont: { family: 'Outfit', size: 13, weight: '700' },
+        callbacks: { label: c => ' ¥' + c.raw + '万' }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: 'Noto Sans JP', size: 10 }, color: '#94a3b8', maxRotation: 0, maxTicksLimit: 6 } },
+      y: { grid: { color: 'rgba(148,163,184,0.1)' }, ticks: { font: { family: 'Outfit', size: 10 }, color: '#94a3b8', callback: v => v + '万' } }
+    },
+    animation: { duration: 800, easing: 'easeInOutQuart' }
+  }
+});
+
+function switchGrowth(btn, p) {
+  document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const map = { '1y': [gLabels1y, gData1y], '3y': [gLabels3y, gData3y], 'all': [gLabelsAll, gDataAll] };
+  growthChart.data.labels = map[p][0];
+  growthChart.data.datasets[0].data = map[p][1];
+  growthChart.update();
+}
+
+const projData = [
+  { label: '5年後', year: 2030, val: '¥1,271万', gain: '+471万', gainPct: '+59%' },
+  { label: '10年後', year: 2035, val: '¥2,271万', gain: '+1,071万', gainPct: '+89%' },
+  { label: '20年後', year: 2045, val: '¥5,286万', gain: '+4,086万', gainPct: '+340%' },
+];
+const pg = document.getElementById('projGrid');
+projData.forEach((p, i) => {
+  pg.innerHTML += `<div class="proj-box ${i===1?'selected':''}" onclick="selectProj(this,${i})">
+    <div class="proj-year">${p.label}</div>
+    <div class="proj-val">${p.val}</div>
+    <div class="proj-gain">${p.gainPct}</div>
+  </div>`;
+});
+function selectProj(el, i) {
+  document.querySelectorAll('.proj-box').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  const p = projData[i];
+  document.getElementById('pdLabel').textContent = p.label + '（' + p.year + '年）';
+  document.getElementById('pdVal').textContent = p.val;
+  document.getElementById('pdGain').textContent = p.gain + '（' + p.gainPct + '）';
+}
+
+const fundsMonthly = [
+  { name: 'eMAXIS Slim 全世界株式（オール・カントリー）', tags: ['つみたて', 'インデックス'], monthly: '50,000', total: '120万' },
+  { name: 'eMAXIS Slim 米国株式（S&P500）', tags: ['つみたて', 'インデックス'], monthly: '33,333', total: '80万' },
+  { name: '日本高配当株式インデックス', tags: ['成長投資枠'], monthly: '16,667', total: '60万' },
+];
+const fundsAnnual = [
+  { name: 'eMAXIS Slim 全世界株式', tags: ['つみたて'], monthly: '600000', total: '累計 120万' },
+  { name: 'eMAXIS Slim 米国株式', tags: ['つみたて'], monthly: '400000', total: '累計 80万' },
+  { name: '日本高配当株式インデックス', tags: ['成長投資枠'], monthly: '200000', total: '累計 60万' },
+];
+function renderFunds(data, mode) {
+  const fs = document.getElementById('fundSchedule');
+  fs.innerHTML = '';
+  data.forEach((f, i) => {
+    const tags = f.tags.map(t => {
+      const cls = t === 'つみたて' ? 'ft-tsumi' : t === '成長投資枠' ? 'ft-seichyo' : 'ft-index';
+      return `<span class="fund-tag ${cls}">${t}</span>`;
+    }).join('');
+    fs.innerHTML += `<div class="fund-row">
+      <div class="fund-rank">${i + 1}</div>
+      <div class="fund-info">
+        <div class="fund-name">${f.name}</div>
+        <div class="fund-meta">${tags}</div>
+      </div>
+      <div class="fund-right">
+        <div class="fund-monthly">¥${Number(f.monthly.replace(/,/g,'')).toLocaleString()}</div>
+        <div class="fund-total">${mode === 'annual' ? '年間 ¥' + Number(f.monthly.replace(/,/g,'')).toLocaleString() : f.total}</div>
+      </div>
+    </div>`;
+  });
+}
+renderFunds(fundsMonthly, 'monthly');
+
+function switchAccum(btn, mode) {
+  document.querySelectorAll('.accum-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderFunds(mode === 'monthly' ? fundsMonthly : fundsAnnual, mode);
+}
+
+setTimeout(() => {
+  document.getElementById('tsumiFill').style.width = '50%';
+  document.getElementById('seichyoFill').style.width = '50%';
+  document.getElementById('totalFill').style.width = '50%';
+  document.getElementById('ltTsumi').style.width = '6.67%';
+  document.getElementById('ltSeichyo').style.width = '3.33%';
+}, 200);
+
+function updateChartColors() {
+  const tc = dark ? '#374151' : '#94a3b8';
+  const gc = dark ? 'rgba(255,255,255,0.06)' : 'rgba(148,163,184,0.1)';
+  growthChart.options.scales.x.ticks.color = tc;
+  growthChart.options.scales.y.ticks.color = tc;
+  growthChart.options.scales.y.grid.color = gc;
+  growthChart.update();
+  ringChart.data.datasets[0].backgroundColor[1] = dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)';
+  ringChart.update();
+}
+</script>
+</body>
+</html>
