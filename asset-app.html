@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+  <meta name="description" content="ライフアセットオフィスの資産管理アプリ。NISA・配当・FIRE達成率をリアルタイムで管理。" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>LifeAsset — 資産管理アプリ | ライフアセットオフィス</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            mint: { 50:'#f0fdf9',100:'#ccfbef',200:'#99f6e0',300:'#5eead4',400:'#2dd4bf',500:'#14b8a6',600:'#0d9488',700:'#0f766e' },
+            sky: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1' },
+          },
+          fontFamily: { sans: ['Inter','Noto Sans JP','sans-serif'] },
+          animation: {
+            'fade-up': 'fadeUp 0.6s ease-out forwards',
+            'fade-in': 'fadeIn 0.4s ease-out forwards',
+            'slide-right': 'slideRight 0.5s ease-out forwards',
+            'number-up': 'numberUp 1s ease-out forwards',
+            'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+            'float': 'float 3s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeUp: { '0%':{ opacity:'0', transform:'translateY(24px)' }, '100%':{ opacity:'1', transform:'translateY(0)' } },
+            fadeIn: { '0%':{ opacity:'0' }, '100%':{ opacity:'1' } },
+            slideRight: { '0%':{ opacity:'0', transform:'translateX(-20px)' }, '100%':{ opacity:'1', transform:'translateX(0)' } },
+            pulseSoft: { '0%,100%':{ opacity:'1' }, '50%':{ opacity:'0.6' } },
+            float: { '0%,100%':{ transform:'translateY(0)' }, '50%':{ transform:'translateY(-8px)' } },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter','Noto Sans JP',sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* Glass morphism */
+    .glass {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .glass-dark {
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .dark .glass {
+      background: rgba(15,23,42,0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-warm {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Gradient backgrounds */
+    .gradient-bg {
+      background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf9 50%, #fafffe 100%);
+    }
+    .dark .gradient-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #0d1f1a 50%, #0f172a 100%);
+    }
+
+    /* Card hover effects */
+    .card-hover {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 24px 64px rgba(14,165,233,0.15);
+    }
+
+    /* Progress bars */
+    .progress-fill {
+      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Shimmer loading */
+    .shimmer {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Bottom nav safe area */
+    .bottom-nav { padding-bottom: env(safe-area-inset-bottom, 0); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+    .dark ::-webkit-scrollbar-thumb { background: #334155; }
+
+    /* Animate on scroll */
+    .aos { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .aos.visible { opacity: 1; transform: translateY(0); }
+    .aos-delay-1 { transition-delay: 0.1s; }
+    .aos-delay-2 { transition-delay: 0.2s; }
+    .aos-delay-3 { transition-delay: 0.3s; }
+    .aos-delay-4 { transition-delay: 0.4s; }
+
+    /* Number counter */
+    .counter { font-variant-numeric: tabular-nums; }
+
+    /* Mobile-first utilities */
+    @media (max-width: 640px) {
+      .mobile-scroll { overflow-x: auto; scroll-snap-type: x mandatory; }
+      .mobile-scroll > * { scroll-snap-align: start; }
+    }
+
+    /* Dark mode transitions */
+    body, .glass, .card-hover, header, nav {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Notification dot */
+    .notif-dot::after {
+      content: '';
+      position: absolute;
+      top: 2px; right: 2px;
+      width: 8px; height: 8px;
+      background: #ef4444;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+    .dark .notif-dot::after { border-color: #0f172a; }
+
+    /* Chart container */
+    .chart-wrap { position: relative; width: 100%; }
+
+    /* Tooltip */
+    [data-tooltip] { position: relative; }
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b; color: #fff; font-size: 11px;
+      padding: 4px 8px; border-radius: 6px; white-space: nowrap;
+      pointer-events: none; opacity: 0; transition: opacity 0.2s;
+    }
+    [data-tooltip]:hover::after { opacity: 1; }
+
+    /* Tag badge */
+    .tag-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+    }
+
+    /* Animated gradient border */
+    .gradient-border {
+      position: relative;
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(135deg, #0ea5e9, #14b8a6) border-box;
+      border: 2px solid transparent;
+    }
+    .dark .gradient-border {
+      background: linear-gradient(#1e293b, #1e293b) padding-box,
+                  linear-gradient(135deg, #0ea5e9, #14b8a6) border-box;
+    }
+  </style>
+</head>
+<body class="gradient-bg min-h-screen text-slate-800 dark:text-slate-200" id="body">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass dark:glass-dark sticky top-0 z-50 shadow-sm dark:shadow-slate-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 flex-shrink-0">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-400 to-teal-400 flex items-center justify-center shadow-md">
+          <svg class="w-4.5 h-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-base font-black leading-none gradient-text tracking-tight">LifeAsset</p>
+          <p class="text-[9px] text-slate-400 leading-none mt-0.5 hidden sm:block">by ライフアセットオフィス</p>
+        </div>
+      </a>
+
+      <!-- Nav (desktop) -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#dashboard" class="text-sky-600 dark:text-sky-400 font-semibold">ダッシュボード</a>
+        <a href="#nisa" class="text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors">NISA</a>
+        <a href="#fire" class="text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors">FIRE</a>
+        <a href="#blog" class="text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors">コラム</a>
+      </nav>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-2">
+        <!-- Dark mode toggle -->
+        <button onclick="toggleDark()" class="w-9 h-9 rounded-xl glass dark:glass-dark flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="ダークモード切替">
+          <svg id="sun-icon" class="w-4.5 h-4.5 text-amber-500 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg id="moon-icon" class="w-4.5 h-4.5 text-slate-600 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <!-- Notification -->
+        <button class="relative notif-dot w-9 h-9 rounded-xl glass dark:glass-dark flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="通知">
+          <svg class="w-4.5 h-4.5 text-slate-600 dark:text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        </button>
+        <!-- Avatar -->
+        <button class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-teal-400 flex items-center justify-center text-white text-xs font-bold shadow-md">
+          FP
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO / DASHBOARD ============ -->
+  <section id="dashboard" class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-4">
+
+    <!-- Greeting -->
+    <div class="mb-6 aos" id="greeting">
+      <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">おはようございます 👋</p>
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white leading-tight mt-1">
+        今月の資産は <span class="gradient-text">+2.4%</span> 増加中
+      </h1>
+    </div>
+
+    <!-- Total Asset Card -->
+    <div class="gradient-border rounded-3xl p-6 mb-6 shadow-xl shadow-sky-100/50 dark:shadow-sky-900/20 aos" id="total-card">
+      <div class="flex items-start justify-between flex-wrap gap-4">
+        <div>
+          <p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">総資産残高</p>
+          <div class="flex items-end gap-2">
+            <span class="text-5xl sm:text-6xl font-black tracking-tight text-slate-800 dark:text-white counter" id="total-amount">¥0</span>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="tag-badge bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              +¥3.2万 / 今月
+            </span>
+            <span class="tag-badge bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400">
+              +2.4% YoY
+            </span>
+          </div>
+        </div>
+        <div class="chart-wrap w-full sm:w-48 h-24">
+          <canvas id="miniChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Asset breakdown bar -->
+      <div class="mt-5">
+        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+          <span class="font-semibold">資産内訳</span>
+          <span>更新: 今日</span>
+        </div>
+        <div class="flex rounded-full overflow-hidden h-3 gap-0.5">
+          <div class="bg-sky-400 progress-fill" style="width:45%" data-tooltip="投資信託 45%"></div>
+          <div class="bg-teal-400 progress-fill" style="width:22%" data-tooltip="NISA 22%"></div>
+          <div class="bg-violet-400 progress-fill" style="width:18%" data-tooltip="株式 18%"></div>
+          <div class="bg-amber-400 progress-fill" style="width:10%" data-tooltip="現金 10%"></div>
+          <div class="bg-slate-300 progress-fill" style="width:5%" data-tooltip="その他 5%"></div>
+        </div>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-xs text-slate-500 dark:text-slate-400">
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-400 inline-block"></span>投資信託</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-teal-400 inline-block"></span>NISA</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-violet-400 inline-block"></span>株式</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span>現金</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-slate-300 inline-block"></span>その他</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Action Grid -->
+    <div class="grid grid-cols-4 gap-3 mb-6 aos aos-delay-1" id="quick-grid">
+      <button onclick="showSection('nisa')" class="card-hover glass dark:glass-dark rounded-2xl p-4 text-center flex flex-col items-center gap-2">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-sky-500 flex items-center justify-center shadow-md shadow-sky-200 dark:shadow-sky-900/30">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">NISA</span>
+      </button>
+      <button onclick="showSection('dividend')" class="card-hover glass dark:glass-dark rounded-2xl p-4 text-center flex flex-col items-center gap-2">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center shadow-md shadow-teal-200 dark:shadow-teal-900/30">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">配当</span>
+      </button>
+      <button onclick="showSection('fire')" class="card-hover glass dark:glass-dark rounded-2xl p-4 text-center flex flex-col items-center gap-2">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center shadow-md shadow-violet-200 dark:shadow-violet-900/30">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">FIRE</span>
+      </button>
+      <button onclick="showSection('kakeibo')" class="card-hover glass dark:glass-dark rounded-2xl p-4 text-center flex flex-col items-center gap-2">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-md shadow-amber-200 dark:shadow-amber-900/30">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">家計簿</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ NISA SECTION ============ -->
+  <section id="nisa" class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-black text-slate-800 dark:text-white">NISA 管理</h2>
+      <a href="#" class="text-xs text-sky-500 font-semibold hover:text-sky-600 transition-colors">詳細 →</a>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4 aos" id="nisa-cards">
+      <!-- Tsumitate NISA -->
+      <div class="card-hover glass dark:glass-dark rounded-3xl p-6 shadow-lg shadow-sky-50 dark:shadow-sky-900/10">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 rounded-full bg-sky-400 inline-block"></span>
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-300">つみたて投資枠</span>
+          </div>
+          <span class="tag-badge bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400">非課税</span>
+        </div>
+        <p class="text-3xl font-black text-slate-800 dark:text-white">¥840,000</p>
+        <p class="text-xs text-slate-400 mt-1">評価損益: <span class="text-emerald-500 font-semibold">+¥62,400 (+8.0%)</span></p>
+        <div class="mt-4">
+          <div class="flex justify-between text-xs text-slate-500 mb-1.5">
+            <span>年間枠 使用率</span>
+            <span class="font-semibold text-slate-700 dark:text-slate-300">70% <span class="text-slate-400 font-normal">/ ¥1,200,000</span></span>
+          </div>
+          <div class="h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-sky-400 to-sky-500 rounded-full progress-fill" style="width:70%"></div>
+          </div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div class="bg-sky-50 dark:bg-sky-900/20 rounded-xl p-3">
+            <p class="text-xs text-slate-500">残り枠</p>
+            <p class="text-sm font-bold text-slate-700 dark:text-slate-300">¥360,000</p>
+          </div>
+          <div class="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-3">
+            <p class="text-xs text-slate-500">毎月積立</p>
+            <p class="text-sm font-bold text-slate-700 dark:text-slate-300">¥70,000</p>
+          </div>
+        </div>
+      </div>
+      <!-- Growth NISA -->
+      <div class="card-hover glass dark:glass-dark rounded-3xl p-6 shadow-lg shadow-teal-50 dark:shadow-teal-900/10">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 rounded-full bg-teal-400 inline-block"></span>
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-300">成長投資枠</span>
+          </div>
+          <span class="tag-badge bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-400">非課税</span>
+        </div>
+        <p class="text-3xl font-black text-slate-800 dark:text-white">¥1,280,000</p>
+        <p class="text-xs text-slate-400 mt-1">評価損益: <span class="text-emerald-500 font-semibold">+¥156,000 (+13.9%)</span></p>
+        <div class="mt-4">
+          <div class="flex justify-between text-xs text-slate-500 mb-1.5">
+            <span>年間枠 使用率</span>
+            <span class="font-semibold text-slate-700 dark:text-slate-300">55% <span class="text-slate-400 font-normal">/ ¥2,400,000</span></span>
+          </div>
+          <div class="h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-teal-400 to-emerald-500 rounded-full progress-fill" style="width:55%"></div>
+          </div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div class="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-3">
+            <p class="text-xs text-slate-500">残り枠</p>
+            <p class="text-sm font-bold text-slate-700 dark:text-slate-300">¥1,120,000</p>
+          </div>
+          <div class="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-3">
+            <p class="text-xs text-slate-500">銘柄数</p>
+            <p class="text-sm font-bold text-slate-700 dark:text-slate-300">8 銘柄</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NISA Holdings -->
+    <div class="mt-4 glass dark:glass-dark rounded-3xl p-6 shadow-lg aos aos-delay-1" id="nisa-holdings">
+      <h3 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-4">主要保有銘柄</h3>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-700/50">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center text-sky-600 dark:text-sky-400 text-xs font-bold">全</div>
+            <div>
+              <p class="text-sm font-semibold text-slate-800 dark:text-white">eMAXIS Slim 全世界株式</p>
+              <p class="text-xs text-slate-400">つみたて枠 / 240口</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-bold text-slate-800 dark:text-white">¥420,000</p>
+            <p class="text-xs text-emerald-500 font-semibold">+¥32,000</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-700/50">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 text-xs font-bold">S&P</div>
+            <div>
+              <p class="text-sm font-semibold text-slate-800 dark:text-white">eMAXIS Slim 米国株式</p>
+              <p class="text-xs text-slate-400">成長枠 / 800口</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-bold text-slate-800 dark:text-white">¥680,000</p>
+            <p class="text-xs text-emerald-500 font-semibold">+¥98,000</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between py-2">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400 text-xs font-bold">高</div>
+            <div>
+              <p class="text-sm font-semibold text-slate-800 dark:text-white">SBI・高配当株式ファンド</p>
+              <p class="text-xs text-slate-400">成長枠 / 360口</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-bold text-slate-800 dark:text-white">¥320,000</p>
+            <p class="text-xs text-emerald-500 font-semibold">+¥28,000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIVIDEND SECTION ============ -->
+  <section id="dividend" class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-black text-slate-800 dark:text-white">配当管理</h2>
+      <a href="#" class="text-xs text-teal-500 font-semibold hover:text-teal-600 transition-colors">詳細 →</a>
+    </div>
+
+    <!-- Annual dividend card -->
+    <div class="card-hover glass dark:glass-dark rounded-3xl p-6 shadow-lg mb-4 aos" id="dividend-main">
+      <div class="flex items-start justify-between flex-wrap gap-4">
+        <div>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">年間配当収入（予想）</p>
+          <p class="text-4xl font-black text-slate-800 dark:text-white">¥186,400</p>
+          <p class="text-xs text-slate-400 mt-1">月平均 <span class="text-teal-500 font-semibold">¥15,533</span> · 配当利回り <span class="text-teal-500 font-semibold">3.2%</span></p>
+        </div>
+        <div class="chart-wrap w-full sm:w-40 h-28">
+          <canvas id="dividendChart"></canvas>
+        </div>
+      </div>
+      <!-- Monthly calendar -->
+      <div class="mt-5">
+        <p class="text-xs font-semibold text-slate-500 mb-3">配当カレンダー（2026年）</p>
+        <div class="grid grid-cols-6 sm:grid-cols-12 gap-1.5">
+          <div class="col-span-1 rounded-lg bg-teal-400 text-white text-center py-2 text-xs font-bold shadow-sm shadow-teal-200">3月<br/><span class="text-[10px] opacity-80">¥24k</span></div>
+          <div class="col-span-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-400 text-center py-2 text-xs">4月</div>
+          <div class="col-span-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-400 text-center py-2 text-xs">5月</div>
+          <div class="col-span-1 rounded-lg bg-teal-300 text-white text-center py-2 text-xs font-bold">6月<br/><span class="text-[10px] opacity-80">¥18k</span></div>
+          <div class="col-span-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-400 text-center py-2 text-xs">7月</div>
+          <div class="col-span-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-400 text-center py-2 text-xs">8月</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top dividend stocks -->
+    <div class="grid sm:grid-cols-3 gap-3 aos aos-delay-1" id="dividend-stocks">
+      <div class="card-hover glass dark:glass-dark rounded-2xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 text-xs font-black">三</div>
+          <div>
+            <p class="text-xs font-bold text-slate-800 dark:text-white">三菱UFJ FG</p>
+            <p class="text-[10px] text-slate-400">8306</p>
+          </div>
+        </div>
+        <p class="text-lg font-black text-slate-800 dark:text-white">¥38,400</p>
+        <p class="text-xs text-teal-500 font-semibold mt-0.5">利回り 3.8%</p>
+        <div class="mt-2 h-1 bg-teal-100 dark:bg-teal-900/30 rounded-full"><div class="h-full bg-teal-400 rounded-full" style="width:38%"></div></div>
+      </div>
+      <div class="card-hover glass dark:glass-dark rounded-2xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 text-xs font-black">JT</div>
+          <div>
+            <p class="text-xs font-bold text-slate-800 dark:text-white">日本たばこ産業</p>
+            <p class="text-[10px] text-slate-400">2914</p>
+          </div>
+        </div>
+        <p class="text-lg font-black text-slate-800 dark:text-white">¥52,000</p>
+        <p class="text-xs text-teal-500 font-semibold mt-0.5">利回り 5.2%</p>
+        <div class="mt-2 h-1 bg-teal-100 dark:bg-teal-900/30 rounded-full"><div class="h-full bg-teal-400 rounded-full" style="width:52%"></div></div>
+      </div>
+      <div class="card-hover glass dark:glass-dark rounded-2xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500 text-xs font-black">伊</div>
+          <div>
+            <p class="text-xs font-bold text-slate-800 dark:text-white">伊藤忠商事</p>
+            <p class="text-[10px] text-slate-400">8001</p>
+          </div>
+        </div>
+        <p class="text-lg font-black text-slate-800 dark:text-white">¥29,600</p>
+        <p class="text-xs text-teal-500 font-semibold mt-0.5">利回り 2.9%</p>
+        <div class="mt-2 h-1 bg-teal-100 dark:bg-teal-900/30 rounded-full"><div class="h-full bg-teal-400 rounded-full" style="width:29%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIRE SECTION ============ -->
+  <section id="fire" class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-black text-slate-800 dark:text-white">FIRE 達成率</h2>
+      <a href="#" class="text-xs text-violet-500 font-semibold hover:text-violet-600 transition-colors">詳細 →</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 aos" id="fire-section">
+      <!-- FIRE Progress -->
+      <div class="card-hover glass dark:glass-dark rounded-3xl p-6 shadow-lg">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl">🔥</span>
+          <div>
+            <h3 class="text-sm font-bold text-slate-800 dark:text-white">FIRE 目標進捗</h3>
+            <p class="text-xs text-slate-400">目標額: ¥75,000,000（25倍ルール）</p>
+          </div>
+        </div>
+
+        <!-- Circular progress -->
+        <div class="flex justify-center mb-4">
+          <div class="relative w-36 h-36">
+            <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#e2e8f0" stroke-width="8" class="dark:stroke-slate-700"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="url(#fireGrad)" stroke-width="8"
+                stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-linecap="round"
+                class="transition-all duration-1000"/>
+              <defs>
+                <linearGradient id="fireGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#8b5cf6"/>
+                  <stop offset="100%" stop-color="#06b6d4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-3xl font-black gradient-text-warm">25%</span>
+              <span class="text-xs text-slate-400">達成</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span class="text-slate-500">現在資産</span>
+            <span class="font-bold text-slate-800 dark:text-white">¥18,750,000</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">必要追加額</span>
+            <span class="font-bold text-slate-800 dark:text-white">¥56,250,000</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">達成予想</span>
+            <span class="font-bold text-violet-500">2041年 (15年後)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIRE Scenarios -->
+      <div class="card-hover glass dark:glass-dark rounded-3xl p-6 shadow-lg">
+        <h3 class="text-sm font-bold text-slate-800 dark:text-white mb-4">シナリオ比較</h3>
+        <div class="space-y-4">
+          <div class="bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl p-4">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <p class="text-xs font-bold text-emerald-700 dark:text-emerald-400">強気シナリオ</p>
+                <p class="text-xs text-slate-500">年利7%、月積立¥15万</p>
+              </div>
+              <span class="text-lg font-black text-emerald-600">2038年</span>
+            </div>
+            <div class="h-1.5 bg-emerald-100 dark:bg-emerald-900/30 rounded-full"><div class="h-full bg-emerald-400 rounded-full" style="width:65%"></div></div>
+          </div>
+          <div class="bg-sky-50 dark:bg-sky-900/20 rounded-2xl p-4">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <p class="text-xs font-bold text-sky-700 dark:text-sky-400">標準シナリオ</p>
+                <p class="text-xs text-slate-500">年利5%、月積立¥10万</p>
+              </div>
+              <span class="text-lg font-black text-sky-600">2041年</span>
+            </div>
+            <div class="h-1.5 bg-sky-100 dark:bg-sky-900/30 rounded-full"><div class="h-full bg-sky-400 rounded-full" style="width:45%"></div></div>
+          </div>
+          <div class="bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-4">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <p class="text-xs font-bold text-amber-700 dark:text-amber-400">保守シナリオ</p>
+                <p class="text-xs text-slate-500">年利3%、月積立¥7万</p>
+              </div>
+              <span class="text-lg font-black text-amber-600">2048年</span>
+            </div>
+            <div class="h-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-full"><div class="h-full bg-amber-400 rounded-full" style="width:28%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KAKEIBO SECTION ============ -->
+  <section id="kakeibo" class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-black text-slate-800 dark:text-white">家計簿 — 5月</h2>
+      <a href="#" class="text-xs text-amber-500 font-semibold hover:text-amber-600 transition-colors">詳細 →</a>
+    </div>
+
+    <div class="glass dark:glass-dark rounded-3xl p-6 shadow-lg mb-4 aos" id="kakeibo-main">
+      <div class="grid grid-cols-3 gap-4 mb-5">
+        <div class="text-center">
+          <p class="text-xs text-slate-400 mb-1">収入</p>
+          <p class="text-2xl font-black text-emerald-500">¥480,000</p>
+        </div>
+        <div class="text-center border-x border-slate-100 dark:border-slate-700">
+          <p class="text-xs text-slate-400 mb-1">支出</p>
+          <p class="text-2xl font-black text-red-400">¥312,000</p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs text-slate-400 mb-1">貯蓄</p>
+          <p class="text-2xl font-black gradient-text">¥168,000</p>
+        </div>
+      </div>
+
+      <!-- Expense breakdown -->
+      <div class="chart-wrap h-48">
+        <canvas id="kakeibo-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Category breakdown -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 aos aos-delay-1" id="kakeibo-cats">
+      <div class="glass dark:glass-dark rounded-2xl p-4 card-hover">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🏠</span>
+          <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">住居</span>
+        </div>
+        <p class="text-xl font-black text-slate-800 dark:text-white">¥110,000</p>
+        <p class="text-xs text-slate-400">35.3%</p>
+        <div class="mt-2 h-1 bg-slate-100 dark:bg-slate-700 rounded-full"><div class="h-full bg-sky-400 rounded-full" style="width:80%"></div></div>
+      </div>
+      <div class="glass dark:glass-dark rounded-2xl p-4 card-hover">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🛒</span>
+          <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">食費</span>
+        </div>
+        <p class="text-xl font-black text-slate-800 dark:text-white">¥68,000</p>
+        <p class="text-xs text-slate-400">21.8%</p>
+        <div class="mt-2 h-1 bg-slate-100 dark:bg-slate-700 rounded-full"><div class="h-full bg-emerald-400 rounded-full" style="width:55%"></div></div>
+      </div>
+      <div class="glass dark:glass-dark rounded-2xl p-4 card-hover">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🚗</span>
+          <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">交通</span>
+        </div>
+        <p class="text-xl font-black text-slate-800 dark:text-white">¥28,000</p>
+        <p class="text-xs text-slate-400">9.0%</p>
+        <div class="mt-2 h-1 bg-slate-100 dark:bg-slate-700 rounded-full"><div class="h-full bg-amber-400 rounded-full" style="width:30%"></div></div>
+      </div>
+      <div class="glass dark:glass-dark rounded-2xl p-4 card-hover">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">💡</span>
+          <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">光熱費</span>
+        </div>
+        <p class="text-xl font-black text-slate-800 dark:text-white">¥18,500</p>
+        <p class="text-xs text-slate-400">5.9%</p>
+        <div class="mt-2 h-1 bg-slate-100 dark:bg-slate-700 rounded-full"><div class="h-full bg-violet-400 rounded-full" style="width:22%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AI ADVICE ============ -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+    <h2 class="text-lg font-black text-slate-800 dark:text-white mb-4">AI アドバイス</h2>
+    <div class="glass dark:glass-dark rounded-3xl p-6 shadow-lg gradient-border aos" id="ai-advice">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-400 to-teal-400 flex items-center justify-center text-white font-black text-sm shadow-lg flex-shrink-0 animate-float">
+          AI
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <p class="text-sm font-bold text-slate-800 dark:text-white">ライフアセット AI</p>
+            <span class="tag-badge bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400 animate-pulse-soft">● ライブ</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p>現在の資産配分を分析しました。<strong class="text-slate-800 dark:text-white">投資信託45%</strong>の割合は30〜50代の資産形成層として理想的なポジションです。</p>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-3">
+              <p class="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">💡 今月のアドバイス</p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">NISA成長枠に¥1,120,000の余裕があります。高配当ETFへの追加投資で配当収入を<strong>年間+¥32,480</strong>増やせる見込みです。</p>
+            </div>
+            <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/30 rounded-xl p-3">
+              <p class="text-xs font-bold text-emerald-700 dark:text-emerald-400 mb-1">✅ 良い傾向</p>
+              <p class="text-xs text-slate-600 dark:text-slate-400">貯蓄率35%は目標の25%を大幅に上回っています。このペースを維持するとFIRE達成が<strong>2038年</strong>に前倒しできます。</p>
+            </div>
+          </div>
+          <button class="mt-4 text-xs font-semibold text-sky-500 hover:text-sky-600 transition-colors flex items-center gap-1">
+            詳細分析を見る
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MONTHLY REPORT ============ -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-4 mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-black text-slate-800 dark:text-white">月次レポート</h2>
+      <span class="tag-badge bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-400">2026年5月</span>
+    </div>
+    <div class="glass dark:glass-dark rounded-3xl p-6 shadow-lg aos" id="monthly-report">
+      <div class="chart-wrap h-52">
+        <canvas id="monthlyChart"></canvas>
+      </div>
+      <div class="grid grid-cols-3 gap-4 mt-5 pt-5 border-t border-slate-100 dark:border-slate-700">
+        <div class="text-center">
+          <p class="text-xs text-slate-400">最（削除済み）</p>
+          <p class="text-base font-black gradient-text">2月 +¥48万</p>
+        </div>
+        <div class="text-center border-x border-slate-100 dark:border-slate-700">
+          <p class="text-xs text-slate-400">平均月次増加</p>
+          <p class="text-base font-black text-slate-800 dark:text-white">+¥32万</p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs text-slate-400">年間目標達成率</p>
+          <p class="text-base font-black text-emerald-500">68%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOTTOM NAV (Mobile) ============ -->
+  <nav class="fixed bottom-0 left-0 right-0 glass dark:glass-dark border-t border-slate-100 dark:border-slate-700 bottom-nav z-40 md:hidden">
+    <div class="grid grid-cols-5 h-16 max-w-lg mx-auto">
+      <button onclick="scrollTo('#dashboard')" class="flex flex-col items-center justify-center gap-0.5 text-sky-500">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span class="text-[10px] font-semibold">ホーム</span>
+      </button>
+      <button onclick="scrollTo('#nisa')" class="flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-sky-500 transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-[10px] font-semibold">NISA</span>
+      </button>
+      <button onclick="scrollTo('#fire')" class="flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-violet-500 transition-colors">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-400 to-teal-400 flex items-center justify-center shadow-lg shadow-sky-200/50 -mt-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+        </div>
+        <span class="text-[10px] font-semibold mt-0.5">FIRE</span>
+      </button>
+      <button onclick="scrollTo('#kakeibo')" class="flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-amber-500 transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span class="text-[10px] font-semibold">家計簿</span>
+      </button>
+      <button onclick="scrollTo('#ai-advice')" class="flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-sky-500 transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        <span class="text-[10px] font-semibold">AI</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Spacer for bottom nav on mobile -->
+  <div class="h-20 md:h-0"></div>
+
+  <script>
+    // ======= Dark Mode =======
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    // ======= Counter Animation =======
+    function animateCounter(el, target, duration = 1500) {
+      const start = 0;
+      const startTime = performance.now();
+      const format = (n) => '¥' + Math.floor(n).toLocaleString('ja-JP');
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = format(start + (target - start) * eased);
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    // ======= Scroll Animation =======
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          if (e.target.id === 'total-card') {
+            animateCounter(document.getElementById('total-amount'), 18750000);
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+    document.getElementById('greeting').classList.add('visible');
+
+    // ======= Scroll helper =======
+    function scrollTo(id) {
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function showSection(id) { scrollTo('#' + id); }
+
+    // ======= Mini sparkline chart =======
+    const sparkCtx = document.getElementById('miniChart').getContext('2d');
+    new Chart(sparkCtx, {
+      type: 'line',
+      data: {
+        labels: ['', '', '', '', '', '', '', '', '', '', '', ''],
+        datasets: [{
+          data: [15.2, 15.8, 15.5, 16.2, 16.8, 17.1, 16.9, 17.5, 17.8, 18.1, 18.4, 18.75],
+          borderColor: '#0ea5e9',
+          backgroundColor: 'rgba(14,165,233,0.12)',
+          borderWidth: 2.5,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: {
+          callbacks: { label: c => '¥' + (c.raw * 100).toLocaleString() + '万' }
+        }},
+        scales: { x: { display: false }, y: { display: false } },
+        animation: { duration: 1500, easing: 'easeInOutQuart' }
+      }
+    });
+
+    // ======= Dividend doughnut =======
+    const divCtx = document.getElementById('dividendChart').getContext('2d');
+    new Chart(divCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['三菱UFJ', 'JT', '伊藤忠', 'その他'],
+        datasets: [{
+          data: [38400, 52000, 29600, 66400],
+          backgroundColor: ['#0ea5e9','#14b8a6','#8b5cf6','#f59e0b'],
+          borderWidth: 0,
+          hoverOffset: 6,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '72%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: c => c.label + ': ¥' + c.raw.toLocaleString() } }
+        },
+        animation: { duration: 1200, easing: 'easeInOutCubic' }
+      }
+    });
+
+    // ======= Kakeibo doughnut =======
+    const kakCtx = document.getElementById('kakeibo-chart').getContext('2d');
+    new Chart(kakCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['住居', '食費', '交通', '光熱費', '通信', 'その他'],
+        datasets: [{
+          data: [110000, 68000, 28000, 18500, 15500, 72000],
+          backgroundColor: ['#0ea5e9','#14b8a6','#f59e0b','#8b5cf6','#ec4899','#94a3b8'],
+          borderWidth: 0,
+          hoverOffset: 8,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: { font: { size: 11 }, padding: 12, color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b', boxWidth: 12, borderRadius: 4 }
+          },
+          tooltip: { callbacks: { label: c => c.label + ': ¥' + c.raw.toLocaleString() } }
+        },
+        animation: { duration: 1200 }
+      }
+    });
+
+    // ======= Monthly bar chart =======
+    const mCtx = document.getElementById('monthlyChart').getContext('2d');
+    new Chart(mCtx, {
+      type: 'bar',
+      data: {
+        labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+        datasets: [
+          {
+            label: '資産増加',
+            data: [28, 48, 32, 36, 32, null, null, null, null, null, null, null],
+            backgroundColor: (c) => {
+              const g = c.chart.ctx.createLinearGradient(0, 0, 0, 180);
+              g.addColorStop(0, '#0ea5e9'); g.addColorStop(1, 'rgba(14,165,233,0.3)');
+              return g;
+            },
+            borderRadius: 8, borderSkipped: false,
+          },
+          {
+            label: '目標ライン',
+            data: [30,30,30,30,30,30,30,30,30,30,30,30],
+            type: 'line',
+            borderColor: '#14b8a6',
+            borderWidth: 1.5,
+            borderDash: [4,4],
+            pointRadius: 0,
+            fill: false,
+            tension: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { font: { size: 11 }, color: '#94a3b8', boxWidth: 16 } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ': ' + (c.raw ? '¥' + c.raw + '万' : '未確定') } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#94a3b8' } },
+          y: {
+            grid: { color: 'rgba(148,163,184,0.1)' },
+            ticks: { font: { size: 11 }, color: '#94a3b8', callback: v => '¥' + v + '万' }
+          }
+        },
+        animation: { duration: 1400, easing: 'easeInOutQuart' }
+      }
+    });
+  </script>
+</body>
+</html>
