@@ -254,6 +254,31 @@ main{padding:20px 20px 0}
 
 @keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:0}
+
+/* edit panel */
+.edit-panel{background:linear-gradient(135deg,rgba(16,185,129,0.06),rgba(59,130,246,0.04));border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:14px 16px;margin-top:12px;display:none}
+.edit-panel.open{display:block}
+.edit-panel-title{font-size:12px;font-weight:700;color:var(--text-s);margin-bottom:10px}
+.edit-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.edit-row:last-of-type{margin-bottom:12px}
+.edit-label{font-size:11px;color:var(--text-s);flex:1;font-weight:600}
+.edit-input{width:80px;padding:7px 10px;border-radius:10px;border:1.5px solid rgba(16,185,129,0.3);background:var(--card);color:var(--text-p);font-family:var(--font-en);font-size:14px;font-weight:700;text-align:right;outline:none}
+.edit-input:focus{border-color:var(--g1)}
+.edit-unit{font-size:11px;color:var(--text-t);min-width:16px}
+.edit-save{width:100%;padding:10px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--g1),var(--b1));color:white;font-family:var(--font-jp);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.edit-save:active{transform:scale(0.97)}
+
+/* app edit modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:var(--card, #fff);border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:430px;backdrop-filter:blur(20px)}
+.modal-handle{width:40px;height:4px;background:rgba(0,0,0,0.15);border-radius:2px;margin:0 auto 20px}
+.modal-title{font-size:16px;font-weight:700;color:var(--text-p, #0f172a);margin-bottom:16px;text-align:center}
+.modal-field{margin-bottom:14px}
+.modal-field label{display:block;font-size:12px;font-weight:600;color:var(--text-s, #475569);margin-bottom:6px}
+.modal-field input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid rgba(0,0,0,0.1);background:var(--bg2, #f1f5f9);color:var(--text-p, #0f172a);font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;outline:none}
+.modal-field input:focus{border-color:#10b981}
+.modal-btn{width:100%;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#10b981,#3b82f6);color:white;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px}
 </style>
 </head>
 <body>
@@ -334,7 +359,21 @@ main{padding:20px 20px 0}
 <div class="card" style="animation-delay:.12s">
   <div class="section-head" style="margin-bottom:14px">
     <span class="section-title">枠の内訳</span>
-    <span class="section-more">設定変更</span>
+    <span class="section-more" onclick="toggleEditPanel()">✏️ 数値入力</span>
+  </div>
+  <div class="edit-panel" id="editPanel">
+    <div class="edit-panel-title" id="editPanelTitle">2025年 実績を入力</div>
+    <div class="edit-row">
+      <span class="edit-label">つみたて投資枠 使用額</span>
+      <input class="edit-input" type="number" id="ei-tsumi" min="0" max="240" value="120">
+      <span class="edit-unit">万</span>
+    </div>
+    <div class="edit-row">
+      <span class="edit-label">成長投資枠 使用額</span>
+      <input class="edit-input" type="number" id="ei-seichyo" min="0" max="240" value="60">
+      <span class="edit-unit">万</span>
+    </div>
+    <button class="edit-save" onclick="saveNisaEdit()">保存して反映</button>
   </div>
   <div class="dual-prog-grid">
     <div class="prog-box pb-tsumitate">
@@ -743,6 +782,52 @@ function updateChartColors() {
   ringChart.data.datasets[0].backgroundColor[1] = dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)';
   ringChart.update();
 }
+
+// ── LOCALSTORAGE ──
+const NISA_KEY = 'lao-nisa-v1';
+function saveNisaData() {
+  localStorage.setItem(NISA_KEY, JSON.stringify({ yearData, curYear }));
+}
+function loadNisaData() {
+  try {
+    const s = JSON.parse(localStorage.getItem(NISA_KEY));
+    if (!s || !s.yearData) return;
+    [2023, 2024, 2025].forEach(y => {
+      if (s.yearData[y]) {
+        const d = s.yearData[y];
+        yearData[y].tsumi = d.tsumi;
+        yearData[y].seichyo = d.seichyo;
+        yearData[y].total = d.tsumi + d.seichyo;
+      }
+    });
+  } catch(e) {}
+}
+
+function toggleEditPanel() {
+  const panel = document.getElementById('editPanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    document.getElementById('editPanelTitle').textContent = curYear + '年 実績を入力';
+    document.getElementById('ei-tsumi').value = yearData[curYear].tsumi;
+    document.getElementById('ei-seichyo').value = yearData[curYear].seichyo;
+  }
+}
+
+function saveNisaEdit() {
+  const tsumi = Math.min(parseInt(document.getElementById('ei-tsumi').value) || 0, yearData[curYear].tsumiMax);
+  const seichyo = Math.min(parseInt(document.getElementById('ei-seichyo').value) || 0, yearData[curYear].seichyoMax);
+  yearData[curYear].tsumi = tsumi;
+  yearData[curYear].seichyo = seichyo;
+  yearData[curYear].total = tsumi + seichyo;
+  saveNisaData();
+  document.getElementById('editPanel').classList.remove('open');
+  const btn = document.querySelector('.year-btn.active');
+  if (btn) setYear(btn, curYear);
+  const totalUsed = yearData[2023].total + yearData[2024].total + yearData[2025].total;
+  document.getElementById('lifetimeUsed').textContent = totalUsed;
+}
+
+loadNisaData();
 </script>
 </body>
 </html>
