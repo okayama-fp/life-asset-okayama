@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="30代から始めるNISA×高配当株投資のロードマップ。月10万円の積立でFIREを目指す具体的な戦略をFPが解説。" />
+  <link rel="canonical" href="https://lifeassetoffice.net/blog/post-540.html" />
+  <title>30代から始めるNISA×高配当株でFIRE達成ロードマップ | ライフアセットオフィス</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','Noto Sans JP','sans-serif'], serif: ['Noto Serif JP','serif'] },
+          colors: {
+            brand: { 50:'#f0f9ff', 100:'#e0f2fe', 400:'#38bdf8', 500:'#0ea5e9', 600:'#0284c7' },
+            teal: { 50:'#f0fdf9', 400:'#2dd4bf', 500:'#14b8a6' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter','Noto Sans JP',sans-serif; -webkit-font-smoothing: antialiased; }
+    .glass {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .dark .glass {
+      background: rgba(15,23,42,0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    /* Article typography */
+    .article-body p { margin-bottom: 1.5rem; line-height: 1.9; }
+    .article-body h2 { font-size: 1.35rem; font-weight: 800; margin: 2.5rem 0 1rem; color: #0f172a; line-height: 1.4; }
+    .dark .article-body h2 { color: #f1f5f9; }
+    .article-body h3 { font-size: 1.1rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #1e293b; }
+    .dark .article-body h3 { color: #e2e8f0; }
+    .article-body ul { margin-bottom: 1.5rem; padding-left: 1.25rem; space-y: 0.5rem; }
+    .article-body ul li { margin-bottom: 0.5rem; line-height: 1.8; list-style: none; padding-left: 1.5rem; position: relative; }
+    .article-body ul li::before { content: '▸'; position: absolute; left: 0; color: #0ea5e9; font-size: 0.85em; }
+    .article-body strong { font-weight: 700; color: #0ea5e9; }
+    /* Callout boxes */
+    .callout { border-radius: 16px; padding: 1.25rem 1.5rem; margin: 1.75rem 0; }
+    .callout-info { background: #eff6ff; border-left: 4px solid #0ea5e9; }
+    .callout-warn { background: #fffbeb; border-left: 4px solid #f59e0b; }
+    .callout-tip { background: #f0fdf9; border-left: 4px solid #14b8a6; }
+    .callout-danger { background: #fef2f2; border-left: 4px solid #ef4444; }
+    .dark .callout-info { background: rgba(14,165,233,0.1); }
+    .dark .callout-warn { background: rgba(245,158,11,0.1); }
+    .dark .callout-tip { background: rgba(20,184,166,0.1); }
+    .dark .callout-danger { background: rgba(239,68,68,0.1); }
+    /* Table */
+    .article-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; }
+    .article-table th { background: #f0f9ff; font-size: 0.8rem; font-weight: 700; padding: 10px 16px; text-align: left; color: #0284c7; }
+    .dark .article-table th { background: rgba(14,165,233,0.15); color: #38bdf8; }
+    .article-table td { font-size: 0.875rem; padding: 10px 16px; border-top: 1px solid #f1f5f9; color: #334155; }
+    .dark .article-table td { border-color: #1e293b; color: #cbd5e1; }
+    .article-table tr:hover td { background: #f8fafc; }
+    .dark .article-table tr:hover td { background: rgba(255,255,255,0.03); }
+    /* TOC */
+    .toc-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 10px; transition: background 0.2s; color: #475569; text-decoration: none; font-size: 0.875rem; }
+    .toc-item:hover { background: #f0f9ff; color: #0ea5e9; }
+    .dark .toc-item:hover { background: rgba(14,165,233,0.1); }
+    /* Progress bar */
+    #read-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #0ea5e9, #14b8a6); z-index: 200; transition: width 0.1s; }
+    /* Share buttons */
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; cursor: pointer; border: none; }
+    /* Footnote */
+    .footnote { font-size: 0.75rem; color: #94a3b8; line-height: 1.6; }
+    /* Aos */
+    .aos { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .aos.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 min-h-screen" id="body">
+
+  <!-- Reading progress -->
+  <div id="read-progress" style="width:0%"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass dark:bg-slate-900/80 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <a href="/index.html" class="flex items-center gap-2 flex-shrink-0">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-sky-400 to-teal-400 flex items-center justify-center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+        </div>
+        <span class="font-black text-sm gradient-text hidden sm:block">ライフアセットオフィス</span>
+      </a>
+      <nav class="flex items-center gap-4 text-xs">
+        <a href="/blog/index.html" class="text-slate-500 hover:text-sky-500 transition-colors font-medium">← コラム一覧</a>
+        <button onclick="toggleDark()" class="w-8 h-8 rounded-lg glass flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <svg id="sun-i" class="w-4 h-4 text-amber-400 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg id="moon-i" class="w-4 h-4 text-slate-500 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 lg:grid lg:grid-cols-[1fr_280px] lg:gap-10">
+    <!-- ============ MAIN ARTICLE ============ -->
+    <article>
+      <!-- Category + Meta -->
+      <div class="flex flex-wrap items-center gap-2 mb-5 aos" id="meta">
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400">NISA</span>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-400">FIRE</span>
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-400">高配当投資</span>
+        <span class="text-xs text-slate-400 ml-auto">2026年5月28日</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white leading-tight mb-5 aos" id="title">
+        30代から始める<br class="sm:hidden" /><span class="gradient-text">NISA × 高配当株</span>でFIRE達成ロードマップ
+        <span class="block text-base font-normal text-slate-500 dark:text-slate-400 mt-2">月10万円の積立で2040年FIRE達成は可能か？FPが試算</span>
+      </h1>
+
+      <!-- Author card -->
+      <div class="glass dark:bg-slate-800/60 rounded-2xl p-4 flex items-center gap-4 mb-8 aos" id="author">
+        <img src="/images/fp-avatar.png" alt="ライフアセットオフィス FP" class="w-12 h-12 rounded-xl object-cover bg-sky-100" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-teal-400 hidden items-center justify-center text-white font-black text-sm flex-shrink-0">FP</div>
+        <div class="flex-1">
+          <p class="text-sm font-bold text-slate-800 dark:text-white">ライフアセットオフィス FP</p>
+          <p class="text-xs text-slate-500">CFP® / 2級FP技能士 · 資産形成専門</p>
+        </div>
+        <div class="hidden sm:flex gap-3 text-xs text-slate-400">
+          <span class="flex items-center gap-1"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,231 views</span>
+          <span class="flex items-center gap-1"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8 min read</span>
+        </div>
+      </div>
+
+      <!-- Hero image placeholder -->
+      <div class="rounded-3xl overflow-hidden mb-8 bg-gradient-to-br from-sky-400 via-teal-400 to-violet-500 h-52 sm:h-72 flex items-center justify-center relative aos" id="hero-img">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-500/80 to-teal-600/80"></div>
+        <div class="relative z-10 text-center text-white px-6">
+          <p class="text-5xl font-black mb-2">🏝️</p>
+          <p class="text-2xl font-black">月10万円でFIREへ</p>
+          <p class="text-sm mt-1 opacity-80">2040年 経済的自由を手に入れる</p>
+        </div>
+      </div>
+
+      <!-- Lead -->
+      <div class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed mb-8 font-light border-l-4 border-sky-400 pl-5 aos" id="lead">
+        「老後のために貯金しているけれど、全然増えない気がする」「NISAは始めたけど、これだけで本当に大丈夫？」そんな不安を抱える30〜40代の方へ。本記事では、<strong class="text-sky-600 dark:text-sky-400 font-semibold">NISA × 高配当株の組み合わせ</strong>で2040年FIREを目指す、具体的なロードマップを公開します。
+      </div>
+
+      <!-- Article body -->
+      <div class="article-body text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+
+        <h2 id="s1">📊 なぜ今、NISA × 高配当株なのか</h2>
+        <p>日本の新NISA制度（2024年〜）は年間360万円、生涯1,800万円まで非課税で運用できる圧倒的な制度です。この器を最大活用しながら、定期的なキャッシュフローを生む<strong>高配当株</strong>と組み合わせることで、「資産成長」と「インカムゲイン」の両輪でFIREへ近づけます。</p>
+
+        <div class="callout callout-info aos">
+          <p class="text-xs font-bold text-sky-700 dark:text-sky-400 mb-1">💡 新NISAの基本枠</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">つみたて投資枠：年間<strong>120万円</strong>（インデックス型投信向け）<br/>成長投資枠：年間<strong>240万円</strong>（個別株・ETF・投信）<br/>合計年間<strong>360万円</strong>・生涯<strong>1,800万円</strong>が非課税</p>
+        </div>
+
+        <h2 id="s2">🗺️ 3ステージ・ロードマップ</h2>
+        <p>FIREを目指す旅は3つのステージに分けて考えると整理しやすくなります。</p>
+
+        <div class="grid sm:grid-cols-3 gap-4 my-6 aos">
+          <div class="rounded-2xl p-5 bg-sky-50 dark:bg-sky-900/20 border border-sky-100 dark:border-sky-800/30">
+            <p class="text-xs font-bold text-sky-600 dark:text-sky-400 mb-2">Stage 1 (30〜35歳)</p>
+            <p class="text-base font-black text-slate-800 dark:text-white mb-2">基盤構築期</p>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1">
+              <li>• つみたてNISAで全世界株式</li>
+              <li>• 生活防衛資金を6ヶ月分確保</li>
+              <li>• 月積立額：5〜7万円</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl p-5 bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-800/30">
+            <p class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">Stage 2 (36〜42歳)</p>
+            <p class="text-base font-black text-slate-800 dark:text-white mb-2">加速成長期</p>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1">
+              <li>• 成長投資枠で高配当株追加</li>
+              <li>• 配当再投資で複利加速</li>
+              <li>• 月積立額：10〜15万円</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl p-5 bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800/30">
+            <p class="text-xs font-bold text-violet-600 dark:text-violet-400 mb-2">Stage 3 (43〜50歳)</p>
+            <p class="text-base font-black text-slate-800 dark:text-white mb-2">収穫・FIRE期</p>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1">
+              <li>• 取り崩しと配当で生活費を賄う</li>
+              <li>• 4%ルールを適用</li>
+              <li>• 目標資産：7,500万円</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="s3">💹 月10万円積立シミュレーション</h2>
+        <p>月10万円（年間120万円）を平均年利<strong>5%</strong>で運用した場合の資産推移をシミュレートしました。</p>
+
+        <div class="glass dark:bg-slate-800/50 rounded-2xl p-4 my-6 aos">
+          <div style="position:relative; height:260px;">
+            <canvas id="simulChart"></canvas>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto my-6 aos">
+          <table class="article-table">
+            <thead>
+              <tr>
+                <th>年齢</th><th>元本累計</th><th>運用益（年利5%）</th><th>総資産</th><th>FIRE達成率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>35歳</td><td>¥600万</td><td>¥82万</td><td>¥682万</td><td>9.1%</td></tr>
+              <tr><td>40歳</td><td>¥1,200万</td><td>¥368万</td><td>¥1,568万</td><td>20.9%</td></tr>
+              <tr><td>45歳</td><td>¥1,800万</td><td>¥1,021万</td><td>¥2,821万</td><td>37.6%</td></tr>
+              <tr><td>50歳</td><td>¥2,400万</td><td>¥2,234万</td><td>¥4,634万</td><td>61.8%</td></tr>
+              <tr style="font-weight:700;"><td>54歳</td><td>¥2,880万</td><td>¥3,756万</td><td>¥6,636万</td><td>88.5%</td></tr>
+              <tr style="background:#f0fdf9;"><td><strong>55歳</strong></td><td>¥3,000万</td><td>¥4,284万</td><td><strong>¥7,284万</strong></td><td><strong>97.1% 🎉</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-tip aos">
+          <p class="text-xs font-bold text-teal-700 dark:text-teal-400 mb-1">✅ ポイント</p>
+          <p class="text-sm">複利の力で、40代後半から資産増加が急加速します。「元本の2倍以上を運用益が超える」のは50歳前後。ここで諦めないことが最重要です。</p>
+        </div>
+
+        <h2 id="s4">📈 おすすめ高配当株 5選（2026年版）</h2>
+        <p>FIREの収入源となる高配当株の選定基準は①<strong>連続増配</strong>②配当利回り<strong>3%以上</strong>③財務健全性です。</p>
+
+        <div class="grid sm:grid-cols-2 gap-3 my-6">
+          <div class="glass dark:bg-slate-800/50 rounded-2xl p-4 aos aos-delay-1 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 font-black text-xs flex-shrink-0">三</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">三菱UFJフィナンシャルグループ<span class="text-xs font-normal text-slate-400 ml-1">(8306)</span></p>
+              <p class="text-xs text-teal-500 font-semibold">配当利回り 3.8%｜連続増配8期</p>
+              <p class="text-xs text-slate-500 mt-1">日本最大の銀行グループ。金利上昇局面での収益拡大が期待できる安定銘柄。</p>
+            </div>
+          </div>
+          <div class="glass dark:bg-slate-800/50 rounded-2xl p-4 aos aos-delay-2 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 font-black text-xs flex-shrink-0">JT</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">日本たばこ産業<span class="text-xs font-normal text-slate-400 ml-1">(2914)</span></p>
+              <p class="text-xs text-teal-500 font-semibold">配当利回り 5.2%｜海外売上比率70%</p>
+              <p class="text-xs text-slate-500 mt-1">高配当の王様。新興国市場での成長と安定した配当政策が魅力。</p>
+            </div>
+          </div>
+          <div class="glass dark:bg-slate-800/50 rounded-2xl p-4 aos flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500 font-black text-xs flex-shrink-0">伊</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">伊藤忠商事<span class="text-xs font-normal text-slate-400 ml-1">(8001)</span></p>
+              <p class="text-xs text-teal-500 font-semibold">配当利回り 2.9%｜PBR1.5倍</p>
+              <p class="text-xs text-slate-500 mt-1">5大商社トップクラスの収益力。バフェット効果で世界的認知度向上。</p>
+            </div>
+          </div>
+          <div class="glass dark:bg-slate-800/50 rounded-2xl p-4 aos aos-delay-1 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-teal-500 font-black text-[10px] flex-shrink-0">SPYD</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">SPDR ポートフォリオS&P500高配当<span class="text-xs font-normal text-slate-400 ml-1">(SPYD)</span></p>
+              <p class="text-xs text-teal-500 font-semibold">配当利回り 4.1%｜年4回分配</p>
+              <p class="text-xs text-slate-500 mt-1">米国高配当株80社に分散投資。NISA成長枠で保有可能なETF。</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="s5">⚠️ リスクと注意点</h2>
+
+        <div class="callout callout-warn aos">
+          <p class="text-xs font-bold text-amber-700 dark:text-amber-400 mb-2">⚠️ 注意：過去の配当は将来を保証しない</p>
+          <p class="text-sm">高配当株は業績悪化時に減配・無配転落のリスクがあります。特定銘柄への集中投資は避け、複数銘柄・複数セクターへの分散を心がけましょう。</p>
+        </div>
+
+        <ul>
+          <li><strong>為替リスク</strong>：海外ETF（SPYD等）は円高時に評価額が下落します</li>
+          <li><strong>集中リスク</strong>：1銘柄に全額投入は禁物。5〜10銘柄以上に分散を</li>
+          <li><strong>税制改正リスク</strong>：NISA制度は将来的に変更される可能性があります</li>
+          <li><strong>インフレリスク</strong>：現金比率が高い場合、実質購買力が低下します</li>
+        </ul>
+
+        <h2 id="s6">🤖 AIが自動管理する時代へ</h2>
+        <p>ライフアセットオフィスでは、NISA・高配当株・家計簿をまとめて管理できる<strong>資産管理アプリ「LifeAsset」</strong>の提供を準備中です。AIがあなたのポートフォリオを分析し、最適なリバランス提案・FIRE達成予測を自動でお届けします。</p>
+
+        <div class="rounded-3xl bg-gradient-to-br from-sky-500 to-teal-500 p-6 my-6 text-white text-center aos">
+          <p class="text-2xl mb-2">📱 LifeAsset アプリ</p>
+          <p class="text-sm opacity-90 mb-4">NISA・高配当・FIRE・家計簿をワンアプリで。<br/>AIが最適な投資戦略をアドバイス。</p>
+          <a href="/asset-app.html" class="inline-block bg-white text-sky-600 font-bold text-sm px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-shadow">
+            アプリのデモを見る →
+          </a>
+        </div>
+
+        <h2 id="s7">📝 まとめ：今すぐできる3ステップ</h2>
+        <div class="space-y-3 my-4 aos">
+          <div class="flex items-start gap-4 glass dark:bg-slate-800/50 rounded-2xl p-4">
+            <div class="w-8 h-8 rounded-full bg-sky-500 text-white font-black text-sm flex items-center justify-center flex-shrink-0">1</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">NISAつみたて枠を満額設定する</p>
+              <p class="text-xs text-slate-500 mt-0.5">eMAXIS Slim 全世界株式（月10万円）→ 年間120万円を非課税運用</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 glass dark:bg-slate-800/50 rounded-2xl p-4">
+            <div class="w-8 h-8 rounded-full bg-teal-500 text-white font-black text-sm flex items-center justify-center flex-shrink-0">2</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">成長投資枠で高配当ETFを追加</p>
+              <p class="text-xs text-slate-500 mt-0.5">SPYD or SBI高配当ファンドを年間数十万円ずつ積み上げ、配当収入を確立</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 glass dark:bg-slate-800/50 rounded-2xl p-4">
+            <div class="w-8 h-8 rounded-full bg-violet-500 text-white font-black text-sm flex items-center justify-center flex-shrink-0">3</div>
+            <div>
+              <p class="text-sm font-bold text-slate-800 dark:text-white">家計簿で支出を「見える化」してFIRE目標を設定</p>
+              <p class="text-xs text-slate-500 mt-0.5">生活費×25倍がFIRE必要額。まず現在の支出を把握することが第一歩</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="glass dark:bg-slate-800/60 rounded-3xl p-6 my-8 text-center aos">
+        <p class="text-lg font-black text-slate-800 dark:text-white mb-1">無料FP相談、受付中</p>
+        <p class="text-sm text-slate-500 mb-4">NISA・FIRE・高配当投資について、プロのFPが個別にアドバイスします。</p>
+        <a href="/contact.html" class="inline-block bg-gradient-to-r from-sky-500 to-teal-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-shadow text-sm">
+          無料相談を予約する →
+        </a>
+      </div>
+
+      <!-- Share -->
+      <div class="border-t border-slate-100 dark:border-slate-700 pt-6 mb-8">
+        <p class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider">この記事をシェア</p>
+        <div class="flex flex-wrap gap-2">
+          <button class="share-btn bg-sky-500 text-white hover:bg-sky-600" onclick="shareTwitter()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X でシェア
+          </button>
+          <button class="share-btn bg-blue-600 text-white hover:bg-blue-700" onclick="shareFacebook()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </button>
+          <button class="share-btn bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600" onclick="copyLink()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            リンクをコピー
+          </button>
+        </div>
+      </div>
+
+      <!-- Related articles -->
+      <div class="aos">
+        <h3 class="text-base font-black text-slate-800 dark:text-white mb-4">関連記事</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="/blog/post-539.html" class="glass dark:bg-slate-800/50 rounded-2xl p-4 hover:shadow-lg transition-shadow group">
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400 mb-2 inline-block">住宅ローン</span>
+            <p class="text-sm font-bold text-slate-800 dark:text-white group-hover:text-sky-500 transition-colors leading-snug">住宅ローン金利リスク診断ツール完全解説</p>
+            <p class="text-xs text-slate-400 mt-1">2026年5月20日</p>
+          </a>
+          <a href="/future-plans.html" class="glass dark:bg-slate-800/50 rounded-2xl p-4 hover:shadow-lg transition-shadow group">
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400 mb-2 inline-block">ライフプラン</span>
+            <p class="text-sm font-bold text-slate-800 dark:text-white group-hover:text-sky-500 transition-colors leading-snug">人生100年時代の資産形成プランニング</p>
+            <p class="text-xs text-slate-400 mt-1">ライフプランニングページ</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="mt-8 p-4 bg-slate-50 dark:bg-slate-800/40 rounded-2xl footnote">
+        <p class="font-semibold text-slate-500 dark:text-slate-400 mb-1">免責事項</p>
+        <p>本記事は情報提供を目的としており、特定の金融商品・投資方法を推奨するものではありません。投資には元本割れのリスクがあります。具体的な投資判断はご自身の責任のもとで行うか、専門家にご相談ください。掲載している数値はすべて試算値であり、将来の結果を保証するものではありません。</p>
+      </div>
+    </article>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="hidden lg:block mt-0">
+      <div class="sticky top-20 space-y-6">
+        <!-- TOC -->
+        <div class="glass dark:bg-slate-800/60 rounded-3xl p-5">
+          <p class="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">目次</p>
+          <nav class="space-y-0.5">
+            <a href="#s1" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">1</span>NISAと高配当株の相性</a>
+            <a href="#s2" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">2</span>3ステージ・ロードマップ</a>
+            <a href="#s3" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">3</span>月10万円シミュレーション</a>
+            <a href="#s4" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">4</span>高配当株5選</a>
+            <a href="#s5" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">5</span>リスクと注意点</a>
+            <a href="#s6" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">6</span>AIが自動管理する時代</a>
+            <a href="#s7" class="toc-item dark:text-slate-400"><span class="w-5 h-5 rounded-md bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-xs flex-shrink-0">7</span>まとめ</a>
+          </nav>
+        </div>
+
+        <!-- App CTA -->
+        <div class="rounded-3xl bg-gradient-to-br from-sky-500 to-teal-500 p-5 text-white text-center">
+          <p class="text-2xl mb-1">📱</p>
+          <p class="font-black text-base mb-1">LifeAsset App</p>
+          <p class="text-xs opacity-80 mb-3">NISA・FIRE・配当を<br/>ワンアプリで管理</p>
+          <a href="/asset-app.html" class="block bg-white text-sky-600 font-bold text-xs px-4 py-2.5 rounded-full hover:shadow-lg transition-shadow">
+            デモを試す →
+          </a>
+        </div>
+
+        <!-- Tags -->
+        <div class="glass dark:bg-slate-800/60 rounded-3xl p-5">
+          <p class="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">タグ</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs px-3 py-1 rounded-full bg-sky-100 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400 cursor-pointer hover:bg-sky-200 transition-colors">NISA</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400 cursor-pointer hover:bg-teal-200 transition-colors">FIRE</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 cursor-pointer hover:bg-violet-200 transition-colors">高配当株</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 cursor-pointer hover:bg-amber-200 transition-colors">資産形成</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400 cursor-pointer hover:bg-slate-200 transition-colors">投資信託</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Dark mode
+    function toggleDark() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+
+    // Reading progress
+    window.addEventListener('scroll', () => {
+      const el = document.documentElement;
+      const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+      document.getElementById('read-progress').style.width = pct + '%';
+    });
+
+    // AOS
+    const obs = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.08 });
+    document.querySelectorAll('.aos').forEach(el => obs.observe(el));
+    ['meta','title','author','lead','hero-img'].forEach(id => { const el = document.getElementById(id); if(el) setTimeout(() => el.classList.add('visible'), 100); });
+
+    // Simulation chart
+    const sCtx = document.getElementById('simulChart').getContext('2d');
+    const ages = [30,32,34,36,38,40,42,44,46,48,50,52,54,55];
+    const principal = ages.map(a => (a-30)*12*10); // 月10万
+    const total = ages.map(a => {
+      let v=0; const n=(a-30)*12;
+      for(let i=0;i<n;i++) v = (v + 10)*1.004167;
+      return Math.round(v);
+    });
+    new Chart(sCtx, {
+      type: 'line',
+      data: {
+        labels: ages.map(a=>a+'歳'),
+        datasets: [
+          { label: '総資産（年利5%）', data: total, borderColor: '#0ea5e9', backgroundColor: 'rgba(14,165,233,0.12)', fill: true, tension: 0.4, borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#0ea5e9' },
+          { label: '元本のみ', data: principal, borderColor: '#94a3b8', borderDash: [4,4], fill: false, tension: 0, borderWidth: 1.5, pointRadius: 0 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { font:{size:11}, color:'#94a3b8', boxWidth: 16 } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ': ¥' + c.raw.toLocaleString() + '万' } }
+        },
+        scales: {
+          x: { ticks: { font:{size:11}, color:'#94a3b8' }, grid: { display:false } },
+          y: { ticks: { font:{size:11}, color:'#94a3b8', callback: v => '¥'+v+'万' }, grid: { color:'rgba(148,163,184,0.1)' } }
+        },
+        animation: { duration:1400, easing:'easeInOutQuart' }
+      }
+    });
+
+    // Share functions
+    function shareTwitter() { window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(location.href), '_blank'); }
+    function shareFacebook() { window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href), '_blank'); }
+    function copyLink() { navigator.clipboard.writeText(location.href).then(() => alert('リンクをコピーしました')); }
+  </script>
+</body>
+</html>
