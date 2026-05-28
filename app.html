@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;">
+<title>資産管理アプリ｜ライフアセットオフィス</title>
+<meta name="description" content="NISA・FIRE・配当・家計を一画面で管理。ライフアセットオフィスの資産管理ダッシュボード。">
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="資産管理アプリ｜ライフアセットオフィス">
+<meta property="og:description" content="NISA・FIRE達成率・配当カレンダー・家計レポートを一画面で管理できるFPダッシュボード。">
+<meta property="og:url" content="https://lifeassetoffice.net/app.html">
+<meta property="og:image" content="https://lifeassetoffice.net/images/fp-avatar.png">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="資産管理アプリ｜ライフアセットオフィス">
+<meta name="twitter:description" content="NISA・FIRE・配当・家計を一画面で管理するFPダッシュボード。">
+<meta name="twitter:image" content="https://lifeassetoffice.net/images/fp-avatar.png">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PKDH2DR522');</script>
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g1: #10b981;
+  --g2: #059669;
+  --g3: #d1fae5;
+  --b1: #3b82f6;
+  --b2: #1d4ed8;
+  --b3: #dbeafe;
+  --text-p: #0f172a;
+  --text-s: #475569;
+  --text-t: #94a3b8;
+  --bg: #f8fafc;
+  --card: rgba(255,255,255,0.85);
+  --card-border: rgba(255,255,255,0.6);
+  --shadow-sm: 0 2px 8px rgba(15,23,42,0.06);
+  --shadow-md: 0 8px 32px rgba(15,23,42,0.08);
+  --shadow-lg: 0 20px 60px rgba(15,23,42,0.12);
+  --r: 20px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --font-en: 'Outfit', sans-serif;
+  --font-jp: 'Noto Sans JP', sans-serif;
+  --nav-h: 72px;
+}
+[data-theme="dark"] {
+  --bg: #0a0f1e;
+  --card: rgba(20,28,48,0.85);
+  --card-border: rgba(255,255,255,0.08);
+  --text-p: #f1f5f9;
+  --text-s: #94a3b8;
+  --text-t: #475569;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+  --g3: rgba(16,185,129,0.12);
+  --b3: rgba(59,130,246,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-jp);background:var(--bg);color:var(--text-p);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+
+/* BG MESH */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-mesh::before{content:'';position:absolute;top:-20%;left:-10%;width:70%;height:70%;background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 70%);animation:mesh1 12s ease-in-out infinite alternate}
+.bg-mesh::after{content:'';position:absolute;bottom:-20%;right:-10%;width:60%;height:60%;background:radial-gradient(ellipse,rgba(59,130,246,0.07) 0%,transparent 70%);animation:mesh2 15s ease-in-out infinite alternate}
+@keyframes mesh1{from{transform:translate(0,0) scale(1)}to{transform:translate(5%,3%) scale(1.05)}}
+@keyframes mesh2{from{transform:translate(0,0) scale(1)}to{transform:translate(-4%,-3%) scale(1.08)}}
+.page-wrap{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(248,250,252,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.04);transition:background .3s}
+[data-theme="dark"] nav{background:rgba(10,15,30,0.8);border-bottom-color:rgba(255,255,255,0.06)}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--g1),var(--b1));border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
+.logo-icon svg{width:20px;height:20px;fill:none;stroke:white;stroke-width:2}
+.logo-text{font-family:var(--font-en);font-weight:700;font-size:16px;color:var(--text-p);letter-spacing:-.3px}
+.logo-text span{color:var(--g1)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-btn{width:38px;height:38px;border-radius:12px;border:none;background:var(--card);box-shadow:var(--shadow-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-s);transition:all .2s;backdrop-filter:blur(10px)}
+.nav-btn:active{transform:scale(0.94)}
+.nav-btn svg{width:18px;height:18px}
+.avatar{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--g1),var(--b1));display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:700;font-size:14px;color:white;cursor:pointer;box-shadow:0 4px 12px rgba(16,185,129,0.3);text-decoration:none}
+
+/* MAIN */
+main{padding:24px 20px 0}
+
+/* GREETING */
+.greeting{margin-bottom:24px;opacity:0;animation:fadeUp .6s .1s ease forwards}
+.greeting-time{font-size:12px;color:var(--text-t);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;font-family:var(--font-en)}
+.greeting-name{font-size:22px;font-weight:700;color:var(--text-p);letter-spacing:-.5px}
+.greeting-name span{color:var(--g1)}
+
+/* TOTAL ASSET CARD */
+.total-card{background:linear-gradient(145deg,#0f2027,#1a3a4a,#0f2027);border-radius:var(--r-xl);padding:28px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.25);opacity:0;animation:fadeUp .6s .15s ease forwards}
+.total-card::before{content:'';position:absolute;top:-40%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(16,185,129,0.25) 0%,transparent 65%);pointer-events:none}
+.total-card::after{content:'';position:absolute;bottom:-30%;left:-10%;width:250px;height:250px;background:radial-gradient(circle,rgba(59,130,246,0.2) 0%,transparent 65%);pointer-events:none}
+.total-label{font-size:12px;color:rgba(255,255,255,0.5);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;font-family:var(--font-en)}
+.total-amount{font-family:var(--font-en);font-size:38px;font-weight:800;color:white;letter-spacing:-1.5px;line-height:1;margin-bottom:4px}
+.total-amount .yen{font-size:20px;font-weight:500;margin-right:4px;opacity:.8}
+.total-amount .decimal{font-size:22px;font-weight:500;opacity:.7}
+.total-change{display:flex;align-items:center;gap:6px;margin-bottom:20px}
+.change-badge{background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:3px 10px;font-family:var(--font-en);font-size:12px;font-weight:600;color:#34d399}
+.change-desc{font-size:12px;color:rgba(255,255,255,0.4)}
+.total-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1}
+.mini-stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px 14px;backdrop-filter:blur(10px)}
+.mini-stat-label{font-size:10px;color:rgba(255,255,255,0.4);font-weight:500;margin-bottom:4px;letter-spacing:.05em}
+.mini-stat-val{font-family:var(--font-en);font-size:18px;font-weight:700;color:white}
+.mini-stat-val.green{color:#34d399}
+.mini-stat-val.blue{color:#60a5fa}
+
+/* QUICK ACTIONS */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.section-title{font-size:14px;font-weight:700;color:var(--text-p);letter-spacing:-.2px}
+.section-more{font-size:12px;color:var(--g1);font-weight:600;cursor:pointer;font-family:var(--font-en)}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;opacity:0;animation:fadeUp .6s .25s ease forwards}
+.quick-btn{background:var(--card);border:1px solid var(--card-border);border-radius:var(--r);padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;box-shadow:var(--shadow-sm);transition:all .25s;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);text-decoration:none}
+.quick-btn:active{transform:scale(0.94) translateY(1px);box-shadow:var(--shadow-sm)}
+.quick-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.quick-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.quick-icon svg{width:22px;height:22px}
+.quick-label{font-size:11px;font-weight:600;color:var(--text-s);text-align:center;line-height:1.3}
+.qi-nisa{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+.qi-nisa svg{color:#059669}
+.qi-fire{background:linear-gradient(135deg,#fee2e2,#fecaca)}
+.qi-fire svg{color:#dc2626}
+.qi-dividend{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+.qi-dividend svg{color:#2563eb}
+.qi-kakeibo{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+.qi-kakeibo svg{color:#d97706}
+
+/* PORTFOLIO DONUT */
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--r-lg);padding:20px;margin-bottom:16px;box-shadow:var(--shadow-sm);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:all .3s;opacity:0;animation:fadeUp .6s .3s ease forwards}
+.donut-wrap{position:relative;width:180px;height:180px;margin:0 auto}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.donut-center-label{font-size:11px;color:var(--text-t);font-weight:500;margin-bottom:2px}
+.donut-center-val{font-family:var(--font-en);font-size:22px;font-weight:800;color:var(--text-p)}
+.legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.legend-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border-radius:10px}
+.legend-dot{width:10px;height:10px;border-radius:4px;flex-shrink:0}
+.legend-info{flex:1}
+.legend-name{font-size:11px;font-weight:600;color:var(--text-s)}
+.legend-pct{font-family:var(--font-en);font-size:13px;font-weight:700;color:var(--text-p)}
+
+/* NISA PROGRESS */
+.nisa-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.nisa-badge{background:linear-gradient(135deg,var(--g1),#059669);border-radius:10px;padding:6px 12px;font-family:var(--font-en);font-size:11px;font-weight:700;color:white;letter-spacing:.05em}
+.nisa-year{font-size:12px;color:var(--text-t);margin-top:2px}
+.nisa-amount{text-align:right}
+.nisa-used{font-family:var(--font-en);font-size:20px;font-weight:800;color:var(--text-p)}
+.nisa-total{font-size:11px;color:var(--text-t);margin-top:1px}
+.progress-wrap{margin-bottom:8px}
+.progress-bar{height:10px;background:rgba(16,185,129,0.1);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--g1),var(--b1));border-radius:100px;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+.progress-labels{display:flex;justify-content:space-between;margin-top:6px}
+.progress-pct{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--g1)}
+.progress-remain{font-size:12px;color:var(--text-t)}
+.nisa-types{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.nisa-type{background:var(--bg);border-radius:12px;padding:10px 12px}
+.nisa-type-label{font-size:10px;color:var(--text-t);font-weight:600;margin-bottom:4px;letter-spacing:.05em}
+.nisa-type-val{font-family:var(--font-en);font-size:16px;font-weight:700;color:var(--text-p)}
+.nisa-type-sub{font-size:10px;color:var(--g1);font-weight:600;margin-top:1px}
+
+/* FIRE */
+.fire-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.fire-emoji{font-size:28px}
+.fire-title{font-size:14px;font-weight:700;color:var(--text-p)}
+.fire-sub{font-size:12px;color:var(--text-t)}
+.fire-gauge{position:relative;height:120px;margin-bottom:16px}
+.fire-gauge canvas{width:100%!important;height:100%!important}
+.fire-gauge-label{position:absolute;bottom:0;left:50%;transform:translateX(-50%);text-align:center}
+.fire-gauge-pct{font-family:var(--font-en);font-size:32px;font-weight:800;color:var(--text-p);line-height:1}
+.fire-gauge-sub{font-size:11px;color:var(--text-t);margin-top:2px}
+.fire-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fire-stat{background:var(--bg);border-radius:12px;padding:10px;text-align:center}
+.fire-stat-val{font-family:var(--font-en);font-size:16px;font-weight:800;color:var(--text-p)}
+.fire-stat-label{font-size:10px;color:var(--text-t);font-weight:500;margin-top:2px}
+
+/* CHART */
+.chart-tabs{display:flex;gap:4px;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:16px}
+.chart-tab{flex:1;padding:7px;border-radius:8px;border:none;background:transparent;font-family:var(--font-jp);font-size:12px;font-weight:600;color:var(--text-t);cursor:pointer;transition:all .2s}
+.chart-tab.active{background:var(--card);color:var(--text-p);box-shadow:var(--shadow-sm)}
+.chart-wrap{height:160px;position:relative}
+
+/* DIVIDEND */
+.div-month-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.div-month{background:var(--bg);border-radius:10px;padding:8px 6px;text-align:center}
+.div-month-name{font-size:10px;color:var(--text-t);font-weight:500;margin-bottom:4px;font-family:var(--font-en)}
+.div-month-bar{height:40px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:4px}
+.div-bar{width:20px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--b1),var(--g1))}
+.div-month-val{font-family:var(--font-en);font-size:10px;font-weight:700;color:var(--text-p)}
+.div-annual{display:flex;align-items:center;justify-content:space-between;padding:14px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.08));border-radius:14px;border:1px solid rgba(16,185,129,0.15)}
+.div-annual-label{font-size:12px;font-weight:600;color:var(--text-s)}
+.div-annual-val{font-family:var(--font-en);font-size:22px;font-weight:800;color:var(--text-p)}
+
+/* AI ADVICE */
+.ai-card{background:linear-gradient(145deg,rgba(15,23,42,0.96),rgba(26,58,74,0.96));border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-lg);padding:20px;margin-bottom:16px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;opacity:0;animation:fadeUp .6s .5s ease forwards}
+.ai-card::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(16,185,129,0.2) 0%,transparent 65%)}
+.ai-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ai-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--g1),var(--b1));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(16,185,129,0.4)}
+.ai-icon svg{width:18px;height:18px;color:white}
+.ai-title{font-size:14px;font-weight:700;color:white}
+.ai-subtitle{font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px}
+.ai-message{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.8);margin-bottom:14px;position:relative;z-index:1}
+.ai-message strong{color:#34d399}
+.ai-actions{display:flex;gap:8px;position:relative;z-index:1}
+.ai-btn{flex:1;padding:10px;border-radius:12px;border:none;font-family:var(--font-jp);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.ai-btn:active{transform:scale(0.96)}
+.ai-btn.primary{background:linear-gradient(135deg,var(--g1),var(--b1));color:white;box-shadow:0 4px 16px rgba(16,185,129,0.3)}
+.ai-btn.secondary{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1)}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:100;padding:0 16px 20px;background:linear-gradient(to top,var(--bg) 70%,transparent)}
+.bottom-nav-inner{background:var(--card);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--card-border);border-radius:24px;display:flex;align-items:center;padding:8px 16px;box-shadow:var(--shadow-lg)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;cursor:pointer;border-radius:14px;transition:all .2s;position:relative}
+.nav-item:active{transform:scale(0.92)}
+.nav-item.active{background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(59,130,246,0.12))}
+.nav-item svg{width:22px;height:22px;color:var(--text-t);transition:color .2s}
+.nav-item.active svg{color:var(--g1)}
+.nav-item-label{font-size:9px;font-weight:600;color:var(--text-t);letter-spacing:.03em;transition:color .2s}
+.nav-item.active .nav-item-label{color:var(--g1)}
+.nav-center-btn{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,var(--g1),var(--b1));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(16,185,129,0.4);cursor:pointer;flex-shrink:0;transition:all .2s;margin:0 4px}
+.nav-center-btn:active{transform:scale(0.92)}
+.nav-center-btn svg{width:24px;height:24px;color:white}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--g1);position:absolute;top:4px;right:8px}
+
+/* MONTHLY REPORT */
+.report-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
+[data-theme="dark"] .report-row{border-bottom-color:rgba(255,255,255,0.06)}
+.report-row:last-child{border-bottom:none}
+.report-cat{display:flex;align-items:center;gap:10px}
+.report-dot{width:8px;height:8px;border-radius:4px}
+.report-name{font-size:13px;font-weight:500;color:var(--text-p)}
+.report-vals{text-align:right}
+.report-val{font-family:var(--font-en);font-size:14px;font-weight:700;color:var(--text-p)}
+.report-diff{font-size:10px;font-weight:600;margin-top:1px}
+.diff-up{color:#10b981}.diff-dn{color:#ef4444}
+
+/* STATUS STRIP */
+.status-strip{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.08));border:1px solid rgba(16,185,129,0.15);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:20px;opacity:0;animation:fadeUp .6s .2s ease forwards}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--g1);flex-shrink:0}
+.status-text{font-size:12px;color:var(--text-s);font-weight:500}
+.status-text strong{color:var(--text-p)}
+
+/* FPツールリンク */
+.fp-link-row{display:flex;gap:10px;margin-bottom:16px;opacity:0;animation:fadeUp .6s .55s ease forwards}
+.fp-link-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:12px;font-size:12px;font-weight:700;color:var(--text-s);text-decoration:none;box-shadow:var(--shadow-sm);transition:all .2s;backdrop-filter:blur(20px)}
+.fp-link-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);color:var(--g1)}
+.fp-link-btn svg{width:16px;height:16px;color:var(--g1)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.pulse{animation:pulse 2s ease-in-out infinite}
+::-webkit-scrollbar{width:0}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="page-wrap">
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="logo-text">Life<span>Asset</span></div>
+  </a>
+  <div class="nav-actions">
+    <button class="nav-btn" id="themeBtn" title="ダークモード">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="nav-btn" title="通知">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </button>
+    <a href="/#contact" class="avatar" title="お問い合わせ">FP</a>
+  </div>
+</nav>
+
+<main>
+
+<div class="greeting">
+  <div class="greeting-time" id="timeLabel">Good Morning</div>
+  <div class="greeting-name">ようこそ、<span>ライフアセット</span> 👋</div>
+</div>
+
+<div class="status-strip">
+  <div class="status-dot pulse"></div>
+  <div class="status-text"><strong>今月の投資進捗：順調です</strong>　先月比 +2.4%のペースで推移中</div>
+</div>
+
+<div class="total-card">
+  <div class="total-label">Total Assets（サンプル）</div>
+  <div class="total-amount"><span class="yen">¥</span>4,872<span class="decimal">.5万</span></div>
+  <div class="total-change">
+    <span class="change-badge">▲ +3.2%</span>
+    <span class="change-desc">前月比 +152万円</span>
+  </div>
+  <div class="total-mini-grid">
+    <div class="mini-stat"><div class="mini-stat-label">運用資産</div><div class="mini-stat-val green">3,240万</div></div>
+    <div class="mini-stat"><div class="mini-stat-label">現金・預金</div><div class="mini-stat-val blue">1,632万</div></div>
+    <div class="mini-stat"><div class="mini-stat-label">含み益</div><div class="mini-stat-val green">+812万</div></div>
+    <div class="mini-stat"><div class="mini-stat-label">年間配当</div><div class="mini-stat-val blue">68万/年</div></div>
+  </div>
+</div>
+
+<div style="opacity:0;animation:fadeUp .6s .2s ease forwards">
+  <div class="section-head"><span class="section-title">クイックアクセス</span></div>
+</div>
+<div class="quick-grid">
+  <a href="/fp-tools.html" class="quick-btn">
+    <div class="quick-icon qi-nisa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+    <span class="quick-label">NISA<br>管理</span>
+  </a>
+  <a href="/fp-tools.html" class="quick-btn">
+    <div class="quick-icon qi-fire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+    <span class="quick-label">FIRE<br>達成率</span>
+  </a>
+  <a href="/fp-tools.html" class="quick-btn">
+    <div class="quick-icon qi-dividend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
+    <span class="quick-label">配当<br>管理</span>
+  </a>
+  <a href="/fp-tools.html" class="quick-btn">
+    <div class="quick-icon qi-kakeibo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+    <span class="quick-label">家計簿<br>入力</span>
+  </a>
+</div>
+
+<div class="card" style="animation-delay:.3s">
+  <div class="section-head"><span class="section-title">ポートフォリオ配分</span><span class="section-more">詳細</span></div>
+  <div class="donut-wrap">
+    <canvas id="donutChart"></canvas>
+    <div class="donut-center"><div class="donut-center-label">合計</div><div class="donut-center-val">3,240万</div></div>
+  </div>
+  <div class="legend-grid">
+    <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div><div class="legend-info"><div class="legend-name">国内株式</div><div class="legend-pct">32%</div></div></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><div class="legend-info"><div class="legend-name">外国株式</div><div class="legend-pct">28%</div></div></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><div class="legend-info"><div class="legend-name">債券</div><div class="legend-pct">18%</div></div></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div><div class="legend-info"><div class="legend-name">金・リート</div><div class="legend-pct">22%</div></div></div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.35s">
+  <div class="nisa-header">
+    <div><div class="nisa-badge">NISA 2025</div><div class="nisa-year">新NISA 年間枠</div></div>
+    <div class="nisa-amount"><div class="nisa-used">180<span style="font-size:13px;font-weight:500;color:var(--text-t)">万円</span></div><div class="nisa-total">360万円 満額まで</div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="nisaBar" style="width:0%"></div></div>
+    <div class="progress-labels"><span class="progress-pct">50%</span><span class="progress-remain">残り 180万円</span></div>
+  </div>
+  <div class="nisa-types">
+    <div class="nisa-type"><div class="nisa-type-label">つみたて投資枠</div><div class="nisa-type-val">120万</div><div class="nisa-type-sub">枠 240万 / 年</div></div>
+    <div class="nisa-type"><div class="nisa-type-label">成長投資枠</div><div class="nisa-type-val">60万</div><div class="nisa-type-sub">枠 120万 / 年</div></div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.4s">
+  <div class="fire-header">
+    <div class="fire-emoji">🔥</div>
+    <div><div class="fire-title">FIRE達成率</div><div class="fire-sub">目標資産 9,600万円（25倍ルール）</div></div>
+  </div>
+  <div class="fire-gauge">
+    <canvas id="fireGauge"></canvas>
+    <div class="fire-gauge-label"><div class="fire-gauge-pct">50.7%</div><div class="fire-gauge-sub">達成中</div></div>
+  </div>
+  <div class="fire-stats">
+    <div class="fire-stat"><div class="fire-stat-val" style="color:#10b981">4.8年</div><div class="fire-stat-label">Side FIRE</div></div>
+    <div class="fire-stat"><div class="fire-stat-val" style="color:#3b82f6">9.2年</div><div class="fire-stat-label">Full FIRE</div></div>
+    <div class="fire-stat"><div class="fire-stat-val" style="color:#f59e0b">68万</div><div class="fire-stat-label">年間配当</div></div>
+  </div>
+</div>
+
+<div class="card" style="animation-delay:.42s">
+  <div class="section-head">
+    <span class="section-title">資産推移</span>
+    <div class="chart-tabs" style="margin:0">
+      <button class="chart-tab active" onclick="switchTab(this,'1y')">1年</button>
+      <button class="chart-tab" onclick="switchTab(this,'3y')">3年</button>
+      <button class="chart-tab" onclick="switchTab(this,'5y')">5年</button>
+    </div>
+  </div>
+  <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+</div>
+
+<div class="card" style="animation-delay:.44s">
+  <div class="section-head"><span class="section-title">配当カレンダー 2025</span><span class="section-more">詳細</span></div>
+  <div class="div-annual">
+    <div class="div-annual-label">年間配当予想</div>
+    <div class="div-annual-val">¥<span style="font-family:var(--font-en);font-size:26px;font-weight:800">68</span>万円</div>
+  </div>
+  <div class="div-month-grid" id="divGrid"></div>
+</div>
+
+<div class="card" style="animation-delay:.46s">
+  <div class="section-head"><span class="section-title">5月 家計レポート</span><span class="section-more">詳細</span></div>
+  <div id="reportRows"></div>
+</div>
+
+<div class="fp-link-row">
+  <a href="/fp-tools.html" class="fp-link-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/></svg>
+    FPツール集
+  </a>
+  <a href="/loan-check.html" class="fp-link-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    住宅ローン診断
+  </a>
+</div>
+
+<div class="ai-card">
+  <div class="ai-header">
+    <div class="ai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 1 8 8c0 3-1.5 5.5-4 7l-4 5-4-5c-2.5-1.5-4-4-4-7a8 8 0 0 1 8-8z"/><circle cx="12" cy="10" r="2"/></svg></div>
+    <div><div class="ai-title">FPからのアドバイス</div><div class="ai-subtitle">今月のパーソナル提案</div></div>
+  </div>
+  <div class="ai-message">
+    <strong>NISA枠がまだ50%残っています</strong>。今月中に積立設定を見直すと年末までに枠を最大活用できます。また、<strong>eMAXIS Slim全世界株式</strong>の配当再投資効果で複利が加速するタイミングです。
+  </div>
+  <div class="ai-actions">
+    <a href="/fp-tools.html" class="ai-btn primary" style="text-align:center;text-decoration:none">FPツールで確認する</a>
+    <a href="/#contact" class="ai-btn secondary" style="text-align:center;text-decoration:none">お問い合わせ</a>
+  </div>
+</div>
+
+</main>
+</div>
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <a href="/" class="nav-item active" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+      <span class="nav-item-label">ホーム</span>
+    </a>
+    <a href="/fp-tools.html" class="nav-item" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span class="nav-item-label">分析</span>
+    </a>
+    <a href="/loan-check.html" class="nav-center-btn" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    </a>
+    <a href="/blog/" class="nav-item" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span class="nav-item-label">ブログ</span>
+    </a>
+    <a href="/#contact" class="nav-item" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="nav-item-label">相談</span>
+    </a>
+  </div>
+</div>
+
+<script>
+const themeBtn=document.getElementById('themeBtn');
+let dark=false;
+themeBtn.onclick=()=>{dark=!dark;document.body.setAttribute('data-theme',dark?'dark':'');updateCharts()};
+
+const h=new Date().getHours();
+document.getElementById('timeLabel').textContent=h<12?'Good Morning':h<18?'Good Afternoon':'Good Evening';
+
+const donutCtx=document.getElementById('donutChart').getContext('2d');
+new Chart(donutCtx,{type:'doughnut',data:{datasets:[{data:[32,28,18,22],backgroundColor:['#10b981','#3b82f6','#f59e0b','#8b5cf6'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'72%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw+'%'},backgroundColor:'rgba(15,23,42,0.9)',padding:10,cornerRadius:10}},animation:{duration:1200,easing:'easeInOutQuart'}}});
+
+const fireCtx=document.getElementById('fireGauge').getContext('2d');
+new Chart(fireCtx,{type:'doughnut',data:{datasets:[{data:[50.7,49.3],backgroundColor:['#10b981','rgba(16,185,129,0.1)'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:true,circumference:240,rotation:-120,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}},animation:{duration:1600,easing:'easeInOutQuart'}}});
+
+const trendCtx=document.getElementById('trendChart').getContext('2d');
+const months=['6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月'];
+let trendChart=new Chart(trendCtx,{type:'line',data:{labels:months,datasets:[{data:[3800,3920,3850,4050,4120,4200,4350,4280,4450,4600,4750,4872],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.06)',borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#10b981',fill:true,tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,backgroundColor:'rgba(15,23,42,0.9)',padding:12,cornerRadius:12,callbacks:{label:c=>' ¥'+c.raw+'万'}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},color:'#94a3b8',maxRotation:0}},y:{grid:{color:'rgba(148,163,184,0.1)'},ticks:{font:{size:10},color:'#94a3b8',callback:v=>v+'万'}}},animation:{duration:1000,easing:'easeInOutQuart'}}});
+
+function switchTab(btn,period){
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const d={
+    '1y':[3800,3920,3850,4050,4120,4200,4350,4280,4450,4600,4750,4872],
+    '3y':[3200,3300,3250,3400,3350,3500,3600,3700,3750,3900,4100,4872],
+    '5y':[2800,2950,2900,3100,3050,3200,3300,3400,3350,3500,3600,4872]
+  };
+  trendChart.data.datasets[0].data=d[period];
+  trendChart.update();
+}
+
+const divData={1:2.1,2:1.8,3:5.2,4:3.4,5:2.9,6:12.1,7:2.2,8:1.9,9:8.4,10:3.1,11:2.5,12:14.3};
+const maxDiv=Math.max(...Object.values(divData));
+const mNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const divGrid=document.getElementById('divGrid');
+for(let i=1;i<=12;i++){
+  const bh=Math.round((divData[i]/maxDiv)*36);
+  divGrid.innerHTML+=`<div class="div-month"><div class="div-month-name">${mNames[i-1]}</div><div class="div-month-bar"><div class="div-bar" style="height:${bh}px"></div></div><div class="div-month-val">${divData[i]}万</div></div>`;
+}
+
+const reports=[
+  {name:'食費',color:'#10b981',val:'58,200',diff:'+2.1%',up:false},
+  {name:'住宅費',color:'#3b82f6',val:'89,000',diff:'±0%',up:true},
+  {name:'教育費',color:'#f59e0b',val:'42,500',diff:'-5.3%',up:true},
+  {name:'投資積立',color:'#8b5cf6',val:'100,000',diff:'+0%',up:true},
+  {name:'車・交通',color:'#ef4444',val:'34,800',diff:'+8.2%',up:false},
+];
+const rr=document.getElementById('reportRows');
+reports.forEach(r=>{
+  rr.innerHTML+=`<div class="report-row"><div class="report-cat"><div class="report-dot" style="background:${r.color}"></div><div class="report-name">${r.name}</div></div><div class="report-vals"><div class="report-val">¥${r.val}</div><div class="report-diff ${r.up?'diff-up':'diff-dn'}">${r.diff}</div></div></div>`;
+});
+
+setTimeout(()=>{document.getElementById('nisaBar').style.width='50%'},300);
+
+function updateCharts(){
+  const c=dark?'rgba(255,255,255,0.1)':'rgba(148,163,184,0.1)';
+  const tc=dark?'#475569':'#94a3b8';
+  trendChart.options.scales.y.grid.color=c;
+  trendChart.options.scales.x.ticks.color=tc;
+  trendChart.options.scales.y.ticks.color=tc;
+  trendChart.update();
+}
+</script>
+</body>
+</html>
