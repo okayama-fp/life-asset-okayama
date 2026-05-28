@@ -560,6 +560,7 @@ function setFireType(type) {
   document.getElementById('sl-expense').value = cfg.monthlyExpense;
   updateSlider('expense');
   recalc();
+  saveState();
 }
 
 function calcFireYears(assets, monthly, rate, target) {
@@ -693,11 +694,12 @@ function updateSlider(id) {
 }
 
 sliders.forEach(({ id }) => {
-  document.getElementById('sl-' + id).addEventListener('input', () => { updateSlider(id); recalc(); });
+  document.getElementById('sl-' + id).addEventListener('input', () => { updateSlider(id); recalc(); saveState(); });
   updateSlider(id);
 });
 
 function resetSliders() {
+  localStorage.removeItem('lao-fire-v1');
   document.getElementById('sl-assets').value = 4872;
   document.getElementById('sl-monthly').value = 10;
   document.getElementById('sl-rate').value = 5;
@@ -807,6 +809,29 @@ themeBtn.onclick = () => {
   projChart.update();
 };
 
+// ── LOCALSTORAGE ──
+const LS_KEY = 'lao-fire-v1';
+function saveState() {
+  localStorage.setItem(LS_KEY, JSON.stringify({ assets: state.assets, monthly: state.monthly, rate: state.rate, expense: state.expense, fireType: state.fireType }));
+}
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(LS_KEY));
+    if (!s) return;
+    if (s.fireType && fireConfig[s.fireType]) {
+      ['side','full','coast'].forEach(t => { document.getElementById('btn-'+t).className = 'fire-type-btn' + (t===s.fireType ? ' active-'+t : ''); });
+      state.fireType = s.fireType;
+      const cfg = fireConfig[s.fireType];
+      document.getElementById('heroCard').className = 'hero-fire ' + cfg.bg.join(' ');
+      document.getElementById('heroTag').className = 'hf-type-tag ' + cfg.tag;
+      document.getElementById('heroTag').textContent = cfg.tagLabel;
+    }
+    ['assets','monthly','rate','expense'].forEach(k => {
+      if (s[k] !== undefined) { document.getElementById('sl-'+k).value = s[k]; updateSlider(k); }
+    });
+  } catch(e) {}
+}
+loadState();
 recalc();
 </script>
 </body>
