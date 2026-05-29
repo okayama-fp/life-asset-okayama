@@ -28,8 +28,8 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{
-      --sky:#0ea5e9;--sky-light:#38bdf8;--sky-pale:#e0f2fe;--sky-bg:#dff3ff;
-      --navy:#0f3460;--navy-soft:#1e4d8c;--white:#fff;
+      --sky:#1a7a4a;--sky-light:#22c55e;--sky-pale:#dcfce7;--sky-bg:#f0fdf4;
+      --navy:#1a3d2b;--navy-soft:#1f5c40;--white:#fff;
       --gray-bg:#f1f5f9;--text:#1e293b;--text-sub:#64748b;--border:#e2e8f0;
       --green:#16a34a;--green-l:#dcfce7;--green-bg:#f0fdf4;
       --orange:#ea580c;--orange-l:#ffedd5;
@@ -42,14 +42,14 @@
     /* Header */
     header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
     .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-    .logo-main{font-size:20px;font-weight:900;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .logo-main{font-size:20px;font-weight:900;background:linear-gradient(90deg,#1a7a4a,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .logo-text .tagline{font-size:10px;color:var(--text-sub);}
     nav{display:flex;align-items:center;gap:20px;}
     nav a{font-size:13px;color:var(--text-sub);font-weight:500;transition:color .2s;}
     nav a:hover,nav a.active{color:var(--sky);}
-    .btn-cta{display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:50px;flex-shrink:0;box-shadow:0 4px 14px rgba(14,165,233,.3);}
+    .btn-cta{display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:50px;flex-shrink:0;box-shadow:0 4px 14px rgba(26,122,74,.3);}
     /* Hero */
-    .page-hero{background:linear-gradient(135deg,#b8e4f9 0%,#dff3ff 50%,#f4fbff 100%);padding:48px 24px 40px;text-align:center;}
+    .page-hero{background:linear-gradient(135deg,#b8e4f9 0%,#f0fdf4 50%,#f4fbff 100%);padding:48px 24px 40px;text-align:center;}
     .page-hero .label{display:inline-flex;align-items:center;gap:6px;background:var(--sky-pale);color:var(--sky);font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;margin-bottom:14px;}
     .page-hero h1{font-size:clamp(22px,4vw,34px);font-weight:900;color:var(--navy);margin-bottom:8px;}
     .page-hero p{font-size:13px;color:var(--text-sub);}
@@ -64,7 +64,7 @@
     .tab-nav::-webkit-scrollbar{display:none;}
     .tab-btn{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:10px 16px;border-radius:10px;border:none;background:transparent;font-size:13px;font-weight:700;color:var(--text-sub);cursor:pointer;transition:all .2s;white-space:nowrap;}
     .tab-btn:hover{background:var(--sky-bg);color:var(--sky);}
-    .tab-btn.active{background:var(--sky);color:#fff;box-shadow:0 2px 8px rgba(14,165,233,.35);}
+    .tab-btn.active{background:var(--sky);color:#fff;box-shadow:0 2px 8px rgba(26,122,74,.35);}
     .tab-btn .icon{font-size:16px;}
     /* Tab pane */
     .tab-pane{display:none;}
@@ -83,8 +83,8 @@
     .input-group input:focus,.input-group select:focus{outline:none;border-color:var(--sky);}
     .input-hint{font-size:11px;color:var(--text-sub);}
     /* Calc btn */
-    .calc-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--sky),var(--sky-light));color:#fff;font-size:14px;font-weight:700;padding:12px 28px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(14,165,233,.35);transition:transform .15s,box-shadow .15s;}
-    .calc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(14,165,233,.45);}
+    .calc-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--sky),var(--sky-light));color:#fff;font-size:14px;font-weight:700;padding:12px 28px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(26,122,74,.35);transition:transform .15s,box-shadow .15s;}
+    .calc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(26,122,74,.45);}
     /* Result panel */
     .result-panel{background:var(--gray-bg);border-radius:14px;padding:20px;margin-top:20px;}
     .result-panel.hidden{display:none;}
@@ -143,14 +143,14 @@
     .cta-box{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:20px;padding:36px 28px;text-align:center;margin-top:40px;}
     .cta-box h2{font-size:18px;font-weight:900;color:#fff;margin-bottom:8px;}
     .cta-box p{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:18px;}
-    .cta-box a{display:inline-block;background:var(--sky);color:#fff;font-size:14px;font-weight:700;padding:12px 32px;border-radius:50px;box-shadow:0 4px 14px rgba(14,165,233,.4);}
+    .cta-box a{display:inline-block;background:var(--sky);color:#fff;font-size:14px;font-weight:700;padding:12px 32px;border-radius:50px;box-shadow:0 4px 14px rgba(26,122,74,.4);}
     /* Share */
     .share-area{text-align:center;margin-top:20px;}
     .share-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-size:13px;font-weight:700;padding:10px 22px;border-radius:50px;border:none;cursor:pointer;}
     /* Footer */
-    footer{background:linear-gradient(135deg,#0f3460 0%,#1e4d8c 100%);color:#fff;padding:28px 24px;}
+    footer{background:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 100%);color:#fff;padding:28px 24px;}
     .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
-    .footer-logo-text{font-size:18px;font-weight:900;background:linear-gradient(90deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .footer-logo-text{font-size:18px;font-weight:900;background:linear-gradient(90deg,#1a7a4a,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .footer-contact a{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.75);}
     /* Highlight number */
     .big-num{font-size:28px;font-weight:900;color:var(--navy);}
@@ -369,7 +369,7 @@
     </div>
     <div id="ns-result" class="result-panel hidden">
       <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#0ea5e9;"></div>元本</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1a7a4a;"></div>元本</div>
         <div class="legend-item"><div class="legend-dot" style="background:#7c3aed;"></div>NISA運用益（非課税）</div>
         <div class="legend-item"><div class="legend-dot" style="background:#e2e8f0;"></div>課税口座の税金ロス</div>
       </div>
@@ -582,7 +582,7 @@ function drawDonut(canvas, segments) {
 }
 
 /* ===== 家計診断 ===== */
-var KK_COLORS = ['#0ea5e9','#f59e0b','#10b981','#a855f7','#ef4444','#64748b','#06b6d4','#f97316','#6366f1'];
+var KK_COLORS = ['#1a7a4a','#f59e0b','#10b981','#a855f7','#ef4444','#64748b','#06b6d4','#f97316','#6366f1'];
 var KK_LABELS = ['住居費','食費','通信費','保険料','光熱費','交通費','娯楽・交際費','その他'];
 var KK_IDS    = ['kk-house','kk-food','kk-comm','kk-ins','kk-util','kk-trans','kk-enter','kk-other'];
 var KK_FIXED  = [true,false,true,true,false,true,false,false];
@@ -728,9 +728,9 @@ function drawRoagoChart(canvas, asset, nenkin, need) {
   var maxV = Math.max(asset+nenkin, need, 1);
   var barH = 48; var gap = 20; var labelW = 100; var pad = 20;
   var barW = W - labelW - pad - 20;
-  var colors = [['#0ea5e9','#7c3aed'],['#16a34a']];
+  var colors = [['#1a7a4a','#7c3aed'],['#16a34a']];
   var items = [
-    {label:'予測資産＋年金', value: asset+nenkin, parts:[{v:asset,c:'#0ea5e9'},{v:nenkin,c:'#7c3aed'}]},
+    {label:'予測資産＋年金', value: asset+nenkin, parts:[{v:asset,c:'#1a7a4a'},{v:nenkin,c:'#7c3aed'}]},
     {label:'必要資金総額',    value: need,         parts:[{v:need,c:'#dc2626'}]}
   ];
   items.forEach(function(item,i){
@@ -754,7 +754,7 @@ function drawRoagoChart(canvas, asset, nenkin, need) {
   });
   // legend
   var ly = pad + 2*(barH+gap) + 10;
-  [{c:'#0ea5e9',l:'積立資産'},{c:'#7c3aed',l:'年金受取（推計）'},{c:'#dc2626',l:'必要資金'}].forEach(function(leg,i){
+  [{c:'#1a7a4a',l:'積立資産'},{c:'#7c3aed',l:'年金受取（推計）'},{c:'#dc2626',l:'必要資金'}].forEach(function(leg,i){
     ctx.fillStyle = leg.c; ctx.fillRect(labelW+i*110, ly, 14, 14);
     ctx.fillStyle = '#64748b'; ctx.font = '11px sans-serif';
     ctx.fillText(leg.l, labelW+i*110+18, ly+11);
@@ -832,7 +832,7 @@ function drawNisaChart(canvas, principal, nisaGain, taxLoss, years) {
     var lossH = (taxLossV/maxH)*chartH;
     // NISA bar: principal + gain
     var y0 = padT+chartH;
-    ctx.fillStyle='#0ea5e9';
+    ctx.fillStyle='#1a7a4a';
     ctx.fillRect(x, y0-prinH, barW, prinH);
     ctx.fillStyle='#7c3aed';
     ctx.fillRect(x, y0-prinH-gainH, barW, gainH);
