@@ -30,8 +30,8 @@
   </script>
   <style>
     :root {
-      --sky: #0ea5e9; --sky-light: #38bdf8; --sky-pale: #e0f2fe;
-      --navy: #0f3460; --navy-soft: #1e4d8c;
+      --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+      --navy: #1a3d2b; --navy-soft: #1f5c40;
       --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
       --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
       --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
@@ -47,7 +47,7 @@
 
     header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 20px; }
-    .logo-text .name { font-size: 1.2rem; font-weight: 700; background: linear-gradient(90deg,#4facfe,#00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo-text .name { font-size: 1.2rem; font-weight: 700; background: linear-gradient(90deg,#1a7a4a,#4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .logo-text .tagline { font-size: 0.6rem; color: var(--text-light); }
     nav { display: flex; gap: 4px; margin-left: auto; }
     nav a { padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; color: var(--text); transition: all .2s; }
@@ -217,9 +217,9 @@
   <h1>あなたの住宅ローン、<br>金利が上がったら大丈夫？</h1>
   <p class="hero-lead">借入額・金利・年収を入力するだけ。返済負担率・金利上昇リスク・住宅ローン控除の逆ざやを一括診断します。</p>
   <div class="hero-badges">
-    <span class="hero-tag">📊 返済負担率チェック</span>
-    <span class="hero-tag">📈 金利上昇シミュレーション</span>
-    <span class="hero-tag">🏦 控除・逆ざや判定</span>
+    <span class="hero-tag">返済負担率チェック</span>
+    <span class="hero-tag">金利上昇シミュレーション</span>
+    <span class="hero-tag">控除・逆ざや判定</span>
   </div>
 </div>
 
@@ -231,7 +231,7 @@
 
     <!-- INPUT PANEL -->
     <div class="input-panel">
-      <h2>📋 あなたの情報を入力</h2>
+      <h2>あなたの情報を入力</h2>
 
       <div class="field">
         <div class="field-label">借入残高<span class="field-val" id="lbl-principal">2,500万円</span></div>
@@ -303,7 +303,7 @@
           </div>
 
           <div class="rate-table-wrap" id="rate-table-wrap">
-            <div class="rate-table-ttl">📈 金利上昇シミュレーション</div>
+            <div class="rate-table-ttl">金利上昇シミュレーション</div>
             <table class="rate-table">
               <thead>
                 <tr><th>金利</th><th>月返済額</th><th>うち利息</th><th>負担率</th></tr>
@@ -320,7 +320,7 @@
           <div class="share-row">
             <button class="share-btn share-x" onclick="shareResult()">𝕏 結果をシェア</button>
           </div>
-          <button class="cta-btn-full" onclick="openContact()">📩 お問い合わせ →</button>
+          <button class="cta-btn-full" onclick="openContact()">お問い合わせ →</button>
         </div>
       </div>
     </div>
@@ -399,39 +399,39 @@
   <div class="info-section">
     <div class="info-grid">
       <div class="info-card">
-        <div class="info-card-icon">📌</div>
+        
         <h3>5年ルールとは？</h3>
         <p>変動金利でも月返済額は5年間変わりません。ただし金利が上がると、毎月の返済のうち利息が増え元本の減り方が遅くなります。</p>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">📌</div>
+        
         <h3>125%ルールとは？</h3>
         <p>5年後に月返済額が変わる場合でも、前回の125%が上限です。ただしその分、利息分として繰り越されるリスクがあります。</p>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">📌</div>
+        
         <h3>返済負担率の目安</h3>
         <p>月手取りに占める返済額の割合。25%未満が安心、25〜35%は注意、35%超は危険信号です。</p>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">📌</div>
+        
         <h3>定年後のローンリスク</h3>
         <p>完済が65歳を超えると退職後も返済が続きます。収入が激減する中での返済は家計を直撃します。</p>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">🏦</div>
+        
         <h3>逆ざやとは？</h3>
         <p>住宅ローン金利が控除率（旧1%・新0.7%）を下回る状態。控除で受け取る額が利息より多いため、繰上返済より資産運用が有利になります。</p>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">⚠️</div>
+        
         <h3>12月繰上返済に注意</h3>
         <p>住宅ローン控除は12月末残高が基準です。12月に繰上返済すると翌年の控除額が減ります。繰上返済は1月以降が有利です。</p>
       </div>
     </div>
 
     <div class="blog-link-section">
-      <h2>📚 関連記事を読む</h2>
+      <h2>関連記事を読む</h2>
       <div class="blog-links">
         <a href="blog/post-537.html" class="blog-link-card">
           <div class="tag">🏠 Aさんシリーズ 第三弾</div>
