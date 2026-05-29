@@ -187,6 +187,7 @@
       .result-panel { position: static; }
     }
   </style>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <div id="pb"></div>
@@ -205,6 +206,9 @@
       <a href="blog/index.html">ブログ</a>
     </nav>
     <a href="index.html#contact" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -698,5 +702,6 @@ window.addEventListener('scroll', function(){
   document.getElementById('pb').style.width = (el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
 });
 </script>
+<script src="/nav.js" defer></script>
 </body>
 </html>
