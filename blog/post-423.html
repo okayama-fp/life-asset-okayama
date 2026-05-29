@@ -310,7 +310,7 @@
     const msg = document.getElementById('chat-input').value.trim();
     const sub = encodeURIComponent('Life Assetブログ お問い合わせ：' + document.title.split('｜')[0]);
     const body = encodeURIComponent(msg || 'ブログを拝見しました。詳しく教えていただけますか？');
-    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=yamakaze8000@gmail.com&su=' + sub + '&body=' + body, '_blank');
+    window.location.href='../contact.html';
   }
   window.addEventListener('scroll', function(){
     const el = document.documentElement;

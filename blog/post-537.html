@@ -390,7 +390,7 @@
   <div class="cta-box">
     <h2>「うちの場合はどうすれば？」と思ったら</h2>
     <p>繰上返済・教育費・老後資金のバランス、一緒に数字で整理します。<br>地方在住の子育て世代のご相談、お気軽にどうぞ。</p>
-    <button class="cta-btn" onclick="(function(){var u='yamakaze8000',d='gmail.com';location.href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;})()">無料相談はこちら →</button>
+    <button class="cta-btn" onclick="(function(){document.querySelector('[id]').href='../contact.html';})()">無料相談はこちら →</button>
   </div>
 
 </div>
@@ -440,8 +440,7 @@
     window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
   }
   (function(){
-    var u='yamakaze8000',d='gmail.com';
-    document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+    document.querySelector('[id]').href='../contact.html';
   })();
   window.addEventListener('scroll', function(){
     var el = document.documentElement;
