@@ -15,188 +15,25 @@
   <meta http-equiv="X-Frame-Options" content="DENY">
   <link rel="canonical" href="https://lifeassetoffice.net/">
   <title>ライフアセットオフィス｜資産・融資サポート</title>
+  <!-- OGP -->
+  <meta property="og:title" content="ライフアセットオフィス｜資産・融資サポート">
+  <meta property="og:description" content="個人資産管理から資金調達まで、お一人おひとりに最適なご提案をいたします。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lifeassetoffice.net/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --sky:       #0ea5e9;
-      --sky-light: #38bdf8;
-      --sky-pale:  #e0f2fe;
-      --sky-bg:    #dff3ff;
-      --navy:      #0f3460;
-      --navy-soft: #1e4d8c;
-      --white:     #ffffff;
-      --gray-bg:   #edf8ff;
-      --text:      #1e293b;
-      --text-sub:  #64748b;
-      --border:    #e2e8f0;
-    }
-    body { font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',Meiryo,sans-serif; color: var(--text); line-height: 1.7; background: linear-gradient(180deg, #d6effe 0%, #ffffff 18%) fixed; }
-    a { text-decoration: none; color: inherit; }
-
-    /* HEADER */
-    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-main { font-size: 22px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
-    .logo-text .tagline { font-size: 10px; color: var(--text-sub); }
-    nav { display: flex; align-items: center; gap: 28px; }
-    nav a { font-size: 13px; color: var(--text-sub); font-weight: 500; transition: color .2s; }
-    nav a:hover { color: var(--sky); }
-    .btn-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sky); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 50px; transition: background .2s, transform .15s; flex-shrink: 0; box-shadow: 0 4px 14px rgba(14,165,233,0.35); }
-    .btn-cta:hover { background: var(--sky-light); transform: translateY(-1px); }
-
-    /* HERO */
-    .hero { background: linear-gradient(135deg, #b8e4f9 0%, #dff3ff 30%, #f4fbff 65%, #ffffff 100%); padding: 80px 32px 100px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 520px; height: 520px; background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%); border-radius: 50%; }
-    .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 64px; position: relative; z-index: 1; }
-    .hero-label { display: inline-flex; align-items: center; gap: 6px; background: var(--sky-pale); color: var(--sky); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 50px; margin-bottom: 20px; }
-    .hero-label::before { content: ''; width: 6px; height: 6px; background: var(--sky); border-radius: 50%; }
-    .hero-title { font-size: clamp(30px, 4vw, 50px); font-weight: 900; color: var(--navy); line-height: 1.3; margin-bottom: 18px; }
-    .hero-title em { color: var(--sky); font-style: normal; }
-    .hero-desc { font-size: 15px; color: var(--text-sub); line-height: 1.9; margin-bottom: 36px; }
-    .hero-badges { display: flex; gap: 12px; flex-wrap: wrap; }
-    .badge { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 50px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-    .badge svg { color: var(--sky); flex-shrink: 0; }
-    .hero-img-wrap { position: relative; flex-shrink: 0; }
-    .hero-img-wrap img { width: 300px; height: 400px; object-fit: cover; object-position: center top; border-radius: 24px; box-shadow: 0 24px 60px rgba(15,52,96,0.15); display: block; }
-
-    /* CHARACTER */
-    .char-strip { background: var(--sky-bg); padding: 24px 32px; display: flex; align-items: center; justify-content: center; gap: 20px; }
-    .char-strip img.char-img { width: 72px; flex-shrink: 0; }
-    .char-strip-bubble { background: #fff; border: 2px solid #bae6fd; border-radius: 14px; padding: 12px 18px; font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.7; position: relative; max-width: 480px; }
-    .char-strip-bubble::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: #bae6fd; }
-    .char-strip-bubble::after { content: ''; position: absolute; left: -7px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right-color: #fff; z-index: 1; }
-    .char-name-small { font-size: 10px; color: #2c6fb7; font-weight: 700; text-align: center; margin-top: 4px; }
-
-    /* BANNER */
-    .banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); color: #fff; text-align: center; padding: 48px 24px; }
-    .banner h2 { font-size: clamp(18px,3vw,24px); font-weight: 700; margin-bottom: 10px; }
-    .banner p { font-size: 14px; opacity: 0.75; }
-
-    /* ICON SERVICES */
-    .icon-services { background: var(--white); padding: 56px 32px; }
-    .icon-services-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .icon-service-item { background: var(--sky-bg); border-radius: 16px; padding: 28px 24px; display: flex; align-items: flex-start; gap: 16px; }
-    .icon-service-icon { width: 48px; height: 48px; background: var(--sky); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .icon-service-icon svg { width: 22px; height: 22px; color: #fff; }
-    .icon-service-text h3 { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .icon-service-text p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
-
-    /* SERVICES */
-    .services { padding: 80px 32px; background: var(--gray-bg); }
-    .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .section-sub { text-align: center; font-size: 14px; color: var(--text-sub); margin-bottom: 48px; }
-    .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
-    .card:hover { box-shadow: 0 12px 40px rgba(14,165,233,0.12); transform: translateY(-5px); }
-    .card-header { height: 140px; display: flex; align-items: center; justify-content: center; }
-    .card-header-inner { width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-    .card-header svg { width: 44px; height: 44px; }
-    .card-body { padding: 24px; }
-    .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .card-desc { font-size: 12.5px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.7; }
-    .card-list { list-style: none; margin-bottom: 20px; }
-    .card-list li { font-size: 12.5px; color: var(--text); padding: 4px 0 4px 20px; position: relative; }
-    .card-list li::before { content: '✓'; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
-    .btn-sky { display: flex; align-items: center; justify-content: center; background: var(--sky); color: #fff; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 10px; transition: background .2s; }
-    .btn-sky:hover { background: var(--sky-light); }
-
-    /* CTA BANNER */
-    .cta-banner { padding: 48px 32px; background: linear-gradient(135deg, #eaf7ff 0%, #ffffff 60%); }
-    .cta-banner-inner { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #c8e9f8, #dff3ff); border: 1px solid #93d5f5; border-radius: 24px; padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-    .cta-banner-text .em { font-size: 12px; color: var(--sky); font-weight: 700; margin-bottom: 8px; }
-    .cta-banner-text h3 { font-size: clamp(17px,2.5vw,22px); font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .cta-banner-text h3 strong { color: var(--sky); }
-    .cta-banner-text p { font-size: 13px; color: var(--text-sub); }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--sky); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 50px; white-space: nowrap; transition: background .2s, transform .15s; box-shadow: 0 4px 16px rgba(14,165,233,0.35); flex-shrink: 0; }
-    .btn-primary:hover { background: var(--sky-light); transform: translateY(-2px); }
-
-    /* LIFEPLAN */
-    .lifeplan-section { background: linear-gradient(160deg, #dff3ff 0%, #eef9ff 50%, #f4fbff 100%); padding: 72px 32px; }
-    .lifeplan-section h2 { text-align: center; color: var(--navy); font-size: clamp(20px,3vw,28px); font-weight: 900; margin-bottom: 8px; }
-    .lifeplan-section .sub { text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 48px; }
-    .lp-wrap { max-width: 860px; margin: 0 auto; }
-    .lp-block { display: flex; gap: 20px; margin-bottom: 28px; align-items: flex-start; }
-    .lp-char { width: 72px; flex-shrink: 0; }
-    .lp-char img { width: 72px; }
-    .lp-bubble { background: #fff; padding: 20px 24px; border-radius: 14px; box-shadow: 0 4px 16px rgba(14,165,233,0.09); border-left: 4px solid var(--sky-pale); flex: 1; }
-    .lp-bubble-title { font-weight: 800; color: var(--navy); margin-bottom: 8px; font-size: 15px; }
-    .lp-bubble p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
-    .lp-bubble ul { padding-left: 18px; font-size: 13px; color: var(--text-sub); line-height: 2; }
-
-    /* REASONS */
-    .reasons { padding: 80px 32px; background: var(--gray-bg); }
-    .reasons-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .reason-item { background: var(--white); border-radius: 20px; padding: 32px 24px; text-align: center; border-top: 4px solid var(--sky); box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
-    .reason-icon { width: 56px; height: 56px; background: var(--sky-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .reason-icon svg { width: 26px; height: 26px; color: var(--sky); }
-    .reason-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .reason-desc { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
-
-    /* BLOG */
-    .blog-section { background: #f0f9ff; padding: 64px 24px; }
-    .blog-inner { max-width: 1100px; margin: 0 auto; }
-    .blog-subtitle { text-align: center; font-size: 14px; color: #64748b; margin-bottom: 36px; }
-    .blog-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
-    @media(max-width: 768px) { .blog-cards { grid-template-columns: 1fr; } }
-    .blog-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: transform .2s, box-shadow .2s; text-decoration: none; display: block; }
-    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(14,165,233,0.15); }
-    .blog-card-thumb { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; }
-    .blog-card-thumb.blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
-    .blog-card-thumb.amber { background: linear-gradient(135deg, #fef3c7, #fde68a); }
-    .blog-card-body { padding: 14px 16px; }
-    .blog-card-tag { font-size: 11px; font-weight: 700; color: #0ea5e9; background: #e0f2fe; padding: 2px 8px; border-radius: 8px; display: inline-block; margin-bottom: 8px; }
-    .blog-card-title { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.5; margin-bottom: 8px; }
-    .blog-card-link { font-size: 12px; color: #0ea5e9; font-weight: 600; }
-    .blog-cta-wrap { text-align: center; }
-    .btn-blog-all { display: inline-flex; align-items: center; gap: 8px; background: #0f3460; color: #fff; font-size: 14px; font-weight: 700; padding: 14px 32px; border-radius: 6px; transition: background .2s; }
-    .btn-blog-all:hover { background: #1e4d8c; }
-
-    /* NOTE MAGAZINE */
-    .note-section { background: #fffbeb; border-top: 1px solid #fde68a; border-bottom: 1px solid #fde68a; padding: 20px 32px; }
-    .note-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .note-badge { font-size: 11px; font-weight: 700; color: #92400e; white-space: nowrap; }
-    .note-title { font-size: 14px; font-weight: 700; color: #78350f; white-space: nowrap; }
-    .note-desc { font-size: 13px; color: #92400e; flex: 1; min-width: 180px; }
-    .btn-note { display: inline-flex; align-items: center; gap: 6px; background: #000; color: #fff; font-size: 12px; font-weight: 700; padding: 8px 18px; border-radius: 6px; white-space: nowrap; transition: opacity .2s; }
-    .btn-note:hover { opacity: .8; }
-
-    /* FOOTER */
-    footer { background: var(--sky-bg); border-top: 2px solid #bae6fd; color: var(--text-sub); padding: 28px 32px; font-size: 12px; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--navy); font-size: 13px; font-weight: 700; }
-    .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; }
-    .footer-contact { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-contact a { color: var(--sky); display: flex; align-items: center; gap: 5px; transition: color .2s; }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; text-align: center; }
-      .hero-img-wrap { margin: 0 auto; }
-      .hero-badges { justify-content: center; }
-      .icon-services-grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
-      .reasons-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
-      .cta-banner-inner { flex-direction: column; text-align: center; padding: 32px 24px; }
-    }
-    @media (max-width: 640px) {
-      nav { display: none; }
-      .header-inner { padding: 0 20px; }
-      .hero { padding: 60px 20px 80px; }
-    }
+    @keyframes lpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
   </style>
-  <!-- Google AdSense ▼ 審査通過後にpublisher IDを設定 -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
-  <!-- Google AdSense ▲ -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498"
-     crossorigin="anonymous"></script>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a href="#" class="logo">
+    <a href="/" class="logo">
       <div class="logo-text">
         <div class="logo-main">Life Asset</div>
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
@@ -213,6 +50,9 @@
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
       お問い合わせはこちら
     </a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -268,7 +108,7 @@
 </section>
 
 <!-- LOAN CHECK TOOL BANNER -->
-<section style="background:linear-gradient(135deg,#0f3460 0%,#1e4d8c 60%,#1a5fac 100%);padding:56px 32px;text-align:center;">
+<section style="background:var(--navy);padding:80px 32px;text-align:center;">
   <div style="max-width:860px;margin:0 auto;">
     <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;color:#fff;letter-spacing:.1em;margin-bottom:20px;">
       <span style="width:7px;height:7px;border-radius:50%;background:#6ee7b7;display:inline-block;animation:lpulse 2s infinite;"></span>
@@ -281,14 +121,11 @@
       <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;">📈 金利上昇シミュレーション</span>
       <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;">🏦 控除・逆ざや判定</span>
     </div>
-    <a href="loan-check.html" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,#38bdf8,#0ea5e9);color:#fff;font-size:16px;font-weight:800;padding:16px 36px;border-radius:50px;box-shadow:0 6px 24px rgba(14,165,233,0.45);transition:transform .15s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    <a href="loan-check.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:#fff;font-size:16px;font-weight:800;padding:16px 36px;border-radius:50px;box-shadow:0 6px 24px rgba(14,165,233,0.45);transition:transform .15s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
       🏠 住宅ローン金利リスク診断を試す &rsaquo;
     </a>
   </div>
 </section>
-<style>
-@keyframes lpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
-</style>
 
 <!-- CTA BANNER -->
 <section class="cta-banner" id="contact">
@@ -406,5 +243,6 @@
   </div>
 </footer>
 
+<script src="/nav.js" defer></script>
 </body>
 </html>
