@@ -32,8 +32,8 @@
   </script>
   <style>
     :root {
-      --sky: #0ea5e9; --sky-light: #38bdf8; --sky-pale: #e0f2fe;
-      --navy: #0f3460; --navy-soft: #1e4d8c;
+      --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+      --navy: #1a3d2b; --navy-soft: #1f5c40;
       --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,14 +43,14 @@
 
     #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--sky), var(--sky-light)); z-index: 9999; transition: width .1s linear; }
 
-    header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(14,165,233,0.07); }
+    header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); box-shadow: 0 1px 8px rgba(26,122,74,0.07); }
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; gap: 24px; }
-    .logo-text .name { font-size: 1.25rem; font-weight: 700; background: linear-gradient(90deg,#4facfe,#00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo-text .name { font-size: 1.25rem; font-weight: 700; background: linear-gradient(90deg,#1a7a4a,#4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .logo-text .tagline { font-size: 0.62rem; color: var(--text-light); }
     nav { display: flex; gap: 4px; margin-left: auto; }
     nav a { padding: 6px 14px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; color: var(--text); transition: all .2s; }
     nav a:hover, nav a.active { background: var(--sky-pale); color: var(--sky); }
-    .btn-cta { padding: 8px 20px; border-radius: 22px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 0.875rem; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 8px rgba(14,165,233,0.3); }
+    .btn-cta { padding: 8px 20px; border-radius: 22px; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-size: 0.875rem; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 8px rgba(26,122,74,0.3); }
 
     .breadcrumb { max-width: 760px; margin: 0 auto; padding: 16px 24px 0; font-size: 0.8rem; color: var(--text-light); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .breadcrumb a { color: var(--sky); }
@@ -70,7 +70,7 @@
     .toc-list li a:hover { text-decoration: underline; }
 
     .article-content { max-width: 760px; margin: 0 auto; padding: 0 24px 48px; }
-    .article-content h2 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin: 40px 0 16px; padding: 10px 16px; border-left: 4px solid var(--sky); background: #f0f9ff; border-radius: 0 8px 8px 0; line-height: 1.4; }
+    .article-content h2 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin: 40px 0 16px; padding: 10px 16px; border-left: 4px solid var(--sky); background: #f0fdf4; border-radius: 0 8px 8px 0; line-height: 1.4; }
     .article-content h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin: 24px 0 12px; }
     .article-content p { margin-bottom: 18px; font-size: 0.97rem; line-height: 1.95; }
     .article-content ul, .article-content ol { padding-left: 1.5em; margin-bottom: 16px; }
@@ -91,7 +91,7 @@
     .big-quote p { font-size: 1.05rem; font-weight: 700; color: #92400e; margin: 0; line-height: 1.7; }
 
     /* 答えボックス */
-    .answer-box { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px solid var(--sky); border-radius: 14px; padding: 24px 28px; margin: 28px 0; }
+    .answer-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid var(--sky); border-radius: 14px; padding: 24px 28px; margin: 28px 0; }
     .answer-box .answer-label { font-size: 0.78rem; font-weight: 700; color: var(--sky); margin-bottom: 8px; }
     .answer-box p { font-size: 1rem; font-weight: 700; color: var(--navy); margin: 0; line-height: 1.7; }
 
@@ -120,7 +120,7 @@
     .priority-box p { font-size: 0.88rem; color: var(--text-light); margin: 0; line-height: 1.7; }
 
     /* CTA */
-    .cta-box { background: linear-gradient(135deg, #0f3460, #1e4d8c); border-radius: 16px; padding: 32px 28px; text-align: center; margin: 40px 0; color: #fff; }
+    .cta-box { background: linear-gradient(135deg, #1a3d2b, #1f5c40); border-radius: 16px; padding: 32px 28px; text-align: center; margin: 40px 0; color: #fff; }
     .cta-box h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
     .cta-box p { font-size: 0.9rem; opacity: .85; margin-bottom: 20px; }
     .cta-btn { display: inline-block; background: linear-gradient(90deg, var(--sky), var(--sky-light)); color: #fff; font-weight: 700; padding: 12px 32px; border-radius: 24px; font-size: 0.95rem; cursor: pointer; border: none; font-family: inherit; }
