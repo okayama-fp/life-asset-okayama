@@ -1007,7 +1007,7 @@
 <div class="cta-box">
   <h2>「自分のレベルに合った相談をしたい」と思ったら</h2>
   <p>資産100万円でも5,000万円でも、今のステージに合ったアドバイスをします。<br>地方在住・会社員・子育て世代のご相談、お気軽にどうぞ。</p>
-  <button class="cta-btn" onclick="(function(){var u='lifeassetpartners',d='gmail.com';location.href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;})()">無料相談はこちら →</button>
+  <button class="cta-btn" onclick="(function(){document.querySelector('[id]').href='../contact.html';})()">無料相談はこちら →</button>
 </div>
 
 <!-- SHARE -->
@@ -1063,8 +1063,7 @@ function shareX(){
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
 }
 (function(){
-  var u='lifeassetpartners',d='gmail.com';
-  document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+  document.querySelector('[id]').href='../contact.html';
 })();
 
 window.addEventListener('scroll', function(){

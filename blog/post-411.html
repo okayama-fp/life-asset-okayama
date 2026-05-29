@@ -306,7 +306,7 @@
     var msg = document.getElementById('chat-input').value.trim();
     var sub = encodeURIComponent('Life Assetブログ お問い合わせ：給料だけに頼らない家計へ');
     var body = encodeURIComponent(msg || 'ブログを拝見しました。詳しく教えていただけますか？');
-    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + sub + '&body=' + body, '_blank', 'noopener,noreferrer');
+    window.location.href='../contact.html';
   }
   function shareX() {
     var url = encodeURIComponent(location.href);

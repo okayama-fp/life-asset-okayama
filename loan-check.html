@@ -687,13 +687,11 @@ function shareResult() {
 }
 
 function openContact() {
-  var u='lifeassetpartners', d='gmail.com';
-  location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d+'&su=住宅ローンお問い合わせ';
+  document.querySelector('[id]').href='contact.html';
 }
 
 (function(){
-  var u='lifeassetpartners', d='gmail.com';
-  document.getElementById('mail-link').href = 'https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
+  document.querySelector('[id]').href='contact.html';
   calc();
 })();
 

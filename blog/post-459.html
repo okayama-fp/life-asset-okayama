@@ -366,7 +366,7 @@
     const msg = document.getElementById('chat-msg').value;
     const subj = encodeURIComponent('ブログ記事からのご相談：' + document.title);
     const body = encodeURIComponent(msg + '\n\n---\n記事URL: ' + location.href);
-    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
+    window.location.href='../contact.html';
   }
   function setTopic(t) { document.getElementById('chat-msg').value = t; }
   function copyLink() {
