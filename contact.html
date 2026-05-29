@@ -71,7 +71,7 @@
 
   <div class="contact-card">
     <h2>✉️ メールでお問い合わせ</h2>
-    <p>下記ボタンからGmailが開きます。件名・お名前・ご相談内容をご記入の上お送りください。通常2営業日以内にご返信いたします。</p>
+    <p>下記ボタンからメールが開きます。件名・お名前・ご相談内容をご記入の上お送りください。通常2営業日以内にご返信いたします。</p>
     <button class="btn-contact" onclick="openGmail()">
       ✉️ メールで問い合わせる
     </button>
@@ -82,7 +82,7 @@
       <span class="info-icon">📧</span>
       <div class="info-text">
         <div class="label">メールアドレス</div>
-        <div class="value">lifeassetpartners@gmail.com</div>
+        <div class="value">info@lifeassetoffice.net</div>
       </div>
     </div>
     <div class="info-item">
@@ -116,7 +116,7 @@
   function openGmail() {
     var subj = encodeURIComponent('ライフアセットオフィスへのお問い合わせ');
     var body = encodeURIComponent('お名前：\n年齢：\nご相談内容：\n\n');
-    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners@gmail.com&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=info%40lifeassetoffice.net&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
   }
 </script>
 <script src="/nav.js" defer></script>
