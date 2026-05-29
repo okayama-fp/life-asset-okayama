@@ -165,6 +165,7 @@
       nav { display: none; }
     }
   </style>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <div id="pb"></div>
@@ -188,7 +189,9 @@
       <a href="../index.html">ホーム</a>
       <a href="index.html">ブログ</a>
     </nav>
-    <a href="../index.html#contact" class="btn-consult">お問い合わせ</a>
+    <a href="../index.html#contact" class="btn-consult">お問い合わせ    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -432,5 +435,6 @@ function shareX() {
   window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
 }
 </script>
+<script src="/nav.js" defer></script>
 </body>
 </html>
