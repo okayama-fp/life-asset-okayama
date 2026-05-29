@@ -286,6 +286,7 @@
       .sum-tbl { font-size: 11.5px; }
     }
   </style>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <div id="pb"></div>
@@ -293,7 +294,7 @@
 <!-- SITE HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <a href="../index.html" class="logo">
+    <a href="/" class="logo">
       <div class="logo-text">
         <div class="name">Life Asset</div>
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
@@ -305,6 +306,9 @@
       <a href="index.html" class="active">ブログ</a>
     </nav>
     <a href="../index.html#contact" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -1107,5 +1111,6 @@ function calcLevel(){
   res.classList.add('show');
 }
 </script>
+<script src="/nav.js" defer></script>
 </body>
 </html>
