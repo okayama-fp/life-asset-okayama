@@ -42,6 +42,15 @@
     .note{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px 18px;font-size:0.85rem;color:#92400e;margin-top:24px;line-height:1.7}
     footer{background:var(--navy);color:rgba(255,255,255,0.8);text-align:center;padding:32px 24px;font-size:0.8rem}
     footer a{color:#22c55e;text-decoration:underline}
+    /* CONTACT FORM */
+    .contact-form{display:grid;gap:16px;margin-top:8px}
+    .form-group{display:flex;flex-direction:column;gap:6px}
+    .form-group label{font-size:0.85rem;font-weight:600;color:var(--navy)}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:0.9rem;font-family:inherit;color:var(--text);transition:border-color .2s;background:#fff}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(26,122,74,0.1)}
+    .form-group textarea{resize:vertical;min-height:120px}
+    /* honeypot: 人間には見えない、ボットが記入する */
+    .hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;pointer-events:none;tab-index:-1}
   </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498"
      crossorigin="anonymous"></script>
@@ -70,11 +79,40 @@
 <div class="page-wrap">
 
   <div class="contact-card">
-    <h2>メールでお問い合わせ</h2>
-    <p>下記ボタンからメールが開きます。件名・お名前・ご相談内容をご記入の上お送りください。通常2営業日以内にご返信いたします。</p>
-    <button class="btn-contact" onclick="openGmail()">
-      ✉️ メールで問い合わせる
-    </button>
+    <h2>お問い合わせフォーム</h2>
+    <p>下記フォームにご記入の上、送信してください。通常2営業日以内にご返信いたします。</p>
+    <form class="contact-form" id="contact-form" onsubmit="return handleSubmit(event)">
+      <!-- honeypot: ボット対策（人間には非表示） -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Website（入力しないでください）</label>
+        <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
+      </div>
+      <div class="form-group">
+        <label for="contact-name">お名前 <span style="color:#e11d48">*</span></label>
+        <input type="text" id="contact-name" name="name" placeholder="例：山田 太郎" required>
+      </div>
+      <div class="form-group">
+        <label for="contact-email-input">メールアドレス <span style="color:#e11d48">*</span></label>
+        <input type="email" id="contact-email-input" name="email" placeholder="例：example@mail.com" required>
+      </div>
+      <div class="form-group">
+        <label for="contact-subject">ご相談内容</label>
+        <select id="contact-subject" name="subject">
+          <option value="">選択してください</option>
+          <option value="資産運用">資産運用</option>
+          <option value="家計管理">家計管理</option>
+          <option value="老後資金">老後資金・年金</option>
+          <option value="保険">保険の見直し</option>
+          <option value="融資">融資・ローン</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="contact-message">メッセージ <span style="color:#e11d48">*</span></label>
+        <textarea id="contact-message" name="message" placeholder="ご相談内容を自由にご記入ください" required></textarea>
+      </div>
+      <button type="submit" class="btn-contact">メールで送信する</button>
+    </form>
   </div>
 
   <div class="info-grid">
@@ -114,10 +152,20 @@
 </footer>
 
 <script>
-  function openGmail() {
-    var subj = encodeURIComponent('ライフアセットオフィスへのお問い合わせ');
-    var body = encodeURIComponent('お名前：\n年齢：\nご相談内容：\n\n');
+  function handleSubmit(e) {
+    e.preventDefault();
+    // honeypot check: ボットが入力していたら無視
+    if (document.getElementById('website').value !== '') {
+      return false;
+    }
+    var name    = document.getElementById('contact-name').value.trim();
+    var email   = document.getElementById('contact-email-input').value.trim();
+    var subject = document.getElementById('contact-subject').value;
+    var message = document.getElementById('contact-message').value.trim();
+    var subj = encodeURIComponent('ライフアセットオフィスへのお問い合わせ' + (subject ? '【' + subject + '】' : ''));
+    var body = encodeURIComponent('お名前：' + name + '\n返信先：' + email + '\nご相談内容：' + subject + '\n\n' + message);
     window.open('https://mail.google.com/mail/?view=cm&fs=1&to=info%40lifeassetoffice.net&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
+    return false;
   }
 </script>
 <script src="/nav.js" defer></script>
