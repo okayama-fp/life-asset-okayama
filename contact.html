@@ -89,7 +89,10 @@
       <div class="hp-field" aria-hidden="true">
         <label for="website">Website（入力しないでください）</label>
         <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
+        <input type="text" id="phone2" name="phone2" autocomplete="off" tabindex="-1">
+        <input type="email" id="email2" name="email2" autocomplete="off" tabindex="-1">
       </div>
+      <input type="hidden" id="form-load-time" name="load_time">
       <div class="form-group">
         <label for="contact-name">お名前 <span style="color:#e11d48">*</span></label>
         <input type="text" id="contact-name" name="name" placeholder="例：山田 太郎" required>
@@ -155,12 +158,36 @@
 </footer>
 
 <script>
+  // フォーム表示時刻を記録
+  document.getElementById('form-load-time').value = Date.now();
+
+  // 連続送信ブロック用
+  var lastSubmit = 0;
+
   function handleSubmit(e) {
     e.preventDefault();
-    // honeypot check: ボットが入力していたら無視
-    if (document.getElementById('website').value !== '') {
+
+    // ハニーポットチェック
+    if (document.getElementById('website').value !== '' ||
+        document.getElementById('phone2').value !== '' ||
+        document.getElementById('email2').value !== '') {
       return false;
     }
+
+    // 送信速度チェック（3秒未満 = ボット疑い）
+    var loadTime = parseInt(document.getElementById('form-load-time').value, 10);
+    if (Date.now() - loadTime < 3000) {
+      return false;
+    }
+
+    // 連続送信ブロック（30秒以内の再送信を拒否）
+    var now = Date.now();
+    if (now - lastSubmit < 30000) {
+      alert('送信が完了しています。しばらくお待ちください。');
+      return false;
+    }
+    lastSubmit = now;
+
     var name    = document.getElementById('contact-name').value.trim();
     var email   = document.getElementById('contact-email-input').value.trim();
     var subject = document.getElementById('contact-subject').value;
