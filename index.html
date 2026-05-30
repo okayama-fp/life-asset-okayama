@@ -233,7 +233,7 @@
       </a>
     </div>
     <div class="blog-cta-wrap">
-      <a href="blog/index.html" class="btn-blog-all">全15記事を見る → ブックマーク＆既読管理機能つき</a>
+      <a href="blog/index.html" class="btn-blog-all" id="btn-blog-all">全<span id="blog-count">…</span>記事を見る → ブックマーク＆既読管理機能つき</a>
     </div>
   </div>
 </section>
@@ -265,5 +265,12 @@
 </footer>
 
 <script src="/nav.js" defer></script>
+<script>
+fetch('blog/index.html').then(r=>r.text()).then(html=>{
+  const doc=new DOMParser().parseFromString(html,'text/html');
+  const count=doc.querySelectorAll('.acard').length;
+  if(count>0)document.getElementById('blog-count').textContent=count;
+}).catch(()=>{document.getElementById('blog-count').textContent='全';});
+</script>
 </body>
 </html>
