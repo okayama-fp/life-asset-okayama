@@ -98,12 +98,13 @@ header.nav-open .hamburger span:nth-child(3) { transform: translateY(-9px) rotat
 .section-title { text-align: center; font-size: clamp(20px,3vw,26px); font-weight: 800; color: var(--navy); margin-bottom: 8px; }
 .section-sub { text-align: center; font-size: 14px; color: var(--text-sub); margin-bottom: 48px; }
 .cards { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-.card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; }
+.card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .25s, transform .25s; display: flex; flex-direction: column; }
 .card:hover { box-shadow: 0 12px 40px var(--g-b); transform: translateY(-5px); }
 .card-header { height: 140px; display: flex; align-items: center; justify-content: center; }
 .card-header-inner { width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .card-header svg { width: 44px; height: 44px; }
-.card-body { padding: 24px; }
+.card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.card-body .btn-sky { margin-top: auto; }
 .card-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
 .card-desc { font-size: 13px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.7; }
 .card-list { list-style: none; margin-bottom: 20px; }
