@@ -54,7 +54,9 @@
     .form-group textarea{resize:vertical;min-height:120px}
     /* honeypot: 人間には見えない、ボットが記入する */
     .hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;pointer-events:none;tab-index:-1}
+    .cf-turnstile { margin-top: 8px; }
   </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498"
      crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/style.css">
@@ -117,6 +119,7 @@
         <label for="contact-message">メッセージ <span style="color:#e11d48">*</span></label>
         <textarea id="contact-message" name="message" placeholder="ご相談内容を自由にご記入ください" required></textarea>
       </div>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAADZkg2tGLOTSIha4" data-theme="light"></div>
       <button type="submit" class="btn-contact">メールで送信する</button>
     </form>
   </div>
@@ -177,6 +180,13 @@
     // 送信速度チェック（3秒未満 = ボット疑い）
     var loadTime = parseInt(document.getElementById('form-load-time').value, 10);
     if (Date.now() - loadTime < 3000) {
+      return false;
+    }
+
+    // Turnstile チェック
+    var tsToken = document.querySelector('[name="cf-turnstile-response"]');
+    if (!tsToken || !tsToken.value) {
+      alert('BOT確認を完了してください。');
       return false;
     }
 
