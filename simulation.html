@@ -8,10 +8,10 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://lifeassetoffice.net/simulation.html">
-<title>無料FPツール 8種｜資産・老後・NISA・ふるさと納税・保険・FIRE・教育費｜ライフアセットオフィス</title>
-<meta name="description" content="資産シミュレーター・老後資金診断・NISA/iDeCo・ふるさと納税・借り換え節約・保険見直し・FIRE・教育費の8つのFPツールを一画面で。登録不要・リアルタイム計算。">
-<meta property="og:title" content="無料FPツール 8種｜ライフアセットオフィス">
-<meta property="og:description" content="8つの無料FPシミュレーターを一画面で使えます。登録不要・リアルタイム計算。">
+<title>無料FPシミュレーター一覧｜ライフアセットオフィス</title>
+<meta name="description" content="資産・老後資金・NISA/iDeCo・ふるさと納税・住宅ローン借り換え・保険見直し・FIRE・教育費の8つの無料シミュレーターが揃っています。登録不要。">
+<meta property="og:title" content="無料FPシミュレーター一覧｜ライフアセットオフィス">
+<meta property="og:description" content="8つの無料FPシミュレーター。スライダーを動かすだけで即計算。登録不要。">
 <meta property="og:url" content="https://lifeassetoffice.net/simulation.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
@@ -25,16 +25,12 @@
   gtag('config', 'G-PKDH2DR522');
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="/style.css">
 <style>
 :root {
   --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
   --navy: #1a3d2b; --navy-soft: #1f5c40;
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
-  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
-  --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
-  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -42,114 +38,84 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color
 a { color: inherit; text-decoration: none; }
 #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
 
-/* Hero */
-.hub-hero { background: linear-gradient(135deg,#0f2d1c,#1a4a30); color: #fff; padding: 40px 24px 32px; text-align: center; }
-.hub-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
-.hub-hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: hpulse 2s infinite; }
-@keyframes hpulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
-.hub-hero h1 { font-size: clamp(20px,4vw,32px); font-weight: 900; margin-bottom: 10px; }
-.hub-hero h1 em { font-style: normal; background: linear-gradient(90deg,#4ade80,#86efac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hub-hero p { font-size: 13.5px; color: rgba(255,255,255,.75); }
+.hero { background: linear-gradient(135deg,#0f2d1c,#1a4a30); color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
+.hero h1 { font-size: clamp(1.5rem,4vw,2.2rem); font-weight: 900; line-height: 1.3; margin-bottom: 10px; }
+.hero p { font-size: 14px; color: rgba(255,255,255,.75); }
 
-/* Tab nav */
-.hub-nav { background: #fff; border-bottom: 2px solid var(--border); position: sticky; top: 60px; z-index: 100; }
-.hub-tabs-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.hub-tabs-scroll::-webkit-scrollbar { display: none; }
-.hub-tabs { display: flex; gap: 0; white-space: nowrap; padding: 0 12px; }
-.htab-btn {
-  padding: 13px 16px; border: none; background: none; cursor: pointer;
-  font-size: 13px; font-weight: 700; color: var(--text-light);
-  font-family: inherit; border-bottom: 3px solid transparent;
-  transition: color .2s, border-color .2s; white-space: nowrap;
+.main { max-width: 920px; margin: 0 auto; padding: 40px 20px 80px; }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
 }
-.htab-btn:hover { color: var(--sky); }
-.htab-btn.active { color: var(--sky); border-bottom-color: var(--sky); }
-@media(max-width:600px){ .htab-btn { font-size: 12px; padding: 11px 12px; } }
 
-/* Hub body */
-.hub-body { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
-.htab-content { display: none; }
-.htab-content.active { display: block; }
+.tool-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 22px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(26,122,74,.12);
+  border-color: var(--sky);
+}
 
-/* Shared components */
-.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
-@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
-.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
-.field { margin-bottom: 20px; }
-.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
-.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
-.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
-.seg, .family-grid, .course-grid { display: flex; gap: 4px; flex-wrap: wrap; }
-.family-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
-.course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.seg-btn { flex: 1; min-width: 60px; padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 11.5px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; line-height: 1.4; }
-.seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
-.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
-.preset-label { font-size: 12px; font-weight: 700; color: var(--text-light); }
-.preset-btn { padding: 8px 16px; border-radius: 50px; border: 1.5px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; font-family: inherit; transition: all .2s; }
-.preset-btn:hover, .preset-btn.active { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
-.section-divider { margin: 16px 0 14px; border: none; border-top: 2px dashed var(--border); }
-.section-label { font-size: 11px; font-weight: 700; color: var(--sky); letter-spacing: .1em; margin-bottom: 12px; }
-.result-panel { position: sticky; top: 130px; }
-@media(max-width:700px){ .result-panel { position: static; } }
-.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
-.result-header { padding: 18px 22px 14px; text-align: center; }
-.result-header.surplus, .result-header.greenh, .result-header.ok { background: var(--greenl); border-bottom: 2px solid var(--greenb); }
-.result-header.deficit, .result-header.redh, .result-header.over { background: var(--redl); border-bottom: 2px solid var(--redb); }
-.result-header.warn, .result-header.amberh { background: var(--amberl); border-bottom: 2px solid var(--amberb); }
-.result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; margin-bottom: 4px; }
-.result-header.surplus .result-label, .result-header.greenh .result-label, .result-header.ok .result-label { color: var(--green); }
-.result-header.deficit .result-label, .result-header.redh .result-label, .result-header.over .result-label { color: var(--red); }
-.result-header.warn .result-label, .result-header.amberh .result-label { color: var(--amber); }
-.result-amount { font-size: clamp(2rem,6vw,3rem); font-weight: 900; line-height: 1.1; }
-.result-header.surplus .result-amount, .result-header.greenh .result-amount, .result-header.ok .result-amount { color: var(--green); }
-.result-header.deficit .result-amount, .result-header.redh .result-amount, .result-header.over .result-amount { color: var(--red); }
-.result-header.warn .result-amount, .result-header.amberh .result-amount { color: var(--amber); }
-.result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
-.result-body { padding: 18px 20px; }
-.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
-.stat-row:last-child { border-bottom: none; }
-.stat-k { font-size: 12.5px; color: var(--text-light); }
-.stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
-.stat-v.good { color: var(--green); }
-.stat-v.bad { color: var(--red); }
-.stat-v.warn { color: var(--amber); }
-.chart-wrap { margin: 16px 0; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
-.chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
-.share-row { display: flex; gap: 8px; margin-top: 14px; }
-.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-.share-x { background: #000; }
-.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
-.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
-.cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
-.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
-.notice-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 10px; padding: 12px 14px; margin: 14px 0; font-size: 12px; color: var(--amber); line-height: 1.65; }
-.bar-label { font-size: 12px; font-weight: 700; color: var(--text-light); margin: 14px 0 6px; }
-.bar-track { width: 100%; height: 12px; background: var(--border); border-radius: 6px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 6px; transition: width .4s, background .3s; }
-.save-box { border-radius: 10px; padding: 12px 14px; margin: 12px 0 0; font-size: 13px; line-height: 1.7; }
-.save-box.over { background: var(--redl); border: 1px solid var(--redb); color: var(--red); font-weight: 700; }
-.save-box.ok { background: var(--greenl); border: 1px solid var(--greenb); color: var(--green); font-weight: 700; }
-.save-box.warn { background: var(--amberl); border: 1px solid var(--amberb); color: var(--amber); font-weight: 700; }
-.fire-age { font-size: clamp(3.5rem,12vw,5rem); font-weight: 900; color: var(--green); line-height: 1; }
-.fire-age-unit { font-size: 1.4rem; font-weight: 700; }
-.sensitivity-section { margin-top: 20px; }
-.sensitivity-section h3, .cost-table-section h3, .table-section h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-.sens-table, .income-table, .cost-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-.sens-table th, .income-table th, .cost-table th { background: var(--navy); color: #fff; padding: 9px 12px; text-align: center; font-size: 12px; }
-.sens-table td, .income-table td, .cost-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: center; }
-.sens-table tr.highlight td, .income-table tr.highlight td, .cost-table tr.highlight td { background: var(--sky-pale); font-weight: 700; color: var(--navy); }
-.cost-table-section { margin-top: 20px; }
-.table-section { margin-top: 28px; }
+.tool-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.4;
+}
+.tool-desc {
+  font-size: 12.5px;
+  color: var(--text-light);
+  line-height: 1.7;
+  flex: 1;
+}
+.tool-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 0;
+  border-radius: 8px;
+  transition: background .2s;
+}
+.tool-link:hover { background: var(--sky); }
 
-/* Tab 1 specific */
-.t1-result-header-navy { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); padding: 22px 24px; }
-.t1-result-header-label { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: .1em; margin-bottom: 6px; }
-.t1-result-total { font-size: clamp(28px,5vw,40px); font-weight: 900; color: #fff; line-height: 1.1; }
-.t1-result-total span { font-size: 16px; font-weight: 400; opacity: .75; }
-.t1-mult-badge { display: inline-block; background: #4ade80; color: #1a3d2b; font-size: 12px; font-weight: 900; padding: 3px 12px; border-radius: 20px; margin-top: 8px; }
+.cta-box {
+  margin-top: 48px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-soft));
+  border-radius: 18px;
+  padding: 36px 28px;
+  text-align: center;
+}
+.cta-box h2 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.cta-box p { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--sky), var(--sky-light));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 13px 32px;
+  border-radius: 50px;
+  transition: opacity .2s, transform .2s;
+}
+.cta-btn:hover { opacity: .9; transform: translateY(-2px); }
 
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
@@ -181,591 +147,74 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   </div>
 </header>
 
-<div class="hub-hero">
-  <div class="hub-hero-badge"><span class="hub-hero-dot"></span>8ツール無料・登録不要</div>
-  <h1>あなたのお金を、<em>8つの視点</em>で診断</h1>
-  <p>資産・老後・NISA・ふるさと納税・借り換え・保険・FIRE・教育費をすべてここで</p>
+<div class="hero">
+  <div class="hero-badge"><span class="hero-dot"></span>登録不要・リアルタイム計算</div>
+  <h1>無料FPシミュレーター</h1>
+  <p>8つのツールで、お金の疑問をすぐに解決できます。</p>
 </div>
 
-<div class="hub-nav">
-  <div class="hub-tabs-scroll">
-    <div class="hub-tabs">
-      <button class="htab-btn active" onclick="showTab(1)">📈 資産シム</button>
-      <button class="htab-btn" onclick="showTab(2)">👴 老後資金</button>
-      <button class="htab-btn" onclick="showTab(3)">🏦 NISA・iDeCo</button>
-      <button class="htab-btn" onclick="showTab(4)">🎁 ふるさと納税</button>
-      <button class="htab-btn" onclick="showTab(5)">🏠 借り換え</button>
-      <button class="htab-btn" onclick="showTab(6)">🛡 保険見直し</button>
-      <button class="htab-btn" onclick="showTab(7)">🔥 FIRE</button>
-      <button class="htab-btn" onclick="showTab(8)">🎓 教育費</button>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="main">
+  <div class="tools-grid">
+
+    <div class="tool-card">
+      <div class="tool-name">資産シミュレーター</div>
+      <div class="tool-desc">積立額・利回り・年数から将来の資産額をグラフで確認できます。元本と運用益を可視化。</div>
+      <a class="tool-link" href="asset-sim.html">使ってみる</a>
     </div>
+
+    <div class="tool-card">
+      <div class="tool-name">老後資金 不足額診断</div>
+      <div class="tool-desc">年金・生活費・貯蓄を入力するだけ。老後資金の不足額をリアルタイムで計算します。</div>
+      <a class="tool-link" href="retirement-gap.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">NISA・iDeCo 節税メリット</div>
+      <div class="tool-desc">NISA・iDeCo・課税口座の運用差額をリアルタイム比較。節税メリットを数字で確認。</div>
+      <a class="tool-link" href="nisa-ideco-sim.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">ふるさと納税 控除上限額</div>
+      <div class="tool-desc">年収・家族構成を選ぶだけ。控除上限額と実質2,000円でもらえるお得額を計算します。</div>
+      <a class="tool-link" href="furusato-sim.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">住宅ローン 借り換え節約</div>
+      <div class="tool-desc">残債・現在の金利・借り換え後の金利を入力。総節約額と手数料回収期間を即計算。</div>
+      <a class="tool-link" href="loan-refinance.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">保険料 見直し診断</div>
+      <div class="tool-desc">年齢・年収・家族構成から適正保険料の目安を診断。払いすぎを一目で確認できます。</div>
+      <a class="tool-link" href="insurance-check.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">FIRE 達成年齢シミュレーター</div>
+      <div class="tool-desc">資産・収入・支出・利回りからFIRE達成年齢を計算。資産推移グラフ＋感度分析付き。</div>
+      <a class="tool-link" href="fire-sim.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">教育費 積立プランナー</div>
+      <div class="tool-desc">子供の年齢・進学コースを選ぶだけ。大学卒業までの教育費と必要積立額を計算します。</div>
+      <a class="tool-link" href="education-sim.html">使ってみる</a>
+    </div>
+
+  </div>
+
+  <div class="cta-box">
+    <h2>シミュレーション結果をもとにFPに相談しませんか？</h2>
+    <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>無料でご相談を承っています。</p>
+    <a href="contact.html" class="cta-btn">FPに無料相談する</a>
   </div>
 </div>
-
-<div class="hub-body">
-
-<!-- =========================================================
-     TAB 1: 資産シミュレーター
-     ========================================================= -->
-<div id="htab-1" class="htab-content active">
-  <div class="preset-row">
-    <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" id="t1-pre-30" onclick="t1_applyPreset('30s')">👨 30代モデル</button>
-    <button class="preset-btn" id="t1-pre-40" onclick="t1_applyPreset('40s')">👨‍👩‍👦 40代モデル</button>
-    <button class="preset-btn" id="t1-pre-nisa" onclick="t1_applyPreset('nisa')">📈 NISA満額</button>
-  </div>
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>条件を入力</h2>
-      <div class="field">
-        <div class="field-label">現在の資産<span class="field-val" id="t1-lbl-initial">200万円</span></div>
-        <input type="range" id="t1-sl-initial" min="0" max="3000" step="50" value="200" oninput="t1_syncLabel('initial',this.value);t1_calc()">
-        <div class="field-ticks"><span>0円</span><span>1,500万</span><span>3,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">毎月の積立額<span class="field-val" id="t1-lbl-monthly">5万円</span></div>
-        <input type="range" id="t1-sl-monthly" min="0" max="30" step="0.5" value="5" oninput="t1_syncLabel('monthly',this.value);t1_calc()">
-        <div class="field-ticks"><span>0円</span><span>15万</span><span>30万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">想定利回り（年）<span class="field-val" id="t1-lbl-rate">5.0%</span></div>
-        <input type="range" id="t1-sl-rate" min="0.5" max="10" step="0.5" value="5" oninput="t1_syncLabel('rate',this.value);t1_calc()">
-        <div class="field-ticks"><span>0.5%</span><span>5%</span><span>10%</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">運用年数<span class="field-val" id="t1-lbl-years">30年</span></div>
-        <input type="range" id="t1-sl-years" min="5" max="40" step="5" value="30" oninput="t1_syncLabel('years',this.value);t1_calc()">
-        <div class="field-ticks"><span>5年</span><span>20年</span><span>40年</span></div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="t1-result-header-navy">
-          <div class="t1-result-header-label" id="t1-r-years-label">30年後の資産</div>
-          <div class="t1-result-total"><span>約 </span><span id="t1-r-total">―</span><span> 万円</span></div>
-          <div class="t1-mult-badge" id="t1-r-mult">元本の―倍</div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">元本合計</span><span class="stat-v" id="t1-r-principal">―</span></div>
-          <div class="stat-row"><span class="stat-k">運用益</span><span class="stat-v good" id="t1-r-gain">―</span></div>
-          <div class="stat-row"><span class="stat-k">運用益の割合</span><span class="stat-v" id="t1-r-ratio">―</span></div>
-        </div>
-      </div>
-      <div class="chart-wrap">
-        <h3>資産の推移（元本 vs 運用益）</h3>
-        <canvas id="t1-assetChart" height="200"></canvas>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t1_shareResult()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">この結果をもとにFPに相談しませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 2: 老後資金診断
-     ========================================================= -->
-<div id="htab-2" class="htab-content">
-  <div class="preset-row">
-    <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" onclick="t2_applyPreset('couple')">夫婦モデル</button>
-    <button class="preset-btn" onclick="t2_applyPreset('single')">おひとりさま</button>
-    <button class="preset-btn" onclick="t2_applyPreset('comfort')">ゆとり老後</button>
-  </div>
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>あなたの情報を入力</h2>
-      <div class="field">
-        <div class="field-label">現在の年齢<span class="field-val" id="t2-lbl-age">40歳</span></div>
-        <input type="range" id="t2-sl-age" min="20" max="65" step="1" value="40" oninput="t2_sync('age',this.value);t2_calc()">
-        <div class="field-ticks"><span>20歳</span><span>45歳</span><span>65歳</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">退職予定年齢<span class="field-val" id="t2-lbl-retire">65歳</span></div>
-        <input type="range" id="t2-sl-retire" min="55" max="70" step="1" value="65" oninput="t2_sync('retire',this.value);t2_calc()">
-        <div class="field-ticks"><span>55歳</span><span>62歳</span><span>70歳</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">老後の月生活費<span class="field-val" id="t2-lbl-expense">25万円</span></div>
-        <input type="range" id="t2-sl-expense" min="10" max="50" step="1" value="25" oninput="t2_sync('expense',this.value);t2_calc()">
-        <div class="field-ticks"><span>10万</span><span>30万</span><span>50万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">年金見込み月額<span class="field-val" id="t2-lbl-pension">15万円</span></div>
-        <input type="range" id="t2-sl-pension" min="0" max="30" step="1" value="15" oninput="t2_sync('pension',this.value);t2_calc()">
-        <div class="field-ticks"><span>0万</span><span>15万</span><span>30万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">現在の貯蓄<span class="field-val" id="t2-lbl-savings">500万円</span></div>
-        <input type="range" id="t2-sl-savings" min="0" max="3000" step="50" value="500" oninput="t2_sync('savings',this.value);t2_calc()">
-        <div class="field-ticks"><span>0万</span><span>1,500万</span><span>3,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">老後の生存年数<span class="field-val" id="t2-lbl-lifespan">30年</span></div>
-        <input type="range" id="t2-sl-lifespan" min="20" max="40" step="1" value="30" oninput="t2_sync('lifespan',this.value);t2_calc()">
-        <div class="field-ticks"><span>20年</span><span>30年</span><span>40年</span></div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header deficit" id="t2-result-header">
-          <div class="result-label" id="t2-result-label">老後資金の不足額</div>
-          <div class="result-amount" id="t2-result-amount">―</div>
-          <div class="result-sub" id="t2-result-sub"></div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">老後に必要な総額</span><span class="stat-v" id="t2-r-total">―</span></div>
-          <div class="stat-row"><span class="stat-k">年金受取総額</span><span class="stat-v good" id="t2-r-pension">―</span></div>
-          <div class="stat-row"><span class="stat-k">現在の貯蓄</span><span class="stat-v" id="t2-r-savings">―</span></div>
-          <div class="stat-row"><span class="stat-k">不足額 / 余剰額</span><span class="stat-v" id="t2-r-gap">―</span></div>
-          <div class="stat-row"><span class="stat-k">退職まで必要な月積立</span><span class="stat-v" id="t2-r-monthly">―</span></div>
-        </div>
-      </div>
-      <div class="chart-wrap">
-        <h3>老後資金の内訳（万円）</h3>
-        <canvas id="t2-retirementChart" height="200"></canvas>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t2_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">老後の不安、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 3: NISA・iDeCo
-     ========================================================= -->
-<div id="htab-3" class="htab-content">
-  <div class="preset-row">
-    <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" onclick="t3_applyPreset('salary')">サラリーマン標準</button>
-    <button class="preset-btn" onclick="t3_applyPreset('high')">高所得者</button>
-    <button class="preset-btn" onclick="t3_applyPreset('housewife')">専業主婦iDeCo</button>
-  </div>
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>あなたの情報を入力</h2>
-      <div class="field">
-        <div class="field-label">年収<span class="field-val" id="t3-lbl-income">500万円</span></div>
-        <input type="range" id="t3-sl-income" min="200" max="2000" step="50" value="500" oninput="t3_sync('income',this.value);t3_calc()">
-        <div class="field-ticks"><span>200万</span><span>1,100万</span><span>2,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">毎月の積立額<span class="field-val" id="t3-lbl-monthly">3万円</span></div>
-        <input type="range" id="t3-sl-monthly" min="1" max="10" step="1" value="3" oninput="t3_sync('monthly',this.value);t3_calc()">
-        <div class="field-ticks"><span>1万</span><span>5万</span><span>10万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">運用年数<span class="field-val" id="t3-lbl-years">20年</span></div>
-        <input type="range" id="t3-sl-years" min="5" max="40" step="1" value="20" oninput="t3_sync('years',this.value);t3_calc()">
-        <div class="field-ticks"><span>5年</span><span>22年</span><span>40年</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">想定利回り（年率）<span class="field-val" id="t3-lbl-rate">5%</span></div>
-        <input type="range" id="t3-sl-rate" min="1" max="8" step="0.5" value="5" oninput="t3_sync('rate',this.value);t3_calc()">
-        <div class="field-ticks"><span>1%</span><span>4.5%</span><span>8%</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">口座タイプ</div>
-        <div class="seg">
-          <button class="seg-btn on" id="t3-tab-nisa" onclick="t3_setTab('nisa')">NISA</button>
-          <button class="seg-btn" id="t3-tab-ideco" onclick="t3_setTab('ideco')">iDeCo</button>
-          <button class="seg-btn" id="t3-tab-taxable" onclick="t3_setTab('taxable')">課税口座</button>
-        </div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header greenh">
-          <div class="result-label" id="t3-account-label">NISA 運用後の資産</div>
-          <div class="result-amount" id="t3-result-amount">―</div>
-          <div class="result-sub" id="t3-result-sub">課税口座比: ―</div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">元本合計</span><span class="stat-v" id="t3-r-principal">―</span></div>
-          <div class="stat-row"><span class="stat-k">運用益（税引後）</span><span class="stat-v good" id="t3-r-gain">―</span></div>
-          <div class="stat-row"><span class="stat-k">課税口座との差額</span><span class="stat-v good" id="t3-r-diff">―</span></div>
-          <div class="stat-row" id="t3-ideco-row" style="display:none"><span class="stat-k">iDeCo年間所得控除</span><span class="stat-v good" id="t3-r-deduction">―</span></div>
-          <div class="stat-row" id="t3-ideco-tax-row" style="display:none"><span class="stat-k">iDeCo年間節税額</span><span class="stat-v good" id="t3-r-ideco-tax">―</span></div>
-        </div>
-      </div>
-      <div class="chart-wrap">
-        <h3>NISA・iDeCo・課税口座 比較（万円）</h3>
-        <canvas id="t3-nisaChart" height="220"></canvas>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t3_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">NISA・iDeCoの選び方、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 4: ふるさと納税
-     ========================================================= -->
-<div id="htab-4" class="htab-content">
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>あなたの情報を入力</h2>
-      <div class="field">
-        <div class="field-label">年収<span class="field-val" id="t4-lbl-income">500万円</span></div>
-        <input type="range" id="t4-sl-income" min="200" max="2000" step="50" value="500" oninput="t4_sync('income',this.value);t4_calc()">
-        <div class="field-ticks"><span>200万</span><span>1,100万</span><span>2,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">家族構成</div>
-        <div class="family-grid">
-          <button class="seg-btn on" id="t4-fam-single" onclick="t4_setFamily('single')">独身</button>
-          <button class="seg-btn" id="t4-fam-couple" onclick="t4_setFamily('couple')">夫婦</button>
-          <button class="seg-btn" id="t4-fam-c1" onclick="t4_setFamily('c1')">夫婦+子1</button>
-          <button class="seg-btn" id="t4-fam-c2" onclick="t4_setFamily('c2')">夫婦+子2</button>
-          <button class="seg-btn" id="t4-fam-c3" onclick="t4_setFamily('c3')">夫婦+子3</button>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">住宅ローン控除額<span class="field-val" id="t4-lbl-hloan">0万円</span></div>
-        <input type="range" id="t4-sl-hloan" min="0" max="50" step="1" value="0" oninput="t4_sync('hloan',this.value);t4_calc()">
-        <div class="field-ticks"><span>0万</span><span>25万</span><span>50万</span></div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header greenh">
-          <div class="result-label" style="color:var(--green)">控除上限額（目安）</div>
-          <div class="result-amount" id="t4-result-amount" style="color:var(--green)">―</div>
-          <div class="result-sub">実質2,000円負担でこの金額まで寄付できます</div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">所得税の還付（目安）</span><span class="stat-v good" id="t4-r-income-tax">―</span></div>
-          <div class="stat-row"><span class="stat-k">住民税の控除（目安）</span><span class="stat-v good" id="t4-r-local-tax">―</span></div>
-          <div class="stat-row"><span class="stat-k">実質負担額</span><span class="stat-v" id="t4-r-burden">2,000円</span></div>
-          <div class="stat-row"><span class="stat-k">お得額（返礼品価値目安）</span><span class="stat-v good" id="t4-r-benefit">―</span></div>
-        </div>
-      </div>
-      <div class="notice-box">※ この計算はあくまで目安です。実際の控除上限額は給与以外の収入・各種控除の状況によって異なります。</div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t4_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">節税の活用方法、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-  <div class="table-section">
-    <h3>年収別 控除上限額の目安（独身の場合）</h3>
-    <table class="income-table">
-      <thead>
-        <tr><th>年収</th><th>独身・共働き</th><th>夫婦（配偶者控除あり）</th><th>夫婦+子1（高校生）</th></tr>
-      </thead>
-      <tbody id="t4-income-table-body"></tbody>
-    </table>
-    <p style="font-size:11px;color:var(--text-light);margin-top:8px;">※ 総務省の目安に基づく簡易計算値です。</p>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 5: 借り換えシミュレーター
-     ========================================================= -->
-<div id="htab-5" class="htab-content">
-  <div class="preset-row">
-    <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" onclick="t5_applyPreset('fixed2var')">2021年固定→変動</button>
-    <button class="preset-btn" onclick="t5_applyPreset('var2fixed')">変動→固定（金利上昇対策）</button>
-  </div>
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>現在のローン情報</h2>
-      <div class="field">
-        <div class="field-label">現在の残債<span class="field-val" id="t5-lbl-balance">3,000万円</span></div>
-        <input type="range" id="t5-sl-balance" min="500" max="8000" step="100" value="3000" oninput="t5_sync('balance',this.value);t5_calc()">
-        <div class="field-ticks"><span>500万</span><span>4,000万</span><span>8,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">現在の金利（年率）<span class="field-val" id="t5-lbl-rate1">1.5%</span></div>
-        <input type="range" id="t5-sl-rate1" min="0.1" max="4.0" step="0.05" value="1.5" oninput="t5_sync('rate1',this.value);t5_calc()">
-        <div class="field-ticks"><span>0.1%</span><span>2%</span><span>4%</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">残り返済期間<span class="field-val" id="t5-lbl-period">25年</span></div>
-        <input type="range" id="t5-sl-period" min="1" max="35" step="1" value="25" oninput="t5_sync('period',this.value);t5_calc()">
-        <div class="field-ticks"><span>1年</span><span>18年</span><span>35年</span></div>
-      </div>
-      <hr class="section-divider">
-      <div class="section-label">借り換え後の条件</div>
-      <div class="field">
-        <div class="field-label">借り換え後の金利（年率）<span class="field-val" id="t5-lbl-rate2">0.6%</span></div>
-        <input type="range" id="t5-sl-rate2" min="0.1" max="4.0" step="0.05" value="0.6" oninput="t5_sync('rate2',this.value);t5_calc()">
-        <div class="field-ticks"><span>0.1%</span><span>2%</span><span>4%</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">借り換え手数料<span class="field-val" id="t5-lbl-fee">30万円</span></div>
-        <input type="range" id="t5-sl-fee" min="0" max="100" step="5" value="30" oninput="t5_sync('fee',this.value);t5_calc()">
-        <div class="field-ticks"><span>0万</span><span>50万</span><span>100万</span></div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header greenh" id="t5-result-header">
-          <div class="result-label" id="t5-result-label">借り換えで総節約</div>
-          <div class="result-amount" id="t5-result-amount">―</div>
-          <div class="result-sub" id="t5-result-sub">手数料差し引き後の節約額</div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">現在の月返済額</span><span class="stat-v" id="t5-r-monthly1">―</span></div>
-          <div class="stat-row"><span class="stat-k">借り換え後の月返済額</span><span class="stat-v good" id="t5-r-monthly2">―</span></div>
-          <div class="stat-row"><span class="stat-k">月々の削減額</span><span class="stat-v good" id="t5-r-monthly-save">―</span></div>
-          <div class="stat-row"><span class="stat-k">手数料回収期間</span><span class="stat-v" id="t5-r-breakeven">―</span></div>
-          <div class="stat-row"><span class="stat-k">総返済額の節約</span><span class="stat-v good" id="t5-r-total-save">―</span></div>
-        </div>
-      </div>
-      <div class="chart-wrap">
-        <h3>月返済額の比較（円）</h3>
-        <canvas id="t5-refinanceChart" height="180"></canvas>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t5_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">借り換えのタイミング、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 6: 保険見直し
-     ========================================================= -->
-<div id="htab-6" class="htab-content">
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>あなたの情報を入力</h2>
-      <div class="field">
-        <div class="field-label">年齢<span class="field-val" id="t6-lbl-age">35歳</span></div>
-        <input type="range" id="t6-sl-age" min="20" max="65" step="1" value="35" oninput="t6_sync('age',this.value);t6_calc()">
-        <div class="field-ticks"><span>20歳</span><span>42歳</span><span>65歳</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">家族構成</div>
-        <div class="seg">
-          <button class="seg-btn on" id="t6-fam-single" onclick="t6_setFamily('single')">独身</button>
-          <button class="seg-btn" id="t6-fam-married" onclick="t6_setFamily('married')">既婚子なし</button>
-          <button class="seg-btn" id="t6-fam-children" onclick="t6_setFamily('children')">既婚子あり</button>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">年収<span class="field-val" id="t6-lbl-income">500万円</span></div>
-        <input type="range" id="t6-sl-income" min="200" max="1500" step="50" value="500" oninput="t6_sync('income',this.value);t6_calc()">
-        <div class="field-ticks"><span>200万</span><span>850万</span><span>1,500万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">現在の月額保険料<span class="field-val" id="t6-lbl-current">3万円</span></div>
-        <input type="range" id="t6-sl-current" min="0" max="10" step="0.5" value="3" oninput="t6_sync('current',this.value);t6_calc()">
-        <div class="field-ticks"><span>0万</span><span>5万</span><span>10万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">住居</div>
-        <div class="seg">
-          <button class="seg-btn on" id="t6-home-own" onclick="t6_setHome('own')">持ち家</button>
-          <button class="seg-btn" id="t6-home-rent" onclick="t6_setHome('rent')">賃貸</button>
-        </div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header ok" id="t6-result-header">
-          <div class="result-label" id="t6-result-label">診断結果</div>
-          <div class="result-amount" id="t6-result-amount">―</div>
-          <div class="result-sub" id="t6-result-sub">適正保険料の目安</div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">適正保険料（月額目安）</span><span class="stat-v" id="t6-r-proper">―</span></div>
-          <div class="stat-row"><span class="stat-k">現在の月額保険料</span><span class="stat-v" id="t6-r-current">―</span></div>
-          <div class="stat-row"><span class="stat-k">差額（月）</span><span class="stat-v" id="t6-r-diff">―</span></div>
-          <div class="bar-label">払いすぎ度</div>
-          <div class="bar-track"><div class="bar-fill" id="t6-over-bar" style="width:50%;background:var(--amber);"></div></div>
-          <div class="save-box ok" id="t6-save-box">診断中...</div>
-        </div>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t6_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">保険の見直し、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 7: FIRE達成年齢
-     ========================================================= -->
-<div id="htab-7" class="htab-content">
-  <div class="preset-row">
-    <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" onclick="t7_applyPreset('dual')">30代・共働き</button>
-    <button class="preset-btn" onclick="t7_applyPreset('side')">サイドFIRE狙い</button>
-    <button class="preset-btn" onclick="t7_applyPreset('semi')">セミリタイア</button>
-  </div>
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>あなたの情報を入力</h2>
-      <div class="field">
-        <div class="field-label">現在の年齢<span class="field-val" id="t7-lbl-age">30歳</span></div>
-        <input type="range" id="t7-sl-age" min="20" max="55" step="1" value="30" oninput="t7_sync('age',this.value);t7_calc()">
-        <div class="field-ticks"><span>20歳</span><span>37歳</span><span>55歳</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">現在の資産<span class="field-val" id="t7-lbl-assets">500万円</span></div>
-        <input type="range" id="t7-sl-assets" min="0" max="5000" step="50" value="500" oninput="t7_sync('assets',this.value);t7_calc()">
-        <div class="field-ticks"><span>0万</span><span>2,500万</span><span>5,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">年間収入<span class="field-val" id="t7-lbl-income">600万円</span></div>
-        <input type="range" id="t7-sl-income" min="200" max="2000" step="50" value="600" oninput="t7_sync('income',this.value);t7_calc()">
-        <div class="field-ticks"><span>200万</span><span>1,100万</span><span>2,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">年間支出<span class="field-val" id="t7-lbl-expense">400万円</span></div>
-        <input type="range" id="t7-sl-expense" min="100" max="1000" step="50" value="400" oninput="t7_sync('expense',this.value);t7_calc()">
-        <div class="field-ticks"><span>100万</span><span>550万</span><span>1,000万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">想定利回り（年率）<span class="field-val" id="t7-lbl-rate">5%</span></div>
-        <input type="range" id="t7-sl-rate" min="1" max="8" step="0.5" value="5" oninput="t7_sync('rate',this.value);t7_calc()">
-        <div class="field-ticks"><span>1%</span><span>4.5%</span><span>8%</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">FIRE後の年間生活費<span class="field-val" id="t7-lbl-fire-expense">300万円</span></div>
-        <input type="range" id="t7-sl-fire-expense" min="100" max="500" step="50" value="300" oninput="t7_sync('fire-expense',this.value);t7_calc()">
-        <div class="field-ticks"><span>100万</span><span>300万</span><span>500万</span></div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header greenh">
-          <div class="result-label" id="t7-fire-label">FIRE達成年齢</div>
-          <div class="fire-age" id="t7-fire-age-display">―<span class="fire-age-unit">歳</span></div>
-          <div class="result-sub" id="t7-fire-sub">―</div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">あと何年</span><span class="stat-v good" id="t7-r-years">―</span></div>
-          <div class="stat-row"><span class="stat-k">FIRE必要資産（4%ルール）</span><span class="stat-v" id="t7-r-target">―</span></div>
-          <div class="stat-row"><span class="stat-k">年間貯蓄額</span><span class="stat-v" id="t7-r-saving">―</span></div>
-          <div class="stat-row"><span class="stat-k">貯蓄率</span><span class="stat-v" id="t7-r-rate">―</span></div>
-        </div>
-      </div>
-      <div class="chart-wrap">
-        <h3>資産推移 + FIRE達成ライン</h3>
-        <canvas id="t7-fireChart" height="220"></canvas>
-      </div>
-      <div class="sensitivity-section">
-        <h3>利回り別 感度分析</h3>
-        <table class="sens-table">
-          <thead><tr><th>利回り</th><th>FIRE達成年齢</th><th>あと何年</th><th>必要資産</th></tr></thead>
-          <tbody id="t7-sens-body"></tbody>
-        </table>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t7_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">FIREプランをFPと一緒に作りませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-     TAB 8: 教育費積立
-     ========================================================= -->
-<div id="htab-8" class="htab-content">
-  <div class="preset-row">
-    <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" onclick="t8_applyPreset('allpub')">0歳から全公立</button>
-    <button class="preset-btn" onclick="t8_applyPreset('chuuju')">3歳から中学受験</button>
-  </div>
-  <div class="tool-grid">
-    <div class="input-panel">
-      <h2>お子様の情報を入力</h2>
-      <div class="field">
-        <div class="field-label">子供の年齢<span class="field-val" id="t8-lbl-child-age">0歳</span></div>
-        <input type="range" id="t8-sl-child-age" min="0" max="15" step="1" value="0" oninput="t8_sync('child-age',this.value);t8_calc()">
-        <div class="field-ticks"><span>0歳</span><span>7歳</span><span>15歳</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">進学コース</div>
-        <div class="course-grid">
-          <button class="seg-btn on" id="t8-course-allpub" onclick="t8_setCourse('allpub')">全公立</button>
-          <button class="seg-btn" id="t8-course-hispri" onclick="t8_setCourse('hispri')">高校から私立</button>
-          <button class="seg-btn" id="t8-course-unipri" onclick="t8_setCourse('unipri')">大学から私立</button>
-          <button class="seg-btn" id="t8-course-allpri" onclick="t8_setCourse('allpri')">全私立</button>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">現在の教育積立額<span class="field-val" id="t8-lbl-savings">0万円</span></div>
-        <input type="range" id="t8-sl-savings" min="0" max="500" step="10" value="0" oninput="t8_sync('savings',this.value);t8_calc()">
-        <div class="field-ticks"><span>0万</span><span>250万</span><span>500万</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label">毎月の積立額<span class="field-val" id="t8-lbl-monthly">1万円</span></div>
-        <input type="range" id="t8-sl-monthly" min="0" max="10" step="0.5" value="1" oninput="t8_sync('monthly',this.value);t8_calc()">
-        <div class="field-ticks"><span>0万</span><span>5万</span><span>10万</span></div>
-      </div>
-    </div>
-    <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header greenh">
-          <div class="result-label" id="t8-result-label" style="color:var(--green)">大学卒業まで必要な教育費</div>
-          <div class="result-amount" id="t8-result-amount" style="color:var(--green)">―</div>
-          <div class="result-sub" id="t8-result-sub"></div>
-        </div>
-        <div class="result-body">
-          <div class="stat-row"><span class="stat-k">現在の積立額</span><span class="stat-v" id="t8-r-savings">―</span></div>
-          <div class="stat-row"><span class="stat-k">積立見込み（大学入学まで）</span><span class="stat-v" id="t8-r-future">―</span></div>
-          <div class="stat-row"><span class="stat-k">不足額</span><span class="stat-v bad" id="t8-r-gap">―</span></div>
-          <div class="stat-row"><span class="stat-k">必要な月積立額（目安）</span><span class="stat-v good" id="t8-r-monthly-need">―</span></div>
-        </div>
-      </div>
-      <div class="chart-wrap">
-        <h3>積立推移と費用発生タイミング（万円）</h3>
-        <canvas id="t8-eduChart" height="220"></canvas>
-      </div>
-      <div class="cost-table-section">
-        <h3>進学コース別 費用内訳（文科省統計ベース）</h3>
-        <table class="cost-table">
-          <thead><tr><th>学校種別</th><th>公立（年）</th><th>私立（年）</th><th>選択中</th></tr></thead>
-          <tbody id="t8-cost-table-body"></tbody>
-        </table>
-        <p style="font-size:11px;color:var(--text-light);margin-top:6px;">※ 文部科学省「子供の学習費調査」等に基づく参考値。</p>
-      </div>
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="t8_shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
-        <div class="cta-contact-text">教育費の積立プラン、FPと一緒に考えませんか？<br>無料でご相談を承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /.hub-body -->
 
 <div style="max-width:920px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">
   【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。
@@ -778,345 +227,9 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 
 <script src="/nav.js" defer></script>
 <script>
-/* ── Tab switching ── */
-var tabInited = {1: false};
-function showTab(n) {
-  document.querySelectorAll('.htab-content').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
-  document.querySelectorAll('.htab-btn').forEach(function(el,i){ el.classList.toggle('active', i===n-1); });
-  var el = document.getElementById('htab-'+n);
-  el.style.display = 'block';
-  el.classList.add('active');
-  if (!tabInited[n]) {
-    tabInited[n] = true;
-    var calcs = {2:t2_calc,3:t3_calc,4:t4_calc,5:t5_calc,6:t6_calc,7:t7_calc,8:t8_calc};
-    if (calcs[n]) calcs[n]();
-  }
-}
-
-/* ── Tab 1: 資産シミュレーター ── */
-var t1_chart = null;
-var T1_PRESETS = {
-  '30s':  {initial:200,  monthly:5,   rate:5,   years:30},
-  '40s':  {initial:500,  monthly:8,   rate:4,   years:20},
-  'nisa': {initial:0,    monthly:10,  rate:5,   years:20}
-};
-function t1_applyPreset(key) {
-  var p = T1_PRESETS[key];
-  document.getElementById('t1-sl-initial').value = p.initial;
-  document.getElementById('t1-sl-monthly').value = p.monthly;
-  document.getElementById('t1-sl-rate').value    = p.rate;
-  document.getElementById('t1-sl-years').value   = p.years;
-  t1_syncLabel('initial', p.initial);
-  t1_syncLabel('monthly', p.monthly);
-  t1_syncLabel('rate',    p.rate);
-  t1_syncLabel('years',   p.years);
-  ['t1-pre-30','t1-pre-40','t1-pre-nisa'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
-  var map = {'30s':'t1-pre-30','40s':'t1-pre-40','nisa':'t1-pre-nisa'};
-  document.getElementById(map[key]).classList.add('active');
-  t1_calc();
-}
-function t1_syncLabel(key, val) {
-  val = parseFloat(val);
-  if (key==='initial') document.getElementById('t1-lbl-initial').textContent = val.toLocaleString()+'万円';
-  else if (key==='monthly') document.getElementById('t1-lbl-monthly').textContent = (val%1===0?val:val.toFixed(1))+'万円';
-  else if (key==='rate') document.getElementById('t1-lbl-rate').textContent = parseFloat(val).toFixed(1)+'%';
-  else if (key==='years') document.getElementById('t1-lbl-years').textContent = val+'年';
-}
-function t1_calcFV(initialMan, monthlyMan, rateAnnual, years) {
-  var total = initialMan * 10000, monthly = monthlyMan * 10000;
-  var r = rateAnnual / 100 / 12, n = years * 12;
-  for (var i=0;i<n;i++) total = total*(1+r)+monthly;
-  return Math.round(total/10000);
-}
-function t1_calc() {
-  var initial = parseFloat(document.getElementById('t1-sl-initial').value);
-  var monthly = parseFloat(document.getElementById('t1-sl-monthly').value);
-  var rate    = parseFloat(document.getElementById('t1-sl-rate').value);
-  var years   = parseInt(document.getElementById('t1-sl-years').value);
-  var totalMan     = t1_calcFV(initial, monthly, rate, years);
-  var principalMan = Math.round(initial + monthly*12*years);
-  var gainMan      = totalMan - principalMan;
-  var mult         = principalMan>0 ? (totalMan/principalMan).toFixed(1) : '―';
-  var gainRatio    = principalMan>0 ? Math.round(gainMan/totalMan*100) : 0;
-  document.getElementById('t1-r-years-label').textContent = years+'年後の資産';
-  document.getElementById('t1-r-total').textContent       = totalMan.toLocaleString();
-  document.getElementById('t1-r-mult').textContent        = '元本の'+mult+'倍';
-  document.getElementById('t1-r-principal').textContent   = principalMan.toLocaleString()+'万円';
-  document.getElementById('t1-r-gain').textContent        = gainMan.toLocaleString()+'万円';
-  document.getElementById('t1-r-ratio').textContent       = gainRatio+'%';
-  t1_updateChart(initial, monthly, rate, years);
-}
-function t1_updateChart(initial, monthly, rate, years) {
-  var steps=[], maxStep=4, stepSize=Math.max(5,Math.round(years/maxStep/5)*5);
-  for(var y=stepSize;y<=years;y+=stepSize) steps.push(y);
-  if(steps[steps.length-1]!==years) steps.push(years);
-  var labels     = steps.map(function(y){return y+'年後';});
-  var principals = steps.map(function(y){return Math.round(initial+monthly*12*y);});
-  var gains      = steps.map(function(y){return Math.max(0,t1_calcFV(initial,monthly,rate,y)-Math.round(initial+monthly*12*y));});
-  if(t1_chart){t1_chart.data.labels=labels;t1_chart.data.datasets[0].data=principals;t1_chart.data.datasets[1].data=gains;t1_chart.update();return;}
-  var ctx = document.getElementById('t1-assetChart').getContext('2d');
-  t1_chart = new Chart(ctx, {
-    type:'bar',
-    data:{labels:labels,datasets:[
-      {label:'元本',data:principals,backgroundColor:'#86efac',borderRadius:4,borderSkipped:false},
-      {label:'運用益',data:gains,backgroundColor:'#1a7a4a',borderRadius:4,borderSkipped:false}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11},boxWidth:12,padding:12}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y.toLocaleString()+'万円';}}}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11}}},y:{stacked:true,ticks:{font:{size:10},callback:function(v){return v.toLocaleString()+'万';}},grid:{color:'#f1f5f9'}}}}
-  });
-}
-function t1_shareResult() {
-  var total=document.getElementById('t1-r-total').textContent;
-  var years=document.getElementById('t1-sl-years').value;
-  var rate=document.getElementById('t1-sl-rate').value;
-  var text='資産シミュレーターで試してみました！\n'+years+'年後の資産：約'+total+'万円（想定利回り'+rate+'%）';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');
-}
-
-/* ── Tab 2: 老後資金 ── */
-var t2_chart = null;
-var t2_sliders = {age:40,retire:65,expense:25,pension:15,savings:500,lifespan:30};
-function t2_labelOf(key,val){
-  if(key==='age'||key==='retire') return val+'歳';
-  if(key==='savings') return parseInt(val).toLocaleString()+'万円';
-  if(key==='lifespan') return val+'年';
-  return val+'万円';
-}
-function t2_sync(key,val){t2_sliders[key]=parseFloat(val);document.getElementById('t2-lbl-'+key).textContent=t2_labelOf(key,val);}
-function t2_fmt(v){if(isNaN(v)||!isFinite(v))return'―';if(Math.abs(v)>=10000)return(v/10000).toFixed(1)+'億円';return Math.round(Math.abs(v)).toLocaleString()+'万円';}
-function t2_calc() {
-  var age=t2_sliders.age,retire=t2_sliders.retire,expense=t2_sliders.expense,pension=t2_sliders.pension,savings=t2_sliders.savings,lifespan=t2_sliders.lifespan;
-  var totalNeeded=expense*12*lifespan,totalPension=pension*12*lifespan,gap=totalNeeded-totalPension-savings;
-  var yearsToRetire=Math.max(retire-age,0),monthsToRetire=yearsToRetire*12;
-  var monthlyNeed=(gap>0&&monthsToRetire>0)?gap/monthsToRetire:0;
-  var header=document.getElementById('t2-result-header'),lbl=document.getElementById('t2-result-label'),amt=document.getElementById('t2-result-amount'),sub=document.getElementById('t2-result-sub');
-  if(gap>0){header.className='result-header deficit';lbl.textContent='老後資金の不足額';amt.textContent=t2_fmt(gap);sub.textContent='今から準備が必要です';}
-  else{header.className='result-header surplus';lbl.textContent='老後資金の余裕額';amt.textContent=t2_fmt(Math.abs(gap));sub.textContent='現状のプランで十分です';}
-  document.getElementById('t2-r-total').textContent=t2_fmt(totalNeeded);
-  document.getElementById('t2-r-pension').textContent=t2_fmt(totalPension);
-  document.getElementById('t2-r-savings').textContent=t2_fmt(savings);
-  var gapEl=document.getElementById('t2-r-gap');
-  gapEl.textContent=(gap>0?'△':'')+t2_fmt(Math.abs(gap));
-  gapEl.className='stat-v '+(gap>0?'bad':'good');
-  document.getElementById('t2-r-monthly').textContent=gap>0?t2_fmt(monthlyNeed)+'/月':'積立不要';
-  var ctx=document.getElementById('t2-retirementChart').getContext('2d');
-  if(t2_chart) t2_chart.destroy();
-  t2_chart=new Chart(ctx,{type:'bar',data:{labels:['必要総額','年金総額','現在の貯蓄','不足額'],datasets:[{data:[totalNeeded,totalPension,savings,Math.max(gap,0)],backgroundColor:['#64748b','#22c55e','#3b82f6','#ef4444'],borderRadius:8}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return v>=10000?(v/10000).toFixed(0)+'億':v+'万';}}}}}});
-}
-function t2_applyPreset(name){
-  var p={couple:{age:50,retire:65,expense:25,pension:22,savings:500,lifespan:30},single:{age:40,retire:65,expense:15,pension:10,savings:300,lifespan:35},comfort:{age:45,retire:60,expense:40,pension:20,savings:1000,lifespan:30}}[name];
-  Object.keys(p).forEach(function(k){t2_sliders[k]=p[k];var sl=document.getElementById('t2-sl-'+k);if(sl)sl.value=p[k];document.getElementById('t2-lbl-'+k).textContent=t2_labelOf(k,p[k]);});
-  t2_calc();
-}
-function t2_shareX(){var gap=document.getElementById('t2-result-amount').textContent;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('老後資金シミュレーターで計算したら'+gap+'！ #ライフアセットオフィス')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Tab 3: NISA・iDeCo ── */
-var t3_chart = null;
-var t3_sliders = {income:500,monthly:3,years:20,rate:5};
-var t3_currentTab = 'nisa';
-function t3_labelOf(key,val){if(key==='income')return parseInt(val).toLocaleString()+'万円';if(key==='monthly')return val+'万円';if(key==='years')return val+'年';if(key==='rate')return val+'%';return val;}
-function t3_sync(key,val){t3_sliders[key]=parseFloat(val);document.getElementById('t3-lbl-'+key).textContent=t3_labelOf(key,val);}
-function t3_setTab(tab){
-  t3_currentTab=tab;
-  ['nisa','ideco','taxable'].forEach(function(t){document.getElementById('t3-tab-'+t).className='seg-btn'+(t===tab?' on':'');});
-  document.getElementById('t3-ideco-row').style.display=tab==='ideco'?'':'none';
-  document.getElementById('t3-ideco-tax-row').style.display=tab==='ideco'?'':'none';
-  t3_calc();
-}
-function t3_calcFV(monthly,years,rate){var r=rate/100/12,n=years*12;if(r===0)return monthly*n;return monthly*((Math.pow(1+r,n)-1)/r);}
-function t3_taxRate(income){if(income<195)return 0.05;if(income<330)return 0.10;if(income<695)return 0.20;if(income<900)return 0.23;if(income<1800)return 0.33;return 0.40;}
-function t3_fmt(v){if(isNaN(v)||!isFinite(v))return'―';if(Math.abs(v)>=10000)return(v/10000).toFixed(2)+'億円';return Math.round(v).toLocaleString()+'万円';}
-function t3_calc(){
-  var monthly=t3_sliders.monthly,years=t3_sliders.years,rate=t3_sliders.rate,income=t3_sliders.income;
-  var principal=monthly*years*12,grossFV=t3_calcFV(monthly,years,rate),grossGain=grossFV-principal;
-  var nisaFV=grossFV,taxableGain=grossGain*(1-0.20315),taxableFV=principal+taxableGain,idecoFV=grossFV;
-  var selectedFV,selectedGain;
-  if(t3_currentTab==='nisa'){selectedFV=nisaFV;selectedGain=grossGain;}
-  else if(t3_currentTab==='ideco'){selectedFV=idecoFV;selectedGain=grossGain;}
-  else{selectedFV=taxableFV;selectedGain=taxableGain;}
-  var diff=selectedFV-taxableFV;
-  document.getElementById('t3-account-label').textContent=(t3_currentTab==='nisa'?'NISA':t3_currentTab==='ideco'?'iDeCo':'課税口座')+' 運用後の資産';
-  document.getElementById('t3-result-amount').textContent=t3_fmt(selectedFV);
-  document.getElementById('t3-result-sub').textContent='課税口座比: +'+t3_fmt(Math.max(diff,0));
-  document.getElementById('t3-r-principal').textContent=t3_fmt(principal);
-  document.getElementById('t3-r-gain').textContent=t3_fmt(selectedGain);
-  var diffEl=document.getElementById('t3-r-diff');diffEl.textContent=diff>=0?'+'+t3_fmt(diff):t3_fmt(diff);diffEl.className='stat-v '+(diff>=0?'good':'warn');
-  if(t3_currentTab==='ideco'){var annualDed=monthly*12,tr=t3_taxRate(income),annualTax=annualDed*tr;document.getElementById('t3-r-deduction').textContent=t3_fmt(annualDed)+'/年';document.getElementById('t3-r-ideco-tax').textContent=t3_fmt(annualTax)+'/年';}
-  var ctx=document.getElementById('t3-nisaChart').getContext('2d');
-  if(t3_chart) t3_chart.destroy();
-  var labels=[],nisaData=[],idecoData=[],taxData=[];
-  for(var y=1;y<=years;y++){labels.push(y+'年後');var gfv=t3_calcFV(monthly,y,rate),p=monthly*y*12;nisaData.push(Math.round(gfv));idecoData.push(Math.round(gfv));taxData.push(Math.round(p+(gfv-p)*(1-0.20315)));}
-  var step=Math.max(1,Math.floor(years/8));
-  var fL=labels.filter(function(_,i){return(i+1)%step===0;}),fN=nisaData.filter(function(_,i){return(i+1)%step===0;}),fI=idecoData.filter(function(_,i){return(i+1)%step===0;}),fT=taxData.filter(function(_,i){return(i+1)%step===0;});
-  t3_chart=new Chart(ctx,{type:'line',data:{labels:fL,datasets:[{label:'NISA',data:fN,borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.08)',tension:0.3,fill:false},{label:'iDeCo',data:fI,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.08)',tension:0.3,fill:false,borderDash:[5,3]},{label:'課税口座',data:fT,borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,0.08)',tension:0.3,fill:false}]},options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:function(v){return(v/10000>=1?(v/10000).toFixed(0)+'億':v)+'万';}}}}}});
-}
-function t3_applyPreset(name){var p={salary:{income:500,monthly:3,years:20,rate:5},high:{income:1200,monthly:8,years:25,rate:6},housewife:{income:200,monthly:2,years:30,rate:4}}[name];Object.keys(p).forEach(function(k){t3_sliders[k]=p[k];var sl=document.getElementById('t3-sl-'+k);if(sl)sl.value=p[k];document.getElementById('t3-lbl-'+k).textContent=t3_labelOf(k,p[k]);});t3_calc();}
-function t3_shareX(){var amt=document.getElementById('t3-result-amount').textContent;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('NISA・iDeCoシミュレーターで計算したら'+amt+'！ #ライフアセットオフィス')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Tab 4: ふるさと納税 ── */
-var t4_income=500, t4_family='single', t4_hloan=0;
-function t4_sync(key,val){if(key==='income'){t4_income=parseFloat(val);document.getElementById('t4-lbl-income').textContent=parseInt(val).toLocaleString()+'万円';}if(key==='hloan'){t4_hloan=parseFloat(val);document.getElementById('t4-lbl-hloan').textContent=val+'万円';}}
-function t4_setFamily(f){t4_family=f;['single','couple','c1','c2','c3'].forEach(function(id){document.getElementById('t4-fam-'+id).className='seg-btn'+(id===f?' on':'');});t4_calc();}
-function t4_personalDeduction(inc){if(inc<=162.5)return 650000;if(inc<=180)return inc*10000*0.4;if(inc<=360)return inc*10000*0.3+180000;if(inc<=660)return inc*10000*0.2+540000;if(inc<=850)return inc*10000*0.1+1200000;return 1950000;}
-function t4_familyDeduction(fam){var base=480000;if(fam==='single')return base;if(fam==='couple')return base+380000;if(fam==='c1')return base+380000*2;if(fam==='c2')return base+380000*3;if(fam==='c3')return base+380000*4;return base;}
-function t4_getTaxRate(taxable){if(taxable<=1950000)return 0.05;if(taxable<=3300000)return 0.10;if(taxable<=6950000)return 0.20;if(taxable<=9000000)return 0.23;if(taxable<=18000000)return 0.33;return 0.40;}
-function t4_calcLimit(inc,fam,hl){var ded=t4_personalDeduction(inc),famDed=t4_familyDeduction(fam),taxable=inc*10000-ded-famDed;if(taxable<0)taxable=0;var itr=t4_getTaxRate(taxable),ltr=0.10,limit=taxable*ltr*0.2/(1-itr*1.021-ltr*0.2);limit=limit/10000;limit=Math.max(0,limit-hl*0.3);return Math.round(limit);}
-function t4_calc(){
-  var limit=t4_calcLimit(t4_income,t4_family,t4_hloan);
-  document.getElementById('t4-result-amount').textContent=limit.toLocaleString()+'円';
-  document.getElementById('t4-r-income-tax').textContent=Math.round(limit*0.10).toLocaleString()+'円';
-  document.getElementById('t4-r-local-tax').textContent=Math.round(limit*0.88).toLocaleString()+'円';
-  document.getElementById('t4-r-benefit').textContent='約'+Math.round(limit*0.30).toLocaleString()+'円相当';
-  var rows=[300,400,500,700,1000,1500],tbody=document.getElementById('t4-income-table-body'),html='';
-  rows.forEach(function(inc){var hl=Math.abs(inc-t4_income)<80?' class="highlight"':'';html+='<tr'+hl+'><td>'+inc+'万円</td><td>'+t4_calcLimit(inc,'single',0).toLocaleString()+'円</td><td>'+t4_calcLimit(inc,'couple',0).toLocaleString()+'円</td><td>'+t4_calcLimit(inc,'c1',0).toLocaleString()+'円</td></tr>';});
-  tbody.innerHTML=html;
-}
-function t4_shareX(){var amt=document.getElementById('t4-result-amount').textContent;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('ふるさと納税の控除上限額が'+amt+'でした！ #ライフアセットオフィス')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Tab 5: 借り換え ── */
-var t5_chart = null;
-var t5_sliders = {balance:3000,rate1:1.5,period:25,rate2:0.6,fee:30};
-function t5_labelOf(key,val){if(key==='balance')return parseInt(val).toLocaleString()+'万円';if(key==='rate1'||key==='rate2')return parseFloat(val).toFixed(2)+'%';if(key==='period')return val+'年';if(key==='fee')return val+'万円';return val;}
-function t5_sync(key,val){t5_sliders[key]=parseFloat(val);document.getElementById('t5-lbl-'+key).textContent=t5_labelOf(key,val);}
-function t5_monthly(principal,annualRate,years){var r=annualRate/100/12,n=years*12;if(r===0)return principal*10000/n;return principal*10000*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
-function t5_fmtYen(v){if(isNaN(v)||!isFinite(v))return'―';return Math.round(v).toLocaleString()+'円';}
-function t5_fmtMan(v){if(isNaN(v)||!isFinite(v))return'―';return Math.round(v/10000).toLocaleString()+'万円';}
-function t5_calc(){
-  var bal=t5_sliders.balance,r1=t5_sliders.rate1,r2=t5_sliders.rate2,period=t5_sliders.period,fee=t5_sliders.fee;
-  var m1=t5_monthly(bal,r1,period),m2=t5_monthly(bal,r2,period),monthlySave=m1-m2;
-  var totalSave=(m1-m2)*period*12-fee*10000;
-  var breakeven=monthlySave>0?Math.ceil((fee*10000)/monthlySave):Infinity;
-  var header=document.getElementById('t5-result-header'),lbl=document.getElementById('t5-result-label'),amt=document.getElementById('t5-result-amount');
-  if(totalSave>0){header.className='result-header greenh';lbl.style.color='var(--green)';lbl.textContent='借り換えで総節約';amt.style.color='var(--green)';amt.textContent=t5_fmtMan(totalSave);}
-  else{header.className='result-header redh';lbl.style.color='var(--red)';lbl.textContent='借り換えは割高';amt.style.color='var(--red)';amt.textContent=t5_fmtMan(Math.abs(totalSave))+'損';}
-  document.getElementById('t5-r-monthly1').textContent=t5_fmtYen(m1);
-  document.getElementById('t5-r-monthly2').textContent=t5_fmtYen(m2);
-  var saveEl=document.getElementById('t5-r-monthly-save');saveEl.textContent=(monthlySave>=0?'-':'+')+t5_fmtYen(Math.abs(monthlySave));saveEl.className='stat-v '+(monthlySave>0?'good':'bad');
-  document.getElementById('t5-r-breakeven').textContent=isFinite(breakeven)?Math.floor(breakeven/12)+'年'+(breakeven%12)+'ヶ月':'回収不可';
-  var totalEl=document.getElementById('t5-r-total-save');totalEl.textContent=t5_fmtMan(Math.abs(totalSave));totalEl.className='stat-v '+(totalSave>0?'good':'bad');
-  var ctx=document.getElementById('t5-refinanceChart').getContext('2d');
-  if(t5_chart) t5_chart.destroy();
-  t5_chart=new Chart(ctx,{type:'bar',data:{labels:['借り換え前（月返済）','借り換え後（月返済）'],datasets:[{data:[Math.round(m1),Math.round(m2)],backgroundColor:['#94a3b8','#22c55e'],borderRadius:8}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return(v/10000).toFixed(1)+'万';}}}}}});
-}
-function t5_applyPreset(name){var p={fixed2var:{balance:3000,rate1:1.5,period:25,rate2:0.6,fee:30},var2fixed:{balance:2500,rate1:0.5,period:20,rate2:1.8,fee:50}}[name];Object.keys(p).forEach(function(k){t5_sliders[k]=p[k];var sl=document.getElementById('t5-sl-'+k);if(sl)sl.value=p[k];document.getElementById('t5-lbl-'+k).textContent=t5_labelOf(k,p[k]);});t5_calc();}
-function t5_shareX(){var save=document.getElementById('t5-result-amount').textContent;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('住宅ローン借り換えで'+save+'の節約！ #ライフアセットオフィス')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Tab 6: 保険見直し ── */
-var t6_age=35, t6_family='single', t6_income=500, t6_currentPremium=3, t6_homeOwn=true;
-function t6_sync(key,val){if(key==='age'){t6_age=parseFloat(val);document.getElementById('t6-lbl-age').textContent=val+'歳';}if(key==='income'){t6_income=parseFloat(val);document.getElementById('t6-lbl-income').textContent=parseInt(val).toLocaleString()+'万円';}if(key==='current'){t6_currentPremium=parseFloat(val);document.getElementById('t6-lbl-current').textContent=val+'万円';}}
-function t6_setFamily(f){t6_family=f;['single','married','children'].forEach(function(id){document.getElementById('t6-fam-'+id).className='seg-btn'+(id===f?' on':'');});t6_calc();}
-function t6_setHome(h){t6_homeOwn=(h==='own');document.getElementById('t6-home-own').className='seg-btn'+(t6_homeOwn?' on':'');document.getElementById('t6-home-rent').className='seg-btn'+(!t6_homeOwn?' on':'');t6_calc();}
-function t6_calcProper(age,family,income,homeOwn){var base=income*10000*0.05/12,ageFactor=age<30?0.7:age<40?0.9:age<50?1.1:1.3,famFactor=family==='single'?0.6:family==='married'?1.0:1.5,homeFactor=homeOwn?0.85:1.1;return base*ageFactor*famFactor*homeFactor/10000;}
-function t6_calc(){
-  var proper=t6_calcProper(t6_age,t6_family,t6_income,t6_homeOwn),diff=t6_currentPremium-proper,ratio=proper>0?(t6_currentPremium/proper):1,barPct=Math.min(ratio*50,100);
-  var header=document.getElementById('t6-result-header'),lbl=document.getElementById('t6-result-label'),amt=document.getElementById('t6-result-amount'),sub=document.getElementById('t6-result-sub'),bar=document.getElementById('t6-over-bar'),saveBox=document.getElementById('t6-save-box'),diffEl=document.getElementById('t6-r-diff');
-  document.getElementById('t6-r-proper').textContent=proper.toFixed(1)+'万円/月';
-  document.getElementById('t6-r-current').textContent=t6_currentPremium.toFixed(1)+'万円/月';
-  diffEl.textContent=diff>=0?'+'+diff.toFixed(1)+'万円':diff.toFixed(1)+'万円';
-  amt.textContent=t6_currentPremium.toFixed(1)+'万円/月';
-  sub.textContent='適正目安の'+(ratio*100).toFixed(0)+'%';
-  bar.style.width=Math.min(barPct,100)+'%';
-  if(ratio>1.3){header.className='result-header over';lbl.textContent='払いすぎの可能性あり';bar.style.background='var(--red)';diffEl.className='stat-v bad';saveBox.className='save-box over';saveBox.textContent='年間約'+(diff*12).toFixed(0)+'万円の節約余地あり';}
-  else if(ratio>1.1){header.className='result-header warn';lbl.textContent='やや払いすぎかも';bar.style.background='var(--amber)';diffEl.className='stat-v warn';saveBox.className='save-box warn';saveBox.textContent='見直しで月'+(diff*10000).toFixed(0)+'円の節約余地があります';}
-  else{header.className='result-header ok';lbl.textContent='適正範囲内です';bar.style.background='var(--green)';diffEl.className='stat-v good';saveBox.className='save-box ok';saveBox.textContent='適正範囲内です。現在の保険内容を維持しましょう。';}
-}
-function t6_shareX(){var label=document.getElementById('t6-result-label').textContent;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('保険料見直し診断：「'+label+'」！ #ライフアセットオフィス')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Tab 7: FIRE ── */
-var t7_chart = null;
-var t7_sliders = {age:30,assets:500,income:600,expense:400,rate:5,'fire-expense':300};
-function t7_labelOf(key,val){if(key==='age')return val+'歳';if(key==='assets'||key==='income'||key==='expense'||key==='fire-expense')return parseInt(val).toLocaleString()+'万円';if(key==='rate')return val+'%';return val;}
-function t7_sync(key,val){t7_sliders[key]=parseFloat(val);document.getElementById('t7-lbl-'+key).textContent=t7_labelOf(key,val);}
-function t7_calcFIRE(curAge,assets,income,expense,rate,fireExp){var target=fireExp/0.04,annualSaving=income-expense;if(annualSaving<=0&&assets<target)return{age:null,years:null,target:target};var cur=assets,r=rate/100;for(var y=0;y<=80;y++){if(cur>=target)return{age:curAge+y,years:y,target:target,assets:cur};cur=cur*(1+r)+annualSaving;}return{age:null,years:null,target:target};}
-function t7_fmtMan(v){if(v==null||isNaN(v)||!isFinite(v))return'―';if(Math.abs(v)>=10000)return(v/10000).toFixed(1)+'億円';return Math.round(v).toLocaleString()+'万円';}
-function t7_calc(){
-  var age=t7_sliders.age,assets=t7_sliders.assets,income=t7_sliders.income,expense=t7_sliders.expense,rate=t7_sliders.rate,fe=t7_sliders['fire-expense'];
-  var result=t7_calcFIRE(age,assets,income,expense,rate,fe),annualSaving=income-expense,savingRate=income>0?(annualSaving/income*100):0;
-  if(result.age){document.getElementById('t7-fire-label').textContent='FIRE達成年齢';document.getElementById('t7-fire-age-display').innerHTML=result.age+'<span class="fire-age-unit">歳</span>';document.getElementById('t7-fire-sub').textContent='今から'+result.years+'年後にFIREできます！';document.getElementById('t7-r-years').textContent=result.years+'年後';}
-  else{document.getElementById('t7-fire-label').textContent='収支を見直してください';document.getElementById('t7-fire-age-display').innerHTML='―';document.getElementById('t7-fire-sub').textContent='現在の条件ではFIREは難しいです';document.getElementById('t7-r-years').textContent='―';}
-  document.getElementById('t7-r-target').textContent=t7_fmtMan(result.target);
-  document.getElementById('t7-r-saving').textContent=t7_fmtMan(annualSaving)+'/年';
-  document.getElementById('t7-r-rate').textContent=savingRate.toFixed(0)+'%';
-  var ctx=document.getElementById('t7-fireChart').getContext('2d');
-  if(t7_chart) t7_chart.destroy();
-  var labels=[],data=[],targetLine=[],cur=assets,r=rate/100,maxYears=Math.min(Math.max((result.age?result.age-age+5:40),15),50);
-  for(var y=0;y<=maxYears;y++){labels.push((age+y)+'歳');data.push(Math.round(cur));targetLine.push(Math.round(result.target));cur=cur*(1+r)+(income-expense);}
-  t7_chart=new Chart(ctx,{type:'line',data:{labels:labels,datasets:[{label:'資産推移',data:data,borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.08)',tension:0.3,fill:true},{label:'FIRE必要資産',data:targetLine,borderColor:'#ef4444',borderDash:[8,4],backgroundColor:'transparent',pointRadius:0}]},options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:function(v){return v>=10000?(v/10000).toFixed(0)+'億':v+'万';}}}}}});
-  var rates=[3,5,7],tbody=document.getElementById('t7-sens-body'),html='';
-  rates.forEach(function(rr){var res=t7_calcFIRE(age,assets,income,expense,rr,fe),hl=(Math.abs(rr-rate)<0.5)?' class="highlight"':'';html+='<tr'+hl+'><td>'+rr+'%</td><td>'+(res.age?res.age+'歳':'FIRE困難')+'</td><td>'+(res.years!=null?res.years+'年後':'―')+'</td><td>'+t7_fmtMan(res.target)+'</td></tr>';});
-  tbody.innerHTML=html;
-}
-function t7_applyPreset(name){var p={dual:{age:32,assets:500,income:1000,expense:600,rate:5,'fire-expense':400},side:{age:35,assets:300,income:500,expense:300,rate:5,'fire-expense':200},semi:{age:40,assets:1000,income:700,expense:450,rate:4,'fire-expense':300}}[name];Object.keys(p).forEach(function(k){t7_sliders[k]=p[k];var sl=document.getElementById('t7-sl-'+k);if(sl)sl.value=p[k];document.getElementById('t7-lbl-'+k).textContent=t7_labelOf(k,p[k]);});t7_calc();}
-function t7_shareX(){var age=document.getElementById('t7-fire-age-display').textContent.replace(/\n/g,'');window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('FIREシミュレーションで達成年齢は'+age+'！ #ライフアセットオフィス #FIRE')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Tab 8: 教育費 ── */
-var t8_chart = null;
-var T8_COSTS = {
-  kindergarten:{pub:33,pri:53,years:3},
-  elementary:  {pub:32,pri:160,years:6},
-  middle:      {pub:49,pri:140,years:3},
-  high:        {pub:46,pri:105,years:3},
-  univ:{pub:{annual:54,entrance:28},pri_lit:{annual:90,entrance:25},pri_sci:{annual:120,entrance:25}}
-};
-var T8_COURSE_MAP = {
-  allpub:{kg:'pub',el:'pub',mid:'pub',hs:'pub',univ:'pub'},
-  hispri:{kg:'pub',el:'pub',mid:'pub',hs:'pri',univ:'pri_lit'},
-  unipri:{kg:'pub',el:'pub',mid:'pub',hs:'pub',univ:'pri_lit'},
-  allpri:{kg:'pri',el:'pri',mid:'pri',hs:'pri',univ:'pri_lit'}
-};
-var t8_sliders = {'child-age':0,savings:0,monthly:1};
-var t8_currentCourse = 'allpub';
-function t8_labelOf(key,val){if(key==='child-age')return val+'歳';if(key==='savings')return parseInt(val).toLocaleString()+'万円';if(key==='monthly')return val+'万円';return val;}
-function t8_sync(key,val){t8_sliders[key]=parseFloat(val);document.getElementById('t8-lbl-'+key).textContent=t8_labelOf(key,val);}
-function t8_setCourse(c){t8_currentCourse=c;['allpub','hispri','unipri','allpri'].forEach(function(id){document.getElementById('t8-course-'+id).className='seg-btn'+(id===c?' on':'');});t8_calc();}
-function t8_calcTotalCost(childAge,course){
-  var cm=T8_COURSE_MAP[course],stages=[],total=0;
-  stages.push({name:'幼稚園',ageStart:3,ageEnd:6,annual:T8_COSTS.kindergarten[cm.kg],type:cm.kg});
-  stages.push({name:'小学校',ageStart:6,ageEnd:12,annual:T8_COSTS.elementary[cm.el],type:cm.el});
-  stages.push({name:'中学校',ageStart:12,ageEnd:15,annual:T8_COSTS.middle[cm.mid],type:cm.mid});
-  stages.push({name:'高校',ageStart:15,ageEnd:18,annual:T8_COSTS.high[cm.hs],type:cm.hs});
-  var ud=T8_COSTS.univ[cm.univ];
-  stages.push({name:'大学',ageStart:18,ageEnd:22,annual:ud.annual,type:cm.univ});
-  stages.forEach(function(s){if(s.ageEnd>childAge){var remaining=s.ageEnd-Math.max(s.ageStart,childAge);total+=s.annual*remaining;if(s.name==='大学'&&childAge<s.ageStart)total+=ud.entrance;}});
-  return{stages:stages,total:total};
-}
-function t8_calc(){
-  var childAge=t8_sliders['child-age'],savings=t8_sliders.savings,monthly=t8_sliders.monthly;
-  var yearsToUni=Math.max(18-childAge,0),totalSavingsAtUni=savings+monthly*12*yearsToUni;
-  var result=t8_calcTotalCost(childAge,t8_currentCourse),gap=result.total-totalSavingsAtUni;
-  var monthsToUni=yearsToUni*12,monthlyNeed=(gap>0&&monthsToUni>0)?gap/monthsToUni:0;
-  document.getElementById('t8-result-amount').textContent=Math.round(result.total).toLocaleString()+'万円';
-  document.getElementById('t8-result-sub').textContent=yearsToUni+'年後の大学入学まで';
-  document.getElementById('t8-r-savings').textContent=savings.toLocaleString()+'万円';
-  document.getElementById('t8-r-future').textContent=Math.round(totalSavingsAtUni).toLocaleString()+'万円';
-  var gapEl=document.getElementById('t8-r-gap');
-  if(gap>0){gapEl.textContent=Math.round(gap).toLocaleString()+'万円';gapEl.className='stat-v bad';}
-  else{gapEl.textContent='不足なし';gapEl.className='stat-v good';}
-  document.getElementById('t8-r-monthly-need').textContent=gap>0?monthlyNeed.toFixed(1)+'万円/月':'現在の積立で十分です';
-  var ctx=document.getElementById('t8-eduChart').getContext('2d');
-  if(t8_chart) t8_chart.destroy();
-  var labels=[],savingsData=[],costData=[],curSav=savings;
-  for(var a=childAge;a<=22;a++){labels.push(a+'歳');var annualCost=0;result.stages.forEach(function(s){if(a>=s.ageStart&&a<s.ageEnd){annualCost+=s.annual;if(a===s.ageStart&&s.name==='大学')annualCost+=25;}});savingsData.push(Math.round(curSav));costData.push(Math.round(annualCost));curSav+=monthly*12;}
-  t8_chart=new Chart(ctx,{type:'line',data:{labels:labels,datasets:[{label:'積立残高',data:savingsData,borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.08)',tension:0.3,fill:true,yAxisID:'y'},{label:'年間費用',data:costData,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,0.08)',type:'bar',yAxisID:'y'}]},options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:function(v){return v+'万';}}}}}});
-  var cm=T8_COURSE_MAP[t8_currentCourse],tbody=document.getElementById('t8-cost-table-body'),html='',typeMap={'幼稚園':cm.kg,'小学校':cm.el,'中学校':cm.mid,'高校':cm.hs,'大学':cm.univ};
-  [{name:'幼稚園（年）',pub:T8_COSTS.kindergarten.pub,pri:T8_COSTS.kindergarten.pri,key:'幼稚園'},{name:'小学校（年）',pub:T8_COSTS.elementary.pub,pri:T8_COSTS.elementary.pri,key:'小学校'},{name:'中学校（年）',pub:T8_COSTS.middle.pub,pri:T8_COSTS.middle.pri,key:'中学校'},{name:'高校（年）',pub:T8_COSTS.high.pub,pri:T8_COSTS.high.pri,key:'高校'},{name:'大学（年）',pub:T8_COSTS.univ.pub.annual,pri:T8_COSTS.univ.pri_lit.annual,key:'大学'}].forEach(function(row){var selType=typeMap[row.key],selLabel=(selType==='pub')?'公立 '+row.pub+'万':'私立 '+row.pri+'万';html+='<tr><td>'+row.name+'</td><td>'+row.pub+'万円</td><td>'+row.pri+'万円</td><td style="font-weight:700;color:var(--sky)">'+selLabel+'</td></tr>';});
-  tbody.innerHTML=html;
-}
-function t8_applyPreset(name){if(name==='allpub'){t8_sliders['child-age']=0;document.getElementById('t8-sl-child-age').value=0;document.getElementById('t8-lbl-child-age').textContent='0歳';t8_setCourse('allpub');}else if(name==='chuuju'){t8_sliders['child-age']=3;document.getElementById('t8-sl-child-age').value=3;document.getElementById('t8-lbl-child-age').textContent='3歳';t8_setCourse('hispri');}t8_calc();}
-function t8_shareX(){var total=document.getElementById('t8-result-amount').textContent;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('教育費シミュレーションで大学卒業まで'+total+'必要！ #ライフアセットオフィス')+'&url='+encodeURIComponent('https://lifeassetoffice.net/simulation.html'),'_blank','noopener,noreferrer');}
-
-/* ── Init ── */
-(function(){
-  t1_syncLabel('initial', document.getElementById('t1-sl-initial').value);
-  t1_syncLabel('monthly', document.getElementById('t1-sl-monthly').value);
-  t1_syncLabel('rate',    document.getElementById('t1-sl-rate').value);
-  t1_syncLabel('years',   document.getElementById('t1-sl-years').value);
-  t1_calc();
-  t6_calc();
-})();
-
 window.addEventListener('scroll', function(){
-  var el=document.documentElement;
-  document.getElementById('pb').style.width=(el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+  var el = document.documentElement;
+  document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
 });
 </script>
 </body>
