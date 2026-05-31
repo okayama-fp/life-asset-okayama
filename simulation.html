@@ -12,212 +12,414 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-  <!-- [X-Frame-Options] クリックジャッキング対策 -->
-  <meta http-equiv="X-Frame-Options" content="DENY">
-<title>資産シミュレーター｜ライフアセットオフィス</title>
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<link rel="canonical" href="https://lifeassetoffice.net/simulation.html">
+<title>資産シミュレーター｜NISA・積立・老後資金｜ライフアセットオフィス</title>
+<meta name="description" content="現在の資産・毎月の積立・利回り・運用年数を入力するだけ。将来の資産額をリアルタイムでシミュレーション。元本と運用益をグラフで確認できます。">
+<meta property="og:title" content="資産シミュレーター｜ライフアセットオフィス">
+<meta property="og:description" content="スライダーを動かすだけで将来の資産を即シミュレーション。Chart.jsグラフで元本・運用益を可視化。">
+<meta property="og:url" content="https://lifeassetoffice.net/simulation.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta name="twitter:card" content="summary">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/style.css">
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f0fdf4;
-    padding: 20px;
-    min-height: 100vh;
+  :root {
+    --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7; --sky-bg: #f0fdf4;
+    --navy: #1a3d2b; --navy-soft: #1f5c40;
+    --bg: #f8fafc; --text: #1e293b; --text-sub: #64748b; --border: #e2e8f0;
   }
-  .page-wrapper {
-    display: flex;
-    gap: 28px;
-    max-width: 760px;
-    margin: auto;
-    align-items: flex-start;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+
+  #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+
+  /* ── HERO ── */
+  .sim-hero { background: linear-gradient(135deg,#0f2d1c,#1a4a30); color: #fff; padding: 48px 24px 40px; text-align: center; }
+  .sim-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .sim-hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: hpulse 2s infinite; }
+  @keyframes hpulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
+  .sim-hero h1 { font-size: clamp(22px,4vw,36px); font-weight: 900; margin-bottom: 12px; }
+  .sim-hero h1 em { font-style: normal; background: linear-gradient(90deg,#4ade80,#86efac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .sim-hero p { font-size: 14px; color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto; }
+
+  /* ── PRESETS ── */
+  .presets-wrap { max-width: 920px; margin: 28px auto 0; padding: 0 24px; }
+  .presets-label { font-size: 11.5px; font-weight: 700; color: var(--text-sub); letter-spacing: .08em; margin-bottom: 10px; }
+  .presets { display: flex; gap: 10px; flex-wrap: wrap; }
+  .preset-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1.5px solid var(--border);
+    border-radius: 50px; padding: 9px 18px;
+    font-size: 13px; font-weight: 700; color: var(--navy);
+    cursor: pointer; font-family: inherit;
+    transition: border-color .2s, background .2s, color .2s;
   }
-  .box {
-    flex: 1;
-    background: white;
-    padding: 24px;
-    border-radius: 14px;
-    box-shadow: 0 4px 18px rgba(26,122,74,0.10);
-    border-top: 4px solid #1a7a4a;
+  .preset-btn:hover, .preset-btn.active { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
+  .preset-icon { font-size: 16px; }
+
+  /* ── MAIN GRID ── */
+  .main-wrap { max-width: 920px; margin: 24px auto 0; padding: 0 24px 80px; }
+  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 680px) { .sim-grid { grid-template-columns: 1fr; } }
+
+  /* ── INPUT PANEL ── */
+  .input-panel { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+  .panel-title { font-size: 15px; font-weight: 900; color: var(--navy); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+
+  .field { margin-bottom: 22px; }
+  .field-label { font-size: 12.5px; font-weight: 700; color: var(--text-sub); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+  .field-val { font-size: 16px; font-weight: 900; color: var(--navy); }
+  .field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+  .field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-sub); margin-top: 4px; }
+
+  /* ── RESULT PANEL ── */
+  .result-panel { position: sticky; top: 76px; display: flex; flex-direction: column; gap: 16px; }
+  @media (max-width: 680px) { .result-panel { position: static; } }
+
+  .result-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.07); }
+  .result-header { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); padding: 22px 24px; }
+  .result-header-label { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: .1em; margin-bottom: 6px; }
+  .result-total { font-size: clamp(30px,5vw,42px); font-weight: 900; color: #fff; line-height: 1.1; }
+  .result-total span { font-size: 16px; font-weight: 400; opacity: .75; }
+  .result-mult-badge { display: inline-block; background: #4ade80; color: #1a3d2b; font-size: 12px; font-weight: 900; padding: 3px 12px; border-radius: 20px; margin-top: 10px; }
+
+  .result-body { padding: 20px 24px; }
+  .result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .result-row:last-child { border-bottom: none; }
+  .result-k { font-size: 12.5px; color: var(--text-sub); }
+  .result-v { font-size: 16px; font-weight: 700; color: var(--navy); }
+  .result-v.gain { color: var(--sky); }
+
+  /* ── CHART ── */
+  .chart-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 22px 20px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+  .chart-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+  .chart-wrap { position: relative; height: 200px; }
+
+  /* ── CTA ── */
+  .sim-cta { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); border-radius: 18px; padding: 32px; text-align: center; margin-top: 28px; }
+  .sim-cta h3 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .sim-cta p { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+  .sim-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn-sim-contact {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(90deg,var(--sky),var(--sky-light));
+    color: #fff; font-size: 14px; font-weight: 800;
+    padding: 13px 28px; border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(34,197,94,.35);
+    transition: transform .2s, box-shadow .2s;
   }
-  h2 {
-    text-align: center;
-    color: #1a3d2b;
-    font-size: 18px;
-    margin-bottom: 16px;
-  }
-  label {
-    display: block;
-    font-size: 13px;
-    color: #444;
-    margin-top: 10px;
-    margin-bottom: 2px;
-  }
-  input {
-    width: 100%;
-    padding: 10px;
-    margin: 0;
-    border-radius: 6px;
-    border: 1px solid #86efac;
-    box-sizing: border-box;
-    font-size: 14px;
-    background: #f0fdf4;
-  }
-  input:focus { outline: none; border-color: #1a7a4a; background: #fff; }
-  button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(90deg, #1a7a4a, #22c55e);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 16px;
-    font-weight: 700;
-    letter-spacing: 0.03em;
+  .btn-sim-contact:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,197,94,.45); }
+  .btn-sim-share {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: #000; color: #fff;
+    font-size: 14px; font-weight: 700;
+    padding: 13px 24px; border-radius: 50px;
     transition: opacity .2s;
   }
-  button:hover { opacity: 0.88; }
-  .result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    color: #1a3d2b;
-  }
-  .back-link {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #1a7a4a;
-    text-decoration: none;
-    font-size: 13px;
-  }
-  .back-link:hover { text-decoration: underline; }
+  .btn-sim-share:hover { opacity: .85; }
 
-  /* キャラクター */
-  .character-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 48px;
-    min-width: 130px;
-  }
-  .speech-bubble {
-    background: #fff;
-    border: 2px solid #86efac;
-    border-radius: 14px;
-    padding: 10px 13px;
-    font-size: 12px;
-    color: #1a3d2b;
-    font-weight: 700;
-    line-height: 1.6;
-    text-align: center;
-    position: relative;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 8px rgba(26,122,74,0.10);
-  }
-  .speech-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: #86efac;
-  }
-  .speech-bubble::before {
-    content: '';
-    position: absolute;
-    bottom: -7px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: #fff;
-    z-index: 1;
-  }
-  .character {
-    text-align: center;
-    font-size: 13px;
-    color: #1a7a4a;
-    font-weight: 700;
-  }
-  .character p { margin: 6px 0 0; }
-
-  @media (max-width: 580px) {
-    .page-wrapper { flex-direction: column; align-items: center; }
-    .character-col { flex-direction: row; gap: 12px; align-items: center; padding-top: 0; order: -1; }
-    .speech-bubble::after, .speech-bubble::before { display: none; }
-    .speech-bubble { margin-bottom: 0; }
-  }
+  footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 28px 24px; text-align: center; }
+  .footer-logo { font-size: 15px; font-weight: 900; margin-bottom: 8px; }
+  .footer-contact a { font-size: 13px; color: var(--sky-light); text-decoration: underline; }
+  footer p { font-size: 11px; opacity: .45; margin-top: 10px; }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498"
-     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
+<div id="pb"></div>
 
-<div class="page-wrapper">
-  <!-- シミュレーター -->
-  <div class="box">
-    <h2>資産シミュレーション</h2>
-
-    <label>現在の資産（万円）</label>
-    <input type="number" id="initial" value="3700" min="0" max="999999" step="1" required>
-
-    <label>毎月の積立（万円）</label>
-    <input type="number" id="monthly" value="10" min="0" max="10000" step="1" required>
-
-    <label>想定利回り（%）</label>
-    <input type="number" id="rate" value="5" min="0" max="50" step="0.01" required>
-
-    <label>運用年数（年）</label>
-    <input type="number" id="years" value="20" min="1" max="50" step="1" required>
-
-    <button onclick="calculate()">計算する</button>
-
-    <div class="result" id="result"></div>
-
-    <a href="index.html" class="back-link">← トップページに戻る</a>
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="loan-check.html">ローン診断</a>
+      <a href="blog/">ブログ</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <a href="#contact" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</header>
 
+<!-- HERO -->
+<div class="sim-hero">
+  <div class="sim-hero-badge"><span class="sim-hero-dot"></span>登録不要・リアルタイム計算</div>
+  <h1>あなたの<em>将来資産</em>を<br>今すぐシミュレーション</h1>
+  <p>スライダーを動かすだけで即反映。元本・運用益をグラフで確認できます。</p>
 </div>
 
+<!-- PRESETS -->
+<div class="presets-wrap">
+  <div class="presets-label">▶ プリセットを選ぶ</div>
+  <div class="presets">
+    <button class="preset-btn" id="pre-30" onclick="applyPreset('30s')">
+      <span class="preset-icon">👨</span> 30代モデル
+    </button>
+    <button class="preset-btn" id="pre-40" onclick="applyPreset('40s')">
+      <span class="preset-icon">👨‍👩‍👦</span> 40代モデル
+    </button>
+    <button class="preset-btn" id="pre-nisa" onclick="applyPreset('nisa')">
+      <span class="preset-icon">📈</span> NISA満額
+    </button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+  <div class="sim-grid">
+
+    <!-- 入力パネル -->
+    <div class="input-panel">
+      <div class="panel-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        条件を入力
+      </div>
+
+      <div class="field">
+        <div class="field-label">現在の資産<span class="field-val" id="lbl-initial">200万円</span></div>
+        <input type="range" id="sl-initial" min="0" max="3000" step="50" value="200" oninput="syncLabel('initial',this.value);calc()">
+        <div class="field-ticks"><span>0円</span><span>1,500万</span><span>3,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">毎月の積立額<span class="field-val" id="lbl-monthly">5万円</span></div>
+        <input type="range" id="sl-monthly" min="0" max="30" step="0.5" value="5" oninput="syncLabel('monthly',this.value);calc()">
+        <div class="field-ticks"><span>0円</span><span>15万</span><span>30万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">想定利回り（年）<span class="field-val" id="lbl-rate">5.0%</span></div>
+        <input type="range" id="sl-rate" min="0.5" max="10" step="0.5" value="5" oninput="syncLabel('rate',this.value);calc()">
+        <div class="field-ticks"><span>0.5%</span><span>5%</span><span>10%</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">運用年数<span class="field-val" id="lbl-years">30年</span></div>
+        <input type="range" id="sl-years" min="5" max="40" step="5" value="30" oninput="syncLabel('years',this.value);calc()">
+        <div class="field-ticks"><span>5年</span><span>20年</span><span>40年</span></div>
+      </div>
+    </div>
+
+    <!-- 結果パネル -->
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-header-label" id="r-years-label">30年後の資産</div>
+          <div class="result-total"><span>約 </span><span id="r-total">—</span><span> 万円</span></div>
+          <div class="result-mult-badge" id="r-mult">元本の—倍</div>
+        </div>
+        <div class="result-body">
+          <div class="result-row">
+            <span class="result-k">元本合計</span>
+            <span class="result-v" id="r-principal">—万円</span>
+          </div>
+          <div class="result-row">
+            <span class="result-k">運用益</span>
+            <span class="result-v gain" id="r-gain">—万円</span>
+          </div>
+          <div class="result-row">
+            <span class="result-k">運用益の割合</span>
+            <span class="result-v" id="r-ratio">—%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">📊 資産の推移（元本 vs 運用益）</div>
+        <div class="chart-wrap">
+          <canvas id="assetChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="sim-cta">
+    <h3>📋 この結果をもとにFPに相談しませんか？</h3>
+    <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>シミュレーション結果を持ってお気軽にお問い合わせください。</p>
+    <div class="sim-cta-btns">
+      <a href="contact.html" class="btn-sim-contact">💬 FPに相談する →</a>
+      <button class="btn-sim-share" onclick="shareResult()">𝕏 結果をシェア</button>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:920px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。</div>
+
+<footer>
+  <div class="footer-logo">Life Asset — ライフアセットオフィス</div>
+  <div class="footer-contact">
+    <a href="contact.html">お問い合わせ</a> ｜ <a href="privacy.html">プライバシーポリシー</a>
+  </div>
+  <p>© 2026 ライフアセットオフィス</p>
+</footer>
+
 <script>
-function calculate() {
-  const initialMan = parseFloat(document.getElementById("initial").value);
-  const monthlyMan = parseFloat(document.getElementById("monthly").value);
-  const rateVal    = parseFloat(document.getElementById("rate").value);
-  const years      = parseFloat(document.getElementById("years").value);
-  const resultEl   = document.getElementById("result");
+var chart = null;
 
-  if ([initialMan, monthlyMan, rateVal, years].some(isNaN)) {
-    resultEl.textContent = "入力値に誤りがあります。"; return;
-  }
-  if (initialMan < 0 || initialMan > 999999) {
-    resultEl.textContent = "現在の資産は0〜999999万円で入力してください。"; return;
-  }
-  if (monthlyMan < 0 || monthlyMan > 10000) {
-    resultEl.textContent = "毎月の積立は0〜10000万円で入力してください。"; return;
-  }
-  if (rateVal < 0 || rateVal > 50) {
-    resultEl.textContent = "利回りは0〜50%で入力してください。"; return;
-  }
-  if (years < 1 || years > 50) {
-    resultEl.textContent = "運用年数は1〜50年で入力してください。"; return;
-  }
+var PRESETS = {
+  '30s':  { initial: 200,  monthly: 5,   rate: 5,   years: 30 },
+  '40s':  { initial: 500,  monthly: 8,   rate: 4,   years: 20 },
+  'nisa': { initial: 0,    monthly: 10,  rate: 5,   years: 20 }
+};
 
-  const monthly = monthlyMan * 10000;
-  const rate    = rateVal / 100;
-  let   total   = initialMan * 10000;
-
-  for (let i = 0; i < years * 12; i++) {
-    total = total * (1 + rate / 12) + monthly;
-  }
-
-  resultEl.textContent = "将来資産：約 " + Math.round(total / 10000).toLocaleString() + " 万円";
+function applyPreset(key) {
+  var p = PRESETS[key];
+  document.getElementById('sl-initial').value  = p.initial;
+  document.getElementById('sl-monthly').value  = p.monthly;
+  document.getElementById('sl-rate').value     = p.rate;
+  document.getElementById('sl-years').value    = p.years;
+  syncLabel('initial', p.initial);
+  syncLabel('monthly', p.monthly);
+  syncLabel('rate',    p.rate);
+  syncLabel('years',   p.years);
+  ['pre-30','pre-40','pre-nisa'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  var map = {'30s':'pre-30','40s':'pre-40','nisa':'pre-nisa'};
+  document.getElementById(map[key]).classList.add('active');
+  calc();
 }
-</script>
-<div style="max-width:760px;margin:16px auto;padding:0 16px;font-size:11px;color:#78716c;line-height:1.6;">【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。</div>
 
+function syncLabel(key, val) {
+  val = parseFloat(val);
+  if (key === 'initial') {
+    document.getElementById('lbl-initial').textContent = val.toLocaleString() + '万円';
+  } else if (key === 'monthly') {
+    document.getElementById('lbl-monthly').textContent = val % 1 === 0 ? val + '万円' : val.toFixed(1) + '万円';
+  } else if (key === 'rate') {
+    document.getElementById('lbl-rate').textContent = parseFloat(val).toFixed(1) + '%';
+  } else if (key === 'years') {
+    document.getElementById('lbl-years').textContent = val + '年';
+  }
+}
+
+function calcFV(initialMan, monthlyMan, rateAnnual, years) {
+  var total = initialMan * 10000;
+  var monthly = monthlyMan * 10000;
+  var r = rateAnnual / 100 / 12;
+  var n = years * 12;
+  for (var i = 0; i < n; i++) {
+    total = total * (1 + r) + monthly;
+  }
+  return Math.round(total / 10000);
+}
+
+function calc() {
+  var initial = parseFloat(document.getElementById('sl-initial').value);
+  var monthly = parseFloat(document.getElementById('sl-monthly').value);
+  var rate    = parseFloat(document.getElementById('sl-rate').value);
+  var years   = parseInt(document.getElementById('sl-years').value);
+
+  var totalMan     = calcFV(initial, monthly, rate, years);
+  var principalMan = Math.round(initial + monthly * 12 * years);
+  var gainMan      = totalMan - principalMan;
+  var mult         = principalMan > 0 ? (totalMan / principalMan).toFixed(1) : '—';
+  var gainRatio    = principalMan > 0 ? Math.round(gainMan / totalMan * 100) : 0;
+
+  document.getElementById('r-years-label').textContent = years + '年後の資産';
+  document.getElementById('r-total').textContent       = totalMan.toLocaleString();
+  document.getElementById('r-mult').textContent        = '元本の' + mult + '倍';
+  document.getElementById('r-principal').textContent   = principalMan.toLocaleString() + '万円';
+  document.getElementById('r-gain').textContent        = gainMan.toLocaleString() + '万円';
+  document.getElementById('r-ratio').textContent       = gainRatio + '%';
+
+  updateChart(initial, monthly, rate, years);
+}
+
+function updateChart(initial, monthly, rate, years) {
+  var steps = [];
+  var maxStep = 4;
+  var stepSize = Math.max(5, Math.round(years / maxStep / 5) * 5);
+  for (var y = stepSize; y <= years; y += stepSize) steps.push(y);
+  if (steps[steps.length - 1] !== years) steps.push(years);
+
+  var labels      = steps.map(function(y){ return y + '年後'; });
+  var principals  = steps.map(function(y){ return Math.round(initial + monthly * 12 * y); });
+  var gains       = steps.map(function(y){ return Math.max(0, calcFV(initial, monthly, rate, y) - Math.round(initial + monthly * 12 * y)); });
+
+  if (chart) {
+    chart.data.labels          = labels;
+    chart.data.datasets[0].data = principals;
+    chart.data.datasets[1].data = gains;
+    chart.update();
+    return;
+  }
+
+  var ctx = document.getElementById('assetChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '元本',
+          data: principals,
+          backgroundColor: '#86efac',
+          borderRadius: 4,
+          borderSkipped: false
+        },
+        {
+          label: '運用益',
+          data: gains,
+          backgroundColor: '#1a7a4a',
+          borderRadius: 4,
+          borderSkipped: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12, padding: 12 } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() + '万円'; }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: function(v){ return v.toLocaleString() + '万'; } }, grid: { color: '#f1f5f9' } }
+      }
+    }
+  });
+}
+
+function shareResult() {
+  var total   = document.getElementById('r-total').textContent;
+  var years   = document.getElementById('sl-years').value;
+  var rate    = document.getElementById('sl-rate').value;
+  var text    = '資産シミュレーターで試してみました！\n' + years + '年後の資産：約' + total + '万円（想定利回り' + rate + '%）\nあなたも試してみてください👇';
+  var url     = 'https://lifeassetoffice.net/simulation.html';
+  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+}
+
+(function(){
+  syncLabel('initial', document.getElementById('sl-initial').value);
+  syncLabel('monthly', document.getElementById('sl-monthly').value);
+  syncLabel('rate',    document.getElementById('sl-rate').value);
+  syncLabel('years',   document.getElementById('sl-years').value);
+  calc();
+})();
+
+window.addEventListener('scroll', function(){
+  var el = document.documentElement;
+  document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
+});
+</script>
+<script src="/nav.js" defer></script>
 </body>
 </html>
