@@ -135,9 +135,36 @@
     .panel-link-sub { font-size: 10.5px; font-weight: 400; color: rgba(255,255,255,0.45); display: block; margin-top: 2px; }
     .panel-link-arrow { margin-left: auto; color: rgba(255,255,255,0.3); font-size: 16px; flex-shrink: 0; }
     @media (max-width: 860px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
       .hero { min-height: auto; padding: 40px 20px 48px; }
       .hero-panel { display: none; }
+    }
+    /* ─── MOBILE MINI SIM ─── */
+    .hero-mini-sim {
+      display: none;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+    }
+    .mini-sim-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: .1em; margin-bottom: 12px; }
+    .mini-sim-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .mini-sim-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+    .mini-sim-val { font-size: 13px; font-weight: 800; color: #86efac; }
+    .mini-sim-slider { width: 100%; accent-color: #22c55e; height: 4px; margin-bottom: 14px; }
+    .mini-sim-result {
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 4px;
+    }
+    .mini-sim-result-label { font-size: 11px; color: rgba(255,255,255,0.55); }
+    .mini-sim-result-num { font-size: 20px; font-weight: 900; color: #4ade80; line-height: 1; }
+    .mini-sim-link { display: block; text-align: center; font-size: 11.5px; color: rgba(255,255,255,0.45); margin-top: 10px; text-decoration: underline; }
+    @media (max-width: 860px) {
+      .hero-mini-sim { display: block; }
     }
   </style>
 </head>
@@ -202,6 +229,25 @@
         <div class="hero-stat"><strong>3</strong>つの無料ツール</div>
         <div class="hero-stat"><strong>登録不要</strong>で今すぐ使える</div>
       </div>
+    </div>
+    <!-- スマホ用ミニシミュレーター -->
+    <div class="hero-mini-sim">
+      <div class="mini-sim-title">▶ かんたん資産シミュレーター</div>
+      <div class="mini-sim-row">
+        <span class="mini-sim-label">毎月積立額</span>
+        <span class="mini-sim-val" id="ms-monthly-val">3万円</span>
+      </div>
+      <input type="range" class="mini-sim-slider" id="ms-monthly" min="1" max="10" value="3" oninput="miniCalc()">
+      <div class="mini-sim-row">
+        <span class="mini-sim-label">積立年数</span>
+        <span class="mini-sim-val" id="ms-years-val">20年</span>
+      </div>
+      <input type="range" class="mini-sim-slider" id="ms-years" min="5" max="40" value="20" step="5" oninput="miniCalc()">
+      <div class="mini-sim-result">
+        <span class="mini-sim-result-label">年率5%で運用すると</span>
+        <span class="mini-sim-result-num" id="ms-result">約993万円</span>
+      </div>
+      <a href="asset-sim.html" class="mini-sim-link">詳細シミュレーターで確認する →</a>
     </div>
     <!-- 右：クイックアクセスパネル -->
     <div class="hero-panel">
@@ -405,6 +451,18 @@
 </footer>
 
 <script src="/nav.js" defer></script>
+<script>
+function miniCalc(){
+  var m=parseInt(document.getElementById('ms-monthly').value);
+  var y=parseInt(document.getElementById('ms-years').value);
+  document.getElementById('ms-monthly-val').textContent=m+'万円';
+  document.getElementById('ms-years-val').textContent=y+'年';
+  var monthly=m*10000, r=0.05/12, n=y*12;
+  var fv=monthly*((Math.pow(1+r,n)-1)/r);
+  var man=Math.round(fv/10000);
+  document.getElementById('ms-result').textContent='約'+man.toLocaleString()+'万円';
+}
+</script>
 <script>
 fetch('blog/index.html').then(r=>r.text()).then(html=>{
   const doc=new DOMParser().parseFromString(html,'text/html');
