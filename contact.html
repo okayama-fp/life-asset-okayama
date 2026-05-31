@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://lifeassetoffice.net/contact.html">
   <title>お問い合わせ｜ライフアセットオフィス</title>
-  <meta name="description" content="ライフアセットオフィスへのお問い合わせページ。資産運用・家計相談・融資サポートについてお気軽にご連絡ください。">
+  <meta name="description" content="ライフアセットオフィスへのお問い合わせページ。資産運用・家計のお問い合わせ・融資サポートについてお気軽にご連絡ください。">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--sky:#1a7a4a;--sky-light:#22c55e;--navy:#1a3d2b;--text:#1e293b;--text-sub:#64748b;--border:#e2e8f0;--bg:#f8fafc}
@@ -78,7 +78,7 @@
 
 <div class="hero">
   <h1>お問い合わせ</h1>
-  <p>資産運用・家計相談・融資サポートについて、お気軽にご連絡ください</p>
+  <p>資産運用・家計のお問い合わせ・融資サポートについて、お気軽にご連絡ください</p>
 </div>
 
 <div class="page-wrap">
@@ -104,7 +104,7 @@
         <input type="email" id="contact-email-input" name="email" placeholder="例：example@mail.com" required>
       </div>
       <div class="form-group">
-        <label for="contact-subject">ご相談内容</label>
+        <label for="contact-subject">お問い合わせ内容</label>
         <select id="contact-subject" name="subject">
           <option value="">選択してください</option>
           <option value="資産運用">資産運用</option>
@@ -117,7 +117,7 @@
       </div>
       <div class="form-group">
         <label for="contact-message">メッセージ <span style="color:#e11d48">*</span></label>
-        <textarea id="contact-message" name="message" placeholder="ご相談内容を自由にご記入ください" required></textarea>
+        <textarea id="contact-message" name="message" placeholder="お問い合わせ内容を自由にご記入ください" required></textarea>
       </div>
       <div class="cf-turnstile" data-sitekey="0x4AAAAAADZkg2tGLOTSIha4" data-theme="light"></div>
       <button type="submit" class="btn-contact">メールで送信する</button>
@@ -143,14 +143,14 @@
     <div class="info-item">
       
       <div class="info-text">
-        <div class="label">相談内容の例</div>
+        <div class="label">お問い合わせ内容の例</div>
         <div class="value">資産運用・家計管理・老後資金・保険・融資</div>
       </div>
     </div>
   </div>
 
   <div class="note">
-    💡 <strong>ご相談の際のポイント：</strong><br>
+    💡 <strong>お問い合わせの際のポイント：</strong><br>
     年齢・家族構成・現在の状況・ご希望をお知らせいただくと、より具体的なアドバイスが可能です。秘密は厳守いたします。
   </div>
 
@@ -203,7 +203,7 @@
     var subject = document.getElementById('contact-subject').value;
     var message = document.getElementById('contact-message').value.trim();
     var subj = encodeURIComponent('ライフアセットオフィスへのお問い合わせ' + (subject ? '【' + subject + '】' : ''));
-    var body = encodeURIComponent('お名前：' + name + '\n返信先：' + email + '\nご相談内容：' + subject + '\n\n' + message);
+    var body = encodeURIComponent('お名前：' + name + '\n返信先：' + email + '\nお問い合わせ内容：' + subject + '\n\n' + message);
     window.open('https://mail.google.com/mail/?view=cm&fs=1&to=info%40lifeassetoffice.net&su=' + subj + '&body=' + body, '_blank', 'noopener,noreferrer');
     return false;
   }
