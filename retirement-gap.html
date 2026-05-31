@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://lifeassetoffice.net/retirement-gap.html">
+<title>老後資金不足額シミュレーター｜ライフアセットオフィス</title>
+<meta name="description" content="老後の月生活費・年金・貯蓄を入力するだけ。老後資金の不足額をリアルタイム計算。夫婦モデル・おひとりさまなどプリセット付き。登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="老後資金不足額シミュレーター｜ライフアセットオフィス">
+<meta property="og:description" content="年金・貯蓄・生活費から老後資金の不足額を即計算。登録不要。">
+<meta property="og:url" content="https://lifeassetoffice.net/retirement-gap.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+.hero { background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+.hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
+.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
+.main { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
+.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+.preset-label { font-size: 12px; font-weight: 700; color: var(--text-light); }
+.preset-btn { padding: 8px 16px; border-radius: 50px; border: 1.5px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; font-family: inherit; transition: all .2s; }
+.preset-btn:hover { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
+.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.field { margin-bottom: 20px; }
+.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+.result-panel { position: sticky; top: 76px; }
+@media(max-width:480px){ .result-panel { position: static; } }
+.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+.result-header { padding: 18px 22px; text-align: center; }
+.result-header.surplus { background: var(--greenl); border-bottom: 2px solid var(--greenb); }
+.result-header.deficit { background: var(--redl); border-bottom: 2px solid var(--redb); }
+.result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; margin-bottom: 4px; }
+.result-header.surplus .result-label { color: var(--green); }
+.result-header.deficit .result-label { color: var(--red); }
+.result-amount { font-size: clamp(2rem,6vw,3rem); font-weight: 900; line-height: 1.1; }
+.result-header.surplus .result-amount { color: var(--green); }
+.result-header.deficit .result-amount { color: var(--red); }
+.result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+.result-body { padding: 18px 20px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; }
+.stat-k { font-size: 12.5px; color: var(--text-light); }
+.stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
+.stat-v.bad { color: var(--red); }
+.stat-v.good { color: var(--green); }
+.chart-wrap { margin: 16px 0; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.share-row { display: flex; gap: 8px; margin-top: 14px; }
+.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+.share-x { background: #000; }
+.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
+.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
+.cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
+.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="service/">サービス</a>
+      <a href="tools.html" style="color:var(--sky);font-weight:700;">無料ツール</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
+  <h1>老後資金、いくら足りない？</h1>
+  <p class="hero-lead">年金・生活費・貯蓄を入力するだけ。老後資金の不足額をリアルタイムで計算します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">不足額を即計算</span>
+    <span class="hero-tag">夫婦・おひとりさま対応</span>
+    <span class="hero-tag">グラフで可視化</span>
+  </div>
+</div>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="main">
+  <div class="preset-row">
+    <span class="preset-label">プリセット：</span>
+    <button class="preset-btn" onclick="applyPreset('couple')">夫婦モデル</button>
+    <button class="preset-btn" onclick="applyPreset('single')">おひとりさま</button>
+    <button class="preset-btn" onclick="applyPreset('comfort')">ゆとり老後</button>
+  </div>
+  <div class="tool-grid">
+    <div class="input-panel">
+      <h2>あなたの情報を入力</h2>
+
+      <div class="field">
+        <div class="field-label">現在の年齢<span class="field-val" id="lbl-age">40歳</span></div>
+        <input type="range" id="sl-age" min="20" max="65" step="1" value="40" oninput="sync('age',this.value);calc()">
+        <div class="field-ticks"><span>20歳</span><span>45歳</span><span>65歳</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">退職予定年齢<span class="field-val" id="lbl-retire">65歳</span></div>
+        <input type="range" id="sl-retire" min="55" max="70" step="1" value="65" oninput="sync('retire',this.value);calc()">
+        <div class="field-ticks"><span>55歳</span><span>62歳</span><span>70歳</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">老後の月生活費<span class="field-val" id="lbl-expense">25万円</span></div>
+        <input type="range" id="sl-expense" min="10" max="50" step="1" value="25" oninput="sync('expense',this.value);calc()">
+        <div class="field-ticks"><span>10万</span><span>30万</span><span>50万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">年金見込み月額<span class="field-val" id="lbl-pension">15万円</span></div>
+        <input type="range" id="sl-pension" min="0" max="30" step="1" value="15" oninput="sync('pension',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>15万</span><span>30万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">現在の貯蓄<span class="field-val" id="lbl-savings">500万円</span></div>
+        <input type="range" id="sl-savings" min="0" max="3000" step="50" value="500" oninput="sync('savings',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>1,500万</span><span>3,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">老後の生存年数<span class="field-val" id="lbl-lifespan">30年</span></div>
+        <input type="range" id="sl-lifespan" min="20" max="40" step="1" value="30" oninput="sync('lifespan',this.value);calc()">
+        <div class="field-ticks"><span>20年</span><span>30年</span><span>40年</span></div>
+      </div>
+    </div>
+
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="result-header deficit" id="result-header">
+          <div class="result-label" id="result-label">老後資金の不足額</div>
+          <div class="result-amount" id="result-amount">―</div>
+          <div class="result-sub" id="result-sub"></div>
+        </div>
+        <div class="result-body">
+          <div class="stat-row">
+            <span class="stat-k">老後に必要な総額</span>
+            <span class="stat-v" id="r-total">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">年金受取総額</span>
+            <span class="stat-v good" id="r-pension">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">現在の貯蓄</span>
+            <span class="stat-v" id="r-savings">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">不足額 / 余剰額</span>
+            <span class="stat-v" id="r-gap">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">退職まで必要な月積立</span>
+            <span class="stat-v" id="r-monthly">―</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <h3>老後資金の内訳（万円）</h3>
+        <canvas id="retirementChart" height="200"></canvas>
+      </div>
+
+      <div class="share-row">
+        <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
+      </div>
+      <div class="cta-contact-box">
+        <div class="cta-contact-text">老後の不安、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
+        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>&copy; 2025 Life Asset Office. All rights reserved.</p>
+</footer>
+
+<script src="/nav.js"></script>
+<script>
+var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30 };
+function labelOf(key, val) {
+  if (key==='age'||key==='retire') return val+'歳';
+  if (key==='savings') return parseInt(val).toLocaleString()+'万円';
+  if (key==='lifespan') return val+'年';
+  return val+'万円';
+}
+function sync(key, val) {
+  sliders[key] = parseFloat(val);
+  document.getElementById('lbl-'+key).textContent = labelOf(key, val);
+}
+function fmt(v) {
+  if (isNaN(v)||!isFinite(v)) return '―';
+  var abs = Math.abs(v);
+  if (abs >= 10000) return (v/10000).toFixed(1)+'億円';
+  return Math.round(Math.abs(v)).toLocaleString()+'万円';
+}
+
+var chart = null;
+function calc() {
+  var age=sliders.age, retire=sliders.retire,
+      expense=sliders.expense, pension=sliders.pension,
+      savings=sliders.savings, lifespan=sliders.lifespan;
+  var totalNeeded = expense * 12 * lifespan;
+  var totalPension = pension * 12 * lifespan;
+  var gap = totalNeeded - totalPension - savings;
+  var yearsToRetire = Math.max(retire - age, 0);
+  var monthsToRetire = yearsToRetire * 12;
+  var monthlyNeed = (gap > 0 && monthsToRetire > 0) ? gap / monthsToRetire : 0;
+
+  var header = document.getElementById('result-header');
+  var lbl = document.getElementById('result-label');
+  var amt = document.getElementById('result-amount');
+  var sub = document.getElementById('result-sub');
+  if (gap > 0) {
+    header.className = 'result-header deficit';
+    lbl.textContent = '老後資金の不足額';
+    amt.textContent = fmt(gap);
+    sub.textContent = '今から準備が必要です';
+  } else {
+    header.className = 'result-header surplus';
+    lbl.textContent = '老後資金の余裕額';
+    amt.textContent = fmt(Math.abs(gap));
+    sub.textContent = '現状のプランで十分です';
+  }
+  document.getElementById('r-total').textContent = fmt(totalNeeded);
+  document.getElementById('r-pension').textContent = fmt(totalPension);
+  document.getElementById('r-savings').textContent = fmt(savings);
+  var gapEl = document.getElementById('r-gap');
+  gapEl.textContent = (gap > 0 ? '△' : '') + fmt(Math.abs(gap));
+  gapEl.className = 'stat-v ' + (gap > 0 ? 'bad' : 'good');
+  document.getElementById('r-monthly').textContent = gap > 0 ? fmt(monthlyNeed)+'/月' : '積立不要';
+
+  renderChart(totalNeeded, totalPension, savings, Math.max(gap, 0));
+}
+
+function renderChart(needed, pension, savings, deficit) {
+  var ctx = document.getElementById('retirementChart').getContext('2d');
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['必要総額', '年金総額', '現在の貯蓄', '不足額'],
+      datasets: [{
+        data: [needed, pension, savings, deficit],
+        backgroundColor: ['#64748b', '#22c55e', '#3b82f6', '#ef4444'],
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          ticks: {
+            callback: function(v) {
+              return v >= 10000 ? (v/10000).toFixed(0)+'億' : v+'万';
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function applyPreset(name) {
+  var presets = {
+    couple:  { age:50, retire:65, expense:25, pension:22, savings:500, lifespan:30 },
+    single:  { age:40, retire:65, expense:15, pension:10, savings:300, lifespan:35 },
+    comfort: { age:45, retire:60, expense:40, pension:20, savings:1000, lifespan:30 }
+  };
+  var p = presets[name];
+  Object.keys(p).forEach(function(k) {
+    sliders[k] = p[k];
+    var sl = document.getElementById('sl-'+k);
+    if (sl) sl.value = p[k];
+    document.getElementById('lbl-'+k).textContent = labelOf(k, p[k]);
+  });
+  calc();
+}
+
+function shareX() {
+  var gap = document.getElementById('result-amount').textContent;
+  var text = encodeURIComponent('老後資金シミュレーターで計算したら' + gap + '！ #ライフアセットオフィス #老後資金');
+  var url = encodeURIComponent('https://lifeassetoffice.net/retirement-gap.html');
+  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url, '_blank', 'noopener,noreferrer');
+}
+
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('pb').style.width = pct + '%';
+});
+
+calc();
+</script>
+</body>
+</html>
