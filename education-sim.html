@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://lifeassetoffice.net/education-sim.html">
+<title>教育費積立プランナー｜ライフアセットオフィス</title>
+<meta name="description" content="子供の年齢・進学コース・現在の積立額を入力するだけ。大学卒業までの教育費・不足額・必要月積立額をリアルタイム計算。文科省統計ベース。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="教育費積立プランナー｜ライフアセットオフィス">
+<meta property="og:description" content="進学コース別の教育費を文科省統計で計算。いくら積立が必要か即わかる。">
+<meta property="og:url" content="https://lifeassetoffice.net/education-sim.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+.hero { background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+.hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
+.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
+.main { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
+.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+.preset-label { font-size: 12px; font-weight: 700; color: var(--text-light); }
+.preset-btn { padding: 8px 16px; border-radius: 50px; border: 1.5px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; font-family: inherit; transition: all .2s; }
+.preset-btn:hover { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
+.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.field { margin-bottom: 20px; }
+.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+.course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.seg-btn { padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 11.5px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; line-height: 1.4; }
+.seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
+.result-panel { position: sticky; top: 76px; }
+@media(max-width:480px){ .result-panel { position: static; } }
+.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+.result-header { padding: 18px 22px 14px; background: var(--greenl); border-bottom: 2px solid var(--greenb); text-align: center; }
+.result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: var(--green); margin-bottom: 4px; }
+.result-amount { font-size: clamp(2rem,6vw,3rem); font-weight: 900; color: var(--green); line-height: 1.1; }
+.result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+.result-body { padding: 18px 20px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; }
+.stat-k { font-size: 12.5px; color: var(--text-light); }
+.stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
+.stat-v.good { color: var(--green); }
+.stat-v.bad { color: var(--red); }
+.chart-wrap { margin: 16px 0; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.cost-table-section { margin-top: 20px; }
+.cost-table-section h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.cost-table { width: 100%; border-collapse: collapse; font-size: 12.5px; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.cost-table th { background: var(--navy); color: #fff; padding: 9px 10px; text-align: center; font-size: 11.5px; }
+.cost-table td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: center; }
+.cost-table tr.highlight td { background: var(--sky-pale); font-weight: 700; }
+.share-row { display: flex; gap: 8px; margin-top: 14px; }
+.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+.share-x { background: #000; }
+.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
+.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
+.cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
+.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="service/">サービス</a>
+      <a href="tools.html" style="color:var(--sky);font-weight:700;">無料ツール</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>文科省統計ベース・登録不要</div>
+  <h1>子供の教育費、いくら必要？</h1>
+  <p class="hero-lead">子供の年齢・進学コースを選ぶだけ。大学卒業までの教育費と必要な積立額をリアルタイムで計算します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">幼稚園〜大学まで計算</span>
+    <span class="hero-tag">進学コース選択</span>
+    <span class="hero-tag">必要積立額を表示</span>
+  </div>
+</div>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="main">
+  <div class="preset-row">
+    <span class="preset-label">プリセット：</span>
+    <button class="preset-btn" onclick="applyPreset('allpub')">0歳から全公立</button>
+    <button class="preset-btn" onclick="applyPreset('chuuju')">3歳から中学受験</button>
+  </div>
+  <div class="tool-grid">
+    <div class="input-panel">
+      <h2>お子様の情報を入力</h2>
+
+      <div class="field">
+        <div class="field-label">子供の年齢<span class="field-val" id="lbl-child-age">0歳</span></div>
+        <input type="range" id="sl-child-age" min="0" max="15" step="1" value="0" oninput="sync('child-age',this.value);calc()">
+        <div class="field-ticks"><span>0歳</span><span>7歳</span><span>15歳</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">進学コース</div>
+        <div class="course-grid">
+          <button class="seg-btn on" id="course-allpub" onclick="setCourse('allpub')">全公立</button>
+          <button class="seg-btn" id="course-hispri" onclick="setCourse('hispri')">高校から私立</button>
+          <button class="seg-btn" id="course-unipri" onclick="setCourse('unipri')">大学から私立</button>
+          <button class="seg-btn" id="course-allpri" onclick="setCourse('allpri')">全私立</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">現在の教育積立額<span class="field-val" id="lbl-savings">0万円</span></div>
+        <input type="range" id="sl-savings" min="0" max="500" step="10" value="0" oninput="sync('savings',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>250万</span><span>500万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">毎月の積立額<span class="field-val" id="lbl-monthly">1万円</span></div>
+        <input type="range" id="sl-monthly" min="0" max="10" step="0.5" value="1" oninput="sync('monthly',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>5万</span><span>10万</span></div>
+      </div>
+    </div>
+
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-label" id="result-label">大学卒業まで必要な教育費</div>
+          <div class="result-amount" id="result-amount">―</div>
+          <div class="result-sub" id="result-sub"></div>
+        </div>
+        <div class="result-body">
+          <div class="stat-row">
+            <span class="stat-k">現在の積立額</span>
+            <span class="stat-v" id="r-savings">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">積立見込み（大学入学まで）</span>
+            <span class="stat-v" id="r-future">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">不足額</span>
+            <span class="stat-v bad" id="r-gap">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">必要な月積立額（目安）</span>
+            <span class="stat-v good" id="r-monthly-need">―</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <h3>積立推移と費用発生タイミング（万円）</h3>
+        <canvas id="eduChart" height="220"></canvas>
+      </div>
+
+      <div class="cost-table-section">
+        <h3>進学コース別 費用内訳（文科省統計ベース）</h3>
+        <table class="cost-table">
+          <thead>
+            <tr><th>学校種別</th><th>公立（年）</th><th>私立（年）</th><th>選択中</th></tr>
+          </thead>
+          <tbody id="cost-table-body"></tbody>
+        </table>
+        <p style="font-size:11px;color:var(--text-light);margin-top:6px;">※ 文部科学省「子供の学習費調査」等に基づく参考値。入学金・制服・修学旅行等は含みません。</p>
+      </div>
+
+      <div class="share-row">
+        <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
+      </div>
+      <div class="cta-contact-box">
+        <div class="cta-contact-text">教育費の積立プラン、FPと一緒に考えませんか？<br>無料でご相談を承っています。</div>
+        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>&copy; 2025 Life Asset Office. All rights reserved.</p>
+</footer>
+
+<script src="/nav.js"></script>
+<script>
+// 文科省統計ベースの費用（万円/年）
+var COSTS = {
+  kindergarten: { pub: 33, pri: 53, years: 3 },   // 3年
+  elementary:   { pub: 32, pri: 160, years: 6 },   // 6年
+  middle:       { pub: 49, pri: 140, years: 3 },   // 3年
+  high:         { pub: 46, pri: 105, years: 3 },   // 3年
+  // 大学：初年度入学金込みの概算
+  univ: {
+    pub:    { annual: 54, entrance: 28 },
+    pri_lit: { annual: 90, entrance: 25 },
+    pri_sci: { annual: 120, entrance: 25 }
+  }
+};
+
+// コース別の学校タイプ選択
+var COURSE_MAP = {
+  allpub:  { kg:'pub', el:'pub', mid:'pub', hs:'pub', univ:'pub' },
+  hispri:  { kg:'pub', el:'pub', mid:'pub', hs:'pri', univ:'pri_lit' },
+  unipri:  { kg:'pub', el:'pub', mid:'pub', hs:'pub', univ:'pri_lit' },
+  allpri:  { kg:'pri', el:'pri', mid:'pri', hs:'pri', univ:'pri_lit' }
+};
+
+var sliders = { 'child-age': 0, savings: 0, monthly: 1 };
+var currentCourse = 'allpub';
+
+function labelOf(key, val) {
+  if (key==='child-age') return val+'歳';
+  if (key==='savings') return parseInt(val).toLocaleString()+'万円';
+  if (key==='monthly') return val+'万円';
+  return val;
+}
+function sync(key, val) {
+  sliders[key] = parseFloat(val);
+  document.getElementById('lbl-'+key).textContent = labelOf(key, val);
+}
+function setCourse(c) {
+  currentCourse = c;
+  ['allpub','hispri','unipri','allpri'].forEach(function(id) {
+    document.getElementById('course-'+id).className = 'seg-btn' + (id===c?' on':'');
+  });
+  calc();
+}
+
+function calcTotalCost(childAge, course) {
+  var cm = COURSE_MAP[course];
+  var stages = [];
+  var total = 0;
+
+  // 幼稚園（3〜6歳）
+  var kgCost = COSTS.kindergarten[cm.kg] * COSTS.kindergarten.years;
+  stages.push({ name:'幼稚園', ageStart:3, ageEnd:6, annual: COSTS.kindergarten[cm.kg], total: kgCost, type: cm.kg });
+
+  // 小学校（6〜12歳）
+  var elCost = COSTS.elementary[cm.el] * COSTS.elementary.years;
+  stages.push({ name:'小学校', ageStart:6, ageEnd:12, annual: COSTS.elementary[cm.el], total: elCost, type: cm.el });
+
+  // 中学校（12〜15歳）
+  var midCost = COSTS.middle[cm.mid] * COSTS.middle.years;
+  stages.push({ name:'中学校', ageStart:12, ageEnd:15, annual: COSTS.middle[cm.mid], total: midCost, type: cm.mid });
+
+  // 高校（15〜18歳）
+  var hsCost = COSTS.high[cm.hs] * COSTS.high.years;
+  stages.push({ name:'高校', ageStart:15, ageEnd:18, annual: COSTS.high[cm.hs], total: hsCost, type: cm.hs });
+
+  // 大学（18〜22歳）
+  var ud = COSTS.univ[cm.univ];
+  var univCost = ud.annual * 4 + ud.entrance;
+  stages.push({ name:'大学', ageStart:18, ageEnd:22, annual: ud.annual, total: univCost, type: cm.univ });
+
+  // 子供の現在年齢以降のみ計上
+  stages.forEach(function(s) {
+    if (s.ageEnd > childAge) {
+      var remaining = s.ageEnd - Math.max(s.ageStart, childAge);
+      var costPerYear = s.annual;
+      total += costPerYear * remaining;
+      if (s.name === '大学' && childAge < s.ageStart) total += ud.entrance;
+    }
+  });
+  return { stages: stages, total: total };
+}
+
+var chart = null;
+function calc() {
+  var childAge = sliders['child-age'];
+  var savings = sliders.savings;
+  var monthly = sliders.monthly;
+  var yearsToUni = Math.max(18 - childAge, 0);
+  var totalSavingsAtUni = savings + monthly * 12 * yearsToUni;
+  var result = calcTotalCost(childAge, currentCourse);
+  var gap = result.total - totalSavingsAtUni;
+  var monthsToUni = yearsToUni * 12;
+  var monthlyNeed = (gap > 0 && monthsToUni > 0) ? gap / monthsToUni : 0;
+
+  document.getElementById('result-label').textContent = '大学卒業までの教育費';
+  document.getElementById('result-amount').textContent = Math.round(result.total).toLocaleString()+'万円';
+  document.getElementById('result-sub').textContent = yearsToUni+'年後の大学入学まで';
+  document.getElementById('r-savings').textContent = savings.toLocaleString()+'万円';
+  document.getElementById('r-future').textContent = Math.round(totalSavingsAtUni).toLocaleString()+'万円';
+  var gapEl = document.getElementById('r-gap');
+  if (gap > 0) {
+    gapEl.textContent = Math.round(gap).toLocaleString()+'万円';
+    gapEl.className = 'stat-v bad';
+  } else {
+    gapEl.textContent = '不足なし';
+    gapEl.className = 'stat-v good';
+  }
+  document.getElementById('r-monthly-need').textContent = gap > 0 ? monthlyNeed.toFixed(1)+'万円/月' : '現在の積立で十分です';
+
+  renderChart(childAge, savings, monthly, result.stages);
+  renderCostTable(result.stages);
+}
+
+function renderChart(childAge, savings, monthly, stages) {
+  var ctx = document.getElementById('eduChart').getContext('2d');
+  if (chart) chart.destroy();
+  var labels = [], savingsData = [], costData = [];
+  var curSav = savings;
+  for (var a = childAge; a <= 22; a++) {
+    labels.push(a+'歳');
+    var annualCost = 0;
+    stages.forEach(function(s) {
+      if (a >= s.ageStart && a < s.ageEnd) {
+        annualCost += s.annual;
+        if (a === s.ageStart && s.name === '大学') annualCost += 25;
+      }
+    });
+    savingsData.push(Math.round(curSav));
+    costData.push(Math.round(annualCost));
+    curSav += monthly * 12;
+  }
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '積立残高',
+          data: savingsData,
+          borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.08)', tension: 0.3, fill: true, yAxisID: 'y'
+        },
+        {
+          label: '年間費用',
+          data: costData,
+          borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)',
+          type: 'bar', yAxisID: 'y'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { ticks: { callback: function(v){ return v+'万'; } } }
+      }
+    }
+  });
+}
+
+function renderCostTable(stages) {
+  var tbody = document.getElementById('cost-table-body');
+  var html = '';
+  var courseRows = [
+    { name:'幼稚園（年）', pub: COSTS.kindergarten.pub, pri: COSTS.kindergarten.pri, stageKey:'幼稚園' },
+    { name:'小学校（年）', pub: COSTS.elementary.pub, pri: COSTS.elementary.pri, stageKey:'小学校' },
+    { name:'中学校（年）', pub: COSTS.middle.pub, pri: COSTS.middle.pri, stageKey:'中学校' },
+    { name:'高校（年）', pub: COSTS.high.pub, pri: COSTS.high.pri, stageKey:'高校' },
+    { name:'大学（年）', pub: COSTS.univ.pub.annual, pri: COSTS.univ.pri_lit.annual, stageKey:'大学' }
+  ];
+  var cm = COURSE_MAP[currentCourse];
+  var typeMap = { '幼稚園':cm.kg, '小学校':cm.el, '中学校':cm.mid, '高校':cm.hs, '大学':cm.univ };
+  courseRows.forEach(function(row) {
+    var selType = typeMap[row.stageKey];
+    var selCost = (selType === 'pub') ? row.pub : row.pri;
+    var selLabel = (selType === 'pub') ? '公立 '+row.pub+'万' : '私立 '+row.pri+'万';
+    html += '<tr><td>'+row.name+'</td><td>'+row.pub+'万円</td><td>'+row.pri+'万円</td>';
+    html += '<td style="font-weight:700;color:var(--sky)">'+selLabel+'</td></tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function applyPreset(name) {
+  if (name === 'allpub') {
+    sliders['child-age'] = 0;
+    document.getElementById('sl-child-age').value = 0;
+    document.getElementById('lbl-child-age').textContent = '0歳';
+    setCourse('allpub');
+  } else if (name === 'chuuju') {
+    sliders['child-age'] = 3;
+    document.getElementById('sl-child-age').value = 3;
+    document.getElementById('lbl-child-age').textContent = '3歳';
+    setCourse('hispri');
+  }
+  calc();
+}
+
+function shareX() {
+  var total = document.getElementById('result-amount').textContent;
+  var text = encodeURIComponent('教育費シミュレーションで大学卒業まで'+total+'必要とわかりました！ #ライフアセットオフィス #教育費');
+  var url = encodeURIComponent('https://lifeassetoffice.net/education-sim.html');
+  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url, '_blank', 'noopener,noreferrer');
+}
+
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+  document.getElementById('pb').style.width = pct + '%';
+});
+
+calc();
+</script>
+</body>
+</html>

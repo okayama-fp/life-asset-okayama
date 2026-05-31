@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://lifeassetoffice.net/furusato-sim.html">
+<title>ふるさと納税 控除上限額シミュレーター｜ライフアセットオフィス</title>
+<meta name="description" content="年収・家族構成・住宅ローン控除から、ふるさと納税の控除上限額をリアルタイム計算。実質2,000円負担でお得な金額も表示。登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ふるさと納税 控除上限額シミュレーター｜ライフアセットオフィス">
+<meta property="og:description" content="年収・家族構成からふるさと納税の上限額を即計算。実質2,000円でもらえるお得額も確認。">
+<meta property="og:url" content="https://lifeassetoffice.net/furusato-sim.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+.hero { background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+.hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
+.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
+.main { max-width: 860px; margin: 0 auto; padding: 28px 20px 80px; }
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
+.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.field { margin-bottom: 20px; }
+.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+.family-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+.seg-btn { padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 11.5px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; }
+.seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
+.result-panel { position: sticky; top: 76px; }
+@media(max-width:480px){ .result-panel { position: static; } }
+.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+.result-header { padding: 18px 22px 14px; background: var(--greenl); border-bottom: 2px solid var(--greenb); text-align: center; }
+.result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: var(--green); margin-bottom: 4px; }
+.result-amount { font-size: clamp(2rem,6vw,3.2rem); font-weight: 900; color: var(--green); line-height: 1.1; }
+.result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+.result-body { padding: 18px 20px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; }
+.stat-k { font-size: 12.5px; color: var(--text-light); }
+.stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
+.stat-v.good { color: var(--green); }
+.notice-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 10px; padding: 12px 14px; margin: 14px 0; font-size: 12px; color: var(--amber); line-height: 1.65; }
+.table-section { margin-top: 28px; }
+.table-section h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.income-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.income-table th { background: var(--navy); color: #fff; padding: 10px 12px; text-align: center; font-size: 12px; }
+.income-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: center; }
+.income-table tr.highlight td { background: var(--sky-pale); font-weight: 700; color: var(--navy); }
+.share-row { display: flex; gap: 8px; margin-top: 14px; }
+.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+.share-x { background: #000; }
+.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
+.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
+.cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
+.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="service/">サービス</a>
+      <a href="tools.html" style="color:var(--sky);font-weight:700;">無料ツール</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
+  <h1>ふるさと納税、いくらまでお得？</h1>
+  <p class="hero-lead">年収・家族構成を選ぶだけ。控除上限額と実質2,000円でもらえるお得額をリアルタイムで計算します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">控除上限を即計算</span>
+    <span class="hero-tag">家族構成対応</span>
+    <span class="hero-tag">住宅ローン控除反映</span>
+  </div>
+</div>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="main">
+  <div class="tool-grid">
+    <div class="input-panel">
+      <h2>あなたの情報を入力</h2>
+
+      <div class="field">
+        <div class="field-label">年収<span class="field-val" id="lbl-income">500万円</span></div>
+        <input type="range" id="sl-income" min="200" max="2000" step="50" value="500" oninput="sync('income',this.value);calc()">
+        <div class="field-ticks"><span>200万</span><span>1,100万</span><span>2,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">家族構成</div>
+        <div class="family-grid">
+          <button class="seg-btn on" id="fam-single" onclick="setFamily('single')">独身</button>
+          <button class="seg-btn" id="fam-couple" onclick="setFamily('couple')">夫婦</button>
+          <button class="seg-btn" id="fam-c1" onclick="setFamily('c1')">夫婦+子1</button>
+          <button class="seg-btn" id="fam-c2" onclick="setFamily('c2')">夫婦+子2</button>
+          <button class="seg-btn" id="fam-c3" onclick="setFamily('c3')">夫婦+子3</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">住宅ローン控除額<span class="field-val" id="lbl-hloan">0万円</span></div>
+        <input type="range" id="sl-hloan" min="0" max="50" step="1" value="0" oninput="sync('hloan',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>25万</span><span>50万</span></div>
+      </div>
+    </div>
+
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-label">控除上限額（目安）</div>
+          <div class="result-amount" id="result-amount">―</div>
+          <div class="result-sub">実質2,000円負担でこの金額まで寄付できます</div>
+        </div>
+        <div class="result-body">
+          <div class="stat-row">
+            <span class="stat-k">所得税の還付（目安）</span>
+            <span class="stat-v good" id="r-income-tax">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">住民税の控除（目安）</span>
+            <span class="stat-v good" id="r-local-tax">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">実質負担額</span>
+            <span class="stat-v" id="r-burden">2,000円</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">お得額（返礼品価値目安）</span>
+            <span class="stat-v good" id="r-benefit">―</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-box">
+        ※ この計算はあくまで目安です。実際の控除上限額は給与以外の収入・各種控除の状況によって異なります。正確な金額はお住まいの自治体や税理士にご確認ください。
+      </div>
+
+      <div class="share-row">
+        <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
+      </div>
+      <div class="cta-contact-box">
+        <div class="cta-contact-text">節税の活用方法、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
+        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-section">
+    <h3>年収別 控除上限額の目安（独身の場合）</h3>
+    <table class="income-table">
+      <thead>
+        <tr>
+          <th>年収</th>
+          <th>独身・共働き</th>
+          <th>夫婦（配偶者控除あり）</th>
+          <th>夫婦+子1（高校生）</th>
+        </tr>
+      </thead>
+      <tbody id="income-table-body"></tbody>
+    </table>
+    <p style="font-size:11px;color:var(--text-light);margin-top:8px;">※ 総務省の目安に基づく簡易計算値です。実際の金額とは異なる場合があります。</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>&copy; 2025 Life Asset Office. All rights reserved.</p>
+</footer>
+
+<script src="/nav.js"></script>
+<script>
+var income = 500, family = 'single', hloan = 0;
+
+function sync(key, val) {
+  if (key === 'income') {
+    income = parseFloat(val);
+    document.getElementById('lbl-income').textContent = parseInt(val).toLocaleString()+'万円';
+  }
+  if (key === 'hloan') {
+    hloan = parseFloat(val);
+    document.getElementById('lbl-hloan').textContent = val+'万円';
+  }
+}
+function setFamily(f) {
+  family = f;
+  ['single','couple','c1','c2','c3'].forEach(function(id) {
+    document.getElementById('fam-'+id).className = 'seg-btn' + (id===f?' on':'');
+  });
+  calc();
+}
+
+// 控除上限計算（総務省モデルに基づく簡易版）
+function calcLimit(inc, fam, hl) {
+  var deduction = personalDeduction(inc);
+  var familyDed = familyDeduction(fam);
+  var taxableIncome = inc * 10000 - deduction - familyDed;
+  if (taxableIncome < 0) taxableIncome = 0;
+  var incomeTaxRate = getTaxRate(taxableIncome);
+  var localTaxRate = 0.10;
+  var limit = taxableIncome * localTaxRate * 0.2 / (1 - incomeTaxRate * 1.021 - localTaxRate * 0.2);
+  limit = limit / 10000;
+  limit = Math.max(0, limit - hl * 0.3);
+  return Math.round(limit);
+}
+function personalDeduction(inc) {
+  if (inc <= 162.5) return 650000;
+  if (inc <= 180) return inc * 10000 * 0.4;
+  if (inc <= 360) return inc * 10000 * 0.3 + 180000;
+  if (inc <= 660) return inc * 10000 * 0.2 + 540000;
+  if (inc <= 850) return inc * 10000 * 0.1 + 1200000;
+  return 1950000;
+}
+function familyDeduction(fam) {
+  var base = 480000;
+  if (fam === 'single') return base;
+  if (fam === 'couple') return base + 380000;
+  if (fam === 'c1') return base + 380000 + 380000;
+  if (fam === 'c2') return base + 380000 + 380000 * 2;
+  if (fam === 'c3') return base + 380000 + 380000 * 3;
+  return base;
+}
+function getTaxRate(taxable) {
+  if (taxable <= 1950000) return 0.05;
+  if (taxable <= 3300000) return 0.10;
+  if (taxable <= 6950000) return 0.20;
+  if (taxable <= 9000000) return 0.23;
+  if (taxable <= 18000000) return 0.33;
+  return 0.40;
+}
+
+function calc() {
+  var limit = calcLimit(income, family, hloan);
+  var incomeTaxRefund = Math.round(limit * 0.10);
+  var localTaxDed = Math.round(limit * 0.88);
+  var benefit = Math.round(limit * 0.30);
+
+  document.getElementById('result-amount').textContent = limit.toLocaleString()+'円';
+  document.getElementById('r-income-tax').textContent = incomeTaxRefund.toLocaleString()+'円';
+  document.getElementById('r-local-tax').textContent = localTaxDed.toLocaleString()+'円';
+  document.getElementById('r-benefit').textContent = '約'+benefit.toLocaleString()+'円相当';
+  renderTable();
+}
+
+function renderTable() {
+  var rows = [300, 400, 500, 700, 1000, 1500];
+  var tbody = document.getElementById('income-table-body');
+  var html = '';
+  rows.forEach(function(inc) {
+    var highlight = (Math.abs(inc - income) < 80) ? ' class="highlight"' : '';
+    var s = calcLimit(inc, 'single', 0);
+    var c = calcLimit(inc, 'couple', 0);
+    var c1 = calcLimit(inc, 'c1', 0);
+    html += '<tr'+highlight+'>';
+    html += '<td>'+inc+'万円</td>';
+    html += '<td>'+s.toLocaleString()+'円</td>';
+    html += '<td>'+c.toLocaleString()+'円</td>';
+    html += '<td>'+c1.toLocaleString()+'円</td>';
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function shareX() {
+  var amt = document.getElementById('result-amount').textContent;
+  var text = encodeURIComponent('ふるさと納税の控除上限額が'+amt+'でした！ #ライフアセットオフィス #ふるさと納税');
+  var url = encodeURIComponent('https://lifeassetoffice.net/furusato-sim.html');
+  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url, '_blank', 'noopener,noreferrer');
+}
+
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+  document.getElementById('pb').style.width = pct + '%';
+});
+
+calc();
+</script>
+</body>
+</html>

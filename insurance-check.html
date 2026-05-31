@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://lifeassetoffice.net/insurance-check.html">
+<title>保険料見直しシミュレーター｜ライフアセットオフィス</title>
+<meta name="description" content="年齢・年収・家族構成・現在の保険料を入力するだけ。適正保険料の目安と払いすぎ度をリアルタイム診断。登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="保険料見直しシミュレーター｜ライフアセットオフィス">
+<meta property="og:description" content="適正保険料の目安を即計算。払いすぎているか一目でわかる。">
+<meta property="og:url" content="https://lifeassetoffice.net/insurance-check.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+.hero { background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+.hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
+.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
+.main { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
+.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.field { margin-bottom: 20px; }
+.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+.seg { display: flex; gap: 4px; flex-wrap: wrap; }
+.seg-btn { flex: 1; min-width: 70px; padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; }
+.seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
+.result-panel { position: sticky; top: 76px; }
+@media(max-width:480px){ .result-panel { position: static; } }
+.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+.result-header { padding: 18px 22px 14px; text-align: center; transition: background .3s, border-bottom-color .3s; }
+.result-header.ok { background: var(--greenl); border-bottom: 2px solid var(--greenb); }
+.result-header.over { background: var(--redl); border-bottom: 2px solid var(--redb); }
+.result-header.warn { background: var(--amberl); border-bottom: 2px solid var(--amberb); }
+.result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; margin-bottom: 4px; }
+.result-header.ok .result-label { color: var(--green); }
+.result-header.over .result-label { color: var(--red); }
+.result-header.warn .result-label { color: var(--amber); }
+.result-amount { font-size: clamp(1.8rem,5vw,2.5rem); font-weight: 900; line-height: 1.1; }
+.result-header.ok .result-amount { color: var(--green); }
+.result-header.over .result-amount { color: var(--red); }
+.result-header.warn .result-amount { color: var(--amber); }
+.result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+.result-body { padding: 18px 20px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; }
+.stat-k { font-size: 12.5px; color: var(--text-light); }
+.stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
+.stat-v.good { color: var(--green); }
+.stat-v.bad { color: var(--red); }
+.stat-v.warn { color: var(--amber); }
+.bar-label { font-size: 12px; font-weight: 700; color: var(--text-light); margin: 14px 0 6px; }
+.bar-track { width: 100%; height: 12px; background: var(--border); border-radius: 6px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width .4s, background .3s; }
+.save-box { border-radius: 10px; padding: 12px 14px; margin: 12px 0 0; font-size: 13px; line-height: 1.7; }
+.save-box.over { background: var(--redl); border: 1px solid var(--redb); color: var(--red); font-weight: 700; }
+.save-box.ok { background: var(--greenl); border: 1px solid var(--greenb); color: var(--green); font-weight: 700; }
+.save-box.warn { background: var(--amberl); border: 1px solid var(--amberb); color: var(--amber); font-weight: 700; }
+.share-row { display: flex; gap: 8px; margin-top: 14px; }
+.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
+.share-x { background: #000; }
+.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
+.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
+.cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
+.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="service/">サービス</a>
+      <a href="tools.html" style="color:var(--sky);font-weight:700;">無料ツール</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム診断</div>
+  <h1>保険料、払いすぎていませんか？</h1>
+  <p class="hero-lead">年齢・年収・家族構成を選ぶだけ。適正保険料の目安と払いすぎ度をリアルタイムで診断します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">適正保険料を診断</span>
+    <span class="hero-tag">払いすぎ度をバー表示</span>
+    <span class="hero-tag">年間節約余地を計算</span>
+  </div>
+</div>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1266918303152498" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<div class="main">
+  <div class="tool-grid">
+    <div class="input-panel">
+      <h2>あなたの情報を入力</h2>
+
+      <div class="field">
+        <div class="field-label">年齢<span class="field-val" id="lbl-age">35歳</span></div>
+        <input type="range" id="sl-age" min="20" max="65" step="1" value="35" oninput="sync('age',this.value);calc()">
+        <div class="field-ticks"><span>20歳</span><span>42歳</span><span>65歳</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">家族構成</div>
+        <div class="seg">
+          <button class="seg-btn on" id="fam-single" onclick="setFamily('single')">独身</button>
+          <button class="seg-btn" id="fam-married" onclick="setFamily('married')">既婚子なし</button>
+          <button class="seg-btn" id="fam-children" onclick="setFamily('children')">既婚子あり</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">年収<span class="field-val" id="lbl-income">500万円</span></div>
+        <input type="range" id="sl-income" min="200" max="1500" step="50" value="500" oninput="sync('income',this.value);calc()">
+        <div class="field-ticks"><span>200万</span><span>850万</span><span>1,500万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">現在の月額保険料<span class="field-val" id="lbl-current">3万円</span></div>
+        <input type="range" id="sl-current" min="0" max="10" step="0.5" value="3" oninput="sync('current',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>5万</span><span>10万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">住居</div>
+        <div class="seg">
+          <button class="seg-btn on" id="home-own" onclick="setHome('own')">持ち家</button>
+          <button class="seg-btn" id="home-rent" onclick="setHome('rent')">賃貸</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="result-header ok" id="result-header">
+          <div class="result-label" id="result-label">診断結果</div>
+          <div class="result-amount" id="result-amount">―</div>
+          <div class="result-sub" id="result-sub">適正保険料の目安</div>
+        </div>
+        <div class="result-body">
+          <div class="stat-row">
+            <span class="stat-k">適正保険料（月額目安）</span>
+            <span class="stat-v" id="r-proper">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">現在の月額保険料</span>
+            <span class="stat-v" id="r-current">―</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">差額（月）</span>
+            <span class="stat-v" id="r-diff">―</span>
+          </div>
+
+          <div class="bar-label">払いすぎ度</div>
+          <div class="bar-track">
+            <div class="bar-fill" id="over-bar" style="width:50%;background:var(--amber);"></div>
+          </div>
+
+          <div class="save-box ok" id="save-box">診断中...</div>
+        </div>
+      </div>
+
+      <div class="share-row">
+        <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
+      </div>
+      <div class="cta-contact-box">
+        <div class="cta-contact-text">保険の見直し、FPに相談してみませんか？<br>無料でご相談を承っています。</div>
+        <a href="contact.html" class="cta-contact-btn">FPに無料相談する →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>&copy; 2025 Life Asset Office. All rights reserved.</p>
+</footer>
+
+<script src="/nav.js"></script>
+<script>
+var age = 35, family = 'single', income = 500, currentPremium = 3, homeOwn = true;
+
+function sync(key, val) {
+  if (key==='age') { age = parseFloat(val); document.getElementById('lbl-age').textContent = val+'歳'; }
+  if (key==='income') { income = parseFloat(val); document.getElementById('lbl-income').textContent = parseInt(val).toLocaleString()+'万円'; }
+  if (key==='current') { currentPremium = parseFloat(val); document.getElementById('lbl-current').textContent = val+'万円'; }
+}
+function setFamily(f) {
+  family = f;
+  ['single','married','children'].forEach(function(id) {
+    document.getElementById('fam-'+id).className = 'seg-btn' + (id===f?' on':'');
+  });
+  calc();
+}
+function setHome(h) {
+  homeOwn = (h === 'own');
+  document.getElementById('home-own').className = 'seg-btn' + (homeOwn?' on':'');
+  document.getElementById('home-rent').className = 'seg-btn' + (!homeOwn?' on':'');
+  calc();
+}
+
+function calcProper(age, family, income, homeOwn) {
+  var base = income * 10000 * 0.05 / 12;
+  var ageFactor = age < 30 ? 0.7 : age < 40 ? 0.9 : age < 50 ? 1.1 : 1.3;
+  var famFactor = family === 'single' ? 0.6 : family === 'married' ? 1.0 : 1.5;
+  var homeFactor = homeOwn ? 0.85 : 1.1;
+  var proper = base * ageFactor * famFactor * homeFactor;
+  return proper / 10000;
+}
+
+function calc() {
+  var proper = calcProper(age, family, income, homeOwn);
+  var diff = currentPremium - proper;
+  var ratio = proper > 0 ? (currentPremium / proper) : 1;
+  var barPct = Math.min(ratio * 50, 100);
+
+  var header = document.getElementById('result-header');
+  var lbl = document.getElementById('result-label');
+  var amt = document.getElementById('result-amount');
+  var sub = document.getElementById('result-sub');
+  var bar = document.getElementById('over-bar');
+  var saveBox = document.getElementById('save-box');
+  var diffEl = document.getElementById('r-diff');
+
+  document.getElementById('r-proper').textContent = proper.toFixed(1)+'万円/月';
+  document.getElementById('r-current').textContent = currentPremium.toFixed(1)+'万円/月';
+  diffEl.textContent = diff >= 0 ? '+'+diff.toFixed(1)+'万円' : diff.toFixed(1)+'万円';
+
+  if (ratio > 1.3) {
+    header.className = 'result-header over';
+    lbl.textContent = '払いすぎの可能性あり';
+    amt.textContent = currentPremium.toFixed(1)+'万円/月';
+    sub.textContent = '適正目安の'+(ratio*100).toFixed(0)+'%';
+    bar.style.width = Math.min(barPct, 100) + '%';
+    bar.style.background = 'var(--red)';
+    diffEl.className = 'stat-v bad';
+    var annualSave = diff * 12;
+    saveBox.className = 'save-box over';
+    saveBox.textContent = '年間約'+annualSave.toFixed(0)+'万円の節約余地あり';
+  } else if (ratio > 1.1) {
+    header.className = 'result-header warn';
+    lbl.textContent = 'やや払いすぎかも';
+    amt.textContent = currentPremium.toFixed(1)+'万円/月';
+    sub.textContent = '適正目安の'+(ratio*100).toFixed(0)+'%';
+    bar.style.width = Math.min(barPct, 100) + '%';
+    bar.style.background = 'var(--amber)';
+    diffEl.className = 'stat-v warn';
+    saveBox.className = 'save-box warn';
+    saveBox.textContent = '見直しで月'+(diff*10000).toFixed(0)+'円の節約余地があります';
+  } else {
+    header.className = 'result-header ok';
+    lbl.textContent = '適正範囲内です';
+    amt.textContent = currentPremium.toFixed(1)+'万円/月';
+    sub.textContent = '適正目安の'+(ratio*100).toFixed(0)+'%';
+    bar.style.width = Math.min(barPct, 100) + '%';
+    bar.style.background = 'var(--green)';
+    diffEl.className = 'stat-v good';
+    saveBox.className = 'save-box ok';
+    saveBox.textContent = '適正範囲内です。現在の保険内容を維持しましょう。';
+  }
+}
+
+function shareX() {
+  var label = document.getElementById('result-label').textContent;
+  var text = encodeURIComponent('保険料見直し診断：「'+label+'」！ #ライフアセットオフィス #保険見直し');
+  var url = encodeURIComponent('https://lifeassetoffice.net/insurance-check.html');
+  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url, '_blank', 'noopener,noreferrer');
+}
+
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+  document.getElementById('pb').style.width = pct + '%';
+});
+
+calc();
+</script>
+</body>
+</html>
