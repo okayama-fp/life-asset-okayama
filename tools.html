@@ -50,13 +50,6 @@ a { color: inherit; text-decoration: none; }
 .main { max-width: 1060px; margin: 0 auto; padding: 40px 20px 80px; }
 .category-section { margin-bottom: 40px; }
 .category-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.category-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-.cat-retirement { background: #fef3c7; }
-.cat-housing    { background: #dbeafe; }
-.cat-invest     { background: #d1fae5; }
-.cat-tax        { background: #ede9fe; }
-.cat-insurance  { background: #fce7f3; }
-.cat-education  { background: #ffedd5; }
 .category-title { font-size: 16px; font-weight: 900; color: var(--navy); }
 .category-count { font-size: 12px; color: var(--text-light); background: var(--border); border-radius: 20px; padding: 2px 10px; }
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
@@ -72,8 +65,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 1px 6px rgba(0,0,0,.04);
 }
 .tool-card:hover { border-color: var(--sky); box-shadow: 0 4px 16px rgba(26,122,74,.12); transform: translateY(-2px); }
-.tool-card-top { display: flex; align-items: center; gap: 12px; }
-.tool-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.tool-card-top { display: flex; flex-direction: column; gap: 4px; }
 .tool-title { font-size: 14px; font-weight: 800; color: var(--navy); line-height: 1.35; }
 .tool-tags { display: flex; gap: 5px; flex-wrap: wrap; }
 .tool-tag { background: var(--sky-pale); color: var(--sky); font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
@@ -147,29 +139,22 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <!-- 老後 -->
   <div class="category-section">
     <div class="category-header">
-      <div class="category-icon cat-retirement">🏖️</div>
       <span class="category-title">老後・リタイア</span>
       <span class="category-count">2ツール</span>
     </div>
     <div class="tools-grid">
       <a href="retirement-gap.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#fef3c7;">🧓</div>
-          <div>
-            <div class="tool-title">老後資金不足額シミュレーター</div>
-            <div class="tool-tags"><span class="tool-tag">老後</span><span class="tool-tag">年金</span><span class="tool-tag">貯蓄</span></div>
-          </div>
+          <div class="tool-title">老後資金不足額シミュレーター</div>
+          <div class="tool-tags"><span class="tool-tag">老後</span><span class="tool-tag">年金</span><span class="tool-tag">貯蓄</span></div>
         </div>
         <div class="tool-desc">年金・生活費・貯蓄から老後資金の不足額をリアルタイム計算。夫婦モデル・おひとりさまのプリセット付き。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
       </a>
       <a href="fire-sim.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#fee2e2;">🔥</div>
-          <div>
-            <div class="tool-title">FIRE達成年齢シミュレーター</div>
-            <div class="tool-tags"><span class="tool-tag">FIRE</span><span class="tool-tag">資産形成</span><span class="tool-tag">感度分析</span></div>
-          </div>
+          <div class="tool-title">FIRE達成年齢シミュレーター</div>
+          <div class="tool-tags"><span class="tool-tag">FIRE</span><span class="tool-tag">資産形成</span><span class="tool-tag">感度分析</span></div>
         </div>
         <div class="tool-desc">現在の資産・収入・支出からFIRE達成年齢を超大きく表示。資産推移グラフと3%/5%/7%感度分析テーブル付き。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
@@ -180,40 +165,30 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <!-- 住宅 -->
   <div class="category-section">
     <div class="category-header">
-      <div class="category-icon cat-housing">🏠</div>
       <span class="category-title">住宅ローン</span>
       <span class="category-count">3ツール</span>
     </div>
     <div class="tools-grid">
       <a href="loan-check.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#dbeafe;">📋</div>
-          <div>
-            <div class="tool-title">住宅ローン金利リスク診断</div>
-            <div class="tool-tags"><span class="tool-tag">住宅ローン</span><span class="tool-tag">金利リスク</span><span class="existing-badge">既存</span></div>
-          </div>
+          <div class="tool-title">住宅ローン金利リスク診断</div>
+          <div class="tool-tags"><span class="tool-tag">住宅ローン</span><span class="tool-tag">金利リスク</span><span class="existing-badge">既存</span></div>
         </div>
         <div class="tool-desc">借入額・金利・年収を入力するだけ。返済負担率・金利上昇リスク・住宅ローン控除の逆ざやを一括診断。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
       </a>
       <a href="loan.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#dbeafe;">🏦</div>
-          <div>
-            <div class="tool-title">住宅ローン借入可能額チェック</div>
-            <div class="tool-tags"><span class="tool-tag">住宅ローン</span><span class="tool-tag">借入額</span><span class="existing-badge">既存</span></div>
-          </div>
+          <div class="tool-title">住宅ローン借入可能額チェック</div>
+          <div class="tool-tags"><span class="tool-tag">住宅ローン</span><span class="tool-tag">借入額</span><span class="existing-badge">既存</span></div>
         </div>
         <div class="tool-desc">年収・返済期間・金利から借入可能額をリアルタイム計算。物件探しの前に確認しましょう。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
       </a>
       <a href="loan-refinance.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#d1fae5;">🔄</div>
-          <div>
-            <div class="tool-title">住宅ローン借り換え節約シミュレーター</div>
-            <div class="tool-tags"><span class="tool-tag">借り換え</span><span class="tool-tag">節約</span><span class="tool-tag">手数料</span></div>
-          </div>
+          <div class="tool-title">住宅ローン借り換え節約シミュレーター</div>
+          <div class="tool-tags"><span class="tool-tag">借り換え</span><span class="tool-tag">節約</span><span class="tool-tag">手数料</span></div>
         </div>
         <div class="tool-desc">残債・現在の金利・借り換え後の金利を入力するだけ。総節約額と手数料回収期間をリアルタイム計算。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
@@ -224,29 +199,22 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <!-- 投資・資産形成 -->
   <div class="category-section">
     <div class="category-header">
-      <div class="category-icon cat-invest">📈</div>
       <span class="category-title">投資・資産形成</span>
       <span class="category-count">2ツール</span>
     </div>
     <div class="tools-grid">
       <a href="simulation.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#d1fae5;">📊</div>
-          <div>
-            <div class="tool-title">資産シミュレーター</div>
-            <div class="tool-tags"><span class="tool-tag">積立</span><span class="tool-tag">複利</span><span class="existing-badge">既存</span></div>
-          </div>
+          <div class="tool-title">資産シミュレーター</div>
+          <div class="tool-tags"><span class="tool-tag">積立</span><span class="tool-tag">複利</span><span class="existing-badge">既存</span></div>
         </div>
         <div class="tool-desc">現在の資産・毎月の積立・利回りを入力するだけ。将来の資産額をグラフでリアルタイム確認。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
       </a>
       <a href="nisa-ideco-sim.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#d1fae5;">💹</div>
-          <div>
-            <div class="tool-title">NISA・iDeCo節税メリット計算</div>
-            <div class="tool-tags"><span class="tool-tag">NISA</span><span class="tool-tag">iDeCo</span><span class="tool-tag">節税</span></div>
-          </div>
+          <div class="tool-title">NISA・iDeCo節税メリット計算</div>
+          <div class="tool-tags"><span class="tool-tag">NISA</span><span class="tool-tag">iDeCo</span><span class="tool-tag">節税</span></div>
         </div>
         <div class="tool-desc">NISA・iDeCo・課税口座の3本比較グラフ。節税メリットと課税口座との差額をリアルタイム計算。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
@@ -257,18 +225,14 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <!-- 節税 -->
   <div class="category-section">
     <div class="category-header">
-      <div class="category-icon cat-tax">💴</div>
       <span class="category-title">節税</span>
       <span class="category-count">1ツール</span>
     </div>
     <div class="tools-grid">
       <a href="furusato-sim.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#ede9fe;">🎁</div>
-          <div>
-            <div class="tool-title">ふるさと納税 控除上限額シミュレーター</div>
-            <div class="tool-tags"><span class="tool-tag">ふるさと納税</span><span class="tool-tag">節税</span><span class="tool-tag">家族構成</span></div>
-          </div>
+          <div class="tool-title">ふるさと納税 控除上限額シミュレーター</div>
+          <div class="tool-tags"><span class="tool-tag">ふるさと納税</span><span class="tool-tag">節税</span><span class="tool-tag">家族構成</span></div>
         </div>
         <div class="tool-desc">年収・家族構成・住宅ローン控除を選ぶだけ。実質2,000円でもらえるお得額を即計算。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
@@ -279,18 +243,14 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <!-- 保険 -->
   <div class="category-section">
     <div class="category-header">
-      <div class="category-icon cat-insurance">🛡️</div>
       <span class="category-title">保険</span>
       <span class="category-count">1ツール</span>
     </div>
     <div class="tools-grid">
       <a href="insurance-check.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#fce7f3;">🔍</div>
-          <div>
-            <div class="tool-title">保険料見直しシミュレーター</div>
-            <div class="tool-tags"><span class="tool-tag">保険</span><span class="tool-tag">見直し</span><span class="tool-tag">払いすぎ診断</span></div>
-          </div>
+          <div class="tool-title">保険料見直しシミュレーター</div>
+          <div class="tool-tags"><span class="tool-tag">保険</span><span class="tool-tag">見直し</span><span class="tool-tag">払いすぎ診断</span></div>
         </div>
         <div class="tool-desc">年齢・年収・家族構成から適正保険料の目安を計算。払いすぎ度をバーで一目表示。年間節約余地も確認。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
@@ -301,18 +261,14 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <!-- 教育 -->
   <div class="category-section">
     <div class="category-header">
-      <div class="category-icon cat-education">🎓</div>
       <span class="category-title">教育費</span>
       <span class="category-count">1ツール</span>
     </div>
     <div class="tools-grid">
       <a href="education-sim.html" class="tool-card">
         <div class="tool-card-top">
-          <div class="tool-icon" style="background:#ffedd5;">📚</div>
-          <div>
-            <div class="tool-title">教育費積立プランナー</div>
-            <div class="tool-tags"><span class="tool-tag">教育費</span><span class="tool-tag">積立</span><span class="tool-tag">文科省統計</span></div>
-          </div>
+          <div class="tool-title">教育費積立プランナー</div>
+          <div class="tool-tags"><span class="tool-tag">教育費</span><span class="tool-tag">積立</span><span class="tool-tag">文科省統計</span></div>
         </div>
         <div class="tool-desc">子供の年齢・進学コース（全公立〜全私立）を選ぶだけ。大学卒業までの必要額と毎月の積立目標をリアルタイム計算。</div>
         <div class="tool-btn">使ってみる <span class="tool-btn-arrow">→</span></div>
