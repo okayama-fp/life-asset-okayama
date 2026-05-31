@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ファーストビュー サンプル</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: #f8fbff; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ─── HEADER ─── */
+  header {
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid #e2e8f0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    justify-content: space-between;
+  }
+  .logo-name { font-size: 20px; font-weight: 900;
+    background: linear-gradient(90deg,#1a7a4a,#4ade80);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .logo-tag { font-size: 10px; color: #64748b; }
+  header nav { display: flex; gap: 20px; font-size: 13px; color: #64748b; }
+  .btn-header { background: #1a7a4a; color: #fff; font-size: 13px; font-weight: 700;
+    padding: 9px 20px; border-radius: 50px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 50%, #1f5c3a 100%);
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    padding: 60px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(74,222,128,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26,122,74,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ラベル */
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(74,222,128,0.15);
+    border: 1px solid rgba(74,222,128,0.35);
+    color: #86efac;
+    font-size: 12px; font-weight: 700; letter-spacing: .12em;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero-tag-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
+
+  /* キャッチコピー */
+  .hero-catch {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero-catch em {
+    font-style: normal;
+    background: linear-gradient(90deg, #4ade80, #86efac);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* サブコピー */
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .hero-fp-note {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 36px;
+  }
+
+  /* CTAボタン群 */
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(90deg, #1a7a4a, #22c55e);
+    color: #fff;
+    font-size: 15px; font-weight: 800;
+    padding: 16px 30px;
+    border-radius: 50px;
+    box-shadow: 0 6px 24px rgba(34,197,94,0.4);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.5); }
+  .btn-primary .btn-icon { font-size: 18px; }
+  .btn-primary .btn-sub { font-size: 11px; font-weight: 400; opacity: .85; display: block; }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 15px; font-weight: 700;
+    padding: 16px 30px;
+    border-radius: 50px;
+    transition: background .2s, border-color .2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.5); }
+  .btn-secondary .btn-icon { font-size: 18px; }
+  .btn-secondary .btn-sub { font-size: 11px; font-weight: 400; opacity: .7; display: block; }
+
+  /* 実績バッジ */
+  .hero-stats {
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .hero-stat {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+  }
+  .hero-stat strong { color: #fff; font-size: 18px; font-weight: 900; }
+
+  /* ─── 右パネル ─── */
+  .hero-panel {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(8px);
+  }
+  .panel-title {
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: .1em;
+    margin-bottom: 16px;
+  }
+  .panel-links { display: flex; flex-direction: column; gap: 10px; }
+  .panel-link {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #fff;
+    font-size: 13.5px; font-weight: 700;
+    transition: background .2s;
+  }
+  .panel-link:hover { background: rgba(255,255,255,0.14); }
+  .panel-link-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .panel-link-icon.green { background: rgba(74,222,128,0.2); }
+  .panel-link-icon.blue  { background: rgba(96,165,250,0.2); }
+  .panel-link-icon.amber { background: rgba(251,191,36,0.2); }
+  .panel-link-sub { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5); display: block; margin-top: 2px; }
+  .panel-link-arrow { margin-left: auto; color: rgba(255,255,255,0.35); font-size: 16px; }
+
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero { min-height: auto; padding: 40px 20px 50px; }
+    .hero-catch { font-size: 30px; }
+    .btn-primary, .btn-secondary { font-size: 14px; padding: 13px 22px; }
+    header nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo-name">Life Asset</div>
+    <div class="logo-tag">ライフアセットオフィス</div>
+  </div>
+  <nav>
+    <a href="#">サービス</a>
+    <a href="#">ローン診断</a>
+    <a href="#">ブログ</a>
+  </nav>
+  <a href="#" class="btn-header">お問い合わせ</a>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- 左：テキスト & CTA -->
+    <div>
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        FP技能士が運営する中立な情報サイト
+      </div>
+
+      <h1 class="hero-catch">
+        住宅ローン・資産運用、<br>
+        <em>FPに相談できます。</em>
+      </h1>
+
+      <p class="hero-sub">
+        お金の不安をひとりで抱えていませんか？<br>
+        住宅ローンの金利リスクから老後資金まで、<br>中立な立場でわかりやすくサポートします。
+      </p>
+      <p class="hero-fp-note">※投資助言業の登録はありません。情報提供・相談サービスです。</p>
+
+      <div class="hero-ctas">
+        <a href="loan-check.html" class="btn-primary">
+          <span class="btn-icon">🏠</span>
+          <span>
+            住宅ローン診断
+            <span class="btn-sub">無料・30秒で完了</span>
+          </span>
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <span class="btn-icon">💬</span>
+          <span>
+            資産運用を相談する
+            <span class="btn-sub">お問い合わせフォーム</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>27</strong>本のブログ記事
+        </div>
+        <div class="hero-stat">
+          <strong>3</strong>つの無料ツール
+        </div>
+        <div class="hero-stat">
+          <strong>登録不要</strong>で今すぐ使える
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：クイックアクセスパネル -->
+    <div class="hero-panel">
+      <div class="panel-title">▶ よく使われているページ</div>
+      <div class="panel-links">
+        <a href="loan-check.html" class="panel-link">
+          <div class="panel-link-icon green">📊</div>
+          <div>
+            住宅ローン金利リスク診断
+            <span class="panel-link-sub">変動 vs 固定・返済負担率をチェック</span>
+          </div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+        <a href="simulation.html" class="panel-link">
+          <div class="panel-link-icon blue">💹</div>
+          <div>
+            資産シミュレーター
+            <span class="panel-link-sub">老後資金・NISA積立をシミュレーション</span>
+          </div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+        <a href="blog/" class="panel-link">
+          <div class="panel-link-icon amber">📝</div>
+          <div>
+            FPブログを読む
+            <span class="panel-link-sub">住宅ローン・投資・保険の最新情報</span>
+          </div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+        <a href="#contact" class="panel-link">
+          <div class="panel-link-icon green">✉️</div>
+          <div>
+            FPに相談する
+            <span class="panel-link-sub">メールで気軽にお問い合わせ</span>
+          </div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
