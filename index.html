@@ -29,9 +29,115 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
   <style>
     @keyframes lpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
+    @keyframes hpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);}}
     img[src*="life-asset-kun"] {
       filter: sepia(1) saturate(2.5) hue-rotate(90deg) brightness(0.88);
       border-radius: 10px;
+    }
+    /* ─── NEW HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 50%, #1f5c3a 100%);
+      min-height: calc(100vh - 68px);
+      display: flex; align-items: center;
+      padding: 60px 32px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      top: -120px; right: -120px;
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(74,222,128,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      bottom: -100px; left: -100px;
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(26,122,74,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 360px;
+      gap: 56px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-tag-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(74,222,128,0.15);
+      border: 1px solid rgba(74,222,128,0.35);
+      color: #86efac;
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 24px;
+    }
+    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: hpulse 2s infinite; }
+    .hero-catch {
+      font-size: clamp(28px, 4.5vw, 50px);
+      font-weight: 900; color: #fff;
+      line-height: 1.25; margin-bottom: 20px;
+    }
+    .hero-catch em {
+      font-style: normal;
+      background: linear-gradient(90deg, #4ade80, #86efac);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.85; margin-bottom: 10px; }
+    .hero-fp-note { font-size: 11.5px; color: rgba(255,255,255,0.38); margin-bottom: 32px; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+    .btn-hero-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(90deg, #1a7a4a, #22c55e);
+      color: #fff; font-size: 15px; font-weight: 800;
+      padding: 15px 28px; border-radius: 50px;
+      box-shadow: 0 6px 24px rgba(34,197,94,0.38);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.5); }
+    .btn-hero-primary .bsub { font-size: 10.5px; font-weight: 400; opacity: .85; display: block; }
+    .btn-hero-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.28);
+      color: #fff; font-size: 15px; font-weight: 700;
+      padding: 15px 28px; border-radius: 50px;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.5); }
+    .btn-hero-secondary .bsub { font-size: 10.5px; font-weight: 400; opacity: .65; display: block; }
+    .hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+    .hero-stat { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.55); font-size: 13px; }
+    .hero-stat strong { color: #fff; font-size: 17px; font-weight: 900; }
+    .hero-panel {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-panel-title { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: .1em; margin-bottom: 14px; }
+    .panel-links { display: flex; flex-direction: column; gap: 8px; }
+    .panel-link {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px; padding: 12px 14px;
+      color: #fff; font-size: 13px; font-weight: 700;
+      transition: background .2s;
+    }
+    .panel-link:hover { background: rgba(255,255,255,0.14); }
+    .panel-link-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .pli-green { background: rgba(74,222,128,0.18); }
+    .pli-blue  { background: rgba(96,165,250,0.18); }
+    .pli-amber { background: rgba(251,191,36,0.18); }
+    .panel-link-sub { font-size: 10.5px; font-weight: 400; color: rgba(255,255,255,0.45); display: block; margin-top: 2px; }
+    .panel-link-arrow { margin-left: auto; color: rgba(255,255,255,0.3); font-size: 16px; flex-shrink: 0; }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero { min-height: auto; padding: 40px 20px 48px; }
+      .hero-panel { display: none; }
     }
   </style>
 </head>
@@ -66,19 +172,62 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-label">安心サポート</div>
-      <h1 class="hero-title">あなたの<em>資産</em>と<em>未来</em>を<br>共に育てるパートナー</h1>
-      <p class="hero-desc">個人資産管理から資金調達まで、<br>お一人おひとりに最適なご提案をいたします。</p>
-      <p style="font-size:0.85rem;color:var(--text-sub);margin-top:8px;">FP技能士が運営する、中立な家計・資産の情報サイトです。</p>
-      <div class="hero-badges">
-        <div class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>FP技能士が運営する情報発信</div>
-        <div class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>安心・丁寧な情報提供</div>
-        <div class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>FP資格者が中立な立場で情報発信</div>
+    <!-- 左：キャッチ & CTA -->
+    <div>
+      <div class="hero-tag-badge">
+        <span class="hero-tag-dot"></span>
+        FP技能士が運営する中立な情報サイト
+      </div>
+      <h1 class="hero-catch">
+        住宅ローン・資産運用、<br>
+        <em>FPに相談できます。</em>
+      </h1>
+      <p class="hero-sub">
+        お金の不安をひとりで抱えていませんか？<br>
+        住宅ローンの金利リスクから老後資金まで、<br>中立な立場でわかりやすくサポートします。
+      </p>
+      <p class="hero-fp-note">※投資助言業の登録はありません。情報提供・相談サービスです。</p>
+      <div class="hero-ctas">
+        <a href="loan-check.html" class="btn-hero-primary">
+          <span style="font-size:20px;">🏠</span>
+          <span>住宅ローン診断<span class="bsub">無料・30秒で完了</span></span>
+        </a>
+        <a href="#contact" class="btn-hero-secondary">
+          <span style="font-size:20px;">💬</span>
+          <span>資産運用を相談する<span class="bsub">お問い合わせフォーム</span></span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>27</strong>本の記事</div>
+        <div class="hero-stat"><strong>3</strong>つの無料ツール</div>
+        <div class="hero-stat"><strong>登録不要</strong>で今すぐ使える</div>
       </div>
     </div>
-    <div class="hero-img-wrap">
-      <img src="images/couple-young.jpg" alt="若い夫婦" />
+    <!-- 右：クイックアクセスパネル -->
+    <div class="hero-panel">
+      <div class="hero-panel-title">▶ よく使われているページ</div>
+      <div class="panel-links">
+        <a href="loan-check.html" class="panel-link">
+          <div class="panel-link-icon pli-green">📊</div>
+          <div>住宅ローン金利リスク診断<span class="panel-link-sub">変動 vs 固定・返済負担率をチェック</span></div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+        <a href="simulation.html" class="panel-link">
+          <div class="panel-link-icon pli-blue">💹</div>
+          <div>資産シミュレーター<span class="panel-link-sub">老後資金・NISA積立をシミュレーション</span></div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+        <a href="blog/" class="panel-link">
+          <div class="panel-link-icon pli-amber">📝</div>
+          <div>FPブログを読む<span class="panel-link-sub">住宅ローン・投資・保険の最新情報</span></div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+        <a href="#contact" class="panel-link">
+          <div class="panel-link-icon pli-green">✉️</div>
+          <div>FPに相談する<span class="panel-link-sub">メールで気軽にお問い合わせ</span></div>
+          <span class="panel-link-arrow">›</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
