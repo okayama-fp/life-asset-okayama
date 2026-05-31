@@ -139,32 +139,32 @@
       .hero { min-height: auto; padding: 40px 20px 48px; }
       .hero-panel { display: none; }
     }
-    /* ─── MOBILE MINI SIM ─── */
-    .hero-mini-sim {
+    /* ─── MOBILE SIM ICONS ─── */
+    .hero-sim-icons {
       display: none;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 16px;
-      padding: 18px 18px 16px;
     }
-    .mini-sim-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: .1em; margin-bottom: 12px; }
-    .mini-sim-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .mini-sim-label { font-size: 12px; color: rgba(255,255,255,0.7); }
-    .mini-sim-val { font-size: 13px; font-weight: 800; color: #86efac; }
-    .mini-sim-slider { width: 100%; accent-color: #22c55e; height: 4px; margin-bottom: 14px; }
-    .mini-sim-result {
-      background: rgba(34,197,94,0.15);
-      border: 1px solid rgba(34,197,94,0.3);
-      border-radius: 10px;
-      padding: 10px 14px;
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 4px;
+    .sim-icons-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: .1em; margin-bottom: 10px; }
+    .sim-icons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
     }
-    .mini-sim-result-label { font-size: 11px; color: rgba(255,255,255,0.55); }
-    .mini-sim-result-num { font-size: 20px; font-weight: 900; color: #4ade80; line-height: 1; }
-    .mini-sim-link { display: block; text-align: center; font-size: 11.5px; color: rgba(255,255,255,0.45); margin-top: 10px; text-decoration: underline; }
+    .sim-icon-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 10px 4px;
+      color: #fff;
+      font-size: 10.5px; font-weight: 700;
+      text-align: center; line-height: 1.3;
+      transition: background .15s;
+    }
+    .sim-icon-btn:hover, .sim-icon-btn:active { background: rgba(74,222,128,0.18); border-color: rgba(74,222,128,0.35); }
+    .sim-icon-dot { width: 28px; height: 28px; border-radius: 8px; background: rgba(74,222,128,0.2); margin-bottom: 5px; display: flex; align-items: center; justify-content: center; }
+    .sim-icon-dot svg { width: 14px; height: 14px; stroke: #4ade80; fill: none; stroke-width: 2; }
     @media (max-width: 860px) {
-      .hero-mini-sim { display: block; }
+      .hero-sim-icons { display: block; }
     }
   </style>
 </head>
@@ -230,24 +230,35 @@
         <div class="hero-stat"><strong>登録不要</strong>で今すぐ使える</div>
       </div>
     </div>
-    <!-- スマホ用ミニシミュレーター -->
-    <div class="hero-mini-sim">
-      <div class="mini-sim-title">▶ かんたん資産シミュレーター</div>
-      <div class="mini-sim-row">
-        <span class="mini-sim-label">毎月積立額</span>
-        <span class="mini-sim-val" id="ms-monthly-val">3万円</span>
+    <!-- スマホ用シミュレーターアイコン -->
+    <div class="hero-sim-icons">
+      <div class="sim-icons-title">▶ シミュレーター</div>
+      <div class="sim-icons-grid">
+        <a href="asset-sim.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>資産
+        </a>
+        <a href="retirement-gap.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>老後
+        </a>
+        <a href="nisa-ideco-sim.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/></svg></div>NISA
+        </a>
+        <a href="furusato-sim.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>ふるさと
+        </a>
+        <a href="loan-refinance.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/></svg></div>ローン
+        </a>
+        <a href="insurance-check.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-7 10-7 10S5 17 5 12V6z"/></svg></div>保険
+        </a>
+        <a href="fire-sim.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/></svg></div>FIRE
+        </a>
+        <a href="education-sim.html" class="sim-icon-btn">
+          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M22 10l-10-7L2 10l10 7 10-7z"/><path d="M6 12v5a6 6 0 0 0 12 0v-5"/></svg></div>教育費
+        </a>
       </div>
-      <input type="range" class="mini-sim-slider" id="ms-monthly" min="1" max="10" value="3" oninput="miniCalc()">
-      <div class="mini-sim-row">
-        <span class="mini-sim-label">積立年数</span>
-        <span class="mini-sim-val" id="ms-years-val">20年</span>
-      </div>
-      <input type="range" class="mini-sim-slider" id="ms-years" min="5" max="40" value="20" step="5" oninput="miniCalc()">
-      <div class="mini-sim-result">
-        <span class="mini-sim-result-label">年率5%で運用すると</span>
-        <span class="mini-sim-result-num" id="ms-result">約993万円</span>
-      </div>
-      <a href="asset-sim.html" class="mini-sim-link">詳細シミュレーターで確認する →</a>
     </div>
     <!-- 右：クイックアクセスパネル -->
     <div class="hero-panel">
@@ -451,18 +462,6 @@
 </footer>
 
 <script src="/nav.js" defer></script>
-<script>
-function miniCalc(){
-  var m=parseInt(document.getElementById('ms-monthly').value);
-  var y=parseInt(document.getElementById('ms-years').value);
-  document.getElementById('ms-monthly-val').textContent=m+'万円';
-  document.getElementById('ms-years-val').textContent=y+'年';
-  var monthly=m*10000, r=0.05/12, n=y*12;
-  var fv=monthly*((Math.pow(1+r,n)-1)/r);
-  var man=Math.round(fv/10000);
-  document.getElementById('ms-result').textContent='約'+man.toLocaleString()+'万円';
-}
-</script>
 <script>
 fetch('blog/index.html').then(r=>r.text()).then(html=>{
   const doc=new DOMParser().parseFromString(html,'text/html');
