@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>loan-check.html 導線サンプル</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
+
+  /* ─────────────────────────────────────
+     パターン A：トップページ用 バナーセクション
+     heroの直下など、目立つ場所に配置
+  ───────────────────────────────────── */
+  .section-label {
+    background: #e2e8f0; color: #64748b;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    padding: 6px 20px; text-align: center;
+  }
+
+  /* ▼ パターン A-1：ダークグリーン・フル幅バナー */
+  .loan-banner-dark {
+    background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 100%);
+    padding: 56px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .loan-banner-dark::before {
+    content: ''; position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(74,222,128,0.1) 0%, transparent 65%);
+  }
+  .loan-banner-dark .inner { max-width: 760px; margin: 0 auto; position: relative; }
+  .loan-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(74,222,128,0.15);
+    border: 1px solid rgba(74,222,128,0.35);
+    color: #86efac;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+  }
+  .loan-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+    animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
+  .loan-banner-dark h2 {
+    font-size: clamp(22px, 4vw, 34px); font-weight: 900;
+    color: #fff; line-height: 1.3; margin-bottom: 14px;
+  }
+  .loan-banner-dark h2 em { font-style: normal;
+    background: linear-gradient(90deg,#4ade80,#86efac);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .loan-banner-dark p { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.85; margin-bottom: 28px; }
+  .loan-chips { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .loan-chip {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22);
+    color: #fff; font-size: 12px; padding: 5px 14px; border-radius: 20px;
+  }
+  .btn-loan-big {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(90deg,#1a7a4a,#22c55e);
+    color: #fff; font-size: 16px; font-weight: 800;
+    padding: 16px 40px; border-radius: 50px;
+    box-shadow: 0 6px 24px rgba(34,197,94,0.4);
+    transition: transform .2s, box-shadow .2s;
+    text-decoration: none;
+  }
+  .btn-loan-big:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.5); }
+  .btn-loan-note { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 12px; }
+
+  /* ▼ パターン A-2：ライトカード型（サービスセクション付近） */
+  .loan-card-light-wrap { background: #f0fdf4; padding: 48px 32px; }
+  .loan-card-light {
+    max-width: 900px; margin: 0 auto;
+    background: #fff;
+    border: 2px solid #86efac;
+    border-radius: 20px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .loan-card-light h3 { font-size: clamp(18px,3vw,26px); font-weight: 900; color: #1a3d2b; margin-bottom: 10px; }
+  .loan-card-light h3 span { color: #1a7a4a; }
+  .loan-card-light p { font-size: 14px; color: #64748b; line-height: 1.8; margin-bottom: 16px; }
+  .loan-card-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .loan-card-chip { background: #dcfce7; color: #1a7a4a; font-size: 11.5px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+  .btn-loan-green {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #1a7a4a; color: #fff;
+    font-size: 14px; font-weight: 800;
+    padding: 14px 28px; border-radius: 50px;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(26,122,74,0.35);
+    text-decoration: none;
+    transition: background .2s, transform .2s;
+  }
+  .btn-loan-green:hover { background: #22c55e; transform: translateY(-2px); }
+  @media (max-width: 640px) {
+    .loan-card-light { grid-template-columns: 1fr; }
+  }
+
+  /* ─────────────────────────────────────
+     パターン B：ブログ記事用 インラインCTA
+     記事本文の途中 or 末尾に挿入
+  ───────────────────────────────────── */
+
+  /* ▼ パターン B-1：記事本文中のインラインカード */
+  .article-mock { max-width: 760px; margin: 0 auto; padding: 40px 24px; }
+  .article-mock p { font-size: 15px; line-height: 2; color: #1e293b; margin-bottom: 20px; }
+
+  .blog-loan-cta {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 2px solid #86efac;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .blog-loan-cta-icon {
+    font-size: 40px; flex-shrink: 0;
+    width: 64px; height: 64px;
+    background: #fff;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 10px rgba(26,122,74,0.15);
+  }
+  .blog-loan-cta-text h4 { font-size: 15px; font-weight: 900; color: #1a3d2b; margin-bottom: 6px; }
+  .blog-loan-cta-text p { font-size: 13px; color: #64748b; margin-bottom: 12px; line-height: 1.7; }
+  .btn-blog-loan {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #1a7a4a; color: #fff;
+    font-size: 13px; font-weight: 700;
+    padding: 9px 20px; border-radius: 50px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .btn-blog-loan:hover { background: #22c55e; }
+  @media (max-width: 560px) {
+    .blog-loan-cta { flex-direction: column; }
+  }
+
+  /* ▼ パターン B-2：記事末尾のまとめバナー */
+  .blog-loan-footer {
+    background: linear-gradient(135deg, #1a3d2b, #1f5c40);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    text-align: center;
+  }
+  .blog-loan-footer h4 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .blog-loan-footer p { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.75; }
+  .blog-loan-footer-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn-footer-primary {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(90deg,#1a7a4a,#22c55e);
+    color: #fff; font-size: 14px; font-weight: 800;
+    padding: 12px 24px; border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(34,197,94,0.35);
+    transition: transform .2s;
+  }
+  .btn-footer-primary:hover { transform: translateY(-2px); }
+  .btn-footer-secondary {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 14px; font-weight: 700;
+    padding: 12px 24px; border-radius: 50px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .btn-footer-secondary:hover { background: rgba(255,255,255,0.18); }
+
+  .spacer { height: 32px; background: #f8fafc; }
+</style>
+</head>
+<body>
+
+<!-- ======================================
+     パターン A-1
+     トップページ：ダークバナー（heroの直下や、サービスセクション後）
+====================================== -->
+<div class="section-label">▼ パターン A-1：トップページ用 ダークバナー（heroの直下 or サービス後）</div>
+<section class="loan-banner-dark">
+  <div class="inner">
+    <div class="loan-badge"><span class="loan-badge-dot"></span> 無料・登録不要・30秒</div>
+    <h2>あなたの住宅ローン、<br><em>金利が上がっても大丈夫？</em></h2>
+    <p>借入額・金利・年収を入力するだけ。返済負担率・金利上昇リスク・<br>住宅ローン控除の逆ざやをまとめて診断します。</p>
+    <div class="loan-chips">
+      <span class="loan-chip">✅ 返済負担率チェック</span>
+      <span class="loan-chip">📈 金利上昇シミュレーション</span>
+      <span class="loan-chip">🏦 控除・逆ざや判定</span>
+    </div>
+    <a href="loan-check.html" class="btn-loan-big">🏠 今すぐ無料診断する →</a>
+    <p class="btn-loan-note">登録・ログイン不要。スマホでも30秒で完了します。</p>
+  </div>
+</section>
+
+<div class="spacer"></div>
+
+<!-- ======================================
+     パターン A-2
+     トップページ：ライトカード型（サービスカードの下など）
+====================================== -->
+<div class="section-label">▼ パターン A-2：トップページ用 ライトカード（サービス一覧の下）</div>
+<div class="loan-card-light-wrap">
+  <div class="loan-card-light">
+    <div>
+      <h3>🏠 <span>住宅ローンの不安</span>、無料で診断できます</h3>
+      <p>借入額・金利・年収を入力するだけで、返済負担率・金利リスク・住宅ローン控除の逆ざやを即判定。変動金利の方は特に確認をおすすめします。</p>
+      <div class="loan-card-chips">
+        <span class="loan-card-chip">無料</span>
+        <span class="loan-card-chip">登録不要</span>
+        <span class="loan-card-chip">30秒で完了</span>
+        <span class="loan-card-chip">スマホ対応</span>
+      </div>
+    </div>
+    <a href="loan-check.html" class="btn-loan-green">無料で診断する →</a>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- ======================================
+     パターン B-1
+     ブログ記事：本文中のインラインCTA
+     （記事の1/3〜半分あたりに挿入）
+====================================== -->
+<div class="section-label">▼ パターン B-1：ブログ記事用 インラインCTA（本文の途中に挿入）</div>
+<div class="article-mock">
+  <p>変動金利は2025年以降、日銀の利上げが続いており、これまで「低金利だから安全」と思っていた方も、金利上昇リスクを真剣に考える必要が出てきました。</p>
+  <p>たとえば借入残高2500万円・金利1.05%・残25年の場合、毎月の返済額は約97,000円ですが、金利が2.55%まで上がると約129,000円になります。月3.2万円の増加は、家計にとって無視できない水準です。</p>
+
+  <!-- ▼ インラインCTA -->
+  <div class="blog-loan-cta">
+    <div class="blog-loan-cta-icon">🏠</div>
+    <div class="blog-loan-cta-text">
+      <h4>あなたのローン、金利が上がったら？今すぐ確認</h4>
+      <p>借入額・金利・年収を入力するだけ。返済負担率・金利リスクを30秒で無料診断できます。</p>
+      <a href="../loan-check.html" class="btn-blog-loan">無料で診断する →</a>
+    </div>
+  </div>
+
+  <p>では、実際に「金利が上がった場合」にどう対処すればよいのでしょうか。大きく分けると「固定金利への借り換え」と「繰上返済で残高を減らす」の2つになります。どちらが有利かは、残高・残年数・控除の有無によって異なります。</p>
+</div>
+
+<div class="spacer"></div>
+
+<!-- ======================================
+     パターン B-2
+     ブログ記事：末尾のまとめバナー
+     （本文の最後 + 関連記事の前）
+====================================== -->
+<div class="section-label">▼ パターン B-2：ブログ記事用 末尾バナー（記事の最後）</div>
+<div style="max-width:760px;margin:0 auto;padding:0 24px 60px;">
+  <div class="blog-loan-footer">
+    <h4>📊 あなたのローン、今すぐ数字で確認しませんか？</h4>
+    <p>この記事で気になった方は、無料の住宅ローン金利リスク診断ツールで<br>ご自身の状況をチェックしてみてください。登録・ログイン不要、30秒で完了します。</p>
+    <div class="blog-loan-footer-btns">
+      <a href="../loan-check.html" class="btn-footer-primary">🏠 無料で診断する →</a>
+      <a href="../#contact" class="btn-footer-secondary">💬 FPに相談する</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
