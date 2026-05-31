@@ -143,6 +143,12 @@
     .share-x { background: #000; }
     .cta-btn-full { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 10px; background: #fff; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); font-family: inherit; margin-top: 8px; transition: border-color .2s; }
     .cta-btn-full:hover { border-color: var(--sky); }
+    .cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
+    .cta-contact-box.mid  { background: linear-gradient(135deg, #78350f, #d97706); }
+    .cta-contact-box.high { background: linear-gradient(135deg, #7f1d1d, #dc2626); }
+    .cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
+    .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
+    .cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
 
     /* 住宅ローン控除セクション */
     .deduction-section { margin-top: 28px; }
@@ -323,7 +329,10 @@
           <div class="share-row">
             <button class="share-btn share-x" onclick="shareResult()">𝕏 結果をシェア</button>
           </div>
-          <button class="cta-btn-full" onclick="openContact()">お問い合わせ →</button>
+          <div id="cta-box" class="cta-contact-box low">
+            <div class="cta-contact-text" id="cta-contact-text">余裕があるうちに資産運用を始めませんか？NISAやiDeCoの活用をFPが無料でご相談します。</div>
+            <a href="contact.html" class="cta-contact-btn">無料相談を申し込む →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -598,6 +607,16 @@ function calc() {
 
   document.getElementById('advice-box').className = 'advice-box ' + level;
 
+  var ctaBox = document.getElementById('cta-box');
+  var ctaText = document.getElementById('cta-contact-text');
+  ctaBox.className = 'cta-contact-box ' + level;
+  var ctaMessages = {
+    low:  '余裕があるうちに資産運用を始めませんか？NISAやiDeCoの活用をFPが無料でご相談します。',
+    mid:  '金利上昇リスクが気になる方へ。借り換えや繰上返済の判断をFPと一緒に考えましょう。',
+    high: '返済負担が重い状態です。今すぐFPに相談して、具体的な改善策を一緒に見つけましょう。'
+  };
+  ctaText.textContent = ctaMessages[level];
+
   var adviceMap = {
     low: [
       '返済負担率は適正範囲です。',
@@ -691,14 +710,7 @@ function shareResult() {
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
 }
 
-function openContact() {
-  document.querySelector('[id]').href='contact.html';
-}
-
-(function(){
-  document.querySelector('[id]').href='contact.html';
-  calc();
-})();
+(function(){ calc(); })();
 
 window.addEventListener('scroll', function(){
   var el = document.documentElement;
