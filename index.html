@@ -139,32 +139,30 @@
       .hero { min-height: auto; padding: 40px 20px 48px; }
       .hero-panel { display: none; }
     }
-    /* ─── MOBILE SIM ICONS ─── */
-    .hero-sim-icons {
+    /* ─── MOBILE QUICK ICONS ─── */
+    .hero-quick-icons {
       display: none;
+      gap: 12px;
     }
-    .sim-icons-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: .1em; margin-bottom: 10px; }
-    .sim-icons-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-    .sim-icon-btn {
+    .quick-icon-btn {
+      flex: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      padding: 10px 4px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 16px 8px 14px;
       color: #fff;
-      font-size: 10.5px; font-weight: 700;
-      text-align: center; line-height: 1.3;
-      transition: background .15s;
+      font-size: 12px; font-weight: 800;
+      text-align: center; line-height: 1.4;
+      transition: background .15s, border-color .15s;
+      gap: 8px;
     }
-    .sim-icon-btn:hover, .sim-icon-btn:active { background: rgba(74,222,128,0.18); border-color: rgba(74,222,128,0.35); }
-    .sim-icon-dot { width: 28px; height: 28px; border-radius: 8px; background: rgba(74,222,128,0.2); margin-bottom: 5px; display: flex; align-items: center; justify-content: center; }
-    .sim-icon-dot svg { width: 14px; height: 14px; stroke: #4ade80; fill: none; stroke-width: 2; }
+    .quick-icon-btn:hover, .quick-icon-btn:active { background: rgba(74,222,128,0.2); border-color: rgba(74,222,128,0.4); }
+    .quick-icon-circle { width: 44px; height: 44px; border-radius: 12px; background: rgba(74,222,128,0.18); display: flex; align-items: center; justify-content: center; }
+    .quick-icon-circle svg { width: 22px; height: 22px; stroke: #4ade80; fill: none; stroke-width: 2; }
+    .quick-icon-sub { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.45); }
     @media (max-width: 860px) {
-      .hero-sim-icons { display: block; }
+      .hero-quick-icons { display: flex; }
     }
   </style>
 </head>
@@ -230,35 +228,22 @@
         <div class="hero-stat"><strong>登録不要</strong>で今すぐ使える</div>
       </div>
     </div>
-    <!-- スマホ用シミュレーターアイコン -->
-    <div class="hero-sim-icons">
-      <div class="sim-icons-title">▶ シミュレーター</div>
-      <div class="sim-icons-grid">
-        <a href="asset-sim.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>資産
-        </a>
-        <a href="retirement-gap.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>老後
-        </a>
-        <a href="nisa-ideco-sim.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/></svg></div>NISA
-        </a>
-        <a href="furusato-sim.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>ふるさと
-        </a>
-        <a href="loan-refinance.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/></svg></div>ローン
-        </a>
-        <a href="insurance-check.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-7 10-7 10S5 17 5 12V6z"/></svg></div>保険
-        </a>
-        <a href="fire-sim.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/></svg></div>FIRE
-        </a>
-        <a href="education-sim.html" class="sim-icon-btn">
-          <div class="sim-icon-dot"><svg viewBox="0 0 24 24"><path d="M22 10l-10-7L2 10l10 7 10-7z"/><path d="M6 12v5a6 6 0 0 0 12 0v-5"/></svg></div>教育費
-        </a>
-      </div>
+    <!-- スマホ用クイックアイコン -->
+    <div class="hero-quick-icons">
+      <a href="simulation.html" class="quick-icon-btn">
+        <div class="quick-icon-circle">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        シミュレーター
+        <span class="quick-icon-sub">8つのツール</span>
+      </a>
+      <a href="blog/" class="quick-icon-btn">
+        <div class="quick-icon-circle">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        ブログ
+        <span class="quick-icon-sub">FP記事一覧</span>
+      </a>
     </div>
     <!-- 右：クイックアクセスパネル -->
     <div class="hero-panel">
