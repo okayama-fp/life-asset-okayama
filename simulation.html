@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://lifeassetoffice.net/simulation.html">
 <title>FPシミュレーター一覧｜ライフアセットオフィス</title>
-<meta name="description" content="資産・老後資金・NISA/iDeCo・ふるさと納税・住宅ローン借り換え・保険見直し・FIRE・教育費の8つのシミュレーターが揃っています。登録不要。">
+<meta name="description" content="資産・老後資金・NISA/iDeCo・ふるさと納税・住宅ローン・保険・FIRE・教育費など9つのFPシミュレーターが揃っています。登録不要でリアルタイム計算。">
 <meta property="og:title" content="FPシミュレーター一覧｜ライフアセットオフィス">
-<meta property="og:description" content="8つのFPシミュレーター。スライダーを動かすだけで即計算。登録不要。">
+<meta property="og:description" content="9つのFPシミュレーター。スライダーを動かすだけで即計算。登録不要。">
 <meta property="og:url" content="https://lifeassetoffice.net/simulation.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
@@ -24,13 +24,13 @@
   gtag('js', new Date());
   gtag('config', 'G-PKDH2DR522');
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/style.css">
 <style>
 :root {
   --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
   --navy: #1a3d2b; --navy-soft: #1f5c40;
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --c-asset: #0ea5e9; --c-tax: #f59e0b; --c-loan: #ef4444; --c-other: #8b5cf6;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -38,18 +38,46 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color
 a { color: inherit; text-decoration: none; }
 #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
 
-.hero { background: linear-gradient(135deg,#0f2d1c,#1a4a30); color: #fff; padding: 48px 24px 40px; text-align: center; }
+/* ─── Hero ─── */
+.hero { background: linear-gradient(135deg,#0f2d1c 0%,#1a4a30 60%,#1a3060 100%); color: #fff; padding: 52px 24px 44px; text-align: center; }
 .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
 .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
 .hero h1 { font-size: clamp(1.5rem,4vw,2.2rem); font-weight: 900; line-height: 1.3; margin-bottom: 10px; }
-.hero p { font-size: 14px; color: rgba(255,255,255,.75); }
+.hero-lead { font-size: 14px; color: rgba(255,255,255,.78); margin-bottom: 28px; }
 
-.main { max-width: 920px; margin: 0 auto; padding: 40px 20px 80px; }
+.stat-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.stat-item { text-align: center; }
+.stat-num { font-size: 2rem; font-weight: 900; color: #4ade80; line-height: 1; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,.62); margin-top: 4px; letter-spacing: .05em; }
 
+/* ─── Main ─── */
+.main { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+
+/* ─── Category tabs ─── */
+.cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.cat-tab {
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all .2s;
+}
+.cat-tab:hover { border-color: var(--sky); color: var(--sky); }
+.cat-tab.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+.cat-tab[data-cat="asset"].active { background: var(--c-asset); border-color: var(--c-asset); }
+.cat-tab[data-cat="tax"].active { background: var(--c-tax); border-color: var(--c-tax); }
+.cat-tab[data-cat="loan"].active { background: var(--c-loan); border-color: var(--c-loan); }
+.cat-tab[data-cat="other"].active { background: var(--c-other); border-color: var(--c-other); }
+
+/* ─── Tools grid ─── */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 20px;
 }
 
@@ -63,29 +91,73 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
+  overflow: hidden;
 }
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.tool-card[data-cat="asset"]::before { background: var(--c-asset); }
+.tool-card[data-cat="tax"]::before   { background: var(--c-tax); }
+.tool-card[data-cat="loan"]::before  { background: var(--c-loan); }
+.tool-card[data-cat="other"]::before { background: var(--c-other); }
+
 .tool-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(26,122,74,.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26,122,74,.13);
   border-color: var(--sky);
 }
+.tool-card.hidden { display: none; }
 
+.tool-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.tool-card[data-cat="asset"] .tool-icon { background: #e0f2fe; }
+.tool-card[data-cat="tax"]   .tool-icon { background: #fef3c7; }
+.tool-card[data-cat="loan"]  .tool-icon { background: #fee2e2; }
+.tool-card[data-cat="other"] .tool-icon { background: #ede9fe; }
+
+.tool-header { display: flex; align-items: center; gap: 12px; }
+
+.tool-meta { flex: 1; }
 .tool-name {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 900;
   color: var(--navy);
   line-height: 1.4;
 }
+.tool-cat-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-top: 3px;
+}
+.tool-card[data-cat="asset"] .tool-cat-badge { background: #e0f2fe; color: #0284c7; }
+.tool-card[data-cat="tax"]   .tool-cat-badge { background: #fef3c7; color: #d97706; }
+.tool-card[data-cat="loan"]  .tool-cat-badge { background: #fee2e2; color: #dc2626; }
+.tool-card[data-cat="other"] .tool-cat-badge { background: #ede9fe; color: #7c3aed; }
+
 .tool-desc {
   font-size: 12.5px;
   color: var(--text-light);
-  line-height: 1.7;
+  line-height: 1.75;
   flex: 1;
 }
 .tool-link {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   background: var(--navy);
   color: #fff;
   font-size: 13px;
@@ -94,17 +166,19 @@ a { color: inherit; text-decoration: none; }
   border-radius: 8px;
   transition: background .2s;
 }
+.tool-link::after { content: '→'; font-size: 14px; }
 .tool-link:hover { background: var(--sky); }
 
+/* ─── CTA ─── */
 .cta-box {
-  margin-top: 48px;
+  margin-top: 56px;
   background: linear-gradient(135deg, var(--navy), var(--navy-soft));
   border-radius: 18px;
-  padding: 36px 28px;
+  padding: 40px 28px;
   text-align: center;
 }
 .cta-box h2 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 8px; }
-.cta-box p { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+.cta-box p { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 22px; }
 .cta-btn {
   display: inline-block;
   background: linear-gradient(90deg, var(--sky), var(--sky-light));
@@ -117,9 +191,18 @@ a { color: inherit; text-decoration: none; }
 }
 .cta-btn:hover { opacity: .9; transform: translateY(-2px); }
 
+/* ─── Footer ─── */
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
+
+/* ─── Responsive ─── */
+@media (max-width: 520px) {
+  .stat-row { gap: 20px; }
+  .stat-num { font-size: 1.6rem; }
+  .cat-tabs { gap: 6px; }
+  .cat-tab { padding: 7px 14px; font-size: 12px; }
+}
 </style>
 </head>
 <body>
@@ -136,7 +219,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <nav>
       <a href="/">ホーム</a>
       <a href="service/">サービス</a>
-      <a href="tools.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
       <a href="blog/">ブログ</a>
       <a href="contact.html">お問い合わせ</a>
     </nav>
@@ -150,70 +233,157 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 <div class="hero">
   <div class="hero-badge"><span class="hero-dot"></span>登録不要・リアルタイム計算</div>
   <h1>FPシミュレーター</h1>
-  <p>8つのツールで、お金の疑問をすぐに解決できます。</p>
+  <p class="hero-lead">スライダーを動かすだけ。お金の疑問を今すぐ数字で確認。</p>
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">ツール</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">登録不要</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">即</div>
+      <div class="stat-label">リアルタイム計算</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">📱</div>
+      <div class="stat-label">スマホ対応</div>
+    </div>
+  </div>
 </div>
 
 <div class="main">
-  <div class="tools-grid">
 
-    <div class="tool-card">
-      <div class="tool-name">資産シミュレーター</div>
-      <div class="tool-desc">積立額・利回り・年数から将来の資産額をグラフで確認できます。元本と運用益を可視化。</div>
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-cat="all">すべて</button>
+    <button class="cat-tab" data-cat="asset">資産・老後</button>
+    <button class="cat-tab" data-cat="tax">税制優遇</button>
+    <button class="cat-tab" data-cat="loan">住宅ローン</button>
+    <button class="cat-tab" data-cat="other">保険・その他</button>
+  </div>
+
+  <div class="tools-grid" id="toolsGrid">
+
+    <div class="tool-card" data-cat="asset">
+      <div class="tool-header">
+        <div class="tool-icon">📈</div>
+        <div class="tool-meta">
+          <div class="tool-name">資産シミュレーター</div>
+          <span class="tool-cat-badge">資産・老後</span>
+        </div>
+      </div>
+      <div class="tool-desc">積立額・利回り・年数から将来の資産額をグラフで確認。元本と運用益を可視化してリターンの実感を掴めます。</div>
       <a class="tool-link" href="asset-sim.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">老後資金 不足額診断</div>
-      <div class="tool-desc">年金・生活費・貯蓄を入力するだけ。老後資金の不足額をリアルタイムで計算します。</div>
+    <div class="tool-card" data-cat="asset">
+      <div class="tool-header">
+        <div class="tool-icon">🏖️</div>
+        <div class="tool-meta">
+          <div class="tool-name">老後資金 不足額診断</div>
+          <span class="tool-cat-badge">資産・老後</span>
+        </div>
+      </div>
+      <div class="tool-desc">年金・生活費・貯蓄を入力するだけ。老後資金の不足額をリアルタイムで計算し、対策の優先度を把握できます。</div>
       <a class="tool-link" href="retirement-gap.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">NISA・iDeCo 節税メリット</div>
-      <div class="tool-desc">NISA・iDeCo・課税口座の運用差額をリアルタイム比較。節税メリットを数字で確認。</div>
+    <div class="tool-card" data-cat="tax">
+      <div class="tool-header">
+        <div class="tool-icon">🎁</div>
+        <div class="tool-meta">
+          <div class="tool-name">NISA・iDeCo 節税メリット</div>
+          <span class="tool-cat-badge">税制優遇</span>
+        </div>
+      </div>
+      <div class="tool-desc">NISA・iDeCo・課税口座の運用差額をリアルタイム比較。税制優遇の恩恵を金額ベースで確認できます。</div>
       <a class="tool-link" href="nisa-ideco-sim.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">ふるさと納税 控除上限額</div>
-      <div class="tool-desc">年収・家族構成を選ぶだけ。控除上限額と実質2,000円でもらえるお得額を計算します。</div>
+    <div class="tool-card" data-cat="tax">
+      <div class="tool-header">
+        <div class="tool-icon">🗾</div>
+        <div class="tool-meta">
+          <div class="tool-name">ふるさと納税 控除上限額</div>
+          <span class="tool-cat-badge">税制優遇</span>
+        </div>
+      </div>
+      <div class="tool-desc">年収・家族構成を選ぶだけ。控除上限額と実質2,000円でもらえるお得額を即計算します。</div>
       <a class="tool-link" href="furusato-sim.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">住宅ローン 借り換え節約</div>
-      <div class="tool-desc">残債・現在の金利・借り換え後の金利を入力。総節約額と手数料回収期間を即計算。</div>
+    <div class="tool-card" data-cat="loan">
+      <div class="tool-header">
+        <div class="tool-icon">🔍</div>
+        <div class="tool-meta">
+          <div class="tool-name">住宅ローン リスク診断</div>
+          <span class="tool-cat-badge">住宅ローン</span>
+        </div>
+      </div>
+      <div class="tool-desc">借入額・金利・年収から返済比率・利息総額・完済年齢を診断。繰上返済の節約効果もシミュレーションできます。</div>
+      <a class="tool-link" href="loan-check.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="loan">
+      <div class="tool-header">
+        <div class="tool-icon">🏠</div>
+        <div class="tool-meta">
+          <div class="tool-name">住宅ローン 借り換え節約</div>
+          <span class="tool-cat-badge">住宅ローン</span>
+        </div>
+      </div>
+      <div class="tool-desc">残債・現在の金利・借り換え後の金利を入力。総節約額と手数料回収期間を即計算。借り換えの判断材料に。</div>
       <a class="tool-link" href="loan-refinance.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">保険料 見直し診断</div>
-      <div class="tool-desc">年齢・年収・家族構成から適正保険料の目安を診断。払いすぎを一目で確認できます。</div>
+    <div class="tool-card" data-cat="other">
+      <div class="tool-header">
+        <div class="tool-icon">🛡️</div>
+        <div class="tool-meta">
+          <div class="tool-name">保険料 見直し診断</div>
+          <span class="tool-cat-badge">保険・その他</span>
+        </div>
+      </div>
+      <div class="tool-desc">年齢・年収・家族構成から適正保険料の目安を診断。払いすぎているか一目で確認し、見直しポイントを把握できます。</div>
       <a class="tool-link" href="insurance-check.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">FIRE 達成年齢シミュレーター</div>
-      <div class="tool-desc">資産・収入・支出・利回りからFIRE達成年齢を計算。資産推移グラフ＋感度分析付き。</div>
+    <div class="tool-card" data-cat="other">
+      <div class="tool-header">
+        <div class="tool-icon">🔥</div>
+        <div class="tool-meta">
+          <div class="tool-name">FIRE 達成年齢シミュレーター</div>
+          <span class="tool-cat-badge">保険・その他</span>
+        </div>
+      </div>
+      <div class="tool-desc">資産・収入・支出・利回りからFIRE達成年齢を計算。資産推移グラフと感度分析で「もしも」のシナリオも確認。</div>
       <a class="tool-link" href="fire-sim.html">使ってみる</a>
     </div>
 
-    <div class="tool-card">
-      <div class="tool-name">教育費 積立プランナー</div>
-      <div class="tool-desc">子供の年齢・進学コースを選ぶだけ。大学卒業までの教育費と必要積立額を計算します。</div>
+    <div class="tool-card" data-cat="other">
+      <div class="tool-header">
+        <div class="tool-icon">🎓</div>
+        <div class="tool-meta">
+          <div class="tool-name">教育費 積立プランナー</div>
+          <span class="tool-cat-badge">保険・その他</span>
+        </div>
+      </div>
+      <div class="tool-desc">子供の年齢・進学コースを選ぶだけ。大学卒業までの教育費総額と毎月の必要積立額を計算します。</div>
       <a class="tool-link" href="education-sim.html">使ってみる</a>
     </div>
 
   </div>
 
   <div class="cta-box">
-    <h2>シミュレーション結果をもとにお問い合わせください。</h2>
-    <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>お問い合わせを承っています。</p>
+    <h2>シミュレーション結果をもとにご相談ください。</h2>
+    <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>FPが個別のご状況に合わせてアドバイスします。</p>
     <a href="contact.html" class="cta-btn">お問い合わせ</a>
   </div>
 </div>
 
-<div style="max-width:920px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">
+<div style="max-width:960px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">
   【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。
 </div>
 
@@ -228,6 +398,25 @@ window.addEventListener('scroll', function(){
   var el = document.documentElement;
   document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
 });
+
+(function(){
+  var tabs = document.querySelectorAll('.cat-tab');
+  var cards = document.querySelectorAll('.tool-card');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var cat = tab.dataset.cat;
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      cards.forEach(function(card){
+        if(cat === 'all' || card.dataset.cat === cat){
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
 </script>
 </body>
 </html>
