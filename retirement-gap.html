@@ -25,7 +25,6 @@
   gtag('js', new Date());
   gtag('config', 'G-PKDH2DR522');
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="/style.css">
 <style>
@@ -34,6 +33,7 @@
   --navy: #1a3d2b; --navy-soft: #1f5c40;
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
   --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
   --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,60 +41,148 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
-.hero { background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
-.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
-.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+
+/* ─── Hero ─── */
+.hero { background: linear-gradient(135deg,#0f2d1c 0%,#1a4a30 60%,#1a3060 100%); color: #fff; padding: 52px 24px 44px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
 .hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
-.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
-.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
-.main { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
-.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+.hero-lead { font-size: 14.5px; color: rgba(255,255,255,.82); max-width: 560px; margin: 0 auto 22px; line-height: 1.85; }
+.hero-tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tag { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); border-radius: 20px; padding: 4px 13px; font-size: 12px; color: rgba(255,255,255,.85); }
+
+/* ─── Main ─── */
+.main { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
+
+.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; align-items: center; }
 .preset-label { font-size: 12px; font-weight: 700; color: var(--text-light); }
 .preset-btn { padding: 8px 16px; border-radius: 50px; border: 1.5px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; font-family: inherit; transition: all .2s; }
 .preset-btn:hover { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
+
 .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
 @media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
+
+/* ─── Input panel ─── */
 .input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
 .field { margin-bottom: 20px; }
 .field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
 .field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
 .field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
 .field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
-.result-panel { position: sticky; top: 76px; }
+
+/* ─── Result panel ─── */
+.result-panel { position: sticky; top: 76px; display: flex; flex-direction: column; gap: 16px; }
 @media(max-width:480px){ .result-panel { position: static; } }
-.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+
+/* Coverage gauge */
+.coverage-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.coverage-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.coverage-title { font-size: 12px; font-weight: 700; color: var(--text-light); letter-spacing: .05em; }
+.coverage-pct { font-size: 22px; font-weight: 900; }
+.coverage-pct.safe { color: var(--green); }
+.coverage-pct.warn { color: var(--amber); }
+.coverage-pct.danger { color: var(--red); }
+.coverage-bar-bg { height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
+.coverage-bar-fill { height: 100%; border-radius: 5px; transition: width .6s cubic-bezier(.4,0,.2,1), background .4s; max-width: 100%; }
+.coverage-bar-fill.safe   { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.coverage-bar-fill.warn   { background: linear-gradient(90deg, #d97706, #fbbf24); }
+.coverage-bar-fill.danger { background: linear-gradient(90deg, #dc2626, #f87171); }
+.coverage-legend { display: flex; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
+.cov-leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-light); }
+.cov-leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+/* Result card */
+.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
 .result-header { padding: 18px 22px; text-align: center; }
 .result-header.surplus { background: var(--greenl); border-bottom: 2px solid var(--greenb); }
 .result-header.deficit { background: var(--redl); border-bottom: 2px solid var(--redb); }
+.result-header.warn    { background: var(--amberl); border-bottom: 2px solid var(--amberb); }
 .result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; margin-bottom: 4px; }
 .result-header.surplus .result-label { color: var(--green); }
 .result-header.deficit .result-label { color: var(--red); }
-.result-amount { font-size: clamp(2rem,6vw,3rem); font-weight: 900; line-height: 1.1; }
+.result-header.warn    .result-label { color: var(--amber); }
+.result-amount { font-size: clamp(2rem,6vw,2.8rem); font-weight: 900; line-height: 1.1; }
 .result-header.surplus .result-amount { color: var(--green); }
 .result-header.deficit .result-amount { color: var(--red); }
+.result-header.warn    .result-amount { color: var(--amber); }
 .result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
-.result-body { padding: 18px 20px; }
-.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.result-body { padding: 16px 20px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--border); }
 .stat-row:last-child { border-bottom: none; }
 .stat-k { font-size: 12.5px; color: var(--text-light); }
 .stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
 .stat-v.bad { color: var(--red); }
 .stat-v.good { color: var(--green); }
-.chart-wrap { margin: 16px 0; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
-.chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
-.share-row { display: flex; gap: 8px; margin-top: 14px; }
+
+.chart-wrap { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+
+.share-row { display: flex; gap: 8px; }
 .share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
 .share-x { background: #000; }
-.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
-.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
+.cta-contact-box { padding: 18px 20px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
+.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,.88); margin-bottom: 10px; line-height: 1.65; }
 .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
-.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+
+/* ─── Scenario section ─── */
+.scenario-section {
+  margin-top: 32px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 26px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.scenario-title-row {
+  display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px;
+}
+.scenario-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: #fef3c7; font-size: 22px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.scenario-title { font-size: 16px; font-weight: 900; color: var(--navy); }
+.scenario-sub { font-size: 12.5px; color: var(--text-light); margin-top: 2px; }
+
+.sc-field { margin-bottom: 20px; max-width: 420px; }
+.sc-field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); display: flex; justify-content: space-between; margin-bottom: 6px; }
+.sc-field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.sc-field input[type=range] { width: 100%; accent-color: #d97706; cursor: pointer; height: 4px; }
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media(max-width:580px){ .scenario-grid { grid-template-columns: 1fr; } }
+
+.sc-card {
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: border-color .2s, box-shadow .2s;
+}
+.sc-card:hover { border-color: var(--sky); box-shadow: 0 4px 16px rgba(26,122,74,.1); }
+.sc-card-title { font-size: 12px; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+.sc-accum { font-size: 1.35rem; font-weight: 900; color: #0284c7; line-height: 1.1; }
+.sc-accum-label { font-size: 10px; color: var(--text-light); margin-top: 2px; margin-bottom: 10px; }
+.sc-gap { font-size: 1.1rem; font-weight: 900; line-height: 1.1; }
+.sc-gap.ok { color: var(--green); }
+.sc-gap.ng { color: var(--red); }
+.sc-gap-label { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+/* ─── Footer ─── */
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
+
+@media(max-width:520px){
+  .scenario-section { padding: 20px 16px; }
+}
 </style>
 </head>
 <body>
@@ -111,7 +199,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <nav>
       <a href="/">ホーム</a>
       <a href="service/">サービス</a>
-      <a href="tools.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
       <a href="blog/">ブログ</a>
       <a href="contact.html">お問い合わせ</a>
     </nav>
@@ -123,16 +211,15 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 </header>
 
 <div class="hero">
-  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
+  <div class="hero-badge"><span class="hero-dot"></span>登録不要・リアルタイム計算</div>
   <h1>老後資金、いくら足りない？</h1>
   <p class="hero-lead">年金・生活費・貯蓄を入力するだけ。老後資金の不足額をリアルタイムで計算します。</p>
-  <div class="hero-badges">
+  <div class="hero-tags">
     <span class="hero-tag">不足額を即計算</span>
     <span class="hero-tag">夫婦・おひとりさま対応</span>
-    <span class="hero-tag">グラフで可視化</span>
+    <span class="hero-tag">積立シミュレーション付き</span>
   </div>
 </div>
-
 
 <div class="main">
   <div class="preset-row">
@@ -141,9 +228,11 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <button class="preset-btn" onclick="applyPreset('single')">おひとりさま</button>
     <button class="preset-btn" onclick="applyPreset('comfort')">ゆとり老後</button>
   </div>
+
   <div class="tool-grid">
+    <!-- 入力パネル -->
     <div class="input-panel">
-      <h2>あなたの情報を入力</h2>
+      <h2>📋 情報を入力</h2>
 
       <div class="field">
         <div class="field-label">現在の年齢<span class="field-val" id="lbl-age">40歳</span></div>
@@ -182,7 +271,26 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
     </div>
 
+    <!-- 結果パネル -->
     <div class="result-panel">
+
+      <!-- カバー率ゲージ -->
+      <div class="coverage-card">
+        <div class="coverage-header">
+          <span class="coverage-title">年金＋貯蓄のカバー率</span>
+          <span class="coverage-pct" id="cov-pct">67%</span>
+        </div>
+        <div class="coverage-bar-bg">
+          <div class="coverage-bar-fill danger" id="cov-fill" style="width:67%"></div>
+        </div>
+        <div class="coverage-legend">
+          <span class="cov-leg-item"><span class="cov-leg-dot" style="background:#22c55e"></span>100%超 = 安心</span>
+          <span class="cov-leg-item"><span class="cov-leg-dot" style="background:#fbbf24"></span>75〜100% = 要注意</span>
+          <span class="cov-leg-item"><span class="cov-leg-dot" style="background:#f87171"></span>75%未満 = 要対策</span>
+        </div>
+      </div>
+
+      <!-- メイン結果 -->
       <div class="result-card">
         <div class="result-header deficit" id="result-header">
           <div class="result-label" id="result-label">老後資金の不足額</div>
@@ -213,30 +321,79 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         </div>
       </div>
 
+      <!-- チャート -->
       <div class="chart-wrap">
         <h3>老後資金の内訳（万円）</h3>
-        <canvas id="retirementChart" height="200"></canvas>
+        <canvas id="retirementChart" height="180"></canvas>
       </div>
 
       <div class="share-row">
         <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
       </div>
+
       <div class="cta-contact-box">
-        <div class="cta-contact-text">老後の不安、お問い合わせください。<br>お問い合わせを承っています。</div>
+        <div class="cta-contact-text">老後の不安、FPにご相談ください。<br>状況に合わせた準備プランをご提案します。</div>
         <a href="contact.html" class="cta-contact-btn">お問い合わせ →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 積立シミュレーション -->
+  <div class="scenario-section">
+    <div class="scenario-title-row">
+      <div class="scenario-icon">💰</div>
+      <div>
+        <div class="scenario-title">毎月の積立でどう変わる？</div>
+        <div class="scenario-sub">積立額を変えて3つのシナリオの退職時資産と不足額を比較</div>
+      </div>
+    </div>
+
+    <div class="sc-field">
+      <div class="sc-field-label">毎月の追加積立額<span class="sc-field-val" id="lbl-extra">3万円</span></div>
+      <input type="range" id="sl-extra" min="0" max="100000" step="5000" value="30000" oninput="syncExtra(this.value);calcExtra()">
+      <div class="field-ticks"><span>0円</span><span>5万円</span><span>10万円</span></div>
+    </div>
+
+    <div class="scenario-grid">
+      <div class="sc-card">
+        <div class="sc-card-title">📦 積立のみ</div>
+        <div class="sc-accum" id="sc-accum0">―</div>
+        <div class="sc-accum-label">退職時の積立額</div>
+        <div class="sc-gap" id="sc-gap0">―</div>
+        <div class="sc-gap-label" id="sc-gap0-lbl">残り不足額</div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-card-title">📊 NISA（年3%）</div>
+        <div class="sc-accum" id="sc-accum1">―</div>
+        <div class="sc-accum-label">退職時の積立額</div>
+        <div class="sc-gap" id="sc-gap1">―</div>
+        <div class="sc-gap-label" id="sc-gap1-lbl">残り不足額</div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-card-title">🚀 積極運用（年5%）</div>
+        <div class="sc-accum" id="sc-accum2">―</div>
+        <div class="sc-accum-label">退職時の積立額</div>
+        <div class="sc-gap" id="sc-gap2">―</div>
+        <div class="sc-gap-label" id="sc-gap2-lbl">残り不足額</div>
       </div>
     </div>
   </div>
 </div>
 
+<div style="max-width:920px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">
+  【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。
+</div>
+
 <footer>
   <div class="footer-logo">ライフアセットオフィス</div>
-  <p>&copy; 2025 Life Asset Office. All rights reserved.</p>
+  <p>&copy; 2026 Life Asset Office. All rights reserved.</p>
 </footer>
 
 <script src="/nav.js"></script>
 <script>
 var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30 };
+var currentGap = 0;
+
 function labelOf(key, val) {
   if (key==='age'||key==='retire') return val+'歳';
   if (key==='savings') return parseInt(val).toLocaleString()+'万円';
@@ -265,13 +422,25 @@ function calc() {
   var yearsToRetire = Math.max(retire - age, 0);
   var monthsToRetire = yearsToRetire * 12;
   var monthlyNeed = (gap > 0 && monthsToRetire > 0) ? gap / monthsToRetire : 0;
+  currentGap = gap;
 
+  // Coverage gauge
+  var covPct = Math.round((totalPension + savings) / totalNeeded * 100);
+  var covEl = document.getElementById('cov-pct');
+  var fillEl = document.getElementById('cov-fill');
+  covEl.textContent = Math.min(covPct, 999) + '%';
+  fillEl.style.width = Math.min(covPct, 100) + '%';
+  var covClass = covPct >= 100 ? 'safe' : covPct >= 75 ? 'warn' : 'danger';
+  covEl.className = 'coverage-pct ' + covClass;
+  fillEl.className = 'coverage-bar-fill ' + covClass;
+
+  // Main result
   var header = document.getElementById('result-header');
   var lbl = document.getElementById('result-label');
   var amt = document.getElementById('result-amount');
   var sub = document.getElementById('result-sub');
   if (gap > 0) {
-    header.className = 'result-header deficit';
+    header.className = covPct >= 75 ? 'result-header warn' : 'result-header deficit';
     lbl.textContent = '老後資金の不足額';
     amt.textContent = fmt(gap);
     sub.textContent = '今から準備が必要です';
@@ -290,6 +459,7 @@ function calc() {
   document.getElementById('r-monthly').textContent = gap > 0 ? fmt(monthlyNeed)+'/月' : '積立不要';
 
   renderChart(totalNeeded, totalPension, savings, Math.max(gap, 0));
+  calcExtra();
 }
 
 function renderChart(needed, pension, savings, deficit) {
@@ -301,7 +471,7 @@ function renderChart(needed, pension, savings, deficit) {
       labels: ['必要総額', '年金総額', '現在の貯蓄', '不足額'],
       datasets: [{
         data: [needed, pension, savings, deficit],
-        backgroundColor: ['#64748b', '#22c55e', '#3b82f6', '#ef4444'],
+        backgroundColor: ['#64748b','#22c55e','#3b82f6','#ef4444'],
         borderRadius: 8
       }]
     },
@@ -323,8 +493,8 @@ function renderChart(needed, pension, savings, deficit) {
 
 function applyPreset(name) {
   var presets = {
-    couple:  { age:50, retire:65, expense:25, pension:22, savings:500, lifespan:30 },
-    single:  { age:40, retire:65, expense:15, pension:10, savings:300, lifespan:35 },
+    couple:  { age:50, retire:65, expense:25, pension:22, savings:500,  lifespan:30 },
+    single:  { age:40, retire:65, expense:15, pension:10, savings:300,  lifespan:35 },
     comfort: { age:45, retire:60, expense:40, pension:20, savings:1000, lifespan:30 }
   };
   var p = presets[name];
@@ -335,6 +505,38 @@ function applyPreset(name) {
     document.getElementById('lbl-'+k).textContent = labelOf(k, p[k]);
   });
   calc();
+}
+
+function syncExtra(val) {
+  var man = Math.round(val / 10000);
+  document.getElementById('lbl-extra').textContent = man > 0 ? man + '万円' : '0円';
+}
+
+function calcExtra() {
+  var extra = parseFloat(document.getElementById('sl-extra').value) / 10000; // 万円
+  var n = Math.max(sliders.retire - sliders.age, 0) * 12; // months
+  var rates = [0, 0.03/12, 0.05/12];
+
+  rates.forEach(function(r, i) {
+    var accum = r === 0
+      ? extra * n
+      : extra * ((Math.pow(1+r, n) - 1) / r);
+    accum = Math.round(accum);
+
+    document.getElementById('sc-accum'+i).textContent = accum.toLocaleString() + '万円';
+
+    var remain = currentGap - accum;
+    var gapEl = document.getElementById('sc-gap'+i);
+    var lblEl = document.getElementById('sc-gap'+i+'-lbl');
+    gapEl.textContent = Math.abs(Math.round(remain)).toLocaleString() + '万円';
+    if (remain <= 0) {
+      gapEl.className = 'sc-gap ok';
+      lblEl.textContent = '余裕額';
+    } else {
+      gapEl.className = 'sc-gap ng';
+      lblEl.textContent = '残り不足額';
+    }
+  });
 }
 
 function shareX() {
@@ -351,6 +553,7 @@ window.addEventListener('scroll', function() {
 });
 
 calc();
+syncExtra(document.getElementById('sl-extra').value);
 </script>
 </body>
 </html>
