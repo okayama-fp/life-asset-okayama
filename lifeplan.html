@@ -448,6 +448,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <div class="field">
         <label>月々の生活費（現在）</label>
         <div class="field-row"><input type="number" id="living-cost" value="25" min="0"><span class="field-unit">万円/月</span></div>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">食費・光熱費・通信費・保険料・日常の子育て費用をすべて含めて入力</p>
       </div>
       <div class="field">
         <label>老後の月生活費（65歳以降）</label>
@@ -502,8 +503,8 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
         <div class="field-row"><input type="number" id="leisure-cost" value="30" min="0"><span class="field-unit">万円/年</span></div>
       </div>
       <div class="field">
-        <label>保険料（年間）</label>
-        <div class="field-row"><input type="number" id="insurance-cost" value="40" min="0"><span class="field-unit">万円/年</span></div>
+        <label>保険料（年間・生活費に含む場合は0）</label>
+        <div class="field-row"><input type="number" id="insurance-cost" value="0" min="0"><span class="field-unit">万円/年</span></div>
       </div>
     </div>
   </div>
@@ -971,10 +972,7 @@ function _generatePlan(){
     let eduExp=0;
     children.forEach(c=>{
       const childNow=c.age+y;
-      if(childNow>=3&&childNow<=5)eduExp+=15;
-      else if(childNow>=6&&childNow<=11)eduExp+=20;
-      else if(childNow>=12&&childNow<=14)eduExp+=35;
-      else if(childNow>=15&&childNow<=17)eduExp+=50;
+      if(childNow>=15&&childNow<=17)eduExp+=50;
       else if(childNow>=18&&childNow<=21)eduExp+=c.eduCost;
     });
 
@@ -984,7 +982,7 @@ function _generatePlan(){
     if(selfAge===reformAge)reformExp=reformCost;
     const leisure=selfAge<75?leisureCost:0;
     const insurance=selfAge<75?insuranceCost:0;
-    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+insurance;
+    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure;
     const cf=totalIncome-totalExpense;
 
     const _rn=nisaRate/100/12,_Rn=Math.pow(1+_rn,12);
@@ -1170,7 +1168,7 @@ function _generatePlan(){
   document.getElementById('plan-thead').innerHTML=`<tr>
     <th class="cat">西暦</th><th>本人</th>${hasSpouse?'<th>配偶者</th>':''}<th>主なイベント</th>
     <th>収入合計</th><th>うち年金</th><th>支出合計</th><th>年間収支</th>
-    <th>住宅ローン</th><th>教育費</th>
+    <th>住宅ローン</th><th>高校・大学</th>
     <th>現金資産</th><th>NISA</th><th>iDeCo</th><th>投資資産</th><th>総資産</th>
   </tr>`;
   document.getElementById('plan-tbody').innerHTML=rows.map(r=>{
