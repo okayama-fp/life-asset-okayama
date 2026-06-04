@@ -1024,10 +1024,116 @@ function _generatePlan(){
     </div>`;
 
   const al=document.getElementById('alerts');al.innerHTML='';
-  if(depleteRow)al.innerHTML+=`<div class="alert danger"><strong>🔴 ${depleteRow.selfAge}歳で資産が枯渇する試算です。</strong>今から積立額の増加・支出削減・収入増加の対策が必要です。FPへの相談を推奨します。</div>`;
-  if(retireAsset>0&&retireAsset<500)al.innerHTML+=`<div class="alert warn"><strong>🟡 定年時の資産が${Math.round(retireAsset)}万円と少なめです。</strong>老後の生活費・医療費をカバーできるか確認が必要です。</div>`;
-  if(!depleteRow&&minAsset>1000)al.innerHTML+=`<div class="alert ok"><strong>✅ ${planEndAge}歳まで資産を維持できる試算です。</strong>現在の計画を継続しながら、想定外の支出（介護・医療）への備えも検討しましょう。</div>`;
-  if(loanBalance>0)al.innerHTML+=`<div class="alert ok">🏠 住宅ローンは<strong>${ageSelf+loanYears}歳</strong>に完済予定。月々<strong>${Math.round(loanMonthly/10000*10)/10}万円</strong>の返済が続きます。</div>`;
+  const fmt=n=>Math.round(n).toLocaleString();
+  const fmtM=n=>Math.round(n*10)/10;
+  const workRows=rows.filter(r=>r.selfAge<retireSelf);
+  const retRows=rows.filter(r=>r.selfAge>=retireSelf);
+  const avgRetireCF=retRows.length?retRows.reduce((s,r)=>s+r.cf,0)/retRows.length:0;
+  const loanRepayAge=loanBalance>0?ageSelf+loanYears:0;
+  const loanBurdenPct=incomeSelf>0&&loanBalance>0?Math.round(loanAnnual/incomeSelf*100):0;
+  const totalRepay=loanAnnual*loanYears;
+  const totalInterest=Math.max(0,totalRepay-loanBalance);
+  const nisaAtRetire=retireRow?retireRow.nisaAsset:0;
+  const nisaMaxMonthly=10;
+  const nisaUtilPct=Math.round(nisaMonthly/nisaMaxMonthly*100);
+  const pensionMonthly=pensionSelf+(hasSpouse?pensionSpouse:0);
+  const gapMonthly=livingCostRetire-pensionMonthly;
+  const peakRow=rows.find(r=>r.totalAsset===peakAsset);
+
+  // ① 総合評価
+  let overallClass=depleteRow?'danger':(retireAsset<500||minAsset<0?'warn':'ok');
+  let overallIcon=depleteRow?'🔴':(retireAsset<500?'🟡':'✅');
+  let overallTitle=depleteRow?`${depleteRow.selfAge}歳で資産が枯渇します`:(retireAsset<500?'定年時資産が不足気味です':'現在の計画は堅調です');
+  al.innerHTML+=`<div class="alert ${overallClass}" style="margin-bottom:20px">
+    <div style="font-size:15px;font-weight:900;margin-bottom:10px">${overallIcon} 総合評価：${overallTitle}</div>
+    <div style="font-size:13px;line-height:2">
+    ${depleteRow?`現在のプランでは <strong>${depleteRow.selfAge}歳（${new Date().getFullYear()+(depleteRow.selfAge-ageSelf)}年）に現金資産が底をつく</strong> 見込みです。
+    定年後の年間収支が平均 <strong>▲${fmt(Math.abs(avgRetireCF))}万円の赤字</strong> となり、資産の早期取り崩しが進みます。<br><br>
+    <strong>◆ 今すぐ取れる対策（優先順）</strong>
+    <ul style="margin:6px 0 0 18px;line-height:2.4">
+      <li>NISA積立を月<strong>${fmtM(Math.min(10,nisaMonthly+3))}万円</strong>に増額（現在${nisaMonthly}万円→+${fmtM(Math.min(10,nisaMonthly+3)-nisaMonthly)}万円で老後資産が大幅改善）</li>
+      <li>定年後の生活費を月<strong>2〜3万円</strong>削減（飲食・サブスク・保険の見直しで年24〜36万円の改善）</li>
+      <li>${retireSelf}〜${Math.min(retireSelf+5,70)}歳の再雇用・副業で年間<strong>60〜120万円</strong>の収入を確保</li>
+      ${loanBalance>0?`<li>住宅ローン完済（${loanRepayAge}歳）後の月<strong>${fmtM(loanMonthly/10000)}万円</strong>をそのまま積立に回す</li>`:''}
+    </ul>`
+    :retireAsset<500?`定年時の資産 <strong>${fmt(retireAsset)}万円</strong> は老後30年間の生活費には心もとない水準です。
+    老後の月次収支は平均 <strong>${avgRetireCF>=0?'+':'▲'}${fmt(Math.abs(avgRetireCF/12))}万円</strong> の見込みで、${avgRetireCF<0?'毎月資産を取り崩す':'黒字を維持できる'}計画です。
+    今のうちにNISA・iDeCoの積立増額と支出の見直しを行いましょう。`
+    :`${planEndAge}歳まで総資産 <strong>${fmt(minAsset)}万円以上</strong> を維持できる堅実なプランです。
+    ピーク資産 <strong>${fmt(peakAsset)}万円</strong> を${peakRow?peakRow.selfAge+'歳':''}頃に達成する見込みです。
+    余裕がある今こそ、介護・医療など想定外の大型支出への備えを固めておきましょう。`}
+    </div>
+  </div>`;
+
+  // ② 老後・年金収支分析
+  if(retRows.length>0){
+    al.innerHTML+=`<div class="alert ${gapMonthly>5?'warn':'ok'}" style="margin-bottom:16px">
+      <div style="font-size:13px;font-weight:900;margin-bottom:8px">🏖️ 老後の収支分析（${retireSelf}歳〜）</div>
+      <div style="font-size:13px;line-height:2">
+      年金収入 <strong>${fmt(pensionMonthly)}万円/月</strong>、生活費の目安 <strong>${fmt(livingCostRetire)}万円/月</strong>。<br>
+      ${gapMonthly>0
+        ?`毎月 <strong>${fmt(gapMonthly)}万円（年間${fmt(gapMonthly*12)}万円）</strong> を貯蓄から補填する計画です。
+        ${retireAsset>0?`定年時資産 <strong>${fmt(retireAsset)}万円</strong> は年間赤字の <strong>約${Math.floor(retireAsset/(gapMonthly*12))}年分</strong> に相当します。`:''}
+        <br>💡 <strong>FPアドバイス：</strong>
+        ${retireSelf<65?`<strong>${retireSelf}〜65歳の空白期間（${65-retireSelf}年間）</strong> は年金がゼロのため特に家計が厳しくなります。この期間は再雇用または配偶者の就労継続で収入を確保することが最重要です。`:''}
+        医療・介護費は75歳以降に急増する傾向があります。<strong>医療保険・介護保険の見直し</strong>と<strong>高額療養費制度の理解</strong>を今から進めておきましょう。`
+        :`年金が生活費をカバーできる試算です（月 <strong>+${fmt(Math.abs(gapMonthly))}万円の黒字</strong>）。
+        余剰分は医療・介護の緊急予備資金として普通預金に積み上げるのが賢明です。`}
+      </div>
+    </div>`;
+  }
+
+  // ③ NISA・iDeCo活用診断
+  al.innerHTML+=`<div class="alert ${nisaMonthly<5?'warn':'ok'}" style="margin-bottom:16px">
+    <div style="font-size:13px;font-weight:900;margin-bottom:8px">📈 NISA・iDeCo活用診断</div>
+    <div style="font-size:13px;line-height:2">
+    NISA積立 <strong>${nisaMonthly}万円/月</strong>（上限10万円の <strong>${nisaUtilPct}%</strong> 活用） ／ iDeCo <strong>${idecoMonthly}万円/月</strong>。<br>
+    ${retireSelf}歳時点のNISA推定残高：<strong>${fmt(nisaAtRetire)}万円</strong>（運用益は <strong>全額非課税</strong>）。<br><br>
+    💡 <strong>FPアドバイス：</strong><br>
+    ${nisaMonthly<10?`NISA枠にはまだ月 <strong>${fmtM(nisaMaxMonthly-nisaMonthly)}万円</strong> の余裕があります。月1万円増やすだけでも${retireSelf}歳まで${Math.max(0,retireSelf-ageSelf)}年間積み立てると複利で <strong>数百万円以上</strong> の差になる可能性があります。`
+    :`NISA上限フル活用中です。素晴らしい！複利の恩恵を最大化する理想的な運用です。`}<br>
+    ${idecoMonthly<1.2?`iDeCoは掛金を増やすと <strong>所得控除</strong> の節税効果も得られます（例：年収500万・月1万増で年間約 <strong>2万円の節税</strong>）。給与所得者の上限は月2.3万円です。`
+    :`iDeCoも積極活用中です。iDeCoは受取時の税制に注意し、退職所得控除・公的年金等控除を最大限活用しましょう。`}
+    </div>
+  </div>`;
+
+  // ④ 住宅ローン診断
+  if(loanBalance>0){
+    al.innerHTML+=`<div class="alert ${loanRepayAge>65?'warn':'ok'}" style="margin-bottom:16px">
+      <div style="font-size:13px;font-weight:900;margin-bottom:8px">🏠 住宅ローン診断</div>
+      <div style="font-size:13px;line-height:2">
+      残債 <strong>${fmt(loanBalance)}万円</strong>、月々 <strong>${fmtM(loanMonthly/10000)}万円</strong>、
+      <strong>${loanRepayAge}歳</strong>（${new Date().getFullYear()+(loanRepayAge-ageSelf)}年）に完済予定。<br>
+      残り返済総額：約 <strong>${fmt(totalRepay)}万円</strong>（元本${fmt(loanBalance)}万円＋利息 <strong>${fmt(totalInterest)}万円</strong>）。<br>
+      返済負担率：年収の <strong>${loanBurdenPct}%</strong>
+      ${loanBurdenPct>25?' ⚠️ 25%超は家計を圧迫しやすい水準です':loanBurdenPct>20?' ※目安の20%をやや超えています':' ✅ 適正水準です'}。<br><br>
+      💡 <strong>FPアドバイス：</strong>
+      ${loanRepayAge>65
+        ?`完済が${loanRepayAge}歳と老後にかかるため要注意です。<strong>繰上返済（期間短縮型）</strong>を活用して ${Math.max(retireSelf,60)}歳以前に完済できると、老後の月次収支が月 <strong>${fmtM(loanMonthly/10000)}万円</strong> 改善します。金利が変動型なら金利上昇リスクも考慮して固定金利への借り換えも検討しましょう。`
+        :`完済時期が定年（${retireSelf}歳）前に終わる理想的な計画です。完済後の月 <strong>${fmtM(loanMonthly/10000)}万円</strong> をそのままNISAに回すと老後資産が大幅に増えます。`}
+      </div>
+    </div>`;
+  }
+
+  // ⑤ 優先アクション
+  const actions=[];
+  if(depleteRow||retireAsset<500) actions.push(`NISA積立を月<strong>${fmtM(Math.min(10,nisaMonthly+3))}万円</strong>に増額し、複利効果で老後資産を底上げする`);
+  if(retireSelf<65) actions.push(`${retireSelf}〜65歳の<strong>年金空白期間（${65-retireSelf}年間）</strong>は再雇用・パートで月<strong>10〜15万円</strong>の収入を確保する`);
+  if(loanBalance>0&&loanRepayAge>retireSelf) actions.push(`住宅ローンの<strong>繰上返済（期間短縮型）</strong>で定年前完済を目指す`);
+  if(childrenCount>0) actions.push(`教育費ピーク（大学進学時）に備え、<strong>ジュニアNISA・学資保険</strong>で先手を打つ`);
+  actions.push(`緊急予備資金として生活費<strong>6か月分（目安：${fmt(livingCost*6)}万円）</strong>を普通預金に確保しておく`);
+  if(loanBalance>0&&loanRepayAge<=retireSelf) actions.push(`完済後の月<strong>${fmtM(loanMonthly/10000)}万円</strong>を即座にNISAに回す仕組みをつくる`);
+  actions.push(`保険料の見直し（払いすぎ診断）で年間<strong>5〜15万円</strong>のコスト削減を検討する`);
+
+  al.innerHTML+=`<div class="alert ok" style="border-color:var(--green)">
+    <div style="font-size:13px;font-weight:900;margin-bottom:10px">📌 FPが提案する優先アクション</div>
+    <ol style="margin:0 0 0 20px;font-size:13px;line-height:2.6">
+      ${actions.map(a=>`<li>${a}</li>`).join('')}
+    </ol>
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(26,107,60,.08);border-radius:8px;font-size:11px;color:var(--green);line-height:1.9">
+      ※ 本シミュレーションは概算であり、将来の結果を保証するものではありません。税制・社会保険制度の改正により実際の数値は変動します。具体的なプランニングはFP技能士にご相談ください。
+    </div>
+  </div>`;
 
   buildSVGChart(rows);
 
