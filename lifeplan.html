@@ -59,9 +59,19 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 .hero{background:linear-gradient(135deg,var(--green-dark),var(--green),var(--green-light));color:#fff;padding:40px 24px 48px;text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:600;margin-bottom:16px}
-.hero h1{font-size:clamp(20px,4vw,32px);font-weight:900;margin-bottom:10px;line-height:1.3}
+.hero h1{font-size:clamp(22px,4vw,34px);font-weight:900;margin-bottom:10px;line-height:1.3}
 .hero h1 em{color:#7ee8a2;font-style:normal}
-.hero p{font-size:13px;color:rgba(255,255,255,.8);max-width:480px;margin:0 auto}
+.hero p{font-size:13px;color:rgba(255,255,255,.8);max-width:480px;margin:0 auto 28px}
+.hero-steps{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:24px;max-width:720px;margin-left:auto;margin-right:auto}
+.hero-step{display:flex;flex-direction:column;align-items:center;gap:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;min-width:72px;transition:background .2s}
+.hero-step:hover{background:rgba(255,255,255,.22)}
+.hs-num{font-size:9px;font-weight:700;color:rgba(255,255,255,.6);font-family:'DM Mono',monospace;letter-spacing:.06em}
+.hs-icon{font-size:26px;line-height:1}
+.hs-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.95);white-space:nowrap}
+.hs-arrow{font-size:14px;color:rgba(255,255,255,.4);flex-shrink:0}
+@media(max-width:560px){.hs-arrow{display:none}.hero-step{min-width:60px;padding:8px 10px}.hs-icon{font-size:22px}}
+.hero-feats{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.hero-feat{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:600;color:rgba(255,255,255,.9)}
 
 .progress-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:56px;z-index:100}
 .progress-inner{max-width:900px;margin:0 auto;display:flex;gap:0;align-items:center}
@@ -176,6 +186,26 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <div class="hero-badge">📋 登録不要・6ステップで完成</div>
   <h1>総合<em>ライフプラン表</em>を作成</h1>
   <p>家族構成・収入・支出・住宅ローン・教育費・老後資金を一枚の表に。今後の家計の流れを年別で可視化します。</p>
+  <div class="hero-steps">
+    <div class="hero-step"><div class="hs-num">STEP 1</div><div class="hs-icon">👨‍👩‍👧</div><div class="hs-label">家族情報</div></div>
+    <div class="hs-arrow">›</div>
+    <div class="hero-step"><div class="hs-num">STEP 2</div><div class="hs-icon">💴</div><div class="hs-label">収入</div></div>
+    <div class="hs-arrow">›</div>
+    <div class="hero-step"><div class="hs-num">STEP 3</div><div class="hs-icon">🛒</div><div class="hs-label">支出</div></div>
+    <div class="hs-arrow">›</div>
+    <div class="hero-step"><div class="hs-num">STEP 4</div><div class="hs-icon">🏠</div><div class="hs-label">住宅ローン</div></div>
+    <div class="hs-arrow">›</div>
+    <div class="hero-step"><div class="hs-num">STEP 5</div><div class="hs-icon">📈</div><div class="hs-label">資産・投資</div></div>
+    <div class="hs-arrow">›</div>
+    <div class="hero-step"><div class="hs-num">STEP 6</div><div class="hs-icon">📊</div><div class="hs-label">プラン表</div></div>
+  </div>
+  <div class="hero-feats">
+    <span class="hero-feat">💾 保存・復元</span>
+    <span class="hero-feat">📥 CSV出力</span>
+    <span class="hero-feat">🖨 印刷・PDF</span>
+    <span class="hero-feat">0円 登録不要</span>
+    <span class="hero-feat">📱 スマホ対応</span>
+  </div>
 </div>
 
 <div class="progress-wrap">
