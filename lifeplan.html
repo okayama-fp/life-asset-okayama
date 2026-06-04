@@ -849,56 +849,56 @@ function generatePlan(){
   try{ _generatePlan(); } catch(e){ showToast('⚠️ エラー: '+e.message); console.error(e); }
 }
 function _generatePlan(){
-  const ageSelf=parseInt(document.getElementById('age-self').value)||40;
-  const retireSelf=parseInt(document.getElementById('retire-self').value)||65;
-  const hasSpouse=document.getElementById('spouse-yn').value==='yes';
-  const ageSpouse=hasSpouse?parseInt(document.getElementById('age-spouse').value)||38:0;
-  const retireSpouse=hasSpouse?parseInt(document.getElementById('retire-spouse').value)||60:0;
-  const planEndAge=parseInt(document.getElementById('plan-end-age').value)||90;
-  const currentAssets=parseFloat(document.getElementById('current-assets')?.value)||0;
+  const g=(id,def=0)=>{const el=document.getElementById(id);return el?el.value:def;};
+  const ageSelf=parseInt(g('age-self'))||40;
+  const retireSelf=parseInt(g('retire-self'))||65;
+  const hasSpouse=g('spouse-yn')==='yes';
+  const ageSpouse=hasSpouse?parseInt(g('age-spouse'))||38:0;
+  const retireSpouse=hasSpouse?parseInt(g('retire-spouse'))||60:0;
+  const planEndAge=parseInt(g('plan-end-age'))||90;
 
-  const incomeSelf=parseFloat(document.getElementById('income-self').value)||0;
-  const incomeGrowth=parseFloat(document.getElementById('income-growth').value)||0;
-  const incomeReemploy=parseFloat(document.getElementById('income-reemploy').value)||0;
-  const reemployEnd=parseInt(document.getElementById('reemploy-end').value)||70;
-  const incomeSpouse=hasSpouse?parseFloat(document.getElementById('income-spouse').value)||0:0;
-  const spouseWorkStart=hasSpouse?parseInt(document.getElementById('spouse-work-start').value)||0:0;
-  const incomeSpouseNew=hasSpouse?parseFloat(document.getElementById('income-spouse-new').value)||0:0;
-  const pensionSelf=parseFloat(document.getElementById('pension-self').value)||0;
-  const pensionSpouse=hasSpouse?parseFloat(document.getElementById('pension-spouse').value)||0:0;
-  const retirePay=parseFloat(document.getElementById('retirement-pay').value)||0;
-  const retirePaySpouse=hasSpouse?parseFloat(document.getElementById('retirement-pay-spouse').value)||0:0;
-  const inheritance=parseFloat(document.getElementById('inheritance').value)||0;
-  const inheritanceAge=parseInt(document.getElementById('inheritance-age').value)||60;
+  const incomeSelf=parseFloat(g('income-self'))||0;
+  const incomeGrowth=parseFloat(g('income-growth'))||0;
+  const incomeReemploy=parseFloat(g('income-reemploy'))||0;
+  const reemployEnd=parseInt(g('reemploy-end'))||70;
+  const incomeSpouse=hasSpouse?parseFloat(g('income-spouse'))||0:0;
+  const spouseWorkStart=hasSpouse?parseInt(g('spouse-work-start'))||0:0;
+  const incomeSpouseNew=hasSpouse?parseFloat(g('income-spouse-new'))||0:0;
+  const pensionSelf=parseFloat(g('pension-self'))||0;
+  const pensionSpouse=hasSpouse?parseFloat(g('pension-spouse'))||0:0;
+  const retirePay=parseFloat(g('retirement-pay'))||0;
+  const retirePaySpouse=hasSpouse?parseFloat(g('retirement-pay-spouse'))||0:0;
+  const inheritance=parseFloat(g('inheritance'))||0;
+  const inheritanceAge=parseInt(g('inheritance-age'))||60;
 
-  const livingCost=parseFloat(document.getElementById('living-cost').value)||25;
-  const livingCostRetire=parseFloat(document.getElementById('living-cost-retire').value)||22;
-  const inflation=parseFloat(document.getElementById('inflation').value)||0;
-  const medicalCost=parseFloat(document.getElementById('medical-cost').value)||3;
-  const carCost=parseFloat(document.getElementById('car-cost').value)||0;
-  const carCycle=parseInt(document.getElementById('car-cycle').value)||0;
-  const reformCost=parseFloat(document.getElementById('reform-cost').value)||0;
-  const reformAge=parseInt(document.getElementById('reform-age').value)||55;
-  const leisureCost=parseFloat(document.getElementById('leisure-cost').value)||0;
-  const insuranceCost=parseFloat(document.getElementById('insurance-cost').value)||0;
+  const livingCost=parseFloat(g('living-cost'))||25;
+  const livingCostRetire=parseFloat(g('living-cost-retire'))||22;
+  const inflation=parseFloat(g('inflation'))||0;
+  const medicalCost=parseFloat(g('medical-cost'))||3;
+  const carCost=parseFloat(g('car-cost'))||0;
+  const carCycle=parseInt(g('car-cycle'))||0;
+  const reformCost=parseFloat(g('reform-cost'))||0;
+  const reformAge=parseInt(g('reform-age'))||55;
+  const leisureCost=parseFloat(g('leisure-cost'))||0;
+  const insuranceCost=parseFloat(g('insurance-cost'))||0;
 
-  const housingType=document.getElementById('housing-type').value;
-  const loanBalance=housingType==='owned_loan'?parseFloat(document.getElementById('loan-balance').value)||0:0;
-  const loanRate=parseFloat(document.getElementById('loan-rate').value)||0;
-  const loanYears=parseInt(document.getElementById('loan-years').value)||0;
-  const rentCost=housingType==='rent'?parseFloat(document.getElementById('rent-cost').value)||0:0;
-  const rentEndAge=housingType==='rent'?parseInt(document.getElementById('rent-end-age').value)||90:0;
+  const housingType=g('housing-type','owned_no_loan');
+  const loanBalance=housingType==='owned_loan'?parseFloat(g('loan-balance'))||0:0;
+  const loanRate=parseFloat(g('loan-rate'))||0;
+  const loanYears=parseInt(g('loan-years'))||0;
+  const rentCost=housingType==='rent'?parseFloat(g('rent-cost'))||0:0;
+  const rentEndAge=housingType==='rent'?parseInt(g('rent-end-age'))||90:0;
 
-  const nisaMonthly=parseFloat(document.getElementById('nisa-monthly').value)||0;
-  const nisaRate=parseFloat(document.getElementById('nisa-rate').value)||0;
-  const idecoMonthly=parseFloat(document.getElementById('ideco-monthly').value)||0;
-  const idecoRate=parseFloat(document.getElementById('ideco-rate').value)||0;
-  const investCurrent=parseFloat(document.getElementById('invest-current').value)||0;
-  const investRate=parseFloat(document.getElementById('invest-rate').value)||0;
-  const investAnnual=parseFloat(document.getElementById('invest-annual').value)||0;
-  const savingsCurrent=parseFloat(document.getElementById('savings-current').value)||0;
+  const nisaMonthly=parseFloat(g('nisa-monthly'))||0;
+  const nisaRate=parseFloat(g('nisa-rate'))||0;
+  const idecoMonthly=parseFloat(g('ideco-monthly'))||0;
+  const idecoRate=parseFloat(g('ideco-rate'))||0;
+  const investCurrent=parseFloat(g('invest-current'))||0;
+  const investRate=parseFloat(g('invest-rate'))||0;
+  const investAnnual=parseFloat(g('invest-annual'))||0;
+  const savingsCurrent=parseFloat(g('savings-current'))||0;
 
-  const childrenCount=parseInt(document.getElementById('children-count').value)||0;
+  const childrenCount=parseInt(g('children-count'))||0;
   const children=[];
   for(let i=1;i<=childrenCount;i++){
     children.push({
