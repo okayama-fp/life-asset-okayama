@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://lifeassetoffice.net/">
+<title>ライフアセットオフィス｜住宅ローン・資産運用・老後資金 FP情報サイト</title>
+<meta name="description" content="FP技能士が運営する中立な情報サイト。住宅ローン金利リスク診断・老後資金・NISA/iDeCo・ふるさと納税など9つのシミュレーターと28本のFPブログ記事。登録不要。">
+<meta property="og:title" content="ライフアセットオフィス｜住宅ローン・資産運用・老後資金 FP情報サイト">
+<meta property="og:description" content="登録不要のFPシミュレーター9種と最新記事28本。住宅ローン・資産運用・老後資金の不安を数字で解決。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lifeassetoffice.net/">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@lifeasset_fp">
 <script>if(location.pathname.endsWith('/index.html')){location.replace(location.href.replace('/index.html','/'));}</script>
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -10,478 +26,590 @@
   gtag('js', new Date());
   gtag('config', 'G-PKDH2DR522');
 </script>
-  <meta charset="UTF-8" />
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <link rel="canonical" href="https://lifeassetoffice.net/">
-  <title>ライフアセットオフィス｜資産・融資サポート</title>
-  <!-- OGP -->
-  <meta property="og:title" content="ライフアセットオフィス｜資産・融資サポート">
-  <meta property="og:description" content="個人資産管理から資金調達まで、お一人おひとりに最適なご提案をいたします。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lifeassetoffice.net/">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/style.css">
-  <style>
-    @keyframes lpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
-    @keyframes hpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);}}
-    img[src*="life-asset-kun"] {
-      filter: sepia(1) saturate(2.5) hue-rotate(90deg) brightness(0.88);
-      border-radius: 10px;
-    }
-    /* ─── NEW HERO ─── */
-    .hero {
-      background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 50%, #1f5c3a 100%);
-      min-height: calc(100vh - 68px);
-      display: flex; align-items: center;
-      padding: 60px 32px;
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute;
-      top: -120px; right: -120px;
-      width: 560px; height: 560px;
-      background: radial-gradient(circle, rgba(74,222,128,0.13) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: ''; position: absolute;
-      bottom: -100px; left: -100px;
-      width: 440px; height: 440px;
-      background: radial-gradient(circle, rgba(26,122,74,0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 1100px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 360px;
-      gap: 56px; align-items: center;
-      position: relative; z-index: 1;
-    }
-    .hero-tag-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(74,222,128,0.15);
-      border: 1px solid rgba(74,222,128,0.35);
-      color: #86efac;
-      font-size: 12px; font-weight: 700; letter-spacing: .1em;
-      padding: 5px 14px; border-radius: 20px; margin-bottom: 24px;
-    }
-    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: hpulse 2s infinite; }
-    .hero-catch {
-      font-size: clamp(28px, 4.5vw, 50px);
-      font-weight: 900; color: #fff;
-      line-height: 1.25; margin-bottom: 20px;
-    }
-    .hero-catch em {
-      font-style: normal;
-      background: linear-gradient(90deg, #4ade80, #86efac);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.85; margin-bottom: 10px; }
-    .hero-fp-note { font-size: 11.5px; color: rgba(255,255,255,0.38); margin-bottom: 32px; }
-    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
-    .btn-hero-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: linear-gradient(90deg, #1a7a4a, #22c55e);
-      color: #fff; font-size: 15px; font-weight: 800;
-      padding: 15px 28px; border-radius: 50px;
-      box-shadow: 0 6px 24px rgba(34,197,94,0.38);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.5); }
-    .btn-hero-primary .bsub { font-size: 10.5px; font-weight: 400; opacity: .85; display: block; }
-    .btn-hero-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.08);
-      border: 1.5px solid rgba(255,255,255,0.28);
-      color: #fff; font-size: 15px; font-weight: 700;
-      padding: 15px 28px; border-radius: 50px;
-      transition: background .2s, border-color .2s;
-    }
-    .btn-hero-secondary:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.5); }
-    .btn-hero-secondary .bsub { font-size: 10.5px; font-weight: 400; opacity: .65; display: block; }
-    .hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
-    .hero-stat { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.55); font-size: 13px; }
-    .hero-stat strong { color: #fff; font-size: 17px; font-weight: 900; }
-    .hero-panel {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 24px;
-      backdrop-filter: blur(8px);
-    }
-    .hero-panel-title { font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: .1em; margin-bottom: 14px; }
-    .panel-links { display: flex; flex-direction: column; gap: 8px; }
-    .panel-link {
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 12px; padding: 12px 14px;
-      color: #fff; font-size: 13px; font-weight: 700;
-      transition: background .2s;
-    }
-    .panel-link:hover { background: rgba(255,255,255,0.14); }
-    .panel-link-icon {
-      width: 36px; height: 36px; border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px; flex-shrink: 0;
-    }
-    .pli-green { background: rgba(74,222,128,0.18); }
-    .pli-blue  { background: rgba(96,165,250,0.18); }
-    .pli-amber { background: rgba(251,191,36,0.18); }
-    .panel-link-sub { font-size: 10.5px; font-weight: 400; color: rgba(255,255,255,0.45); display: block; margin-top: 2px; }
-    .panel-link-arrow { margin-left: auto; color: rgba(255,255,255,0.3); font-size: 16px; flex-shrink: 0; }
-    /* ─── SIMULATOR STRIP ─── */
-    .sim-strip { background: #fff; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 32px 24px; }
-    .sim-strip-inner { max-width: 1100px; margin: 0 auto; }
-    .sim-strip-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-    .sim-strip-ttl { font-size: 17px; font-weight: 900; color: #1a3d2b; }
-    .sim-strip-ttl span { color: #1a7a4a; }
-    .sim-strip-sub { font-size: 12px; color: #64748b; margin-top: 3px; }
-    .btn-all-sims { display: inline-block; background: #1a3d2b; color: #fff; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 50px; transition: background .2s; white-space: nowrap; }
-    .btn-all-sims:hover { background: #1a7a4a; }
-    .sim-strip-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-    @media(max-width:700px){ .sim-strip-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media(max-width:380px){ .sim-strip-grid { grid-template-columns: repeat(2, 1fr); } }
-    .sc { display: flex; flex-direction: column; align-items: center; gap: 7px; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 16px 6px 14px; text-decoration: none; transition: all .2s; }
-    .sc:hover { border-color: #1a7a4a; background: #dcfce7; transform: translateY(-2px); }
-    .sc-icon { font-size: 26px; line-height: 1; }
-    .sc-name { font-size: 11px; font-weight: 700; color: #1a3d2b; text-align: center; line-height: 1.4; }
-    @media (max-width: 860px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
-      .hero { min-height: auto; padding: 40px 20px 48px; }
-      .hero-panel { display: none; }
-    }
-    /* ─── MOBILE QUICK ICONS ─── */
-    .hero-quick-icons {
-      display: none;
-      gap: 12px;
-    }
-    .quick-icon-btn {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 16px 8px 14px;
-      color: #fff;
-      font-size: 12px; font-weight: 800;
-      text-align: center; line-height: 1.4;
-      transition: background .15s, border-color .15s;
-      gap: 8px;
-    }
-    .quick-icon-btn:hover, .quick-icon-btn:active { background: rgba(74,222,128,0.2); border-color: rgba(74,222,128,0.4); }
-    .quick-icon-circle { width: 44px; height: 44px; border-radius: 12px; background: rgba(74,222,128,0.18); display: flex; align-items: center; justify-content: center; }
-    .quick-icon-circle svg { width: 22px; height: 22px; stroke: #4ade80; fill: none; stroke-width: 2; }
-    .quick-icon-sub { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.45); }
-    @media (max-width: 860px) {
-      .hero-quick-icons { display: flex; }
-    }
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1a6b3c;--green-dark:#0f4d2a;--green-light:#2d8a52;--green-pale:#e8f5ee;--green-mid:#c8e6d4;
+  --ink:#0d0d0d;--white:#fff;--gray:#6b7280;--border:#e5e7eb;--bg:#f8faf7;
+  --shadow:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 12px 48px rgba(0,0,0,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{background:var(--white);padding:0 32px;height:64px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:100}
+.logo{display:flex;flex-direction:column;line-height:1.2;text-decoration:none}
+.logo-main{font-size:20px;font-weight:900;color:var(--green);letter-spacing:-.02em}
+.logo-sub{font-size:10px;color:var(--gray);font-weight:400}
+.nav-links{display:flex;gap:28px;font-size:13px}
+.nav-links a{color:var(--gray);text-decoration:none;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;border:none;border-radius:24px;padding:10px 22px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;text-decoration:none}
+.nav-cta:hover{background:var(--green-light);transform:translateY(-1px);box-shadow:0 4px 12px rgba(26,107,60,.3)}
+@media(max-width:640px){.nav-links{display:none}}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 55%,var(--green-light) 100%);min-height:88vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 32px}
+.hero-bg-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 60px)}
+.hero-bg-circle{position:absolute;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-bg-circle.c1{width:600px;height:600px;top:-200px;right:-100px}
+.hero-bg-circle.c2{width:300px;height:300px;bottom:-100px;left:10%}
+
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center;position:relative;z-index:1}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:40px}}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:#fff;margin-bottom:24px;letter-spacing:.03em}
+.hero-eyebrow-dot{width:7px;height:7px;border-radius:50%;background:#7ee8a2;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.2)}}
+
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(28px,4.5vw,52px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:20px;letter-spacing:-.02em}
+.hero h1 .accent{color:#7ee8a2}
+
+.hero-desc{font-size:16px;color:rgba(255,255,255,.82);line-height:1.9;margin-bottom:36px;max-width:480px}
+
+.value-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.vpill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:#fff;display:flex;align-items:center;gap:5px}
+
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.cta-primary{background:#fff;color:var(--green);border:none;border-radius:12px;padding:16px 28px;font-size:15px;font-weight:900;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.15);text-decoration:none}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.cta-primary .sub{font-size:11px;font-weight:400;color:var(--gray);display:block;margin-top:1px}
+.cta-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:12px;padding:16px 24px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center}
+.cta-secondary:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+.hero-stats{display:flex;gap:32px;padding-top:36px;border-top:1px solid rgba(255,255,255,.15)}
+.hstat{text-align:left}
+.hstat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:#fff;line-height:1}
+.hstat-label{font-size:11px;color:rgba(255,255,255,.6);margin-top:4px}
+
+.tool-cards{display:flex;flex-direction:column;gap:12px}
+.tool-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;text-decoration:none}
+.tool-card:hover{background:rgba(255,255,255,.18);transform:translateX(4px);border-color:rgba(255,255,255,.35)}
+.tool-card-icon{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.tool-card-text{flex:1}
+.tool-card-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.tool-card-desc{font-size:11px;color:rgba(255,255,255,.65)}
+.tool-card-arrow{color:rgba(255,255,255,.5);font-size:16px;transition:transform .2s}
+.tool-card:hover .tool-card-arrow{transform:translateX(4px);color:#fff}
+.tool-card.hot{background:rgba(255,255,255,.18);border-color:rgba(126,232,162,.4)}
+.hot-badge{background:#7ee8a2;color:var(--green-dark);font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;margin-left:6px;vertical-align:middle}
+.panel-footer{text-align:center;padding-top:10px}
+.panel-footer a{font-size:12px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .15s}
+.panel-footer a:hover{color:#fff}
+
+/* ── SECTION COMMON ── */
+.section{padding:80px 32px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:'Noto Serif JP',serif;font-size:clamp(22px,3vw,34px);font-weight:900;line-height:1.3;margin-bottom:16px;letter-spacing:-.01em}
+.section-desc{font-size:15px;color:var(--gray);line-height:1.9;max-width:560px;margin-bottom:48px}
+
+/* ── WHY ── */
+.why{background:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.why-card{padding:28px;border:1.5px solid var(--border);border-radius:16px;position:relative;transition:all .2s}
+.why-card:hover{border-color:var(--green-mid);box-shadow:var(--shadow);transform:translateY(-2px)}
+.why-icon{font-size:36px;margin-bottom:16px;display:block}
+.why-card h3{font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.4}
+.why-card p{font-size:13.5px;color:var(--gray);line-height:1.8}
+.why-num{position:absolute;top:16px;right:16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--border);font-weight:500}
+
+/* ── TOOLS SECTION ── */
+.tools{background:var(--bg)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.sim-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:all .2s;text-decoration:none;display:block}
+.sim-card:hover{border-color:var(--green);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.sim-card-top{padding:24px 24px 0;background:linear-gradient(135deg,var(--green-dark),var(--green));min-height:80px;position:relative}
+.sim-card-badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;color:#fff;margin-bottom:10px}
+.sim-card-emoji{position:absolute;right:20px;top:16px;font-size:40px;opacity:.9}
+.sim-card-title{font-size:17px;font-weight:900;color:#fff;margin-bottom:16px;line-height:1.3}
+.sim-card-body{padding:20px 24px 24px}
+.sim-card-desc{font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:14px}
+.sim-card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.sim-tag{font-size:11px;background:var(--green-pale);color:var(--green);padding:3px 10px;border-radius:10px;font-weight:500}
+.sim-card-cta{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;font-weight:700;color:var(--green)}
+
+/* ── BLOG PREVIEW ── */
+.blog-section{background:var(--white)}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.blog-card{border:1.5px solid var(--border);border-radius:14px;padding:22px;transition:all .2s;text-decoration:none;display:block}
+.blog-card:hover{border-color:var(--green);box-shadow:var(--shadow);transform:translateY(-2px)}
+.blog-cat{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px;margin-bottom:10px;letter-spacing:.05em}
+.cat-loan{background:#fdecea;color:#c0392b}
+.cat-asset{background:var(--green-pale);color:var(--green)}
+.cat-retire{background:#e8f0fb;color:#1a4fa0}
+.cat-tax{background:#fef6e4;color:#d4820a}
+.blog-card h3{font-size:15px;font-weight:700;line-height:1.5;margin-bottom:8px;color:var(--ink)}
+.blog-card p{font-size:12.5px;color:var(--gray);line-height:1.7}
+.blog-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--gray)}
+.blog-read{color:var(--green);font-weight:700;font-size:12px}
+
+/* ── CONCERN SECTION ── */
+.concern{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:80px 32px;color:#fff}
+.concern-inner{max-width:1100px;margin:0 auto}
+.concern-title{font-family:'Noto Serif JP',serif;font-size:clamp(22px,3vw,32px);font-weight:900;margin-bottom:40px;text-align:center}
+.concern-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.concern-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+.concern-icon{font-size:28px;flex-shrink:0}
+.concern-item h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.concern-item p{font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.7}
+
+/* ── CTA SECTION ── */
+.cta-section{background:var(--white);padding:80px 32px;text-align:center}
+.cta-box{max-width:640px;margin:0 auto;background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:24px;padding:56px 40px;color:#fff;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.cta-box h2{font-family:'Noto Serif JP',serif;font-size:clamp(20px,3vw,28px);font-weight:900;margin-bottom:14px;position:relative}
+.cta-box p{font-size:14px;color:rgba(255,255,255,.8);margin-bottom:32px;line-height:1.9;position:relative}
+.cta-box-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+.cta-btn-white{background:#fff;color:var(--green);border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:900;font-family:inherit;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.cta-btn-white:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.cta-btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:12px;padding:14px 24px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.cta-btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)}
+@media(max-width:640px){.footer-top{grid-template-columns:1fr}}
+.footer-logo{font-size:18px;font-weight:900;color:#fff;margin-bottom:8px}
+.footer-tagline{font-size:12px;line-height:1.8}
+.footer-col h4{font-size:12px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:14px;letter-spacing:.05em}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .15s}
+.footer-col a:hover{color:rgba(255,255,255,.8)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:12px}
+.footer-disc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:16px}
+
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:640px){
+  .hero{padding:60px 20px;min-height:auto}
+  .section{padding:56px 20px}
+  .hero-stats{gap:20px}
+  .hstat-num{font-size:22px}
+  .cta-box{padding:36px 24px}
+}
+</style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <div class="logo-text">
-        <div class="logo-main">Life Asset</div>
-        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
-      </div>
-    </a>
-    <nav>
-      <a href="#home">ホーム</a>
-      <a href="service/">サービス</a>
-      <a href="simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
-      <a href="blog/">ブログ</a>
-      <a href="#contact">お問い合わせ</a>
-    </nav>
-    <a href="#contact" class="btn-cta">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-      お問い合わせはこちら
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">
+    <span class="logo-main">Life Asset</span>
+    <span class="logo-sub">あなたの未来に、確かな安心と成長を。</span>
+  </a>
+  <div class="nav-links">
+    <a href="/">ホーム</a>
+    <a href="service/">サービス</a>
+    <a href="simulation.html">シミュレーター</a>
+    <a href="blog/">ブログ</a>
+    <a href="contact.html">お問い合わせ</a>
   </div>
-</header>
+  <a href="contact.html" class="nav-cta">✉ お問い合わせはこちら</a>
+</nav>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+
   <div class="hero-inner">
-    <!-- 左：キャッチ & CTA -->
-    <div>
-      <div class="hero-tag-badge">
-        <span class="hero-tag-dot"></span>
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
         FP技能士が運営する中立な情報サイト
       </div>
-      <h1 class="hero-catch">
+      <h1>
         住宅ローン・資産運用、<br>
-        <em>お問い合わせください。</em>
+        <span class="accent">お金の不安を</span><br>
+        今すぐ数字で解決。
       </h1>
-      <p class="hero-sub">
-        お金の不安をひとりで抱えていませんか？<br>
-        住宅ローンの金利リスクから老後資金まで、<br>中立な立場でわかりやすくサポートします。
+      <p class="hero-desc">
+        金利上昇・老後資金・NISA・ふるさと納税——<br>
+        登録不要のシミュレーターで、<strong style="color:#fff">あなたの数字</strong>を今すぐ確認できます。
       </p>
-      <p class="hero-fp-note">※投資助言業の登録はありません。情報提供サービスです。</p>
+
+      <div class="value-pills">
+        <div class="vpill">📊 シミュレーター9種</div>
+        <div class="vpill">📝 FPブログ28本</div>
+        <div class="vpill">🔒 登録不要</div>
+        <div class="vpill">⚖️ 中立・売り込みなし</div>
+      </div>
+
       <div class="hero-ctas">
-        <a href="loan-check.html" class="btn-hero-primary">
-          <span>住宅ローン診断<span class="bsub">30秒で完了</span></span>
+        <a href="#tools" class="cta-primary">
+          <span>🔍</span>
+          <span>
+            シミュレーターを使う
+            <span class="sub">30秒・登録不要</span>
+          </span>
         </a>
-        <a href="#contact" class="btn-hero-secondary">
-          <span>資産運用のお問い合わせ<span class="bsub">お問い合わせフォーム</span></span>
+        <a href="blog/" class="cta-secondary">
+          ブログを読む →
         </a>
       </div>
+
       <div class="hero-stats">
-        <div class="hero-stat"><strong>28</strong>本の記事</div>
-        <div class="hero-stat"><strong>9</strong>つのツール</div>
-        <div class="hero-stat"><strong>登録不要</strong>で今すぐ使える</div>
+        <div class="hstat">
+          <div class="hstat-num">9</div>
+          <div class="hstat-label">つのシミュレーター</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">28</div>
+          <div class="hstat-label">本のFP記事</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">0円</div>
+          <div class="hstat-label">登録不要</div>
+        </div>
       </div>
     </div>
-    <!-- スマホ用クイックアイコン -->
-    <div class="hero-quick-icons">
-      <a href="simulation.html" class="quick-icon-btn">
-        <div class="quick-icon-circle">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        シミュレーター
-        <span class="quick-icon-sub">9つのツール</span>
-      </a>
-      <a href="blog/" class="quick-icon-btn">
-        <div class="quick-icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-        ブログ
-        <span class="quick-icon-sub">FP記事一覧</span>
-      </a>
-    </div>
-    <!-- 右：クイックアクセスパネル -->
-    <div class="hero-panel">
-      <div class="hero-panel-title">▶ よく使われているページ</div>
-      <div class="panel-links">
-        <a href="loan-check.html" class="panel-link">
-          <div>住宅ローン金利リスク診断<span class="panel-link-sub">変動 vs 固定・返済負担率をチェック</span></div>
-          <span class="panel-link-arrow">›</span>
+
+    <!-- TOOL QUICK NAV -->
+    <div class="hero-right">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">▶ よく使われているツール</div>
+      <div class="tool-cards">
+        <a href="loan-check.html" class="tool-card hot">
+          <div class="tool-card-icon">🏠</div>
+          <div class="tool-card-text">
+            <div class="tool-card-title">住宅ローン金利リスク診断<span class="hot-badge">人気</span></div>
+            <div class="tool-card-desc">変動 vs 固定・返済負担率をチェック</div>
+          </div>
+          <div class="tool-card-arrow">›</div>
         </a>
-        <a href="simulation.html" class="panel-link">
-          <div>資産シミュレーター<span class="panel-link-sub">老後資金・NISA積立をシミュレーション</span></div>
-          <span class="panel-link-arrow">›</span>
+        <a href="asset-sim.html" class="tool-card">
+          <div class="tool-card-icon">📈</div>
+          <div class="tool-card-text">
+            <div class="tool-card-title">将来資産シミュレーター</div>
+            <div class="tool-card-desc">NISA積立で老後資産がわかる</div>
+          </div>
+          <div class="tool-card-arrow">›</div>
         </a>
-        <a href="blog/" class="panel-link">
-          <div>FPブログを読む<span class="panel-link-sub">住宅ローン・投資・保険の最新情報</span></div>
-          <span class="panel-link-arrow">›</span>
+        <a href="retirement-gap.html" class="tool-card">
+          <div class="tool-card-icon">🏖️</div>
+          <div class="tool-card-text">
+            <div class="tool-card-title">老後資金不足額シミュレーター</div>
+            <div class="tool-card-desc">いくら足りないか・月積立額を計算</div>
+          </div>
+          <div class="tool-card-arrow">›</div>
         </a>
-        <a href="#contact" class="panel-link">
-          <div>お問い合わせ<span class="panel-link-sub">メールで気軽にお問い合わせ</span></div>
-          <span class="panel-link-arrow">›</span>
+        <a href="nisa-ideco-sim.html" class="tool-card">
+          <div class="tool-card-icon">💰</div>
+          <div class="tool-card-text">
+            <div class="tool-card-title">NISA vs iDeCo 比較</div>
+            <div class="tool-card-desc">節税効果を3口座で比較</div>
+          </div>
+          <div class="tool-card-arrow">›</div>
+        </a>
+        <a href="furusato-sim.html" class="tool-card">
+          <div class="tool-card-icon">🎁</div>
+          <div class="tool-card-text">
+            <div class="tool-card-title">ふるさと納税 上限額計算</div>
+            <div class="tool-card-desc">家族構成・住宅ローン控除を反映</div>
+          </div>
+          <div class="tool-card-arrow">›</div>
+        </a>
+        <a href="loan-refinance.html" class="tool-card">
+          <div class="tool-card-icon">🔄</div>
+          <div class="tool-card-text">
+            <div class="tool-card-title">住宅ローン借り換えシミュレーター</div>
+            <div class="tool-card-desc">手数料回収期間・総節約額を計算</div>
+          </div>
+          <div class="tool-card-arrow">›</div>
         </a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- BANNER -->
-<section class="banner">
-  <h2>お金の悩み、ひとりで抱えていませんか？</h2>
-  <p>将来への不安、資産の運用、急な資金ニーズ——　そのお悩み、私たちが解決します。</p>
-</section>
-
-<!-- SIMULATOR STRIP -->
-<div class="sim-strip">
-  <div class="sim-strip-inner">
-    <div class="sim-strip-hd">
-      <div>
-        <div class="sim-strip-ttl">FPシミュレーター <span>9ツール</span></div>
-        <div class="sim-strip-sub">登録不要・スライダーで即計算</div>
+      <div class="panel-footer">
+        <a href="simulation.html">全9ツールを見る →</a>
       </div>
-      <a href="simulation.html" class="btn-all-sims">全て見る →</a>
     </div>
-    <div class="sim-strip-grid">
-      <a href="loan-check.html" class="sc"><span class="sc-icon">🔍</span><span class="sc-name">ローンリスク診断</span></a>
-      <a href="retirement-gap.html" class="sc"><span class="sc-icon">🏖️</span><span class="sc-name">老後資金診断</span></a>
-      <a href="asset-sim.html" class="sc"><span class="sc-icon">📈</span><span class="sc-name">資産シミュレーター</span></a>
-      <a href="nisa-ideco-sim.html" class="sc"><span class="sc-icon">🎁</span><span class="sc-name">NISA・iDeCo</span></a>
-      <a href="furusato-sim.html" class="sc"><span class="sc-icon">🗾</span><span class="sc-name">ふるさと納税</span></a>
-      <a href="fire-sim.html" class="sc"><span class="sc-icon">🔥</span><span class="sc-name">FIRE達成</span></a>
-    </div>
-  </div>
-</div>
-
-<!-- ICON SERVICES -->
-<section class="icon-services">
-  <div class="icon-services-grid">
-    <div class="icon-service-item"><div class="icon-service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="icon-service-text"><h3>将来設計・資産運用</h3><p>ライフプランに合わせた資産形成・運用プランをご提案します。</p></div></div>
-    <div class="icon-service-item"><div class="icon-service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="icon-service-text"><h3>個人資産管理会社</h3><p>資産の一元管理で、効率的かつ安全な資産運用をサポート。</p></div></div>
-    <div class="icon-service-item"><div class="icon-service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="icon-service-text"><h3>融資・資金調達の情報提供</h3><p>資金調達に関する情報をブログで発信しています。実際の融資手続きは金融機関にお問い合わせください。</p></div></div>  </div>
-</section>
-
-<!-- CHARACTER STRIP -->
-<div class="char-strip">
-  <div class="char-strip-bubble">お金のこと、将来のこと——<br>一緒に考えて、カタチにします！<br>まずはお気軽にお問い合わせください。</div>
-</div>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <h2 class="section-title">サービスのご案内</h2>
-  <p class="section-sub">お客様の状況に合わせた最適なプランをご提供します</p>
-  <div class="cards">
-    <div class="card"><div class="card-header" style="background:linear-gradient(135deg,#dcfce7,#86efac)"><div class="card-header-inner" style="background:linear-gradient(135deg,#1a7a4a,#22c55e)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="card-body"><h3 class="card-title">個人資産管理</h3><p class="card-desc">資産の見える化と最適化で、将来に向けた資産形成を支援します。</p><ul class="card-list"><li>資産ポートフォリオ分析</li><li>資産運用プランの設計</li><li>定期的な資産状況の確認</li></ul><a href="simulation.html" class="btn-sky">詳しく見る &rsaquo;</a></div></div>
-    <div class="card"><div class="card-header" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)"><div class="card-header-inner" style="background:linear-gradient(135deg,#22c55e,#4ade80)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div><div class="card-body"><h3 class="card-title">アドバイザー業務</h3><p class="card-desc">専門知識と経験を活かし、最適なアドバイスを提供します。</p><ul class="card-list"><li>ライフプラン設計</li><li>保険の見直し・最適化</li></ul><a href="advisor.html" class="btn-sky">詳しく見る &rsaquo;</a></div></div>
-    <div class="card"><div class="card-header" style="background:linear-gradient(135deg,#dcfce7,#86efac)"><div class="card-header-inner" style="background:#1a7a4a"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div></div><div class="card-body"><h3 class="card-title">融資・資金調達の情報提供</h3><p class="card-desc">資金調達に関する情報をブログで発信しています。実際の融資手続きは金融機関にお問い合わせください。</p><ul class="card-list"><li>住宅ローンの選び方</li></ul><a href="loan.html" class="btn-sky">詳しく見る &rsaquo;</a></div></div>
   </div>
 </section>
 
-<!-- LOAN CHECK TOOL BANNER -->
-<section style="background:var(--navy);padding:80px 32px;text-align:center;">
-  <div style="max-width:860px;margin:0 auto;">
-    <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;color:#fff;letter-spacing:.1em;margin-bottom:20px;">
-      <span style="width:7px;height:7px;border-radius:50%;background:#6ee7b7;display:inline-block;animation:lpulse 2s infinite;"></span>
-      登録不要・30秒で診断
+<!-- WHY -->
+<section class="why section">
+  <div class="section-inner">
+    <div class="section-label fade-up">このサイトについて</div>
+    <h2 class="section-title fade-up">なぜ「Life Asset」なのか</h2>
+    <p class="section-desc fade-up">売り込みなし・登録不要・中立な立場から、お金の不安を一つずつ数字で解決します。</p>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <span class="why-num">01</span>
+        <span class="why-icon">⚖️</span>
+        <h3>中立な情報提供</h3>
+        <p>特定の金融機関・商品の販売代理店ではありません。FP技能士の立場から公平な情報をお届けします。</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-num">02</span>
+        <span class="why-icon">🔢</span>
+        <h3>あなたの数字で判断</h3>
+        <p>一般論ではなく、あなたの年収・残高・家族構成を入力することで「自分の場合どうなるか」がわかります。</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-num">03</span>
+        <span class="why-icon">🔒</span>
+        <h3>登録不要・追加費用なし</h3>
+        <p>すべてのシミュレーターとブログ記事は登録不要でご利用いただけます。メールアドレスも不要です。</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-num">04</span>
+        <span class="why-icon">📱</span>
+        <h3>スマホで30秒</h3>
+        <p>スライダーを動かすだけでリアルタイムに計算。難しい知識は不要です。</p>
+      </div>
     </div>
-    <h2 style="font-size:clamp(20px,4vw,30px);font-weight:900;color:#fff;line-height:1.3;margin-bottom:14px;">あなたの住宅ローン、<br>金利が上がったら大丈夫？</h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.85;margin-bottom:28px;">借入額・金利・年収を入力するだけ。<br>返済負担率・金利上昇リスク・住宅ローン控除（逆ざや）を一括診断。</p>
-    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:28px;">
-      <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;">返済負担率チェック</span>
-      <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;">金利上昇シミュレーション</span>
-      <span style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;">控除・逆ざや判定</span>
-    </div>
-    <a href="loan-check.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--sky);color:#fff;font-size:16px;font-weight:800;padding:16px 36px;border-radius:50px;box-shadow:0 6px 24px rgba(26,122,74,0.45);transition:transform .15s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-      住宅ローン金利リスク診断を試す &rsaquo;
-    </a>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<section class="cta-banner" id="contact">
-  <div class="cta-banner-inner">
-    <div class="cta-banner-text">
-      <p class="em">まずはお問い合わせ</p>
-      <h3>まずは<strong>お問い合わせ</strong>で、あなたの未来を一緒に考えませんか？</h3>
-      <p>お問い合わせはフォームまたはメールでお気軽にどうぞ。</p>
+<!-- CONCERNS -->
+<section class="concern">
+  <div class="concern-inner">
+    <h2 class="concern-title">こんなお悩みはありませんか？</h2>
+    <div class="concern-grid">
+      <div class="concern-item fade-up">
+        <div class="concern-icon">🏠</div>
+        <div>
+          <h4>住宅ローンの金利が上がったら返済できるか不安</h4>
+          <p>変動金利が1〜2%上がったとき月々いくら増えるか確認できていますか？</p>
+        </div>
+      </div>
+      <div class="concern-item fade-up">
+        <div class="concern-icon">🏖️</div>
+        <div>
+          <h4>老後資金がいくら必要かわからない</h4>
+          <p>年金だけでは足りない額と、今から必要な積立額を計算してみましょう。</p>
+        </div>
+      </div>
+      <div class="concern-item fade-up">
+        <div class="concern-icon">📊</div>
+        <div>
+          <h4>NISAとiDeCoどちらから始めればいいか迷っている</h4>
+          <p>年収・雇用形態別に節税効果を比較し、最適な順番がわかります。</p>
+        </div>
+      </div>
+      <div class="concern-item fade-up">
+        <div class="concern-icon">🎁</div>
+        <div>
+          <h4>ふるさと納税の上限額がよくわからない</h4>
+          <p>住宅ローン控除・医療費控除の影響を含めた正確な上限を計算できます。</p>
+        </div>
+      </div>
     </div>
-    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:center;">
-      <a href="contact.html" class="btn-primary">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        お問い合わせはこちら
+  </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section class="tools section" id="tools">
+  <div class="section-inner">
+    <div class="section-label fade-up">登録不要ツール</div>
+    <h2 class="section-title fade-up">9つのシミュレーター</h2>
+    <p class="section-desc fade-up">登録不要・スマホ対応。スライダーを動かすだけでリアルタイム計算。</p>
+    <div class="tools-grid">
+      <a href="loan-check.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">🔥 人気No.1</div>
+          <div class="sim-card-emoji">🏠</div>
+          <div class="sim-card-title">住宅ローン<br>金利リスク診断</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">変動・固定の返済比較、金利上昇シミュレーション、住宅ローン控除の逆ざや判定を一括診断。</p>
+          <div class="sim-card-tags"><span class="sim-tag">変動金利</span><span class="sim-tag">返済比率</span><span class="sim-tag">控除判定</span></div>
+          <div class="sim-card-cta"><span>診断してみる</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="asset-sim.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">資産形成</div>
+          <div class="sim-card-emoji">📈</div>
+          <div class="sim-card-title">将来資産<br>シミュレーター</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">積立額・利回り・期間を入力するだけ。NISA節税効果・複利グラフで「やらない損」を可視化。</p>
+          <div class="sim-card-tags"><span class="sim-tag">NISA</span><span class="sim-tag">複利グラフ</span><span class="sim-tag">3パターン比較</span></div>
+          <div class="sim-card-cta"><span>シミュレーション</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="retirement-gap.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">老後資金</div>
+          <div class="sim-card-emoji">🏖️</div>
+          <div class="sim-card-title">老後資金<br>不足額シミュレーター</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">年金・生活費・貯蓄を入力。不足額・必要月積立額・積立シナリオ比較を即計算。</p>
+          <div class="sim-card-tags"><span class="sim-tag">老後不足額</span><span class="sim-tag">年金</span><span class="sim-tag">積立シナリオ</span></div>
+          <div class="sim-card-cta"><span>不足額を確認</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="nisa-ideco-sim.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">節税比較</div>
+          <div class="sim-card-emoji">💰</div>
+          <div class="sim-card-title">NISA vs iDeCo<br>どっちがトク？</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">年収・雇用形態別にNISA・iDeCo・課税口座を3列比較。所得控除節税額も即計算。</p>
+          <div class="sim-card-tags"><span class="sim-tag">iDeCo節税</span><span class="sim-tag">3口座比較</span><span class="sim-tag">所得控除</span></div>
+          <div class="sim-card-cta"><span>節税額を確認</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="furusato-sim.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">節税</div>
+          <div class="sim-card-emoji">🎁</div>
+          <div class="sim-card-title">ふるさと納税<br>いくらまでお得？</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">家族構成・住宅ローン控除の影響まで反映した正確な控除上限額と実質お得額を計算。</p>
+          <div class="sim-card-tags"><span class="sim-tag">控除上限</span><span class="sim-tag">家族構成対応</span><span class="sim-tag">ローン反映</span></div>
+          <div class="sim-card-cta"><span>上限額を計算</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="loan-refinance.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">ローン最適化</div>
+          <div class="sim-card-emoji">🔄</div>
+          <div class="sim-card-title">住宅ローン<br>借り換えシミュレーター</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">残債・金利差・諸費用から総節約額・手数料回収期間を計算。借り換えすべきか即判定。</p>
+          <div class="sim-card-tags"><span class="sim-tag">節約額</span><span class="sim-tag">回収期間</span><span class="sim-tag">判定付き</span></div>
+          <div class="sim-card-cta"><span>節約額を計算</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="insurance-check.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">保険</div>
+          <div class="sim-card-emoji">🛡️</div>
+          <div class="sim-card-title">保険料<br>見直し診断</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">年齢・年収・家族構成から適正保険料の目安を診断。払いすぎているか一目で確認できます。</p>
+          <div class="sim-card-tags"><span class="sim-tag">適正保険料</span><span class="sim-tag">見直し</span><span class="sim-tag">家族構成対応</span></div>
+          <div class="sim-card-cta"><span>診断してみる</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="fire-sim.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">ライフプラン</div>
+          <div class="sim-card-emoji">🔥</div>
+          <div class="sim-card-title">FIRE達成年齢<br>シミュレーター</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">資産・収入・支出・利回りからFIRE達成年齢を計算。資産推移グラフと感度分析付き。</p>
+          <div class="sim-card-tags"><span class="sim-tag">FIRE</span><span class="sim-tag">資産推移</span><span class="sim-tag">感度分析</span></div>
+          <div class="sim-card-cta"><span>達成年齢を計算</span><span>→</span></div>
+        </div>
+      </a>
+      <a href="education-sim.html" class="sim-card fade-up">
+        <div class="sim-card-top">
+          <div class="sim-card-badge">教育費</div>
+          <div class="sim-card-emoji">🎓</div>
+          <div class="sim-card-title">教育費<br>積立プランナー</div>
+        </div>
+        <div class="sim-card-body">
+          <p class="sim-card-desc">子どもの年齢・進学コースを選ぶだけ。大学卒業までの教育費総額と必要積立額を計算。</p>
+          <div class="sim-card-tags"><span class="sim-tag">教育費</span><span class="sim-tag">積立計画</span><span class="sim-tag">進路別</span></div>
+          <div class="sim-card-cta"><span>積立額を確認</span><span>→</span></div>
+        </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- LIFEPLAN BLOCKS -->
-<section class="lifeplan-section">
-  <div class="lp-wrap">
-    <h2>ライフプランとは？</h2>
-    <p class="sub">あなたの未来を「見える化」して、安心へ</p>
-    <div class="lp-steps">
-      <div class="lp-step">
-        <div class="lp-step-num">01</div>
-        <div class="lp-step-body">
-          <div class="lp-bubble-title">今から実現できるライフプランがあります</div>
-          <p>ライフプランとは、将来の理想の生活を実現するために、必要なお金を「見える化」するシミュレーションです。</p>
-          <p>資産形成・資産運用・将来設計まで、ライフアセットオフィスがトータルでサポートします。</p>
-        </div>
-      </div>
-      <div class="lp-step">
-        <div class="lp-step-num">02</div>
-        <div class="lp-step-body">
-          <div class="lp-bubble-title">収入と支出のバランスがすべて</div>
-          <p>収入を増やすことだけでなく、支出とのバランスが資産形成のカギです。</p>
-          <ul><li>無駄な支出の見直し</li><li>借金を防ぐ仕組み</li><li>会社員でもできる節税対策</li></ul>
-        </div>
-      </div>
-      <div class="lp-step">
-        <div class="lp-step-num">03</div>
-        <div class="lp-step-body">
-          <div class="lp-bubble-title">老後資金も今から対策できます</div>
-          <p>年金や老後資金も事前にシミュレーション可能です。</p>
-          <ul><li>将来受け取れる年金</li><li>必要な生活費</li><li>2000万円問題の対策</li></ul>
-        </div>
-      </div>
+<!-- BLOG PREVIEW -->
+<section class="blog-section section" id="blog">
+  <div class="section-inner">
+    <div class="section-label fade-up">FPブログ</div>
+    <h2 class="section-title fade-up">最新記事</h2>
+    <p class="section-desc fade-up">住宅ローン・投資・保険・税金——FP目線の解説記事を随時更新中。</p>
+    <div class="blog-grid">
+      <a href="blog/post-543.html" class="blog-card fade-up">
+        <span class="blog-cat cat-loan">住宅ローン</span>
+        <h3>住宅ローン完全攻略2026｜金利上昇時代に今すぐやるべきこと全パターン解説</h3>
+        <p>変動金利の上昇で何が起きる？年齢・年収・子どもの人数別に「今やるべき行動」を全パターン解説。</p>
+        <div class="blog-card-footer"><span>2026.06.03 ✦ NEW</span><span class="blog-read">続きを読む →</span></div>
+      </a>
+      <a href="blog/post-453.html" class="blog-card fade-up">
+        <span class="blog-cat cat-tax">節税・控除</span>
+        <h3>節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた</h3>
+        <p>ふるさと納税とiDeCoを組み合わせたときの節税効果を、年収別に具体的な金額で試算しました。</p>
+        <div class="blog-card-footer"><span>2026.05.22</span><span class="blog-read">続きを読む →</span></div>
+      </a>
+      <a href="blog/post-447.html" class="blog-card fade-up">
+        <span class="blog-cat cat-asset">NISA・投資</span>
+        <h3>iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法</h3>
+        <p>iDeCoとNISAの使い分けから、年収・雇用形態別の最適な組み合わせまで徹底解説します。</p>
+        <div class="blog-card-footer"><span>2026.05.21</span><span class="blog-read">続きを読む →</span></div>
+      </a>
+      <a href="blog/post-441.html" class="blog-card fade-up">
+        <span class="blog-cat cat-retire">老後資金</span>
+        <h3>老後2000万円問題の真実：FPが試算する本当に必要な老後資金</h3>
+        <p>「2000万円」は本当に正しいのか？生活スタイル別に必要額を再試算し、対策を解説します。</p>
+        <div class="blog-card-footer"><span>2026.05.20</span><span class="blog-read">続きを読む →</span></div>
+      </a>
     </div>
-    <div style="text-align:center;margin-top:32px">
-      <img src="images/couple-elderly.jpg" alt="老後を安心して過ごすご夫婦" style="max-width:480px;width:100%;border-radius:16px;box-shadow:0 8px 24px rgba(26,122,74,0.12)">
-      <p style="font-size:13px;color:var(--text-sub);margin-top:10px">「老後も安心して暮らしたい」そのために、今から備えましょう</p>
+    <div style="text-align:center;margin-top:36px">
+      <a href="blog/" style="display:inline-block;background:var(--green-pale);color:var(--green);border:1.5px solid var(--green-mid);border-radius:10px;padding:13px 32px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s" onmouseover="this.style.background='var(--green)';this.style.color='#fff'" onmouseout="this.style.background='var(--green-pale)';this.style.color='var(--green)'">記事一覧を見る（28本）→</a>
     </div>
   </div>
 </section>
 
-
-<!-- BLOG SECTION -->
-<section class="blog-section" id="blog-cards">
-  <div class="blog-inner">
-    <h2 class="section-title">Life Asset ブログ</h2>
-    <p class="blog-subtitle">お金の疑問をわかりやすく解説します</p>
-    <div class="blog-cards">
-      <a href="blog/post-543.html" class="blog-card">
-        <div class="blog-card-thumb" style="background:linear-gradient(135deg,#1a3060,#1a4a30)"></div>
-        <div class="blog-card-body">
-          <span class="blog-card-tag">住宅ローン</span>
-          <div style="font-size:10px;color:#64748b;margin-bottom:4px">2026-06-03 ✦ NEW</div>
-          <div class="blog-card-title">住宅ローン完全攻略2026｜金利上昇時代に今すぐやるべきこと全パターン解説</div>
-          <span class="blog-card-link">続きを読む →</span>
-        </div>
-      </a>
-      <a href="blog/post-453.html" class="blog-card">
-        <div class="blog-card-thumb" style="background:#1a7a4a"></div>
-        <div class="blog-card-body">
-          <span class="blog-card-tag">節税・控除</span>
-          <div style="font-size:10px;color:#64748b;margin-bottom:4px">2026-05-22</div>
-          <div class="blog-card-title">節税の最強コンビ：ふるさと納税＋iDeCoでいくら得をするか試算してみた</div>
-          <span class="blog-card-link">続きを読む →</span>
-        </div>
-      </a>
-      <a href="blog/post-447.html" class="blog-card">
-        <div class="blog-card-thumb" style="background:#1a7a4a"></div>
-        <div class="blog-card-body">
-          <span class="blog-card-tag">NISA・投資</span>
-          <div style="font-size:10px;color:#64748b;margin-bottom:4px">2026-05-21</div>
-          <div class="blog-card-title">iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法</div>
-          <span class="blog-card-link">続きを読む →</span>
-        </div>
-      </a>
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>お金のことで迷ったら、<br>まず数字で確認しましょう。</h2>
+    <p>売り込みなし・登録不要。<br>シミュレーターで「自分の場合どうなるか」を今すぐ確認できます。</p>
+    <div class="cta-box-btns">
+      <a href="#tools" class="cta-btn-white">シミュレーターを使う</a>
+      <a href="contact.html" class="cta-btn-outline">お問い合わせ</a>
     </div>
-    <div class="blog-cta-wrap">
-      <a href="blog/index.html" class="btn-blog-all" id="btn-blog-all">全<span id="blog-count">…</span>記事を見る → ブックマーク＆既読管理機能つき</a>
-    </div>
-  </div>
-</section>
-
-<!-- NOTE MAGAZINE -->
-<section class="note-section">
-  <div class="note-inner">
-    <span class="note-badge">📓 note</span>
-    <span class="note-title">ライフアセットFP通信</span>
-    <span class="note-desc">FP資格者による資産形成・節税の深掘り解説マガジン</span>
-    <a href="https://note.com/lifeasset_fp" target="_blank" rel="noopener noreferrer" class="btn-note">noteで読む →</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">
-      <img src="images/fp-avatar.png" alt="FP" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">
-      <div class="footer-logo-text">Life Asset</div>
-      <div style="display:flex;flex-direction:column;gap:3px;"></div>
+    <div class="footer-disc">
+      ※本サイトは一般的な情報提供を目的としており、特定の金融商品の購入・取引を勧誘するものではありません。投資は元本保証ではありません。重要な意思決定の前にはFP・税理士等の専門家にご相談ください。
     </div>
-    <div class="footer-contact">
-      <a href="contact.html">お問い合わせ</a>
-      <a href="privacy.html">プライバシーポリシー</a>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">ライフアセットオフィス</div>
+        <p class="footer-tagline">あなたの未来に、確かな安心と成長を。<br>FP技能士が運営する中立な情報サイト。</p>
+      </div>
+      <div class="footer-col">
+        <h4>シミュレーター</h4>
+        <a href="loan-check.html">住宅ローン金利リスク診断</a>
+        <a href="asset-sim.html">将来資産シミュレーター</a>
+        <a href="retirement-gap.html">老後資金不足額</a>
+        <a href="nisa-ideco-sim.html">NISA vs iDeCo比較</a>
+        <a href="furusato-sim.html">ふるさと納税計算</a>
+        <a href="loan-refinance.html">借り換えシミュレーター</a>
+      </div>
+      <div class="footer-col">
+        <h4>コンテンツ</h4>
+        <a href="blog/">FPブログ一覧</a>
+        <a href="service/">サービス</a>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </div>
     </div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.75);margin-top:12px;line-height:1.7;text-align:center;">本サイトの情報は参考情報であり投資助言ではありません。当サイトは投資助言業・貸金業の登録を受けていません。</div>
+    <div class="footer-bottom">
+      <span>© 2026 ライフアセットオフィス. All rights reserved.</span>
+      <span>FP技能士監修 | 情報提供サービス</span>
+    </div>
   </div>
 </footer>
 
-<script src="/nav.js" defer></script>
 <script>
-fetch('blog/index.html').then(r=>r.text()).then(html=>{
-  const doc=new DOMParser().parseFromString(html,'text/html');
-  const count=doc.querySelectorAll('.acard').length;
-  if(count>0)document.getElementById('blog-count').textContent=count;
-}).catch(()=>{document.getElementById('blog-count').textContent='全';});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:0.12});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
