@@ -781,7 +781,6 @@ function buildSVGChart(rows){
 }
 
 function goStep(n){
-  if(n===6){generatePlan();return}
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+n).classList.add('active');
   for(let i=1;i<=6;i++){
