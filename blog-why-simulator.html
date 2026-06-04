@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPに相談できないあなたへ｜ライフプランシミュレーターで5分で大枠がわかる理由｜ライフアセットオフィス</title>
+<meta name="description" content="時間がない・ハードルが高い・費用が心配・商品を売られそう——FP相談を避けてきた方へ。まず無料シミュレーターで自分の数字を把握するだけで、将来のお金の不安は大きく変わります。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --cream: #f0ece3;
+    --green: #1a6b3c;
+    --green-pale: #e8f5ee;
+    --green-mid: #c8e6d4;
+    --accent: #c0392b;
+    --gold: #b7860b;
+    --muted: #6b7280;
+    --border: #e0d9ce;
+    --white: #fff;
+    --shadow: 0 4px 32px rgba(0,0,0,.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.95;
+    font-size: 16px;
+  }
+
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo { font-size: 17px; font-weight: 900; color: var(--green); }
+  .nav-logo span { font-size: 10px; font-weight: 400; color: var(--muted); display: block; }
+  .nav-links { display: flex; gap: 24px; font-size: 13px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: #fff; border: none; border-radius: 20px; padding: 8px 18px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  @media(max-width:640px) { .nav-links { display: none; } }
+
+  .hero {
+    background: linear-gradient(160deg, #0f3d22 0%, #1a6b3c 60%, #2d8a52 100%);
+    padding: 72px 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0, rgba(255,255,255,.015) 1px, transparent 1px, transparent 30px);
+  }
+  .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7ee8a2;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    letter-spacing: -.01em;
+  }
+  .hero h1 em { color: #7ee8a2; font-style: normal; border-bottom: 2px solid rgba(126,232,162,.4); }
+  .hero-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    font-family: 'DM Mono', monospace;
+    flex-wrap: wrap;
+  }
+
+  article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  .toc {
+    position: static;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .toc ol { padding-left: 18px; }
+  .toc li { margin: 7px 0; font-size: 14px; }
+  .toc a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(19px, 2.8vw, 26px);
+    font-weight: 900;
+    margin: 60px 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .sec-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--white);
+    background: var(--green);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--green);
+    line-height: 1.5;
+  }
+
+  p { margin-bottom: 18px; }
+
+  .callout {
+    padding: 18px 22px;
+    margin: 28px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .callout-key { background: var(--green-pale); border-left: 4px solid var(--green); }
+  .callout-warn { background: #fef6e4; border-left: 4px solid var(--gold); }
+  .callout-danger { background: #fdecea; border-left: 4px solid var(--accent); }
+  .callout strong { font-weight: 700; }
+
+  .pull-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 700;
+    line-height: 1.65;
+    color: var(--green);
+    padding: 28px 32px;
+    margin: 40px 0;
+    border-left: 4px solid var(--green);
+    background: var(--green-pale);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .stat-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 7px; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500; color: var(--green); line-height: 1; }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+  .reason-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .reason-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .reason-card .r-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+  }
+  .reason-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .reason-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; }
+
+  .compare-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0;
+  }
+  @media(max-width:540px) { .compare-box { grid-template-columns: 1fr; } }
+  .compare-side {
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .compare-side.no { background: #fdecea; border: 1.5px solid #f5c6cb; }
+  .compare-side.yes { background: var(--green-pale); border: 1.5px solid var(--green-mid); }
+  .compare-side h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .compare-side.no h4 { color: var(--accent); }
+  .compare-side.yes h4 { color: var(--green); }
+  .compare-side ul { list-style: none; }
+  .compare-side ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px dotted rgba(0,0,0,.1); line-height: 1.6; }
+  .compare-side ul li:last-child { border: none; }
+
+  .step-box { margin: 28px 0; }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .step-item:last-child { border: none; }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+  .step-content p { font-size: 14px; color: #333; margin: 0; line-height: 1.8; }
+
+  .table-wrap { overflow-x: auto; margin: 24px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 500; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.7; }
+  tr:nth-child(even) td { background: var(--cream); }
+  .good { color: var(--green); font-weight: 700; }
+  .bad { color: var(--accent); }
+
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14.5px;
+    border-bottom: 1px dotted var(--border);
+    line-height: 1.7;
+  }
+  .checklist li:last-child { border: none; }
+  .ck {
+    width: 20px;
+    height: 20px;
+    background: var(--green);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    position: relative;
+  }
+  .ck::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    width: 7px;
+    height: 11px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+  }
+
+  .tool-cta {
+    background: linear-gradient(135deg, #0f4d2a, #1a6b3c);
+    border-radius: 14px;
+    padding: 28px 28px;
+    margin: 40px 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .tool-cta-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tool-cta-icon::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background: url('images/fp-avatar.png') center/cover no-repeat, linear-gradient(135deg,#7ee8a2,#38bdf8);
+    border-radius: 4px;
+    display: block;
+  }
+  .tool-cta-text { flex: 1; }
+  .tool-cta h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .tool-cta p { font-size: 13px; color: rgba(255,255,255,.8); margin: 0; line-height: 1.7; }
+  .tool-cta-btn {
+    background: #fff;
+    color: var(--green);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all .2s;
+  }
+  .tool-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  .author {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-top: 48px;
+  }
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--green-pale);
+  }
+  .author-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .author-bio { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+  .disclaimer {
+    background: #fff8e1;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #856404;
+    margin-top: 32px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    article { padding: 40px 18px 60px; }
+    .hero { padding: 48px 18px 56px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></div>
+  <div class="nav-links">
+    <a href="index.html">ホーム</a>
+    <a href="lifeplan.html">ライフプラン表</a>
+    <a href="index.html#blog">ブログ</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">お問い合わせ</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-cat">ライフプラン・FP活用</div>
+    <h1>
+      「FPに相談できない」あなたへ。<br>
+      <em>シミュレーターで5分、大枠を知るだけで未来が変わる</em>
+    </h1>
+    <div class="hero-meta">
+      <span>2026年6月</span>
+      <span>読了約8分</span>
+      <span>ライフアセットオフィス FP</span>
+    </div>
+  </div>
+</div>
+
+<article>
+
+  <div class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#sec1">FPに相談できない4つの理由、全部わかります</a></li>
+      <li><a href="#sec2">でも「知らないまま」は一番損をする</a></li>
+      <li><a href="#sec3">「大枠を知る」だけで何が変わるのか</a></li>
+      <li><a href="#sec4">シミュレーターと有料FP相談の違い</a></li>
+      <li><a href="#sec5">ライフプランシミュレーターの使い方</a></li>
+      <li><a href="#sec6">まとめ：まず5分、自分の数字を見てみる</a></li>
+    </ol>
+  </div>
+
+  <!-- SEC1 -->
+  <section id="sec1">
+    <h2><span class="sec-num">01</span>FPに相談できない4つの理由、全部わかります</h2>
+
+    <p>「お金のことが不安だけど、FPに相談するのはちょっと……」</p>
+
+    <p>こう感じている方は、実はとても多いです。ハードルを感じるのはあなたが特別なわけではありません。FP相談を避けてきた理由には、共通したパターンがあります。</p>
+
+    <div class="reason-grid">
+      <div class="reason-card">
+        <div class="r-num">REASON 01</div>
+        <h4>時間がない</h4>
+        <p>平日は仕事で手いっぱい。週末は家族の時間。「FP相談のために2時間確保する」のが現実的でない。</p>
+      </div>
+      <div class="reason-card">
+        <div class="r-num">REASON 02</div>
+        <h4>ハードルが高い</h4>
+        <p>「FPに相談するのはもっと深刻な人の話」「自分の家計をさらすのが恥ずかしい」という心理的な壁。</p>
+      </div>
+      <div class="reason-card">
+        <div class="r-num">REASON 03</div>
+        <h4>費用がかかる</h4>
+        <p>有料FP相談は1時間1〜3万円が相場。「そのお金があれば貯金したい」という本末転倒な焦り。</p>
+      </div>
+      <div class="reason-card">
+        <div class="r-num">REASON 04</div>
+        <h4>商品を売られる不安</h4>
+        <p>「相談しに行ったら保険や投資信託を勧められた」という声は少なくない。中立な情報が欲しいだけなのに。</p>
+      </div>
+    </div>
+
+    <p>これらは全て、正当な理由です。FP業界がこうした不信感を持たれていること自体、業界の課題でもあります。</p>
+
+    <div class="callout callout-key">
+      <strong>ただし、一つだけ誤解があります。</strong>FPに相談できないこと自体は問題ではありません。問題は、<strong>「相談できないまま、何も知らない状態でお金の決断をし続けること」</strong>です。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC2 -->
+  <section id="sec2">
+    <h2><span class="sec-num">02</span>でも「知らないまま」は一番損をする</h2>
+
+    <p>お金の問題は、知っていると知らないとでは結果が大きく変わります。これは運や才能の話ではなく、<strong>情報と行動のタイミングの差</strong>です。</p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-label">老後に「お金が不安」と答えた人のうち</div>
+        <div class="stat-value">71%</div>
+        <div class="stat-sub">が「現役時代に具体的な試算をしたことがない」（FP相談データ）</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">住宅購入前にライフプランを確認した人の</div>
+        <div class="stat-value">82%</div>
+        <div class="stat-sub">が「購入条件を見直した」または「別の選択肢を選んだ」</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">NISA積立を「もっと早く始めれば」と後悔する人の平均</div>
+        <div class="stat-value">6.4年</div>
+        <div class="stat-sub">の遅れ（40代以上へのアンケートより）</div>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      知らないでいることは、<br>
+      何もしていないのではなく、<br>
+      「損する選択をし続けている」ことと同じ。
+    </div>
+
+    <p>たとえば、30代で月2万円のNISA積立を始めると、40代で始めた場合と比べて<strong>30年後に約900万円以上の差</strong>が生まれることがあります（年率5%複利の場合）。この差を生む唯一の条件は、「早く知っていたかどうか」です。</p>
+
+    <div class="callout callout-danger">
+      <strong>最もリスクが高いのは「何となくうまくいくだろう」という感覚で進むこと。</strong>住宅ローンの返済中に教育費のピークが重なるとき、定年時にローン残高が残っているとき——これらは事前に数字で確認すれば対処できますが、気づいたときには手遅れになりやすい問題です。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC3 -->
+  <section id="sec3">
+    <h2><span class="sec-num">03</span>「大枠を知る」だけで何が変わるのか</h2>
+
+    <p>「でも、完璧な計画を立てなければ意味がないのでは？」と思う方もいるかもしれません。</p>
+
+    <p>違います。<strong>完璧なライフプランは必要ありません。大枠だけで十分です。</strong></p>
+
+    <p>大枠とは、たった3つのことです。</p>
+
+    <div class="step-box">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>収支のバランスが黒字か赤字か</h4>
+          <p>「毎年いくら残せているか、またはいくら足りないか」を年単位でざっくり把握する。これだけで、今の生活が持続可能かどうかがわかります。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>資産が底をつく年齢</h4>
+          <p>今の収支ペースを続けた場合、何歳で貯蓄がゼロになるか。この数字を一度でも見た人は、必ず行動が変わります。「まだ大丈夫」が「今すぐやらないと」に変わる瞬間です。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>危険な重なり年があるか</h4>
+          <p>子どもが高校・大学の時期、住宅ローンの残高、定年のタイミングが重なっていないか。重なりを事前に知っているだけで、準備が全く違ってきます。</p>
+        </div>
+      </div>
+    </div>
+
+    <p>この3つが見えれば、細かい計算は後でいい。<strong>「方向性が正しいかどうか」</strong>だけがわかれば、今日から行動が変わります。</p>
+
+    <div class="compare-box">
+      <div class="compare-side no">
+        <h4>大枠を知らない人の10年後</h4>
+        <ul>
+          <li>住宅ローンと教育費が重なり、キャッシュフローが詰まる</li>
+          <li>50代になってiDeCoを知り「もっと早く始めれば」と後悔</li>
+          <li>定年時のローン残高が想定外に多く、退職金を全て充当</li>
+          <li>老後資金の試算をしておらず、70代で生活レベルを落とす</li>
+        </ul>
+      </div>
+      <div class="compare-side yes">
+        <h4>大枠を知っている人の10年後</h4>
+        <ul>
+          <li>教育費ピークに備えて繰り上げ返済のタイミングを調整済み</li>
+          <li>30代でiDeCo・NISAを最大活用。複利効果が積み上がる</li>
+          <li>定年前に資産状況を確認し、継続雇用・副業で調整</li>
+          <li>老後の生活費を試算済みで、年金+資産で無理なく生活</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>この差を生んでいるのは、収入の違いでも才能の違いでもありません。<strong>「早い段階で大枠を知っていたかどうか」</strong>だけです。</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC4 -->
+  <section id="sec4">
+    <h2><span class="sec-num">04</span>シミュレーターと有料FP相談の違い</h2>
+
+    <p>「シミュレーターで十分なのか」と思う方のために、正直に整理します。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>比較軸</th>
+            <th>ライフプランシミュレーター</th>
+            <th>有料FP相談（1〜3万円/回）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>所要時間</strong></td>
+            <td class="good">5〜15分。スマホで完結</td>
+            <td>事前準備含め半日〜1日</td>
+          </tr>
+          <tr>
+            <td><strong>費用</strong></td>
+            <td class="good">登録不要</td>
+            <td>1〜3万円/回（相場）</td>
+          </tr>
+          <tr>
+            <td><strong>中立性</strong></td>
+            <td class="good">商品販売なし。数字だけ</td>
+            <td>FPによって異なる（要確認）</td>
+          </tr>
+          <tr>
+            <td><strong>精度</strong></td>
+            <td>入力値に基づく概算</td>
+            <td class="good">詳細な資産・税務まで対応</td>
+          </tr>
+          <tr>
+            <td><strong>アドバイス</strong></td>
+            <td>数字と傾向の把握のみ</td>
+            <td class="good">個別の最適解を提案</td>
+          </tr>
+          <tr>
+            <td><strong>向いている人</strong></td>
+            <td class="good">まず全体像を把握したい人・初めて考える人</td>
+            <td>具体的な行動計画まで決めたい人</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-key">
+      <strong>シミュレーターは「最初の地図」です。</strong>FP相談は「詳細なナビゲーション」。どちらが上とか下ではなく、<strong>順番があります。地図なしでナビを使っても意味がない</strong>ように、全体像がわかってから専門家に相談するほうが、相談の質も結果も格段に上がります。
+    </div>
+
+    <p>シミュレーターを使った後、「これは自分一人では判断できない」と感じたとき——それが有料FP相談を使うベストなタイミングです。逆に言えば、<strong>シミュレーターで大枠が見えた段階で8割の不安は解消されます。</strong></p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC5 -->
+  <section id="sec5">
+    <h2><span class="sec-num">05</span>ライフプランシミュレーターの使い方</h2>
+
+    <p>当サイトのライフプランシミュレーターは、6つのステップで入力するだけで年別の収支表とグラフが自動生成されます。</p>
+
+    <div class="step-box">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>家族情報（1分）</h4>
+          <p>本人・配偶者の年齢、子どもの人数と年齢を入力します。これだけで「教育費がいつ重なるか」が自動で計算されます。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>収入設定（2分）</h4>
+          <p>現在の年収・定年年齢・定年後の年金・継続雇用収入を入力します。「退職後に収入がどう変わるか」が一目でわかります。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>支出設定（1分）</h4>
+          <p>月々の生活費・退職後の生活費・車の買い替えや旅行などの特別支出を入力します。ざっくりでOKです。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>住宅ローン（1分）</h4>
+          <p>ローン残高・月返済額を入力します。「定年時に残高がいくら残るか」がすぐわかります。ローンなしの方はスキップ可能です。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>資産・NISA/iDeCo（1分）</h4>
+          <p>現在の貯蓄額・NISA残高・iDeCoの毎月積立額を入力します。複利効果がグラフで可視化されます。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <h4>結果を確認</h4>
+          <p>年別の収支表と金融資産グラフが自動生成されます。「何歳で資産が底をつくか」「教育費とローンが重なる年の収支」が一目でわかります。CSVで保存して毎年更新できます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>入力のコツ：</strong>完璧な数字は不要です。「だいたいこのくらい」で十分。ライフプランシミュレーターの目的は精密な予測ではなく、<strong>「このまま進んだら何が起きるか」の仮説を作ること</strong>です。数字に自信がなければ、少し悲観的な値を入れることで、より安全なシナリオが確認できます。
+    </div>
+
+    <div class="tool-cta">
+      <div class="tool-cta-icon"></div>
+      <div class="tool-cta-text">
+        <h3>ライフプランシミュレーターを今すぐ試す</h3>
+        <p>登録不要・5〜15分で完了。年別収支表・グラフをその場で確認。CSVダウンロードも可能です。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">シミュレーターを開く →</button>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC6 まとめ -->
+  <section id="sec6">
+    <h2><span class="sec-num">まとめ</span>まず5分、自分の数字を見てみる</h2>
+
+    <p>FPに相談できない理由はたくさんあります。でもその理由は、「何も知らなくていい理由」にはなりません。</p>
+
+    <ul class="checklist">
+      <li><span class="ck"></span>FP相談のハードルは現実的。時間・費用・信頼の問題は全て正当な懸念</li>
+      <li><span class="ck"></span>でも「知らないまま」は確実に損をする選択を積み重ねていることになる</li>
+      <li><span class="ck"></span>完璧な計画は不要。<strong>「収支が黒字か・資産が底をつく年齢・危険な重なり年」の3つ</strong>を知るだけでいい</li>
+      <li><span class="ck"></span>シミュレーターは5分・登録不要・商品販売なし。「最初の地図」として最適</li>
+      <li><span class="ck"></span>大枠が見えてから、必要なら専門家に相談する——これが最も効率的な順番</li>
+    </ul>
+
+    <div class="pull-quote">
+      知ることは、怖いことではない。<br>
+      知った上で選ぶことが、<br>
+      本当の意味での「安心」につながる。
+    </div>
+
+    <p>まず5分だけ、自分の数字を見てみてください。それだけで、10年後・20年後のお金の不安は確実に小さくなります。</p>
+
+    <div class="tool-cta">
+      <div class="tool-cta-icon"></div>
+      <div class="tool-cta-text">
+        <h3>ライフプランシミュレーターで今すぐ確認する</h3>
+        <p>家族・収入・支出・ローン・NISAを入力するだけ。年別収支表とグラフを自動生成。登録不要。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">今すぐ試してみる →</button>
+    </div>
+  </section>
+
+  <div class="author">
+    <img src="images/fp-avatar.png" alt="ライフアセットオフィス FP" class="author-avatar">
+    <div>
+      <div class="author-name">ライフアセットオフィス FP</div>
+      <p class="author-bio">FP技能士が運営する中立な情報サイト。住宅ローン・資産運用・老後資金・税金など、お金に関するテーマをわかりやすく解説しています。特定の金融商品の販売・仲介は行っておらず、中立な立場での情報提供を方針としています。</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    本記事は一般的な情報提供を目的としており、特定の金融商品の購入・取引を勧誘するものではありません。個々の状況に応じた判断は、ファイナンシャルプランナー・税理士等の資格を持つ専門家にご相談ください。数値・制度情報は2026年6月時点のものです。最新情報は各公的機関の公式情報をご確認ください。
+  </div>
+
+</article>
+
+</body>
+</html>
