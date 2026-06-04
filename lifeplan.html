@@ -130,6 +130,11 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .year-table .plus{color:var(--green)}
 .year-table tfoot td{background:var(--green-pale);font-weight:700;border-top:2px solid var(--green);color:var(--ink);font-size:11px}
 .year-table .retire-row td{border-top:2px dashed var(--green) !important;background:rgba(26,107,60,.07) !important}
+.year-table .row-depleted td{background:rgba(220,53,69,.12) !important}
+.year-table .row-depleted .year-label{color:var(--red);font-weight:900}
+.year-table .row-warn td{background:rgba(245,158,11,.08) !important}
+.year-table .row-milestone td{border-top:2px solid #3b82f6 !important;background:rgba(59,130,246,.06) !important}
+.year-table .row-event td{background:rgba(26,107,60,.04) !important}
 
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
 .s-box{border-radius:12px;padding:16px;text-align:center;border:1.5px solid}
@@ -978,10 +983,18 @@ function _generatePlan(){
     const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+insurance;
     const cf=totalIncome-totalExpense;
 
-    nisaAsset=y<30?fvMonthly(nisaMonthly,nisaRate,(y+1)*12):nisaAsset*Math.pow(1+nisaRate/100/12,12);
-    idecoAsset=selfAge>=60?idecoAsset*(1+idecoRate/100):fvMonthly(selfAge<60?idecoMonthly:0,idecoRate,(y+1)*12);
+    const _rn=nisaRate/100/12,_Rn=Math.pow(1+_rn,12);
+    nisaAsset=y<30?nisaAsset*_Rn+(_rn===0?nisaMonthly*12:nisaMonthly*(_Rn-1)/_rn):nisaAsset*_Rn;
+    const _ri=idecoRate/100/12,_Ri=Math.pow(1+_ri,12);
+    idecoAsset=selfAge<60?idecoAsset*_Ri+(_ri===0?idecoMonthly*12:idecoMonthly*(_Ri-1)/_ri):idecoAsset*(1+idecoRate/100);
     investAsset=investAsset*(1+investRate/100)+investAnnual;
     cashAsset+=cf;
+    let drawdown=0;
+    if(cashAsset<0){
+      const d1=Math.min(-cashAsset,investAsset);investAsset-=d1;cashAsset+=d1;drawdown+=d1;
+      if(cashAsset<0&&selfAge>=60){const d2=Math.min(-cashAsset,nisaAsset);nisaAsset-=d2;cashAsset+=d2;drawdown+=d2;}
+      if(cashAsset<0&&selfAge>=60){const d3=Math.min(-cashAsset,idecoAsset);idecoAsset-=d3;cashAsset+=d3;drawdown+=d3;}
+    }
     if(loanRemaining>0)loanRemaining=Math.max(0,loanRemaining-loanAnnual);
     const totalAsset=Math.max(0,cashAsset)+nisaAsset+idecoAsset+investAsset;
 
@@ -995,12 +1008,14 @@ function _generatePlan(){
       if(cn===22)events.push(`第${i+1}子卒業`);
     });
     if(selfAge===reformAge&&reformCost>0)events.push('リフォーム');
+    if(drawdown>10)events.push(`▼取崩${Math.round(drawdown)}万`);
+    const pensionInc=Math.round((selfAge>=65?pensionSelf*12:0)+(hasSpouse&&spouseAge>=65?pensionSpouse*12:0));
 
     rows.push({yr,selfAge,spouseAge,events,
       incSelf:Math.round(incSelf),incSpouse:Math.round(incSpouse),lumpIncome:Math.round(lumpIncome),totalIncome:Math.round(totalIncome),
       baseLiving:Math.round(baseLiving),loanExp:Math.round(loanExp),rentExp:Math.round(rentExp),eduExp:Math.round(eduExp),carExp:Math.round(carExp),reformExp:Math.round(reformExp),leisure:Math.round(leisure),insurance:Math.round(insurance),totalExpense:Math.round(totalExpense),
       cf:Math.round(cf),cashAsset:Math.round(cashAsset),nisaAsset:Math.round(nisaAsset),idecoAsset:Math.round(idecoAsset),investAsset:Math.round(investAsset),totalAsset:Math.round(totalAsset),
-      loanRemaining:Math.round(loanRemaining)
+      loanRemaining:Math.round(loanRemaining),drawdown:Math.round(drawdown),pensionInc
     });
   }
 
@@ -1056,7 +1071,7 @@ function _generatePlan(){
   al.innerHTML+=`<div class="alert ${overallClass}" style="margin-bottom:20px">
     <div style="font-size:15px;font-weight:900;margin-bottom:10px">${overallIcon} 総合評価：${overallTitle}</div>
     <div style="font-size:13px;line-height:2">
-    ${depleteRow?`現在のプランでは <strong>${depleteRow.selfAge}歳（${new Date().getFullYear()+(depleteRow.selfAge-ageSelf)}年）に現金資産が底をつく</strong> 見込みです。
+    ${depleteRow?`現在のプランでは <strong>${depleteRow.selfAge}歳（${new Date().getFullYear()+(depleteRow.selfAge-ageSelf)}年）に全資産が枯渇する</strong> 見込みです。
     定年後の年間収支が平均 <strong>▲${fmt(Math.abs(avgRetireCF))}万円の赤字</strong> となり、資産の早期取り崩しが進みます。<br><br>
     <strong>◆ 今すぐ取れる対策（優先順）</strong>
     <ul style="margin:6px 0 0 18px;line-height:2.4">
@@ -1148,18 +1163,24 @@ function _generatePlan(){
 
   document.getElementById('plan-thead').innerHTML=`<tr>
     <th class="cat">西暦</th><th>本人</th>${hasSpouse?'<th>配偶者</th>':''}<th>主なイベント</th>
-    <th>収入合計</th><th>支出合計</th><th>年間収支</th>
+    <th>収入合計</th><th>うち年金</th><th>支出合計</th><th>年間収支</th>
     <th>住宅ローン</th><th>教育費</th>
     <th>現金資産</th><th>NISA</th><th>iDeCo</th><th>投資資産</th><th>総資産</th>
   </tr>`;
   document.getElementById('plan-tbody').innerHTML=rows.map(r=>{
     const barPct=Math.min(100,Math.max(0,Math.round(r.totalAsset/peakAsset*100)));
-    return `<tr${r.selfAge===retireSelf?' class="retire-row"':''}>
+    let rowCls='';
+    if(r.totalAsset<=0)rowCls='row-depleted';
+    else if(r.selfAge>=retireSelf&&r.totalAsset<500)rowCls='row-warn';
+    else if(r.selfAge===retireSelf||r.selfAge===65)rowCls='row-milestone';
+    else if(r.events.filter(e=>!e.startsWith('▼')).length>0)rowCls='row-event';
+    return `<tr${rowCls?' class="'+rowCls+'"':''}>
     <td class="year-label">${r.yr}</td>
     <td class="age-cell">${r.selfAge}歳</td>
     ${hasSpouse?`<td class="age-cell">${r.spouseAge}歳</td>`:''}
     <td class="event-cell">${r.events.join(' ')}</td>
     <td class="${r.totalIncome>0?'plus':''}">${r.totalIncome.toLocaleString()}</td>
+    <td class="${r.pensionInc>0?'plus':''}">${r.pensionInc>0?r.pensionInc.toLocaleString():'-'}</td>
     <td>${r.totalExpense.toLocaleString()}</td>
     <td class="${r.cf>=0?'plus':'minus'}">${r.cf>=0?'+':''}${r.cf.toLocaleString()}</td>
     <td>${r.loanExp>0?r.loanExp.toLocaleString():'-'}</td>
@@ -1172,6 +1193,7 @@ function _generatePlan(){
   </tr>`;
   }).join('');
   const lifeIncome=rows.reduce((s,r)=>s+r.totalIncome,0);
+  const lifePension=rows.reduce((s,r)=>s+r.pensionInc,0);
   const lifeExpense=rows.reduce((s,r)=>s+r.totalExpense,0);
   const lifeCf=rows.reduce((s,r)=>s+r.cf,0);
   const finalRow=rows[rows.length-1];
@@ -1181,6 +1203,7 @@ function _generatePlan(){
     ${hasSpouse?'<td></td>':''}
     <td class="event-cell" style="font-size:10px;color:var(--gray)">最終残高→</td>
     <td class="plus">${Math.round(lifeIncome).toLocaleString()}</td>
+    <td class="plus">${Math.round(lifePension).toLocaleString()}</td>
     <td>${Math.round(lifeExpense).toLocaleString()}</td>
     <td class="${lifeCf>=0?'plus':'minus'}">${lifeCf>=0?'+':''}${Math.round(lifeCf).toLocaleString()}</td>
     <td style="color:var(--gray)">-</td><td style="color:var(--gray)">-</td>
