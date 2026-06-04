@@ -858,7 +858,7 @@ function generatePlan(){
   try{ _generatePlan(); } catch(e){ showToast('⚠️ エラー: '+e.message); console.error(e); }
 }
 function _generatePlan(){
-  const g=(id,def=0)=>{const el=document.getElementById(id);return el?el.value:def;};
+  const g=(id,def=0)=>{const el=document.getElementById(id);if(!el)return def;return el.value===''?def:el.value;};
   const ageSelf=parseInt(g('age-self'))||40;
   const retireSelf=parseInt(g('retire-self'))||65;
   const hasSpouse=g('spouse-yn')==='yes';
