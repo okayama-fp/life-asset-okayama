@@ -451,7 +451,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
         <p style="font-size:11px;color:var(--gray);margin-top:4px">食費・光熱費・通信費・保険料・日常の子育て費用をすべて含めて入力</p>
       </div>
       <div class="field">
-        <label>老後の月生活費（65歳以降）</label>
+        <label>老後の月生活費（定年後）</label>
         <div class="field-row"><input type="number" id="living-cost-retire" value="22" min="0"><span class="field-unit">万円/月</span></div>
       </div>
       <div class="field">
@@ -961,7 +961,7 @@ function _generatePlan(){
     const totalIncome=incSelf+incSpouse+lumpIncome;
 
     const inflFactor=Math.pow(1+inflation/100,y);
-    let baseLiving=(selfAge>=65?livingCostRetire:livingCost)*12*inflFactor;
+    let baseLiving=(selfAge>=retireSelf?livingCostRetire:livingCost)*12*inflFactor;
     if(selfAge>=75)baseLiving+=medicalCost*12;
 
     let loanExp=0;
