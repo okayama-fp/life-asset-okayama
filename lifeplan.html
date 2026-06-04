@@ -843,6 +843,9 @@ function renderEducationFields(){
 }
 
 function generatePlan(){
+  try{ _generatePlan(); } catch(e){ showToast('⚠️ エラー: '+e.message); console.error(e); }
+}
+function _generatePlan(){
   const ageSelf=parseInt(document.getElementById('age-self').value)||40;
   const retireSelf=parseInt(document.getElementById('retire-self').value)||65;
   const hasSpouse=document.getElementById('spouse-yn').value==='yes';
@@ -1055,6 +1058,7 @@ function generatePlan(){
   document.getElementById('btn-print').style.display='block';
 
   goStep(6);
+  document.getElementById('panel-6').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 toggleSpouse();
