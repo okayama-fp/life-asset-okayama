@@ -117,8 +117,8 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .member-icon{display:none}
 .member-name{font-size:13px;font-weight:700;color:var(--green)}
 
-.year-rows-wrap{overflow-x:auto;margin-top:4px}
-.year-table{width:100%;border-collapse:collapse;font-size:12px;min-width:600px}
+.year-rows-wrap{overflow:auto;max-height:clamp(360px,68vh,720px);margin-top:4px;border:1px solid var(--border);border-radius:6px;-webkit-overflow-scrolling:touch}
+.year-table{width:100%;border-collapse:collapse;font-size:12px;min-width:560px}
 .year-table th{background:var(--ink);color:#fff;padding:8px 10px;text-align:center;font-size:11px;font-weight:500;white-space:nowrap;position:sticky;top:0;z-index:20}
 .year-table th.cat{text-align:left;background:var(--green-dark);position:sticky;top:0;left:0;z-index:30}
 .year-table td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
@@ -127,7 +127,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .year-table tr:nth-child(even) .year-label{background:var(--bg)}
 .year-table tfoot .year-label{background:var(--green-pale)}
 .year-table .age-cell{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray)}
-.year-table .event-cell{font-size:10px;color:var(--green);font-weight:700}
+.year-table .event-cell{font-size:10px;color:var(--green);font-weight:700;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .year-table .minus{color:var(--red);font-weight:700}
 .year-table .plus{color:var(--green)}
 .year-table tfoot td{background:var(--green-pale);font-weight:700;border-top:2px solid var(--green);color:var(--ink);font-size:11px}
@@ -177,6 +177,12 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   .btn-next,.btn-back,.btn-generate{width:100%;text-align:center;box-sizing:border-box}
   .card-title{font-size:14px}
   .s-val{font-size:20px}
+}
+@media(max-width:480px){
+  .year-table{font-size:10px;min-width:0}
+  .year-table th,.year-table td{padding:4px 4px}
+  .col-age{display:none!important}
+  .year-table .event-cell{max-width:70px}
 }
 @media print{
   nav,.progress-wrap,.btn-row,.disclaimer,.hero-badge{display:none!important}
@@ -1188,7 +1194,7 @@ function _generatePlan(){
   buildSVGChart(rows);
 
   document.getElementById('plan-thead').innerHTML=`<tr>
-    <th class="cat">西暦</th><th>本人</th>${hasSpouse?'<th>配偶者</th>':''}<th>主なイベント</th>
+    <th class="cat">西暦</th><th class="col-age">本人</th>${hasSpouse?'<th class="col-age">配偶者</th>':''}<th>主なイベント</th>
     <th>収入合計</th><th class="col-sec">うち年金</th><th>支出合計</th><th>年間収支</th>
     <th class="col-sec">住宅ローン</th><th class="col-sec">高校・大学</th><th class="col-sec">NISA/iDeCo積立</th>
     <th>現金資産</th><th class="col-sec">NISA</th><th class="col-sec">iDeCo</th><th>投資資産</th><th>総資産</th>
@@ -1202,8 +1208,8 @@ function _generatePlan(){
     else if(r.events.filter(e=>!e.startsWith('▼')).length>0)rowCls='row-event';
     return `<tr${rowCls?' class="'+rowCls+'"':''}>
     <td class="year-label">${r.yr}</td>
-    <td class="age-cell">${r.selfAge}歳</td>
-    ${hasSpouse?`<td class="age-cell">${r.spouseAge}歳</td>`:''}
+    <td class="age-cell col-age">${r.selfAge}歳</td>
+    ${hasSpouse?`<td class="age-cell col-age">${r.spouseAge}歳</td>`:''}
     <td class="event-cell">${r.events.join(' ')}</td>
     <td class="${r.totalIncome>0?'plus':''}">${r.totalIncome.toLocaleString()}</td>
     <td class="col-sec ${r.pensionInc>0?'plus':''}">${r.pensionInc>0?r.pensionInc.toLocaleString():'-'}</td>
@@ -1226,8 +1232,8 @@ function _generatePlan(){
   const finalRow=rows[rows.length-1];
   document.getElementById('plan-tfoot').innerHTML=`<tr>
     <td class="year-label">合計</td>
-    <td></td>
-    ${hasSpouse?'<td></td>':''}
+    <td class="col-age"></td>
+    ${hasSpouse?'<td class="col-age"></td>':''}
     <td class="event-cell" style="font-size:10px;color:var(--gray)">最終残高→</td>
     <td class="plus">${Math.round(lifeIncome).toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(lifePension).toLocaleString()}</td>
