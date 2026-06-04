@@ -335,11 +335,8 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
         <label>計画期間（終了年齢）</label>
         <div class="field-row"><input type="number" id="plan-end-age" value="90" min="70" max="100"><span class="field-unit">歳まで</span></div>
       </div>
-      <div class="field">
-        <label>現在の金融資産合計</label>
-        <div class="field-row"><input type="number" id="current-assets" value="500" min="0" max="99999"><span class="field-unit">万円</span></div>
-      </div>
     </div>
+    <p style="font-size:11px;color:var(--gray);margin-top:8px">※ 現在の資産（預貯金・投資資産）は STEP 5 で詳しく入力します。</p>
   </div>
 
   <div class="btn-row"><button class="btn-next" onclick="goStep(2)">次へ：収入設定 →</button></div>
@@ -729,14 +726,14 @@ function downloadCSV(){
     '収入合計(万円)','本人収入(万円)','配偶者収入(万円)','一時収入(万円)',
     '支出合計(万円)','生活費(万円)','住宅ローン(万円)','家賃(万円)',
     '教育費(万円)','車・イベント(万円)','趣味・旅行(万円)','保険料(万円)',
-    '年間収支(万円)','現金資産(万円)','NISA資産(万円)','iDeCo資産(万円)','総資産(万円)','ローン残高(万円)'];
+    '年間収支(万円)','現金資産(万円)','NISA資産(万円)','iDeCo資産(万円)','投資資産(万円)','総資産(万円)','ローン残高(万円)'];
   const rows=[headers.join(',')];
   lastRows.forEach(r=>{
     rows.push([r.yr,r.selfAge,lastHasSpouse?r.spouseAge:'',r.events.join(' '),
       r.totalIncome,r.incSelf,r.incSpouse,r.lumpIncome,
       r.totalExpense,r.baseLiving,r.loanExp,r.rentExp,
       r.eduExp,r.carExp,r.leisure,r.insurance,
-      r.cf,r.cashAsset,Math.round(r.nisaAsset),Math.round(r.idecoAsset),r.totalAsset,r.loanRemaining
+      r.cf,r.cashAsset,Math.round(r.nisaAsset),Math.round(r.idecoAsset),Math.round(r.investAsset||0),r.totalAsset,r.loanRemaining
     ].map(v=>v===undefined?'':v).join(','));
   });
   const blob=new Blob([BOM+rows.join('\n')],{type:'text/csv;charset=utf-8'});
@@ -978,7 +975,7 @@ function _generatePlan(){
     const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+insurance;
     const cf=totalIncome-totalExpense;
 
-    nisaAsset=fvMonthly(y<30?nisaMonthly:0,nisaRate,(y+1)*12);
+    nisaAsset=y<30?fvMonthly(nisaMonthly,nisaRate,(y+1)*12):nisaAsset*Math.pow(1+nisaRate/100/12,12);
     idecoAsset=selfAge>=60?idecoAsset*(1+idecoRate/100):fvMonthly(selfAge<60?idecoMonthly:0,idecoRate,(y+1)*12);
     investAsset=investAsset*(1+investRate/100)+investAnnual;
     cashAsset+=cf;
@@ -1006,7 +1003,7 @@ function _generatePlan(){
 
   const minAsset=Math.min(...rows.map(r=>r.totalAsset));
   const peakAsset=Math.max(...rows.map(r=>r.totalAsset));
-  const depleteRow=rows.find(r=>r.cashAsset<0);
+  const depleteRow=rows.find(r=>r.totalAsset<100);
   const retireRow=rows.find(r=>r.selfAge===retireSelf);
   const retireAsset=retireRow?retireRow.totalAsset:0;
 
