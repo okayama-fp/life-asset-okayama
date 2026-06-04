@@ -847,9 +847,9 @@ function renderEducationFields(){
   if(n===0){wrap.innerHTML='<p style="font-size:12px;color:var(--gray)">子どもなし</p>';return}
   let html='<div class="grid-2">';
   for(let i=1;i<=n;i++){
-    html+=`<div class="field"><label>第${i}子の教育費（年間ピーク時）</label><div class="field-row"><input type="number" id="edu-cost-${i}" value="${i===1?150:130}" min="0"><span class="field-unit">万円/年</span></div></div>`;
+    html+=`<div class="field"><label>第${i}子の大学費用（年間）</label><div class="field-row"><input type="number" id="edu-cost-${i}" value="${i===1?150:130}" min="0"><span class="field-unit">万円/年</span></div></div>`;
   }
-  html+='</div><p style="font-size:11px;color:var(--gray);margin-top:8px">※幼稚園〜大学まで自動計算。ピーク時の年額を入力してください（目安：公立中心120万、私立混じり150〜200万）</p>';
+  html+='</div><p style="font-size:11px;color:var(--gray);margin-top:8px">※幼稚園15万・小学校20万・中学35万・高校50万は自動計上。大学費用のみ入力（目安：国公立110万、私立150〜200万）</p>';
   wrap.innerHTML=html;
 }
 
@@ -971,7 +971,11 @@ function _generatePlan(){
     let eduExp=0;
     children.forEach(c=>{
       const childNow=c.age+y;
-      if(childNow>=3&&childNow<=22)eduExp+=childNow>=15&&childNow<=22?c.eduCost:c.eduCost*0.5;
+      if(childNow>=3&&childNow<=5)eduExp+=15;
+      else if(childNow>=6&&childNow<=11)eduExp+=20;
+      else if(childNow>=12&&childNow<=14)eduExp+=35;
+      else if(childNow>=15&&childNow<=17)eduExp+=50;
+      else if(childNow>=18&&childNow<=21)eduExp+=c.eduCost;
     });
 
     let carExp=0;
@@ -988,7 +992,9 @@ function _generatePlan(){
     const _ri=idecoRate/100/12,_Ri=Math.pow(1+_ri,12);
     idecoAsset=selfAge<60?idecoAsset*_Ri+(_ri===0?idecoMonthly*12:idecoMonthly*(_Ri-1)/_ri):idecoAsset*(1+idecoRate/100);
     investAsset=investAsset*(1+investRate/100)+investAnnual;
-    cashAsset+=cf;
+    const nisaContrib=y<30?nisaMonthly*12:0;
+    const idecoContrib=selfAge<60?idecoMonthly*12:0;
+    cashAsset+=cf-nisaContrib-idecoContrib;
     let drawdown=0;
     if(cashAsset<0){
       const d1=Math.min(-cashAsset,investAsset);investAsset-=d1;cashAsset+=d1;drawdown+=d1;
