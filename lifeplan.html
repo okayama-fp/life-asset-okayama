@@ -855,7 +855,7 @@ function _generatePlan(){
   const ageSpouse=hasSpouse?parseInt(document.getElementById('age-spouse').value)||38:0;
   const retireSpouse=hasSpouse?parseInt(document.getElementById('retire-spouse').value)||60:0;
   const planEndAge=parseInt(document.getElementById('plan-end-age').value)||90;
-  const currentAssets=parseFloat(document.getElementById('current-assets').value)||0;
+  const currentAssets=parseFloat(document.getElementById('current-assets')?.value)||0;
 
   const incomeSelf=parseFloat(document.getElementById('income-self').value)||0;
   const incomeGrowth=parseFloat(document.getElementById('income-growth').value)||0;
