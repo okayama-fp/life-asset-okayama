@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ライフプランシートと家計簿が人生を変える理由｜Life Asset FPブログ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --cream: #f0ece3;
+    --green: #1a6b3c;
+    --green-pale: #e8f5ee;
+    --green-mid: #c8e6d4;
+    --accent: #c0392b;
+    --gold: #b7860b;
+    --muted: #6b7280;
+    --border: #e0d9ce;
+    --white: #fff;
+    --shadow: 0 4px 32px rgba(0,0,0,.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.95;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo { font-size: 17px; font-weight: 900; color: var(--green); }
+  .nav-logo span { font-size: 10px; font-weight: 400; color: var(--muted); display: block; }
+  .nav-links { display: flex; gap: 24px; font-size: 13px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: #fff; border: none; border-radius: 20px; padding: 8px 18px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  @media(max-width:640px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #0f3d22 0%, #1a6b3c 60%, #2d8a52 100%);
+    padding: 72px 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0, rgba(255,255,255,.015) 1px, transparent 1px, transparent 30px);
+  }
+  .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7ee8a2;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    letter-spacing: -.01em;
+  }
+  .hero h1 em { color: #7ee8a2; font-style: normal; border-bottom: 2px solid rgba(126,232,162,.4); }
+  .hero-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    font-family: 'DM Mono', monospace;
+    flex-wrap: wrap;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 5px; }
+
+  /* ARTICLE */
+  article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .toc ol { padding-left: 18px; }
+  .toc li { margin: 7px 0; font-size: 14px; }
+  .toc a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* HEADINGS */
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(19px, 2.8vw, 26px);
+    font-weight: 900;
+    margin: 60px 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .sec-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--white);
+    background: var(--green);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--green);
+    line-height: 1.5;
+  }
+
+  p { margin-bottom: 18px; }
+
+  /* CALLOUTS */
+  .callout {
+    padding: 18px 22px;
+    margin: 28px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .callout-key {
+    background: var(--green-pale);
+    border-left: 4px solid var(--green);
+  }
+  .callout-warn {
+    background: #fef6e4;
+    border-left: 4px solid var(--gold);
+  }
+  .callout-danger {
+    background: #fdecea;
+    border-left: 4px solid var(--accent);
+  }
+  .callout strong { font-weight: 700; }
+
+  /* BIG QUOTE */
+  .pull-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 700;
+    line-height: 1.65;
+    color: var(--green);
+    padding: 28px 32px;
+    margin: 40px 0;
+    border-left: 4px solid var(--green);
+    background: var(--green-pale);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* STAT BOXES */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .stat-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 7px; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500; color: var(--green); line-height: 1; }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+  /* STEP BOX */
+  .step-box {
+    counter-reset: step-counter;
+    margin: 28px 0;
+  }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border);
+    counter-increment: step-counter;
+  }
+  .step-item:last-child { border: none; }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+  .step-content p { font-size: 14px; color: #333; margin: 0; line-height: 1.8; }
+
+  /* COMPARE TABLE */
+  .table-wrap { overflow-x: auto; margin: 24px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 500; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.7; }
+  tr:nth-child(even) td { background: var(--cream); }
+  .good { color: var(--green); font-weight: 700; }
+  .bad { color: var(--accent); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14.5px;
+    border-bottom: 1px dotted var(--border);
+    line-height: 1.7;
+  }
+  .checklist li:last-child { border: none; }
+  .ck {
+    width: 20px;
+    height: 20px;
+    background: var(--green);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    position: relative;
+  }
+  .ck::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    width: 7px;
+    height: 11px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+  }
+
+  /* TOOL CTA */
+  .tool-cta {
+    background: linear-gradient(135deg, #0f4d2a, #1a6b3c);
+    border-radius: 14px;
+    padding: 28px 28px;
+    margin: 40px 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .tool-cta-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tool-cta-icon::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background: url('images/fp-avatar.png') center/cover no-repeat, linear-gradient(135deg,#7ee8a2,#38bdf8);
+    border-radius: 4px;
+    display: block;
+  }
+  .tool-cta-text { flex: 1 }
+  .tool-cta h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .tool-cta p { font-size: 13px; color: rgba(255,255,255,.8); margin: 0; line-height: 1.7; }
+  .tool-cta-btn {
+    background: #fff;
+    color: var(--green);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all .2s;
+  }
+  .tool-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  /* PROFILE */
+  .author {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-top: 48px;
+  }
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--green-pale);
+  }
+  .author-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .author-bio { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: #fff8e1;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #856404;
+    margin-top: 32px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    article { padding: 40px 18px 60px; }
+    .hero { padding: 48px 18px 56px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></div>
+  <div class="nav-links">
+    <a href="#">ホーム</a>
+    <a href="#">シミュレーター</a>
+    <a href="#">ブログ</a>
+    <a href="#">お問い合わせ</a>
+  </div>
+  <button class="nav-cta">無料相談</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-cat">ライフプラン・家計管理</div>
+    <h1>
+      ライフプランシートと家計簿、<br>
+      <em>なぜ「書くだけ」で人生が変わるのか</em>
+    </h1>
+    <div class="hero-meta">
+      <span>2026年6月</span>
+      <span>読了約10分</span>
+      <span>ライフアセットオフィス FP</span>
+    </div>
+  </div>
+</div>
+
+<article>
+
+  <nav class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#sec1">「お金が貯まらない」の本当の理由</a></li>
+      <li><a href="#sec2">ライフプランシートとは何か</a></li>
+      <li><a href="#sec3">家計簿の本当の役割</a></li>
+      <li><a href="#sec4">ライフプランと家計簿の違い・使い分け</a></li>
+      <li><a href="#sec5">ライフプランシートに書くべき5つの項目</a></li>
+      <li><a href="#sec6">家計簿を続けるための3つのルール</a></li>
+      <li><a href="#sec7">年代別・今すぐやるべきこと</a></li>
+      <li><a href="#sec8">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <!-- SEC1 -->
+  <section id="sec1">
+    <h2><span class="sec-num">01</span>「お金が貯まらない」の本当の理由</h2>
+
+    <p>「毎月それなりに稼いでいるのに、なぜかお金が残らない」——この悩みを抱えている方は多くいます。しかし、収入が少ないことが原因であるケースは実は少数派です。</p>
+
+    <p>FPとして多くの家計相談を受けてきた経験から言えることがあります。<strong>お金が貯まらない最大の理由は「数字を見ていないこと」</strong>です。</p>
+
+    <div class="callout callout-danger">
+      <strong>よくあるパターン：</strong>月収50万円・支出不明・貯蓄ゼロ。「なんとなく使っているうちになくなる」状態。収入が増えても支出も増え、残高はいつも同じ。これを<strong>「ライフスタイルインフレ」</strong>と呼びます。
+    </div>
+
+    <p>逆に、年収300万円台でも着実に資産を積み上げている人には共通点があります。それは<strong>「今どこにいて、どこに向かうかを数字で把握している」</strong>ことです。</p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-label">家計を「見える化」している世帯の</div>
+        <div class="stat-value">3.2倍</div>
+        <div class="stat-sub">10年後の平均資産額（FP相談データ比較）</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">家計簿をつけ始めてから</div>
+        <div class="stat-value">6ヶ月</div>
+        <div class="stat-sub">で支出の「無駄」に気づく平均期間</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">ライフプランを作成した世帯の</div>
+        <div class="stat-value">78%</div>
+        <div class="stat-sub">が「将来不安が減った」と回答（当サイト調査）</div>
+      </div>
+    </div>
+
+    <p>数字を見ることは、怖いことではありません。むしろ、<strong>見えていない状態のほうがはるかにリスクが高い</strong>のです。</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC2 -->
+  <section id="sec2">
+    <h2><span class="sec-num">02</span>ライフプランシートとは何か</h2>
+
+    <p>ライフプランシートとは、<strong>人生の収支を年単位で一覧化した表</strong>です。現在から老後まで、収入・支出・資産の変化を時系列で可視化します。</p>
+
+    <div class="pull-quote">
+      「ライフプランシートは人生の地図。<br>地図なしで旅をする人はいないのに、<br>なぜ人生設計は地図なしでいいと思うのか。」
+    </div>
+
+    <h3>ライフプランシートで「見える」こと</h3>
+    <ul class="checklist">
+      <li><span class="ck"></span>教育費・住宅ローン・老後資金が<strong>同時に重なる時期</strong>がいつか</li>
+      <li><span class="ck"></span>退職金と住宅ローン残高を比較したとき<strong>定年時の手元資金</strong>がいくらか</li>
+      <li><span class="ck"></span>今の積立額を続けた場合、<strong>何歳で資産が底をつくか</strong></li>
+      <li><span class="ck"></span>NISAやiDeCoが老後資産形成に<strong>どれだけ貢献するか</strong></li>
+      <li><span class="ck"></span>月3万円の積立を「今すぐ始める」と「5年後に始める」の<strong>差額</strong></li>
+    </ul>
+
+    <div class="callout callout-key">
+      <strong>核心：</strong>ライフプランシートは「予測」ではなく「仮説」です。完璧な正確性は不要。「このまま進んだら何が起きるか」をシミュレーションし、問題があれば今のうちに軌道修正するための道具です。
+    </div>
+
+    <h3>ライフプランシートがない状態とは</h3>
+    <p>カーナビなしで高速道路を走るようなものです。今どこにいるかはわかる。でも目的地まであと何キロか、どこで降りるべきかがわからない。<strong>見えていないリスクは、見えているリスクより怖い</strong>のです。</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC3 -->
+  <section id="sec3">
+    <h2><span class="sec-num">03</span>家計簿の本当の役割</h2>
+
+    <p>「家計簿は節約のためにつける」——これは半分正解で半分間違いです。</p>
+
+    <p>家計簿の本当の役割は<strong>「支出のパターンを知ること」</strong>です。節約は手段であり、目的ではありません。</p>
+
+    <h3>家計簿でわかること</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>カテゴリ</th>
+            <th>家計簿なしの状態</th>
+            <th>家計簿ありの状態</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>固定費</strong></td>
+            <td class="bad">「たぶん月15万くらい」という感覚</td>
+            <td class="good">18.3万円と正確に把握。使っていない保険・サブスクを発見</td>
+          </tr>
+          <tr>
+            <td><strong>変動費</strong></td>
+            <td class="bad">「食費は普通じゃないか」と思っている</td>
+            <td class="good">食費7.2万円。外食が4.1万円を占めていたことを発見</td>
+          </tr>
+          <tr>
+            <td><strong>特別支出</strong></td>
+            <td class="bad">「なんか今月余分にかかった」で終わり</td>
+            <td class="good">毎年3月・8月に特別支出が多い法則を発見。事前に準備できる</td>
+          </tr>
+          <tr>
+            <td><strong>貯蓄率</strong></td>
+            <td class="bad">「結構使ったかな、でも残ってるからいいか」</td>
+            <td class="good">貯蓄率12%。目標20%に向けて何を削るか具体的に検討できる</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>家計簿の落とし穴：</strong>「完璧につけようとして挫折する」パターンが最多です。1円単位で合わせることが目的ではありません。<strong>大きな支出の流れをつかむこと</strong>が目的です。月に1回、15分で十分です。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC4 -->
+  <section id="sec4">
+    <h2><span class="sec-num">04</span>ライフプランと家計簿の違い・使い分け</h2>
+
+    <p>この2つは似て非なるものです。役割を理解して両方を使うことが重要です。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>比較軸</th>
+            <th>ライフプランシート</th>
+            <th>家計簿</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>時間軸</strong></td>
+            <td>長期（現在〜老後・数十年）</td>
+            <td>短期（日・月・年単位）</td>
+          </tr>
+          <tr>
+            <td><strong>精度</strong></td>
+            <td>概算・仮説でOK</td>
+            <td>実績・実数が重要</td>
+          </tr>
+          <tr>
+            <td><strong>目的</strong></td>
+            <td>将来のリスク発見・対策立案</td>
+            <td>現在の支出把握・習慣改善</td>
+          </tr>
+          <tr>
+            <td><strong>更新頻度</strong></td>
+            <td>年1回でOK（ライフイベント時に随時）</td>
+            <td>月1回以上が理想</td>
+          </tr>
+          <tr>
+            <td><strong>使うタイミング</strong></td>
+            <td>住宅購入・転職・出産などの意思決定前</td>
+            <td>日常の支出管理・節約判断</td>
+          </tr>
+          <tr>
+            <td><strong>アウトプット</strong></td>
+            <td>「〇歳で資産が底をつく」などの気づき</td>
+            <td>「外食費が予算オーバー」などの気づき</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull-quote">
+      家計簿は「現在地の確認」。<br>ライフプランは「目的地と経路の設定」。<br>両方あってはじめてナビが機能する。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC5 -->
+  <section id="sec5">
+    <h2><span class="sec-num">05</span>ライフプランシートに書くべき5つの項目</h2>
+
+    <p>ライフプランシートを一から作るのは大変に感じるかもしれません。しかし最低限この5つを押さえれば、家計の全体像は見えてきます。</p>
+
+    <div class="step-box">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>家族の年齢推移</h4>
+          <p>本人・配偶者・子どもの年齢を縦軸に並べます。「子ども2人が同時に大学生になる年」「定年の年」「年金開始の年」が一目でわかります。これだけで支出のピーク時期が見えます。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>収入の変化</h4>
+          <p>現在の年収から始まり、昇給・定年・年金受給開始・配偶者の就労変化を記入します。「退職後の収入が3〜5割減る現実」を数字で確認することが重要です。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>大きな支出イベント</h4>
+          <p>住宅購入・教育費・車の買い替え・リフォーム・冠婚葬祭。これらは「まとまった出費」として年別に記入します。「同じ年にいくつも重なっていないか」の確認が目的です。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>住宅ローンの返済状況</h4>
+          <p>残債・月返済額・完済予定年齢を記入します。「定年時にローンがいくら残るか」「退職金で完済できるか」を確認する最重要項目です。変動金利の場合は金利上昇シナリオも記入しましょう。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>資産残高の推移</h4>
+          <p>現在の貯蓄・NISA・iDeCoを起点に、毎年の収支を積み上げた「資産残高」を記入します。<strong>「何歳で資産がゼロになるか」</strong>を見ることがすべての出発点です。マイナスになる年があれば、今から対策を立てられます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-cta">
+      <div class="tool-cta-icon"></div>
+      <div class="tool-cta-text">
+        <h3>無料ライフプランシミュレーターで今すぐ作成</h3>
+        <p>家族構成・収入・支出・住宅ローン・NISA/iDeCoを入力するだけ。年別の収支表とグラフを自動生成。CSVダウンロードも可能です。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">今すぐ作成する →</button>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC6 -->
+  <section id="sec6">
+    <h2><span class="sec-num">06</span>家計簿を続けるための3つのルール</h2>
+
+    <p>「家計簿を始めたが続かなかった」という方に向けて、FPが実際に勧める継続のコツを3つお伝えします。</p>
+
+    <h3>ルール①：1円単位を追わない</h3>
+    <p>家計簿挫折の最大の原因は「完璧主義」です。レシートを全部集め、1円単位で合わせようとすると、それ自体がストレスになります。<strong>カテゴリ別の月合計だけを把握すること</strong>が目的です。500円単位でも十分です。</p>
+
+    <h3>ルール②：カテゴリは6つだけにする</h3>
+
+    <div class="callout callout-key">
+      <strong>最小カテゴリ構成：</strong><br>
+      ①住居費（家賃・ローン）②食費 ③光熱・通信費 ④保険・税金 ⑤教育・子育て ⑥その他<br><br>
+      この6カテゴリだけで家計の80%が把握できます。細かく分類するほど続かなくなります。慣れたら少しずつ細分化しましょう。
+    </div>
+
+    <h3>ルール③：月1回・15分だけ</h3>
+    <p>毎日つけようとすると続きません。<strong>月末に銀行口座・クレジットカードの明細を見ながら15分だけ集計する</strong>。これが最も続く方法です。キャッシュレス決済に統一すれば、明細から自動的にほぼすべての支出が把握できます。</p>
+
+    <div class="callout callout-warn">
+      <strong>家計簿アプリの活用：</strong>マネーフォワードME・Zaimなどの家計簿アプリは、銀行・クレジットカードと連携して自動入力できます。手入力の手間がほぼゼロになるため、継続率が大幅に上がります。ただし<strong>アプリを入れただけで満足しない</strong>こと。月1回の振り返りセットで初めて効果が出ます。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC7 -->
+  <section id="sec7">
+    <h2><span class="sec-num">07</span>年代別・今すぐやるべきこと</h2>
+
+    <h3>20代：習慣づけが最優先</h3>
+    <p>老後はまだ遠く感じますが、20代こそライフプランの恩恵が最も大きい時期です。複利効果により、<strong>20代で始めた月3万円の積立は30代で始めるより数百万〜数千万円の差</strong>になります。家計簿で支出の癖を知り、まずNISA積立を自動化することが最重要アクションです。</p>
+
+    <h3>30代：住宅・教育費・老後が同時進行</h3>
+    <p>住宅購入・子育て・老後準備が重なる最も複雑な時期です。ライフプランシートで<strong>「教育費のピーク年（子どもが高校〜大学の時期）に住宅ローンがいくら残るか」</strong>を確認することが急務です。この時期に計画なく進めると、50代で家計が逼迫するパターンに陥ります。</p>
+
+    <h3>40代：定年後のシミュレーションを今すぐ</h3>
+    <p>定年まで20年を切ると、ライフプランシートの精度が一気に上がります。<strong>「退職金と現在の貯蓄で老後の不足額をカバーできるか」</strong>を試算してください。iDeCoは60歳まで引き出せないため、40代前半がギリギリ節税効果を最大化できる最後のチャンスです。</p>
+
+    <h3>50代：数字を確定させて動く</h3>
+    <p>ねんきん定期便で年金見込み額を確認し、退職金額を会社に確認し、ローン残高を調べる。この3つを<strong>今月中に数字として紙に書き出す</strong>だけで、やるべきことが明確になります。感覚ではなく数字で動く時期です。</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SEC8 まとめ -->
+  <section id="sec8">
+    <h2><span class="sec-num">まとめ</span>書くことは、決断すること</h2>
+
+    <p>ライフプランシートも家計簿も、本質は同じです。<strong>「見えていなかったものを見えるようにする」</strong>こと。そして見えたら、行動できるようになります。</p>
+
+    <ul class="checklist">
+      <li><span class="ck"></span>お金が貯まらない原因は収入不足より<strong>「見える化不足」</strong>がほとんど</li>
+      <li><span class="ck"></span>ライフプランシートは長期の地図。完璧でなくていい。<strong>仮説として作ることが重要</strong></li>
+      <li><span class="ck"></span>家計簿は日常の羅針盤。<strong>月1回15分・6カテゴリだけ</strong>で続けられる</li>
+      <li><span class="ck"></span>2つは役割が違う。<strong>両方を使うことで初めて「今」と「未来」がつながる</strong></li>
+      <li><span class="ck"></span>年代を問わず、今日始めた人が一番得をする</li>
+    </ul>
+
+    <div class="pull-quote">
+      完璧なライフプランは存在しない。<br>でも、ライフプランがないことは、<br>確実に後悔への近道になる。
+    </div>
+
+    <div class="tool-cta">
+      <div class="tool-cta-icon"></div>
+      <div class="tool-cta-text">
+        <h3>まず5分。ライフプランシートを今すぐ作る</h3>
+        <p>当サイトの無料シミュレーターなら入力するだけで年別の収支表・グラフが自動生成されます。登録不要・無料。CSVで保存して毎年更新できます。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">シミュレーターを開く →</button>
+    </div>
+  </section>
+
+  <div class="author">
+    <img src="images/fp-avatar.png" alt="ライフアセットオフィス FP" class="author-avatar">
+    <div>
+      <div class="author-name">ライフアセットオフィス FP</div>
+      <p class="author-bio">FP技能士が運営する中立な情報サイト。住宅ローン・資産運用・老後資金・税金など、お金に関するテーマをわかりやすく解説しています。特定の金融商品の販売・仲介は行っておらず、中立な立場での情報提供を方針としています。</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    本記事は一般的な情報提供を目的としており、特定の金融商品の購入・取引を勧誘するものではありません。個々の状況に応じた判断は、ファイナンシャルプランナー・税理士等の資格を持つ専門家にご相談ください。数値・制度情報は2026年6月時点のものです。最新情報は各公的機関の公式情報をご確認ください。
+  </div>
+
+</article>
+
+</body>
+</html>
