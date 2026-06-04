@@ -94,7 +94,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .panel-title{font-size:18px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:10px}
-.panel-title .icon{font-size:24px}
+.panel-title .icon{display:none}
 .panel-desc{font-size:13px;color:var(--gray);margin-bottom:24px;line-height:1.8}
 
 .card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px;margin-bottom:16px}
@@ -114,7 +114,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 .member-section{margin-bottom:16px}
 .member-header{display:flex;align-items:center;gap:10px;background:var(--green-pale);border-radius:8px;padding:10px 14px;margin-bottom:10px}
-.member-icon{font-size:20px}
+.member-icon{display:none}
 .member-name{font-size:13px;font-weight:700;color:var(--green)}
 
 .year-rows-wrap{overflow-x:auto;margin-top:4px}
@@ -197,37 +197,37 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <a href="/" class="nav-logo">ライフアセットオフィス<span>あなたの未来に、確かな安心と成長を。</span></a>
   <div class="nav-actions">
     <a href="simulation.html" class="nav-home">← シミュレーター一覧</a>
-    <button class="nav-btn save" onclick="saveData()">💾 データ保存</button>
-    <label class="nav-btn load" style="cursor:pointer">📂 読み込む<input type="file" id="load-file" accept=".json" style="display:none" onchange="loadData(event)"></label>
-    <button class="nav-btn csv" onclick="downloadCSV()" id="btn-csv" style="display:none">📥 CSV</button>
-    <button class="nav-btn print" onclick="window.print()" id="btn-print" style="display:none">🖨 印刷</button>
+    <button class="nav-btn save" onclick="saveData()">データ保存</button>
+    <label class="nav-btn load" style="cursor:pointer">読み込む<input type="file" id="load-file" accept=".json" style="display:none" onchange="loadData(event)"></label>
+    <button class="nav-btn csv" onclick="downloadCSV()" id="btn-csv" style="display:none">CSV</button>
+    <button class="nav-btn print" onclick="window.print()" id="btn-print" style="display:none">印刷</button>
   </div>
 </nav>
 <div class="toast" id="toast"></div>
 
 <div class="hero">
-  <div class="hero-badge">📋 登録不要・6ステップで完成</div>
+  <div class="hero-badge">登録不要・6ステップで完成</div>
   <h1>総合<em>ライフプラン表</em>を作成</h1>
   <p>家族構成・収入・支出・住宅ローン・教育費・老後資金を一枚の表に。今後の家計の流れを年別で可視化します。</p>
   <div class="hero-steps">
-    <div class="hero-step"><div class="hs-num">STEP 1</div><div class="hs-icon">👨‍👩‍👧</div><div class="hs-label">家族情報</div></div>
+    <div class="hero-step"><div class="hs-num">STEP 1</div><div class="hs-icon"></div><div class="hs-label">家族情報</div></div>
     <div class="hs-arrow">›</div>
-    <div class="hero-step"><div class="hs-num">STEP 2</div><div class="hs-icon">💴</div><div class="hs-label">収入</div></div>
+    <div class="hero-step"><div class="hs-num">STEP 2</div><div class="hs-icon"></div><div class="hs-label">収入</div></div>
     <div class="hs-arrow">›</div>
-    <div class="hero-step"><div class="hs-num">STEP 3</div><div class="hs-icon">🛒</div><div class="hs-label">支出</div></div>
+    <div class="hero-step"><div class="hs-num">STEP 3</div><div class="hs-icon"></div><div class="hs-label">支出</div></div>
     <div class="hs-arrow">›</div>
-    <div class="hero-step"><div class="hs-num">STEP 4</div><div class="hs-icon">🏠</div><div class="hs-label">住宅ローン</div></div>
+    <div class="hero-step"><div class="hs-num">STEP 4</div><div class="hs-icon"></div><div class="hs-label">住宅ローン</div></div>
     <div class="hs-arrow">›</div>
-    <div class="hero-step"><div class="hs-num">STEP 5</div><div class="hs-icon">📈</div><div class="hs-label">資産・投資</div></div>
+    <div class="hero-step"><div class="hs-num">STEP 5</div><div class="hs-icon"></div><div class="hs-label">資産・投資</div></div>
     <div class="hs-arrow">›</div>
-    <div class="hero-step"><div class="hs-num">STEP 6</div><div class="hs-icon">📊</div><div class="hs-label">プラン表</div></div>
+    <div class="hero-step"><div class="hs-num">STEP 6</div><div class="hs-icon"></div><div class="hs-label">プラン表</div></div>
   </div>
   <div class="hero-feats">
-    <span class="hero-feat">💾 保存・復元</span>
-    <span class="hero-feat">📥 CSV出力</span>
-    <span class="hero-feat">🖨 印刷・PDF</span>
+    <span class="hero-feat">保存・復元</span>
+    <span class="hero-feat">CSV出力</span>
+    <span class="hero-feat">印刷・PDF</span>
     <span class="hero-feat">0円 登録不要</span>
-    <span class="hero-feat">📱 スマホ対応</span>
+    <span class="hero-feat">スマホ対応</span>
   </div>
 </div>
 
@@ -269,14 +269,14 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 <!-- ═══ STEP 1 ═══ -->
 <div class="panel active" id="panel-1">
-  <div class="panel-title"><span class="icon">👨‍👩‍👧‍👦</span>家族情報を入力</div>
+  <div class="panel-title"><span class="icon"></span>家族情報を入力</div>
   <p class="panel-desc">現在の年齢と家族構成を入力してください。ライフプラン表の期間・ライフイベントの自動設定に使います。</p>
 
   <div class="card">
     <div class="card-title">本人・配偶者</div>
     <div class="grid-2">
       <div class="member-section">
-        <div class="member-header"><span class="member-icon">👤</span><span class="member-name">本人</span></div>
+        <div class="member-header"><span class="member-icon"></span><span class="member-name">本人</span></div>
         <div class="field" style="margin-bottom:10px">
           <label>現在の年齢</label>
           <div class="field-row"><input type="number" id="age-self" value="40" min="20" max="65"><span class="field-unit">歳</span></div>
@@ -299,7 +299,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
         </div>
       </div>
       <div class="member-section">
-        <div class="member-header"><span class="member-icon">👤</span><span class="member-name">配偶者</span></div>
+        <div class="member-header"><span class="member-icon"></span><span class="member-name">配偶者</span></div>
         <div class="field" style="margin-bottom:10px">
           <label>配偶者の有無</label>
           <div class="field-row">
@@ -367,7 +367,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 <!-- ═══ STEP 2 ═══ -->
 <div class="panel" id="panel-2">
-  <div class="panel-title"><span class="icon">💴</span>収入を設定</div>
+  <div class="panel-title"><span class="icon"></span>収入を設定</div>
   <p class="panel-desc">現在の収入と将来の変化を入力してください。定年後の年金・継続雇用収入も設定できます。</p>
 
   <div class="card">
@@ -455,7 +455,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 <!-- ═══ STEP 3 ═══ -->
 <div class="panel" id="panel-3">
-  <div class="panel-title"><span class="icon">🛒</span>支出を設定</div>
+  <div class="panel-title"><span class="icon"></span>支出を設定</div>
   <p class="panel-desc">現在の生活費と将来の大きな支出を入力してください。</p>
 
   <div class="card">
@@ -533,7 +533,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 <!-- ═══ STEP 4 ═══ -->
 <div class="panel" id="panel-4">
-  <div class="panel-title"><span class="icon">🏠</span>住宅・ローンを設定</div>
+  <div class="panel-title"><span class="icon"></span>住宅・ローンを設定</div>
   <p class="panel-desc">住宅ローンがある場合、残債と金利を入力してください。</p>
 
   <div class="card">
@@ -601,7 +601,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 <!-- ═══ STEP 5 ═══ -->
 <div class="panel" id="panel-5">
-  <div class="panel-title"><span class="icon">📈</span>資産・投資を設定</div>
+  <div class="panel-title"><span class="icon"></span>資産・投資を設定</div>
   <p class="panel-desc">NISA・iDeCo・その他の投資状況を入力してください。</p>
 
   <div class="card">
@@ -650,13 +650,13 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
   <div class="btn-row">
     <button class="btn-back" onclick="goStep(4)">← 戻る</button>
-    <button class="btn-generate" onclick="generatePlan()">📊 ライフプラン表を生成する</button>
+    <button class="btn-generate" onclick="generatePlan()">ライフプラン表を生成する</button>
   </div>
 </div>
 
 <!-- ═══ STEP 6 ═══ -->
 <div class="panel" id="panel-6">
-  <div class="panel-title"><span class="icon">📊</span>あなたのライフプラン表</div>
+  <div class="panel-title"><span class="icon"></span>あなたのライフプラン表</div>
   <p class="panel-desc" id="plan-desc">入力データをもとに生成したライフプラン表です。</p>
 
   <div class="summary-grid" id="summary-grid"></div>
@@ -682,19 +682,25 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
         <tfoot id="plan-tfoot"></tfoot>
       </table>
     </div>
+    <div style="display:flex;gap:16px;font-size:11px;color:var(--gray);margin-top:8px;flex-wrap:wrap">
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(220,53,69,.4);border-radius:2px;margin-right:4px;vertical-align:middle"></span>資産枯渇</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(245,158,11,.4);border-radius:2px;margin-right:4px;vertical-align:middle"></span>要注意（残高500万未満）</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(59,130,246,.3);border-radius:2px;margin-right:4px;vertical-align:middle"></span>節目（定年・65歳）</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(26,107,60,.15);border-radius:2px;margin-right:4px;vertical-align:middle"></span>イベントあり</span>
+    </div>
   </div>
 
   <div class="btn-row" style="justify-content:space-between;flex-wrap:wrap;gap:12px">
     <button class="btn-back" onclick="goStep(5)">← 条件を変更</button>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn-back" onclick="downloadCSV()">📥 CSVダウンロード</button>
-      <button class="btn-back" onclick="window.print()">🖨 印刷・PDF保存</button>
+      <button class="btn-back" onclick="downloadCSV()">CSVダウンロード</button>
+      <button class="btn-back" onclick="window.print()">印刷・PDF保存</button>
       <button class="btn-next" onclick="goStep(1)">最初からやり直す</button>
     </div>
   </div>
 
   <div class="disclaimer">
-    ⚠️ 本ツールは情報提供目的です。計算は入力値に基づく概算であり、実際の家計状況とは異なる場合があります。投資には元本割れのリスクがあります。重要な意思決定の前には必ずFP・税理士等の専門家にご相談ください。
+    ⚠ 本ツールは情報提供目的です。計算は入力値に基づく概算であり、実際の家計状況とは異なる場合があります。投資には元本割れのリスクがあります。重要な意思決定の前には必ずFP・税理士等の専門家にご相談ください。
   </div>
 </div>
 
@@ -728,7 +734,7 @@ function saveData(){
   a.href=url;
   a.download=`lifeplan_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.json`;
   a.click();URL.revokeObjectURL(url);
-  showToast('💾 入力データを保存しました');
+  showToast('入力データを保存しました');
 }
 function loadData(event){
   const file=event.target.files[0];if(!file)return;
@@ -739,13 +745,13 @@ function loadData(event){
       if(!data.inputs)throw new Error();
       applyAllInputs(data.inputs);
       toggleSpouse();toggleHousing();renderChildrenFields();
-      showToast('📂 データを読み込みました');goStep(1);
+      showToast('データを読み込みました');goStep(1);
     }catch{showToast('❌ 読み込みに失敗しました')}
   };
   reader.readAsText(file);event.target.value='';
 }
 function downloadCSV(){
-  if(!lastRows.length){showToast('⚠️ まずライフプラン表を生成してください');return}
+  if(!lastRows.length){showToast('⚠ まずライフプラン表を生成してください');return}
   const BOM='﻿';
   const headers=['西暦','本人年齢','配偶者年齢','主なイベント',
     '収入合計(万円)','本人収入(万円)','配偶者収入(万円)','一時収入(万円)',
@@ -767,7 +773,7 @@ function downloadCSV(){
   a.href=url;
   a.download=`lifeplan_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.csv`;
   a.click();URL.revokeObjectURL(url);
-  showToast('📥 CSVをダウンロードしました');
+  showToast('CSVをダウンロードしました');
 }
 
 function buildSVGChart(rows){
@@ -841,7 +847,7 @@ function renderChildrenFields(){
   for(let i=1;i<=n;i++){
     wrap.innerHTML+=`
     <div class="member-header" style="margin-bottom:10px">
-      <span class="member-icon">👧</span><span class="member-name">第${i}子</span>
+      <span class="member-icon"></span><span class="member-name">第${i}子</span>
     </div>
     <div class="grid-3" style="margin-bottom:16px">
       <div class="field"><label>現在の年齢</label>
@@ -871,7 +877,7 @@ function renderEducationFields(){
 }
 
 function generatePlan(){
-  try{ _generatePlan(); } catch(e){ showToast('⚠️ エラー: '+e.message); console.error(e); }
+  try{ _generatePlan(); } catch(e){ showToast('⚠ エラー: '+e.message); console.error(e); }
 }
 function _generatePlan(){
   const g=(id,def=0)=>{const el=document.getElementById(id);if(!el)return def;return el.value===''?def:el.value;};
@@ -1086,7 +1092,7 @@ function _generatePlan(){
 
   // ① 総合評価
   let overallClass=depleteRow?'danger':(retireAsset<500||minAsset<0?'warn':'ok');
-  let overallIcon=depleteRow?'🔴':(retireAsset<500?'🟡':'✅');
+  let overallIcon=depleteRow?'':(retireAsset<500?'':'✅');
   let overallTitle=depleteRow?`${depleteRow.selfAge}歳で資産が枯渇します`:(retireAsset<500?'定年時資産が不足気味です':'現在の計画は堅調です');
   al.innerHTML+=`<div class="alert ${overallClass}" style="margin-bottom:20px">
     <div style="font-size:15px;font-weight:900;margin-bottom:10px">${overallIcon} 総合評価：${overallTitle}</div>
@@ -1112,13 +1118,13 @@ function _generatePlan(){
   // ② 老後・年金収支分析
   if(retRows.length>0){
     al.innerHTML+=`<div class="alert ${gapMonthly>5?'warn':'ok'}" style="margin-bottom:16px">
-      <div style="font-size:13px;font-weight:900;margin-bottom:8px">🏖️ 老後の収支分析（${retireSelf}歳〜）</div>
+      <div style="font-size:13px;font-weight:900;margin-bottom:8px"> 老後の収支分析（${retireSelf}歳〜）</div>
       <div style="font-size:13px;line-height:2">
       年金収入 <strong>${fmt(pensionMonthly)}万円/月</strong>、生活費の目安 <strong>${fmt(livingCostRetire)}万円/月</strong>。<br>
       ${gapMonthly>0
         ?`毎月 <strong>${fmt(gapMonthly)}万円（年間${fmt(gapMonthly*12)}万円）</strong> を貯蓄から補填する計画です。
         ${retireAsset>0?`定年時資産 <strong>${fmt(retireAsset)}万円</strong> は年間赤字の <strong>約${Math.floor(retireAsset/(gapMonthly*12))}年分</strong> に相当します。`:''}
-        <br>💡 <strong>FPアドバイス：</strong>
+        <br><strong>FPアドバイス：</strong>
         ${retireSelf<65?`<strong>${retireSelf}〜65歳の空白期間（${65-retireSelf}年間）</strong> は年金がゼロのため特に家計が厳しくなります。この期間は再雇用または配偶者の就労継続で収入を確保することが最重要です。`:''}
         医療・介護費は75歳以降に急増する傾向があります。<strong>医療保険・介護保険の見直し</strong>と<strong>高額療養費制度の理解</strong>を今から進めておきましょう。`
         :`年金が生活費をカバーできる試算です（月 <strong>+${fmt(Math.abs(gapMonthly))}万円の黒字</strong>）。
@@ -1129,11 +1135,11 @@ function _generatePlan(){
 
   // ③ NISA・iDeCo活用診断
   al.innerHTML+=`<div class="alert ${nisaMonthly<5?'warn':'ok'}" style="margin-bottom:16px">
-    <div style="font-size:13px;font-weight:900;margin-bottom:8px">📈 NISA・iDeCo活用診断</div>
+    <div style="font-size:13px;font-weight:900;margin-bottom:8px">NISA・iDeCo活用診断</div>
     <div style="font-size:13px;line-height:2">
     NISA積立 <strong>${nisaMonthly}万円/月</strong>（上限10万円の <strong>${nisaUtilPct}%</strong> 活用） ／ iDeCo <strong>${idecoMonthly}万円/月</strong>。<br>
     ${retireSelf}歳時点のNISA推定残高：<strong>${fmt(nisaAtRetire)}万円</strong>（運用益は <strong>全額非課税</strong>）。<br><br>
-    💡 <strong>FPアドバイス：</strong><br>
+    <strong>FPアドバイス：</strong><br>
     ${nisaMonthly<10?`NISA枠にはまだ月 <strong>${fmtM(nisaMaxMonthly-nisaMonthly)}万円</strong> の余裕があります。月1万円増やすだけでも${retireSelf}歳まで${Math.max(0,retireSelf-ageSelf)}年間積み立てると複利で <strong>数百万円以上</strong> の差になる可能性があります。`
     :`NISA上限フル活用中です。素晴らしい！複利の恩恵を最大化する理想的な運用です。`}<br>
     ${idecoMonthly<1.2?`iDeCoは掛金を増やすと <strong>所得控除</strong> の節税効果も得られます（例：年収500万・月1万増で年間約 <strong>2万円の節税</strong>）。給与所得者の上限は月2.3万円です。`
@@ -1144,14 +1150,14 @@ function _generatePlan(){
   // ④ 住宅ローン診断
   if(loanBalance>0){
     al.innerHTML+=`<div class="alert ${loanRepayAge>65?'warn':'ok'}" style="margin-bottom:16px">
-      <div style="font-size:13px;font-weight:900;margin-bottom:8px">🏠 住宅ローン診断</div>
+      <div style="font-size:13px;font-weight:900;margin-bottom:8px">住宅ローン診断</div>
       <div style="font-size:13px;line-height:2">
       残債 <strong>${fmt(loanBalance)}万円</strong>、月々 <strong>${fmtM(loanMonthly/10000)}万円</strong>、
       <strong>${loanRepayAge}歳</strong>（${new Date().getFullYear()+(loanRepayAge-ageSelf)}年）に完済予定。<br>
       残り返済総額：約 <strong>${fmt(totalRepay)}万円</strong>（元本${fmt(loanBalance)}万円＋利息 <strong>${fmt(totalInterest)}万円</strong>）。<br>
       返済負担率：年収の <strong>${loanBurdenPct}%</strong>
-      ${loanBurdenPct>25?' ⚠️ 25%超は家計を圧迫しやすい水準です':loanBurdenPct>20?' ※目安の20%をやや超えています':' ✅ 適正水準です'}。<br><br>
-      💡 <strong>FPアドバイス：</strong>
+      ${loanBurdenPct>25?' ⚠ 25%超は家計を圧迫しやすい水準です':loanBurdenPct>20?' ※目安の20%をやや超えています':' ✅ 適正水準です'}。<br><br>
+      <strong>FPアドバイス：</strong>
       ${loanRepayAge>65
         ?`完済が${loanRepayAge}歳と老後にかかるため要注意です。<strong>繰上返済（期間短縮型）</strong>を活用して ${Math.max(retireSelf,60)}歳以前に完済できると、老後の月次収支が月 <strong>${fmtM(loanMonthly/10000)}万円</strong> 改善します。金利が変動型なら金利上昇リスクも考慮して固定金利への借り換えも検討しましょう。`
         :`完済時期が定年（${retireSelf}歳）前に終わる理想的な計画です。完済後の月 <strong>${fmtM(loanMonthly/10000)}万円</strong> をそのままNISAに回すと老後資産が大幅に増えます。`}
@@ -1170,7 +1176,7 @@ function _generatePlan(){
   actions.push(`保険料の見直し（払いすぎ診断）で年間<strong>5〜15万円</strong>のコスト削減を検討する`);
 
   al.innerHTML+=`<div class="alert ok" style="border-color:var(--green)">
-    <div style="font-size:13px;font-weight:900;margin-bottom:10px">📌 FPが提案する優先アクション</div>
+    <div style="font-size:13px;font-weight:900;margin-bottom:10px">FPが提案する優先アクション</div>
     <ol style="margin:0 0 0 20px;font-size:13px;line-height:2.6">
       ${actions.map(a=>`<li>${a}</li>`).join('')}
     </ol>
