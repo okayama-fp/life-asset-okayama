@@ -858,7 +858,7 @@ function generatePlan(){
   try{ _generatePlan(); } catch(e){ showToast('⚠️ エラー: '+e.message); console.error(e); }
 }
 function _generatePlan(){
-  const g=(id,def=0)=>{const el=document.getElementById(id);return el?el.value:def;};
+  const g=(id,def=0)=>{const el=document.getElementById(id);if(!el)return def;return el.value===''?def:el.value;};
   const ageSelf=parseInt(g('age-self'))||40;
   const retireSelf=parseInt(g('retire-self'))||65;
   const hasSpouse=g('spouse-yn')==='yes';
@@ -982,7 +982,9 @@ function _generatePlan(){
     if(selfAge===reformAge)reformExp=reformCost;
     const leisure=selfAge<75?leisureCost:0;
     const insurance=selfAge<75?insuranceCost:0;
-    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure;
+    const nisaContrib=y<30?nisaMonthly*12:0;
+    const idecoContrib=selfAge<60?idecoMonthly*12:0;
+    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+nisaContrib+idecoContrib;
     const cf=totalIncome-totalExpense;
 
     const _rn=nisaRate/100/12,_Rn=Math.pow(1+_rn,12);
@@ -990,9 +992,7 @@ function _generatePlan(){
     const _ri=idecoRate/100/12,_Ri=Math.pow(1+_ri,12);
     idecoAsset=selfAge<60?idecoAsset*_Ri+(_ri===0?idecoMonthly*12:idecoMonthly*(_Ri-1)/_ri):idecoAsset*(1+idecoRate/100);
     investAsset=investAsset*(1+investRate/100)+investAnnual;
-    const nisaContrib=y<30?nisaMonthly*12:0;
-    const idecoContrib=selfAge<60?idecoMonthly*12:0;
-    cashAsset+=cf-nisaContrib-idecoContrib;
+    cashAsset+=cf;
     let drawdown=0;
     if(cashAsset<0){
       const d1=Math.min(-cashAsset,investAsset);investAsset-=d1;cashAsset+=d1;drawdown+=d1;
@@ -1017,7 +1017,7 @@ function _generatePlan(){
 
     rows.push({yr,selfAge,spouseAge,events,
       incSelf:Math.round(incSelf),incSpouse:Math.round(incSpouse),lumpIncome:Math.round(lumpIncome),totalIncome:Math.round(totalIncome),
-      baseLiving:Math.round(baseLiving),loanExp:Math.round(loanExp),rentExp:Math.round(rentExp),eduExp:Math.round(eduExp),carExp:Math.round(carExp),reformExp:Math.round(reformExp),leisure:Math.round(leisure),insurance:Math.round(insurance),totalExpense:Math.round(totalExpense),
+      baseLiving:Math.round(baseLiving),loanExp:Math.round(loanExp),rentExp:Math.round(rentExp),eduExp:Math.round(eduExp),carExp:Math.round(carExp),reformExp:Math.round(reformExp),leisure:Math.round(leisure),insurance:Math.round(insurance),nisaContrib:Math.round(nisaContrib),idecoContrib:Math.round(idecoContrib),totalExpense:Math.round(totalExpense),
       cf:Math.round(cf),cashAsset:Math.round(cashAsset),nisaAsset:Math.round(nisaAsset),idecoAsset:Math.round(idecoAsset),investAsset:Math.round(investAsset),totalAsset:Math.round(totalAsset),
       loanRemaining:Math.round(loanRemaining),drawdown:Math.round(drawdown),pensionInc
     });
@@ -1168,7 +1168,7 @@ function _generatePlan(){
   document.getElementById('plan-thead').innerHTML=`<tr>
     <th class="cat">西暦</th><th>本人</th>${hasSpouse?'<th>配偶者</th>':''}<th>主なイベント</th>
     <th>収入合計</th><th>うち年金</th><th>支出合計</th><th>年間収支</th>
-    <th>住宅ローン</th><th>高校・大学</th>
+    <th>住宅ローン</th><th>高校・大学</th><th>NISA/iDeCo積立</th>
     <th>現金資産</th><th>NISA</th><th>iDeCo</th><th>投資資産</th><th>総資産</th>
   </tr>`;
   document.getElementById('plan-tbody').innerHTML=rows.map(r=>{
@@ -1189,6 +1189,7 @@ function _generatePlan(){
     <td class="${r.cf>=0?'plus':'minus'}">${r.cf>=0?'+':''}${r.cf.toLocaleString()}</td>
     <td>${r.loanExp>0?r.loanExp.toLocaleString():'-'}</td>
     <td>${r.eduExp>0?r.eduExp.toLocaleString():'-'}</td>
+    <td class="${(r.nisaContrib+r.idecoContrib)>0?'plus':''}">${(r.nisaContrib+r.idecoContrib)>0?(r.nisaContrib+r.idecoContrib).toLocaleString():'-'}</td>
     <td class="${r.cashAsset<0?'minus':''}">${r.cashAsset.toLocaleString()}</td>
     <td class="plus">${Math.round(r.nisaAsset).toLocaleString()}</td>
     <td class="plus">${Math.round(r.idecoAsset).toLocaleString()}</td>
@@ -1211,6 +1212,7 @@ function _generatePlan(){
     <td>${Math.round(lifeExpense).toLocaleString()}</td>
     <td class="${lifeCf>=0?'plus':'minus'}">${lifeCf>=0?'+':''}${Math.round(lifeCf).toLocaleString()}</td>
     <td style="color:var(--gray)">-</td><td style="color:var(--gray)">-</td>
+    <td class="plus">${Math.round(rows.reduce((s,r)=>s+r.nisaContrib+r.idecoContrib,0)).toLocaleString()}</td>
     <td class="${finalRow.cashAsset<0?'minus':''}">${finalRow.cashAsset.toLocaleString()}</td>
     <td class="plus">${Math.round(finalRow.nisaAsset).toLocaleString()}</td>
     <td class="plus">${Math.round(finalRow.idecoAsset).toLocaleString()}</td>
