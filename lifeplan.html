@@ -119,11 +119,13 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 .year-rows-wrap{overflow-x:auto;margin-top:4px}
 .year-table{width:100%;border-collapse:collapse;font-size:12px;min-width:600px}
-.year-table th{background:var(--ink);color:#fff;padding:8px 10px;text-align:center;font-size:11px;font-weight:500;white-space:nowrap}
-.year-table th.cat{text-align:left;background:var(--green-dark)}
+.year-table th{background:var(--ink);color:#fff;padding:8px 10px;text-align:center;font-size:11px;font-weight:500;white-space:nowrap;position:sticky;top:0;z-index:20}
+.year-table th.cat{text-align:left;background:var(--green-dark);position:sticky;top:0;left:0;z-index:30}
 .year-table td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
 .year-table tr:nth-child(even) td{background:var(--bg)}
-.year-table .year-label{text-align:left;font-weight:700;font-family:'DM Mono',monospace;font-size:11px}
+.year-table .year-label{text-align:left;font-weight:700;font-family:'DM Mono',monospace;font-size:11px;position:sticky;left:0;z-index:10;background:#fff;box-shadow:2px 0 4px rgba(0,0,0,.07)}
+.year-table tr:nth-child(even) .year-label{background:var(--bg)}
+.year-table tfoot .year-label{background:var(--green-pale)}
 .year-table .age-cell{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray)}
 .year-table .event-cell{font-size:10px;color:var(--green);font-weight:700}
 .year-table .minus{color:var(--red);font-weight:700}
@@ -131,10 +133,13 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .year-table tfoot td{background:var(--green-pale);font-weight:700;border-top:2px solid var(--green);color:var(--ink);font-size:11px}
 .year-table .retire-row td{border-top:2px dashed var(--green) !important;background:rgba(26,107,60,.07) !important}
 .year-table .row-depleted td{background:rgba(220,53,69,.12) !important}
-.year-table .row-depleted .year-label{color:var(--red);font-weight:900}
+.year-table .row-depleted .year-label{color:var(--red);font-weight:900;background:rgba(220,53,69,.12) !important}
 .year-table .row-warn td{background:rgba(245,158,11,.08) !important}
+.year-table .row-warn .year-label{background:rgba(245,158,11,.08) !important}
 .year-table .row-milestone td{border-top:2px solid #3b82f6 !important;background:rgba(59,130,246,.06) !important}
+.year-table .row-milestone .year-label{background:rgba(59,130,246,.06) !important}
 .year-table .row-event td{background:rgba(26,107,60,.04) !important}
+.year-table .row-event .year-label{background:rgba(26,107,60,.04) !important}
 
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
 .s-box{border-radius:12px;padding:16px;text-align:center;border:1.5px solid}
