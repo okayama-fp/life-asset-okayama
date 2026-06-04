@@ -613,6 +613,10 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
         <div class="field-row"><input type="number" id="invest-current" value="200" min="0"><span class="field-unit">万円</span></div>
       </div>
       <div class="field">
+        <label>投資資産の想定利回り</label>
+        <div class="field-row"><input type="number" id="invest-rate" value="4" min="0" max="15" step="0.5"><span class="field-unit">%/年</span></div>
+      </div>
+      <div class="field">
         <label>追加投資（年間）</label>
         <div class="field-row"><input type="number" id="invest-annual" value="0" min="0"><span class="field-unit">万円/年</span></div>
       </div>
@@ -643,6 +647,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
     <div style="display:flex;gap:16px;font-size:11px;color:var(--gray);margin-top:8px;flex-wrap:wrap">
       <span><span style="display:inline-block;width:10px;height:10px;background:#1a6b3c;border-radius:2px;margin-right:4px;vertical-align:middle"></span>総資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#bfdbfe;border-radius:2px;margin-right:4px;vertical-align:middle"></span>NISA資産</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:#a78bfa;border-radius:2px;margin-right:4px;vertical-align:middle"></span>投資資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#f59e0b;border-radius:2px;margin-right:4px;vertical-align:middle"></span>現金資産</span>
     </div>
   </div>
@@ -749,7 +754,7 @@ function buildSVGChart(rows){
   const cW=W-PL-PR,cH=H-PT-PB;
   const step=Math.max(1,Math.ceil(rows.length/40));
   const pts=rows.filter((_,i)=>i%step===0||i===rows.length-1);
-  const allVals=pts.flatMap(r=>[r.totalAsset,r.nisaAsset,r.cashAsset]);
+  const allVals=pts.flatMap(r=>[r.totalAsset,r.nisaAsset,r.cashAsset,r.investAsset||0]);
   const maxV=Math.max(0,...allVals)*1.1||1000;
   const minV=Math.min(0,...allVals)*1.1;
   const range=maxV-minV||1;
@@ -775,6 +780,7 @@ function buildSVGChart(rows){
     <polygon points="${polyFill('totalAsset',Math.max(0,minV))}" fill="rgba(26,107,60,.08)"/>
     <polyline points="${poly('totalAsset')}" fill="none" stroke="#1a6b3c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
     <polyline points="${poly('nisaAsset')}" fill="none" stroke="#93c5fd" stroke-width="1.5" stroke-linejoin="round"/>
+    <polyline points="${poly('investAsset')}" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round"/>
     <polyline points="${poly('cashAsset')}" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3" stroke-linejoin="round"/>
     ${xTicksSVG}
   </svg>`;
@@ -891,6 +897,8 @@ function _generatePlan(){
   const idecoMonthly=parseFloat(document.getElementById('ideco-monthly').value)||0;
   const idecoRate=parseFloat(document.getElementById('ideco-rate').value)||0;
   const investCurrent=parseFloat(document.getElementById('invest-current').value)||0;
+  const investRate=parseFloat(document.getElementById('invest-rate').value)||0;
+  const investAnnual=parseFloat(document.getElementById('invest-annual').value)||0;
   const savingsCurrent=parseFloat(document.getElementById('savings-current').value)||0;
 
   const childrenCount=parseInt(document.getElementById('children-count').value)||0;
@@ -918,7 +926,7 @@ function _generatePlan(){
 
   const rows=[];
   const totalYears=planEndAge-ageSelf+1;
-  let nisaAsset=0,idecoAsset=0,cashAsset=savingsCurrent+currentAssets-investCurrent;
+  let nisaAsset=0,idecoAsset=0,investAsset=investCurrent,cashAsset=savingsCurrent;
   let loanRemaining=loanBalance;
 
   for(let y=0;y<totalYears;y++){
@@ -972,9 +980,10 @@ function _generatePlan(){
 
     nisaAsset=fvMonthly(y<30?nisaMonthly:0,nisaRate,(y+1)*12);
     idecoAsset=selfAge>=60?idecoAsset*(1+idecoRate/100):fvMonthly(selfAge<60?idecoMonthly:0,idecoRate,(y+1)*12);
+    investAsset=investAsset*(1+investRate/100)+investAnnual;
     cashAsset+=cf;
     if(loanRemaining>0)loanRemaining=Math.max(0,loanRemaining-loanAnnual);
-    const totalAsset=Math.max(0,cashAsset)+nisaAsset+idecoAsset;
+    const totalAsset=Math.max(0,cashAsset)+nisaAsset+idecoAsset+investAsset;
 
     const events=[];
     if(selfAge===retireSelf)events.push('本人定年');
@@ -990,7 +999,7 @@ function _generatePlan(){
     rows.push({yr,selfAge,spouseAge,events,
       incSelf:Math.round(incSelf),incSpouse:Math.round(incSpouse),lumpIncome:Math.round(lumpIncome),totalIncome:Math.round(totalIncome),
       baseLiving:Math.round(baseLiving),loanExp:Math.round(loanExp),rentExp:Math.round(rentExp),eduExp:Math.round(eduExp),carExp:Math.round(carExp),reformExp:Math.round(reformExp),leisure:Math.round(leisure),insurance:Math.round(insurance),totalExpense:Math.round(totalExpense),
-      cf:Math.round(cf),cashAsset:Math.round(cashAsset),nisaAsset:Math.round(nisaAsset),idecoAsset:Math.round(idecoAsset),totalAsset:Math.round(totalAsset),
+      cf:Math.round(cf),cashAsset:Math.round(cashAsset),nisaAsset:Math.round(nisaAsset),idecoAsset:Math.round(idecoAsset),investAsset:Math.round(investAsset),totalAsset:Math.round(totalAsset),
       loanRemaining:Math.round(loanRemaining)
     });
   }
@@ -1141,7 +1150,7 @@ function _generatePlan(){
     <th class="cat">西暦</th><th>本人</th>${hasSpouse?'<th>配偶者</th>':''}<th>主なイベント</th>
     <th>収入合計</th><th>支出合計</th><th>年間収支</th>
     <th>住宅ローン</th><th>教育費</th>
-    <th>現金資産</th><th>NISA</th><th>総資産</th>
+    <th>現金資産</th><th>NISA</th><th>投資資産</th><th>総資産</th>
   </tr>`;
   document.getElementById('plan-tbody').innerHTML=rows.map(r=>`<tr>
     <td class="year-label">${r.yr}</td>
@@ -1155,6 +1164,7 @@ function _generatePlan(){
     <td>${r.eduExp>0?r.eduExp.toLocaleString():'-'}</td>
     <td class="${r.cashAsset<0?'minus':''}">${r.cashAsset.toLocaleString()}</td>
     <td class="plus">${Math.round(r.nisaAsset).toLocaleString()}</td>
+    <td class="plus">${Math.round(r.investAsset).toLocaleString()}</td>
     <td class="${r.totalAsset<0?'minus':'plus'}" style="font-weight:700">${r.totalAsset.toLocaleString()}</td>
   </tr>`).join('');
 
