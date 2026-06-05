@@ -306,6 +306,37 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--greenb);
 }
 
+/* ─── Dynamic next-action card ─── */
+.next-action-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  transition: border-color .3s;
+}
+.next-action-card.na-safe   { border-color: var(--greenb); background: var(--greenl); }
+.next-action-card.na-warn   { border-color: var(--amberb); background: var(--amberl); }
+.next-action-card.na-danger { border-color: var(--redb);   background: var(--redl); }
+.na-label {
+  font-size: 10px; font-weight: 800; letter-spacing: .12em;
+  margin-bottom: 6px; text-transform: uppercase;
+}
+.na-safe   .na-label { color: var(--green); }
+.na-warn   .na-label { color: var(--amber); }
+.na-danger .na-label { color: var(--red); }
+.na-msg { font-size: 13.5px; font-weight: 700; color: var(--navy); line-height: 1.75; margin-bottom: 10px; }
+.na-steps { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.na-steps li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--text); line-height: 1.7; }
+.na-step-num {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 900; flex-shrink: 0; margin-top: 1px;
+  color: #fff;
+}
+.na-safe   .na-step-num { background: var(--green); }
+.na-warn   .na-step-num { background: var(--amber); }
+.na-danger .na-step-num { background: var(--red); }
+
 /* ─── FP advice box ─── */
 .fp-advice-box {
   margin-top: 20px;
@@ -479,6 +510,13 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
             <span class="stat-v" id="r-monthly">―</span>
           </div>
         </div>
+      </div>
+
+      <!-- あなたへのアドバイス -->
+      <div class="next-action-card na-danger" id="next-action-card">
+        <div class="na-label" id="na-label">あなたへのアドバイス</div>
+        <div class="na-msg" id="na-msg">―</div>
+        <ul class="na-steps" id="na-steps"></ul>
       </div>
 
       <!-- チャート -->
@@ -776,6 +814,7 @@ function calc() {
   document.getElementById('r-monthly').textContent = gap > 0 ? fmt(monthlyNeed)+'/月' : '積立不要';
 
   renderChart(totalNeeded, totalPension, savings, Math.max(gap, 0));
+  updateNextAction(gap, monthlyNeed, covPct, yearsToRetire);
   calcExtra();
 }
 
@@ -806,6 +845,71 @@ function renderChart(needed, pension, savings, deficit) {
       }
     }
   });
+}
+
+function updateNextAction(gap, monthlyNeed, covPct, yearsToRetire) {
+  var card = document.getElementById('next-action-card');
+  var msgEl = document.getElementById('na-msg');
+  var stepsEl = document.getElementById('na-steps');
+  var labelEl = document.getElementById('na-label');
+  var cls, msg, steps;
+
+  if (gap <= 0) {
+    cls = 'na-safe';
+    labelEl.textContent = '状況：安心圏内';
+    msg = '現在のプランで老後資金は十分カバーできています。次のステップで、さらに安心な老後を固めましょう。';
+    steps = [
+      'インフレ対策として資産の一部をNISAや投資信託に分散する',
+      'ねんきんネットで年金繰下げ受給（最大+84%増）の効果を試算する',
+      '医療・介護の予備費として300〜500万円を別枠で確保する'
+    ];
+  } else if (covPct >= 75) {
+    cls = 'na-warn';
+    labelEl.textContent = '状況：もう少しで安心圏内';
+    var mn = Math.ceil(monthlyNeed);
+    msg = '月' + mn + '万円ほどの積立でカバーできます。iDeCoやNISAなら節税しながら準備できます。';
+    steps = [
+      'iDeCoまたはNISA（つみたて投資枠）で月' + mn + '万円の自動積立を今月中に設定する',
+      '保険料・通信費・サブスクを見直して積立の原資を月2〜3万円作る',
+      'ねんきんネットで自分の年金見込み額を確認し、試算をより正確にする'
+    ];
+  } else if (yearsToRetire >= 20) {
+    cls = 'na-danger';
+    labelEl.textContent = '状況：要対策（時間はあります）';
+    var mn2 = Math.ceil(monthlyNeed);
+    msg = '不足額は大きいですが、' + yearsToRetire + '年の準備期間があります。今すぐ始めれば十分間に合います。';
+    steps = [
+      'iDeCo＋NISAをできるだけ早く開始。月' + mn2 + '万円を目標に自動積立を設定する',
+      '固定費（保険・通信・サブスク）を見直して月2〜3万円の積立原資を捻出する',
+      '退職年齢を1〜2年延ばすことも検討——収入期間が延び、不足額が大幅に改善する'
+    ];
+  } else if (yearsToRetire >= 10) {
+    cls = 'na-danger';
+    labelEl.textContent = '状況：要対策（早急に準備を）';
+    var mn3 = Math.ceil(monthlyNeed);
+    msg = '準備期間は' + yearsToRetire + '年あります。今月中に行動を始めることが重要です。';
+    steps = [
+      'NISAを今月中に開設・積立開始。月' + mn3 + '万円を目標にする',
+      '保険・通信費・サブスクを総点検し、積立に回せる金額を最大化する',
+      '退職年齢の延長と生活費の見直しを同時に検討する（どちらも不足額を大きく改善する）'
+    ];
+  } else {
+    cls = 'na-danger';
+    labelEl.textContent = '状況：要対策（複合的な手を打つ必要があります）';
+    var expTarget = Math.round(sliders.expense * 0.85);
+    msg = '退職まで' + yearsToRetire + '年以内です。積立だけでなく、複数の対策を組み合わせましょう。';
+    steps = [
+      '退職年齢を延ばして収入期間を最大化する（最も効果が大きい選択肢）',
+      '老後の月生活費を' + expTarget + '万円に下げるシミュレーションをする',
+      '退職金・不動産・相続資産の活用方法をFPに相談し、取り崩し戦略を設計する'
+    ];
+  }
+
+  card.className = 'next-action-card ' + cls;
+  msgEl.textContent = msg;
+  stepsEl.innerHTML = steps.map(function(s, i) {
+    return '<li><span class="na-step-num">' + (i+1) + '</span>' + s + '</li>';
+  }).join('');
 }
 
 function applyPreset(name) {
