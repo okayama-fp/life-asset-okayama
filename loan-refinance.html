@@ -35,6 +35,7 @@
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
   --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
   --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -88,6 +89,29 @@ a { color: inherit; text-decoration: none; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+.advice-card { margin: 24px 0 0; padding: 20px 22px; border-radius: 14px; font-size: 14px; line-height: 1.8; transition: all .3s; }
+.advice-card.default { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.advice-card.good    { background: #f0fdf4; border: 1.5px solid #86efac; }
+.advice-card.warn    { background: #fffbeb; border: 1.5px solid #fde68a; }
+.advice-card.danger  { background: #fff1f2; border: 1.5px solid #fecdd3; }
+.advice-title { font-size: 13px; font-weight: 800; letter-spacing: .05em; margin-bottom: 8px; }
+.advice-card.default .advice-title,.advice-card.good .advice-title { color: #15803d; }
+.advice-card.warn .advice-title { color: #92400e; }
+.advice-card.danger .advice-title { color: #991b1b; }
+.advice-steps { list-style: none; margin-top: 8px; }
+.advice-steps li { padding: 4px 0 4px 20px; position: relative; font-size: 13.5px; }
+.advice-steps li::before { content: '▶'; position: absolute; left: 0; font-size: 9px; top: 7px; opacity: .7; }
+.fp-section { margin-top: 40px; }
+.fp-section-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.fp-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; }
+.fp-card table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.fp-card th { background: var(--sky-pale); color: var(--navy); padding: 5px 8px; text-align: center; font-size: 11px; }
+.fp-card td { padding: 5px 8px; border-bottom: 1px solid var(--border); text-align: center; font-size: 11.5px; }
+.fp-card tr:last-child td { border-bottom: none; }
+.warn-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -212,6 +236,52 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
     </div>
   </div>
+
+  <div class="advice-card default" id="advice-card">
+    <div class="advice-title" id="advice-title">FPアドバイス</div>
+    <div id="advice-body"></div>
+  </div>
+
+  <section class="fp-section">
+    <div class="fp-section-title">📚 FP解説：住宅ローン借り換えの基礎</div>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">💡 借り換えのタイミング</div>
+        <p>借り換えが有効な目安として「1%・1,000万円・10年」ルールがよく使われます。金利差1%以上・残債1,000万円以上・残期間10年以上の場合、借り換えメリットが出やすいとされています。</p>
+        <div class="warn-box">残債が少ない・残期間が短い場合、手数料が利息削減効果を上回ることがあります。必ず試算しましょう。</div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">📊 変動金利 vs 固定金利</div>
+        <table>
+          <tr><th>種類</th><th>メリット</th><th>デメリット</th></tr>
+          <tr><td>変動</td><td>低金利</td><td>上昇リスク</td></tr>
+          <tr><td>固定</td><td>安定返済</td><td>割高になる可能性</td></tr>
+          <tr><td>固定10年</td><td>中間的</td><td>期間後に見直し必要</td></tr>
+        </table>
+        <p style="margin-top:8px">2024年以降の日銀利上げ局面では、変動から固定への借り換えを検討する方が増えています。</p>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🔢 手数料の主な内訳</div>
+        <ul class="advice-steps">
+          <li>繰り上げ返済手数料（旧銀行）：1〜3万円</li>
+          <li>新規借り入れ手数料：融資額の2.2%または定額</li>
+          <li>抵当権抹消・設定費用：5〜10万円</li>
+          <li>司法書士費用：5〜10万円</li>
+          <li>合計：通常20〜80万円程度</li>
+        </ul>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">⚠️ 金利上昇リスクへの対策</div>
+        <p>変動金利は短期プライムレートに連動します。金利が1%上昇すると残債3,000万円・25年の場合、月返済が約1.5万円増加します。</p>
+        <ul class="advice-steps" style="margin-top:8px">
+          <li>繰り上げ返済で残債を早期に減らす</li>
+          <li>金利上昇時の返済額増加額を事前に試算</li>
+          <li>余剰資金をNISAで運用し金利上昇を補完</li>
+          <li>固定への切り替えは急がず比較検討を</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </div>
 
 <footer>
@@ -221,6 +291,35 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 
 <script src="/nav.js"></script>
 <script>
+function updateAdvice(totalSave, monthlySave, breakeven) {
+  var card = document.getElementById('advice-card');
+  var title = document.getElementById('advice-title');
+  var body = document.getElementById('advice-body');
+  var cls, t, html;
+  var bkYrs = Math.floor(breakeven / 12);
+  var bkMon = breakeven % 12;
+  if (totalSave <= 0) {
+    cls = 'danger';
+    t = '⚠️ 現在の条件では借り換えは割高です';
+    html = '<p>手数料差し引き後の節約額がマイナスです。現状では借り換えをしない方がよいでしょう。</p><ul class="advice-steps"><li>金利差が0.5〜1%以上開くまで待つことを検討しましょう。</li><li>借り換えではなく繰り上げ返済を優先すると利息を直接削減できます。</li><li>手数料の安いネット銀行に絞り込んで再試算してみましょう。</li><li>残期間があと10年以上ある場合は、将来の金利状況を見ながら再度検討を。</li></ul>';
+  } else if (!isFinite(breakeven) || breakeven > 120) {
+    cls = 'warn';
+    t = '📋 手数料の回収に時間がかかります（' + (isFinite(breakeven) ? bkYrs + '年' + bkMon + 'ヶ月' : '回収困難') + '）';
+    html = '<p>月々の節約効果はありますが、手数料回収まで<strong>' + (isFinite(breakeven) ? bkYrs + '年以上' : '長期') + '</strong>かかります。</p><ul class="advice-steps"><li>残期間と手数料回収期間を比較し、残期間内に確実に回収できるか確認しましょう。</li><li>手数料の安いネット銀行への切り替えで回収期間を短縮できます。</li><li>借り換えと並行して繰り上げ返済も組み合わせると効果が高まります。</li><li>変動金利への借り換えは将来の金利上昇リスクも考慮しましょう。</li></ul>';
+  } else if (breakeven > 60) {
+    cls = 'default';
+    t = '📈 条件次第で借り換えメリットあり（回収：' + bkYrs + '年' + bkMon + 'ヶ月）';
+    html = '<p>手数料回収まで<strong>' + bkYrs + '年' + bkMon + 'ヶ月</strong>かかりますが、残期間内に十分回収できる可能性があります。</p><ul class="advice-steps"><li>残期間中に転居・売却・繰り上げ完済の予定がないか確認しましょう。</li><li>複数の金融機関で競合させ、さらに低い金利を引き出しましょう。</li><li>団信（団体信用生命保険）の保障内容も比較検討しましょう（がん特約など）。</li><li>借り換え手続きは通常2〜3ヶ月かかります。余裕を持って動きましょう。</li></ul>';
+  } else {
+    cls = 'good';
+    t = '🎯 借り換えのメリットが大きいです！（回収：' + bkYrs + '年' + bkMon + 'ヶ月）';
+    html = '<p>手数料回収まで<strong>' + bkYrs + '年' + bkMon + 'ヶ月</strong>と短く、総節約効果も大きいです。早急に動きましょう。</p><ul class="advice-steps"><li>複数のネット銀行・地方銀行で見積もりを取り、最も条件の良い先を選びましょう。</li><li>審査は勤務先・収入・信用情報が重要。申し込み前に確認しておきましょう。</li><li>借り換えと同時に繰り上げ返済も組み合わせると節約効果が倍増します。</li><li>新しいローンの団信内容（がん特約・就業不能特約）も比較してみましょう。</li></ul>';
+  }
+  card.className = 'advice-card ' + cls;
+  title.textContent = t;
+  body.innerHTML = html;
+}
+
 var sliders = { balance:3000, rate1:1.5, period:25, rate2:0.6, fee:30 };
 
 function labelOf(key, val) {
@@ -291,6 +390,7 @@ function calc() {
   totalEl.className = 'stat-v ' + (totalSave > 0 ? 'good' : 'bad');
 
   renderChart(m1, m2);
+  updateAdvice(totalSave, monthlySave, breakeven);
 }
 
 function renderChart(m1, m2) {
