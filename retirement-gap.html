@@ -478,6 +478,12 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
         <input type="range" id="sl-lifespan" min="20" max="40" step="1" value="30" oninput="sync('lifespan',this.value);calc()">
         <div class="field-ticks"><span>20年</span><span>30年</span><span>40年</span></div>
       </div>
+
+      <div class="field">
+        <div class="field-label">資産の想定運用利回り（年率）<span class="field-val" id="lbl-rate">3%</span></div>
+        <input type="range" id="sl-rate" min="0" max="7" step="0.5" value="3" oninput="sync('rate',this.value);calc()">
+        <div class="field-ticks"><span>0%</span><span>3.5%</span><span>7%</span></div>
+      </div>
     </div>
 
     <!-- 結果パネル -->
@@ -516,7 +522,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
             <span class="stat-v good" id="r-pension">―</span>
           </div>
           <div class="stat-row">
-            <span class="stat-k">資産合計</span>
+            <span class="stat-k" id="r-assets-label">退職時の予測資産</span>
             <span class="stat-v" id="r-assets-total">―</span>
           </div>
           <div class="stat-sub-row">
@@ -775,11 +781,12 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
 <script src="/nav.js"></script>
 <script>
-var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30, nisa:0, ideco:0, invest:0 };
+var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30, nisa:0, ideco:0, invest:0, rate:3 };
 var currentGap = 0;
 
 function labelOf(key, val) {
   if (key==='age'||key==='retire') return val+'歳';
+  if (key==='rate') return val+'%';
   if (key==='savings'||key==='nisa'||key==='ideco'||key==='invest') return parseInt(val).toLocaleString()+'万円';
   if (key==='lifespan') return val+'年';
   return val+'万円';
@@ -800,13 +807,21 @@ function calc() {
   var age=sliders.age, retire=sliders.retire,
       expense=sliders.expense, pension=sliders.pension,
       savings=sliders.savings, lifespan=sliders.lifespan,
-      nisa=sliders.nisa, ideco=sliders.ideco, invest=sliders.invest;
-  var totalAssets = savings + nisa + ideco + invest;
+      nisa=sliders.nisa, ideco=sliders.ideco, invest=sliders.invest,
+      rate=sliders.rate;
+  var yearsToRetire = Math.max(retire - age, 0);
+  var monthsToRetire = yearsToRetire * 12;
+  // 現在の資産を退職年齢まで複利運用した予測値
+  var gf = Math.pow(1 + rate / 100, yearsToRetire);   // 投資資産（NISA・iDeCo・投資）
+  var sf = Math.pow(1.001, yearsToRetire);             // 現金・貯蓄は年0.1%（預金金利相当）
+  var projSavings = Math.round(savings * sf);
+  var projNisa    = Math.round(nisa    * gf);
+  var projIdeco   = Math.round(ideco   * gf);
+  var projInvest  = Math.round(invest  * gf);
+  var totalAssets = projSavings + projNisa + projIdeco + projInvest;
   var totalNeeded = expense * 12 * lifespan;
   var totalPension = pension * 12 * lifespan;
   var gap = totalNeeded - totalPension - totalAssets;
-  var yearsToRetire = Math.max(retire - age, 0);
-  var monthsToRetire = yearsToRetire * 12;
   var monthlyNeed = (gap > 0 && monthsToRetire > 0) ? gap / monthsToRetire : 0;
   currentGap = gap;
 
@@ -839,10 +854,13 @@ function calc() {
   document.getElementById('r-total').textContent = fmt(totalNeeded);
   document.getElementById('r-pension').textContent = fmt(totalPension);
   document.getElementById('r-assets-total').textContent = fmt(totalAssets);
-  document.getElementById('r-savings').textContent = fmt(savings);
-  document.getElementById('r-nisa').textContent = fmt(nisa);
-  document.getElementById('r-ideco').textContent = fmt(ideco);
-  document.getElementById('r-invest').textContent = fmt(invest);
+  document.getElementById('r-assets-label').textContent = yearsToRetire > 0
+    ? '退職時の予測資産（年' + rate + '%運用）'
+    : '現在の資産合計';
+  document.getElementById('r-savings').textContent = fmt(projSavings);
+  document.getElementById('r-nisa').textContent = fmt(projNisa);
+  document.getElementById('r-ideco').textContent = fmt(projIdeco);
+  document.getElementById('r-invest').textContent = fmt(projInvest);
   var gapEl = document.getElementById('r-gap');
   gapEl.textContent = (gap > 0 ? '△' : '') + fmt(Math.abs(gap));
   gapEl.className = 'stat-v ' + (gap > 0 ? 'bad' : 'good');
