@@ -115,6 +115,10 @@ a { color: inherit; text-decoration: none; }
 .stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
 .stat-v.bad { color: var(--red); }
 .stat-v.good { color: var(--green); }
+.stat-sub-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0 4px 14px; border-bottom: 1px solid #f1f5f9; }
+.stat-sub-row:last-child { border-bottom: none; }
+.stat-sub-k { font-size: 11.5px; color: var(--text-light); }
+.stat-sub-v { font-size: 12.5px; font-weight: 700; color: var(--navy); }
 
 .chart-wrap { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
 .chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
@@ -450,8 +454,26 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       </div>
 
       <div class="field">
-        <div class="field-label">現在の貯蓄<span class="field-val" id="lbl-savings">500万円</span></div>
+        <div class="field-label">現金・貯蓄<span class="field-val" id="lbl-savings">500万円</span></div>
         <input type="range" id="sl-savings" min="0" max="10000" step="100" value="500" oninput="sync('savings',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>5,000万</span><span>1億</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">NISA残高<span class="field-val" id="lbl-nisa">0万円</span></div>
+        <input type="range" id="sl-nisa" min="0" max="5000" step="100" value="0" oninput="sync('nisa',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>2,500万</span><span>5,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">iDeCo残高<span class="field-val" id="lbl-ideco">0万円</span></div>
+        <input type="range" id="sl-ideco" min="0" max="2000" step="50" value="0" oninput="sync('ideco',this.value);calc()">
+        <div class="field-ticks"><span>0万</span><span>1,000万</span><span>2,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">その他投資資産<span class="field-val" id="lbl-invest">0万円</span></div>
+        <input type="range" id="sl-invest" min="0" max="10000" step="100" value="0" oninput="sync('invest',this.value);calc()">
         <div class="field-ticks"><span>0万</span><span>5,000万</span><span>1億</span></div>
       </div>
 
@@ -468,7 +490,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       <!-- カバー率ゲージ -->
       <div class="coverage-card">
         <div class="coverage-header">
-          <span class="coverage-title">年金＋貯蓄のカバー率</span>
+          <span class="coverage-title">年金＋全資産のカバー率</span>
           <span class="coverage-pct" id="cov-pct">67%</span>
         </div>
         <div class="coverage-bar-bg">
@@ -498,8 +520,24 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
             <span class="stat-v good" id="r-pension">―</span>
           </div>
           <div class="stat-row">
-            <span class="stat-k">現在の貯蓄</span>
-            <span class="stat-v" id="r-savings">―</span>
+            <span class="stat-k">資産合計</span>
+            <span class="stat-v" id="r-assets-total">―</span>
+          </div>
+          <div class="stat-sub-row">
+            <span class="stat-sub-k">うち 現金・貯蓄</span>
+            <span class="stat-sub-v" id="r-savings">―</span>
+          </div>
+          <div class="stat-sub-row">
+            <span class="stat-sub-k">うち NISA残高</span>
+            <span class="stat-sub-v" id="r-nisa">―</span>
+          </div>
+          <div class="stat-sub-row">
+            <span class="stat-sub-k">うち iDeCo残高</span>
+            <span class="stat-sub-v" id="r-ideco">―</span>
+          </div>
+          <div class="stat-sub-row">
+            <span class="stat-sub-k">うち 投資資産</span>
+            <span class="stat-sub-v" id="r-invest">―</span>
           </div>
           <div class="stat-row">
             <span class="stat-k">不足額 / 余剰額</span>
@@ -746,12 +784,12 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
 <script src="/nav.js"></script>
 <script>
-var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30 };
+var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30, nisa:0, ideco:0, invest:0 };
 var currentGap = 0;
 
 function labelOf(key, val) {
   if (key==='age'||key==='retire') return val+'歳';
-  if (key==='savings') return parseInt(val).toLocaleString()+'万円';
+  if (key==='savings'||key==='nisa'||key==='ideco'||key==='invest') return parseInt(val).toLocaleString()+'万円';
   if (key==='lifespan') return val+'年';
   return val+'万円';
 }
@@ -770,17 +808,19 @@ var chart = null;
 function calc() {
   var age=sliders.age, retire=sliders.retire,
       expense=sliders.expense, pension=sliders.pension,
-      savings=sliders.savings, lifespan=sliders.lifespan;
+      savings=sliders.savings, lifespan=sliders.lifespan,
+      nisa=sliders.nisa, ideco=sliders.ideco, invest=sliders.invest;
+  var totalAssets = savings + nisa + ideco + invest;
   var totalNeeded = expense * 12 * lifespan;
   var totalPension = pension * 12 * lifespan;
-  var gap = totalNeeded - totalPension - savings;
+  var gap = totalNeeded - totalPension - totalAssets;
   var yearsToRetire = Math.max(retire - age, 0);
   var monthsToRetire = yearsToRetire * 12;
   var monthlyNeed = (gap > 0 && monthsToRetire > 0) ? gap / monthsToRetire : 0;
   currentGap = gap;
 
   // Coverage gauge
-  var covPct = Math.round((totalPension + savings) / totalNeeded * 100);
+  var covPct = Math.round((totalPension + totalAssets) / totalNeeded * 100);
   var covEl = document.getElementById('cov-pct');
   var fillEl = document.getElementById('cov-fill');
   covEl.textContent = Math.min(covPct, 999) + '%';
@@ -807,29 +847,36 @@ function calc() {
   }
   document.getElementById('r-total').textContent = fmt(totalNeeded);
   document.getElementById('r-pension').textContent = fmt(totalPension);
+  document.getElementById('r-assets-total').textContent = fmt(totalAssets);
   document.getElementById('r-savings').textContent = fmt(savings);
+  document.getElementById('r-nisa').textContent = fmt(nisa);
+  document.getElementById('r-ideco').textContent = fmt(ideco);
+  document.getElementById('r-invest').textContent = fmt(invest);
   var gapEl = document.getElementById('r-gap');
   gapEl.textContent = (gap > 0 ? '△' : '') + fmt(Math.abs(gap));
   gapEl.className = 'stat-v ' + (gap > 0 ? 'bad' : 'good');
   document.getElementById('r-monthly').textContent = gap > 0 ? fmt(monthlyNeed)+'/月' : '積立不要';
 
-  renderChart(totalNeeded, totalPension, savings, Math.max(gap, 0));
+  renderChart(totalNeeded, totalPension, savings, nisa, ideco, invest, Math.max(gap, 0));
   updateNextAction(gap, monthlyNeed, covPct, yearsToRetire);
   calcExtra();
 }
 
-function renderChart(needed, pension, savings, deficit) {
+function renderChart(needed, pension, savings, nisa, ideco, invest, deficit) {
   var ctx = document.getElementById('retirementChart').getContext('2d');
   if (chart) chart.destroy();
+  var labels = ['必要総額', '年金', '現金貯蓄'];
+  var data   = [needed, pension, savings];
+  var colors = ['#64748b', '#22c55e', '#3b82f6'];
+  if (nisa   > 0) { labels.push('NISA');   data.push(nisa);   colors.push('#8b5cf6'); }
+  if (ideco  > 0) { labels.push('iDeCo');  data.push(ideco);  colors.push('#f59e0b'); }
+  if (invest > 0) { labels.push('投資資産'); data.push(invest); colors.push('#06b6d4'); }
+  if (deficit > 0) { labels.push('不足額'); data.push(deficit); colors.push('#ef4444'); }
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['必要総額', '年金総額', '現在の貯蓄', '不足額'],
-      datasets: [{
-        data: [needed, pension, savings, deficit],
-        backgroundColor: ['#64748b','#22c55e','#3b82f6','#ef4444'],
-        borderRadius: 8
-      }]
+      labels: labels,
+      datasets: [{ data: data, backgroundColor: colors, borderRadius: 8 }]
     },
     options: {
       responsive: true,
@@ -838,7 +885,7 @@ function renderChart(needed, pension, savings, deficit) {
         y: {
           ticks: {
             callback: function(v) {
-              return v >= 10000 ? (v/10000).toFixed(0)+'億' : v+'万';
+              return v >= 10000 ? (v/10000).toFixed(1)+'億' : v+'万';
             }
           }
         }
@@ -914,9 +961,9 @@ function updateNextAction(gap, monthlyNeed, covPct, yearsToRetire) {
 
 function applyPreset(name) {
   var presets = {
-    couple:  { age:50, retire:65, expense:25, pension:22, savings:500,  lifespan:30 },
-    single:  { age:40, retire:65, expense:15, pension:10, savings:300,  lifespan:35 },
-    comfort: { age:45, retire:60, expense:40, pension:20, savings:1000, lifespan:30 }
+    couple:  { age:50, retire:65, expense:25, pension:22, savings:500,  lifespan:30, nisa:200,  ideco:100, invest:0    },
+    single:  { age:40, retire:65, expense:15, pension:10, savings:300,  lifespan:35, nisa:100,  ideco:50,  invest:0    },
+    comfort: { age:45, retire:60, expense:40, pension:20, savings:1000, lifespan:30, nisa:500,  ideco:200, invest:300  }
   };
   var p = presets[name];
   Object.keys(p).forEach(function(k) {
