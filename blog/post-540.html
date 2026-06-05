@@ -141,8 +141,6 @@
     .share-section { border-top: 1px solid var(--border); padding-top: 28px; margin-top: 40px; }
     .share-section h3 { font-size: 14px; font-weight: 700; color: var(--text-light); margin-bottom: 12px; }
     .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-    .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-    .share-x { background: #000; }
 
     /* 関連 */
     .related-section { margin-top: 40px; }
@@ -400,9 +398,7 @@
 
   <div class="share-section">
     <h3>この記事をシェアする</h3>
-    <div class="share-btns">
-      <button class="share-btn share-x" onclick="shareX()">𝕏 でシェア</button>
-    </div>
+    
   </div>
 
   <div class="related-section">
@@ -424,11 +420,6 @@
 </footer>
 
 <script>
-function shareX() {
-  var text = '【住宅ローン危機2025】\n「地方で新築を建てた瞬間、資産が消える」——年収400〜500万円世帯が陥る住宅ローン破綻の構造を解説。危険度チェックリスト付き。\n';
-  var url = 'https://lifeassetoffice.net/blog/post-540.html';
-  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-}
 </script>
 <script src="/nav.js" defer></script>
 </body>

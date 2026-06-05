@@ -258,8 +258,7 @@
     .share-section { margin: 0 0 36px; }
     .share-section h2 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
     .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-    .share-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-    .share-x { background: #000; } .share-line { background: #06c755; } .share-copy { background: #64748b; }
+    .share-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #fff; cursor: pointer; border: none; font-family: inherit; } .share-line { background: #06c755; } .share-copy { background: #64748b; }
 
     /* RELATED */
     .related h2 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
@@ -1014,7 +1013,6 @@
 <div class="share-section">
   <h2>この記事をシェアする</h2>
   <div class="share-btns">
-    <button class="share-btn share-x" onclick="shareX()">𝕏 Xでシェア</button>
     <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https://lifeassetoffice.net/blog/post-538.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
     <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href).then(function(){alert('リンクをコピーしました！');})">🔗 リンクをコピー</button>
   </div>
@@ -1057,11 +1055,6 @@
 </footer>
 
 <script>
-function shareX(){
-  var text = 'あなたの資産、今どのステージ？FPが本音で教えるレベル別ロードマップ';
-  var url  = 'https://lifeassetoffice.net/blog/post-538.html';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-}
 (function(){
   document.querySelector('[id]').href='../contact.html';
 })();

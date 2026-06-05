@@ -147,8 +147,6 @@
     .cta-box p{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:18px;}
     .cta-box a{display:inline-block;background:var(--sky);color:#fff;font-size:14px;font-weight:700;padding:12px 32px;border-radius:50px;box-shadow:0 4px 14px rgba(26,122,74,.4);}
     /* Share */
-    .share-area{text-align:center;margin-top:20px;}
-    .share-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-size:13px;font-weight:700;padding:10px 22px;border-radius:50px;border:none;cursor:pointer;}
     /* Footer */
     footer{background:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 100%);color:#fff;padding:28px 24px;}
     .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
@@ -211,8 +209,6 @@
       .know-box{padding:14px;}
       .cta-box{padding:28px 18px;border-radius:16px;}
       .cta-box a{display:block;padding:14px;border-radius:12px;}
-      .share-btn{width:100%;justify-content:center;padding:13px;}
-      .share-area{margin-top:16px;}
       footer{padding:20px 16px;}
       .footer-inner{flex-direction:column;align-items:flex-start;gap:10px;}
       /* iPhoneセーフエリア */
@@ -320,7 +316,6 @@
       <div class="know-title">💡 FPが勧める家計最適化の基本</div>
       <p>固定費の削減が最大の効果。通信費は格安SIM（月3000円以下が目安）、保険は掛け捨て・必要最低限、住居費は手取りの25〜30%以内が基準。食費は変動費なので削りすぎは逆効果。まず固定費を見直してから変動費を管理しましょう。</p>
     </div>
-    <div class="share-area"><button class="share-btn" onclick="shareX('家計診断ツール','家計の貯蓄率・固定費比率をチェックしました。')">𝕏 でシェア</button></div>
   </div>
 
   <!-- ===== TAB 2: 老後資金診断 ===== -->
@@ -354,7 +349,6 @@
       <div class="know-title">💡 老後2000万円問題の本当の意味</div>
       <p>金融庁報告書（2019）の2000万円は「夫婦・平均的生活費・年金の差額5.5万円×360ヶ月」の試算。あくまで平均値。実際は年金額・生活費・運用次第で変わります。大切なのは「自分の数字」を把握すること。インデックス投資の複利効果で30年後に大きな差が生まれます。</p>
     </div>
-    <div class="share-area"><button class="share-btn" onclick="shareX('老後資金診断','老後の必要資金と現在の積立ペースを確認しました。')">𝕏 でシェア</button></div>
   </div>
 
   <!-- ===== TAB 3: NISA複利シミュレーター ===== -->
@@ -389,7 +383,6 @@
       <div class="know-title">💡 新NISA（2024年〜）のポイント</div>
       <p>年間投資枠：つみたて枠120万＋成長投資枠240万＝計360万円。生涯非課税枠1800万円。期間無制限・非課税。売却後は翌年に枠が復活。長期・分散・低コストのインデックスファンドが基本。信託報酬0.1%以下を目安に選ぶと20年で大きな差になります。</p>
     </div>
-    <div class="share-area"><button class="share-btn" onclick="shareX('NISA複利シミュレーター','NISAの非課税メリットをシミュレーションしました。')">𝕏 でシェア</button></div>
   </div>
 
   <!-- ===== TAB 4: 相続・贈与税 ===== -->
@@ -451,7 +444,6 @@
       </div>
     </div>
     <div id="so-advice-area"></div>
-    <div class="share-area"><button class="share-btn" onclick="shareX('相続・贈与税シミュレーター','相続税と贈与税をシミュレーションしました。')">𝕏 でシェア</button></div>
   </div>
 
   <!-- ===== TAB 5: 保険診断 ===== -->
@@ -509,7 +501,6 @@
         <p>一般的な年収（約370〜770万）の場合、1ヶ月の医療費の自己負担上限は約8〜9万円。長期入院でも月ごとにリセット。貯金が100万円以上あれば医療保険の優先度は低い。就労不能の長期療養リスクには就業不能保険や傷病手当金の確認を。</p>
       </div>
     </div>
-    <div class="share-area"><button class="share-btn" onclick="shareX('保険診断ツール','必要保障額と高額療養費をシミュレーションしました。')">𝕏 でシェア</button></div>
   </div>
 
   <!-- ===== TAB 6: FP用語辞典 ===== -->
@@ -553,11 +544,6 @@ function switchTab(id) {
 }
 
 /* ===== SHARE ===== */
-function shareX(toolName, msg) {
-  var text = '【'+toolName+'】\n'+msg+'\nライフアセットオフィスのFPツール集で試せます。\n';
-  var url = 'https://lifeassetoffice.net/fp-tools.html';
-  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url),'_blank','noopener,noreferrer');
-}
 
 /* ===== DONUT CHART ===== */
 function drawDonut(canvas, segments) {
