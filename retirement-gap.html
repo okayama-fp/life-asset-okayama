@@ -141,8 +141,9 @@ a { color: inherit; text-decoration: none; }
 }
 .scenario-icon {
   width: 46px; height: 46px; border-radius: 12px;
-  background: #fef3c7; font-size: 22px;
+  background: #fef3c7;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 13px; font-weight: 900; color: #d97706; line-height: 1.3; text-align: center;
 }
 .scenario-title { font-size: 16px; font-weight: 900; color: var(--navy); }
 .scenario-sub { font-size: 12.5px; color: var(--text-light); margin-top: 2px; }
@@ -175,6 +176,163 @@ a { color: inherit; text-decoration: none; }
 .sc-gap.ng { color: var(--red); }
 .sc-gap-label { font-size: 10px; color: var(--text-light); margin-top: 2px; }
 
+/* ─── Section common ─── */
+.section-heading { margin-bottom: 24px; }
+.section-label-tag { display: inline-block; background: var(--sky-pale); color: var(--navy-soft); font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 3px 10px; border-radius: 4px; margin-bottom: 8px; border: 1px solid var(--greenb); }
+.section-title { font-size: clamp(1.05rem,3vw,1.3rem); font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+.section-lead { font-size: 13px; color: var(--text-light); line-height: 1.75; }
+
+/* ─── Reality section ─── */
+.reality-section {
+  margin-top: 36px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.reality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+@media(max-width:580px){ .reality-grid { grid-template-columns: 1fr; } }
+
+.reality-card {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 16px;
+  background: var(--bg);
+}
+.reality-card-head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.reality-card-icon {
+  width: 38px; height: 38px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900; flex-shrink: 0; text-align: center; line-height: 1.3;
+}
+.reality-card-icon.amber { background: var(--amberl); color: var(--amber); border: 1px solid var(--amberb); }
+.reality-card-icon.blue  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.reality-card-icon.red   { background: var(--redl); color: var(--red); border: 1px solid var(--redb); }
+.reality-card-title { font-size: 13.5px; font-weight: 800; color: var(--navy); line-height: 1.4; }
+.reality-card-body { font-size: 13px; color: var(--text-light); line-height: 1.85; }
+.reality-card-body strong { color: var(--navy); font-weight: 700; }
+
+.pitfall-box {
+  background: var(--redl);
+  border: 1.5px solid var(--redb);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.pitfall-title { font-size: 13.5px; font-weight: 800; color: var(--red); margin-bottom: 12px; }
+.pitfall-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.pitfall-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text); line-height: 1.75; }
+.pitfall-list li::before { content: '×'; color: var(--red); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── Action plan section ─── */
+.action-section {
+  margin-top: 32px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.action-timeline { display: flex; flex-direction: column; gap: 0; }
+.action-item {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 0;
+  position: relative;
+}
+.action-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 37px;
+  top: 54px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+@media(max-width:480px){
+  .action-item { grid-template-columns: 58px 1fr; }
+  .action-item:not(:last-child)::after { left: 28px; }
+}
+.action-decade-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.action-decade-badge {
+  width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900;
+  border: 2.5px solid;
+  background: #fff;
+}
+.action-decade-badge.d30 { border-color: #22c55e; color: #16a34a; }
+.action-decade-badge.d40 { border-color: #3b82f6; color: #1d4ed8; }
+.action-decade-badge.d50 { border-color: #f59e0b; color: #d97706; }
+.action-decade-badge.d60 { border-color: #a855f7; color: #7e22ce; }
+.action-content {
+  padding: 6px 0 28px 18px;
+}
+.action-title { font-size: 15px; font-weight: 900; color: var(--navy); margin-bottom: 2px; }
+.action-subtitle { font-size: 12px; color: var(--text-light); margin-bottom: 12px; line-height: 1.6; }
+.action-items-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.action-items-list li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13px; color: var(--text); line-height: 1.75;
+}
+.action-items-list li::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%; background: var(--sky);
+  flex-shrink: 0; margin-top: 8px;
+}
+.action-highlight {
+  display: inline-block;
+  background: var(--sky-pale);
+  color: var(--navy-soft);
+  font-size: 11.5px; font-weight: 700;
+  padding: 4px 10px; border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid var(--greenb);
+}
+
+/* ─── FP advice box ─── */
+.fp-advice-box {
+  margin-top: 20px;
+  background: linear-gradient(135deg, var(--sky-pale), #f0fdf4);
+  border: 1.5px solid var(--sky-light);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.fp-advice-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--sky); }
+.fp-advice-name { font-size: 11px; font-weight: 700; color: var(--sky); margin-bottom: 5px; }
+.fp-advice-text { font-size: 13px; color: var(--text); line-height: 1.85; }
+.fp-advice-cta { margin-top: 14px; text-align: center; }
+.fp-advice-cta a {
+  display: inline-block;
+  background: var(--sky);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 800;
+  padding: 11px 28px;
+  border-radius: 50px;
+  transition: box-shadow .2s, transform .2s;
+}
+.fp-advice-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(26,122,74,.35); }
+
 /* ─── Footer ─── */
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
@@ -182,6 +340,8 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
 @media(max-width:520px){
   .scenario-section { padding: 20px 16px; }
+  .reality-section { padding: 20px 16px; }
+  .action-section { padding: 20px 16px; }
 }
 </style>
 </head>
@@ -232,7 +392,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   <div class="tool-grid">
     <!-- 入力パネル -->
     <div class="input-panel">
-      <h2>📋 情報を入力</h2>
+      <h2>情報を入力</h2>
 
       <div class="field">
         <div class="field-label">現在の年齢<span class="field-val" id="lbl-age">40歳</span></div>
@@ -341,7 +501,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   <!-- 積立シミュレーション -->
   <div class="scenario-section">
     <div class="scenario-title-row">
-      <div class="scenario-icon">💰</div>
+      <div class="scenario-icon">月積立<br>試算</div>
       <div>
         <div class="scenario-title">毎月の積立でどう変わる？</div>
         <div class="scenario-sub">積立額を変えて3つのシナリオの退職時資産と不足額を比較</div>
@@ -356,25 +516,182 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
     <div class="scenario-grid">
       <div class="sc-card">
-        <div class="sc-card-title">📦 積立のみ</div>
+        <div class="sc-card-title">積立のみ（0%）</div>
         <div class="sc-accum" id="sc-accum0">―</div>
         <div class="sc-accum-label">退職時の積立額</div>
         <div class="sc-gap" id="sc-gap0">―</div>
         <div class="sc-gap-label" id="sc-gap0-lbl">残り不足額</div>
       </div>
       <div class="sc-card">
-        <div class="sc-card-title">📊 NISA（年3%）</div>
+        <div class="sc-card-title">NISA（年3%）</div>
         <div class="sc-accum" id="sc-accum1">―</div>
         <div class="sc-accum-label">退職時の積立額</div>
         <div class="sc-gap" id="sc-gap1">―</div>
         <div class="sc-gap-label" id="sc-gap1-lbl">残り不足額</div>
       </div>
       <div class="sc-card">
-        <div class="sc-card-title">🚀 積極運用（年5%）</div>
+        <div class="sc-card-title">積極運用（年5%）</div>
         <div class="sc-accum" id="sc-accum2">―</div>
         <div class="sc-accum-label">退職時の積立額</div>
         <div class="sc-gap" id="sc-gap2">―</div>
         <div class="sc-gap-label" id="sc-gap2-lbl">残り不足額</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 老後資金の現実 -->
+  <div class="reality-section">
+    <div class="section-heading">
+      <span class="section-label-tag">FP解説</span>
+      <h2 class="section-title">老後資金の現実をプロの視点で読み解く</h2>
+      <p class="section-lead">シミュレーターの数字が出たら、次はその背景を理解することが大切です。なぜその金額が必要なのか、4つの重要事実から解説します。</p>
+    </div>
+
+    <div class="reality-grid">
+      <div class="reality-card">
+        <div class="reality-card-head">
+          <div class="reality-card-icon amber">2000<br>万円</div>
+          <div class="reality-card-title">「2,000万円問題」の真実</div>
+        </div>
+        <div class="reality-card-body">
+          2019年の金融審議会報告で話題になった「2,000万円不足」は、<strong>特定の夫婦モデルの試算</strong>です。厚生年金を十分に受給できる方は不足額が少なく、自営業・低年金の方はそれ以上になるケースも多くあります。重要なのは「平均値」ではなく、<strong>あなた自身の収入・支出・年金額で試算すること</strong>です。このシミュレーターはその第一歩です。
+        </div>
+      </div>
+
+      <div class="reality-card">
+        <div class="reality-card-head">
+          <div class="reality-card-icon blue">年金<br>実態</div>
+          <div class="reality-card-title">年金の仕組みと手取り額の実態</div>
+        </div>
+        <div class="reality-card-body">
+          年金には<strong>厚生年金（会社員・公務員）</strong>と<strong>国民年金（自営業等）</strong>があります。2024年度の平均受給額は、夫婦合計で約21万円／月。ただし実際の手取りは<strong>健康保険料・介護保険料・所得税が天引き</strong>され、1〜3万円程度少なくなります。ねんきんネット（日本年金機構）で自分の見込み額を確認しましょう。
+        </div>
+      </div>
+
+      <div class="reality-card">
+        <div class="reality-card-head">
+          <div class="reality-card-icon amber">物価<br>上昇</div>
+          <div class="reality-card-title">インフレリスクを見落とさない</div>
+        </div>
+        <div class="reality-card-body">
+          年2%のインフレが続くと、<strong>30年後の物価は現在の約1.8倍</strong>になります。今月25万円の生活費が、30年後には実質45万円相当の価値が必要です。年金には物価スライド制度がありますが、賃金水準との連動で<strong>実質的な購買力は低下しやすい</strong>傾向があります。現金・定期預金だけでは資産が目減りするリスクがあります。
+        </div>
+      </div>
+
+      <div class="reality-card">
+        <div class="reality-card-head">
+          <div class="reality-card-icon red">長寿<br>リスク</div>
+          <div class="reality-card-title">長寿リスク：平均より長く生きる現実</div>
+        </div>
+        <div class="reality-card-body">
+          2024年の平均寿命は<strong>男性81.1歳・女性87.1歳</strong>。しかし「平均」とは上の半数も下の半数も含む数値です。<strong>90歳まで生きる確率は女性で約50%、95歳超まで生きる確率も約17%</strong>（2023年厚生労働省生命表）。老後年数は余裕を持って設定し、「長生きすること」を前提にした資産計画が必要です。
+        </div>
+      </div>
+    </div>
+
+    <div class="pitfall-box">
+      <div class="pitfall-title">よくある落とし穴 — これをやると老後資金が危険水域に</div>
+      <ul class="pitfall-list">
+        <li>年金だけで生活できると思い込み、40〜50代の積立を先送りにしている（最も多いパターン）</li>
+        <li>退職金を老後資金として全額計算しているが、住宅修繕・医療費・子どもへの援助で消えるケースが多い</li>
+        <li>インフレを考慮せず「現在の生活費×年数」だけで試算し、必要額を過小評価している</li>
+        <li>iDeCoは原則60歳まで解約不可と知らずに加入し、緊急時の資金繰りに困る</li>
+        <li>配偶者死別後の年金激減（遺族年金への切り替わり）を想定せず、一人分の年金でシミュレーションしていない</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 年代別アクションプラン -->
+  <div class="action-section">
+    <div class="section-heading">
+      <span class="section-label-tag">行動指針</span>
+      <h2 class="section-title">年代別アクションプラン</h2>
+      <p class="section-lead">老後準備は「いつ始めるか」で結果が大きく変わります。シミュレーターで不足額を把握したら、今の年代に合った具体的な行動を起こしましょう。</p>
+    </div>
+
+    <div class="action-timeline">
+
+      <div class="action-item">
+        <div class="action-decade-wrap">
+          <div class="action-decade-badge d30">30代</div>
+        </div>
+        <div class="action-content">
+          <div class="action-title">複利の力を最大化する時期</div>
+          <div class="action-subtitle">老後まで30年以上。時間こそが最大の武器です。今始めた積立は、老後直前に始めるより3〜4倍の価値を生みます。</div>
+          <ul class="action-items-list">
+            <li>iDeCo・NISA（つみたて投資枠）を今すぐ開始。月2〜3万円でも30年間・年3%複利で運用すると約1,400〜2,100万円に</li>
+            <li>生命保険・医療保険の見直し。掛け捨て保険に支払いすぎている場合、その分を投資に回すと長期では大きな差になる</li>
+            <li>住宅ローン返済と老後資金積立を両立させる家計設計。繰上げ返済より積立投資が有利なケースが多い</li>
+            <li>ねんきんネット（日本年金機構）で自分の年金見込み額を確認し、老後試算の精度を上げる</li>
+          </ul>
+          <span class="action-highlight">月3万円 × 30年 × 年3%複利 ≈ 約1,749万円（元本1,080万円）</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-decade-wrap">
+          <div class="action-decade-badge d40">40代</div>
+        </div>
+        <div class="action-content">
+          <div class="action-title">「老後の解像度」を上げる時期</div>
+          <div class="action-subtitle">教育費・住宅ローンと老後資金が競合する山場。資金の優先順位を意識的に設定することが重要です。</div>
+          <ul class="action-items-list">
+            <li>ねんきんネットで年金見込み額を詳細確認。繰下げ受給（最大+84%）の効果もシミュレーションしておく</li>
+            <li>iDeCoの拠出額を増額検討。所得税・住民税の節税効果があり、年収500万円で月2万円拠出すると年間約6万円節税になるケースも</li>
+            <li>NISA成長投資枠も活用し、老後資産の非課税出口を確保する（売却益・配当に課税されない）</li>
+            <li>子どもの教育費ピーク（大学在学中）を試算し、その後の余剰資金を老後資金に一気に集中させる計画を今から立てる</li>
+            <li>医療保険・がん保険の見直し（40代から保険料が上がりやすく、見直しで月数千円以上節約できることも）</li>
+          </ul>
+          <span class="action-highlight">iDeCo節税効果：年収600万円・月2.3万円拠出で年間約8.3万円の節税（所得税+住民税）</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-decade-wrap">
+          <div class="action-decade-badge d50">50代</div>
+        </div>
+        <div class="action-content">
+          <div class="action-title">積立加速と「出口設計」を始める時期</div>
+          <div class="action-subtitle">教育費が落ち着く50代後半は老後資金の「ラストスパート」。同時に退職後の取り崩し方法を設計し始める時期です。</div>
+          <ul class="action-items-list">
+            <li>教育費・住宅ローン完済後の余剰資金をすべて老後資産へ集中投入。この時期の積立は10〜15年かけて成長する</li>
+            <li>退職金の受取方法を事前に比較検討。「一括受取（退職所得控除）」と「年金受取（雑所得）」では税負担が100〜300万円異なるケースがある</li>
+            <li>NISA口座に資産を移しておく。老後の取り崩しを非課税で行うための「出口の整備」が重要</li>
+            <li>老後の月生活費を具体的に試算する。現役時より交際費・被服費が減る一方、医療費・旅行費が増える傾向がある</li>
+            <li>健康診断・生活習慣の見直し。医療費は老後の最大の変動コスト。1回の大きな入院で数十万円が飛ぶことも</li>
+          </ul>
+          <span class="action-highlight">退職金2,000万円の受取：一括vs年金で税負担差が100〜300万円以上になることも</span>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-decade-wrap">
+          <div class="action-decade-badge d60">60代</div>
+        </div>
+        <div class="action-content">
+          <div class="action-title">繰下げ受給と取り崩し戦略を最適化する時期</div>
+          <div class="action-subtitle">年金の受取タイミングと資産の取り崩し順序が、老後30年の生活水準を決定します。</div>
+          <ul class="action-items-list">
+            <li>年金繰下げ受給を検討。1ヶ月繰下げるごとに0.7%増額（65歳→70歳で+42%、最大75歳まで+84%）。健康状態・資産状況と総合判断を</li>
+            <li>配偶者の年金との組み合わせ最適化。夫婦で繰下げタイミングをずらす戦略（一方が繰下げ、一方は早期受給など）も有効</li>
+            <li>取り崩しの優先順位：①現金・定期預金（元本保証・流動性高）→ ②NISA（非課税・柔軟）→ ③iDeCo（税計算が複雑なため最後）</li>
+            <li>高齢期の住まい・医療・介護費用として「予備費」を生活資金とは別枠で最低300〜500万円確保する</li>
+            <li>認知症・判断能力低下に備えた家族信託・任意後見の検討。財産管理を家族に委ねる仕組みを元気なうちに整える</li>
+          </ul>
+          <span class="action-highlight">65歳→70歳繰下げ：月15万円 → 月21.3万円（+42%）。5年間の取り崩しで損益分岐は約80歳</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fp-advice-box">
+      <img src="images/fp-avatar.png" alt="ライフアセットオフィス FP" class="fp-advice-avatar">
+      <div class="fp-advice-content">
+        <div class="fp-advice-name">ライフアセットオフィス FP より</div>
+        <div class="fp-advice-text">老後資金の準備は「始める時期」と「続ける仕組み」がすべてです。シミュレーターで不足額を把握したら、次は個人の状況に合わせた具体的なプランの設計が必要です。iDeCo・NISAの最適な組み合わせ、退職金の受取方法の比較、年金繰下げ戦略、取り崩しシミュレーションなど、数字に基づいた提案をご支援します。まずはお気軽にご相談ください。</div>
+        <div class="fp-advice-cta">
+          <a href="contact.html">FPに相談する →</a>
+        </div>
       </div>
     </div>
   </div>
