@@ -81,9 +81,6 @@ a { color: inherit; text-decoration: none; }
 .stat-v.bad { color: var(--red); }
 .chart-wrap { margin: 16px 0; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
 .chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
-.share-row { display: flex; gap: 8px; margin-top: 14px; }
-.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-.share-x { background: #000; }
 .cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
 .cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
 .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
@@ -209,11 +206,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         <h3>月返済額の比較（円）</h3>
         <canvas id="refinanceChart" height="180"></canvas>
       </div>
-
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
+<div class="cta-contact-box">
         <div class="cta-contact-text">借り換えのタイミング、お問い合わせください。<br>お問い合わせを承っています。</div>
         <a href="contact.html" class="cta-contact-btn">お問い合わせ →</a>
       </div>
@@ -337,14 +330,6 @@ function applyPreset(name) {
   });
   calc();
 }
-
-function shareX() {
-  var save = document.getElementById('result-amount').textContent;
-  var text = encodeURIComponent('住宅ローンの借り換えシミュレーションで'+save+'の節約！ #ライフアセットオフィス #住宅ローン借り換え');
-  var url = encodeURIComponent('https://lifeassetoffice.net/loan-refinance.html');
-  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url, '_blank', 'noopener,noreferrer');
-}
-
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;

@@ -113,8 +113,6 @@
     .share-section { border-top: 1px solid var(--border); padding-top: 28px; margin-top: 40px; }
     .share-section h3 { font-size: 14px; font-weight: 700; color: var(--text-light); margin-bottom: 12px; }
     .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-    .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-    .share-x { background: #000; }
 
     .related-section { margin-top: 40px; }
     .related-section h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
@@ -296,9 +294,7 @@
 
   <div class="share-section">
     <h3>この記事をシェアする</h3>
-    <div class="share-btns">
-      <button class="share-btn share-x" onclick="shareX()">𝕏 Xでシェア</button>
-    </div>
+    
   </div>
 
   <div class="related-section">
@@ -326,12 +322,6 @@
 </footer>
 
 <script>
-function shareX() {
-  var text = '繰上返済より「逆ざや確認」が先という話。\n住宅ローン控除中は繰上返済で損する可能性があります。\n\n金利リスク診断ツールで今すぐチェック👇';
-  var url = 'https://lifeassetoffice.net/blog/post-539.html';
-  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-}
-
 window.addEventListener('scroll', function(){
   var el = document.documentElement;
   document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
