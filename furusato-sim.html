@@ -85,6 +85,28 @@ a { color: inherit; text-decoration: none; }
 .cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
 .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
 .cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.advice-card { background: #fff; border: 2px solid var(--sky); border-radius: 16px; padding: 22px 24px; margin-top: 28px; transition: border-color .3s; }
+.advice-card.good { border-color: var(--green); }
+.advice-card.warn { border-color: var(--amber); }
+.advice-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; margin-bottom: 10px; }
+.advice-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.advice-body { font-size: 13.5px; color: var(--text); line-height: 1.85; margin-bottom: 14px; }
+.advice-steps { list-style: none; }
+.advice-steps li { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
+.advice-steps li:last-child { border-bottom: none; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--sky); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.advice-card.good .step-num { background: var(--green); }
+.advice-card.warn .step-num { background: var(--amber); }
+.fp-section { margin-top: 36px; }
+.fp-section h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px){ .fp-grid { grid-template-columns: 1fr; } }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.fp-card-body { font-size: 12.5px; color: var(--text); line-height: 1.85; }
+.fp-card-body ul { padding-left: 16px; margin-top: 6px; }
+.fp-card-body li { margin-bottom: 5px; }
+.warn-box { background: var(--amberl); border-left: 4px solid var(--amber); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 16px; font-size: 12.5px; line-height: 1.8; color: #92400e; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
@@ -208,6 +230,44 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     </table>
     <p style="font-size:11px;color:var(--text-light);margin-top:8px;">※ 総務省の目安に基づく簡易計算値です。実際の金額とは異なる場合があります。</p>
   </div>
+
+  <div id="advice-card" class="advice-card" style="display:none;"></div>
+
+  <div class="fp-section">
+    <h3>FPが教えるふるさと納税 活用ガイド</h3>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">ふるさと納税の仕組みを正しく理解する</div>
+        <div class="fp-card-body">
+          <p>ふるさと納税は「寄付金控除」の一形態です。上限額まで寄付すると、翌年の所得税・住民税から「寄付額 − 2,000円」が控除されます。実質2,000円の自己負担で地域の返礼品（30%相当）を受け取れるため、活用しない手はありません。</p>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">ワンストップ特例 vs 確定申告</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>ワンストップ特例</strong>：給与所得のみ・確定申告不要な方。5自治体以内なら申請書の郵送だけで完結</li>
+            <li><strong>確定申告</strong>：医療費控除・副業・株式譲渡益がある方。自治体数の制限なし。ふるさと納税もまとめて申告</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">上限額を超えないための注意点</div>
+        <div class="fp-card-body">
+          <p>上限額を超えた寄付分は控除対象外となり、全額自己負担になります。年末に駆け込む方が多いため、<strong>年間を通じて計画的に寄付する</strong>のが安全です。シミュレーション結果はあくまで目安であり、医療費控除やiDeCoによって実際の上限額は変動します。</p>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">iDeCo・NISAとの組み合わせ戦略</div>
+        <div class="fp-card-body">
+          <p>iDeCoで掛金を拠出すると所得控除が増え、課税所得が下がるため、ふるさと納税の上限額も変動します（多くの場合は減少）。節税を最大化するにはiDeCo・NISA・ふるさと納税を一体的に設計することが重要です。FPへのご相談でトータル最適化が可能です。</p>
+        </div>
+      </div>
+    </div>
+    <div class="warn-box">
+      この計算はあくまでも目安です。医療費控除・副業収入・株式譲渡益・配偶者特別控除・iDeCo掛金など、個別の税務状況によって実際の上限額は変わります。正確な金額の把握や総合的な節税プランの策定には、FPまたは税理士へのご相談を推奨します。
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -237,7 +297,7 @@ function setFamily(f) {
   calc();
 }
 
-// 控除上限計算（総務省モデルに基づく簡易版）
+// 控除上限計算（総務省モデル・2020年改正税法準拠）
 function calcLimit(inc, fam, hl) {
   var deduction = personalDeduction(inc);
   var familyDed = familyDeduction(fam);
@@ -246,16 +306,18 @@ function calcLimit(inc, fam, hl) {
   var incomeTaxRate = getTaxRate(taxableIncome);
   var localTaxRate = 0.10;
   var limit = taxableIncome * localTaxRate * 0.2 / (1 - incomeTaxRate * 1.021 - localTaxRate * 0.2);
-  limit = limit / 10000;
-  limit = Math.max(0, limit - hl * 0.3);
-  return Math.round(limit);
+  // 住宅ローン控除による圧縮（hl は万円単位、円に換算して差引）
+  limit = Math.max(0, limit - hl * 10000 * 0.2);
+  // 1,000円単位で丸める
+  return Math.round(limit / 1000) * 1000;
 }
 function personalDeduction(inc) {
-  if (inc <= 162.5) return 650000;
-  if (inc <= 180) return inc * 10000 * 0.4;
-  if (inc <= 360) return inc * 10000 * 0.3 + 180000;
-  if (inc <= 660) return inc * 10000 * 0.2 + 540000;
-  if (inc <= 850) return inc * 10000 * 0.1 + 1200000;
+  // 2020年改正後の給与所得控除（最低55万円）
+  if (inc <= 162.5) return 550000;
+  if (inc <= 180)   return inc * 10000 * 0.4 - 100000;
+  if (inc <= 360)   return inc * 10000 * 0.3 + 80000;
+  if (inc <= 660)   return inc * 10000 * 0.2 + 440000;
+  if (inc <= 850)   return inc * 10000 * 0.1 + 1100000;
   return 1950000;
 }
 function familyDeduction(fam) {
@@ -287,6 +349,68 @@ function calc() {
   document.getElementById('r-local-tax').textContent = localTaxDed.toLocaleString()+'円';
   document.getElementById('r-benefit').textContent = '約'+benefit.toLocaleString()+'円相当';
   renderTable();
+  updateAdvice(limit);
+}
+
+function updateAdvice(limit) {
+  var card = document.getElementById('advice-card');
+  if (limit <= 0) { card.style.display = 'none'; return; }
+  card.style.display = '';
+
+  var cls, labelColor, title, body, steps;
+
+  if (limit < 10000) {
+    cls = '';
+    labelColor = 'var(--sky)';
+    title = '少額でも活用する価値があります';
+    body = '控除上限額は少なめですが、実質2,000円の自己負担でお得な返礼品を受け取れる仕組みに変わりはありません。まず1品試してふるさと納税を体験することをおすすめします。';
+    steps = [
+      '上限額の範囲内で返礼品1品を選んで試してみる（送料・手数料込みの金額を確認）',
+      '「ワンストップ特例申請書」を自治体から取り寄せ、翌年1月10日までに返送',
+      '翌年の住民税通知書で控除額を確認し、来年の計画に活かす'
+    ];
+  } else if (limit < 50000) {
+    cls = '';
+    labelColor = 'var(--sky)';
+    title = '2〜3品の返礼品をお得に受け取れます';
+    body = '上限額の範囲内で、人気返礼品（お肉・海産物・米・お酒など）を2〜3品選びましょう。ワンストップ特例を使えば確定申告不要で手続きが完結します。';
+    steps = [
+      'ふるさと納税サイト（楽天ふるさと納税・さとふるなど）で返礼品を比較・選択',
+      '寄付後に届く「寄付金受領証明書」または「ワンストップ特例申請書」を必ず保管',
+      '5自治体以内はワンストップ特例で完結。6か所以上は翌年2〜3月に確定申告を実施'
+    ];
+  } else if (limit < 100000) {
+    cls = 'good';
+    labelColor = 'var(--green)';
+    title = '複数自治体に分散して効率よく活用できます';
+    body = '上限額が' + limit.toLocaleString() + '円あります。複数の自治体に分散寄付することで、地域の特産品を多様に楽しみながら節税効果を最大化できます。';
+    steps = [
+      '年間上限を4〜6分割し、四半期ごとに寄付するとまとまった返礼品が届き管理しやすい',
+      '日用品（トイレットペーパー・米・調味料など）を選ぶと生活費の節約にも直結する',
+      '5自治体を超える場合は確定申告で一括処理。医療費控除と同時申告するとさらにお得'
+    ];
+  } else {
+    cls = 'good';
+    labelColor = 'var(--green)';
+    title = '年間計画を立てて戦略的に活用しましょう';
+    body = '上限額が' + limit.toLocaleString() + '円と高水準です。計画的に寄付することで、返礼品受け取りと節税の両方を最大化できます。iDeCo・NISAと組み合わせた総合節税も検討価値があります。';
+    steps = [
+      '月ごとに予算を分けて計画的に寄付（例：1万円/月 × 12か月）し、年末の集中を避ける',
+      '確定申告を行う方は、ふるさと納税・医療費控除・iDeCo掛金をまとめて申告して効率化',
+      'iDeCoやNISAとの組み合わせによる総合的な節税設計をFPに相談するとさらに最適化できる'
+    ];
+  }
+
+  var html = '<div class="advice-label" style="color:' + labelColor + '">あなたへのアドバイス</div>';
+  html += '<div class="advice-title">' + title + '</div>';
+  html += '<div class="advice-body">' + body + '</div>';
+  html += '<ol class="advice-steps">';
+  steps.forEach(function(s, i) {
+    html += '<li><span class="step-num">' + (i + 1) + '</span><span>' + s + '</span></li>';
+  });
+  html += '</ol>';
+  card.className = 'advice-card' + (cls ? ' ' + cls : '');
+  card.innerHTML = html;
 }
 
 function renderTable() {
