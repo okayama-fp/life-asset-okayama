@@ -1197,7 +1197,7 @@ function _generatePlan(){
   document.getElementById('plan-thead').innerHTML=`<tr>
     <th class="cat">西暦</th><th class="col-age">本人</th>${hasSpouse?'<th class="col-age">配偶者</th>':''}<th>主なイベント</th>
     <th>収入合計</th><th class="col-sec">うち年金</th><th>支出合計</th><th>年間収支</th>
-    <th class="col-sec">住宅ローン</th><th class="col-sec">高校・大学</th><th class="col-sec">車・改装</th><th class="col-sec">NISA/iDeCo積立</th>
+    <th class="col-sec">住宅ローン</th><th class="col-sec">高校・大学</th><th class="col-sec">車・改装</th><th class="col-sec">旅行</th><th class="col-sec">NISA/iDeCo積立</th>
     <th>現金資産</th><th class="col-sec">NISA</th><th class="col-sec">iDeCo</th><th>投資資産</th><th>総資産</th>
   </tr>`;
   document.getElementById('plan-tbody').innerHTML=rows.map(r=>{
@@ -1219,6 +1219,7 @@ function _generatePlan(){
     <td class="col-sec">${r.loanExp>0?r.loanExp.toLocaleString():'-'}</td>
     <td class="col-sec">${r.eduExp>0?r.eduExp.toLocaleString():'-'}</td>
     <td class="col-sec${(r.carExp+r.reformExp)>0?' minus':''}">${(r.carExp+r.reformExp)>0?(r.carExp+r.reformExp).toLocaleString():'-'}</td>
+    <td class="col-sec">${r.leisure>0?r.leisure.toLocaleString():'-'}</td>
     <td class="col-sec ${(r.nisaContrib+r.idecoContrib)>0?'plus':''}">${(r.nisaContrib+r.idecoContrib)>0?(r.nisaContrib+r.idecoContrib).toLocaleString():'-'}</td>
     <td class="${r.cashAsset<0?'minus':''}">${r.cashAsset.toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(r.nisaAsset).toLocaleString()}</td>
@@ -1243,6 +1244,7 @@ function _generatePlan(){
     <td class="${lifeCf>=0?'plus':'minus'}">${lifeCf>=0?'+':''}${Math.round(lifeCf).toLocaleString()}</td>
     <td class="col-sec" style="color:var(--gray)">-</td><td class="col-sec" style="color:var(--gray)">-</td>
     <td class="col-sec minus">${Math.round(rows.reduce((s,r)=>s+r.carExp+r.reformExp,0)).toLocaleString()}</td>
+    <td class="col-sec">${Math.round(rows.reduce((s,r)=>s+r.leisure,0)).toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(rows.reduce((s,r)=>s+r.nisaContrib+r.idecoContrib,0)).toLocaleString()}</td>
     <td class="${finalRow.cashAsset<0?'minus':''}">${finalRow.cashAsset.toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(finalRow.nisaAsset).toLocaleString()}</td>
