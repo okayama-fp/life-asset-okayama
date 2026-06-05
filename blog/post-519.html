@@ -487,6 +487,39 @@
   </div>
 </div>
 
+<section style="max-width:720px;margin:0 auto;padding:40px 24px 48px;">
+  <h2 style="font-size:1.1rem;font-weight:900;color:#1a3d2b;margin-bottom:6px;">コメントを送る</h2>
+  <p style="font-size:0.8rem;color:#64748b;margin-bottom:20px;">記事への感想・質問をお気軽にどうぞ。</p>
+  <div style="display:grid;gap:12px;">
+    <div>
+      <label style="font-size:0.82rem;font-weight:700;color:#1a3d2b;display:block;margin-bottom:5px;">お名前</label>
+      <input id="cmt-name" type="text" placeholder="例：山田 太郎" maxlength="50"
+        style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;">
+    </div>
+    <div>
+      <label style="font-size:0.82rem;font-weight:700;color:#1a3d2b;display:block;margin-bottom:5px;">コメント <span style="color:#e11d48">*</span></label>
+      <textarea id="cmt-body" rows="4" placeholder="感想・ご質問など..." maxlength="500"
+        style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:0.9rem;font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>
+    </div>
+    <button onclick="sendComment()" style="background:linear-gradient(90deg,#1a7a4a,#22c55e);color:#fff;font-size:0.92rem;font-weight:800;padding:12px 0;border-radius:50px;border:none;cursor:pointer;font-family:inherit;width:100%;">コメントを送信する</button>
+  </div>
+  <p id="cmt-err" style="display:none;color:#e11d48;font-size:0.8rem;margin-top:8px;">コメントを入力してください。</p>
+  <p style="font-size:0.72rem;color:#94a3b8;margin-top:12px;line-height:1.6;">送信するとGmailが開きます。そのまま送信してください。</p>
+</section>
+<script>
+function sendComment(){
+  var name = document.getElementById('cmt-name').value.trim();
+  var body = document.getElementById('cmt-body').value.trim();
+  var err  = document.getElementById('cmt-err');
+  if(!body){ err.style.display='block'; return; }
+  err.style.display='none';
+  var title = document.title.replace(/｜.*$/,'').trim();
+  var sub  = encodeURIComponent('【ブログコメント】' + title);
+  var msg  = encodeURIComponent((name ? 'お名前：' + name + '\n\n' : '') + 'コメント：\n' + body + '\n\n記事URL：' + location.href);
+  window.open('https://mail.google.com/mail/?view=cm&fs=1&to=yamakaze8000%40gmail.com&su=' + sub + '&body=' + msg, '_blank', 'noopener,noreferrer');
+}
+</script>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
