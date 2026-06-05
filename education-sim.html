@@ -93,6 +93,35 @@ a { color: inherit; text-decoration: none; }
 .cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
 .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
 .cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.advice-card { background: #fff; border: 2px solid var(--sky); border-radius: 16px; padding: 22px 24px; margin-top: 28px; transition: border-color .3s; }
+.advice-card.good { border-color: var(--green); }
+.advice-card.warn { border-color: var(--amber); }
+.advice-card.danger { border-color: var(--red); }
+.advice-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; margin-bottom: 10px; }
+.advice-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.advice-body { font-size: 13.5px; color: var(--text); line-height: 1.85; margin-bottom: 14px; }
+.advice-steps { list-style: none; }
+.advice-steps li { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
+.advice-steps li:last-child { border-bottom: none; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--sky); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.advice-card.good .step-num { background: var(--green); }
+.advice-card.warn .step-num { background: var(--amber); }
+.advice-card.danger .step-num { background: var(--red); }
+.fp-section { margin-top: 36px; }
+.fp-section h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px){ .fp-grid { grid-template-columns: 1fr; } }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.fp-card-body { font-size: 12.5px; color: var(--text); line-height: 1.85; }
+.fp-card-body ul { padding-left: 16px; margin-top: 6px; }
+.fp-card-body li { margin-bottom: 5px; }
+.fp-compare-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 6px; }
+.fp-compare-table th { background: var(--navy); color: #fff; padding: 7px 8px; text-align: center; font-size: 11px; }
+.fp-compare-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); text-align: center; }
+.fp-compare-table tr:last-child td { border-bottom: none; }
+.fp-compare-table td:first-child { text-align: left; font-weight: 700; color: var(--text-light); }
+.warn-box { background: var(--amberl); border-left: 4px solid var(--amber); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 16px; font-size: 12.5px; line-height: 1.8; color: #92400e; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
@@ -222,6 +251,66 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
     </div>
   </div>
+
+  <div id="advice-card" class="advice-card" style="display:none;"></div>
+
+  <div class="fp-section">
+    <h3>FPが教える 教育費準備 完全ガイド</h3>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">積立方法の選び方</div>
+        <div class="fp-card-body">
+          <table class="fp-compare-table">
+            <thead><tr><th>方法</th><th>利回り</th><th>流動性</th><th>おすすめ度</th></tr></thead>
+            <tbody>
+              <tr><td>学資保険</td><td>105〜110%</td><td>低い</td><td>安定重視の方</td></tr>
+              <tr><td>NISAつみたて</td><td>期待3〜6%</td><td>高い</td><td>10年以上あれば</td></tr>
+              <tr><td>定期預金</td><td>0.1〜0.3%</td><td>高い</td><td>5年以内の方</td></tr>
+              <tr><td>児童手当積立</td><td>―</td><td>高い</td><td>全員必須</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">費用以外にかかるお金</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>塾・習い事</strong>：小学生で月2〜5万円、受験期は月5〜15万円</li>
+            <li><strong>受験費用</strong>：中学受験で20〜50万円、大学入試で10〜30万円</li>
+            <li><strong>入学準備</strong>：制服・教材・PC等で10〜30万円</li>
+            <li><strong>大学生活費</strong>：仕送り・家賃込みで月10〜15万円（4年で480〜720万円）</li>
+          </ul>
+          <p style="margin-top:8px;font-size:11.5px;color:var(--text-light);">※ これらはシミュレーターの計算に含まれていません</p>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">公立 vs 私立の費用差</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>全公立（幼〜大）</strong>：約800〜900万円</li>
+            <li><strong>高校〜大学私立</strong>：約1,100〜1,200万円</li>
+            <li><strong>中学〜大学私立</strong>：約1,400〜1,600万円</li>
+            <li><strong>全私立（幼〜大）</strong>：約2,400〜2,800万円</li>
+          </ul>
+          <p style="margin-top:8px;font-size:11.5px;color:var(--text-light);">全私立は全公立の3倍以上。コース選択は早期から家族で話し合いを</p>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">奨学金・教育ローンの活用</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>日本学生支援機構（給付型）</strong>：住民税非課税世帯等対象。返済不要</li>
+            <li><strong>第一種奨学金（無利子）</strong>：成績・家計基準あり。月2〜6.4万円</li>
+            <li><strong>教育一般貸付（日本公庫）</strong>：子1人あたり上限350万円。年利1.7%程度。在学中は利息のみ可</li>
+            <li><strong>教育資金贈与非課税制度</strong>：祖父母からの贈与1,500万円まで非課税（直系尊属→30歳未満）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="warn-box">
+      このシミュレーターは授業料・保育料など主要費用のみを計算しています。塾・習い事・受験費・入学準備・生活費は含まれません。実際には計算値の1.5〜2倍の資金が必要になるケースも多く、早期からの計画的な準備とFPへのご相談をおすすめします。
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -341,6 +430,78 @@ function calc() {
 
   renderChart(childAge, savings, monthly, result.stages);
   renderCostTable(result.stages);
+  updateAdvice(gap, yearsToUni, monthlyNeed, currentCourse);
+}
+
+function updateAdvice(gap, yearsToUni, monthlyNeed, course) {
+  var card = document.getElementById('advice-card');
+  card.style.display = '';
+  var cls, labelColor, title, body, steps;
+  var gapStr = Math.round(Math.abs(gap)).toLocaleString() + '万円';
+  var mnStr = monthlyNeed.toFixed(1) + '万円';
+
+  if (gap <= 0) {
+    cls = 'good';
+    labelColor = 'var(--green)';
+    title = '現在の積立プランで教育費を賄えます';
+    body = '現在の積立ペースを続ければ、選択したコースの教育費を十分に準備できる見込みです。余裕分はNISAで運用して老後資産や緊急資金に活用しましょう。';
+    steps = [
+      '現在の積立は維持しつつ、余剰分をNISAつみたて投資枠で老後・緊急資金として運用する',
+      '年1回、教育費計画を見直す（コース変更・学費改定・物価変動に対応）',
+      '大学入学後の生活費・塾代・受験費は別途100〜200万円を目安に用意しておく'
+    ];
+  } else if (yearsToUni >= 15) {
+    cls = '';
+    labelColor = 'var(--sky)';
+    title = '準備期間が十分。今すぐ始めれば月' + mnStr + 'で余裕です';
+    body = '大学入学まで' + yearsToUni + '年あります。今から毎月' + mnStr + '積み立てるだけで不足額' + gapStr + 'を解消できます。早く始めるほど月額負担は小さくなります。';
+    steps = [
+      '学資保険（満期18歳型）を比較して加入。返戻率105〜110%のものを選ぶ。加入は早いほど有利',
+      '月額の一部（1〜2万円）はNISAつみたて投資枠でインデックスファンドを積立。長期で大きく育てる',
+      '児童手当（月1〜1.5万円）を全額教育専用口座に自動入金する仕組みを作る'
+    ];
+  } else if (yearsToUni >= 10) {
+    cls = '';
+    labelColor = 'var(--sky)';
+    title = '今すぐ月' + mnStr + 'に増額すれば間に合います';
+    body = '大学入学まで' + yearsToUni + '年あります。積立先の見直しと増額を今すぐ行動に移しましょう。利回りの低い貯蓄をNISAに切り替えると差が大きく変わります。';
+    steps = [
+      '定期預金・学資保険をNISAつみたて投資枠に切り替え、実質利回りを3〜5%に向上させる',
+      '毎月の積立額を増やす（ボーナス月に一括積立を加えるのも効果的）',
+      '子供が中学・高校になると塾費が増加するため、今のうちに一気に積立を厚くしておく'
+    ];
+  } else if (yearsToUni >= 5) {
+    cls = 'warn';
+    labelColor = 'var(--amber)';
+    title = '残り' + yearsToUni + '年。複数の手段を組み合わせましょう';
+    body = '積立だけでは不足額' + gapStr + 'を解消するのが難しくなってきます。積立増額・教育ローン・奨学金の事前確認を今すぐ始めてください。';
+    steps = [
+      'ボーナス一括積立・退職金の一部充当など、まとまったお金を優先して教育口座に移す',
+      '日本政策金融公庫「教育一般貸付」（上限350万円・年利1.7%程度）の申込資格・条件を確認しておく',
+      '日本学生支援機構の給付型・第一種奨学金は在学前年に申込開始。早めに情報収集する'
+    ];
+  } else {
+    cls = 'danger';
+    labelColor = 'var(--red)';
+    title = '大学入学まで' + yearsToUni + '年以内。緊急対策が必要です';
+    body = '積立での解決は難しい段階です。教育ローン・奨学金・一時金確保・祖父母の支援を早急に検討してください。';
+    steps = [
+      '日本政策金融公庫の教育一般貸付（上限350万円）・奨学金を今すぐ調べて申込準備を開始',
+      '祖父母からの「教育資金一括贈与非課税制度」（1,500万円まで非課税）の活用を家族で相談する',
+      'FPに相談して、手元資金・ローン・奨学金の最適な組み合わせを整理・計画立案する'
+    ];
+  }
+
+  var html = '<div class="advice-label" style="color:' + labelColor + '">あなたへのアドバイス</div>';
+  html += '<div class="advice-title">' + title + '</div>';
+  html += '<div class="advice-body">' + body + '</div>';
+  html += '<ol class="advice-steps">';
+  steps.forEach(function(s, i) {
+    html += '<li><span class="step-num">' + (i + 1) + '</span><span>' + s + '</span></li>';
+  });
+  html += '</ol>';
+  card.className = 'advice-card' + (cls ? ' ' + cls : '');
+  card.innerHTML = html;
 }
 
 function renderChart(childAge, savings, monthly, stages) {
