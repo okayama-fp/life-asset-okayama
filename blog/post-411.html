@@ -77,7 +77,6 @@
     .share-btns{display:flex;gap:12px;flex-wrap:wrap}
     .share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:22px;font-size:0.875rem;font-weight:600;color:#fff;cursor:pointer;border:none;font-family:inherit;transition:opacity .2s}
     .share-btn:hover{opacity:.85}
-    .share-x{background:#000}
     .share-line{background:#06c755}
     .related{max-width:760px;margin:0 auto 60px;padding:0 24px}
     .related-inner{background:#fff;border-radius:14px;padding:26px;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--b)}
@@ -222,7 +221,6 @@
   <div class="share-inner">
     <h3>📣 この記事をシェア</h3>
     <div class="share-btns">
-      <button class="share-btn share-x" onclick="shareX()">𝕏 Xでシェア</button>
       <button class="share-btn share-line" onclick="shareLine()">💬 LINEで送る</button>
     </div>
   </div>
@@ -308,12 +306,7 @@
     var body = encodeURIComponent(msg || 'ブログを拝見しました。詳しく教えていただけますか？');
     window.location.href='../contact.html';
   }
-  function shareX() {
-    var url = encodeURIComponent(location.href);
-    var text = encodeURIComponent('給料だけに頼らない家計へ。FPが教える資産形成の始め方 | Life Asset ブログ');
-    window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + text, '_blank', 'noopener,noreferrer');
-  }
-  function shareLine() {
+function shareLine() {
     window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(location.href), '_blank', 'noopener,noreferrer');
   }
 </script>

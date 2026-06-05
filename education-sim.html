@@ -89,9 +89,6 @@ a { color: inherit; text-decoration: none; }
 .cost-table th { background: var(--navy); color: #fff; padding: 9px 10px; text-align: center; font-size: 11.5px; }
 .cost-table td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: center; }
 .cost-table tr.highlight td { background: var(--sky-pale); font-weight: 700; }
-.share-row { display: flex; gap: 8px; margin-top: 14px; }
-.share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-.share-x { background: #000; }
 .cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
 .cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
 .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
@@ -219,11 +216,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         </table>
         <p style="font-size:11px;color:var(--text-light);margin-top:6px;">※ 文部科学省「子供の学習費調査」等に基づく参考値。入学金・制服・修学旅行等は含みません。</p>
       </div>
-
-      <div class="share-row">
-        <button class="share-btn share-x" onclick="shareX()">𝕏 シェア</button>
-      </div>
-      <div class="cta-contact-box">
+<div class="cta-contact-box">
         <div class="cta-contact-text">教育費の積立プラン、FPと一緒に考えませんか？<br>お問い合わせを承っています。</div>
         <a href="contact.html" class="cta-contact-btn">お問い合わせ →</a>
       </div>
@@ -432,14 +425,6 @@ function applyPreset(name) {
   }
   calc();
 }
-
-function shareX() {
-  var total = document.getElementById('result-amount').textContent;
-  var text = encodeURIComponent('教育費シミュレーションで大学卒業まで'+total+'必要とわかりました！ #ライフアセットオフィス #教育費');
-  var url = encodeURIComponent('https://lifeassetoffice.net/education-sim.html');
-  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url, '_blank', 'noopener,noreferrer');
-}
-
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;

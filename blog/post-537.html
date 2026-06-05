@@ -128,8 +128,7 @@
     .share-section { max-width: 760px; margin: 0 auto 40px; padding: 0 24px; }
     .share-section h2 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
     .share-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 22px; font-size: 0.875rem; font-weight: 600; color: #fff; cursor: pointer; border: none; font-family: inherit; }
-    .share-x { background: #000; } .share-line { background: #06c755; } .share-copy { background: #64748b; }
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 22px; font-size: 0.875rem; font-weight: 600; color: #fff; cursor: pointer; border: none; font-family: inherit; } .share-line { background: #06c755; } .share-copy { background: #64748b; }
 
     .related { max-width: 760px; margin: 0 auto 40px; padding: 0 24px; }
     .related h2 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
@@ -398,7 +397,6 @@
 <div class="share-section">
   <h2>この記事をシェアする</h2>
   <div class="share-btns">
-    <button class="share-btn share-x" onclick="shareX()">𝕏 Xでシェア</button>
     <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url=https://lifeassetoffice.net/blog/post-537.html" target="_blank" rel="noopener noreferrer">💬 LINEで送る</a>
     <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href).then(function(){alert('リンクをコピーしました！');})">🔗 リンクをコピー</button>
   </div>
@@ -434,12 +432,7 @@
 </footer>
 
 <script>
-  function shareX(){
-    var text = '繰上返済と教育費積立、どっちが先？42歳・子ども3人のAさんがFPに聞いた本音';
-    var url  = 'https://lifeassetoffice.net/blog/post-537.html';
-    window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-  }
-  (function(){
+(function(){
     document.querySelector('[id]').href='../contact.html';
   })();
   window.addEventListener('scroll', function(){
