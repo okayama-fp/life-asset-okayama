@@ -94,6 +94,29 @@ a { color: inherit; text-decoration: none; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+.advice-card { margin: 24px 0 0; padding: 20px 22px; border-radius: 14px; font-size: 14px; line-height: 1.8; transition: all .3s; }
+.advice-card.default { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.advice-card.good    { background: #f0fdf4; border: 1.5px solid #86efac; }
+.advice-card.warn    { background: #fffbeb; border: 1.5px solid #fde68a; }
+.advice-card.danger  { background: #fff1f2; border: 1.5px solid #fecdd3; }
+.advice-title { font-size: 13px; font-weight: 800; letter-spacing: .05em; margin-bottom: 8px; }
+.advice-card.default .advice-title,.advice-card.good .advice-title { color: #15803d; }
+.advice-card.warn .advice-title { color: #92400e; }
+.advice-card.danger .advice-title { color: #991b1b; }
+.advice-steps { list-style: none; margin-top: 8px; }
+.advice-steps li { padding: 4px 0 4px 20px; position: relative; font-size: 13.5px; }
+.advice-steps li::before { content: '▶'; position: absolute; left: 0; font-size: 9px; top: 7px; opacity: .7; }
+.fp-section { margin-top: 40px; }
+.fp-section-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.fp-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; }
+.fp-card table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.fp-card th { background: var(--sky-pale); color: var(--navy); padding: 5px 8px; text-align: center; font-size: 11px; }
+.fp-card td { padding: 5px 8px; border-bottom: 1px solid var(--border); text-align: center; font-size: 11.5px; }
+.fp-card tr:last-child td { border-bottom: none; }
+.warn-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -228,6 +251,53 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
     </div>
   </div>
+
+  <div class="advice-card default" id="advice-card">
+    <div class="advice-title" id="advice-title">FPアドバイス</div>
+    <div id="advice-body"></div>
+  </div>
+
+  <section class="fp-section">
+    <div class="fp-section-title">📚 FP解説：FIREの基礎知識</div>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">💡 4%ルールとは？</div>
+        <p>FIREの核心となる「4%ルール」は、年間生活費の25倍の資産があれば年4%ずつ取り崩しても資産が尽きないという研究（トリニティスタディ）に基づいています。例えば年300万円の生活費なら目標資産は7,500万円です。</p>
+        <div class="warn-box">※長期実績に基づく目安です。インフレや市場変動を考慮し、定期的に計画を見直しましょう。</div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">📊 貯蓄率とFIRE達成年数</div>
+        <table>
+          <tr><th>貯蓄率</th><th>FIRE達成目安</th></tr>
+          <tr><td>10%</td><td>約40〜45年</td></tr>
+          <tr><td>25%</td><td>約25〜30年</td></tr>
+          <tr><td>50%</td><td>約15〜17年</td></tr>
+          <tr><td>75%</td><td>約7〜10年</td></tr>
+        </table>
+        <p style="margin-top:8px">貯蓄率が高いほど達成年数は劇的に短縮。収入増より支出削減の方が貯蓄率への影響が大きいです。</p>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🔥 FIREの種類</div>
+        <table>
+          <tr><th>種類</th><th>内容</th></tr>
+          <tr><td>フルFIRE</td><td>完全引退。資産取り崩しで生活</td></tr>
+          <tr><td>サイドFIRE</td><td>副業・パートで生活費を一部補填</td></tr>
+          <tr><td>セミFIRE</td><td>週3〜4日勤務。完全引退ではない</td></tr>
+          <tr><td>バリスタFIRE</td><td>医療保険目的で週数時間だけ勤務</td></tr>
+        </table>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">⚠️ FIRE後のリスク管理</div>
+        <p>「配列リスク」—引退直後の市場下落で資産が大幅減し回復しにくくなる現象に注意が必要です。</p>
+        <ul class="advice-steps" style="margin-top:10px">
+          <li>生活費2〜3年分の現金を別途確保する</li>
+          <li>FIRE直前は株式比率を段階的に下げる</li>
+          <li>公的年金受給時期を考慮した長期設計</li>
+          <li>社会保険・国保の費用増加に注意</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </div>
 
 <footer>
@@ -269,6 +339,37 @@ function fmtMan(v) {
   return Math.round(v).toLocaleString()+'万円';
 }
 
+function updateAdvice(result, savingRate) {
+  var card = document.getElementById('advice-card');
+  var title = document.getElementById('advice-title');
+  var body = document.getElementById('advice-body');
+  var cls, t, html;
+  if (!result.age) {
+    cls = 'danger';
+    t = '⚠️ 現状のままではFIREは困難です';
+    html = '<ul class="advice-steps"><li>年間支出が収入に対して多すぎます。まず支出を削減し、プラスの貯蓄を生み出しましょう。</li><li>月々の固定費（家賃・保険・サブスク）の見直しが最も効果的です。</li><li>副業・スキルアップで収入増加を目指しましょう。年収100万増でFIRE期間は大幅短縮されます。</li><li>まずは「貯蓄率10%」を目標に、家計の見直しからスタートしてください。</li></ul>';
+  } else if (result.years >= 30) {
+    cls = 'warn';
+    t = '📋 長期戦略が必要です（あと' + result.years + '年）';
+    html = '<p>貯蓄率 <strong>' + savingRate.toFixed(0) + '%</strong> — FIREまで30年以上あります。今から正しい習慣を積み重ねましょう。</p><ul class="advice-steps"><li>貯蓄率を5%上げるだけでFIRE達成年数を数年短縮できます。支出削減が最優先です。</li><li>NISA・iDeCoをフル活用し、税制優遇を最大限に活かした運用を今すぐ始めましょう。</li><li>スキルアップ・転職・副業で年収アップを図ると複利効果が倍増します。</li><li>長期投資では「時間」が最大の武器。今すぐ始めることが最も重要です。</li></ul>';
+  } else if (result.years >= 20) {
+    cls = 'warn';
+    t = '📈 戦略次第で加速できます（あと' + result.years + '年）';
+    html = '<p>貯蓄率 <strong>' + savingRate.toFixed(0) + '%</strong> — 支出最適化と副収入で大幅な短縮が可能です。</p><ul class="advice-steps"><li>固定費の見直し（住宅ローン借り換え・保険・通信費）で月2〜5万削減を目指しましょう。</li><li>NISA成長投資枠（年240万）・iDeCo（所得控除）を必ずフル活用してください。</li><li>サイドFIREも視野に。副業収入100〜200万/年で必要資産額が大幅に減ります。</li><li>ポートフォリオは株式比率を高め、長期での複利成長を優先させましょう。</li></ul>';
+  } else if (result.years >= 10) {
+    cls = 'default';
+    t = '✅ 順調です！さらに加速しましょう（あと' + result.years + '年）';
+    html = '<p>貯蓄率 <strong>' + savingRate.toFixed(0) + '%</strong> — 10〜20年でFIRE達成圏内です！</p><ul class="advice-steps"><li>NISAつみたて枠・成長投資枠を合わせて年360万をフル活用しましょう。</li><li>生活費の「半固定費」（食費・娯楽費）を見直し、投資額を増やしましょう。</li><li>FIRE後の収入源（不動産・配当・副業）を今から育てておくと安心です。</li><li>資産が3,000万を超えたら、ポートフォリオの債券比率を少しずつ上げましょう。</li></ul>';
+  } else {
+    cls = 'good';
+    t = '🎯 FIRE射程圏内です！（あと' + result.years + '年）';
+    html = '<p>貯蓄率 <strong>' + savingRate.toFixed(0) + '%</strong> — あと<strong>' + result.years + '年</strong>でFIREできます！</p><ul class="advice-steps"><li>資産の取り崩し計画（4%ルール）を確認し、FIRE後の月次キャッシュフローを試算しましょう。</li><li>FIRE直前は株式比率を少し下げ、生活費2〜3年分の現金を確保しておきましょう。</li><li>医療保険・公的年金の繰り下げ受給など、FIRE後の保障設計を今から考えましょう。</li><li>セミFIRE（週3勤務など）も選択肢。完全FIRE前に段階的に移行するのもおすすめです。</li></ul>';
+  }
+  card.className = 'advice-card ' + cls;
+  title.textContent = t;
+  body.innerHTML = html;
+}
+
 var chart = null;
 function calc() {
   var age = sliders.age, assets = sliders.assets, income = sliders.income,
@@ -294,6 +395,7 @@ function calc() {
 
   renderChart(age, assets, income, expense, rate, result.target, result.age);
   renderSensitivity(age, assets, income, expense, fe, rate);
+  updateAdvice(result, savingRate);
 }
 
 function renderChart(age, assets, income, expense, rate, target, fireAge) {
