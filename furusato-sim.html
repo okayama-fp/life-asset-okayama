@@ -61,6 +61,13 @@ a { color: inherit; text-decoration: none; }
 .family-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
 .seg-btn { padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 11.5px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; }
 .seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
+.child-ages { margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 12px; }
+.child-row { margin-bottom: 10px; }
+.child-row:last-child { margin-bottom: 0; }
+.child-row-label { font-size: 11.5px; font-weight: 700; color: var(--text-light); margin-bottom: 5px; }
+.age-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; }
+.age-btn { padding: 7px 2px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 10.5px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; line-height: 1.3; }
+.age-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
 .result-panel { position: sticky; top: 76px; }
 @media(max-width:480px){ .result-panel { position: static; } }
 .result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
@@ -168,6 +175,35 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
           <button class="seg-btn" id="fam-c1" onclick="setFamily('c1')">夫婦+子1</button>
           <button class="seg-btn" id="fam-c2" onclick="setFamily('c2')">夫婦+子2</button>
           <button class="seg-btn" id="fam-c3" onclick="setFamily('c3')">夫婦+子3</button>
+        </div>
+        <div id="child-ages" class="child-ages" style="display:none;">
+          <div id="ca-row-0" class="child-row" style="display:none;">
+            <div class="child-row-label">第1子の年齢</div>
+            <div class="age-grid">
+              <button class="age-btn on" id="ca-0-young" onclick="setChildAge(0,'young')">0〜15歳<br><small>控除なし</small></button>
+              <button class="age-btn" id="ca-0-high" onclick="setChildAge(0,'high')">16〜18歳<br><small>38万控除</small></button>
+              <button class="age-btn" id="ca-0-college" onclick="setChildAge(0,'college')">19〜22歳<br><small>63万控除</small></button>
+              <button class="age-btn" id="ca-0-adult" onclick="setChildAge(0,'adult')">23歳以上<br><small>38万控除</small></button>
+            </div>
+          </div>
+          <div id="ca-row-1" class="child-row" style="display:none;">
+            <div class="child-row-label">第2子の年齢</div>
+            <div class="age-grid">
+              <button class="age-btn on" id="ca-1-young" onclick="setChildAge(1,'young')">0〜15歳<br><small>控除なし</small></button>
+              <button class="age-btn" id="ca-1-high" onclick="setChildAge(1,'high')">16〜18歳<br><small>38万控除</small></button>
+              <button class="age-btn" id="ca-1-college" onclick="setChildAge(1,'college')">19〜22歳<br><small>63万控除</small></button>
+              <button class="age-btn" id="ca-1-adult" onclick="setChildAge(1,'adult')">23歳以上<br><small>38万控除</small></button>
+            </div>
+          </div>
+          <div id="ca-row-2" class="child-row" style="display:none;">
+            <div class="child-row-label">第3子の年齢</div>
+            <div class="age-grid">
+              <button class="age-btn on" id="ca-2-young" onclick="setChildAge(2,'young')">0〜15歳<br><small>控除なし</small></button>
+              <button class="age-btn" id="ca-2-high" onclick="setChildAge(2,'high')">16〜18歳<br><small>38万控除</small></button>
+              <button class="age-btn" id="ca-2-college" onclick="setChildAge(2,'college')">19〜22歳<br><small>63万控除</small></button>
+              <button class="age-btn" id="ca-2-adult" onclick="setChildAge(2,'adult')">23歳以上<br><small>38万控除</small></button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -278,6 +314,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 <script src="/nav.js"></script>
 <script>
 var income = 500, family = 'single', hloan = 0;
+var childAges = ['young', 'young', 'young'];
 
 function sync(key, val) {
   if (key === 'income') {
@@ -293,6 +330,18 @@ function setFamily(f) {
   family = f;
   ['single','couple','c1','c2','c3'].forEach(function(id) {
     document.getElementById('fam-'+id).className = 'seg-btn' + (id===f?' on':'');
+  });
+  var numChildren = f === 'c1' ? 1 : f === 'c2' ? 2 : f === 'c3' ? 3 : 0;
+  document.getElementById('child-ages').style.display = numChildren > 0 ? '' : 'none';
+  for (var i = 0; i < 3; i++) {
+    document.getElementById('ca-row-' + i).style.display = i < numChildren ? '' : 'none';
+  }
+  calc();
+}
+function setChildAge(idx, ageKey) {
+  childAges[idx] = ageKey;
+  ['young','high','college','adult'].forEach(function(k) {
+    document.getElementById('ca-'+idx+'-'+k).className = 'age-btn' + (k === ageKey ? ' on' : '');
   });
   calc();
 }
@@ -320,14 +369,19 @@ function personalDeduction(inc) {
   if (inc <= 850)   return inc * 10000 * 0.1 + 1100000;
   return 1950000;
 }
+function childDed(ageKey) {
+  if (ageKey === 'high')    return 380000; // 一般扶養控除
+  if (ageKey === 'college') return 630000; // 特定扶養控除（19〜22歳）
+  if (ageKey === 'adult')   return 380000; // 一般扶養控除
+  return 0; // 0〜15歳：年少扶養控除なし（2011年廃止）
+}
 function familyDeduction(fam) {
-  var base = 480000;
-  if (fam === 'single') return base;
-  if (fam === 'couple') return base + 380000;
-  if (fam === 'c1') return base + 380000 + 380000;
-  if (fam === 'c2') return base + 380000 + 380000 * 2;
-  if (fam === 'c3') return base + 380000 + 380000 * 3;
-  return base;
+  var base = 480000; // 基礎控除
+  var spouseDed = (fam !== 'single') ? 380000 : 0; // 配偶者控除
+  var numChildren = fam === 'c1' ? 1 : fam === 'c2' ? 2 : fam === 'c3' ? 3 : 0;
+  var kids = 0;
+  for (var i = 0; i < numChildren; i++) kids += childDed(childAges[i]);
+  return base + spouseDed + kids;
 }
 function getTaxRate(taxable) {
   if (taxable <= 1950000) return 0.05;
