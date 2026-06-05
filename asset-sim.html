@@ -89,6 +89,28 @@ a { color: inherit; text-decoration: none; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+.advice-card { margin: 24px 0 0; padding: 20px 22px; border-radius: 14px; font-size: 14px; line-height: 1.8; transition: all .3s; }
+.advice-card.default { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.advice-card.good    { background: #f0fdf4; border: 1.5px solid #86efac; }
+.advice-card.best    { background: #dcfce7; border: 2px solid #4ade80; }
+.advice-card.warn    { background: #fffbeb; border: 1.5px solid #fde68a; }
+.advice-title { font-size: 13px; font-weight: 800; letter-spacing: .05em; margin-bottom: 8px; }
+.advice-card.default .advice-title,.advice-card.good .advice-title,.advice-card.best .advice-title { color: #15803d; }
+.advice-card.warn .advice-title { color: #92400e; }
+.advice-steps { list-style: none; margin-top: 8px; }
+.advice-steps li { padding: 4px 0 4px 20px; position: relative; font-size: 13.5px; }
+.advice-steps li::before { content: '▶'; position: absolute; left: 0; font-size: 9px; top: 7px; opacity: .7; }
+.fp-section { margin-top: 40px; }
+.fp-section-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.fp-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; }
+.fp-card table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.fp-card th { background: var(--sky-pale); color: var(--navy); padding: 5px 8px; text-align: center; font-size: 11px; }
+.fp-card td { padding: 5px 8px; border-bottom: 1px solid var(--border); text-align: center; font-size: 11.5px; }
+.fp-card tr:last-child td { border-bottom: none; }
+.warn-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -140,8 +162,8 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       <h2>条件を入力</h2>
       <div class="field">
         <div class="field-label">現在の資産<span class="field-val" id="lbl-initial">200万円</span></div>
-        <input type="range" id="sl-initial" min="0" max="3000" step="50" value="200" oninput="syncLabel('initial',this.value);calc()">
-        <div class="field-ticks"><span>0円</span><span>1,500万</span><span>3,000万</span></div>
+        <input type="range" id="sl-initial" min="0" max="10000" step="100" value="200" oninput="syncLabel('initial',this.value);calc()">
+        <div class="field-ticks"><span>0円</span><span>5,000万</span><span>1億円</span></div>
       </div>
       <div class="field">
         <div class="field-label">毎月の積立額<span class="field-val" id="lbl-monthly">5万円</span></div>
@@ -180,6 +202,61 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     </div>
   </div>
 
+  <div class="advice-card default" id="advice-card">
+    <div class="advice-title" id="advice-title">FPアドバイス</div>
+    <div id="advice-body"></div>
+  </div>
+
+  <section class="fp-section">
+    <div class="fp-section-title">📚 FP解説：長期投資の基礎知識</div>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">💡 72の法則 — 資産が2倍になる年数</div>
+        <p>「72 ÷ 年利回り（%）」で資産が2倍になるおよその年数がわかります。</p>
+        <table>
+          <tr><th>利回り</th><th>2倍になる年数</th></tr>
+          <tr><td>3%</td><td>約24年</td></tr>
+          <tr><td>5%</td><td>約14年</td></tr>
+          <tr><td>7%</td><td>約10年</td></tr>
+          <tr><td>10%</td><td>約7年</td></tr>
+        </table>
+        <div class="warn-box">利回りが1%違うだけで、30年後の資産は大きく変わります。</div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">📊 積立開始年齢と最終資産（月5万・5%）</div>
+        <table>
+          <tr><th>開始年齢</th><th>65歳時の資産</th></tr>
+          <tr><td>25歳（40年）</td><td>約7,600万円</td></tr>
+          <tr><td>30歳（35年）</td><td>約5,800万円</td></tr>
+          <tr><td>35歳（30年）</td><td>約4,200万円</td></tr>
+          <tr><td>40歳（25年）</td><td>約2,950万円</td></tr>
+        </table>
+        <p style="margin-top:8px">5年の差が約1,600〜1,800万円の差に。「今すぐ始める」が最大の戦略です。</p>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🔄 積立 vs 一括投資</div>
+        <p>どちらが有利かは相場環境によります。実際には両方を組み合わせるのが最適です。</p>
+        <ul class="advice-steps" style="margin-top:8px">
+          <li>積立：ドルコスト平均法で価格変動リスクを分散</li>
+          <li>一括：早期に複利効果を最大化できる</li>
+          <li>現金がある場合：まず一括→その後毎月積立が王道</li>
+          <li>NISAは毎年の枠内でできるだけ早く使い切るのが有利</li>
+        </ul>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🏛️ NISA・iDeCoで税制優遇を最大化</div>
+        <p>投資利益には通常20.315%の税金がかかります。非課税口座を使うと複利効果が劇的に改善します。</p>
+        <table>
+          <tr><th>制度</th><th>年間上限</th><th>非課税期間</th></tr>
+          <tr><td>NISA（積立）</td><td>120万円</td><td>無期限</td></tr>
+          <tr><td>NISA（成長）</td><td>240万円</td><td>無期限</td></tr>
+          <tr><td>iDeCo</td><td>14.4〜81.6万</td><td>60歳まで</td></tr>
+        </table>
+        <p style="margin-top:8px">まずNISA年360万をフル活用、次にiDeCoで所得控除も獲得しましょう。</p>
+      </div>
+    </div>
+  </section>
+
   <div class="sim-cta">
     <h3>この結果をもとにお問い合わせください。</h3>
     <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>シミュレーション結果を持ってお気軽にお問い合わせください。</p>
@@ -201,6 +278,45 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 
 <script src="/nav.js" defer></script>
 <script>
+function fmtOku(man) {
+  if (man >= 10000) return (man/10000).toFixed(1).replace(/\.0$/,'')+'億円';
+  return man.toLocaleString()+'万円';
+}
+
+function updateAdvice(totalMan, principalMan, gainMan, rate, years) {
+  var card = document.getElementById('advice-card');
+  var title = document.getElementById('advice-title');
+  var body = document.getElementById('advice-body');
+  var ratio = principalMan > 0 ? gainMan / totalMan * 100 : 0;
+  var mult = principalMan > 0 ? (totalMan / principalMan) : 1;
+  var cls, t, html;
+
+  if (totalMan >= 10000) {
+    cls = 'best';
+    t = '🏆 1億円突破！資産形成の頂点に到達しています';
+    html = '<p>試算の結果、<strong>' + fmtOku(totalMan) + '</strong>（元本の<strong>' + mult.toFixed(1) + '倍</strong>）に達しています。このレベルになると資産保全と最適な出口戦略が重要です。</p><ul class="advice-steps"><li>資産の分散：国内株・外国株・債券・不動産（REIT）に分散してリスクを管理しましょう。</li><li>4%ルールを活用すれば年間<strong>' + Math.round(totalMan * 0.04).toLocaleString() + '万円</strong>を永続的に取り崩せます。</li><li>相続・贈与対策：1億円超の資産は相続税対策が必須。生前贈与・生命保険の活用を検討しましょう。</li><li>iDeCoの受け取り方・NISAの出口設計など、専門家と一緒に最適な戦略を立てましょう。</li></ul>';
+  } else if (ratio >= 55) {
+    cls = 'good';
+    t = '🎯 複利パワーが最大化しています（運用益 ' + ratio.toFixed(0) + '%）';
+    html = '<p>資産の<strong>' + ratio.toFixed(0) + '%</strong>が運用益です。元本の<strong>' + mult.toFixed(1) + '倍</strong>に成長しています。長期・積立・分散投資の力が最大限に発揮されています。</p><ul class="advice-steps"><li>利回りを維持しつつ、積立額を少し増やすと1億円への道が見えてきます。</li><li>株式比率が高すぎる場合、資産の10〜20%を債券・現金に切り替えてリスク調整を。</li><li>NISA成長投資枠（年240万）を使って一括投資分を追加すると効果的です。</li><li>この水準になったら、ポートフォリオの定期リバランス（年1〜2回）を習慣化しましょう。</li></ul>';
+  } else if (ratio >= 35) {
+    cls = 'default';
+    t = '✅ 順調に複利が機能しています（運用益 ' + ratio.toFixed(0) + '%）';
+    html = '<p>資産の<strong>' + ratio.toFixed(0) + '%</strong>が運用益です。複利の力が着実に積み上がっています。</p><ul class="advice-steps"><li>運用年数をあと5年延ばすだけで、最終資産が大幅に増加します。「売らない」が最大の戦略です。</li><li>利回り5〜7%を目指すなら、全世界株式インデックス（MSCI ACWI）や米国S&P500への投資が有力です。</li><li>毎月の積立額を1〜2万円増やすだけで、長期的には数百万円の差になります。</li><li>iDeCoを最大限活用し、積立額の全額を所得控除に。節税分をさらに再投資しましょう。</li></ul>';
+  } else if (ratio >= 15) {
+    cls = 'default';
+    t = '📈 着実に資産が積み上がっています（運用益 ' + ratio.toFixed(0) + '%）';
+    html = '<p>元本の<strong>' + mult.toFixed(1) + '倍</strong>まで成長中です。運用期間が長くなるほど複利効果が加速します。</p><ul class="advice-steps"><li>今の積立ペースを続けることが最も重要。積立を止めないことが成功の鍵です。</li><li>利回りが低い場合（3%未満）は、預金・債券中心から全世界株式へのシフトを検討しましょう。</li><li>ボーナス月は積立額を増やすと、年間の投資総額を効率的に高められます。</li><li>NISAのつみたて投資枠（月10万円）を使い切ることを最初の目標にしましょう。</li></ul>';
+  } else {
+    cls = 'warn';
+    t = '📋 利回りか運用期間を見直すと大きく改善できます';
+    html = '<p>現状の設定では複利効果が十分に出ていません。小さな変化が長期的に大きな差を生みます。</p><ul class="advice-steps"><li>利回り1%アップで最終資産は大幅に増加します。全世界株式インデックスファンドを検討しましょう。</li><li>運用年数を5年延ばすだけで複利効果が倍増するケースもあります。早期引退より長期運用を優先を。</li><li>積立額を月1〜2万でも増やすと、長期では数百万円の差になります。固定費の見直しを。</li><li>まずNISA口座を開設し、つみたて投資枠で全世界株式ファンドを毎月自動積立しましょう。</li></ul>';
+  }
+  card.className = 'advice-card ' + cls;
+  title.textContent = t;
+  body.innerHTML = html;
+}
+
 var chart = null;
 var PRESETS = {
   '30s':  {initial:200,  monthly:5,   rate:5,   years:30},
@@ -221,7 +337,10 @@ function applyPreset(key) {
 }
 function syncLabel(key, val) {
   val = parseFloat(val);
-  if (key==='initial') document.getElementById('lbl-initial').textContent = val.toLocaleString()+'万円';
+  if (key==='initial') {
+    if (val >= 10000) document.getElementById('lbl-initial').textContent = (val/10000).toFixed(1).replace(/\.0$/,'')+'億円';
+    else document.getElementById('lbl-initial').textContent = val.toLocaleString()+'万円';
+  }
   else if (key==='monthly') document.getElementById('lbl-monthly').textContent = (val%1===0?val:val.toFixed(1))+'万円';
   else if (key==='rate') document.getElementById('lbl-rate').textContent = parseFloat(val).toFixed(1)+'%';
   else if (key==='years') document.getElementById('lbl-years').textContent = val+'年';
@@ -247,6 +366,7 @@ function calc() {
   document.getElementById('r-gain').textContent        = gainMan.toLocaleString()+'万円';
   document.getElementById('r-ratio').textContent       = (principalMan>0?Math.round(gainMan/totalMan*100):0)+'%';
   updateChart(initial, monthly, rate, years);
+  updateAdvice(totalMan, principalMan, gainMan, rate, years);
 }
 function updateChart(initial, monthly, rate, years) {
   var steps=[], stepSize=Math.max(5,Math.round(years/4/5)*5);
