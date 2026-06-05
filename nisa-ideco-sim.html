@@ -87,6 +87,33 @@ a { color: inherit; text-decoration: none; }
 .cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
 .cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
 .cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.advice-card { background: #fff; border: 2px solid var(--sky); border-radius: 16px; padding: 22px 24px; margin-top: 28px; transition: border-color .3s; }
+.advice-card.good { border-color: var(--green); }
+.advice-card.warn { border-color: var(--amber); }
+.advice-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; margin-bottom: 10px; }
+.advice-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.advice-body { font-size: 13.5px; color: var(--text); line-height: 1.85; margin-bottom: 14px; }
+.advice-steps { list-style: none; }
+.advice-steps li { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
+.advice-steps li:last-child { border-bottom: none; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--sky); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.advice-card.good .step-num { background: var(--green); }
+.advice-card.warn .step-num { background: var(--amber); }
+.fp-section { margin-top: 36px; }
+.fp-section h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px){ .fp-grid { grid-template-columns: 1fr; } }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.fp-card-body { font-size: 12.5px; color: var(--text); line-height: 1.85; }
+.fp-card-body ul { padding-left: 16px; margin-top: 6px; }
+.fp-card-body li { margin-bottom: 5px; }
+.fp-compare-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+.fp-compare-table th { background: var(--navy); color: #fff; padding: 8px 10px; text-align: center; font-size: 11.5px; }
+.fp-compare-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: center; }
+.fp-compare-table tr:last-child td { border-bottom: none; }
+.fp-compare-table td:first-child { text-align: left; font-weight: 700; color: var(--text-light); }
+.warn-box { background: var(--amberl); border-left: 4px solid var(--amber); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 16px; font-size: 12.5px; line-height: 1.8; color: #92400e; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
@@ -215,6 +242,65 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
     </div>
   </div>
+
+  <div id="advice-card" class="advice-card" style="display:none;"></div>
+
+  <div class="fp-section">
+    <h3>FPが教える NISA・iDeCo 完全ガイド</h3>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">NISA（新NISA）の特徴</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>非課税期間：無期限</strong>（旧NISAは有期限）</li>
+            <li>年間投資枠：つみたて120万円＋成長240万円＝計360万円</li>
+            <li>生涯投資枠：1,800万円（成長枠は1,200万円上限）</li>
+            <li>いつでも引き出し可能。教育費・住宅購入など目的を問わない</li>
+            <li>所得控除なし。課税所得を下げる効果はないが、運用益が永久非課税</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">iDeCoの特徴</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>掛金が全額所得控除</strong>→所得税・住民税が即年に節税</li>
+            <li>運用益も非課税で複利が続く</li>
+            <li>受取時も退職所得控除・公的年金等控除の優遇あり</li>
+            <li><strong>60歳まで引き出し不可</strong>（老後専用の強制貯蓄）</li>
+            <li>掛金上限：会社員2.3万/月、自営業6.8万/月、専業主婦2万/月</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">NISA vs iDeCo どちらを優先？</div>
+        <div class="fp-card-body">
+          <table class="fp-compare-table">
+            <thead><tr><th>観点</th><th>NISA</th><th>iDeCo</th></tr></thead>
+            <tbody>
+              <tr><td>流動性</td><td>高い（いつでも可）</td><td>低い（60歳まで不可）</td></tr>
+              <tr><td>節税タイミング</td><td>運用益のみ</td><td>今すぐ＋運用益</td></tr>
+              <tr><td>向いている人</td><td>全員・目的問わず</td><td>高所得・老後特化</td></tr>
+              <tr><td>FP推奨順</td><td>1番目</td><td>2番目</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">長期積立で重要な3原則</div>
+        <div class="fp-card-body">
+          <ul>
+            <li><strong>長期</strong>：10年以上保有することで元本割れリスクが大幅に低下。20年以上ではほぼゼロに近い（過去実績）</li>
+            <li><strong>積立</strong>：毎月定額を自動購入すると「ドルコスト平均法」により平均取得単価が下がる</li>
+            <li><strong>分散</strong>：全世界株式インデックスや国内・海外債券を組み合わせることでリスクを分散</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="warn-box">
+      運用利回りはあくまでシミュレーション上の仮定値です。実際の投資は元本割れリスクがあります。iDeCoは加入・運営管理手数料（月170〜600円）がかかるため、節税効果と比較して判断してください。個別の最適戦略はFPへご相談ください。
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -314,6 +400,98 @@ function calc() {
   }
 
   renderChart(nisaFV, idecoFV, taxableFV, years, monthly, rate);
+
+  var annualTaxSaving = 0;
+  if (currentTab === 'ideco') {
+    annualTaxSaving = monthly * 12 * taxRate(income);
+  }
+  updateAdvice(currentTab, diff, annualTaxSaving, income, years);
+}
+
+function updateAdvice(tab, diff, annualTaxSaving, income, years) {
+  var card = document.getElementById('advice-card');
+  card.style.display = '';
+  var cls, labelColor, title, body, steps;
+
+  if (tab === 'taxable') {
+    cls = 'warn';
+    labelColor = 'var(--amber)';
+    title = '課税口座のままでは損をしています';
+    body = '課税口座では運用益に20.315%の税金がかかります。NISAやiDeCoに切り替えるだけで、同じ積立・同じ利回りでも数十〜数百万円の差が生まれます。今すぐ行動する価値があります。';
+    steps = [
+      'SBI証券・楽天証券・auカブコム等でNISA口座を開設（申込から開設まで最短1週間）',
+      '課税口座の積立をNISAへ移行する（既存の課税口座保有分は売却せず保有継続でもよい）',
+      '余裕があれば並行してiDeCoも検討（所得控除の節税効果が課税口座との差をさらに拡大）'
+    ];
+  } else if (tab === 'ideco') {
+    var totalTaxSaving = Math.round(annualTaxSaving * years);
+    if (annualTaxSaving < 10000) {
+      cls = '';
+      labelColor = 'var(--sky)';
+      title = 'iDeCoは老後資産の強制貯蓄として有効です';
+      body = '現在の所得税率では年間節税効果は小さめですが、運用益の非課税と強制的に老後資産を積み立てられる点でiDeCoには価値があります。NISAと組み合わせるのが最適です。';
+      steps = [
+        'まずNISAを優先して開設・積立を始める（流動性が高く汎用性が高い）',
+        'iDeCoは60歳まで引き出せないため、生活費の3〜6か月分の緊急資金を確保してから加入を検討',
+        '将来、収入が増えたタイミングでiDeCo掛金を増額すると節税効果が大きくなる'
+      ];
+    } else {
+      cls = 'good';
+      labelColor = 'var(--green)';
+      var annualManWen = Math.round(annualTaxSaving / 10000 * 10) / 10;
+      var totalManWen = Math.round(totalTaxSaving / 10000 * 10) / 10;
+      title = years + '年間で約' + totalManWen + '万円の節税効果が見込まれます';
+      body = 'iDeCoの掛金は全額所得控除のため、年間約' + annualManWen + '万円の税金が戻ります。この節税額を再投資すれば複利で資産が加速します。';
+      steps = [
+        '掛金上限まで積立てることで節税を最大化（会社員2.3万/月、自営業6.8万/月）',
+        '受取時は「一時金」として受取ると退職所得控除が適用され課税が最小化できる',
+        'NISAと並行して活用し、NISAは自由に使える資産・iDeCoは老後専用資産として役割を分担'
+      ];
+    }
+  } else {
+    if (diff < 500000) {
+      cls = '';
+      labelColor = 'var(--sky)';
+      title = 'NISAを始めるだけで着実に差が広がります';
+      body = '積立額・期間・利回りを伸ばすほど、NISAの非課税メリットは拡大します。まだ始めていない方は今すぐ口座開設を。既に始めている方は積立額の増額を検討しましょう。';
+      steps = [
+        'NISA口座を開設し「つみたて投資枠」で全世界株式・S&P500連動インデックスを選択',
+        '毎月の積立額を無理のない範囲で設定し、自動積立にして継続する（人間は相場が下がると売りたくなるため自動化が重要）',
+        '年末に「来年から月1万円増額」のような小さなステップアップを習慣化する'
+      ];
+    } else if (diff < 2000000) {
+      cls = 'good';
+      labelColor = 'var(--green)';
+      title = 'NISAで課税口座より' + fmt(diff) + '多く資産を築けます';
+      body = '非課税の恩恵が数百万円規模になっています。この差は長期になるほど加速します。年間投資枠を最大限活用し、iDeCoとの組み合わせも検討する段階です。';
+      steps = [
+        '年間360万円の投資枠（つみたて120万＋成長240万）を計画的に使い切る',
+        '生涯投資枠1,800万円を達成するまでの年数を逆算してペースを設定する',
+        'iDeCoも並行して活用すると所得控除（今すぐ節税）＋運用益非課税の二重効果が得られる'
+      ];
+    } else {
+      cls = 'good';
+      labelColor = 'var(--green)';
+      title = 'NISAの節税効果は' + fmt(diff) + '。総合的な資産設計を';
+      body = '課税口座に対して' + fmt(diff) + 'の優位性があります。この規模になると、NISA・iDeCo・ふるさと納税・生命保険控除を組み合わせたトータルな節税設計が重要です。';
+      steps = [
+        'NISA成長投資枠240万円も活用し、インデックス＋ETF等でポートフォリオを多様化',
+        'iDeCoで年間の所得控除を確保し、確定申告で還付を受け取ってその分を再投資',
+        '総合的な節税ポートフォリオ（NISA・iDeCo・ふるさと納税・控除）をFPと設計することで効果が最大化する'
+      ];
+    }
+  }
+
+  var html = '<div class="advice-label" style="color:' + labelColor + '">あなたへのアドバイス</div>';
+  html += '<div class="advice-title">' + title + '</div>';
+  html += '<div class="advice-body">' + body + '</div>';
+  html += '<ol class="advice-steps">';
+  steps.forEach(function(s, i) {
+    html += '<li><span class="step-num">' + (i + 1) + '</span><span>' + s + '</span></li>';
+  });
+  html += '</ol>';
+  card.className = 'advice-card' + (cls ? ' ' + cls : '');
+  card.innerHTML = html;
 }
 
 function renderChart(nisaFV, idecoFV, taxableFV, years, monthly, rate) {
