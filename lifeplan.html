@@ -375,6 +375,31 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <div class="panel-title"><span class="icon"></span>収入を設定</div>
   <p class="panel-desc">現在の収入と将来の変化を入力してください。定年後の年金・継続雇用収入も設定できます。</p>
 
+  <div class="card" style="border:1.5px solid #bae6fd;background:#f0f9ff">
+    <div class="card-title" style="cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between" onclick="toggleTH()">
+      <span>💡 手取り年収の目安を計算する</span>
+      <span id="th-icon" style="font-size:12px;color:var(--sky)">▼ 開く</span>
+    </div>
+    <div id="th-body" style="display:none;margin-top:16px">
+      <p style="font-size:12px;color:var(--gray);margin-bottom:14px">税込年収・子供の人数から手取りを概算します。社会保険15%・給与所得控除・扶養控除・所得税・住民税を考慮した目安です。</p>
+      <div class="grid-2" style="margin-bottom:12px">
+        <div class="field">
+          <label>本人の税込年収</label>
+          <div class="field-row"><input type="number" id="th-self" value="600" min="0" oninput="calcTH()"><span class="field-unit">万円</span></div>
+        </div>
+        <div class="field">
+          <label>配偶者の税込年収</label>
+          <div class="field-row"><input type="number" id="th-spouse" value="0" min="0" oninput="calcTH()"><span class="field-unit">万円</span></div>
+        </div>
+        <div class="field">
+          <label>子供の人数</label>
+          <div class="field-row"><input type="number" id="th-kids" value="0" min="0" max="6" oninput="calcTH()"><span class="field-unit">人</span></div>
+        </div>
+      </div>
+      <div id="th-result"></div>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-title">本人の収入</div>
     <div class="grid-2">
@@ -1261,6 +1286,94 @@ function _generatePlan(){
 toggleSpouse();
 toggleHousing();
 renderChildrenFields();
+
+function toggleTH(){
+  const b=document.getElementById('th-body');
+  const ic=document.getElementById('th-icon');
+  const open=b.style.display==='none';
+  b.style.display=open?'block':'none';
+  ic.textContent=open?'▲ 閉じる':'▼ 開く';
+  if(open)calcTH();
+}
+
+function calcTH(){
+  const selfG=parseFloat(document.getElementById('th-self').value)||0;
+  const spouseG=parseFloat(document.getElementById('th-spouse').value)||0;
+  const kids=parseInt(document.getElementById('th-kids').value)||0;
+
+  function kyuyoKojo(g){
+    const y=g*10000;
+    if(y<=1625000)return 550000;
+    if(y<=1800000)return y*0.4-100000;
+    if(y<=3600000)return y*0.3+80000;
+    if(y<=6600000)return y*0.2+440000;
+    if(y<=8500000)return y*0.1+1100000;
+    return 1950000;
+  }
+  function shotokuTax(k){
+    if(k<=0)return 0;
+    if(k<=1950000)return k*0.05;
+    if(k<=3300000)return k*0.10-97500;
+    if(k<=6950000)return k*0.20-427500;
+    if(k<=9000000)return k*0.23-636000;
+    if(k<=18000000)return k*0.33-1536000;
+    if(k<=40000000)return k*0.40-2796000;
+    return k*0.45-4796000;
+  }
+  function calcOne(gMan, fuyo){
+    const g=gMan*10000;
+    if(g<=0)return null;
+    const shakai=Math.round(g*0.15);
+    const kojo=kyuyoKojo(gMan);
+    const kiso=480000;
+    const kazei=Math.max(0,g-shakai-kojo-kiso-fuyo);
+    const st=Math.round(shotokuTax(kazei)*1.021);
+    const jt=Math.round(kazei*0.10);
+    const th=g-shakai-st-jt;
+    return{g,shakai,st,jt,th,kazei};
+  }
+
+  // 扶養控除：主たる生計者（本人）に全適用。16歳未満は実際0だが目安として38万/人
+  const fuyoKojo=kids*380000;
+  const self=calcOne(selfG,fuyoKojo);
+  const spouse=calcOne(spouseG,0);
+
+  function row(label,val,cls=''){
+    const sign=val<0?'':val>0?'':' ';
+    return `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:13px${cls?';'+cls:''}">
+      <span>${label}</span><span>${val>=0?'+':'-'}${Math.abs(Math.round(val/10000)).toLocaleString()}万円</span></div>`;
+  }
+  function card(title,r,id){
+    if(!r)return '';
+    const low=r.g<=1030000;
+    const warn=r.g<=1300000&&r.g>1030000;
+    return `<div style="background:#fff;border:1px solid #e0f2fe;border-radius:10px;padding:14px 16px;margin-bottom:12px">
+      <div style="font-weight:700;font-size:13px;margin-bottom:10px;color:var(--navy)">${title}</div>
+      ${row('税込年収',r.g,'color:#555')}
+      ${row('社会保険料',-r.shakai,'color:#f59e0b')}
+      ${row('所得税',-r.st,'color:#f59e0b')}
+      ${row('住民税',-r.jt,'color:#f59e0b')}
+      <div style="border-top:1.5px solid #bae6fd;margin:8px 0"></div>
+      <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:900;color:var(--sky)">
+        <span>推定手取り</span>
+        <span>${Math.round(r.th/10000).toLocaleString()}万円/年（月${Math.round(r.th/12/10000)}万円）</span>
+      </div>
+      ${low?'<p style="font-size:11px;color:#059669;margin-top:8px">103万円以下のため所得税・住民税はほぼ0です</p>':''}
+      ${warn?'<p style="font-size:11px;color:#d97706;margin-top:8px">103〜130万円の範囲は社会保険の扶養ライン付近。勤め先の規模・条件を確認してください</p>':''}
+      <p style="font-size:11px;color:var(--gray);margin-top:6px">※協会けんぽ・社保加入者の概算。個人差があります</p>
+      <button onclick="applyTH('${id}',${Math.max(0,Math.round(r.th/10000))})" style="margin-top:10px;padding:6px 14px;font-size:12px;background:var(--sky);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700">この金額を手取り欄に反映する</button>
+    </div>`;
+  }
+
+  document.getElementById('th-result').innerHTML=
+    (self||spouse?'':'')+card('本人',self,'self')+card('配偶者',spouse,'spouse');
+}
+
+function applyTH(who,val){
+  if(who==='self')document.getElementById('income-self').value=val;
+  else document.getElementById('income-spouse').value=val;
+  showToast('✅ 手取り'+val+'万円を入力しました');
+}
 </script>
 </body>
 </html>
