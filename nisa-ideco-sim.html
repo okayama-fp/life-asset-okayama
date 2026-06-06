@@ -406,6 +406,9 @@ function calc() {
     annualTaxSaving = monthly * 12 * taxRate(income);
   }
   updateAdvice(currentTab, diff, annualTaxSaving, income, years);
+  if(typeof gtag==='function'){
+    gtag('event','simulate_nisa',{account_type:currentTab,monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',years:years,rate:rate,income_range:(Math.floor(income/100)*100)+'〜'+(Math.floor(income/100)*100+100)+'万'});
+  }
 }
 
 function updateAdvice(tab, diff, annualTaxSaving, income, years) {

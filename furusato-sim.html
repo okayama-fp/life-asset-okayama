@@ -404,6 +404,9 @@ function calc() {
   document.getElementById('r-benefit').textContent = '約'+benefit.toLocaleString()+'円相当';
   renderTable();
   updateAdvice(limit);
+  if(typeof gtag==='function'){
+    gtag('event','simulate_furusato',{income_range:(Math.floor(income/100)*100)+'〜'+(Math.floor(income/100)*100+100)+'万',family:family,limit_range:(Math.floor(limit/10000/10)*10)+'〜'+(Math.floor(limit/10000/10)*10+10)+'万'});
+  }
 }
 
 function updateAdvice(limit) {

@@ -396,6 +396,10 @@ function calc() {
   renderChart(age, assets, income, expense, rate, result.target, result.age);
   renderSensitivity(age, assets, income, expense, fe, rate);
   updateAdvice(result, savingRate);
+  if(typeof gtag==='function'){
+    var rng=function(v,s){return (Math.floor(v/s)*s)+'〜'+(Math.floor(v/s)*s+s)+'万';};
+    gtag('event','simulate_fire',{assets_range:rng(assets,100),income_range:rng(income,100),expense_range:rng(expense,50),rate:rate,result:result.age?'ok':'impossible',years_to_fire:result.age?result.years:null});
+  }
 }
 
 function renderChart(age, assets, income, expense, rate, target, fireAge) {
