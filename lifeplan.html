@@ -469,11 +469,12 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <div class="field">
         <label>月々の生活費（現在）</label>
         <div class="field-row"><input type="number" id="living-cost" value="25" min="0"><span class="field-unit">万円/月</span></div>
-        <p style="font-size:11px;color:var(--gray);margin-top:4px">食費・光熱費・通信費・保険料・日常の子育て費用をすべて含めて入力</p>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">食費・光熱費・通信費・日用品など基本分のみ。旅行・保険料は下の専用欄で入力（2重計上に注意）</p>
       </div>
       <div class="field">
         <label>老後の月生活費（定年後）</label>
         <div class="field-row"><input type="number" id="living-cost-retire" value="22" min="0"><span class="field-unit">万円/月</span></div>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">旅行・保険料は含めず基本生活費のみ</p>
       </div>
       <div class="field">
         <label>インフレ率（生活費上昇）</label>
@@ -522,10 +523,12 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <div class="field">
         <label>旅行・趣味（年間）</label>
         <div class="field-row"><input type="number" id="leisure-cost" value="30" min="0"><span class="field-unit">万円/年</span></div>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">生活費に含めていない場合のみ入力。含めた場合は0</p>
       </div>
       <div class="field">
-        <label>保険料（年間・生活費に含む場合は0）</label>
+        <label>保険料（年間）</label>
         <div class="field-row"><input type="number" id="insurance-cost" value="0" min="0"><span class="field-unit">万円/年</span></div>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">生活費に含めていない場合のみ入力。含めた場合は0</p>
       </div>
     </div>
   </div>
