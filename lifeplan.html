@@ -469,12 +469,12 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <div class="field">
         <label>月々の生活費（現在）</label>
         <div class="field-row"><input type="number" id="living-cost" value="25" min="0"><span class="field-unit">万円/月</span></div>
-        <p style="font-size:11px;color:var(--gray);margin-top:4px">食費・光熱費・通信費・日用品など基本分のみ。住宅ローン・旅行・保険料は下の専用欄で入力（2重計上に注意）</p>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">食費・光熱費・通信費・旅行・保険料など生活全般を含む。住宅ローンは専用欄で入力（2重計上に注意）</p>
       </div>
       <div class="field">
         <label>老後の月生活費（定年後）</label>
         <div class="field-row"><input type="number" id="living-cost-retire" value="22" min="0"><span class="field-unit">万円/月</span></div>
-        <p style="font-size:11px;color:var(--gray);margin-top:4px">旅行・保険料は含めず基本生活費のみ</p>
+        <p style="font-size:11px;color:var(--gray);margin-top:4px">旅行・保険料を含む生活全般。住宅ローンは別欄</p>
       </div>
       <div class="field">
         <label>インフレ率（生活費上昇）</label>
@@ -519,16 +519,6 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <div class="field">
         <label>リフォーム予定年齢</label>
         <div class="field-row"><input type="number" id="reform-age" value="55" min="30" max="85"><span class="field-unit">歳</span></div>
-      </div>
-      <div class="field">
-        <label>旅行・趣味（年間）</label>
-        <div class="field-row"><input type="number" id="leisure-cost" value="30" min="0"><span class="field-unit">万円/年</span></div>
-        <p style="font-size:11px;color:var(--gray);margin-top:4px">生活費に含めていない場合のみ入力。含めた場合は0</p>
-      </div>
-      <div class="field">
-        <label>保険料（年間）</label>
-        <div class="field-row"><input type="number" id="insurance-cost" value="0" min="0"><span class="field-unit">万円/年</span></div>
-        <p style="font-size:11px;color:var(--gray);margin-top:4px">生活費に含めていない場合のみ入力。含めた場合は0</p>
       </div>
     </div>
   </div>
@@ -764,14 +754,14 @@ function downloadCSV(){
   const headers=['西暦','本人年齢','配偶者年齢','主なイベント',
     '収入合計(万円)','本人収入(万円)','配偶者収入(万円)','一時収入(万円)',
     '支出合計(万円)','生活費(万円)','住宅ローン(万円)','家賃(万円)',
-    '教育費(万円)','車・イベント(万円)','趣味・旅行(万円)','保険料(万円)',
+    '教育費(万円)','車・イベント(万円)',
     '年間収支(万円)','現金資産(万円)','NISA資産(万円)','iDeCo資産(万円)','投資資産(万円)','総資産(万円)','ローン残高(万円)'];
   const rows=[headers.join(',')];
   lastRows.forEach(r=>{
     rows.push([r.yr,r.selfAge,lastHasSpouse?r.spouseAge:'',r.events.join(' '),
       r.totalIncome,r.incSelf,r.incSpouse,r.lumpIncome,
       r.totalExpense,r.baseLiving,r.loanExp,r.rentExp,
-      r.eduExp,r.carExp,r.leisure,r.insurance,
+      r.eduExp,r.carExp,
       r.cf,r.cashAsset,Math.round(r.nisaAsset),Math.round(r.idecoAsset),Math.round(r.investAsset||0),r.totalAsset,r.loanRemaining
     ].map(v=>v===undefined?'':v).join(','));
   });
@@ -918,8 +908,6 @@ function _generatePlan(){
   const carCycle=parseInt(g('car-cycle'))||0;
   const reformCost=parseFloat(g('reform-cost'))||0;
   const reformAge=parseInt(g('reform-age'))||55;
-  const leisureCost=parseFloat(g('leisure-cost'))||0;
-  const insuranceCost=parseFloat(g('insurance-cost'))||0;
 
   const housingType=g('housing-type','owned_no_loan');
   const loanBalance=housingType==='owned_loan'?parseFloat(g('loan-balance'))||0:0;
@@ -1010,12 +998,10 @@ function _generatePlan(){
     if(carCycle>0&&y>0&&y%carCycle===0&&selfAge<80)carExp=carCost;
     let reformExp=0;
     if(selfAge===reformAge)reformExp=reformCost;
-    const leisure=selfAge<75?leisureCost:0;
-    const insurance=selfAge<75?insuranceCost:0;
     const nisaContrib=y<30?nisaMonthly*12:0;
     const idecoContrib=selfAge<60?idecoMonthly*12:0;
     const investContrib=nisaContrib+idecoContrib;
-    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+insurance;
+    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp;
     const cf=totalIncome-totalExpense-investContrib;
 
     const _rn=nisaRate/100/12,_Rn=Math.pow(1+_rn,12);
@@ -1049,7 +1035,7 @@ function _generatePlan(){
 
     rows.push({yr,selfAge,spouseAge,events,
       incSelf:Math.round(incSelf),incSpouse:Math.round(incSpouse),lumpIncome:Math.round(lumpIncome),totalIncome:Math.round(totalIncome),
-      baseLiving:Math.round(baseLiving),loanExp:Math.round(loanExp),rentExp:Math.round(rentExp),eduExp:Math.round(eduExp),carExp:Math.round(carExp),reformExp:Math.round(reformExp),leisure:Math.round(leisure),insurance:Math.round(insurance),nisaContrib:Math.round(nisaContrib),idecoContrib:Math.round(idecoContrib),totalExpense:Math.round(totalExpense),
+      baseLiving:Math.round(baseLiving),loanExp:Math.round(loanExp),rentExp:Math.round(rentExp),eduExp:Math.round(eduExp),carExp:Math.round(carExp),reformExp:Math.round(reformExp),nisaContrib:Math.round(nisaContrib),idecoContrib:Math.round(idecoContrib),totalExpense:Math.round(totalExpense),
       cf:Math.round(cf),cashAsset:Math.round(cashAsset),nisaAsset:Math.round(nisaAsset),idecoAsset:Math.round(idecoAsset),investAsset:Math.round(investAsset),totalAsset:Math.round(totalAsset),
       loanRemaining:Math.round(loanRemaining),drawdown:Math.round(drawdown),pensionInc
     });
@@ -1200,7 +1186,7 @@ function _generatePlan(){
   document.getElementById('plan-thead').innerHTML=`<tr>
     <th class="cat">西暦</th><th class="col-age">本人</th>${hasSpouse?'<th class="col-age">配偶者</th>':''}<th>主なイベント</th>
     <th>収入合計</th><th class="col-sec">うち年金</th><th>支出合計</th><th>年間収支</th>
-    <th class="col-sec">住宅ローン</th><th class="col-sec">高校・大学</th><th class="col-sec">車・改装</th><th class="col-sec">旅行</th><th class="col-sec">積立額(NISA+iDeCo)</th>
+    <th class="col-sec">住宅ローン</th><th class="col-sec">高校・大学</th><th class="col-sec">車・改装</th><th class="col-sec">積立額(NISA+iDeCo)</th>
     <th>現金資産</th><th class="col-sec">NISA残高</th><th class="col-sec">iDeCo残高</th><th>投資資産</th><th>総資産</th>
   </tr>`;
   document.getElementById('plan-tbody').innerHTML=rows.map(r=>{
@@ -1222,7 +1208,6 @@ function _generatePlan(){
     <td class="col-sec">${r.loanExp>0?r.loanExp.toLocaleString():'-'}</td>
     <td class="col-sec">${r.eduExp>0?r.eduExp.toLocaleString():'-'}</td>
     <td class="col-sec${(r.carExp+r.reformExp)>0?' minus':''}">${(r.carExp+r.reformExp)>0?(r.carExp+r.reformExp).toLocaleString():'-'}</td>
-    <td class="col-sec">${r.leisure>0?r.leisure.toLocaleString():'-'}</td>
     <td class="col-sec ${(r.nisaContrib+r.idecoContrib)>0?'plus':''}">${(r.nisaContrib+r.idecoContrib)>0?(r.nisaContrib+r.idecoContrib).toLocaleString():'-'}</td>
     <td class="${r.cashAsset<0?'minus':''}">${r.cashAsset.toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(r.nisaAsset).toLocaleString()}</td>
