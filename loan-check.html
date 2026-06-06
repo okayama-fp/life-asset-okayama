@@ -770,6 +770,9 @@ function calc() {
 
   calcDeduction(P, rate, inc);
   calcExtra();
+  if(typeof gtag==='function'){
+    gtag('event','simulate_loan_check',{balance_range:(Math.floor(P/500)*500)+'〜'+(Math.floor(P/500)*500+500)+'万',rate:rate,years:yrs,result:ratio>35?'over':ratio>25?'warn':'ok'});
+  }
 }
 
 function calcExtra() {

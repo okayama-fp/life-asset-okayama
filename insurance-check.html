@@ -397,6 +397,9 @@ function calc() {
     saveBox.textContent = '適正範囲内です。現在の保険内容を維持しましょう。';
   }
   updateAdvice(ratio, diff, proper);
+  if(typeof gtag==='function'){
+    gtag('event','simulate_insurance',{result:ratio>1.3?'over':ratio>1.1?'warn':'ok',income_range:(Math.floor(income/100)*100)+'〜'+(Math.floor(income/100)*100+100)+'万',family:family,age_group:age<30?'20代':age<40?'30代':age<50?'40代':'50代以上'});
+  }
 }
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
