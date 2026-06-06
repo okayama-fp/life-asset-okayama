@@ -1011,8 +1011,9 @@ function _generatePlan(){
     const insurance=selfAge<75?insuranceCost:0;
     const nisaContrib=y<30?nisaMonthly*12:0;
     const idecoContrib=selfAge<60?idecoMonthly*12:0;
-    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+nisaContrib+idecoContrib;
-    const cf=totalIncome-totalExpense;
+    const investContrib=nisaContrib+idecoContrib;
+    const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure+insurance;
+    const cf=totalIncome-totalExpense-investContrib;
 
     const _rn=nisaRate/100/12,_Rn=Math.pow(1+_rn,12);
     nisaAsset=y<30?nisaAsset*_Rn+(_rn===0?nisaMonthly*12:nisaMonthly*(_Rn-1)/_rn):nisaAsset*_Rn;
