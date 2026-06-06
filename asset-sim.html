@@ -367,6 +367,9 @@ function calc() {
   document.getElementById('r-ratio').textContent       = (principalMan>0?Math.round(gainMan/totalMan*100):0)+'%';
   updateChart(initial, monthly, rate, years);
   updateAdvice(totalMan, principalMan, gainMan, rate, years);
+  if(typeof gtag==='function'){
+    gtag('event','simulate_asset',{initial_range:(Math.floor(initial/100)*100)+'〜'+(Math.floor(initial/100)*100+100)+'万',monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',rate:rate,years:years});
+  }
 }
 function updateChart(initial, monthly, rate, years) {
   var steps=[], stepSize=Math.max(5,Math.round(years/4/5)*5);

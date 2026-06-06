@@ -869,6 +869,9 @@ function calc() {
   renderChart(totalNeeded, totalPension, savings, nisa, ideco, invest, Math.max(gap, 0));
   updateNextAction(gap, monthlyNeed, covPct, yearsToRetire);
   calcExtra();
+  if(typeof gtag==='function'){
+    gtag('event','simulate_retirement_gap',{age_group:age<40?'30代':age<50?'40代':age<60?'50代':'60代',retire_age:retire,expense_range:(Math.floor(expense/5)*5)+'〜'+(Math.floor(expense/5)*5+5)+'万',result:gap>0?'shortage':'sufficient'});
+  }
 }
 
 function renderChart(needed, pension, savings, nisa, ideco, invest, deficit) {

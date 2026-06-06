@@ -391,6 +391,9 @@ function calc() {
 
   renderChart(m1, m2);
   updateAdvice(totalSave, monthlySave, breakeven);
+  if(typeof gtag==='function'){
+    gtag('event','simulate_loan_refinance',{balance_range:(Math.floor(bal/500)*500)+'〜'+(Math.floor(bal/500)*500+500)+'万',result:totalSave>0?'save':'costly',breakeven_months:isFinite(breakeven)?Math.round(breakeven):null,period:period});
+  }
 }
 
 function renderChart(m1, m2) {
