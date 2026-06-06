@@ -1279,6 +1279,19 @@ function _generatePlan(){
   document.getElementById('btn-csv').style.display='block';
   document.getElementById('btn-print').style.display='block';
 
+  if(typeof gtag==='function'){
+    const rng=(v,s)=>(Math.floor(v/s)*s)+'〜'+(Math.floor(v/s)*s+s)+'万';
+    gtag('event','simulate_lifeplan',{
+      income_range: rng(incomeSelf,100),
+      has_spouse: hasSpouse,
+      children_count: childrenCount,
+      retire_age: retireSelf,
+      housing_type: housingType,
+      plan_years: totalYears,
+      result: depleteRow?'danger':minAsset<500?'warn':'ok'
+    });
+  }
+
   goStep(6);
   document.getElementById('panel-6').scrollIntoView({behavior:'smooth',block:'start'});
 }
