@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ライフプランを作る7つのメリット｜老後・教育費・住宅ローンを数字で把握｜ライフアセットオフィス</title>
+<meta name="description" content="ライフプランを作ると何が変わるのか。老後の資金不足の早期発見、教育費とローンの衝突回避、NISA開始タイミングの最適化など、7つの具体的なメリットを解説します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+  gtag('event', 'view_blog_article', { article: 'lifeplan_merits' });
+</script>
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --cream: #f0ece3;
+    --green: #1a6b3c;
+    --green-pale: #e8f5ee;
+    --green-mid: #c8e6d4;
+    --accent: #c0392b;
+    --gold: #b7860b;
+    --muted: #6b7280;
+    --border: #e0d9ce;
+    --white: #fff;
+    --shadow: 0 4px 32px rgba(0,0,0,.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.95;
+    font-size: 16px;
+  }
+
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo { font-size: 17px; font-weight: 900; color: var(--green); }
+  .nav-logo span { font-size: 10px; font-weight: 400; color: var(--muted); display: block; }
+  .nav-links { display: flex; gap: 24px; font-size: 13px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: #fff; border: none; border-radius: 20px; padding: 8px 18px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  @media(max-width:640px) { .nav-links { display: none; } }
+
+  .hero {
+    background-color: #1a6b3c;
+    background-image: linear-gradient(160deg, #0f3d22 0%, #1a6b3c 60%, #2d8a52 100%);
+    padding: 72px 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,.015) 0, rgba(255,255,255,.015) 1px, transparent 1px, transparent 30px);
+  }
+  .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7ee8a2;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    letter-spacing: -.01em;
+  }
+  .hero h1 em { color: #7ee8a2; font-style: normal; border-bottom: 2px solid rgba(126,232,162,.4); }
+  .hero-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    font-family: 'DM Mono', monospace;
+    flex-wrap: wrap;
+  }
+
+  article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  .toc {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc-title { font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { padding-left: 18px; }
+  .toc li { margin: 7px 0; font-size: 14px; }
+  .toc a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(19px, 2.8vw, 26px);
+    font-weight: 900;
+    margin: 60px 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .sec-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--white);
+    background: var(--green);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--green);
+    line-height: 1.5;
+  }
+
+  p { margin-bottom: 18px; }
+
+  .callout {
+    padding: 18px 22px;
+    margin: 28px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .callout-key { background: var(--green-pale); border-left: 4px solid var(--green); }
+  .callout-warn { background: #fef6e4; border-left: 4px solid var(--gold); }
+  .callout-danger { background: #fdecea; border-left: 4px solid var(--accent); }
+  .callout strong { font-weight: 700; }
+
+  .pull-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 700;
+    line-height: 1.65;
+    color: var(--green);
+    padding: 28px 32px;
+    margin: 40px 0;
+    border-left: 4px solid var(--green);
+    background: var(--green-pale);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* STAT ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .stat-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 18px 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--green);
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .stat-unit { font-size: 18px; }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .stat-source {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-top: 8px;
+    line-height: 1.5;
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+    width: 100%;
+    text-align: left;
+  }
+  .copy-btn {
+    margin-top: 10px;
+    padding: 5px 14px;
+    background: var(--green-pale);
+    color: var(--green);
+    border: 1px solid var(--green-mid);
+    border-radius: 20px;
+    font-size: 11px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .copy-btn:hover { background: var(--green-mid); }
+
+  /* MERIT GRID */
+  .merit-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .merit-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--green);
+    border-radius: 0 12px 12px 0;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+  .merit-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .merit-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--green);
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .merit-card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .merit-card p { font-size: 14px; color: #333; line-height: 1.85; margin: 0; }
+  .merit-highlight {
+    display: inline-block;
+    background: #fff8e1;
+    border: 1px solid #fde68a;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #92400e;
+    margin-top: 8px;
+  }
+
+  .compare-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0;
+  }
+  @media(max-width:540px) { .compare-box { grid-template-columns: 1fr; } }
+  .compare-side { border-radius: 10px; padding: 20px; }
+  .compare-side.no { background: #fdecea; border: 1.5px solid #f5c6cb; }
+  .compare-side.yes { background: var(--green-pale); border: 1.5px solid var(--green-mid); }
+  .compare-side h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .compare-side.no h4 { color: var(--accent); }
+  .compare-side.yes h4 { color: var(--green); }
+  .compare-side ul { list-style: none; }
+  .compare-side ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px dotted rgba(0,0,0,.1); line-height: 1.6; }
+  .compare-side ul li:last-child { border: none; }
+
+  .tool-cta {
+    background-color: #0f4d2a;
+    background-image: linear-gradient(135deg, #0f4d2a, #1a6b3c);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 40px 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .tool-cta-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tool-cta-icon::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background: url('images/fp-avatar.png') center/cover no-repeat, linear-gradient(135deg,#7ee8a2,#38bdf8);
+    border-radius: 4px;
+    display: block;
+  }
+  .tool-cta-text { flex: 1; }
+  .tool-cta h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; border: none; padding: 0; margin-top: 0; }
+  .tool-cta p { font-size: 13px; color: rgba(255,255,255,.8); margin: 0; line-height: 1.7; }
+  .tool-cta-btn {
+    background: #fff;
+    color: var(--green);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 900;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all .2s;
+  }
+  .tool-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li { display: flex; gap: 10px; padding: 8px 0; font-size: 14.5px; border-bottom: 1px dotted var(--border); line-height: 1.7; }
+  .checklist li:last-child { border: none; }
+  .ck { width: 20px; height: 20px; background: var(--green); border-radius: 3px; flex-shrink: 0; margin-top: 3px; position: relative; }
+  .ck::after { content: ''; position: absolute; left: 4px; top: 2px; width: 7px; height: 11px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg); }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  .author {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-top: 48px;
+  }
+  .author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--green-pale); }
+  .author-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .author-bio { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+  .disclaimer {
+    background: #fff8e1;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #856404;
+    margin-top: 32px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    article { padding: 40px 18px 60px; }
+    .hero { padding: 48px 18px 56px; }
+    .stat-value { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></div>
+  <div class="nav-links">
+    <a href="index.html">ホーム</a>
+    <a href="lifeplan.html">ライフプラン表</a>
+    <a href="index.html#blog">ブログ</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">お問い合わせ</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-cat">ライフプラン・お金の基礎</div>
+    <h1>
+      ライフプランを作る<em>7つのメリット</em><br>
+      老後・教育費・住宅を数字で把握する
+    </h1>
+    <div class="hero-meta">
+      <span>2026年6月</span>
+      <span>読了約10分</span>
+      <span>ライフアセットオフィス FP</span>
+    </div>
+  </div>
+</div>
+
+<article>
+
+  <div class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#sec0">なぜ今ライフプランが必要なのか（統計で見る現実）</a></li>
+      <li><a href="#sec1">メリット1：老後の資金不足を「早期発見」できる</a></li>
+      <li><a href="#sec2">メリット2：教育費とローンの「衝突年」を回避できる</a></li>
+      <li><a href="#sec3">メリット3：NISAとiDeCoを最適なタイミングで始められる</a></li>
+      <li><a href="#sec4">メリット4：住宅購入の適正ローン額が明確になる</a></li>
+      <li><a href="#sec5">メリット5：不要な保険料を削減できる</a></li>
+      <li><a href="#sec6">メリット6：節税・控除の機会を逃さない</a></li>
+      <li><a href="#sec7">メリット7：パートナーとお金の話がしやすくなる</a></li>
+      <li><a href="#sec8">まとめ：まず大枠だけ、今日作ってみる</a></li>
+    </ol>
+  </div>
+
+  <!-- SEC0: 統計 -->
+  <section id="sec0">
+    <h2><span class="sec-num">背景</span>なぜ今ライフプランが必要なのか</h2>
+
+    <p>「ライフプランを作ったほうがいい」とはよく聞きます。でも、なぜ今なのか。数字で見てみましょう。</p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-label">老後の生活に<br>「不安感あり」と答えた人の割合</div>
+        <div class="stat-value">83<span class="stat-unit">.2%</span></div>
+        <div class="stat-sub">10人中8人以上が老後を不安に感じている</div>
+        <div class="stat-source">出典：生命保険文化センター「生活保障に関する調査」令和7年度（2025年）速報版</div>
+        <button class="copy-btn" onclick="copyStat(this,'老後の生活に「不安感あり」の割合：83.2%（生命保険文化センター「生活保障に関する調査」令和7年度 2025年）')">コピー</button>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">年金だけでは毎月不足する金額<br>（65歳以上夫婦無職世帯の平均）</div>
+        <div class="stat-value">月<span class="stat-unit">5.5万円</span></div>
+        <div class="stat-sub">30年で約2,000万円の不足（老後2,000万円問題）</div>
+        <div class="stat-source">出典：金融審議会 市場ワーキング・グループ報告書「高齢社会における資産形成・管理」（2019年6月）※現在も政策議論の基準値として参照</div>
+        <button class="copy-btn" onclick="copyStat(this,'年金だけでは月約5.5万円不足（65歳以上夫婦無職世帯平均）／30年で約2,000万円不足：金融審議会 市場ワーキング・グループ報告書（2019年6月）')">コピー</button>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">金融資産をまったく保有していない<br>二人以上世帯の割合</div>
+        <div class="stat-value">24<span class="stat-unit">.0%</span></div>
+        <div class="stat-sub">4世帯に1世帯が老後に向けた貯蓄ゼロ</div>
+        <div class="stat-source">出典：金融経済教育推進機構（J-FLEC）「家計の金融行動に関する世論調査」2024年（令和6年）二人以上世帯</div>
+        <button class="copy-btn" onclick="copyStat(this,'金融資産ゼロの二人以上世帯：24.0%（金融経済教育推進機構 J-FLEC「家計の金融行動に関する世論調査」2024年）')">コピー</button>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <strong>これらの数字が示すこと：</strong>老後の不安を感じている人は8割を超えているにもかかわらず、4世帯に1世帯は貯蓄ゼロです。不安を感じているのに行動できていない——その理由の多くは、<strong>「何から始めればいいかわからない」</strong>ことにあります。ライフプランはその「出発点の地図」です。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- MERIT 1〜7 -->
+  <section id="merits">
+    <h2><span class="sec-num">本論</span>ライフプランを作る7つのメリット</h2>
+
+    <div class="merit-grid">
+
+      <!-- MERIT 1 -->
+      <div class="merit-card" id="sec1">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 01</span>
+          <h3>老後の資金不足を「早期発見」できる</h3>
+        </div>
+        <p>ライフプランを作ると、「今の収支ペースで続けた場合、何歳で貯蓄が底をつくか」が一目でわかります。この数字を30代・40代のうちに把握できた人と、60代手前で初めて気づいた人では、取れる対策がまったく違います。</p>
+        <p>老後2,000万円問題（月5.5万円×30年）は有名になりましたが、これは「平均の夫婦世帯」の話。自分の生活費・年金見込み額・退職金額によって不足額は変わります。ライフプランでは自分の数字で試算するため、「平均より多い」「意外と少ない」という個別の実態がわかります。</p>
+        <span class="merit-highlight">早く知るほど、取れる選択肢が増える</span>
+      </div>
+
+      <!-- MERIT 2 -->
+      <div class="merit-card" id="sec2">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 02</span>
+          <h3>教育費とローンの「衝突年」を事前に回避できる</h3>
+        </div>
+        <p>子どもの中学〜大学進学と住宅ローンの返済が重なる時期は、家計が最も圧迫される「山場」です。文部科学省の調査では、幼稚園から大学（国公立）まで子ども1人にかかる教育費の合計は約1,000万円。私立に進む場合は大幅に増えます。</p>
+        <p>ライフプランを作ると、「第一子が高3の年、住宅ローン残高はいくら残っているか」「その年の収支は黒字か赤字か」が具体的にわかります。衝突が見えれば、繰り上げ返済の時期を調整したり、学資保険・NISA積立の目標額を設定したりという対策が立てられます。</p>
+        <span class="merit-highlight">「知っていれば防げた」を事前につぶす</span>
+      </div>
+
+      <!-- MERIT 3 -->
+      <div class="merit-card" id="sec3">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 03</span>
+          <h3>NISAとiDeCoを最適なタイミングで始められる</h3>
+        </div>
+        <p>複利の力は「始める年齢」で大きく変わります。月3万円を年利5%で積み立てた場合、30歳から20年続けると約1,233万円（元本720万円）、40歳から10年だと約466万円（元本360万円）になります（複利計算、税考慮なし）。同じ月3万円でも、10年早く始めただけで約770万円の差が生まれます。</p>
+        <p>ライフプランを作ると「毎月いくらまで投資に回せるか」が年単位でわかるため、「今すぐiDeCoを始めるべきか、まず住宅ローンを減らすべきか」という優先順位が数字で判断できます。</p>
+        <span class="merit-highlight">10年早く始めると約770万円の差（月3万円・年5%の場合）</span>
+      </div>
+
+      <!-- MERIT 4 -->
+      <div class="merit-card" id="sec4">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 04</span>
+          <h3>住宅購入の「適正ローン額」が数字で明確になる</h3>
+        </div>
+        <p>「年収の何倍まで借りられる」という銀行の審査基準と、「無理なく返せる金額」は別物です。ライフプランに住宅ローンを組み込むと、「子どもの教育費ピーク年の月々手取りと返済額のバランス」「定年時のローン残高」「繰り上げ返済の余力」が一覧で確認できます。</p>
+        <p>購入前にこれを確認した人は、条件を見直したり、頭金の目標額を変えたりという判断を数字の根拠で行えます。「なんとなく大丈夫そう」ではなく、「この条件なら定年時に残高〇〇万円になる」という具体的な見通しが持てます。</p>
+        <span class="merit-highlight">「審査が通る額」と「無理なく返せる額」は違う</span>
+      </div>
+
+      <!-- MERIT 5 -->
+      <div class="merit-card" id="sec5">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 05</span>
+          <h3>不要な保険料を削減できる</h3>
+        </div>
+        <p>保険の見直しで最も多いのが「いつの間にか過剰な補償を払い続けていた」ケースです。子どもが独立した後も手厚い死亡保険を継続する、住宅ローン完済後も収入補償保険を持ち続けるなど、ライフステージに合わせた見直しが行われていない家庭は少なくありません。</p>
+        <p>ライフプランがあると「何歳で子どもが独立するか」「ローンが完済するのはいつか」が明確なため、「その年以降は保険を段階的に減らせる」という計画が立てられます。必要な補償だけを持つことで、保険料の削減分を資産形成に回すことができます。</p>
+        <span class="merit-highlight">ライフステージに合わせた保険の「卒業計画」が立てられる</span>
+      </div>
+
+      <!-- MERIT 6 -->
+      <div class="merit-card" id="sec6">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 06</span>
+          <h3>ふるさと納税・医療費控除など節税機会を逃さない</h3>
+        </div>
+        <p>節税の多くは「その年の収入・支出の状況」によって効果が変わります。ふるさと納税の上限額は収入・家族構成・他の控除の額で決まり、知らずに少ない金額で納税している人も多くいます。医療費控除も「複数年で調整できるものではなく、その年限りの控除」です。</p>
+        <p>ライフプランで年単位の収支を見ておくと、「今年は収入が増えるのでふるさと納税の限度額が上がる」「大きな医療費が発生した年は医療費控除を忘れずに申告する」という意識が自然と生まれます。小さな節税の積み重ねが、長期間では大きな差になります。</p>
+        <span class="merit-highlight">ふるさと納税・iDeCo・住宅ローン控除を組み合わせた最適化</span>
+      </div>
+
+      <!-- MERIT 7 -->
+      <div class="merit-card" id="sec7">
+        <div class="merit-header">
+          <span class="merit-num">MERIT 07</span>
+          <h3>パートナーとお金の話がしやすくなる</h3>
+        </div>
+        <p>夫婦間でお金の話を避けている家庭は少なくありません。「収入が違うと言いにくい」「貯蓄が少ないことへの後ろめたさ」「将来の不安を話すと揉める」——こうした心理的な壁が、家計管理の共有を妨げます。</p>
+        <p>ライフプランは「共通の地図」として機能します。「子どもが22歳になる年に、私たちの家計はこうなっている」という客観的な数字を一緒に確認することで、感情論ではなく事実ベースで話し合いができます。「老後はどうしたい？」という漠然とした会話より、「定年時の貯蓄目標は○○万円にしよう」という具体的な合意に進みやすくなります。</p>
+        <span class="merit-highlight">「感情の話」ではなく「数字の確認」として共有できる</span>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- COMPARE -->
+  <section>
+    <h2><span class="sec-num">比較</span>ライフプランあり vs なし、10年後の違い</h2>
+
+    <div class="compare-box">
+      <div class="compare-side no">
+        <h4>ライフプランなし／10年後</h4>
+        <ul>
+          <li>教育費とローンが重なり、キャッシュフローが詰まる</li>
+          <li>50代でiDeCo・NISAを知り「もっと早く始めれば」と後悔</li>
+          <li>定年時のローン残高が想定外に多く、退職金を全て充当</li>
+          <li>老後資金の試算をしておらず、70代で生活水準を下げざるを得ない</li>
+          <li>保険の見直しを後回しにし、過剰な保険料を払い続けている</li>
+        </ul>
+      </div>
+      <div class="compare-side yes">
+        <h4>ライフプランあり／10年後</h4>
+        <ul>
+          <li>教育費ピークに備えて繰り上げ返済のタイミングを調整済み</li>
+          <li>30代でNISA・iDeCoを最大活用。複利効果が積み上がっている</li>
+          <li>定年前に資産状況を確認し、継続雇用・副業で余裕を持って調整</li>
+          <li>老後の生活費を試算済みで、年金＋資産で無理なく生活できる見通し</li>
+          <li>子どもの独立に合わせて保険を段階的に見直し、保険料を削減</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      この差を生んでいるのは、収入でも才能でもありません。<strong>「早い段階で大枠を数字で把握していたかどうか」</strong>だけです。ライフプランは特別な専門知識がなくても、シミュレーターを使えば15分で作れます。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TOOL CTA mid -->
+  <div class="tool-cta">
+    <div class="tool-cta-icon"></div>
+    <div class="tool-cta-text">
+      <h3>ライフプランシミュレーターを今すぐ試す</h3>
+      <p>登録不要・15分で完了。年別収支表・グラフをその場で確認。CSVダウンロードも可能。</p>
+    </div>
+    <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">シミュレーターを開く →</button>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SUMMARY -->
+  <section id="sec8">
+    <h2><span class="sec-num">まとめ</span>まず大枠だけ、今日作ってみる</h2>
+
+    <p>ライフプランは「完璧な将来予測」ではありません。「今の状態を数字にして、方向性を確認するための地図」です。地図なしで何十年もお金の意思決定をするより、大まかな地図があるほうが、はるかに安全に進めます。</p>
+
+    <ul class="checklist">
+      <li><span class="ck"></span>老後の生活に不安を感じている人は8割超。ライフプランがあれば不安を「数字」に変えられる</li>
+      <li><span class="ck"></span>年金だけでは月5.5万円（30年で約2,000万円）不足する試算——でも自分の数字は違う場合がある</li>
+      <li><span class="ck"></span>NISAは10年早く始めるだけで数百万円の差。「いつから始めるか」を決めるためにもライフプランが必要</li>
+      <li><span class="ck"></span>教育費・住宅ローン・老後という3大支出の「衝突年」は、事前にしか回避できない</li>
+      <li><span class="ck"></span>保険・節税・夫婦の対話——すべての土台は「自分たちの数字を把握すること」から始まる</li>
+    </ul>
+
+    <div class="pull-quote">
+      ライフプランを作る最良のタイミングは、<br>
+      10年前だったかもしれない。<br>
+      でも2番目に良いタイミングは、今日。
+    </div>
+
+    <div class="tool-cta">
+      <div class="tool-cta-icon"></div>
+      <div class="tool-cta-text">
+        <h3>ライフプランシミュレーターで今すぐ確認する</h3>
+        <p>家族・収入・支出・ローン・NISAを入力するだけ。年別収支表とグラフを自動生成。登録不要・無料。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">今すぐ試してみる →</button>
+    </div>
+  </section>
+
+  <div class="author">
+    <img src="images/fp-avatar.png" alt="ライフアセットオフィス FP" class="author-avatar">
+    <div>
+      <div class="author-name">ライフアセットオフィス FP</div>
+      <p class="author-bio">FP技能士が運営する中立な情報サイト。住宅ローン・資産運用・老後資金・税金など、お金に関するテーマをわかりやすく解説しています。特定の金融商品の販売・仲介は行っておらず、中立な立場での情報提供を方針としています。</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    本記事は一般的な情報提供を目的としており、特定の金融商品の購入・取引を勧誘するものではありません。個々の状況に応じた判断は、ファイナンシャルプランナー・税理士等の資格を持つ専門家にご相談ください。統計数字・制度情報は各出典資料の公表時点のものです。最新情報は各公的機関の公式情報をご確認ください。
+  </div>
+
+</article>
+
+<script>
+function copyStat(btn, text) {
+  navigator.clipboard.writeText(text).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = '✓ コピー完了';
+    btn.style.background = '#c8e6d4';
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.style.background = '';
+    }, 2000);
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var orig = btn.textContent;
+    btn.textContent = '✓ コピー完了';
+    setTimeout(function() { btn.textContent = orig; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
