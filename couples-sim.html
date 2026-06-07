@@ -226,6 +226,93 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .accordion-body.open{max-height:800px;padding:14px 18px}
 .accordion-arrow{transition:transform .3s;font-size:11px;color:var(--gray)}.accordion-arrow.open{transform:rotate(180deg)}
 
+/* ── HEALTH SCORE GAUGE ── */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;padding:10px 0}
+.gauge-svg{width:200px;height:110px}
+.gauge-score{font-family:'DM Mono',monospace;font-size:40px;font-weight:500;text-anchor:middle;dominant-baseline:middle}
+.gauge-grade{font-size:13px;font-weight:700;text-anchor:middle}
+.gauge-label{font-size:10px;fill:#6b7280;text-anchor:middle}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-top:12px}
+.score-item{text-align:center;background:var(--bg);border-radius:8px;padding:8px 4px}
+.score-item-label{font-size:10px;color:var(--gray);margin-bottom:2px}
+.score-item-val{font-family:'DM Mono',monospace;font-size:14px;font-weight:500}
+
+/* ── NATIONAL AVG COMPARISON ── */
+.avg-row{display:grid;grid-template-columns:90px 1fr 70px 60px;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);font-size:12px}
+.avg-row:last-child{border:none}
+.avg-bar-wrap{background:var(--border);border-radius:4px;height:8px;position:relative}
+.avg-bar-you{height:100%;border-radius:4px;transition:width .6s ease;min-width:3px}
+.avg-marker{position:absolute;top:-4px;width:2px;height:16px;background:var(--gray);border-radius:1px}
+.avg-you{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;text-align:right}
+.avg-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-align:center;white-space:nowrap}
+.avg-ok{background:var(--green-pale);color:var(--green)}
+.avg-ng{background:var(--red-pale);color:var(--red)}
+.avg-neutral{background:var(--bg);color:var(--gray);border:1px solid var(--border)}
+
+/* ── TIMELINE ACTION ── */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-phase{position:relative;padding-left:32px;margin-bottom:20px}
+.tl-phase:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:0;top:3px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.tl-dot.today{background:var(--red)}.tl-dot.week{background:var(--yellow)}.tl-dot.month{background:var(--green)}.tl-dot.qtr{background:var(--blue)}
+.tl-line{position:absolute;left:10px;top:25px;bottom:-20px;width:2px;background:var(--border)}
+.tl-phase:last-child .tl-line{display:none}
+.tl-phase-head{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.tl-actions{display:flex;flex-direction:column;gap:6px}
+.tl-action{background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.6;transition:border-color .2s}
+.tl-action:hover{border-color:var(--green)}
+.tl-action strong{display:block;font-size:13px;margin-bottom:3px}
+.tl-action .service{font-size:11px;color:var(--blue);font-weight:600;margin-top:4px}
+
+/* ── POTENTIAL CARD ── */
+.potential-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--border);font-size:13px}
+.potential-row:last-child{border:none}
+.potential-change{font-family:'DM Mono',monospace;font-weight:500;color:var(--green)}
+
+/* ── STYLE RECOMMEND ── */
+.style-rank-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;margin-bottom:8px;border:1.5px solid var(--border);transition:all .2s}
+.style-rank-row.rank1{background:var(--green-pale);border-color:var(--green-mid)}
+.style-rank-badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.style-rank-stars{color:#f59e0b;font-size:14px;letter-spacing:-2px}
+.style-rank-reason{font-size:12px;color:var(--gray);flex:1}
+
+/* ── FIRE ── */
+.fire-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+@media(max-width:480px){.fire-grid{grid-template-columns:1fr}}
+.fire-box{background:rgba(255,255,255,.7);border-radius:10px;padding:14px;text-align:center;border:1.5px solid var(--border)}
+.fire-box.best{border-color:var(--green);background:var(--green-pale)}
+.fire-age{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--green)}
+.fire-scenario{font-size:10px;color:var(--gray);margin-bottom:4px}
+
+/* ── 老後ギャップ ── */
+.gap-flow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0;font-size:12px}
+.gap-box{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;text-align:center;min-width:90px}
+.gap-box-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:500}
+.gap-box-label{font-size:10px;color:var(--gray);margin-top:2px}
+.gap-arrow{font-size:18px;color:var(--gray)}
+.gap-result{border-radius:10px;padding:14px 18px;font-size:13px;line-height:1.8}
+.gap-result.ok{background:var(--green-pale);border:1.5px solid var(--green-mid)}
+.gap-result.ng{background:var(--red-pale);border:1.5px solid var(--red-mid)}
+
+/* ── iDeCo ── */
+.ideco-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+@media(max-width:480px){.ideco-grid{grid-template-columns:1fr}}
+.ideco-box{background:var(--blue-pale);border-radius:10px;padding:14px;border:1px solid #b8cef8}
+.ideco-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--blue);margin:4px 0}
+.ideco-label{font-size:11px;color:var(--gray)}
+
+/* ── ROAD MAP ── */
+.roadmap{position:relative;padding-left:28px}
+.rm-item{position:relative;padding:0 0 20px 0}
+.rm-item:last-child{padding-bottom:0}
+.rm-dot{position:absolute;left:-28px;top:4px;width:16px;height:16px;border-radius:50%;border:2px solid var(--green);background:var(--white)}
+.rm-item.reached .rm-dot{background:var(--green)}
+.rm-line{position:absolute;left:-21px;top:20px;width:2px;background:var(--green-mid);bottom:0}
+.rm-item:last-child .rm-line{display:none}
+.rm-year{font-size:11px;font-weight:700;color:var(--green);margin-bottom:3px}
+.rm-body{font-size:13px;color:var(--ink2);background:var(--white);border:1px solid var(--border);border-radius:8px;padding:10px 12px;line-height:1.7}
+.rm-amount{font-family:'DM Mono',monospace;font-weight:500;color:var(--green);font-size:14px}
+
 .disclaimer{background:#fffbeb;border-left:3px solid #f5d28a;border-radius:0 8px 8px 0;padding:12px 15px;font-size:11px;color:#856404;margin-top:20px;line-height:1.8}
 </style>
 </head>
@@ -393,12 +480,54 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       </div>
     </div>
 
+    <!-- 家計ヘルススコア -->
+    <div class="card">
+      <div class="card-title">家計ヘルススコア</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center">
+        <div class="gauge-wrap">
+          <svg class="gauge-svg" viewBox="0 0 200 115">
+            <path d="M20,105 A90,90 0 0,1 180,105" fill="none" stroke="#e5e7eb" stroke-width="18" stroke-linecap="round"/>
+            <path id="gauge-arc" d="M20,105 A90,90 0 0,1 180,105" fill="none" stroke="#1a6b3c" stroke-width="18" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" style="transition:stroke-dashoffset 1s ease,stroke .5s"/>
+            <text id="gauge-num" class="gauge-score" x="100" y="82" fill="#0d0d0d">--</text>
+            <text id="gauge-grade" class="gauge-grade" x="100" y="100" fill="#6b7280">診断中</text>
+            <text class="gauge-label" x="20" y="115" fill="#6b7280">0</text>
+            <text class="gauge-label" x="180" y="115" fill="#6b7280">100</text>
+          </svg>
+        </div>
+        <div>
+          <div id="gauge-comment" style="font-size:13.5px;line-height:1.8;color:#374151;margin-bottom:12px"></div>
+          <div class="score-grid" id="score-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 全国平均比較 -->
+    <div class="card">
+      <div class="card-title">費目別 全国平均との比較（総務省家計調査 2023年 2人世帯）</div>
+      <div style="display:grid;grid-template-columns:90px 1fr 70px 60px;gap:8px;padding:4px 0 8px;font-size:10px;font-weight:700;color:var(--gray);letter-spacing:.04em">
+        <span>費目</span><span>あなた vs 全国平均</span><span style="text-align:right">あなた</span><span style="text-align:center">判定</span>
+      </div>
+      <div id="avg-compare"></div>
+    </div>
+
     <!-- FP診断カード -->
     <div id="fp-diag-card"></div>
 
+    <!-- タイムライン型アクションプラン -->
+    <div class="card">
+      <div class="card-title">今すぐ動けるアクションプラン</div>
+      <div class="timeline" id="timeline-actions"></div>
+    </div>
+
+    <!-- 支出削減ポテンシャル -->
+    <div class="card">
+      <div class="card-title">支出削減シミュレーション — もし固定費を見直したら</div>
+      <div id="potential-card"></div>
+    </div>
+
     <!-- チェックリスト -->
     <div class="card">
-      <div class="card-title">今すぐ動けるチェックリスト</div>
+      <div class="card-title">家計診断チェックリスト</div>
       <div class="checklist" id="checklist"></div>
     </div>
 
@@ -407,6 +536,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 
   <!-- ─── TAB 2 ─── -->
   <div id="tab-method" class="section">
+
+    <!-- スタイル適性自動診断 -->
+    <div class="card">
+      <div class="card-title">あなたへのスタイル適性診断（自動）</div>
+      <div id="style-recommend"></div>
+    </div>
 
     <div class="card">
       <div class="card-title">あなたの収入に合わせた4スタイル比較</div>
@@ -569,7 +704,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 
     <div id="goal-result"></div>
 
-    <div class="disclaimer">投資は元本保証ではありません。将来の運用成果を保証するものではありません。本ツールは情報提供目的です。</div>
+    <!-- FIRE達成年齢 -->
+    <div class="card" style="background:linear-gradient(135deg,#0f3d22,#1a6b3c);color:#fff">
+      <div class="card-title" style="color:#7ee8a2">🔥 FIRE達成年齢シミュレーション（4%ルール）</div>
+      <p style="font-size:12px;color:rgba(255,255,255,.75);margin-bottom:16px">月の支出×12÷4%＝FIRE必要資産。現在の貯蓄+積立で何歳に達成できるか3シナリオで計算します。</p>
+      <div class="fire-grid" id="fire-grid"></div>
+      <div id="fire-comment" style="margin-top:14px;font-size:13px;color:rgba(255,255,255,.85);line-height:1.8"></div>
+    </div>
+
+    <!-- 老後資金ギャップ -->
+    <div class="card">
+      <div class="card-title">🏖️ 老後資金ギャップ診断</div>
+      <p style="font-size:12px;color:var(--gray);margin-bottom:14px">年金推定額・老後月生活費・平均寿命90歳（30年生活）をもとに不足額を計算します。</p>
+      <div class="gap-flow" id="gap-flow"></div>
+      <div id="gap-result"></div>
+      <div style="margin-top:12px;font-size:12px;color:var(--gray)">※年金推定は目安です。ねんきんネット（https://www.nenkin.go.jp/）で正確な金額を確認してください。</div>
+    </div>
+
+    <!-- iDeCo節税効果 -->
+    <div class="card">
+      <div class="card-title">💡 iDeCo節税シミュレーション（会社員・月2.3万円満額）</div>
+      <div class="ideco-grid" id="ideco-grid"></div>
+      <div style="margin-top:14px;background:var(--blue-pale);border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.8">
+        <strong>iDeCoの始め方：</strong> SBI証券 or 楽天証券で口座開設（無料）→ 勤務先に「事業主証明書」を発行依頼 → 掛金設定 → eMAXIS Slim 全世界株式で積立設定。節税効果は毎年の確定申告 or 年末調整で自動還付されます。
+      </div>
+    </div>
+
+    <!-- 資産形成ロードマップ -->
+    <div class="card">
+      <div class="card-title">🗺️ あなたの資産形成ロードマップ</div>
+      <div class="roadmap" id="roadmap"></div>
+    </div>
+
+    <div class="disclaimer">投資は元本保証ではありません。将来の運用成果を保証するものではありません。FIRE・老後試算は概算です。本ツールは情報提供目的です。</div>
   </div>
 
 </div>
@@ -783,6 +950,125 @@ function update(){
   }
 
   if(document.getElementById('tab-method').classList.contains('active'))renderMethod();
+
+  // ── ヘルススコア計算 ──
+  var s_save=savingRate>=25?30:savingRate>=20?24:savingRate>=15?18:savingRate>=10?12:savingRate>=5?6:0;
+  var s_rent=rentRatio<=20?20:rentRatio<=25?16:rentRatio<=30?10:3;
+  var s_food=foodRatio<=12?15:foodRatio<=15?12:foodRatio<=18?8:3;
+  var insRatio=totalIncome>0?v.insurance/totalIncome*100:0;
+  var s_ins=insRatio<=5?10:insRatio<=8?8:insRatio<=12?5:1;
+  var diff=v.hIncome>0&&v.wIncome>0?Math.max(v.hIncome,v.wIncome)/Math.max(1,Math.min(v.hIncome,v.wIncome)):1;
+  var s_bal=diff<1.3?10:diff<1.6?7:diff<2?4:1;
+  var fixedPct2=totalIncome>0?(v.rent+v.util+v.insurance)/totalIncome*100:0;
+  var s_fixed=fixedPct2<=35?15:fixedPct2<=45?11:fixedPct2<=55?6:0;
+  var healthScore=s_save+s_rent+s_food+s_ins+s_bal+s_fixed;
+  var grade=healthScore>=85?'A':healthScore>=70?'B':healthScore>=55?'C':healthScore>=40?'D':'E';
+  var gaugeColor=healthScore>=75?'#1a6b3c':healthScore>=60?'#d4820a':healthScore>=40?'#f59e0b':'#c0392b';
+  var arcLen=283;var offset=arcLen-(arcLen*healthScore/100);
+  var ga=document.getElementById('gauge-arc');
+  var gn=document.getElementById('gauge-num');
+  var gg=document.getElementById('gauge-grade');
+  if(ga){ga.style.strokeDashoffset=offset;ga.style.stroke=gaugeColor;gn.textContent=healthScore;gg.textContent='評価 '+grade;}
+  var gcComment={
+    'A':'優秀な家計です！この水準を維持しながらNISA・iDeCoを満額活用して資産形成を加速させましょう。',
+    'B':'良好な家計です。あと一歩の改善（固定費見直しor収入増）で満点水準に到達できます。',
+    'C':'標準的な水準です。固定費（住居費・保険料）の見直しで大きく改善できます。月3万の削減で評価Bになります。',
+    'D':'要改善です。特に住居費または貯蓄率が足を引っ張っています。まず固定費を重点的に見直してください。',
+    'E':'家計に課題があります。最優先で固定費を削減し、赤字を解消することから始めましょう。'
+  };
+  var gcEl=document.getElementById('gauge-comment');
+  if(gcEl)gcEl.textContent=gcComment[grade]||'';
+  var sgEl=document.getElementById('score-grid');
+  if(sgEl)sgEl.innerHTML=[
+    {l:'貯蓄率',v:s_save+'/30pt'},
+    {l:'住居費率',v:s_rent+'/20pt'},
+    {l:'食費率',v:s_food+'/15pt'},
+    {l:'保険料率',v:s_ins+'/10pt'},
+    {l:'収入バランス',v:s_bal+'/10pt'},
+    {l:'固定費率',v:s_fixed+'/15pt'},
+  ].map(function(x){return '<div class="score-item"><div class="score-item-label">'+x.l+'</div><div class="score-item-val">'+x.v+'</div></div>';}).join('');
+
+  // ── 全国平均比較 ──
+  var avgs=[
+    {name:'住居費',you:v.rent,avg:7.2},
+    {name:'食費',you:v.food,avg:7.8},
+    {name:'光熱・通信',you:v.util,avg:2.8},
+    {name:'日用品',you:v.daily,avg:1.8},
+    {name:'娯楽・交際',you:v.leisure,avg:2.5},
+    {name:'保険料',you:v.insurance,avg:2.2},
+  ];
+  var acEl=document.getElementById('avg-compare');
+  if(acEl)acEl.innerHTML=avgs.map(function(a){
+    var max=Math.max(a.you,a.avg)*1.3;
+    var youPct=a.you/max*100;
+    var avgPct=a.avg/max*100;
+    var ok=a.you<=a.avg;
+    var diff2=((a.you-a.avg)/a.avg*100).toFixed(0);
+    var badge=ok?'<span class="avg-badge avg-ok">平均以下</span>':Math.abs(a.you-a.avg)<0.5?'<span class="avg-badge avg-neutral">ほぼ同等</span>':'<span class="avg-badge avg-ng">+'+diff2+'%</span>';
+    return '<div class="avg-row">'+
+      '<span>'+a.name+'</span>'+
+      '<div class="avg-bar-wrap">'+
+        '<div class="avg-bar-you" style="width:'+youPct+'%;background:'+(ok?'#1a6b3c':'#c0392b')+'"></div>'+
+        '<div class="avg-marker" style="left:'+avgPct+'%"></div>'+
+      '</div>'+
+      '<span class="avg-you">'+fmtMan(a.you)+'</span>'+
+      badge+
+    '</div>';
+  }).join('');
+
+  // ── タイムライン型アクションプラン ──
+  var phases=[
+    {cls:'today',label:'🔴 今日やること',actions:[]},
+    {cls:'week',label:'🟡 今週やること',actions:[]},
+    {cls:'month',label:'🟢 今月やること',actions:[]},
+    {cls:'qtr',label:'🔵 3ヶ月以内にやること',actions:[]},
+  ];
+  if(saving<0){
+    phases[0].actions.push({title:'赤字の原因費目を特定する',body:'スマホに「マネーフォワードME」をインストールし、銀行・カードを連携。先月の支出を費目別に確認する。',service:'→ マネーフォワードME（無料）'});
+    phases[0].actions.push({title:'全サブスクリプションをリストアップ',body:'Netflixや動画配信・音楽・アプリ課金を全て書き出し、2人で使っていないものを即解約。月1,000円×5個=年6万円の節約。',service:'→ スマホの「サブスク管理」設定から確認'});
+    phases[1].actions.push({title:'保険証券を全部引き出して確認',body:'特に掛け捨てでない保険・医療保険が高額なケースが多い。「ほけんの窓口」の無料相談で適正額か確認する。',service:'→ ほけんの窓口（全国店舗・相談無料）'});
+  } else if(savingRate<15){
+    phases[0].actions.push({title:'先取り貯蓄の自動振替を今日設定',body:'ネットバンクにログインし、給料日翌日に貯蓄口座へ'+fmtMan(Math.max(1,Math.floor(saving*0.8)))+'の自動振替を設定。「余ったら貯める」はゼロになりがち。',service:'→ 住信SBIネット銀行 / 楽天銀行（振替設定無料）'});
+    phases[1].actions.push({title:'通信費を格安SIMに変更',body:'大手キャリアから格安SIM（IIJmio・povo・mineoなど）に変えると2人で月1〜2万節約できる。手続きは30分。',service:'→ IIJmio（月2,068円〜）/ 楽天モバイル（月980円〜）'});
+  } else {
+    phases[0].actions.push({title:'NISA口座でつみたて設定を今月中に',body:'SBI証券または楽天証券でNISA口座を開設（10分）し、eMAXIS Slim 全世界株式（オルカン）で月'+nisaMonthly+'万円の自動積立を設定する。',service:'→ SBI証券 / 楽天証券（手数料無料）'});
+  }
+  if(rentRatio>30){
+    phases[1].actions.push({title:'住居費を収入の25%以内に下げる計画を立てる',body:'現在'+rentRatio.toFixed(0)+'%と高め。転居・家賃交渉・住宅ローンへの切り替えで月'+fmtMan(v.rent-totalIncome*0.25)+'の削減余地あり。引っ越し費用は4〜6月・9〜11月が安い。',service:'→ スーモ・ホームズで同エリア家賃相場を確認'});
+  }
+  phases[1].actions.push({title:'共同口座（生活費用）を開設',body:'住信SBIネット銀行の「目的別口座」が最適。1つの口座の中に「生活費」「旅行」「車」など用途別に最大10個の仮想口座が無料で作れる。',service:'→ 住信SBIネット銀行（目的別口座・手数料無料）'});
+  phases[2].actions.push({title:'家計管理アプリで全収支を見える化',body:'マネーフォワードMEで2人の銀行口座・クレカを全連携。「予算管理」機能で費目ごとの上限を設定すると自動でアラートが出る。',service:'→ マネーフォワードME プレミアム（月500円）'});
+  phases[2].actions.push({title:'iDeCoの資料請求（節税を今すぐ開始）',body:'会社員は月2.3万円まで全額所得控除。年収'+fmtMan(totalIncome*12)+'なら年間節税額'+fmtMan(Math.round(23000*12*0.2/10000))+'万円以上。開設に2〜3ヶ月かかるので今すぐ申し込む。',service:'→ SBI証券 iDeCo（加入手数料・口座管理料0円）'});
+  phases[3].actions.push({title:'生活防衛資金'+fmtMan(Math.round(totalIncome*6))+'を専用口座に積立',body:'月収の6ヶ月分を「絶対に使わない口座」に確保。目標額は'+fmtMan(Math.round(totalIncome*6))+'。達成後は全額NISA・iDeCoへ。',service:'→ 楽天銀行 普通預金（金利0.11%、SBI証券連携で+0.1%）'});
+  if(savingRate>=20){
+    phases[3].actions.push({title:'資産配分（アセットアロケーション）を決める',body:'NISA（オルカン）＋iDeCo（外国株インデックス）＋現金（生活防衛資金）の3層で構成。株式比率＝100－年齢が目安。現在年齢ベースで株式'+Math.max(50,100-35)+'%が標準。',service:'→ 投信比較サイト「投信まとめ」で信託報酬を確認'});
+  }
+  var tlEl=document.getElementById('timeline-actions');
+  if(tlEl)tlEl.innerHTML=phases.map(function(p,i){
+    if(p.actions.length===0)return '';
+    return '<div class="tl-phase">'+
+      '<div class="tl-dot '+p.cls+'">'+(i+1)+'</div>'+
+      '<div class="tl-line"></div>'+
+      '<div class="tl-phase-head">'+p.label+'</div>'+
+      '<div class="tl-actions">'+p.actions.map(function(a){
+        return '<div class="tl-action"><strong>'+a.title+'</strong>'+a.body+'<div class="service">'+a.service+'</div></div>';
+      }).join('')+'</div>'+
+    '</div>';
+  }).join('');
+
+  // ── 支出削減ポテンシャル ──
+  var pot10=(totalIncome>0?(v.rent+v.util+v.insurance)*0.1:0);
+  var pot20=(totalIncome>0?(v.rent+v.util+v.insurance)*0.2:0);
+  var sr10=(totalIncome>0?(saving+pot10)/totalIncome*100:0);
+  var sr20=(totalIncome>0?(saving+pot20)/totalIncome*100:0);
+  var nisa10=Math.min(10,Math.floor((saving+pot10)*0.7));
+  var nisa20=Math.min(10,Math.floor((saving+pot20)*0.7));
+  var potEl=document.getElementById('potential-card');
+  if(potEl)potEl.innerHTML='<p style="font-size:12.5px;color:var(--gray);margin-bottom:14px">固定費（住居費・光熱通信・保険料）を削減した場合の貯蓄率の変化をシミュレーションします。</p>'+
+    '<div class="potential-row"><span>現状</span><span style="font-size:12px;color:var(--gray)">固定費 '+fmtMan(v.rent+v.util+v.insurance)+'</span><span class="potential-change">貯蓄率 '+savingRate.toFixed(1)+'%</span></div>'+
+    '<div class="potential-row"><span>固定費 <strong>10%削減</strong></span><span style="font-size:12px;color:var(--gray)">月 '+fmtMan(pot10)+'の削減</span><span class="potential-change">貯蓄率 '+sr10.toFixed(1)+'% → NISA月'+nisa10+'万可能</span></div>'+
+    '<div class="potential-row"><span>固定費 <strong>20%削減</strong></span><span style="font-size:12px;color:var(--gray)">月 '+fmtMan(pot20)+'の削減</span><span class="potential-change">貯蓄率 '+sr20.toFixed(1)+'% → NISA月'+nisa20+'万可能</span></div>'+
+    '<div style="margin-top:12px;background:var(--yellow-pale);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.7">💡 <strong>固定費削減の優先順位：</strong>①通信費（格安SIM：月1〜2万削減）→ ②保険見直し（過剰な生命保険：月0.5〜3万）→ ③住居費（転居・交渉：最大効果）</div>';
 }
 
 function selectMethod(name,btn){
@@ -798,6 +1084,46 @@ function renderMethod(){
   var wM=v.wIncome+v.wBonus/12;
   var total=hM+wM;
   var totalExp=v.rent+v.food+v.util+v.daily+v.leisure+v.insurance+v.other;
+
+  // スタイル適性診断
+  var incDiff=wM>0?hM/wM:99;
+  var styles=[
+    {name:'① 完全共同管理',score:0,reason:''},
+    {name:'② 収入比例分担',score:0,reason:''},
+    {name:'③ 折半（50:50）',score:0,reason:''},
+    {name:'④ 役割分担型',score:0,reason:''},
+  ];
+  // 完全共同
+  var fs=70;if(incDiff>2)fs+=15;if(wM===0)fs=100;
+  styles[0].score=Math.min(100,fs);
+  styles[0].reason=wM===0?'片方が専業主婦/夫の場合は完全共同が唯一の選択肢です。':incDiff>2?'収入差が大きいため完全共同が最も公平で効率的です。':'収入差があっても公平感が生まれにくい、最も貯蓄効率の高い管理方法です。';
+  // 収入比例
+  var rs=60;if(incDiff>1.3&&incDiff<3)rs+=25;if(incDiff>=1.3)rs+=10;
+  styles[1].score=Math.min(100,rs);
+  styles[1].reason='収入差が'+incDiff.toFixed(1)+'倍'+(incDiff>=1.3?'あるため収入比例が最も公平感を保てます。':
+    'と小さめのため使えますが、収入差が均等に近い場合は完全共同の方がシンプルです。');
+  // 折半
+  var hs=40;if(incDiff<1.2)hs+=40;if(incDiff<1.1)hs+=10;
+  styles[2].score=Math.min(100,hs);
+  styles[2].reason=incDiff<1.2?'収入差が小さいため折半でも公平感があります。シンプルで継続しやすいスタイルです。':
+    '収入差（'+incDiff.toFixed(1)+'倍）があるため折半は'+(hM>wM?'B':'A')+'に負担が偏ります。収入比例を推奨します。';
+  // 役割分担
+  var rls=50;
+  styles[3].score=rls;
+  styles[3].reason='担当費目が明確でストレスが少ない方法ですが、共同貯蓄のルールを別途決める必要があります。信頼関係が確立しているカップルに向いています。';
+
+  styles.sort(function(a,b){return b.score-a.score;});
+  var srEl=document.getElementById('style-recommend');
+  if(srEl)srEl.innerHTML='<p style="font-size:13px;color:var(--gray);margin-bottom:14px">あなたの収入比率（A : B = '+Math.round(hM/(hM+wM)*100)+' : '+Math.round(wM/(hM+wM)*100)+'）から自動診断しました。</p>'+
+    styles.map(function(s,i){
+      var stars=Math.round(s.score/20);
+      var starStr='★'.repeat(stars)+'☆'.repeat(5-stars);
+      return '<div class="style-rank-row'+(i===0?' rank1':'')+'">'+
+        '<span class="style-rank-badge" style="background:'+(i===0?'var(--green)':i===1?'var(--blue)':'var(--gray)')+'15;color:'+(i===0?'var(--green)':i===1?'var(--blue)':'var(--gray)')+'">'+(['推奨','次点','検討可','注意'][i]||'参考')+'</span>'+
+        '<div style="flex:1"><div style="font-size:13px;font-weight:700;margin-bottom:2px">'+s.name+'</div><div class="style-rank-reason">'+s.reason+'</div></div>'+
+        '<span class="style-rank-stars" style="font-size:16px">'+starStr+'</span>'+
+      '</div>';
+    }).join('');
   var baseSaving=total-totalExp-v.pocket;
   var html='';
   var m=currentMethod;
@@ -1054,6 +1380,99 @@ function updateGoal(){
   '</div></div>';
 
   document.getElementById('goal-result').innerHTML=html;
+
+  // ── FIRE計算 ──
+  var fireTarget=totalExp*12/0.04; // 4%ルール
+  var totalAssets=curSaving*10000;
+  var rates=[{r:0.01,label:'慎重（年利1%）',cls:'fire-box'},{r:0.05,label:'標準（年利5%）',cls:'fire-box best'},{r:0.07,label:'積極（年利7%）',cls:'fire-box'}];
+  var fireHtml=rates.map(function(sc){
+    var monthly=(monthlySaving+nisaMonthly)*10000;
+    var r=sc.r/12;
+    var fireAge=99;
+    if(monthly>0){
+      for(var mo=1;mo<=600;mo++){
+        totalAssets=totalAssets*(1+r)+monthly;
+        if(totalAssets>=fireTarget*10000){fireAge=32+Math.floor(mo/12);break;}
+      }
+    } else if(totalAssets>=fireTarget*10000){fireAge=32;}
+    totalAssets=curSaving*10000;
+    return '<div class="'+sc.cls+'"><div class="fire-scenario">'+sc.label+'</div><div class="fire-age">'+(fireAge>=99?'60歳超':fireAge+'歳')+'</div><div style="font-size:10px;color:'+(sc.cls.includes('best')?'rgba(255,255,255,.7)':'var(--gray)')+'">でFIRE可能</div></div>';
+  }).join('');
+  var fireTarget万=Math.round(fireTarget/10000);
+  var fireEl=document.getElementById('fire-grid');
+  if(fireEl)fireEl.innerHTML=fireHtml;
+  var fcEl=document.getElementById('fire-comment');
+  if(fcEl)fcEl.innerHTML='FIRE必要資産額：<strong>'+fmtMan(fireTarget万)+'万円</strong>（現在の月支出'+fmtMan(totalExp)+'×12÷4%ルール）。月の積立'+fmtMan(monthlySaving+nisaMonthly)+'を継続することが鍵です。FIREを目指さない場合でも、この計算は老後資金の目安になります。';
+
+  // ── 老後資金ギャップ ──
+  var retireLivingCost=totalExp*0.7; // 老後は現役の70%が目安
+  var bonusM2=(v.hBonus+v.wBonus)/12;
+  var totalIncome2=v.hIncome+v.wIncome+bonusM2;
+  var annualIncome=totalIncome2*12;
+  var pension=annualIncome<300?12:annualIncome<600?17:22; // 夫婦合計の年金目安（万/月）
+  var retireGap=Math.max(0,retireLivingCost-pension);
+  var retireTotal=retireGap*12*30;
+  var nisaAt20=nisaMonthly>0?(nisaMonthly*10000*(Math.pow(1+0.05/12,240)-1)/(0.05/12))/10000:0;
+  var totalAtRetire=monthlySaving*12*30+curSaving+nisaAt20;
+  var gfEl=document.getElementById('gap-flow');
+  if(gfEl)gfEl.innerHTML=
+    '<div class="gap-box"><div class="gap-box-label">老後月生活費（推定）</div><div class="gap-box-val" style="color:var(--red)">'+fmtMan(retireLivingCost)+'</div></div>'+
+    '<span class="gap-arrow">－</span>'+
+    '<div class="gap-box"><div class="gap-box-label">年金受取推定（2人）</div><div class="gap-box-val" style="color:var(--blue)">'+pension+'万/月</div></div>'+
+    '<span class="gap-arrow">＝</span>'+
+    '<div class="gap-box"><div class="gap-box-label">月額不足</div><div class="gap-box-val" style="color:var(--red)">'+fmtMan(retireGap)+'</div></div>'+
+    '<span class="gap-arrow">×</span>'+
+    '<div class="gap-box"><div class="gap-box-label">30年間</div><div class="gap-box-val">3600ヶ月</div></div>';
+  var grEl=document.getElementById('gap-result');
+  if(grEl){
+    var ok2=totalAtRetire>=retireTotal;
+    grEl.innerHTML='<div class="gap-result '+(ok2?'ok':'ng')+'">'+
+      '<strong>30年間の老後資金不足額（推定）：'+fmtMan(Math.round(retireTotal))+'万円</strong><br>'+
+      '現在の積立で老後に準備できる額（推定）：'+fmtMan(Math.round(totalAtRetire))+'万円<br>'+
+      (ok2?
+        '✅ 現状の積立を継続すれば老後資金は足りる見込みです。余裕分はFIRE・住宅・教育費に充てることを検討してください。':
+        '⚠️ 月'+fmtMan(Math.round((retireTotal-totalAtRetire)/360))+'の追加積立が必要です。iDeCo満額＋NISAの増額で対応できます。ねんきんネットで正確な年金見込み額を確認してください。')+
+    '</div>';
+  }
+
+  // ── iDeCo節税効果 ──
+  var totalIncome3=(v.hIncome+v.wIncome+(v.hBonus+v.wBonus)/12)*12;
+  var marginal=totalIncome3<200?0.05:totalIncome3<600?0.1:totalIncome3<1000?0.2:0.23;
+  var idecoAnnual=23000*12;
+  var idecoTaxYear=Math.round(idecoAnnual*marginal/10000);
+  var idecoTax30=idecoTaxYear*30;
+  var idecoPrincipal=Math.round(idecoAnnual*30/10000);
+  var idecoFV=Math.round((idecoAnnual*(Math.pow(1+0.05/12,360)-1)/(0.05/12))/10000);
+  var idecoEl=document.getElementById('ideco-grid');
+  if(idecoEl)idecoEl.innerHTML=
+    '<div class="ideco-box"><div class="ideco-label">年間節税額（2人）</div><div class="ideco-num">約'+fmtMan(idecoTaxYear*2)+'万円</div><div style="font-size:11px;color:var(--gray)">所得税率'+Math.round(marginal*100)+'%の場合</div></div>'+
+    '<div class="ideco-box"><div class="ideco-label">30年間の節税総額（2人）</div><div class="ideco-num">約'+fmtMan(idecoTax30*2)+'万円</div><div style="font-size:11px;color:var(--gray)">この分が追加資産に</div></div>'+
+    '<div class="ideco-box"><div class="ideco-label">30年後の運用資産（1人）</div><div class="ideco-num">約'+fmtMan(idecoFV)+'万円</div><div style="font-size:11px;color:var(--gray)">元本'+fmtMan(idecoPrincipal)+'万 年利5%</div></div>'+
+    '<div class="ideco-box"><div class="ideco-label">実質コスト（節税考慮後）</div><div class="ideco-num">月'+fmtMan((23000-idecoTaxYear*10000/12)/10000)+'万</div><div style="font-size:11px;color:var(--gray)">節税で実質負担が軽くなる</div></div>';
+
+  // ── 資産形成ロードマップ ──
+  var bonusM3=(v.hBonus+v.wBonus)/12;
+  var totalIncome4=v.hIncome+v.wIncome+bonusM3;
+  var totalExp2=v.rent+v.food+v.util+v.daily+v.leisure+v.pocket+v.insurance+v.other;
+  var ms2=Math.max(0,totalIncome4-totalExp2);
+  function fv2(m,r,yr){return m*(Math.pow(1+r/12,yr*12)-1)/(r/12);}
+  var target3mo=totalIncome4*3;
+  var target6mo=totalIncome4*6;
+  var y1nisa=fv2(nisaMonthly,0.05,1);
+  var y3nisa=fv2(nisaMonthly,0.05,3);
+  var y5nisa=fv2(nisaMonthly,0.05,5);
+  var y10nisa=fv2(nisaMonthly,0.05,10);
+  var y20nisa=fv2(nisaMonthly,0.05,20);
+  var rmEl=document.getElementById('roadmap');
+  if(rmEl)rmEl.innerHTML=[
+    {yr:'1年後',body:'緊急資金目標：<span class="rm-amount">'+fmtMan(Math.round(target3mo))+'万円</span>（月収3ヶ月分）を確保。NISA開始 → 1年後残高：約<span class="rm-amount">'+fmtMan(Math.round(y1nisa/10000))+'万円</span>'},
+    {yr:'3年後',body:'緊急資金：<span class="rm-amount">'+fmtMan(Math.round(target6mo))+'万円</span>（月収6ヶ月分）達成。住宅頭金の積立開始・保険の本格見直し。NISA残高：約<span class="rm-amount">'+fmtMan(Math.round(y3nisa/10000))+'万円</span>'},
+    {yr:'5年後',body:'住宅購入・第1子誕生の可能性。教育費積立（月2〜3万）を開始。NISA残高：約<span class="rm-amount">'+fmtMan(Math.round(y5nisa/10000))+'万円</span>'},
+    {yr:'10年後',body:'NISA残高：約<span class="rm-amount">'+fmtMan(Math.round(y10nisa/10000))+'万円</span>（元本'+fmtMan(nisaMonthly*12*10)+'万）。iDeCo累積で節税効果が顕在化。子の教育費のピーク前に準備。'},
+    {yr:'20年後（老後まで10年）',body:'NISA残高：約<span class="rm-amount">'+fmtMan(Math.round(y20nisa/10000))+'万円</span>（元本'+fmtMan(nisaMonthly*12*20)+'万）。老後生活費を確認し取り崩し計画を立てる。年金受給開始年齢（65歳）の戦略を確定する。'},
+  ].map(function(r){
+    return '<div class="rm-item"><div class="rm-dot"></div><div class="rm-line"></div><div class="rm-year">'+r.yr+'</div><div class="rm-body">'+r.body+'</div></div>';
+  }).join('');
 }
 
 function toggleAcc(h){
