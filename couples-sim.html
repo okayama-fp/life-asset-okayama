@@ -357,13 +357,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="grid-2">
         <div class="field">
           <label>手取り月収 <span id="lbl-h-income">28万円</span></label>
-          <input type="range" id="sl-h-income" min="10" max="80" step="1" value="28" oninput="update()">
-          <div class="slider-labels"><span>10万</span><span>45万</span><span>80万</span></div>
+          <input type="range" id="sl-h-income" min="0" max="150" step="1" value="28" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>75万</span><span>150万</span></div>
         </div>
         <div class="field">
           <label>賞与（年間・手取り）<span id="lbl-h-bonus">60万円</span></label>
-          <input type="range" id="sl-h-bonus" min="0" max="200" step="10" value="60" oninput="update()">
-          <div class="slider-labels"><span>0</span><span>100万</span><span>200万</span></div>
+          <input type="range" id="sl-h-bonus" min="0" max="400" step="10" value="60" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>200万</span><span>400万</span></div>
         </div>
       </div>
     </div>
@@ -373,13 +373,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="grid-2">
         <div class="field">
           <label>手取り月収 <span id="lbl-w-income">22万円</span></label>
-          <input type="range" id="sl-w-income" min="0" max="80" step="1" value="22" oninput="update()">
-          <div class="slider-labels"><span>0万</span><span>40万</span><span>80万</span></div>
+          <input type="range" id="sl-w-income" min="0" max="150" step="1" value="22" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>75万</span><span>150万</span></div>
         </div>
         <div class="field">
           <label>賞与（年間・手取り）<span id="lbl-w-bonus">40万円</span></label>
-          <input type="range" id="sl-w-bonus" min="0" max="200" step="10" value="40" oninput="update()">
-          <div class="slider-labels"><span>0</span><span>100万</span><span>200万</span></div>
+          <input type="range" id="sl-w-bonus" min="0" max="400" step="10" value="40" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>200万</span><span>400万</span></div>
         </div>
       </div>
     </div>
@@ -389,43 +389,43 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="grid-2">
         <div class="field">
           <label>家賃・住宅費 <span id="lbl-rent">10万円</span></label>
-          <input type="range" id="sl-rent" min="0" max="30" step="1" value="10" oninput="update()">
-          <div class="slider-labels"><span>0</span><span>15万</span><span>30万</span></div>
+          <input type="range" id="sl-rent" min="0" max="50" step="1" value="10" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>25万</span><span>50万</span></div>
         </div>
         <div class="field">
           <label>食費（外食含む）<span id="lbl-food">6万円</span></label>
-          <input type="range" id="sl-food" min="2" max="15" step="0.5" value="6" oninput="update()">
-          <div class="slider-labels"><span>2万</span><span>8万</span><span>15万</span></div>
+          <input type="range" id="sl-food" min="0" max="25" step="0.5" value="6" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>12万</span><span>25万</span></div>
         </div>
         <div class="field">
           <label>光熱・通信費 <span id="lbl-util">3万円</span></label>
-          <input type="range" id="sl-util" min="1" max="8" step="0.5" value="3" oninput="update()">
-          <div class="slider-labels"><span>1万</span><span>4万</span><span>8万</span></div>
+          <input type="range" id="sl-util" min="0" max="15" step="0.5" value="3" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>7万</span><span>15万</span></div>
         </div>
         <div class="field">
           <label>日用品・雑費 <span id="lbl-daily">2万円</span></label>
-          <input type="range" id="sl-daily" min="0.5" max="6" step="0.5" value="2" oninput="update()">
-          <div class="slider-labels"><span>0.5万</span><span>3万</span><span>6万</span></div>
-        </div>
-        <div class="field">
-          <label>娯楽・交際費 <span id="lbl-leisure">3万円</span></label>
-          <input type="range" id="sl-leisure" min="0" max="10" step="0.5" value="3" oninput="update()">
+          <input type="range" id="sl-daily" min="0" max="10" step="0.5" value="2" oninput="update()">
           <div class="slider-labels"><span>0</span><span>5万</span><span>10万</span></div>
         </div>
         <div class="field">
+          <label>娯楽・交際費 <span id="lbl-leisure">3万円</span></label>
+          <input type="range" id="sl-leisure" min="0" max="20" step="0.5" value="3" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>10万</span><span>20万</span></div>
+        </div>
+        <div class="field">
           <label>各自のお小遣い合計 <span id="lbl-pocket">6万円</span></label>
-          <input type="range" id="sl-pocket" min="2" max="15" step="1" value="6" oninput="update()">
-          <div class="slider-labels"><span>2万</span><span>8万</span><span>15万</span></div>
+          <input type="range" id="sl-pocket" min="0" max="30" step="1" value="6" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>15万</span><span>30万</span></div>
         </div>
         <div class="field">
           <label>保険料（合計）<span id="lbl-insurance">2万円</span></label>
-          <input type="range" id="sl-insurance" min="0" max="8" step="0.5" value="2" oninput="update()">
-          <div class="slider-labels"><span>0</span><span>4万</span><span>8万</span></div>
+          <input type="range" id="sl-insurance" min="0" max="15" step="0.5" value="2" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>7万</span><span>15万</span></div>
         </div>
         <div class="field">
           <label>その他・積立 <span id="lbl-other">1万円</span></label>
-          <input type="range" id="sl-other" min="0" max="5" step="0.5" value="1" oninput="update()">
-          <div class="slider-labels"><span>0</span><span>2.5万</span><span>5万</span></div>
+          <input type="range" id="sl-other" min="0" max="20" step="0.5" value="1" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>10万</span><span>20万</span></div>
         </div>
       </div>
     </div>
@@ -753,18 +753,18 @@ function fmtMan(n){return (Math.round(n*10)/10).toLocaleString()+'万';}
 
 function getValues(){
   return {
-    hIncome:parseFloat(document.getElementById('sl-h-income').value)||28,
-    wIncome:parseFloat(document.getElementById('sl-w-income').value)||22,
-    hBonus:parseFloat(document.getElementById('sl-h-bonus').value)||60,
-    wBonus:parseFloat(document.getElementById('sl-w-bonus').value)||40,
-    rent:parseFloat(document.getElementById('sl-rent').value)||10,
-    food:parseFloat(document.getElementById('sl-food').value)||6,
-    util:parseFloat(document.getElementById('sl-util').value)||3,
-    daily:parseFloat(document.getElementById('sl-daily').value)||2,
-    leisure:parseFloat(document.getElementById('sl-leisure').value)||3,
-    pocket:parseFloat(document.getElementById('sl-pocket').value)||6,
-    insurance:parseFloat(document.getElementById('sl-insurance').value)||2,
-    other:parseFloat(document.getElementById('sl-other').value)||1
+    hIncome:+document.getElementById('sl-h-income').value,
+    wIncome:+document.getElementById('sl-w-income').value,
+    hBonus:+document.getElementById('sl-h-bonus').value,
+    wBonus:+document.getElementById('sl-w-bonus').value,
+    rent:+document.getElementById('sl-rent').value,
+    food:+document.getElementById('sl-food').value,
+    util:+document.getElementById('sl-util').value,
+    daily:+document.getElementById('sl-daily').value,
+    leisure:+document.getElementById('sl-leisure').value,
+    pocket:+document.getElementById('sl-pocket').value,
+    insurance:+document.getElementById('sl-insurance').value,
+    other:+document.getElementById('sl-other').value
   };
 }
 
