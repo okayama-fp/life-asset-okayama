@@ -118,8 +118,13 @@ nav{background:var(--white);padding:0 32px;height:64px;display:flex;justify-cont
 
 /* ── TOOLS SECTION ── */
 .tools{background:var(--bg)}
+.tools-filter{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:14px 0 14px;margin-bottom:24px;position:sticky;top:60px;z-index:50;background:var(--bg)}
+.tools-filter::-webkit-scrollbar{display:none}
+.filter-btn{flex-shrink:0;padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;background:var(--white);color:var(--gray);transition:all .2s}
+.filter-btn.active{background:var(--green);color:#fff;border-color:var(--green);box-shadow:0 2px 8px rgba(26,107,60,.25)}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .sim-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:all .2s;text-decoration:none;display:block}
+.sim-card.hidden{display:none}
 .sim-card:hover{border-color:var(--green);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .sim-card-top{padding:24px 24px 0;background:linear-gradient(135deg,var(--green-dark),var(--green));min-height:80px;position:relative}
 .sim-card-badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:700;color:#fff;margin-bottom:10px}
@@ -415,8 +420,18 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
     <div class="section-label fade-up">登録不要ツール</div>
     <h2 class="section-title fade-up">10のシミュレーター</h2>
     <p class="section-desc fade-up">登録不要・スマホ対応。スライダーを動かすだけでリアルタイム計算。</p>
+    <div class="tools-filter">
+      <button class="filter-btn active" data-cat="all">すべて</button>
+      <button class="filter-btn" data-cat="住宅ローン">住宅ローン</button>
+      <button class="filter-btn" data-cat="資産運用">資産運用</button>
+      <button class="filter-btn" data-cat="老後・FIRE">老後・FIRE</button>
+      <button class="filter-btn" data-cat="保険">保険</button>
+      <button class="filter-btn" data-cat="節税">節税</button>
+      <button class="filter-btn" data-cat="夫婦・家計">夫婦・家計</button>
+      <button class="filter-btn" data-cat="ライフプラン">ライフプラン</button>
+    </div>
     <div class="tools-grid">
-      <a href="loan-check.html" class="sim-card fade-up">
+      <a href="loan-check.html" class="sim-card fade-up" data-cat="住宅ローン">
         <div class="sim-card-top">
           <div class="sim-card-badge">人気No.1</div>
           <div class="sim-card-emoji"></div>
@@ -428,7 +443,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>診断してみる</span><span>→</span></div>
         </div>
       </a>
-      <a href="asset-sim.html" class="sim-card fade-up">
+      <a href="asset-sim.html" class="sim-card fade-up" data-cat="資産運用">
         <div class="sim-card-top">
           <div class="sim-card-badge">資産形成</div>
           <div class="sim-card-emoji"></div>
@@ -440,7 +455,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>シミュレーション</span><span>→</span></div>
         </div>
       </a>
-      <a href="retirement-gap.html" class="sim-card fade-up">
+      <a href="retirement-gap.html" class="sim-card fade-up" data-cat="老後・FIRE">
         <div class="sim-card-top">
           <div class="sim-card-badge">老後資金</div>
           <div class="sim-card-emoji">️</div>
@@ -452,7 +467,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>不足額を確認</span><span>→</span></div>
         </div>
       </a>
-      <a href="nisa-ideco-sim.html" class="sim-card fade-up">
+      <a href="nisa-ideco-sim.html" class="sim-card fade-up" data-cat="資産運用">
         <div class="sim-card-top">
           <div class="sim-card-badge">節税比較</div>
           <div class="sim-card-emoji"></div>
@@ -464,7 +479,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>節税額を確認</span><span>→</span></div>
         </div>
       </a>
-      <a href="furusato-sim.html" class="sim-card fade-up">
+      <a href="furusato-sim.html" class="sim-card fade-up" data-cat="節税">
         <div class="sim-card-top">
           <div class="sim-card-badge">節税</div>
           <div class="sim-card-emoji"></div>
@@ -476,7 +491,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>上限額を計算</span><span>→</span></div>
         </div>
       </a>
-      <a href="loan-refinance.html" class="sim-card fade-up">
+      <a href="loan-refinance.html" class="sim-card fade-up" data-cat="住宅ローン">
         <div class="sim-card-top">
           <div class="sim-card-badge">ローン最適化</div>
           <div class="sim-card-emoji"></div>
@@ -488,7 +503,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>節約額を計算</span><span>→</span></div>
         </div>
       </a>
-      <a href="insurance-check.html" class="sim-card fade-up">
+      <a href="insurance-check.html" class="sim-card fade-up" data-cat="保険">
         <div class="sim-card-top">
           <div class="sim-card-badge">保険</div>
           <div class="sim-card-emoji">️</div>
@@ -500,7 +515,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>診断してみる</span><span>→</span></div>
         </div>
       </a>
-      <a href="fire-sim.html" class="sim-card fade-up">
+      <a href="fire-sim.html" class="sim-card fade-up" data-cat="老後・FIRE">
         <div class="sim-card-top">
           <div class="sim-card-badge">ライフプラン</div>
           <div class="sim-card-emoji"></div>
@@ -512,7 +527,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>達成年齢を計算</span><span>→</span></div>
         </div>
       </a>
-      <a href="education-sim.html" class="sim-card fade-up">
+      <a href="education-sim.html" class="sim-card fade-up" data-cat="ライフプラン">
         <div class="sim-card-top">
           <div class="sim-card-badge">教育費</div>
           <div class="sim-card-emoji"></div>
@@ -524,7 +539,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>積立額を確認</span><span>→</span></div>
         </div>
       </a>
-      <a href="couples-sim.html" class="sim-card fade-up">
+      <a href="couples-sim.html" class="sim-card fade-up" data-cat="夫婦・家計">
         <div class="sim-card-top">
           <div class="sim-card-badge">✨ NEW</div>
           <div class="sim-card-emoji"></div>
@@ -536,7 +551,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="sim-card-cta"><span>家計を診断する</span><span>→</span></div>
         </div>
       </a>
-      <a href="lifeplan.html" class="sim-card fade-up">
+      <a href="lifeplan.html" class="sim-card fade-up" data-cat="ライフプラン">
         <div class="sim-card-top">
           <div class="sim-card-badge">✨ NEW</div>
           <div class="sim-card-emoji"></div>
@@ -667,6 +682,22 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
 },{threshold:0.12});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+// カテゴリーフィルター
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var cat=this.dataset.cat;
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+    this.classList.add('active');
+    document.querySelectorAll('.sim-card').forEach(function(card){
+      if(cat==='all'||card.dataset.cat===cat){
+        card.classList.remove('hidden');
+      }else{
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
