@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夫婦の家計合わせシミュレーター | ライフアセットオフィス</title>
+<meta name="description" content="2人の収入・支出・貯蓄目標を入力するだけ。最適な家計管理スタイルと毎月の貯蓄可能額を自動計算。登録不要・無料。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<style>
+:root{
+  --green:#1a6b3c;--green-dark:#0f4d2a;--green-light:#2d8a52;
+  --green-pale:#e8f5ee;--green-mid:#c8e6d4;
+  --red:#c0392b;--red-pale:#fdecea;
+  --yellow:#d4820a;--yellow-pale:#fef6e4;
+  --blue:#1a4fa0;--blue-pale:#e8f0fb;
+  --purple:#6d28d9;--purple-pale:#ede9fe;
+  --ink:#0d0d0d;--gray:#6b7280;--border:#e5e7eb;--bg:#f8faf7;--white:#fff;
+  --shadow:0 4px 24px rgba(0,0,0,.08);--radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+
+nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:100}
+.nav-logo{font-size:17px;font-weight:900;color:var(--green)}
+.nav-logo span{font-size:10px;font-weight:400;color:var(--gray);display:block;line-height:1.2}
+.nav-links{display:flex;gap:20px;font-size:13px}
+.nav-links a{color:var(--gray);text-decoration:none}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}
+@media(max-width:640px){.nav-links{display:none}}
+
+.hero{
+  background-color:var(--green-dark);
+  background-image:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 55%,var(--green-light) 100%);
+  color:#fff;padding:52px 24px 60px;text-align:center;position:relative;overflow:hidden
+}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 32px)}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;margin-bottom:18px}
+.hero h1{font-size:clamp(20px,4vw,34px);font-weight:900;line-height:1.3;margin-bottom:12px;color:#fff}
+.hero h1 em{color:#7ee8a2;font-style:normal}
+.hero p{font-size:13px;color:rgba(255,255,255,.8);max-width:480px;margin:0 auto 24px;line-height:1.8}
+.hero-feats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.hero-feat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:5px 13px;font-size:11px;font-weight:500}
+
+.main{max-width:920px;margin:0 auto;padding:32px 16px 80px}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:24px;background:var(--white);border-radius:12px;padding:5px;box-shadow:var(--shadow)}
+.tab-btn{flex:1;padding:10px 6px;border:none;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;background:transparent;color:var(--gray);transition:all .2s}
+.tab-btn.active{background:var(--green);color:#fff;box-shadow:0 2px 8px rgba(26,107,60,.3)}
+
+.section{display:none}.section.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 20px;margin-bottom:18px}
+.card-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:7px}
+.card-title::before{content:'';width:3px;height:14px;background:var(--green);border-radius:2px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid-2{grid-template-columns:1fr}}
+
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.field label{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:.04em;display:flex;justify-content:space-between}
+.field label span{font-family:'DM Mono',monospace;font-weight:500;color:var(--ink);font-size:13px}
+.field-row{display:flex;align-items:center;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .15s}
+.field-row:focus-within{border-color:var(--green)}
+.field-row input,.field-row select{flex:1;border:none;background:transparent;padding:10px 12px;font-size:14px;font-weight:600;font-family:'DM Mono',monospace;color:var(--ink);outline:none}
+.field-row select{font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:500}
+.field-unit{padding:0 10px 0 2px;font-size:11px;color:var(--gray);white-space:nowrap}
+input[type=range]{width:100%;height:6px;border-radius:3px;background:var(--border);outline:none;-webkit-appearance:none;cursor:pointer;accent-color:var(--green)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--green);box-shadow:0 2px 6px rgba(26,107,60,.4)}
+.slider-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--gray);margin-top:3px}
+
+/* PERSON HEADER */
+.person-header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px;font-weight:700}
+.person-header.husband{background:#e8f0fb;color:var(--blue)}
+.person-header.wife{background:var(--purple-pale);color:var(--purple)}
+
+/* METHOD BUTTONS */
+.method-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.method-btn{padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;color:var(--gray)}
+.method-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+.method-btn:hover:not(.active){border-color:var(--green);color:var(--green)}
+
+/* RESULT */
+.result-hero{border-radius:var(--radius);padding:24px;margin-bottom:18px;color:#fff}
+.result-hero.surplus{background-color:#0f3d22;background-image:linear-gradient(135deg,#0f3d22,var(--green))}
+.result-hero.deficit{background-color:#7f1d1d;background-image:linear-gradient(135deg,#7f1d1d,var(--red))}
+.result-hero.tight{background-color:#78350f;background-image:linear-gradient(135deg,#78350f,var(--yellow))}
+.result-label{font-size:12px;color:rgba(255,255,255,.7);margin-bottom:6px}
+.result-big{font-family:'DM Mono',monospace;font-size:clamp(28px,5vw,44px);font-weight:500;line-height:1;margin-bottom:8px}
+.result-sub{font-size:13px;color:rgba(255,255,255,.8)}
+
+/* BREAKDOWN */
+.breakdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media(max-width:480px){.breakdown-grid{grid-template-columns:1fr}}
+.bk-box{border-radius:12px;padding:16px;border:1.5px solid}
+.bk-box.income{background:var(--green-pale);border-color:var(--green-mid)}
+.bk-box.expense{background:var(--red-pale);border-color:#f5b7b1}
+.bk-title{font-size:12px;font-weight:700;color:var(--gray);margin-bottom:10px;letter-spacing:.04em}
+.bk-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--border)}
+.bk-row:last-child{border:none;font-weight:700;font-size:14px}
+.bk-val{font-family:'DM Mono',monospace;font-weight:500}
+.bk-val.plus{color:var(--green)}.bk-val.minus{color:var(--red)}
+
+/* RATIO BAR */
+.ratio-wrap{margin:16px 0}
+.ratio-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.ratio-track{height:24px;background:var(--border);border-radius:6px;overflow:hidden;position:relative;display:flex}
+.ratio-fill{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;transition:width .8s ease;min-width:0}
+.ratio-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--gray);margin-top:6px}
+.ratio-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+
+/* METHOD EXPLANATION */
+.method-card{border-radius:10px;padding:16px 18px;margin-bottom:12px;border-left:4px solid;font-size:13.5px;line-height:1.8}
+.method-card.rec{background:var(--green-pale);border-color:var(--green)}
+.method-card.warn{background:var(--yellow-pale);border-color:var(--yellow)}
+.method-card.info{background:var(--blue-pale);border-color:var(--blue)}
+
+/* ACTION */
+.action-card{border-radius:12px;padding:16px 18px;margin-bottom:12px;border-left:4px solid;display:flex;gap:12px;align-items:flex-start}
+.action-card.urgent{background:var(--red-pale);border-color:var(--red)}
+.action-card.important{background:var(--yellow-pale);border-color:var(--yellow)}
+.action-card.good{background:var(--green-pale);border-color:var(--green)}
+.action-card.normal{background:var(--blue-pale);border-color:var(--blue)}
+.action-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:4px}
+.tag-urgent{background:var(--red);color:#fff}.tag-important{background:var(--yellow);color:#fff}
+.tag-good{background:var(--green);color:#fff}.tag-normal{background:var(--blue);color:#fff}
+.action-body h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.action-body p{font-size:13px;line-height:1.7;color:#333}
+
+/* GOAL ITEMS */
+.goal-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.goal-item:last-child{border:none}
+.goal-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;flex:1;margin:0 12px}
+.goal-bar-fill{height:100%;border-radius:3px;background:var(--green);transition:width .8s ease}
+
+/* DETAIL */
+.detail-card{background:var(--white);border-radius:10px;border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden}
+.detail-header{padding:13px 16px;font-size:13px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.detail-header:hover{background:var(--bg)}
+.detail-body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:13px;line-height:1.8;color:#333}
+.detail-body.open{max-height:500px;padding:14px 16px}
+.detail-arrow{transition:transform .3s;font-size:11px}.detail-arrow.open{transform:rotate(180deg)}
+
+.disclaimer{background:#fff8e1;border-left:3px solid #f5d28a;border-radius:0 8px 8px 0;padding:11px 14px;font-size:11px;color:#856404;margin-top:20px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></div>
+  <div class="nav-links">
+    <a href="index.html">ホーム</a>
+    <a href="lifeplan.html">ライフプラン表</a>
+    <a href="index.html#blog">ブログ</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">お問い合わせ</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">登録不要・リアルタイム計算</div>
+  <h1>結婚後の家計、<em>どう合わせる？</em></h1>
+  <p>2人の収入・支出・貯蓄目標を入力するだけ。最適な家計管理の方法と毎月の貯蓄可能額を自動計算します。</p>
+  <div class="hero-feats">
+    <span class="hero-feat">3つの家計管理スタイルを比較</span>
+    <span class="hero-feat">貯蓄目標の達成期間を計算</span>
+    <span class="hero-feat">具体的なアクションプランを提示</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('input',this)">収入・支出を入力</button>
+    <button class="tab-btn" onclick="switchTab('method',this)">家計管理スタイル比較</button>
+    <button class="tab-btn" onclick="switchTab('goal',this)">貯蓄目標・将来設計</button>
+  </div>
+
+  <!-- TAB1: 入力 -->
+  <div id="tab-input" class="section active">
+
+    <!-- 夫 -->
+    <div class="card">
+      <div class="person-header husband">夫（パートナーA）の収入</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>手取り月収 <span id="lbl-h-income">28万円</span></label>
+          <input type="range" id="sl-h-income" min="10" max="80" step="1" value="28" oninput="update()">
+          <div class="slider-labels"><span>10万</span><span>45万</span><span>80万</span></div>
+        </div>
+        <div class="field">
+          <label>賞与（年間・手取り）<span id="lbl-h-bonus">60万円</span></label>
+          <input type="range" id="sl-h-bonus" min="0" max="200" step="10" value="60" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>100万</span><span>200万</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 妻 -->
+    <div class="card">
+      <div class="person-header wife">妻（パートナーB）の収入</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>手取り月収 <span id="lbl-w-income">22万円</span></label>
+          <input type="range" id="sl-w-income" min="0" max="80" step="1" value="22" oninput="update()">
+          <div class="slider-labels"><span>0万</span><span>40万</span><span>80万</span></div>
+        </div>
+        <div class="field">
+          <label>賞与（年間・手取り）<span id="lbl-w-bonus">40万円</span></label>
+          <input type="range" id="sl-w-bonus" min="0" max="200" step="10" value="40" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>100万</span><span>200万</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 支出 -->
+    <div class="card">
+      <div class="card-title">毎月の2人の支出</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>家賃・住宅費 <span id="lbl-rent">10万円</span></label>
+          <input type="range" id="sl-rent" min="0" max="30" step="1" value="10" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>15万</span><span>30万</span></div>
+        </div>
+        <div class="field">
+          <label>食費（外食含む）<span id="lbl-food">6万円</span></label>
+          <input type="range" id="sl-food" min="2" max="15" step="0.5" value="6" oninput="update()">
+          <div class="slider-labels"><span>2万</span><span>8万</span><span>15万</span></div>
+        </div>
+        <div class="field">
+          <label>光熱・通信費 <span id="lbl-util">3万円</span></label>
+          <input type="range" id="sl-util" min="1" max="8" step="0.5" value="3" oninput="update()">
+          <div class="slider-labels"><span>1万</span><span>4万</span><span>8万</span></div>
+        </div>
+        <div class="field">
+          <label>日用品・雑費 <span id="lbl-daily">2万円</span></label>
+          <input type="range" id="sl-daily" min="0.5" max="6" step="0.5" value="2" oninput="update()">
+          <div class="slider-labels"><span>0.5万</span><span>3万</span><span>6万</span></div>
+        </div>
+        <div class="field">
+          <label>娯楽・交際費 <span id="lbl-leisure">3万円</span></label>
+          <input type="range" id="sl-leisure" min="0" max="10" step="0.5" value="3" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>5万</span><span>10万</span></div>
+        </div>
+        <div class="field">
+          <label>各自のお小遣い合計 <span id="lbl-pocket">6万円</span></label>
+          <input type="range" id="sl-pocket" min="2" max="15" step="1" value="6" oninput="update()">
+          <div class="slider-labels"><span>2万</span><span>8万</span><span>15万</span></div>
+        </div>
+        <div class="field">
+          <label>保険料（合計）<span id="lbl-insurance">2万円</span></label>
+          <input type="range" id="sl-insurance" min="0" max="8" step="0.5" value="2" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>4万</span><span>8万</span></div>
+        </div>
+        <div class="field">
+          <label>その他・積立 <span id="lbl-other">1万円</span></label>
+          <input type="range" id="sl-other" min="0" max="5" step="0.5" value="1" oninput="update()">
+          <div class="slider-labels"><span>0</span><span>2.5万</span><span>5万</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結果サマリー -->
+    <div id="result-hero" class="result-hero surplus">
+      <div class="result-label">毎月の貯蓄可能額</div>
+      <div class="result-big" id="result-saving">－</div>
+      <div class="result-sub" id="result-sub">計算中...</div>
+    </div>
+
+    <!-- 収支内訳 -->
+    <div class="breakdown-grid">
+      <div class="bk-box income">
+        <div class="bk-title">収入内訳（月）</div>
+        <div class="bk-row"><span>夫の手取り</span><span class="bk-val plus" id="bk-h-income">－</span></div>
+        <div class="bk-row"><span>妻の手取り</span><span class="bk-val plus" id="bk-w-income">－</span></div>
+        <div class="bk-row"><span>賞与（月換算）</span><span class="bk-val plus" id="bk-bonus">－</span></div>
+        <div class="bk-row"><span>収入合計</span><span class="bk-val plus" id="bk-income-total">－</span></div>
+      </div>
+      <div class="bk-box expense">
+        <div class="bk-title">支出内訳（月）</div>
+        <div class="bk-row"><span>住居費</span><span class="bk-val" id="bk-rent">－</span></div>
+        <div class="bk-row"><span>食費</span><span class="bk-val" id="bk-food">－</span></div>
+        <div class="bk-row"><span>光熱・通信</span><span class="bk-val" id="bk-util">－</span></div>
+        <div class="bk-row"><span>日用品・娯楽・小遣い</span><span class="bk-val" id="bk-misc">－</span></div>
+        <div class="bk-row"><span>保険・その他</span><span class="bk-val" id="bk-ins">－</span></div>
+        <div class="bk-row"><span>支出合計</span><span class="bk-val minus" id="bk-expense-total">－</span></div>
+      </div>
+    </div>
+
+    <!-- 比率バー -->
+    <div class="card">
+      <div class="card-title">収入の使い道（割合）</div>
+      <div class="ratio-wrap">
+        <div class="ratio-label">
+          <span>支出・貯蓄の内訳</span>
+          <span id="ratio-save-pct" style="font-family:'DM Mono',monospace;font-weight:600">貯蓄率 --%</span>
+        </div>
+        <div class="ratio-track">
+          <div class="ratio-fill" id="ratio-expense" style="background:#e74c3c;width:0%"></div>
+          <div class="ratio-fill" id="ratio-pocket" style="background:#f59e0b;width:0%"></div>
+          <div class="ratio-fill" id="ratio-saving" style="background:#1a6b3c;width:0%"></div>
+        </div>
+        <div class="ratio-legend">
+          <span><span class="ratio-dot" style="background:#e74c3c"></span>固定支出</span>
+          <span><span class="ratio-dot" style="background:#f59e0b"></span>変動・小遣い</span>
+          <span><span class="ratio-dot" style="background:#1a6b3c"></span>貯蓄</span>
+        </div>
+      </div>
+      <div id="ratio-comment" style="font-size:13px;color:var(--gray);margin-top:8px"></div>
+    </div>
+
+    <!-- アクションプラン -->
+    <div class="card">
+      <div class="card-title">具体的アクションプラン</div>
+      <div id="action-list"></div>
+    </div>
+
+    <div class="disclaimer">本ツールは情報提供目的です。実際の家計状況により異なります。重要な判断の前にFP等の専門家にご相談ください。</div>
+  </div>
+
+  <!-- TAB2: 家計管理スタイル -->
+  <div id="tab-method" class="section">
+    <div class="card">
+      <div class="card-title">3つの家計管理スタイルを比較</div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:18px">どのスタイルが自分たちに合うかを選んでください。それぞれのメリット・デメリットと、あなたの収入に基づいた具体的な金額をシミュレーションします。</p>
+
+      <div class="method-btns">
+        <button class="method-btn active" onclick="selectMethod('full',this)">完全共同管理</button>
+        <button class="method-btn" onclick="selectMethod('ratio',this)">収入比例分担</button>
+        <button class="method-btn" onclick="selectMethod('half',this)">折半（50:50）</button>
+        <button class="method-btn" onclick="selectMethod('role',this)">役割分担型</button>
+      </div>
+
+      <div id="method-detail"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">スタイル別メリット・デメリット</div>
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail(this)">完全共同管理（おすすめ度：高）<span class="detail-arrow">▼</span></div>
+        <div class="detail-body">
+          <strong>特徴：</strong>2人の収入を全て共同口座に入れ、支出・貯蓄を一元管理。<br><br>
+          <strong>メリット：</strong>お金の流れが完全に見える。貯蓄効率が最も高い。収入差があっても不公平感が生まれにくい。<br><br>
+          <strong>デメリット：</strong>お互いの支出が全て見えるため、プライバシーがない。自由に使えるお金の確保が必要。<br><br>
+          <strong>向いている夫婦：</strong>信頼関係が強い・貯蓄目標が明確・収入差が大きいカップル
+        </div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail(this)">収入比例分担（おすすめ度：高）<span class="detail-arrow">▼</span></div>
+        <div class="detail-body">
+          <strong>特徴：</strong>収入の割合に応じて生活費を分担。残りは各自が管理。<br><br>
+          <strong>メリット：</strong>収入差があっても公平感がある。各自の自由なお金が確保できる。<br><br>
+          <strong>デメリット：</strong>共同の貯蓄管理が複雑になりやすい。どちらかの収入が減ったとき（育休等）に調整が必要。<br><br>
+          <strong>向いている夫婦：</strong>収入差がある・お互いの自由を大切にしたいカップル
+        </div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail(this)">折半（50:50）（おすすめ度：中）<span class="detail-arrow">▼</span></div>
+        <div class="detail-body">
+          <strong>特徴：</strong>生活費を均等に折半。残りは各自が自由に使う。<br><br>
+          <strong>メリット：</strong>シンプルでわかりやすい。各自の自由が最大限確保できる。<br><br>
+          <strong>デメリット：</strong>収入差が大きいと不公平感が生まれる。共同貯蓄が少なくなりがち。育休などの収入変化に対応しにくい。<br><br>
+          <strong>向いている夫婦：</strong>収入がほぼ同額・独立性を重視するカップル
+        </div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail(this)">役割分担型（おすすめ度：状況による）<span class="detail-arrow">▼</span></div>
+        <div class="detail-body">
+          <strong>特徴：</strong>夫が固定費・妻が変動費など、支出のカテゴリを分担。<br><br>
+          <strong>メリット：</strong>担当が明確でストレスが少ない。<br><br>
+          <strong>デメリット：</strong>共同の貯蓄計画が立てにくい。どちらかの負担が大きくなるリスクがある。全体の収支が把握しにくい。<br><br>
+          <strong>向いている夫婦：</strong>お互いの管理スタイルが確立している・信頼関係が強いカップル
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB3: 貯蓄目標 -->
+  <div id="tab-goal" class="section">
+    <div class="card">
+      <div class="card-title">貯蓄目標を設定</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>現在の貯蓄合計 <span id="lbl-cur-saving">100万円</span></label>
+          <input type="range" id="sl-cur-saving" min="0" max="2000" step="50" value="100" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>1,000万</span><span>2,000万</span></div>
+        </div>
+        <div class="field">
+          <label>目標1：生活防衛資金 <span id="lbl-goal-emergency">月収の6ヶ月分</span></label>
+          <div class="field-row">
+            <select id="sel-emergency" onchange="updateGoal()">
+              <option value="3">月収の3ヶ月分</option>
+              <option value="6" selected>月収の6ヶ月分</option>
+              <option value="12">月収の12ヶ月分</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>目標2：結婚式・新婚旅行 <span id="lbl-goal-wedding">300万円</span></label>
+          <input type="range" id="sl-goal-wedding" min="0" max="600" step="50" value="300" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>300万</span><span>600万</span></div>
+        </div>
+        <div class="field">
+          <label>目標3：住宅購入頭金 <span id="lbl-goal-house">500万円</span></label>
+          <input type="range" id="sl-goal-house" min="0" max="2000" step="100" value="500" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>1,000万</span><span>2,000万</span></div>
+        </div>
+        <div class="field">
+          <label>目標4：子ども教育費準備 <span id="lbl-goal-child">200万円</span></label>
+          <input type="range" id="sl-goal-child" min="0" max="500" step="50" value="200" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>250万</span><span>500万</span></div>
+        </div>
+        <div class="field">
+          <label>目標5：老後・NISA積立（月）<span id="lbl-goal-nisa">5万円</span></label>
+          <input type="range" id="sl-goal-nisa" min="0" max="20" step="1" value="5" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>10万</span><span>20万</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="goal-result"></div>
+
+    <div class="disclaimer">本ツールは情報提供目的です。投資は元本保証ではありません。将来の運用成果を保証するものではありません。</div>
+  </div>
+
+</div>
+
+<script>
+let currentMethod='full';
+
+function fmt(n){return Math.round(n).toLocaleString()}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='method')renderMethod();
+  if(name==='goal')updateGoal();
+}
+
+function update(){
+  var hIncome=parseFloat(document.getElementById('sl-h-income').value);
+  var wIncome=parseFloat(document.getElementById('sl-w-income').value);
+  var hBonus=parseFloat(document.getElementById('sl-h-bonus').value);
+  var wBonus=parseFloat(document.getElementById('sl-w-bonus').value);
+  var rent=parseFloat(document.getElementById('sl-rent').value);
+  var food=parseFloat(document.getElementById('sl-food').value);
+  var util=parseFloat(document.getElementById('sl-util').value);
+  var daily=parseFloat(document.getElementById('sl-daily').value);
+  var leisure=parseFloat(document.getElementById('sl-leisure').value);
+  var pocket=parseFloat(document.getElementById('sl-pocket').value);
+  var insurance=parseFloat(document.getElementById('sl-insurance').value);
+  var other=parseFloat(document.getElementById('sl-other').value);
+
+  document.getElementById('lbl-h-income').textContent=hIncome+'万円';
+  document.getElementById('lbl-w-income').textContent=wIncome+'万円';
+  document.getElementById('lbl-h-bonus').textContent=hBonus+'万円';
+  document.getElementById('lbl-w-bonus').textContent=wBonus+'万円';
+  document.getElementById('lbl-rent').textContent=rent+'万円';
+  document.getElementById('lbl-food').textContent=food+'万円';
+  document.getElementById('lbl-util').textContent=util+'万円';
+  document.getElementById('lbl-daily').textContent=daily+'万円';
+  document.getElementById('lbl-leisure').textContent=leisure+'万円';
+  document.getElementById('lbl-pocket').textContent=pocket+'万円';
+  document.getElementById('lbl-insurance').textContent=insurance+'万円';
+  document.getElementById('lbl-other').textContent=other+'万円';
+
+  var bonusMonthly=(hBonus+wBonus)/12;
+  var totalIncome=hIncome+wIncome+bonusMonthly;
+  var fixedExpense=rent+util+insurance+other;
+  var varExpense=food+daily+leisure+pocket;
+  var totalExpense=fixedExpense+varExpense;
+  var saving=totalIncome-totalExpense;
+  var savingRate=totalIncome>0?saving/totalIncome*100:0;
+
+  var rh=document.getElementById('result-hero');
+  var rb=document.getElementById('result-big');
+  var rs=document.getElementById('result-sub');
+  rb.textContent=(saving>=0?'+':'')+fmt(Math.round(saving))+'万円/月';
+  if(saving>=10){rh.className='result-hero surplus';rs.textContent='年間貯蓄額：約'+fmt(Math.round(saving*12))+'万円 / 貯蓄率'+savingRate.toFixed(1)+'%'}
+  else if(saving>=3){rh.className='result-hero tight';rs.textContent='貯蓄率'+savingRate.toFixed(1)+'%。もう少し支出を見直せます'}
+  else if(saving>=0){rh.className='result-hero tight';rs.textContent='貯蓄率'+savingRate.toFixed(1)+'%。支出の見直しが必要です'}
+  else{rh.className='result-hero deficit';rs.textContent='毎月赤字です。支出を見直してください'}
+
+  document.getElementById('bk-h-income').textContent=fmt(hIncome)+'万';
+  document.getElementById('bk-w-income').textContent=fmt(wIncome)+'万';
+  document.getElementById('bk-bonus').textContent=fmt(Math.round(bonusMonthly*10)/10)+'万';
+  document.getElementById('bk-income-total').textContent=fmt(Math.round(totalIncome*10)/10)+'万';
+  document.getElementById('bk-rent').textContent=fmt(rent)+'万';
+  document.getElementById('bk-food').textContent=fmt(food)+'万';
+  document.getElementById('bk-util').textContent=fmt(util)+'万';
+  document.getElementById('bk-misc').textContent=fmt(daily+leisure+pocket)+'万';
+  document.getElementById('bk-ins').textContent=fmt(insurance+other)+'万';
+  document.getElementById('bk-expense-total').textContent=fmt(Math.round(totalExpense*10)/10)+'万';
+
+  if(totalIncome>0){
+    var fixedPct=Math.min(fixedExpense/totalIncome*100,100);
+    var varPct=Math.min(varExpense/totalIncome*100,100-fixedPct);
+    var savePct=Math.max(0,100-fixedPct-varPct);
+    document.getElementById('ratio-expense').style.width=fixedPct+'%';
+    document.getElementById('ratio-pocket').style.width=varPct+'%';
+    document.getElementById('ratio-saving').style.width=savePct+'%';
+    document.getElementById('ratio-save-pct').textContent='貯蓄率 '+savingRate.toFixed(1)+'%';
+    var comment='';
+    if(savingRate>=25)comment='理想的な貯蓄率です。このペースを維持しましょう。';
+    else if(savingRate>=20)comment='良好な貯蓄率です。あと少し増やせると老後の安心感が高まります。';
+    else if(savingRate>=15)comment='標準的な貯蓄率です。固定費の見直しで20%以上を目指しましょう。';
+    else if(savingRate>=10)comment='やや低めです。サブスク・保険の見直しで改善できる可能性があります。';
+    else if(savingRate>=0)comment='貯蓄率が低めです。固定費から見直すことを推奨します。';
+    else comment='赤字状態です。まず固定費（住居費・保険）の見直しを最優先にしてください。';
+    document.getElementById('ratio-comment').textContent=comment;
+  }
+
+  var actions=[];
+  if(saving<0){
+    actions.push({type:'urgent',tag:'今すぐ',title:'毎月赤字 → 固定費の見直しが最優先',body:'月'+fmt(Math.round(Math.abs(saving)))+'万円の赤字です。まず住居費・保険料・サブスクリプションなど固定費から削減してください。変動費より固定費の削減効果が大きく、一度見直すと継続的に効果が続きます。'});
+  }
+  if(rent/totalIncome>0.3&&totalIncome>0){
+    actions.push({type:'important',tag:'重要',title:'住居費が収入の'+(rent/totalIncome*100).toFixed(0)+'% → 理想は25%以内',body:'住居費の目安は手取り月収の25%以内です。現在'+(rent/totalIncome*100).toFixed(0)+'%と高めです。転居・家賃交渉・住宅ローンへの切り替えを検討してください。'});
+  }
+  if(saving>=5&&saving<15){
+    actions.push({type:'normal',tag:'改善',title:'NISAの自動積立を今すぐ設定',body:'月'+fmt(Math.round(saving))+'万円の余力があります。まずNISAのつみたて投資枠で月3〜5万円の自動積立を設定してください。自動化することで「使ってしまう」リスクをなくせます。'});
+  }
+  if(saving>=15){
+    actions.push({type:'good',tag:'理想的',title:'貯蓄余力十分 → NISA満額＋iDeCoで資産形成を',body:'月'+fmt(Math.round(saving))+'万円の貯蓄余力は十分です。NISAつみたて投資枠（月10万円）＋iDeCo（月2.3万円）をフル活用して資産形成を加速してください。'});
+  }
+  if(pocket/totalIncome>0.2&&totalIncome>0){
+    actions.push({type:'normal',tag:'見直し',title:'小遣いの割合が高め → ルールを決めましょう',body:'お小遣いが収入の'+(pocket/totalIncome*100).toFixed(0)+'%を占めています。夫婦それぞれの小遣いの使途に制限はつけずに、金額だけを決めるルールが継続しやすいです。'});
+  }
+  actions.push({type:'good',tag:'基本',title:'共同口座を今すぐ開設する',body:'2人の共同口座（貯蓄専用）を開設し、毎月自動で一定額を振り込む設定をしてください。「余ったら貯める」ではなく「先に貯める」先取り貯蓄が最も効果的です。'});
+
+  var al=document.getElementById('action-list');
+  al.innerHTML=actions.slice(0,4).map(function(a){return '<div class="action-card '+a.type+'"><div class="action-body"><div class="action-tag tag-'+a.type+'">'+a.tag+'</div><h4>'+a.title+'</h4><p>'+a.body+'</p></div></div>';}).join('');
+
+  if(typeof gtag==='function'){
+    var rng=function(v,s){return (Math.floor(v/s)*s)+'〜'+(Math.floor(v/s)*s+s)+'万';};
+    gtag('event','simulate_couples',{
+      income_range:rng(totalIncome,10),
+      saving_rate:Math.round(savingRate),
+      result:saving<0?'deficit':saving<5?'tight':'surplus'
+    });
+  }
+
+  if(document.getElementById('tab-method').classList.contains('active'))renderMethod();
+}
+
+function selectMethod(name,btn){
+  document.querySelectorAll('.method-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  currentMethod=name;
+  renderMethod();
+}
+
+function renderMethod(){
+  var hIncome=parseFloat(document.getElementById('sl-h-income').value)||28;
+  var wIncome=parseFloat(document.getElementById('sl-w-income').value)||22;
+  var hBonus=(parseFloat(document.getElementById('sl-h-bonus').value)||60)/12;
+  var wBonus=(parseFloat(document.getElementById('sl-w-bonus').value)||40)/12;
+  var totalH=hIncome+hBonus;
+  var totalW=wIncome+wBonus;
+  var total=totalH+totalW;
+  var rent=parseFloat(document.getElementById('sl-rent').value)||10;
+  var food=parseFloat(document.getElementById('sl-food').value)||6;
+  var util=parseFloat(document.getElementById('sl-util').value)||3;
+  var daily=parseFloat(document.getElementById('sl-daily').value)||2;
+  var leisure=parseFloat(document.getElementById('sl-leisure').value)||3;
+  var insurance=parseFloat(document.getElementById('sl-insurance').value)||2;
+  var other=parseFloat(document.getElementById('sl-other').value)||1;
+  var totalExpense=rent+food+util+daily+leisure+insurance+other;
+
+  var html='';
+  if(currentMethod==='full'){
+    var saving=total-totalExpense;
+    var pocket=Math.round(saving*0.3);
+    var actualSaving=saving-pocket;
+    html='<div class="method-card rec"><strong>完全共同管理：全額を共同口座に入れて一元管理</strong><br><br>夫の入金：月'+fmt(Math.round(totalH))+'万円<br>妻の入金：月'+fmt(Math.round(totalW))+'万円<br>共同支出：月'+fmt(Math.round(totalExpense))+'万円<br>各自小遣い（目安）：夫'+fmt(Math.round(pocket*totalH/total))+'万・妻'+fmt(Math.round(pocket*totalW/total))+'万<br><strong>共同貯蓄：月'+fmt(Math.round(actualSaving))+'万円（年'+fmt(Math.round(actualSaving*12))+'万円）</strong><br><br>最も貯蓄効率が高い方法です。お互いに全ての収支が見えるため、信頼関係が前提になります。</div>';
+  } else if(currentMethod==='ratio'){
+    var hRatio=total>0?totalH/total:0.5;
+    var wRatio=total>0?totalW/total:0.5;
+    var hShare=totalExpense*hRatio;
+    var wShare=totalExpense*wRatio;
+    html='<div class="method-card rec"><strong>収入比例分担：収入の割合に応じて生活費を負担</strong><br><br>夫の負担割合：'+(hRatio*100).toFixed(0)+'%（月'+fmt(Math.round(hShare))+'万円）<br>妻の負担割合：'+(wRatio*100).toFixed(0)+'%（月'+fmt(Math.round(wShare))+'万円）<br>夫の自由なお金：月'+fmt(Math.round(totalH-hShare))+'万円<br>妻の自由なお金：月'+fmt(Math.round(totalW-wShare))+'万円<br><br><strong>※自由なお金から共同貯蓄を決めてルール化することが重要です</strong><br>推奨：自由なお金の50%を共同貯蓄に（月'+fmt(Math.round((totalH-hShare+totalW-wShare)*0.5))+'万円）</div>';
+  } else if(currentMethod==='half'){
+    var halfExpense=totalExpense/2;
+    var warnClass=(totalH-halfExpense<2||totalW-halfExpense<2)?'warn':'info';
+    html='<div class="method-card '+warnClass+'"><strong>折半（50:50）：生活費を均等に折半</strong><br><br>1人あたりの負担：月'+fmt(Math.round(halfExpense))+'万円<br>夫の残り自由額：月'+fmt(Math.round(totalH-halfExpense))+'万円<br>妻の残り自由額：月'+fmt(Math.round(totalW-halfExpense))+'万円<br><br>'+(Math.abs(totalH-totalW)>5?'<strong>注意：収入差が月'+fmt(Math.round(Math.abs(totalH-totalW)))+'万円あります。折半は'+(totalH>totalW?'妻':'夫')+'に負担が大きくなります。収入比例分担の方が公平です。</strong>':'収入がほぼ同額なので折半は公平です。')+'</div>';
+  } else {
+    html='<div class="method-card info"><strong>役割分担型：支出のカテゴリを分担</strong><br><br>例：夫が担当 → 住居費'+fmt(rent)+'万・光熱通信'+fmt(util)+'万・保険'+fmt(insurance)+'万 = 月'+fmt(rent+util+insurance)+'万円<br>例：妻が担当 → 食費'+fmt(food)+'万・日用品'+fmt(daily)+'万・娯楽'+fmt(leisure)+'万 = 月'+fmt(food+daily+leisure)+'万円<br><br>担当が明確でストレスが少ない方法ですが、共同貯蓄の計画を別途決める必要があります。<br>推奨：毎月共同口座に夫婦それぞれが'+fmt(Math.round((total-totalExpense)/2))+'万円ずつ入金する</div>';
+  }
+  document.getElementById('method-detail').innerHTML=html;
+}
+
+function updateGoal(){
+  var hIncome=parseFloat(document.getElementById('sl-h-income').value)||28;
+  var wIncome=parseFloat(document.getElementById('sl-w-income').value)||22;
+  var hBonus=(parseFloat(document.getElementById('sl-h-bonus').value)||60)/12;
+  var wBonus=(parseFloat(document.getElementById('sl-w-bonus').value)||40)/12;
+  var totalIncome=hIncome+wIncome+hBonus+wBonus;
+
+  var rent=parseFloat(document.getElementById('sl-rent').value)||10;
+  var food=parseFloat(document.getElementById('sl-food').value)||6;
+  var util=parseFloat(document.getElementById('sl-util').value)||3;
+  var daily=parseFloat(document.getElementById('sl-daily').value)||2;
+  var leisure=parseFloat(document.getElementById('sl-leisure').value)||3;
+  var pocket=parseFloat(document.getElementById('sl-pocket').value)||6;
+  var insurance=parseFloat(document.getElementById('sl-insurance').value)||2;
+  var other=parseFloat(document.getElementById('sl-other').value)||1;
+  var totalExpense=rent+food+util+daily+leisure+pocket+insurance+other;
+  var monthlySaving=Math.max(0,totalIncome-totalExpense);
+
+  var curSaving=parseFloat(document.getElementById('sl-cur-saving').value)||100;
+  var emergencyMonths=parseInt(document.getElementById('sel-emergency').value)||6;
+  var wedding=parseFloat(document.getElementById('sl-goal-wedding').value)||300;
+  var house=parseFloat(document.getElementById('sl-goal-house').value)||500;
+  var child=parseFloat(document.getElementById('sl-goal-child').value)||200;
+  var nisaMonthly=parseFloat(document.getElementById('sl-goal-nisa').value)||5;
+
+  document.getElementById('lbl-cur-saving').textContent=curSaving+'万円';
+  document.getElementById('lbl-goal-wedding').textContent=wedding+'万円';
+  document.getElementById('lbl-goal-house').textContent=house+'万円';
+  document.getElementById('lbl-goal-child').textContent=child+'万円';
+  document.getElementById('lbl-goal-nisa').textContent=nisaMonthly+'万円';
+
+  var emergencyTarget=totalIncome*emergencyMonths;
+  var availableMonthly=Math.max(0,monthlySaving-nisaMonthly);
+
+  var goals=[
+    {name:'生活防衛資金',target:emergencyTarget,color:'#1a6b3c',priority:'最優先'},
+    {name:'結婚式・新婚旅行',target:wedding,color:'#7c3aed',priority:'優先'},
+    {name:'住宅購入頭金',target:house,color:'#1a4fa0',priority:'中期'},
+    {name:'子ども教育費準備',target:child,color:'#d4820a',priority:'中期'},
+  ];
+
+  var remaining=curSaving;
+  var html='<div class="card"><div class="card-title">貯蓄目標の達成シミュレーション</div>';
+  html+='<div style="background:var(--bg);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px">月の貯蓄余力：<strong style="font-family:\'DM Mono\',monospace">'+fmt(Math.round(monthlySaving))+'万円</strong>　うちNISA積立：<strong style="font-family:\'DM Mono\',monospace;color:var(--green)">'+nisaMonthly+'万円</strong>　目標向け積立：<strong style="font-family:\'DM Mono\',monospace">'+fmt(Math.round(availableMonthly))+'万円</strong></div>';
+
+  goals.forEach(function(g){
+    if(g.target===0)return;
+    var pct=Math.min(100,remaining/g.target*100);
+    var need=Math.max(0,g.target-remaining);
+    var months=availableMonthly>0?Math.ceil(need/availableMonthly):9999;
+    var years=Math.floor(months/12);
+    var mo=months%12;
+    var achieveStr=months>=9999?'積立額を増やす必要あり':'約'+(years>0?years+'年':'')+(mo>0?mo+'ヶ月':'')+'で達成';
+    html+='<div class="goal-item"><div style="min-width:120px;font-size:13px;font-weight:600">'+g.name+'<br><span style="font-size:10px;color:var(--gray)">'+g.priority+'</span></div><div class="goal-bar"><div class="goal-bar-fill" style="width:'+pct+'%;background:'+g.color+'"></div></div><div style="text-align:right;min-width:110px;font-size:12px"><div style="font-family:\'DM Mono\',monospace;font-weight:500">'+fmt(g.target)+'万円</div><div style="color:var(--gray)">'+achieveStr+'</div></div></div>';
+    remaining=Math.max(0,remaining-g.target);
+  });
+
+  var nisaFV=nisaMonthly>0?(nisaMonthly*(Math.pow(1+0.05/12,240)-1)/(0.05/12)).toFixed(0):0;
+  html+='<div style="margin-top:16px;padding:14px 16px;background:var(--green-pale);border-radius:10px;font-size:13px"><strong>NISA積立シミュレーション（月'+nisaMonthly+'万円・年利5%・20年）</strong><br>元本：'+fmt(nisaMonthly*12*20)+'万円 → 運用後：約'+fmt(Math.round(nisaFV/10000))+'万円<span style="color:var(--green);font-weight:700">（運用益 約'+fmt(Math.round((nisaFV/10000)-(nisaMonthly*12*20)))+'万円・非課税）</span><br><span style="font-size:11px;color:var(--gray)">※投資は元本保証なし。将来の運用成果を保証するものではありません。</span></div>';
+  html+='</div>';
+  document.getElementById('goal-result').innerHTML=html;
+}
+
+function toggleDetail(h){
+  var b=h.nextElementSibling;
+  var a=h.querySelector('.detail-arrow');
+  b.classList.toggle('open');
+  a.classList.toggle('open');
+}
+
+update();
+</script>
+</body>
+</html>
