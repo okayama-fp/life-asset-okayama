@@ -643,8 +643,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="grid-2">
         <div class="field">
           <label>現在の貯蓄合計 <span id="lbl-cur-saving">100万円</span></label>
-          <input type="range" id="sl-cur-saving" min="0" max="2000" step="50" value="100" oninput="updateGoal()">
-          <div class="slider-labels"><span>0</span><span>1,000万</span><span>2,000万</span></div>
+          <input type="range" id="sl-cur-saving" min="0" max="5000" step="50" value="100" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>2,500万</span><span>5,000万</span></div>
         </div>
         <div class="field">
           <label>生活防衛資金の目安 <span id="lbl-goal-emergency">月収の6ヶ月分</span></label>
@@ -658,23 +658,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
         </div>
         <div class="field">
           <label>結婚式・新婚旅行の目標 <span id="lbl-goal-wedding">300万円</span></label>
-          <input type="range" id="sl-goal-wedding" min="0" max="600" step="50" value="300" oninput="updateGoal()">
-          <div class="slider-labels"><span>0</span><span>300万</span><span>600万</span></div>
+          <input type="range" id="sl-goal-wedding" min="0" max="1500" step="50" value="300" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>750万</span><span>1,500万</span></div>
         </div>
         <div class="field">
           <label>住宅購入頭金の目標 <span id="lbl-goal-house">500万円</span></label>
-          <input type="range" id="sl-goal-house" min="0" max="2000" step="100" value="500" oninput="updateGoal()">
-          <div class="slider-labels"><span>0</span><span>1,000万</span><span>2,000万</span></div>
+          <input type="range" id="sl-goal-house" min="0" max="8000" step="100" value="500" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>4,000万</span><span>8,000万</span></div>
         </div>
         <div class="field">
           <label>子ども教育費の目標 <span id="lbl-goal-child">200万円</span></label>
-          <input type="range" id="sl-goal-child" min="0" max="500" step="50" value="200" oninput="updateGoal()">
-          <div class="slider-labels"><span>0</span><span>250万</span><span>500万</span></div>
+          <input type="range" id="sl-goal-child" min="0" max="2000" step="50" value="200" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>1,000万</span><span>2,000万</span></div>
         </div>
         <div class="field">
           <label>NISA積立（月） <span id="lbl-goal-nisa">5万円</span></label>
-          <input type="range" id="sl-goal-nisa" min="0" max="20" step="1" value="5" oninput="updateGoal()">
-          <div class="slider-labels"><span>0</span><span>10万</span><span>20万</span></div>
+          <input type="range" id="sl-goal-nisa" min="0" max="50" step="1" value="5" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>25万</span><span>50万</span></div>
         </div>
       </div>
     </div>
@@ -695,8 +695,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
         </div>
         <div class="field">
           <label>育休期間 <span id="lbl-ikukyu-months">12ヶ月</span></label>
-          <input type="range" id="sl-ikukyu-months" min="3" max="24" step="3" value="12" oninput="updateGoal()">
-          <div class="slider-labels"><span>3ヶ月</span><span>12ヶ月</span><span>24ヶ月</span></div>
+          <input type="range" id="sl-ikukyu-months" min="0" max="36" step="1" value="12" oninput="updateGoal()">
+          <div class="slider-labels"><span>0</span><span>18ヶ月</span><span>36ヶ月</span></div>
         </div>
       </div>
       <div id="ikukyu-result"></div>
@@ -1257,14 +1257,14 @@ function updateGoal(){
   var totalExp=v.rent+v.food+v.util+v.daily+v.leisure+v.pocket+v.insurance+v.other;
   var monthlySaving=Math.max(0,totalIncome-totalExp);
 
-  var curSaving=parseFloat(document.getElementById('sl-cur-saving').value)||100;
+  var curSaving=+document.getElementById('sl-cur-saving').value;
   var emergencyMonths=parseInt(document.getElementById('sel-emergency').value)||6;
-  var wedding=parseFloat(document.getElementById('sl-goal-wedding').value)||300;
-  var house=parseFloat(document.getElementById('sl-goal-house').value)||500;
-  var child=parseFloat(document.getElementById('sl-goal-child').value)||200;
-  var nisaMonthly=parseFloat(document.getElementById('sl-goal-nisa').value)||5;
+  var wedding=+document.getElementById('sl-goal-wedding').value;
+  var house=+document.getElementById('sl-goal-house').value;
+  var child=+document.getElementById('sl-goal-child').value;
+  var nisaMonthly=+document.getElementById('sl-goal-nisa').value;
   var ikuyuWho=document.getElementById('sel-ikukyu-who').value;
-  var ikuyuMonths=parseInt(document.getElementById('sl-ikukyu-months').value)||12;
+  var ikuyuMonths=+document.getElementById('sl-ikukyu-months').value;
 
   document.getElementById('lbl-cur-saving').textContent=curSaving+'万円';
   document.getElementById('lbl-goal-wedding').textContent=wedding+'万円';
