@@ -32,7 +32,7 @@
   --shadow:0 4px 28px rgba(0,0,0,.07);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.95;font-size:16px}
 
 nav{background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
@@ -60,11 +60,18 @@ article{max-width:740px;margin:0 auto;padding:56px 28px 80px}
 
 .lead{font-size:17px;line-height:2;margin-bottom:40px;color:#222;padding:24px 28px;background:var(--white);border-radius:8px;border:1px solid var(--border);box-shadow:var(--shadow)}
 
-.toc{background:var(--cream);border:1px solid var(--border);border-left:4px solid var(--green);padding:24px 28px;margin-bottom:52px;border-radius:0 8px 8px 0}
+.toc{background:var(--cream);border:1px solid var(--border);border-left:4px solid var(--green);padding:20px 24px;margin-bottom:52px;border-radius:0 8px 8px 0}
 .toc-title{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
 .toc ol{padding-left:18px}
 .toc li{margin:7px 0;font-size:14px}
 .toc a{color:var(--green);text-decoration:none;font-weight:500}
+.toc a:hover{text-decoration:underline}
+/* デスクトップ: 右側スティッキーサイドバー */
+@media(min-width:1100px){
+  .toc{position:fixed;right:max(16px,calc(50vw - 600px));top:72px;width:200px;max-height:calc(100vh - 90px);overflow-y:auto;margin-bottom:0;font-size:13px;z-index:40;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+  .toc ol{padding-left:14px}
+  .toc li{margin:6px 0;font-size:13px}
+}
 .toc a:hover{text-decoration:underline}
 
 h2{font-family:'Noto Serif JP',serif;font-size:clamp(18px,2.8vw,24px);font-weight:900;margin:60px 0 20px;padding-bottom:14px;border-bottom:2px solid var(--ink);line-height:1.4;display:flex;align-items:flex-start;gap:12px}
