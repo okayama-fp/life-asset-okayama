@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夫婦の家計シミュレーターの使い方｜家計スタイル診断・FIRE・老後ギャップを無料で計算｜ライフアセットオフィス</title>
+<meta name="description" content="夫婦2人の収入・支出を入力するだけ。家計スタイル診断・健康スコア・FIRE目標・老後ギャップ・iDeCo節税を無料で自動診断。共働き夫婦のための家計管理ツールの全機能を解説します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+  gtag('event', 'view_blog_article', { article: 'couples_sim_guide' });
+</script>
+<style>
+:root{
+  --green:#1a6b3c;--green-dark:#0f4d2a;--green-light:#2d8a52;
+  --green-pale:#e8f5ee;--green-mid:#c8e6d4;
+  --red:#c0392b;--red-pale:#fdecea;
+  --yellow:#d4820a;--yellow-pale:#fef6e4;
+  --blue:#1a4fa0;--blue-pale:#e8f0fb;
+  --ink:#0d0d0d;--paper:#faf8f5;--cream:#f2ede4;
+  --muted:#6b7280;--border:#e0d9ce;--white:#fff;
+  --shadow:0 4px 28px rgba(0,0,0,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.95;font-size:16px}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:17px;font-weight:900;color:var(--green)}
+.nav-logo span{font-size:10px;font-weight:400;color:var(--muted);display:block;line-height:1.2}
+.nav-links{display:flex;gap:24px;font-size:13px}
+.nav-links a{color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}
+@media(max-width:640px){.nav-links{display:none}}
+
+.hero{
+  background-color:var(--green-dark);
+  background-image:linear-gradient(150deg,var(--green-dark) 0%,var(--green) 60%,var(--green-light) 100%);
+  padding:68px 28px 76px;position:relative;overflow:hidden
+}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 32px)}
+.hero-inner{max-width:740px;margin:0 auto;position:relative;z-index:1}
+.hero-cat{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.1em;margin-bottom:20px}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(20px,3.8vw,34px);font-weight:900;color:#fff;line-height:1.3;margin-bottom:16px}
+.hero h1 em{color:#7ee8a2;font-style:normal}
+.hero-meta{display:flex;gap:20px;font-size:12px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;flex-wrap:wrap}
+
+.page-wrap{display:flex;align-items:flex-start;max-width:1100px;margin:0 auto;padding:0 28px}
+article{flex:1;min-width:0;max-width:740px;order:1;padding:56px 0 80px}
+
+.lead{font-size:17px;line-height:2;margin-bottom:40px;color:#222;padding:24px 28px;background:var(--white);border-radius:8px;border:1px solid var(--border);box-shadow:var(--shadow)}
+
+.toc{order:2;width:210px;flex-shrink:0;position:sticky;top:62px;max-height:calc(100vh - 80px);overflow-y:auto;margin-top:56px;margin-bottom:0;background:var(--cream);border:1px solid var(--border);border-left:4px solid var(--green);padding:20px 18px;border-radius:0 8px 8px 0;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.toc ol{padding-left:14px}
+.toc li{margin:6px 0;font-size:13px}
+.toc a{color:var(--green);text-decoration:none;font-weight:500}
+.toc a:hover{text-decoration:underline}
+@media(max-width:1099px){
+  .page-wrap{display:block;padding:0}
+  .toc{position:static;width:auto;max-height:none;overflow-y:visible;order:0;margin-top:0;margin-bottom:52px;padding:20px 24px}
+  .toc ol{padding-left:18px}
+  .toc li{margin:7px 0;font-size:14px}
+  article{order:0;max-width:100%;padding:56px 28px 80px}
+}
+
+h2{font-family:'Noto Serif JP',serif;font-size:clamp(18px,2.8vw,24px);font-weight:900;margin:60px 0 20px;padding-bottom:14px;border-bottom:2px solid var(--ink);line-height:1.4;display:flex;align-items:flex-start;gap:12px}
+.sec-num{font-family:'DM Mono',monospace;font-size:10px;color:#fff;background:var(--green);padding:3px 8px;border-radius:3px;margin-top:5px;flex-shrink:0;font-weight:500}
+h3{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:700;margin:36px 0 12px;padding-left:12px;border-left:3px solid var(--green);line-height:1.5}
+p{margin-bottom:18px}
+
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:600px){.feature-grid{grid-template-columns:1fr}}
+.feature-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;box-shadow:var(--shadow)}
+.feature-icon{font-size:28px;margin-bottom:10px}
+.feature-title{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--green)}
+.feature-desc{font-size:13px;color:#444;line-height:1.8}
+
+.step-list{margin:24px 0}
+.step-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px dashed var(--border)}
+.step-item:last-child{border:none}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;flex-shrink:0;margin-top:2px}
+.step-content h4{font-size:15px;font-weight:700;margin-bottom:5px}
+.step-content p{font-size:14px;color:#333;margin:0;line-height:1.8}
+
+.callout{padding:16px 20px;margin:26px 0;border-radius:0 8px 8px 0;font-size:14.5px;line-height:1.9}
+.callout-key{background:var(--green-pale);border-left:4px solid var(--green)}
+.callout-warn{background:var(--yellow-pale);border-left:4px solid var(--yellow)}
+
+.tool-cta{
+  background-color:var(--green-dark);
+  background-image:linear-gradient(135deg,var(--green-dark),var(--green));
+  border-radius:14px;padding:26px;margin:40px 0;color:#fff;display:flex;align-items:center;gap:18px;flex-wrap:wrap
+}
+.tool-cta-text{flex:1}
+.tool-cta h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.tool-cta p{font-size:13px;color:rgba(255,255,255,.8);margin:0;line-height:1.7}
+.tool-cta-btn{background:#fff;color:var(--green);border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:900;font-family:inherit;cursor:pointer;flex-shrink:0;transition:all .2s;white-space:nowrap}
+.tool-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+.tab-preview{background:var(--white);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0;box-shadow:var(--shadow)}
+.tab-preview-header{display:flex;background:var(--cream);border-bottom:1px solid var(--border)}
+.tab-label{padding:10px 18px;font-size:12px;font-weight:700;color:var(--muted)}
+.tab-label.active{background:var(--white);color:var(--green);border-bottom:2px solid var(--green);margin-bottom:-1px}
+.tab-preview-body{padding:20px 24px;font-size:14px;line-height:1.9;color:#333}
+
+.score-bar{margin:16px 0}
+.score-label{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;justify-content:space-between}
+.score-track{background:#e5e7eb;border-radius:6px;height:10px;overflow:hidden}
+.score-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--green),#7ee8a2)}
+
+hr{border:none;border-top:1px solid var(--border);margin:52px 0}
+.author{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:48px}
+.author-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--green-pale)}
+.author-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.author-bio{font-size:13px;color:var(--muted);line-height:1.8}
+.disclaimer{background:#fff8e1;border-left:3px solid #f5d28a;border-radius:0 6px 6px 0;padding:12px 16px;font-size:12px;color:#856404;margin-top:28px;line-height:1.8}
+@media(max-width:600px){article{padding:40px 18px 60px}.hero{padding:48px 18px 56px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></div>
+  <div class="nav-links">
+    <a href="index.html">ホーム</a>
+    <a href="couples-sim.html">シミュレーター</a>
+    <a href="index.html#blog">ブログ</a>
+    <a href="contact.html">お問い合わせ</a>
+  </div>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">お問い合わせ</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-cat">ツール紹介・使い方</div>
+    <h1>夫婦の家計シミュレーター<em>全機能ガイド</em><br>収入を入れるだけで<br>5つの診断が無料でできる</h1>
+    <div class="hero-meta">
+      <span>2026年6月</span><span>読了約7分</span><span>ライフアセットオフィス FP</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<nav class="toc">
+  <div class="toc-title">目次</div>
+  <ol>
+    <li><a href="#sec1">このツールでできる5つのこと</a></li>
+    <li><a href="#sec2">Tab1：家計スタイル診断＆健康スコア</a></li>
+    <li><a href="#sec3">Tab2：FIRE・老後ギャップ計算</a></li>
+    <li><a href="#sec4">Tab3：貯蓄目標プランナー</a></li>
+    <li><a href="#sec5">Tab4：iDeCo節税シミュレーション</a></li>
+    <li><a href="#sec6">使い方3ステップ</a></li>
+    <li><a href="#sec7">よくある質問</a></li>
+  </ol>
+</nav>
+
+<article>
+
+  <div class="lead">
+    収入・支出を入力するだけで、<strong>家計スタイルの診断・健康スコア・FIRE目標・老後ギャップ・iDeCo節税額</strong>を自動計算。<br><br>
+    FP（ファイナンシャルプランナー）が設計した無料の診断ツールです。結婚直後・育休前・マイホーム検討中など、お金の見直しタイミングに最適です。
+  </div>
+
+  <!-- SEC1 -->
+  <section id="sec1">
+    <h2><span class="sec-num">01</span>このツールでできる5つのこと</h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <div class="feature-title">家計スタイル診断</div>
+        <div class="feature-desc">完全共同・比例分担・折半・役割分担の4スタイルから2人に合った管理方法を診断。離婚リスクスコアも算出。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💚</div>
+        <div class="feature-title">家計健康スコア</div>
+        <div class="feature-desc">貯蓄率・住居費比率・保険料比率など5項目を100点満点で採点。改善ポイントをAIレベルで提示。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <div class="feature-title">FIRE・老後ギャップ</div>
+        <div class="feature-desc">現在の貯蓄ペースで何歳にFIRE達成できるか、老後資金が何万円不足するかをリアルタイム計算。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">貯蓄目標プランナー</div>
+        <div class="feature-desc">住宅・NISA・教育・老後の4ゴールを同時に設定。「月いくら積み立てれば達成できるか」を自動算出。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">iDeCo節税シミュレーション</div>
+        <div class="feature-desc">年収に応じた年間節税額・30年間の複利効果を計算。申し込みまでの具体的なアクションリストも生成。</div>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      すべて<strong>無料・登録不要</strong>。入力したデータはサーバーに送信されず、ブラウザ内のみで処理されます。
+    </div>
+  </section>
+
+  <!-- SEC2 -->
+  <section id="sec2">
+    <h2><span class="sec-num">02</span>Tab1：家計スタイル診断＆健康スコア</h2>
+
+    <p>最初に2人の手取り収入・主な支出項目（食費・光熱費・日用品・お小遣い）を入力します。スライダーで直感的に操作でき、入力と同時にリアルタイムで結果が更新されます。</p>
+
+    <h3>家計スタイル診断の見方</h3>
+    <p>収入の比率と支出パターンから<strong>4つのスタイルのうち最適解</strong>を提案します。たとえば共働きで収入差が大きい場合は「収入比例分担」が推奨されることが多く、収入が近い場合は「完全共同管理」が安定しやすいと診断されます。</p>
+
+    <h3>家計健康スコアの5項目</h3>
+    <div class="score-bar">
+      <div class="score-label"><span>貯蓄率（目標：手取りの20%以上）</span><span style="color:var(--green)">最重要</span></div>
+      <div class="score-track"><div class="score-fill" style="width:85%"></div></div>
+    </div>
+    <div class="score-bar">
+      <div class="score-label"><span>住居費比率（目標：手取りの25%以下）</span></div>
+      <div class="score-track"><div class="score-fill" style="width:70%"></div></div>
+    </div>
+    <div class="score-bar">
+      <div class="score-label"><span>食費比率（目標：手取りの15%以下）</span></div>
+      <div class="score-track"><div class="score-fill" style="width:75%"></div></div>
+    </div>
+    <div class="score-bar">
+      <div class="score-label"><span>保険料比率（目標：手取りの5%以下）</span></div>
+      <div class="score-track"><div class="score-fill" style="width:60%"></div></div>
+    </div>
+    <div class="score-bar">
+      <div class="score-label"><span>お小遣いバランス（公平性スコア）</span></div>
+      <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+    </div>
+
+    <div class="callout callout-warn">
+      スコアが60点以下の項目が「改善ポイント」として具体的なアドバイスとともに表示されます。
+    </div>
+
+    <div class="tool-cta">
+      <div class="tool-cta-text">
+        <h3>Tab1を試してみる</h3>
+        <p>2人の収入を入れるだけ。30秒で家計診断が完了します。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='couples-sim.html'">診断スタート →</button>
+    </div>
+  </section>
+
+  <!-- SEC3 -->
+  <section id="sec3">
+    <h2><span class="sec-num">03</span>Tab2：FIRE・老後ギャップ計算</h2>
+
+    <p>「早期退職したい」「老後が不安」という夫婦に特化した計算です。現在の貯蓄額・月々の積立額・想定利回りをもとに、以下を自動計算します。</p>
+
+    <ul style="margin:16px 0 24px;padding-left:20px;line-height:2.2">
+      <li><strong>FIRE達成年齢</strong>：資産が「年間支出×25倍」に達する年齢</li>
+      <li><strong>老後資金の過不足</strong>：年金受給開始（65歳）から90歳まで何万円足りるか</li>
+      <li><strong>必要な月積立額</strong>：目標達成のために今月から積み立てるべき金額</li>
+    </ul>
+
+    <h3>利回り設定のポイント</h3>
+    <p>デフォルトは年利5%に設定されています。全世界株式インデックスの過去30年平均に近い値です。悲観シナリオ（3%）・楽観シナリオ（7%）でそれぞれ試してみると、積立の「幅」が直感的に分かります。</p>
+
+    <div class="callout callout-key">
+      老後ギャップが大きく表示されても焦らないでください。ギャップを埋めるためのアクションプランが自動生成されます。
+    </div>
+  </section>
+
+  <!-- SEC4 -->
+  <section id="sec4">
+    <h2><span class="sec-num">04</span>Tab3：貯蓄目標プランナー</h2>
+
+    <p>住宅購入・NISA積立・教育費・老後資金の<strong>4ゴールを同時に設定</strong>できる機能です。それぞれの目標金額と達成年数を入力すると、月々の必要積立額を合計して表示します。</p>
+
+    <h3>育休シミュレーション機能</h3>
+    <p>育休を取得した場合に収入が何ヶ月減るかを設定すると、育休期間中の家計への影響額と、そのぶん目標達成が何ヶ月ずれるかを計算できます。育休前に家計を見直すきっかけとして活用してください。</p>
+
+    <div class="callout callout-warn">
+      複数のゴールを同時設定すると「今の貯蓄ペースでは達成が難しい」と警告が出ることがあります。その場合は優先順位を決めて、ゴールを段階的に設定するのが現実的です。
+    </div>
+  </section>
+
+  <!-- SEC5 -->
+  <section id="sec5">
+    <h2><span class="sec-num">05</span>Tab4：iDeCo節税シミュレーション</h2>
+
+    <p>iDeCo（個人型確定拠出年金）は掛金が全額所得控除になる節税制度です。年収を入力すると以下が自動計算されます。</p>
+
+    <ul style="margin:16px 0 24px;padding-left:20px;line-height:2.2">
+      <li><strong>年間節税額</strong>：所得税＋住民税の軽減額</li>
+      <li><strong>30年間の複利効果</strong>：節税分を再投資した場合の資産増加額</li>
+      <li><strong>損益分岐年数</strong>：iDeCoを始めて何年で元が取れるか</li>
+    </ul>
+
+    <p>さらに「今すぐやること」アクションリストが自動生成され、iDeCo口座開設の具体的な手順を確認できます。</p>
+  </section>
+
+  <!-- SEC6 -->
+  <section id="sec6">
+    <h2><span class="sec-num">06</span>使い方3ステップ</h2>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Tab1に2人の収入と支出を入力</h4>
+          <p>手取り月収・家賃・食費・光熱費・お小遣いをスライダーで設定。おおよその数字でOKです。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Tab2〜4で気になる項目を確認</h4>
+          <p>FIRE・老後が不安な方はTab2、住宅購入を検討中の方はTab3、節税に興味がある方はTab4へ。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>アクションリストを印刷・メモして実行</h4>
+          <p>各タブの下部に「今月中にやること」リストが生成されます。優先度の高いものから実行してください。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-cta">
+      <div class="tool-cta-text">
+        <h3>夫婦の家計シミュレーターを使う（無料）</h3>
+        <p>登録不要・スマホ対応。2人で一緒に画面を見ながら入力するのがおすすめです。</p>
+      </div>
+      <button class="tool-cta-btn" onclick="window.location.href='couples-sim.html'">無料で診断する →</button>
+    </div>
+  </section>
+
+  <!-- SEC7 -->
+  <section id="sec7">
+    <h2><span class="sec-num">07</span>よくある質問</h2>
+
+    <h3>入力したデータは保存されますか？</h3>
+    <p>いいえ。入力データはブラウザ内のみで処理され、サーバーには送信されません。ページを閉じると消えます。個人情報の入力は不要です。</p>
+
+    <h3>スマホでも使えますか？</h3>
+    <p>はい。スマホ・タブレット・PCすべてに対応しています。2人でスマホを見ながら入力するのが最もおすすめの使い方です。</p>
+
+    <h3>計算結果が実態と合わない場合は？</h3>
+    <p>本ツールは概算診断を目的としています。より精度の高いライフプランが必要な場合は、FPへの無料相談をご利用ください。</p>
+
+    <h3>結果をもとに相談できますか？</h3>
+    <p>もちろんです。診断結果の画面を見せていただきながら、具体的な改善プランをご提案します。</p>
+  </section>
+
+  <hr>
+
+  <div class="author">
+    <img src="images/fp-avatar.png" alt="ライフアセットオフィス FP" class="author-avatar">
+    <div>
+      <div class="author-name">ライフアセットオフィス FP</div>
+      <div class="author-bio">結婚・育休・住宅購入・老後設計など、人生の転換点に特化したFP相談を提供。「数字で見える化する家計管理」をモットーに、夫婦のお金の悩みをサポートします。</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    本記事は一般的な情報提供を目的としており、特定の金融商品の購入・取引を勧誘するものではありません。個々の状況に応じた判断はFP・税理士等の専門家にご相談ください。数値・制度情報は2026年6月時点のものです。当サイトは金融商品取引業（投資助言・代理業）の登録を受けていません。
+  </div>
+
+</article>
+</div><!-- /.page-wrap -->
+</body>
+</html>
