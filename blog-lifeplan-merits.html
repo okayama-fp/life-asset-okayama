@@ -400,10 +400,192 @@
     line-height: 1.8;
   }
 
+  /* PATTERN CALC */
+  .calc-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin: 28px 0;
+    box-shadow: var(--shadow);
+  }
+  .calc-box-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 16px;
+  }
+  .calc-presets {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .calc-preset {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--ink);
+    transition: all .18s;
+    font-weight: 500;
+  }
+  .calc-preset:hover, .calc-preset.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+  .calc-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media(max-width:540px) { .calc-inputs { grid-template-columns: 1fr; } }
+  .calc-field label {
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .calc-slider-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--green);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .calc-field input[type=range] {
+    width: 100%;
+    accent-color: var(--green);
+    cursor: pointer;
+  }
+  .calc-field select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .calc-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media(max-width:400px) { .calc-results { grid-template-columns: 1fr; } }
+  .calc-result-cell {
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+    transition: background .2s;
+  }
+  .calc-result-cell.deficit { background: #fdecea; }
+  .calc-result-cell.surplus { background: var(--green-pale); }
+  .calc-result-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .calc-result-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .calc-result-value.red { color: var(--accent); }
+  .calc-result-value.grn { color: var(--green); }
+  .calc-note { font-size: 11px; color: #94a3b8; margin-top: 14px; line-height: 1.7; }
+
+  /* STEP LIST */
+  .step-list { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+  .step-card {
+    display: flex;
+    gap: 18px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--green);
+    padding: 4px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 2px;
+    letter-spacing: .04em;
+  }
+  .step-body { flex: 1; }
+  .step-title { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
+  .step-tip {
+    background: var(--green-pale);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--green);
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+  .step-card p { font-size: 14px; color: #333; line-height: 1.85; margin: 0; }
+
+  /* ACTION CARDS */
+  .action-list { display: flex; flex-direction: column; gap: 14px; margin: 28px 0; }
+  .action-card {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--green);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+  }
+  .action-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--green);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 30px;
+    padding-top: 3px;
+  }
+  .action-body { flex: 1; }
+  .action-title { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
+  .action-time {
+    display: inline-block;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .action-card p { font-size: 14px; color: #333; line-height: 1.85; margin: 0; }
+
   @media (max-width: 600px) {
     article { padding: 40px 18px 60px; }
     .hero { padding: 48px 18px 56px; }
     .stat-value { font-size: 30px; }
+    .step-card { flex-direction: column; gap: 10px; }
+    .action-card { gap: 12px; }
   }
 </style>
 </head>
@@ -441,13 +623,10 @@
     <div class="toc-title">目次</div>
     <ol>
       <li><a href="#sec0">なぜ今ライフプランが必要なのか（統計で見る現実）</a></li>
-      <li><a href="#sec1">メリット1：老後の資金不足を「早期発見」できる</a></li>
-      <li><a href="#sec2">メリット2：教育費とローンの「衝突年」を回避できる</a></li>
-      <li><a href="#sec3">メリット3：NISAとiDeCoを最適なタイミングで始められる</a></li>
-      <li><a href="#sec4">メリット4：住宅購入の適正ローン額が明確になる</a></li>
-      <li><a href="#sec5">メリット5：不要な保険料を削減できる</a></li>
-      <li><a href="#sec6">メリット6：節税・控除の機会を逃さない</a></li>
-      <li><a href="#sec7">メリット7：パートナーとお金の話がしやすくなる</a></li>
+      <li><a href="#merits">ライフプランを作る7つのメリット</a></li>
+      <li><a href="#sec-compare">ライフプランあり vs なし、10年後の違い</a></li>
+      <li><a href="#sec-how">シミュレーターの正しい使い方（4ステップ）</a></li>
+      <li><a href="#sec-action">今すぐできる具体的アクション5選</a></li>
       <li><a href="#sec8">まとめ：まず大枠だけ、今日作ってみる</a></li>
     </ol>
   </div>
@@ -467,11 +646,11 @@
         <button class="copy-btn" onclick="copyStat(this,'老後の生活に「不安感あり」の割合：83.2%（生命保険文化センター「生活保障に関する調査」令和7年度 2025年）')">コピー</button>
       </div>
       <div class="stat-box">
-        <div class="stat-label">年金だけでは毎月不足する金額<br>（65歳以上夫婦無職世帯の平均）</div>
-        <div class="stat-value">月<span class="stat-unit">5.5万円</span></div>
-        <div class="stat-sub">30年で約2,000万円の不足（老後2,000万円問題）</div>
-        <div class="stat-source">出典：金融審議会 市場ワーキング・グループ報告書「高齢社会における資産形成・管理」（2019年6月）※現在も政策議論の基準値として参照</div>
-        <button class="copy-btn" onclick="copyStat(this,'年金だけでは月約5.5万円不足（65歳以上夫婦無職世帯平均）／30年で約2,000万円不足：金融審議会 市場ワーキング・グループ報告書（2019年6月）')">コピー</button>
+        <div class="stat-label">年金だけでは毎月不足する金額<br>（65歳以上夫婦無職世帯・2026年インフレ調整後推計）</div>
+        <div class="stat-value">月<span class="stat-unit">6.5〜7万円</span></div>
+        <div class="stat-sub">30年で約2,300〜2,500万円超（標準モデル）<br><span style="font-size:11px;color:#94a3b8">※生活水準・年金タイプで大きく変わります↓</span></div>
+        <div class="stat-source">2019年金融審議会報告（月5.5万円・30年で約2,000万円）を基準に、2026年現在の累計物価上昇率（約+15〜20%）を反映した推計値。年金額・生活費は個人差が大きいため目安として参照。</div>
+        <button class="copy-btn" onclick="copyStat(this,'年金だけでは月約6.5〜7万円不足（2026年インフレ調整後推計）／30年で約2,300〜2,500万円超の不足。2019年金融審議会報告（月5.5万円）に累計物価上昇率+15〜20%を反映。')">コピー</button>
       </div>
       <div class="stat-box">
         <div class="stat-label">金融資産をまったく保有していない<br>二人以上世帯の割合</div>
@@ -485,6 +664,50 @@
     <div class="callout callout-danger">
       <strong>これらの数字が示すこと：</strong>老後の不安を感じている人は8割を超えているにもかかわらず、4世帯に1世帯は貯蓄ゼロです。不安を感じているのに行動できていない——その理由の多くは、<strong>「何から始めればいいかわからない」</strong>ことにあります。ライフプランはその「出発点の地図」です。
     </div>
+
+    <!-- INTERACTIVE SHORTFALL CALC -->
+    <div class="calc-box">
+      <div class="calc-box-title">あなたのパターンで月間不足額を試算する</div>
+
+      <div class="calc-presets">
+        <button class="calc-preset" onclick="setPreset(20,22,this)">節約型</button>
+        <button class="calc-preset active" onclick="setPreset(26,22,this)">標準型（片働き）</button>
+        <button class="calc-preset" onclick="setPreset(26,30,this)">標準型（共働き）</button>
+        <button class="calc-preset" onclick="setPreset(35,22,this)">ゆとり型</button>
+        <button class="calc-preset" onclick="setPreset(26,13,this)">自営・フリー</button>
+      </div>
+
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label>老後の月生活費（万円）</label>
+          <span class="calc-slider-val" id="sp-val">26万円 / 月</span>
+          <input type="range" id="spending" min="15" max="50" value="26" step="1" oninput="updateCalc()">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8;margin-top:2px"><span>15万</span><span>50万</span></div>
+        </div>
+        <div class="calc-field">
+          <label>年金の種類（月額目安）</label>
+          <select id="pension" onchange="updateCalc()">
+            <option value="22">厚生年金・片働きモデル（約22万円）</option>
+            <option value="30">厚生年金・共働きフルタイム（約30万円）</option>
+            <option value="13">国民年金のみ・自営業・フリー（約13万円）</option>
+            <option value="17">厚生年金・短時間勤務含む（約17万円）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-results">
+        <div class="calc-result-cell deficit" id="res-monthly">
+          <div class="calc-result-label">月間不足額</div>
+          <div class="calc-result-value red" id="monthly-gap">▲4万円</div>
+        </div>
+        <div class="calc-result-cell deficit" id="res-total">
+          <div class="calc-result-label">30年間の総不足額</div>
+          <div class="calc-result-value red" id="total-gap">1,440万円</div>
+        </div>
+      </div>
+      <div class="calc-note">※年金額・生活費は個人差が大きく、物価変動・就労状況によっても変わります。あくまで目安としてご参照ください。自分の数字を入れた詳細試算は下のシミュレーターで。</div>
+    </div>
+
   </section>
 
   <hr class="divider">
@@ -502,7 +725,7 @@
           <h3>老後の資金不足を「早期発見」できる</h3>
         </div>
         <p>ライフプランを作ると、「今の収支ペースで続けた場合、何歳で貯蓄が底をつくか」が一目でわかります。この数字を30代・40代のうちに把握できた人と、60代手前で初めて気づいた人では、取れる対策がまったく違います。</p>
-        <p>老後2,000万円問題（月5.5万円×30年）は有名になりましたが、これは「平均の夫婦世帯」の話。自分の生活費・年金見込み額・退職金額によって不足額は変わります。ライフプランでは自分の数字で試算するため、「平均より多い」「意外と少ない」という個別の実態がわかります。</p>
+        <p>2019年の金融審議会報告では「月5.5万円・30年で約2,000万円」という数字が話題になりました。しかし2026年現在、累計15〜20%の物価上昇により実際の不足額は<strong>月6.5〜7万円・30年で2,300〜2,500万円超</strong>に膨らんでいる可能性があります。しかもこれは「平均の夫婦世帯」の話。自分の生活費・年金見込み額・退職金額によって不足額は大きく変わります。ライフプランでは自分の数字で試算するため、個別の実態が正確にわかります。</p>
         <span class="merit-highlight">早く知るほど、取れる選択肢が増える</span>
       </div>
 
@@ -578,7 +801,7 @@
   <hr class="divider">
 
   <!-- COMPARE -->
-  <section>
+  <section id="sec-compare">
     <h2><span class="sec-num">比較</span>ライフプランあり vs なし、10年後の違い</h2>
 
     <div class="compare-box">
@@ -623,6 +846,105 @@
 
   <hr class="divider">
 
+  <!-- HOW TO USE SIMULATOR -->
+  <section id="sec-how">
+    <h2><span class="sec-num">使い方</span>シミュレーターの正しい使い方（4ステップ）</h2>
+
+    <p>「シミュレーターって難しそう」と感じる方も多いですが、実際には入力項目はシンプルです。合計40分もあれば自分専用のライフプランが完成します。</p>
+
+    <div class="step-list">
+      <div class="step-card">
+        <div class="step-num">STEP 01</div>
+        <div class="step-body">
+          <div class="step-title">現在の家計情報を入力する（約15分）</div>
+          <p>年収・手取り・現在の貯蓄残高・毎月の生活費を入力します。最初は「だいたいこのくらい」の数字で問題ありません。まず動かしてみることが最も大切なステップです。</p>
+          <div class="step-tip">💡 給与明細の「差引支給額」が手取り収入の目安。貯蓄は通帳の残高合計でOK</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 02</div>
+        <div class="step-body">
+          <div class="step-title">ライフイベントを追加する（約10分）</div>
+          <p>子どもの進学予定・住宅購入・住宅ローン返済・配偶者の就労変更など、将来のイベントを入力します。「予定がない」「わからない」項目は空欄のまま進めて構いません。</p>
+          <div class="step-tip">💡 子どもの大学進学費用（国公立約250万円・私立約450万円）はぜひ入れておきましょう</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 03</div>
+        <div class="step-body">
+          <div class="step-title">グラフで「資産が減る年」を確認する（約5分）</div>
+          <p>年別収支グラフを確認します。「貯蓄残高がマイナスになる年」や「支出が収入を大幅に超える山場」が一目でわかります。この「いつ危険になるか」を把握することが、対策の出発点です。</p>
+          <div class="step-tip">💡 グラフが右肩下がりの場合は早急な対策が必要。まず「何歳で底をつくか」という事実を直視しましょう</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 04</div>
+        <div class="step-body">
+          <div class="step-title">対策シナリオを試して比較する（約10分）</div>
+          <p>「毎月の積立を2万円増やしたら？」「住宅ローンを3年繰り上げ返済したら？」というシナリオを入力し、グラフがどう変わるか比較します。この「if比較」がシミュレーターの最大の価値です。</p>
+          <div class="step-tip">💡 CSVダウンロードで年別収支表を保存できます。配偶者と一緒に確認するときに便利です</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <strong>完璧を目指さないことが大切です。</strong>最初は大まかな数字で構いません。入力→グラフ確認→修正のサイクルを繰り返すことで、精度が上がっていきます。目標は「今日の自分の状況を可視化すること」、それだけで十分なスタートです。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONCRETE ACTIONS -->
+  <section id="sec-action">
+    <h2><span class="sec-num">アクション</span>今すぐできる具体的アクション5選</h2>
+
+    <p>「ライフプランを作ろう」と思っても、何から始めればいいかわからない——という方のために、<strong>今日から5〜30分でできる具体的なアクション</strong>を5つにまとめました。順番どおりに取り組むだけで、ライフプランの土台が自然と整います。</p>
+
+    <div class="action-list">
+      <div class="action-card">
+        <div class="action-num">01</div>
+        <div class="action-body">
+          <div class="action-title">今月の手取り収入と支出を書き出す<span class="action-time">5分</span></div>
+          <p>メモ帳・スマホのメモアプリでOK。「手取り：〇〇万円、固定費：〇〇万円、変動費：〇〇万円、毎月の貯蓄：〇〇万円」を書き出すだけ。これがシミュレーター入力の最初の材料になります。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">02</div>
+        <div class="action-body">
+          <div class="action-title">ライフプランシミュレーターに現状を入力してグラフを見る<span class="action-time">15分</span></div>
+          <p>アクション01で書き出した数字をシミュレーターに入力し、グラフを確認します。「貯蓄がいつ底をつくか」という事実を最初に把握することで、その後の行動に現実的な根拠が生まれます。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">03</div>
+        <div class="action-body">
+          <div class="action-title">保険証券を引き出して月額保険料の合計を出す<span class="action-time">10分</span></div>
+          <p>加入中の保険の証券をすべて出して、月額保険料を合計します。「毎月〇〇円払っていた」という事実を数字で確認するだけで、見直しの必要性が自然と見えてきます。月3万円を超えているなら要検討です。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">04</div>
+        <div class="action-body">
+          <div class="action-title">ねんきん定期便で年金見込み額を確認する<span class="action-time">10分</span></div>
+          <p>毎年誕生月に届く「ねんきん定期便」または「ねんきんネット（日本年金機構）」で老齢年金の見込み額を確認します。「年金がいくらもらえるか」がわかると、老後の不足額の計算が初めてできるようになります。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">05</div>
+        <div class="action-body">
+          <div class="action-title">配偶者・パートナーとシミュレーターを一緒に見る時間を作る<span class="action-time">30分</span></div>
+          <p>アクション01〜04で集めた情報をもとに、パートナーと一緒にシミュレーターを確認します。「老後の資金がいくら必要か」「NISAをいつから増やすか」という具体的な会話ができます。感情論ではなく数字を共有することで、話し合いがスムーズになります。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>「完璧にやろう」としなくてOKです。</strong>アクション01と02だけ今日やる——それで十分なスタートです。多くの場合、「最初の一歩を踏み出すこと」が最も大きな変化をもたらします。
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- SUMMARY -->
   <section id="sec8">
     <h2><span class="sec-num">まとめ</span>まず大枠だけ、今日作ってみる</h2>
@@ -631,7 +953,7 @@
 
     <ul class="checklist">
       <li><span class="ck"></span>老後の生活に不安を感じている人は8割超。ライフプランがあれば不安を「数字」に変えられる</li>
-      <li><span class="ck"></span>年金だけでは月5.5万円（30年で約2,000万円）不足する試算——でも自分の数字は違う場合がある</li>
+      <li><span class="ck"></span>年金だけでは月6.5〜7万円不足（2026年インフレ調整後推計・30年で2,300〜2,500万円超）——でも自分の数字は必ず違う</li>
       <li><span class="ck"></span>NISAは10年早く始めるだけで数百万円の差。「いつから始めるか」を決めるためにもライフプランが必要</li>
       <li><span class="ck"></span>教育費・住宅ローン・老後という3大支出の「衝突年」は、事前にしか回避できない</li>
       <li><span class="ck"></span>保険・節税・夫婦の対話——すべての土台は「自分たちの数字を把握すること」から始まる</li>
@@ -668,6 +990,47 @@
 </article>
 
 <script>
+function updateCalc() {
+  var spending = parseInt(document.getElementById('spending').value);
+  var pension  = parseInt(document.getElementById('pension').value);
+  document.getElementById('sp-val').textContent = spending + '万円 / 月';
+  var gap = spending - pension;
+  var mEl  = document.getElementById('monthly-gap');
+  var tEl  = document.getElementById('total-gap');
+  var mCell = document.getElementById('res-monthly');
+  var tCell = document.getElementById('res-total');
+  if (gap > 0) {
+    mEl.textContent = '▲' + gap + '万円';
+    mEl.className = 'calc-result-value red';
+    tEl.textContent = (gap * 12 * 30).toLocaleString() + '万円';
+    tEl.className = 'calc-result-value red';
+    mCell.className = 'calc-result-cell deficit';
+    tCell.className = 'calc-result-cell deficit';
+  } else if (gap === 0) {
+    mEl.textContent = '均衡';
+    mEl.className = 'calc-result-value grn';
+    tEl.textContent = '0万円';
+    tEl.className = 'calc-result-value grn';
+    mCell.className = 'calc-result-cell surplus';
+    tCell.className = 'calc-result-cell surplus';
+  } else {
+    mEl.textContent = '+' + Math.abs(gap) + '万円余剰';
+    mEl.className = 'calc-result-value grn';
+    tEl.textContent = '余剰';
+    tEl.className = 'calc-result-value grn';
+    mCell.className = 'calc-result-cell surplus';
+    tCell.className = 'calc-result-cell surplus';
+  }
+}
+
+function setPreset(spending, pension, btn) {
+  document.querySelectorAll('.calc-preset').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('spending').value = spending;
+  document.getElementById('pension').value  = pension;
+  updateCalc();
+}
+
 function copyStat(btn, text) {
   navigator.clipboard.writeText(text).then(function() {
     var orig = btn.textContent;
