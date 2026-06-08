@@ -618,7 +618,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="card-title">よくある疑問（FPが回答）</div>
       <div class="accordion">
         <div class="accordion-head" onclick="toggleAcc(this)">共同口座って必須ですか？どの銀行がいいですか？<span class="accordion-arrow">▼</span></div>
-        <div class="accordion-body">必須ではありませんが、共同口座があると「見える化」できるため離婚リスクも低下するというデータがあります。おすすめは<strong>ネット銀行（住信SBIネット銀行・楽天銀行）</strong>。振込手数料無料・アプリでリアルタイム残高確認・自動振替設定が簡単です。2人でアプリを共有してください。</div>
+        <div class="accordion-body">必須ではありませんが、共同口座があると「見える化」できるため離婚リスクも低下するというデータがあります。振込手数料無料・アプリで残高共有できるネット銀行が使いやすい選択肢の一つです（住信SBIネット銀行・楽天銀行などが例として挙げられます）。2人でアプリを共有してください。</div>
       </div>
       <div class="accordion">
         <div class="accordion-head" onclick="toggleAcc(this)">お小遣いは毎月いくらが適切ですか？<span class="accordion-arrow">▼</span></div>
@@ -630,7 +630,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       </div>
       <div class="accordion">
         <div class="accordion-head" onclick="toggleAcc(this)">NISAはどちらの口座で開設するべきですか？<span class="accordion-arrow">▼</span></div>
-        <div class="accordion-body">NISAは<strong>個人口座のため1人1口座</strong>。夫婦2人でそれぞれ開設するのがベスト（合計生涯非課税枠3,600万円）。収入が多い方の口座で優先的に積み立て、余力があれば両方を活用してください。投資信託は<strong>オルカン（eMAXIS Slim 全世界株式）</strong>など低コスト指数ファンドが初心者向けです。iDeCoは60歳まで引き出せませんが全額所得控除で節税効果が高い。</div>
+        <div class="accordion-body">NISAは<strong>個人口座のため1人1口座</strong>。夫婦2人でそれぞれ開設するのがベスト（合計生涯非課税枠3,600万円）。収入が多い方の口座で優先的に積み立て、余力があれば両方を活用してください。投資信託は低コストのインデックスファンド（全世界株式・先進国株式タイプ）が初心者向けです。iDeCoは60歳まで引き出せませんが全額所得控除で節税効果が高い。</div>
       </div>
     </div>
   </div>
@@ -726,7 +726,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <div class="card-title">💡 iDeCo節税シミュレーション（会社員・月2.3万円満額）</div>
       <div class="ideco-grid" id="ideco-grid"></div>
       <div style="margin-top:14px;background:var(--blue-pale);border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.8">
-        <strong>iDeCoの始め方：</strong> SBI証券 or 楽天証券で口座開設（無料）→ 勤務先に「事業主証明書」を発行依頼 → 掛金設定 → eMAXIS Slim 全世界株式で積立設定。節税効果は毎年の確定申告 or 年末調整で自動還付されます。
+        <strong>iDeCoの始め方：</strong> iDeCo対応のネット証券で口座開設（無料）→ 勤務先に「事業主証明書」を発行依頼 → 掛金設定 → 低コストインデックスファンドで積立設定。節税効果は毎年の確定申告 or 年末調整で自動還付されます。
       </div>
     </div>
 
@@ -1028,18 +1028,18 @@ function update(){
     phases[0].actions.push({title:'全サブスクリプションをリストアップ',body:'Netflixや動画配信・音楽・アプリ課金を全て書き出し、2人で使っていないものを即解約。月1,000円×5個=年6万円の節約。',service:'→ スマホの「サブスク管理」設定から確認'});
     phases[1].actions.push({title:'保険証券を全部引き出して確認',body:'特に掛け捨てでない保険・医療保険が高額なケースが多い。「ほけんの窓口」の無料相談で適正額か確認する。',service:'→ ほけんの窓口（全国店舗・相談無料）'});
   } else if(savingRate<15){
-    phases[0].actions.push({title:'先取り貯蓄の自動振替を今日設定',body:'ネットバンクにログインし、給料日翌日に貯蓄口座へ'+fmtMan(Math.max(1,Math.floor(saving*0.8)))+'の自動振替を設定。「余ったら貯める」はゼロになりがち。',service:'→ 住信SBIネット銀行 / 楽天銀行（振替設定無料）'});
-    phases[1].actions.push({title:'通信費を格安SIMに変更',body:'大手キャリアから格安SIM（IIJmio・povo・mineoなど）に変えると2人で月1〜2万節約できる。手続きは30分。',service:'→ IIJmio（月2,068円〜）/ 楽天モバイル（月980円〜）'});
+    phases[0].actions.push({title:'先取り貯蓄の自動振替を今日設定',body:'ネットバンクにログインし、給料日翌日に貯蓄口座へ'+fmtMan(Math.max(1,Math.floor(saving*0.8)))+'の自動振替を設定。「余ったら貯める」はゼロになりがち。',service:'→ ネット銀行の自動振替機能を活用（各社・設定無料）'});
+    phases[1].actions.push({title:'通信費を格安SIMに変更',body:'大手キャリアから格安SIM（IIJmio・povo・mineoなど）に変えると2人で月1〜2万節約できる。手続きは30分。',service:'→ 格安SIM各社で比較検討（IIJmio・povo・mineoなど料金は変動します）'});
   } else {
-    phases[0].actions.push({title:'NISA口座でつみたて設定を今月中に',body:'SBI証券または楽天証券でNISA口座を開設（10分）し、eMAXIS Slim 全世界株式（オルカン）で月'+nisaMonthly+'万円の自動積立を設定する。',service:'→ SBI証券 / 楽天証券（手数料無料）'});
+    phases[0].actions.push({title:'NISA口座でつみたて設定を今月中に',body:'NISA対応のネット証券でNISA口座を開設（約10分）し、低コストの全世界株式インデックスファンドで月'+nisaMonthly+'万円の自動積立を設定する。',service:'→ NISA対応ネット証券（各社・口座開設無料）'});
   }
   if(rentRatio>30){
     phases[1].actions.push({title:'住居費を収入の25%以内に下げる計画を立てる',body:'現在'+rentRatio.toFixed(0)+'%と高め。転居・家賃交渉・住宅ローンへの切り替えで月'+fmtMan(v.rent-totalIncome*0.25)+'の削減余地あり。引っ越し費用は4〜6月・9〜11月が安い。',service:'→ スーモ・ホームズで同エリア家賃相場を確認'});
   }
-  phases[1].actions.push({title:'共同口座（生活費用）を開設',body:'住信SBIネット銀行の「目的別口座」が最適。1つの口座の中に「生活費」「旅行」「車」など用途別に最大10個の仮想口座が無料で作れる。',service:'→ 住信SBIネット銀行（目的別口座・手数料無料）'});
+  phases[1].actions.push({title:'共同口座（生活費用）を開設',body:'住信SBIネット銀行の「目的別口座」が最適。1つの口座の中に「生活費」「旅行」「車」など用途別に最大10個の仮想口座が無料で作れる。',service:'→ 目的別口座機能のあるネット銀行（各社・手数料無料）'});
   phases[2].actions.push({title:'家計管理アプリで全収支を見える化',body:'マネーフォワードMEで2人の銀行口座・クレカを全連携。「予算管理」機能で費目ごとの上限を設定すると自動でアラートが出る。',service:'→ マネーフォワードME プレミアム（月500円）'});
-  phases[2].actions.push({title:'iDeCoの資料請求（節税を今すぐ開始）',body:'会社員は月2.3万円まで全額所得控除。年収'+fmtMan(totalIncome*12)+'なら年間節税額'+fmtMan(Math.round(23000*12*0.2/10000))+'万円以上。開設に2〜3ヶ月かかるので今すぐ申し込む。',service:'→ SBI証券 iDeCo（加入手数料・口座管理料0円）'});
-  phases[3].actions.push({title:'生活防衛資金'+fmtMan(Math.round(totalIncome*6))+'を専用口座に積立',body:'月収の6ヶ月分を「絶対に使わない口座」に確保。目標額は'+fmtMan(Math.round(totalIncome*6))+'。達成後は全額NISA・iDeCoへ。',service:'→ 楽天銀行 普通預金（金利0.11%、SBI証券連携で+0.1%）'});
+  phases[2].actions.push({title:'iDeCoの資料請求（節税を今すぐ開始）',body:'会社員は月2.3万円まで全額所得控除。年収'+fmtMan(totalIncome*12)+'なら年間節税額'+fmtMan(Math.round(23000*12*0.2/10000))+'万円以上。開設に2〜3ヶ月かかるので今すぐ申し込む。',service:'→ iDeCo対応ネット証券（加入手数料・口座管理料は各社ご確認ください）'});
+  phases[3].actions.push({title:'生活防衛資金'+fmtMan(Math.round(totalIncome*6))+'を専用口座に積立',body:'月収の6ヶ月分を「絶対に使わない口座」に確保。目標額は'+fmtMan(Math.round(totalIncome*6))+'。達成後は全額NISA・iDeCoへ。',service:'→ 金利の高いネット銀行普通預金を活用（各社金利は変動します）'});
   if(savingRate>=20){
     phases[3].actions.push({title:'資産配分（アセットアロケーション）を決める',body:'NISA（オルカン）＋iDeCo（外国株インデックス）＋現金（生活防衛資金）の3層で構成。株式比率＝100－年齢が目安。現在年齢ベースで株式'+Math.max(50,100-35)+'%が標準。',service:'→ 投信比較サイト「投信まとめ」で信託報酬を確認'});
   }
