@@ -400,6 +400,110 @@
     line-height: 1.8;
   }
 
+  /* PATTERN CALC */
+  .calc-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin: 28px 0;
+    box-shadow: var(--shadow);
+  }
+  .calc-box-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 16px;
+  }
+  .calc-presets {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .calc-preset {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--ink);
+    transition: all .18s;
+    font-weight: 500;
+  }
+  .calc-preset:hover, .calc-preset.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+  .calc-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media(max-width:540px) { .calc-inputs { grid-template-columns: 1fr; } }
+  .calc-field label {
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .calc-slider-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--green);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .calc-field input[type=range] {
+    width: 100%;
+    accent-color: var(--green);
+    cursor: pointer;
+  }
+  .calc-field select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .calc-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media(max-width:400px) { .calc-results { grid-template-columns: 1fr; } }
+  .calc-result-cell {
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+    transition: background .2s;
+  }
+  .calc-result-cell.deficit { background: #fdecea; }
+  .calc-result-cell.surplus { background: var(--green-pale); }
+  .calc-result-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .calc-result-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .calc-result-value.red { color: var(--accent); }
+  .calc-result-value.grn { color: var(--green); }
+  .calc-note { font-size: 11px; color: #94a3b8; margin-top: 14px; line-height: 1.7; }
+
   /* STEP LIST */
   .step-list { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
   .step-card {
@@ -544,7 +648,7 @@
       <div class="stat-box">
         <div class="stat-label">年金だけでは毎月不足する金額<br>（65歳以上夫婦無職世帯・2026年インフレ調整後推計）</div>
         <div class="stat-value">月<span class="stat-unit">6.5〜7万円</span></div>
-        <div class="stat-sub">30年で約2,300〜2,500万円超の不足（2026年現在の物価水準ベース）</div>
+        <div class="stat-sub">30年で約2,300〜2,500万円超（標準モデル）<br><span style="font-size:11px;color:#94a3b8">※生活水準・年金タイプで大きく変わります↓</span></div>
         <div class="stat-source">2019年金融審議会報告（月5.5万円・30年で約2,000万円）を基準に、2026年現在の累計物価上昇率（約+15〜20%）を反映した推計値。年金額・生活費は個人差が大きいため目安として参照。</div>
         <button class="copy-btn" onclick="copyStat(this,'年金だけでは月約6.5〜7万円不足（2026年インフレ調整後推計）／30年で約2,300〜2,500万円超の不足。2019年金融審議会報告（月5.5万円）に累計物価上昇率+15〜20%を反映。')">コピー</button>
       </div>
@@ -560,6 +664,50 @@
     <div class="callout callout-danger">
       <strong>これらの数字が示すこと：</strong>老後の不安を感じている人は8割を超えているにもかかわらず、4世帯に1世帯は貯蓄ゼロです。不安を感じているのに行動できていない——その理由の多くは、<strong>「何から始めればいいかわからない」</strong>ことにあります。ライフプランはその「出発点の地図」です。
     </div>
+
+    <!-- INTERACTIVE SHORTFALL CALC -->
+    <div class="calc-box">
+      <div class="calc-box-title">あなたのパターンで月間不足額を試算する</div>
+
+      <div class="calc-presets">
+        <button class="calc-preset" onclick="setPreset(20,22,this)">節約型</button>
+        <button class="calc-preset active" onclick="setPreset(26,22,this)">標準型（片働き）</button>
+        <button class="calc-preset" onclick="setPreset(26,30,this)">標準型（共働き）</button>
+        <button class="calc-preset" onclick="setPreset(35,22,this)">ゆとり型</button>
+        <button class="calc-preset" onclick="setPreset(26,13,this)">自営・フリー</button>
+      </div>
+
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label>老後の月生活費（万円）</label>
+          <span class="calc-slider-val" id="sp-val">26万円 / 月</span>
+          <input type="range" id="spending" min="15" max="50" value="26" step="1" oninput="updateCalc()">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8;margin-top:2px"><span>15万</span><span>50万</span></div>
+        </div>
+        <div class="calc-field">
+          <label>年金の種類（月額目安）</label>
+          <select id="pension" onchange="updateCalc()">
+            <option value="22">厚生年金・片働きモデル（約22万円）</option>
+            <option value="30">厚生年金・共働きフルタイム（約30万円）</option>
+            <option value="13">国民年金のみ・自営業・フリー（約13万円）</option>
+            <option value="17">厚生年金・短時間勤務含む（約17万円）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-results">
+        <div class="calc-result-cell deficit" id="res-monthly">
+          <div class="calc-result-label">月間不足額</div>
+          <div class="calc-result-value red" id="monthly-gap">▲4万円</div>
+        </div>
+        <div class="calc-result-cell deficit" id="res-total">
+          <div class="calc-result-label">30年間の総不足額</div>
+          <div class="calc-result-value red" id="total-gap">1,440万円</div>
+        </div>
+      </div>
+      <div class="calc-note">※年金額・生活費は個人差が大きく、物価変動・就労状況によっても変わります。あくまで目安としてご参照ください。自分の数字を入れた詳細試算は下のシミュレーターで。</div>
+    </div>
+
   </section>
 
   <hr class="divider">
@@ -842,6 +990,47 @@
 </article>
 
 <script>
+function updateCalc() {
+  var spending = parseInt(document.getElementById('spending').value);
+  var pension  = parseInt(document.getElementById('pension').value);
+  document.getElementById('sp-val').textContent = spending + '万円 / 月';
+  var gap = spending - pension;
+  var mEl  = document.getElementById('monthly-gap');
+  var tEl  = document.getElementById('total-gap');
+  var mCell = document.getElementById('res-monthly');
+  var tCell = document.getElementById('res-total');
+  if (gap > 0) {
+    mEl.textContent = '▲' + gap + '万円';
+    mEl.className = 'calc-result-value red';
+    tEl.textContent = (gap * 12 * 30).toLocaleString() + '万円';
+    tEl.className = 'calc-result-value red';
+    mCell.className = 'calc-result-cell deficit';
+    tCell.className = 'calc-result-cell deficit';
+  } else if (gap === 0) {
+    mEl.textContent = '均衡';
+    mEl.className = 'calc-result-value grn';
+    tEl.textContent = '0万円';
+    tEl.className = 'calc-result-value grn';
+    mCell.className = 'calc-result-cell surplus';
+    tCell.className = 'calc-result-cell surplus';
+  } else {
+    mEl.textContent = '+' + Math.abs(gap) + '万円余剰';
+    mEl.className = 'calc-result-value grn';
+    tEl.textContent = '余剰';
+    tEl.className = 'calc-result-value grn';
+    mCell.className = 'calc-result-cell surplus';
+    tCell.className = 'calc-result-cell surplus';
+  }
+}
+
+function setPreset(spending, pension, btn) {
+  document.querySelectorAll('.calc-preset').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('spending').value = spending;
+  document.getElementById('pension').value  = pension;
+  updateCalc();
+}
+
 function copyStat(btn, text) {
   navigator.clipboard.writeText(text).then(function() {
     var orig = btn.textContent;
