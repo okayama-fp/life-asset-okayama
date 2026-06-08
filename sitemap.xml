@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://lifeassetoffice.net/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://lifeassetoffice.net/service/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://lifeassetoffice.net/contact.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://lifeassetoffice.net/loan-check.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://lifeassetoffice.net/simulation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://lifeassetoffice.net/advisor.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://lifeassetoffice.net/privacy.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-411.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-417.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-423.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-429.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-435.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-441.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-447.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-453.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-459.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-465.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-471.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-477.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-483.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-489.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-495.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-501.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-507.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-513.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-519.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-525.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-531.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-537.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-538.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-539.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-540.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-541.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://lifeassetoffice.net/blog/post-542.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- トップ・主要ページ -->
+  <url><loc>https://lifeassetoffice.net/</loc><lastmod>2026-06-08</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://lifeassetoffice.net/contact.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lifeassetoffice.net/privacy.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+
+  <!-- シミュレーター -->
+  <url><loc>https://lifeassetoffice.net/simulation.html</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lifeassetoffice.net/couples-sim.html</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lifeassetoffice.net/lifeplan.html</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lifeassetoffice.net/loan-check.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/loan-refinance.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/asset-sim.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/retirement-gap.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/nisa-ideco-sim.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/furusato-sim.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/insurance-check.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/fire-sim.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/education-sim.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/future-plans.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/advisor.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ブログ記事（ルート直下） -->
+  <url><loc>https://lifeassetoffice.net/blog-couples-finance.html</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog-lifeplan-kakebo.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog-lifeplan-merits.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog-why-simulator.html</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ブログ記事（blog/フォルダ） -->
+  <url><loc>https://lifeassetoffice.net/blog/post-411.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-417.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-423.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-429.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-435.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-441.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-447.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-453.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-459.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-465.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-471.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-477.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-483.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-489.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-495.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-501.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-507.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-513.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-519.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-525.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-531.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-537.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-538.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-539.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-540.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-541.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://lifeassetoffice.net/blog/post-542.html</loc><lastmod>2026-05-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
