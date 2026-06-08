@@ -400,10 +400,88 @@
     line-height: 1.8;
   }
 
+  /* STEP LIST */
+  .step-list { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+  .step-card {
+    display: flex;
+    gap: 18px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--green);
+    padding: 4px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 2px;
+    letter-spacing: .04em;
+  }
+  .step-body { flex: 1; }
+  .step-title { font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
+  .step-tip {
+    background: var(--green-pale);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--green);
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+  .step-card p { font-size: 14px; color: #333; line-height: 1.85; margin: 0; }
+
+  /* ACTION CARDS */
+  .action-list { display: flex; flex-direction: column; gap: 14px; margin: 28px 0; }
+  .action-card {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--green);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+  }
+  .action-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--green);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 30px;
+    padding-top: 3px;
+  }
+  .action-body { flex: 1; }
+  .action-title { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
+  .action-time {
+    display: inline-block;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .action-card p { font-size: 14px; color: #333; line-height: 1.85; margin: 0; }
+
   @media (max-width: 600px) {
     article { padding: 40px 18px 60px; }
     .hero { padding: 48px 18px 56px; }
     .stat-value { font-size: 30px; }
+    .step-card { flex-direction: column; gap: 10px; }
+    .action-card { gap: 12px; }
   }
 </style>
 </head>
@@ -441,13 +519,10 @@
     <div class="toc-title">目次</div>
     <ol>
       <li><a href="#sec0">なぜ今ライフプランが必要なのか（統計で見る現実）</a></li>
-      <li><a href="#sec1">メリット1：老後の資金不足を「早期発見」できる</a></li>
-      <li><a href="#sec2">メリット2：教育費とローンの「衝突年」を回避できる</a></li>
-      <li><a href="#sec3">メリット3：NISAとiDeCoを最適なタイミングで始められる</a></li>
-      <li><a href="#sec4">メリット4：住宅購入の適正ローン額が明確になる</a></li>
-      <li><a href="#sec5">メリット5：不要な保険料を削減できる</a></li>
-      <li><a href="#sec6">メリット6：節税・控除の機会を逃さない</a></li>
-      <li><a href="#sec7">メリット7：パートナーとお金の話がしやすくなる</a></li>
+      <li><a href="#merits">ライフプランを作る7つのメリット</a></li>
+      <li><a href="#sec-compare">ライフプランあり vs なし、10年後の違い</a></li>
+      <li><a href="#sec-how">シミュレーターの正しい使い方（4ステップ）</a></li>
+      <li><a href="#sec-action">今すぐできる具体的アクション5選</a></li>
       <li><a href="#sec8">まとめ：まず大枠だけ、今日作ってみる</a></li>
     </ol>
   </div>
@@ -578,7 +653,7 @@
   <hr class="divider">
 
   <!-- COMPARE -->
-  <section>
+  <section id="sec-compare">
     <h2><span class="sec-num">比較</span>ライフプランあり vs なし、10年後の違い</h2>
 
     <div class="compare-box">
@@ -620,6 +695,105 @@
     </div>
     <button class="tool-cta-btn" onclick="window.location.href='lifeplan.html'">シミュレーターを開く →</button>
   </div>
+
+  <hr class="divider">
+
+  <!-- HOW TO USE SIMULATOR -->
+  <section id="sec-how">
+    <h2><span class="sec-num">使い方</span>シミュレーターの正しい使い方（4ステップ）</h2>
+
+    <p>「シミュレーターって難しそう」と感じる方も多いですが、実際には入力項目はシンプルです。合計40分もあれば自分専用のライフプランが完成します。</p>
+
+    <div class="step-list">
+      <div class="step-card">
+        <div class="step-num">STEP 01</div>
+        <div class="step-body">
+          <div class="step-title">現在の家計情報を入力する（約15分）</div>
+          <p>年収・手取り・現在の貯蓄残高・毎月の生活費を入力します。最初は「だいたいこのくらい」の数字で問題ありません。まず動かしてみることが最も大切なステップです。</p>
+          <div class="step-tip">💡 給与明細の「差引支給額」が手取り収入の目安。貯蓄は通帳の残高合計でOK</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 02</div>
+        <div class="step-body">
+          <div class="step-title">ライフイベントを追加する（約10分）</div>
+          <p>子どもの進学予定・住宅購入・住宅ローン返済・配偶者の就労変更など、将来のイベントを入力します。「予定がない」「わからない」項目は空欄のまま進めて構いません。</p>
+          <div class="step-tip">💡 子どもの大学進学費用（国公立約250万円・私立約450万円）はぜひ入れておきましょう</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 03</div>
+        <div class="step-body">
+          <div class="step-title">グラフで「資産が減る年」を確認する（約5分）</div>
+          <p>年別収支グラフを確認します。「貯蓄残高がマイナスになる年」や「支出が収入を大幅に超える山場」が一目でわかります。この「いつ危険になるか」を把握することが、対策の出発点です。</p>
+          <div class="step-tip">💡 グラフが右肩下がりの場合は早急な対策が必要。まず「何歳で底をつくか」という事実を直視しましょう</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 04</div>
+        <div class="step-body">
+          <div class="step-title">対策シナリオを試して比較する（約10分）</div>
+          <p>「毎月の積立を2万円増やしたら？」「住宅ローンを3年繰り上げ返済したら？」というシナリオを入力し、グラフがどう変わるか比較します。この「if比較」がシミュレーターの最大の価値です。</p>
+          <div class="step-tip">💡 CSVダウンロードで年別収支表を保存できます。配偶者と一緒に確認するときに便利です</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <strong>完璧を目指さないことが大切です。</strong>最初は大まかな数字で構いません。入力→グラフ確認→修正のサイクルを繰り返すことで、精度が上がっていきます。目標は「今日の自分の状況を可視化すること」、それだけで十分なスタートです。
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONCRETE ACTIONS -->
+  <section id="sec-action">
+    <h2><span class="sec-num">アクション</span>今すぐできる具体的アクション5選</h2>
+
+    <p>「ライフプランを作ろう」と思っても、何から始めればいいかわからない——という方のために、<strong>今日から5〜30分でできる具体的なアクション</strong>を5つにまとめました。順番どおりに取り組むだけで、ライフプランの土台が自然と整います。</p>
+
+    <div class="action-list">
+      <div class="action-card">
+        <div class="action-num">01</div>
+        <div class="action-body">
+          <div class="action-title">今月の手取り収入と支出を書き出す<span class="action-time">5分</span></div>
+          <p>メモ帳・スマホのメモアプリでOK。「手取り：〇〇万円、固定費：〇〇万円、変動費：〇〇万円、毎月の貯蓄：〇〇万円」を書き出すだけ。これがシミュレーター入力の最初の材料になります。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">02</div>
+        <div class="action-body">
+          <div class="action-title">ライフプランシミュレーターに現状を入力してグラフを見る<span class="action-time">15分</span></div>
+          <p>アクション01で書き出した数字をシミュレーターに入力し、グラフを確認します。「貯蓄がいつ底をつくか」という事実を最初に把握することで、その後の行動に現実的な根拠が生まれます。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">03</div>
+        <div class="action-body">
+          <div class="action-title">保険証券を引き出して月額保険料の合計を出す<span class="action-time">10分</span></div>
+          <p>加入中の保険の証券をすべて出して、月額保険料を合計します。「毎月〇〇円払っていた」という事実を数字で確認するだけで、見直しの必要性が自然と見えてきます。月3万円を超えているなら要検討です。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">04</div>
+        <div class="action-body">
+          <div class="action-title">ねんきん定期便で年金見込み額を確認する<span class="action-time">10分</span></div>
+          <p>毎年誕生月に届く「ねんきん定期便」または「ねんきんネット（日本年金機構）」で老齢年金の見込み額を確認します。「年金がいくらもらえるか」がわかると、老後の不足額の計算が初めてできるようになります。</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">05</div>
+        <div class="action-body">
+          <div class="action-title">配偶者・パートナーとシミュレーターを一緒に見る時間を作る<span class="action-time">30分</span></div>
+          <p>アクション01〜04で集めた情報をもとに、パートナーと一緒にシミュレーターを確認します。「老後の資金がいくら必要か」「NISAをいつから増やすか」という具体的な会話ができます。感情論ではなく数字を共有することで、話し合いがスムーズになります。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>「完璧にやろう」としなくてOKです。</strong>アクション01と02だけ今日やる——それで十分なスタートです。多くの場合、「最初の一歩を踏み出すこと」が最も大きな変化をもたらします。
+    </div>
+  </section>
 
   <hr class="divider">
 
