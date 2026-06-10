@@ -32,6 +32,7 @@
   --green:#1a6b3c;--green-dark:#0f4d2a;--green-light:#2d8a52;--green-pale:#e8f5ee;--green-mid:#c8e6d4;
   --red:#c0392b;--red-pale:#fdecea;--yellow:#d4820a;--yellow-pale:#fef6e4;
   --blue:#1a4fa0;--blue-pale:#e8f0fb;
+  --sky:#0ea5e9;--navy:#0f3460;
   --ink:#0d0d0d;--gray:#6b7280;--border:#e5e7eb;--bg:#f8faf7;--white:#fff;
   --shadow:0 4px 24px rgba(0,0,0,.08);--radius:14px;
 }
@@ -1001,7 +1002,7 @@ function _generatePlan(){
         if(spouseWorkStart>0&&spouseAge>=spouseWorkStart)incSpouse=incomeSpouseNew;
         else if(spouseWorkStart===0)incSpouse=incomeSpouse;
       }
-      if(spouseAge>=65&&selfAge<65)incSelf+=pensionSpouse*12;
+      if(spouseAge>=65&&selfAge<65)incSpouse+=pensionSpouse*12;
     }
 
     let lumpIncome=0;
@@ -1022,7 +1023,10 @@ function _generatePlan(){
     let eduExp=0;
     children.forEach(c=>{
       const childNow=c.age+y;
-      if(childNow>=15&&childNow<=17)eduExp+=50;
+      if(childNow>=3&&childNow<=5)eduExp+=15;
+      else if(childNow>=6&&childNow<=11)eduExp+=20;
+      else if(childNow>=12&&childNow<=14)eduExp+=35;
+      else if(childNow>=15&&childNow<=17)eduExp+=50;
       else if(childNow>=18&&childNow<=21)eduExp+=c.eduCost;
     });
 
@@ -1049,7 +1053,10 @@ function _generatePlan(){
       if(cashAsset<0&&selfAge>=60){const d2=Math.min(-cashAsset,nisaAsset);nisaAsset-=d2;cashAsset+=d2;drawdown+=d2;}
       if(cashAsset<0&&selfAge>=60){const d3=Math.min(-cashAsset,idecoAsset);idecoAsset-=d3;cashAsset+=d3;drawdown+=d3;}
     }
-    if(loanRemaining>0)loanRemaining=Math.max(0,loanRemaining-loanAnnual);
+    if(loanRemaining>0){
+      const _rm=loanRate/100/12,_n=loanYears*12,_paid=y*12;
+      loanRemaining=_paid>=_n?0:(_rm===0?Math.round(loanBalance*(1-_paid/_n)):Math.round(loanMonthly*(1-Math.pow(1+_rm,-(_n-_paid)))/_rm/10000));
+    }
     const totalAsset=Math.max(0,cashAsset)+nisaAsset+idecoAsset+investAsset;
 
     const events=[];
