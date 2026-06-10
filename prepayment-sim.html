@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/prepayment-sim.html">
+<title>繰り上げ返済シミュレーター｜期間短縮型vs返済額軽減型を徹底比較｜ライフアセットオフィス</title>
+<meta name="description" content="住宅ローンの繰り上げ返済を徹底比較。期間短縮型と返済額軽減型の利息削減額・残り返済期間・月返済額をリアルタイムで計算。登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="繰り上げ返済シミュレーター｜期間短縮型vs返済額軽減型を徹底比較">
+<meta property="og:description" content="スライダーを動かすだけで繰り上げ返済の効果を即計算。期間短縮型と返済額軽減型の利息削減額を比較できます。">
+<meta property="og:url" content="https://lifeassetoffice.net/prepayment-sim.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+  --red: #dc2626; --redl: #fef2f2; --redb: #fecaca;
+  --blue: #0ea5e9; --bluel: #f0f9ff; --blueb: #bae6fd;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+
+/* ─── Hero ─── */
+.hero { position:relative; overflow:hidden; background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 80% 20%,rgba(74,222,128,.07) 0%,transparent 55%); pointer-events:none; animation:heroBg 7s ease-in-out infinite; z-index:-1; }
+@keyframes heroBg { 0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)} }
+.hero-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); border-radius:20px; padding:5px 14px; font-size:11px; letter-spacing:.1em; margin-bottom:18px; }
+.hero-badge-dot { width:6px; height:6px; border-radius:50%; background:#6ee7b7; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+.hero h1 { font-size:clamp(1.4rem,4.5vw,2.1rem); font-weight:900; line-height:1.3; margin-bottom:14px; }
+.hero-lead { font-size:14.5px; opacity:.85; max-width:560px; margin:0 auto 20px; line-height:1.85; }
+.hero-badges { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.hero-tag { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); border-radius:20px; padding:4px 13px; font-size:12px; }
+
+/* ─── Layout ─── */
+.main { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+.tool-grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+@media(max-width:760px){ .tool-grid { grid-template-columns: 1fr; } }
+
+/* ─── Input Panel ─── */
+.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.field { margin-bottom: 20px; }
+.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+
+/* ─── Result Panel ─── */
+.result-panel { display: flex; flex-direction: column; gap: 16px; }
+
+/* ─── Compare Table ─── */
+.compare-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+.compare-card-header { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); padding: 18px 22px; }
+.compare-card-header h3 { font-size: 15px; font-weight: 800; color: #fff; }
+.compare-card-header p { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+.compare-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 420px; }
+.compare-table thead tr th { padding: 10px 12px; font-size: 11.5px; font-weight: 700; text-align: center; border-bottom: 1px solid var(--border); }
+.compare-table thead tr th:first-child { text-align: left; background: #f8fafc; }
+.compare-table thead th.col-none  { background: #f1f5f9; color: var(--text-light); }
+.compare-table thead th.col-short { background: #dcfce7; color: #166534; }
+.compare-table thead th.col-reduce{ background: #e0f2fe; color: #075985; }
+.compare-table tbody tr td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: center; }
+.compare-table tbody tr td:first-child { text-align: left; font-size: 12px; color: var(--text-light); background: #fafafa; font-weight: 700; }
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table .val-big { font-size: 15px; font-weight: 800; color: var(--navy); }
+.compare-table .val-gain { font-size: 14px; font-weight: 800; color: var(--green); }
+.compare-table .val-sub { font-size: 10.5px; color: var(--text-light); margin-top: 2px; }
+.compare-table td.highlight-short  { background: #f0fdf4; }
+.compare-table td.highlight-reduce { background: #f0f9ff; }
+
+/* ─── Summary Card ─── */
+.summary-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.summary-item { flex: 1; min-width: 140px; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.summary-item-label { font-size: 11px; font-weight: 700; color: var(--text-light); letter-spacing: .05em; margin-bottom: 6px; }
+.summary-item-val { font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1.2; }
+.summary-item-sub { font-size: 11px; color: var(--text-light); margin-top: 4px; }
+.summary-item.green { border-color: var(--greenb); background: var(--greenl); }
+.summary-item.green .summary-item-val { color: var(--green); }
+.summary-item.blue  { border-color: var(--blueb);  background: var(--bluel); }
+.summary-item.blue  .summary-item-val { color: var(--blue); }
+
+/* ─── Advice Card ─── */
+.advice-card { padding: 20px 22px; border-radius: 14px; font-size: 14px; line-height: 1.8; transition: all .3s; }
+.advice-card.recommend-short  { background: var(--greenl); border: 1.5px solid var(--greenb); }
+.advice-card.recommend-reduce { background: var(--bluel);  border: 1.5px solid var(--blueb); }
+.advice-card.recommend-both   { background: var(--amberl); border: 1.5px solid var(--amberb); }
+.advice-title { font-size: 14px; font-weight: 900; margin-bottom: 8px; }
+.advice-card.recommend-short  .advice-title { color: #166534; }
+.advice-card.recommend-reduce .advice-title { color: #075985; }
+.advice-card.recommend-both   .advice-title { color: #92400e; }
+.advice-body { font-size: 13.5px; color: var(--text); }
+.advice-steps { list-style: none; margin-top: 8px; }
+.advice-steps li { padding: 4px 0 4px 20px; position: relative; font-size: 13.5px; }
+.advice-steps li::before { content: '▶'; position: absolute; left: 0; font-size: 9px; top: 7px; opacity: .7; }
+
+/* ─── Caution Card ─── */
+.caution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+@media(max-width:600px){ .caution-grid { grid-template-columns: 1fr; } }
+.caution-card { border-radius: 12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.75; }
+.caution-card.amber { background: var(--amberl); border: 1px solid var(--amberb); color: #78350f; }
+.caution-card.blue  { background: var(--bluel);  border: 1px solid var(--blueb);  color: #0c4a6e; }
+.caution-card-title { font-weight: 800; font-size: 12px; margin-bottom: 6px; letter-spacing: .04em; }
+
+/* ─── FP Section ─── */
+.fp-section { margin-top: 40px; }
+.fp-section-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.fp-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; }
+.warn-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
+
+/* ─── CTA ─── */
+.sim-cta { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); border-radius: 16px; padding: 32px; text-align: center; margin-top: 28px; }
+.sim-cta h3 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.sim-cta p { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+.sim-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.btn-sim-contact { display:inline-flex; align-items:center; gap:7px; background:linear-gradient(90deg,var(--sky),var(--sky-light)); color:#fff; font-size:14px; font-weight:800; padding:13px 28px; border-radius:50px; transition:transform .2s,opacity .2s; }
+.btn-sim-contact:hover { transform:translateY(-2px); opacity:.9; }
+.btn-sim-share { display:inline-flex; align-items:center; gap:7px; background:#000; color:#fff; font-size:14px; font-weight:700; padding:13px 24px; border-radius:50px; transition:opacity .2s; cursor:pointer; border:none; font-family:inherit; }
+.btn-sim-share:hover { opacity:.85; }
+
+/* ─── Utility bar ─── */
+.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
+.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
+.util-btn:hover { border-color:var(--sky); color:var(--sky); }
+.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
+.util-btn.x-share:hover { opacity:.8; }
+.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-toast.show { opacity:1; transform:none; }
+
+/* ─── Footer ─── */
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+
+/* ─── Print ─── */
+@media print {
+  header,.hero,.util-bar,.fp-section,.sim-cta,.caution-grid,footer,#pb { display:none!important; }
+  .tool-grid { grid-template-columns:1fr!important; }
+  body { background:#fff!important; }
+  .main { padding:8px 0!important; }
+}
+
+/* ─── スマホ最適化 (480px以下) ─── */
+@media (max-width:480px){
+  input[type=range]{ height:6px!important; cursor:pointer; }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:28px; height:28px; border-radius:50%;
+    background:var(--sky,#1a7a4a); box-shadow:0 2px 8px rgba(0,0,0,.25);
+    border:3px solid #fff; cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:28px; height:28px; border-radius:50%;
+    background:var(--sky,#1a7a4a); box-shadow:0 2px 8px rgba(0,0,0,.25);
+    border:3px solid #fff; cursor:pointer;
+  }
+  button,.btn,.util-btn { min-height:44px!important; }
+  .btn-sim-contact,.btn-sim-share { min-height:48px!important; display:flex!important; align-items:center; justify-content:center; }
+  .util-bar { gap:6px; padding:8px 12px; }
+  .util-btn { padding:8px 12px!important; font-size:12px!important; min-height:40px!important; }
+  .hero { padding:32px 16px 24px!important; }
+  .hero-lead { font-size:13px; }
+  .field-label { font-size:13px; }
+  .field-val { font-size:14px!important; }
+  .field { margin-bottom:20px; }
+  .summary-row { flex-direction:column; }
+  .summary-item { min-width:unset; }
+  .fp-grid { grid-template-columns:1fr!important; }
+  .sim-cta { padding:24px 16px!important; }
+  .hero-scroll-hint { display:none; }
+}
+@media(hover:none){
+  .util-btn:hover { transform:none!important; background:inherit; border-color:inherit; color:inherit; }
+}
+
+/* ヒーロースクロールヒント */
+.hero-scroll-hint { display:flex; flex-direction:column; align-items:center; gap:5px; margin-top:20px; opacity:.65; }
+.hero-scroll-hint span { font-size:10px; color:rgba(255,255,255,.8); letter-spacing:.08em; font-weight:600; }
+.hero-scroll-arrow { width:16px; height:16px; border-right:2px solid rgba(255,255,255,.8); border-bottom:2px solid rgba(255,255,255,.8); transform:rotate(45deg); animation:sArrow 1.6s ease-in-out infinite; }
+@keyframes sArrow { 0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)} }
+@media(max-width:480px){ .hero-scroll-hint{display:none} }
+</style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="service/">サービス</a>
+      <a href="simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
+  <h1>繰り上げ返済シミュレーター</h1>
+  <p class="hero-lead">期間短縮型と返済額軽減型を徹底比較。繰り上げ返済による利息削減額と短縮期間をスライダー操作で即計算します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">利息削減額を比較</span>
+    <span class="hero-tag">残り返済期間を計算</span>
+    <span class="hero-tag">月返済額の変化を確認</span>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>SCROLL</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="util-bar">
+    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
+    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+  </div>
+  <div class="util-toast" id="util-toast"></div>
+
+  <div class="tool-grid">
+
+    <!-- 入力パネル -->
+    <div class="input-panel">
+      <h2>条件を入力</h2>
+
+      <div class="field">
+        <div class="field-label">住宅ローン残高<span class="field-val" id="lbl-balance">3,000万円</span></div>
+        <input type="range" id="sl-balance" min="100" max="5000" step="50" value="3000" oninput="syncLabel('balance',this.value);calc()">
+        <div class="field-ticks"><span>100万</span><span>2,550万</span><span>5,000万</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">残り返済年数<span class="field-val" id="lbl-years">25年</span></div>
+        <input type="range" id="sl-years" min="1" max="35" step="1" value="25" oninput="syncLabel('years',this.value);calc()">
+        <div class="field-ticks"><span>1年</span><span>18年</span><span>35年</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">金利（年利）<span class="field-val" id="lbl-rate">1.5%</span></div>
+        <input type="range" id="sl-rate" min="0.1" max="5.0" step="0.05" value="1.5" oninput="syncLabel('rate',this.value);calc()">
+        <div class="field-ticks"><span>0.1%</span><span>2.55%</span><span>5.0%</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">繰り上げ返済額<span class="field-val" id="lbl-prepay">200万円</span></div>
+        <input type="range" id="sl-prepay" min="50" max="1000" step="10" value="200" oninput="syncLabel('prepay',this.value);calc()">
+        <div class="field-ticks"><span>50万</span><span>525万</span><span>1,000万</span></div>
+      </div>
+
+      <div style="margin-top:4px;padding:10px 14px;background:#f0fdf4;border-radius:10px;font-size:11.5px;color:#166534;line-height:1.65;">
+        ℹ️ 繰り上げ返済時点で残高から一括返済する想定で計算。元利均等返済方式（固定金利）に基づく概算です。
+      </div>
+    </div>
+
+    <!-- 結果パネル -->
+    <div class="result-panel">
+
+      <!-- サマリー -->
+      <div class="summary-row">
+        <div class="summary-item">
+          <div class="summary-item-label">現在の月返済額</div>
+          <div class="summary-item-val" id="r-monthly">―</div>
+          <div class="summary-item-sub">繰り上げ前</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-label">繰り上げ前 利息合計</div>
+          <div class="summary-item-val" id="r-total-interest">―</div>
+          <div class="summary-item-sub">残り期間の総利息</div>
+        </div>
+      </div>
+
+      <!-- 比較テーブル -->
+      <div class="compare-card">
+        <div class="compare-card-header">
+          <h3>3パターン比較</h3>
+          <p>繰り上げなし・期間短縮型・返済額軽減型</p>
+        </div>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="col-none">繰り上げなし</th>
+                <th class="col-short">期間短縮型</th>
+                <th class="col-reduce">返済額軽減型</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>残り返済期間</td>
+                <td><div class="val-big" id="ct-none-period">―</div></td>
+                <td class="highlight-short"><div class="val-big" id="ct-short-period">―</div><div class="val-gain" id="ct-short-period-save">―</div></td>
+                <td class="highlight-reduce"><div class="val-big" id="ct-reduce-period">―</div><div class="val-sub">変わらず</div></td>
+              </tr>
+              <tr>
+                <td>月返済額</td>
+                <td><div class="val-big" id="ct-none-monthly">―</div></td>
+                <td class="highlight-short"><div class="val-big" id="ct-short-monthly">―</div><div class="val-sub">変わらず</div></td>
+                <td class="highlight-reduce"><div class="val-big" id="ct-reduce-monthly">―</div><div class="val-gain" id="ct-reduce-monthly-save">―</div></td>
+              </tr>
+              <tr>
+                <td>残り利息合計</td>
+                <td><div class="val-big" id="ct-none-interest">―</div></td>
+                <td class="highlight-short"><div class="val-big" id="ct-short-interest">―</div><div class="val-gain" id="ct-short-interest-save">―</div></td>
+                <td class="highlight-reduce"><div class="val-big" id="ct-reduce-interest">―</div><div class="val-gain" id="ct-reduce-interest-save">―</div></td>
+              </tr>
+              <tr>
+                <td>繰り上げ後 総返済額</td>
+                <td><div class="val-big" id="ct-none-total">―</div></td>
+                <td class="highlight-short"><div class="val-big" id="ct-short-total">―</div></td>
+                <td class="highlight-reduce"><div class="val-big" id="ct-reduce-total">―</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- アドバイスカード -->
+      <div class="advice-card recommend-short" id="advice-card">
+        <div class="advice-title" id="advice-title">おすすめの方法</div>
+        <div class="advice-body" id="advice-body"></div>
+      </div>
+
+      <!-- 注意事項 -->
+      <div class="caution-grid">
+        <div class="caution-card amber">
+          <div class="caution-card-title">⚠️ 住宅ローン控除に注意</div>
+          住宅ローン控除（減税）の残存期間は必ず確認してください。繰り上げ返済により控除額が減少する場合があります。
+        </div>
+        <div class="caution-card blue">
+          <div class="caution-card-title">💡 繰り上げ返済手数料</div>
+          繰り上げ返済手数料は金融機関・商品・返済方法により異なります。事前に金融機関へ確認することをおすすめします。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FP解説 -->
+  <section class="fp-section">
+    <div class="fp-section-title">📚 FP解説：繰り上げ返済の基礎知識</div>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">🏠 期間短縮型とは</div>
+        <p>毎月の返済額を変えずに、返済期間を短くする方法です。利息軽減効果が大きく、早く完済できます。ローン残高が多い・金利が高い・残存期間が長いほど効果が出やすいです。</p>
+        <div class="warn-box">短縮後も月返済額は変わらないため、毎月のキャッシュフローは改善されません。</div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">💳 返済額軽減型とは</div>
+        <p>返済期間は変えずに、毎月の返済額を下げる方法です。家計の月々の負担を軽くしたい場合に有効です。利息軽減額は期間短縮型に比べて少なくなる傾向があります。</p>
+        <div class="warn-box">返済期間は短くならないため、利息の総削減効果は期間短縮型より小さくなります。</div>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">📊 どちらを選ぶべきか</div>
+        <p>「利息をとにかく減らしたい」なら期間短縮型。「毎月の生活費を確保したい」「教育費・老後資金が優先」なら返済額軽減型が向いています。</p>
+        <ul class="advice-steps">
+          <li>iDeCoやNISAの積立と繰り上げ返済を比較して有利な方を選ぶ</li>
+          <li>緊急資金（生活費6ヶ月分）は残してから繰り上げ返済を検討</li>
+          <li>住宅ローン控除の残年数・控除額を先に確認する</li>
+        </ul>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🧾 繰り上げ返済が有効な条件</div>
+        <ul class="advice-steps">
+          <li>金利が0.5%以上（低金利でも利息削減効果あり）</li>
+          <li>残り返済期間が10年以上残っている</li>
+          <li>住宅ローン控除の残存期間が終わっている（またはない）</li>
+          <li>手元に十分な生活防衛資金が確保できている</li>
+        </ul>
+        <p style="margin-top:8px">金利・残存期間・家計状況によって最適な戦略は異なります。</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sim-cta">
+    <h3>繰り上げ返済のタイミングをご相談ください。</h3>
+    <p>「住宅ローン控除との兼ね合いは？」「iDeCoと繰り上げ返済どちらが得？」<br>シミュレーション結果を持ってお気軽にお問い合わせください。</p>
+    <div class="sim-cta-btns">
+      <a href="contact.html" class="btn-sim-contact">お問い合わせ</a>
+      <button class="btn-sim-share" onclick="shareX()">𝕏 結果をシェア</button>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:960px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">
+  【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。
+</div>
+
+<div style="max-width:960px;margin:0 auto 12px;padding:0 20px"><div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:12px 16px;font-size:12px;color:#0c4a6e;line-height:1.7;">ℹ️ 本シミュレーターは元利均等返済・固定金利の概算計算です。変動金利・元金均等返済・ボーナス払い併用の場合は結果が異なります。正確な数値は金融機関へご確認ください。</div></div>
+
+<div style="max-width:960px;margin:0 auto 20px;padding:0 20px"><div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。最終的な判断はご自身の責任で行ってください。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。</div></div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>&copy; 2026 Life Asset Office. All rights reserved.</p>
+</footer>
+
+<script src="/nav.js" defer></script>
+<script>
+/* ─── 状態 ─── */
+var state = { balance: 3000, years: 25, rate: 1.5, prepay: 200 };
+
+/* ─── フォーマット ─── */
+function fmtMan(yen) {
+  var man = Math.round(yen / 10000);
+  if (man >= 10000) {
+    return (man / 10000).toFixed(1).replace(/\.0$/, '') + '億' + (man % 10000 > 0 ? (man % 10000).toLocaleString() + '万' : '') + '円';
+  }
+  return man.toLocaleString() + '万円';
+}
+function fmtManSimple(yen) {
+  return Math.round(yen / 10000).toLocaleString() + '万円';
+}
+function fmtYen(yen) { return Math.round(yen).toLocaleString() + '円'; }
+function fmtPeriod(months) {
+  var y = Math.floor(months / 12);
+  var m = Math.round(months % 12);
+  if (m === 0) return y + '年';
+  return y + '年' + m + 'ヶ月';
+}
+
+/* ─── 元利均等返済の月返済額 ─── */
+function monthlyPayment(principal, annualRate, months) {
+  if (annualRate === 0) return principal / months;
+  var r = annualRate / 100 / 12;
+  return principal * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+}
+
+/* ─── 残り返済月数（繰り上げ後の残高・月返済額から逆算） ─── */
+function remainingMonths(principal, annualRate, monthly) {
+  if (annualRate === 0) return Math.ceil(principal / monthly);
+  var r = annualRate / 100 / 12;
+  // n = log(m/(m - P*r)) / log(1+r)
+  var num = monthly / (monthly - principal * r);
+  if (num <= 0) return Infinity;
+  return Math.ceil(Math.log(num) / Math.log(1 + r));
+}
+
+/* ─── 総利息計算（月返済額×月数 - 元本） ─── */
+function totalInterest(principal, annualRate, months) {
+  var m = monthlyPayment(principal, annualRate, months);
+  return m * months - principal;
+}
+
+/* ─── メイン計算 ─── */
+function calc() {
+  var balanceYen = state.balance * 10000;
+  var prepayYen  = state.prepay  * 10000;
+  var months     = state.years   * 12;
+  var rate       = state.rate;
+
+  // 繰り上げ返済後の残高
+  var newBalance = balanceYen - prepayYen;
+  if (newBalance < 0) newBalance = 0;
+
+  // ─── 繰り上げなし ───
+  var m0        = monthlyPayment(balanceYen, rate, months);
+  var interest0 = m0 * months - balanceYen;
+  var total0    = balanceYen + interest0; // 総返済額 = 残高 + 利息
+
+  // ─── 期間短縮型 ───
+  // 月返済額は同じ。新残高に対して残り月数を計算
+  var shortMonths;
+  if (newBalance <= 0) {
+    shortMonths = 0;
+  } else {
+    shortMonths = remainingMonths(newBalance, rate, m0);
+  }
+  var shortInterest = newBalance <= 0 ? 0 : (m0 * shortMonths - newBalance);
+  var shortTotal    = prepayYen + m0 * shortMonths; // 繰り上げ額 + 残り返済
+  var shortInterestSave = interest0 - shortInterest;
+  var shortPeriodSave   = months - shortMonths; // 短縮月数
+
+  // ─── 返済額軽減型 ───
+  // 残り期間は同じ。新残高に対して月返済額を計算
+  var reduceMonthly;
+  if (newBalance <= 0) {
+    reduceMonthly = 0;
+  } else {
+    reduceMonthly = monthlyPayment(newBalance, rate, months);
+  }
+  var reduceInterest = newBalance <= 0 ? 0 : (reduceMonthly * months - newBalance);
+  var reduceTotal    = prepayYen + reduceMonthly * months;
+  var reduceInterestSave = interest0 - reduceInterest;
+  var reduceMonthlySave  = m0 - reduceMonthly;
+
+  /* ─── DOM更新 ─── */
+  document.getElementById('r-monthly').textContent = fmtYen(m0);
+  document.getElementById('r-total-interest').textContent = fmtManSimple(interest0);
+
+  // 比較テーブル
+  document.getElementById('ct-none-period').textContent   = fmtPeriod(months);
+  document.getElementById('ct-none-monthly').textContent  = fmtYen(m0);
+  document.getElementById('ct-none-interest').textContent = fmtManSimple(interest0);
+  document.getElementById('ct-none-total').textContent    = fmtManSimple(total0);
+
+  document.getElementById('ct-short-period').textContent       = newBalance <= 0 ? '即完済' : fmtPeriod(shortMonths);
+  document.getElementById('ct-short-period-save').textContent  = newBalance <= 0 ? '' : ('▼ ' + fmtPeriod(shortPeriodSave) + '短縮');
+  document.getElementById('ct-short-monthly').textContent      = fmtYen(m0);
+  document.getElementById('ct-short-interest').textContent     = newBalance <= 0 ? '0万円' : fmtManSimple(shortInterest);
+  document.getElementById('ct-short-interest-save').textContent= newBalance <= 0 ? '' : ('▼ ' + fmtManSimple(shortInterestSave) + '削減');
+  document.getElementById('ct-short-total').textContent        = newBalance <= 0 ? fmtManSimple(prepayYen) : fmtManSimple(shortTotal);
+
+  document.getElementById('ct-reduce-period').textContent        = fmtPeriod(months);
+  document.getElementById('ct-reduce-monthly').textContent       = newBalance <= 0 ? '0円' : fmtYen(reduceMonthly);
+  document.getElementById('ct-reduce-monthly-save').textContent  = newBalance <= 0 ? '' : ('▼ 月' + fmtYen(reduceMonthlySave) + '軽減');
+  document.getElementById('ct-reduce-interest').textContent      = newBalance <= 0 ? '0万円' : fmtManSimple(reduceInterest);
+  document.getElementById('ct-reduce-interest-save').textContent = newBalance <= 0 ? '' : ('▼ ' + fmtManSimple(reduceInterestSave) + '削減');
+  document.getElementById('ct-reduce-total').textContent         = newBalance <= 0 ? fmtManSimple(prepayYen) : fmtManSimple(reduceTotal);
+
+  /* ─── アドバイスカード ─── */
+  updateAdvice(shortInterestSave, reduceInterestSave, shortPeriodSave, reduceMonthlySave, newBalance);
+
+  /* ─── URL更新 ─── */
+  updateUrlParams({ b: state.balance, y: state.years, r: state.rate, p: state.prepay });
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'simulate_prepayment', {
+      balance_man: state.balance,
+      years: state.years,
+      rate: state.rate,
+      prepay_man: state.prepay
+    });
+  }
+}
+
+function updateAdvice(shortSave, reduceSave, shortMonths, reduceMonthlySave, newBalance) {
+  var card  = document.getElementById('advice-card');
+  var title = document.getElementById('advice-title');
+  var body  = document.getElementById('advice-body');
+
+  if (newBalance <= 0) {
+    card.className = 'advice-card recommend-short';
+    title.textContent = '✅ 繰り上げ返済額でローンが完済できます！';
+    body.innerHTML = '<p>入力した繰り上げ返済額が現在の残高以上のため、即時完済が可能です。手数料・控除の残年数を確認のうえ、金融機関にご相談ください。</p>';
+    return;
+  }
+
+  var diff = shortSave - reduceSave;
+  var diffRatio = reduceSave > 0 ? Math.abs(diff) / reduceSave : 0;
+
+  if (diffRatio < 0.10) {
+    // 差が10%未満 → どちらも有効
+    card.className = 'advice-card recommend-both';
+    title.textContent = '💡 どちらの方法も有効です（利息削減の差は小さい）';
+    body.innerHTML = '<p>期間短縮型・返済額軽減型の利息軽減額の差は<strong>'
+      + fmtManSimple(Math.abs(diff)) + '</strong>（' + (diffRatio * 100).toFixed(0) + '%以内）と小さい水準です。</p>'
+      + '<ul class="advice-steps">'
+      + '<li>毎月のキャッシュフローを改善したい場合は<strong>返済額軽減型</strong>を検討</li>'
+      + '<li>とにかく早く完済したい場合は<strong>期間短縮型</strong>を選択</li>'
+      + '<li>どちらを選ぶかはライフプラン・家計状況に合わせてご判断ください</li>'
+      + '</ul>';
+  } else if (shortSave >= reduceSave) {
+    card.className = 'advice-card recommend-short';
+    title.textContent = '🏠 期間短縮型がおすすめ（利息削減効果が大きい）';
+    body.innerHTML = '<p>期間短縮型は返済額軽減型より利息を<strong>' + fmtManSimple(diff) + '</strong>多く削減できます。'
+      + '返済期間を<strong>' + fmtPeriod(shortMonths) + '</strong>短縮でき、早期完済の達成感も得られます。</p>'
+      + '<ul class="advice-steps">'
+      + '<li>住宅ローン控除の残存期間が終わっているか確認してから実施</li>'
+      + '<li>繰り上げ返済後も生活防衛資金（生活費6ヶ月分）は確保する</li>'
+      + '<li>手数料が発生する場合は費用対効果を確認する</li>'
+      + '</ul>';
+  } else {
+    card.className = 'advice-card recommend-reduce';
+    title.textContent = '💳 返済額軽減型がおすすめ（月返済負担が軽くなる）';
+    body.innerHTML = '<p>返済額軽減型は毎月の返済を<strong>' + fmtYen(reduceMonthlySave) + '</strong>軽減できます。'
+      + '利息削減額は期間短縮型より' + fmtManSimple(Math.abs(diff)) + '少ないですが、毎月のキャッシュフロー改善に優れています。</p>'
+      + '<ul class="advice-steps">'
+      + '<li>軽減された月返済額をiDeCo・NISAの積立に回すと更に資産形成が進む</li>'
+      + '<li>教育費・老後資金などの優先度も総合的に判断する</li>'
+      + '<li>手数料が発生する場合は費用対効果を確認する</li>'
+      + '</ul>';
+  }
+}
+
+/* ─── ラベル同期 ─── */
+function syncLabel(key, val) {
+  val = parseFloat(val);
+  if (key === 'balance') {
+    state.balance = val;
+    document.getElementById('lbl-balance').textContent = val.toLocaleString() + '万円';
+  } else if (key === 'years') {
+    state.years = val;
+    document.getElementById('lbl-years').textContent = val + '年';
+  } else if (key === 'rate') {
+    state.rate = val;
+    document.getElementById('lbl-rate').textContent = val.toFixed(2).replace(/\.?0+$/, '') + '%';
+  } else if (key === 'prepay') {
+    state.prepay = val;
+    document.getElementById('lbl-prepay').textContent = val.toLocaleString() + '万円';
+  }
+}
+
+/* ─── URL共有 ─── */
+function buildShareUrl() {
+  var p = new URLSearchParams({ b: state.balance, y: state.years, r: state.rate, p: state.prepay });
+  return location.origin + location.pathname + '?' + p.toString();
+}
+function updateUrlParams(vals) {
+  var p = new URLSearchParams(vals);
+  history.replaceState(null, '', '?' + p.toString());
+}
+function loadFromUrl() {
+  var p = new URLSearchParams(location.search);
+  var any = false;
+  if (p.has('b')) { var b = Math.min(Math.max(parseFloat(p.get('b'))||3000,100),5000); document.getElementById('sl-balance').value=b; syncLabel('balance',b); any=true; }
+  if (p.has('y')) { var y = Math.min(Math.max(parseInt(p.get('y'))||25,1),35); document.getElementById('sl-years').value=y; syncLabel('years',y); any=true; }
+  if (p.has('r')) { var r = Math.min(Math.max(parseFloat(p.get('r'))||1.5,0.1),5.0); document.getElementById('sl-rate').value=r; syncLabel('rate',r); any=true; }
+  if (p.has('p')) { var pp = Math.min(Math.max(parseFloat(p.get('p'))||200,50),1000); document.getElementById('sl-prepay').value=pp; syncLabel('prepay',pp); any=true; }
+  return any;
+}
+function copySimUrl() {
+  var url = buildShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('URLをコピーしました！'); });
+  } else {
+    var ta = document.createElement('textarea'); ta.value = url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    showToast('URLをコピーしました！');
+  }
+}
+function showToast(msg) {
+  var t = document.getElementById('util-toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+function shareX() {
+  var shortSave = document.getElementById('ct-short-interest-save').textContent.replace('▼ ','').replace('削減','');
+  var text = '繰り上げ返済シミュレーターで試しました！\nローン残高' + state.balance.toLocaleString()
+    + '万円・' + state.years + '年・金利' + state.rate + '%\n繰り上げ' + state.prepay.toLocaleString()
+    + '万円で利息を' + shortSave + '削減（期間短縮型）\n#ライフアセットオフィス #住宅ローン #繰り上げ返済';
+  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(buildShareUrl()), '_blank', 'noopener,noreferrer');
+}
+
+/* ─── 初期化 ─── */
+(function(){
+  // 訪問記録
+  try {
+    var k = 'la_sim_recent', u = location.pathname, n = '繰り上げ返済シミュレーター';
+    var a = JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u !== u; });
+    a.unshift({ u:u, n:n, ts:Date.now() });
+    localStorage.setItem(k, JSON.stringify(a.slice(0,5)));
+  } catch(e) {}
+
+  if (!loadFromUrl()) {
+    syncLabel('balance', document.getElementById('sl-balance').value);
+    syncLabel('years',   document.getElementById('sl-years').value);
+    syncLabel('rate',    document.getElementById('sl-rate').value);
+    syncLabel('prepay',  document.getElementById('sl-prepay').value);
+  }
+  calc();
+})();
+
+window.addEventListener('scroll', function(){
+  var el = document.documentElement;
+  document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
+});
+</script>
+</body>
+</html>
