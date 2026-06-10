@@ -601,6 +601,10 @@ window.addEventListener('scroll', function(){
     var s=0,step=target/Math.round(dur/16);
     var t=setInterval(function(){s=Math.min(s+step,target);el.textContent=Math.round(s)+suffix;if(s>=target){el.textContent=target+suffix;clearInterval(t);}},16);
   }
+  // ツール数はページ内のカード数から自動算出（カード追加で自動的に増える）
+  var toolCount = document.querySelectorAll('.tool-card').length;
+  var toolStat = document.querySelector('.stat-num[data-count]');
+  if(toolCount > 0 && toolStat) toolStat.dataset.count = toolCount;
   setTimeout(function(){
     document.querySelectorAll('[data-count]').forEach(function(el){
       countUp(el,parseInt(el.dataset.count),el.dataset.suffix||'',1000);
