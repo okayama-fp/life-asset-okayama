@@ -195,6 +195,16 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   .cat-tabs::-webkit-scrollbar,.filter-row::-webkit-scrollbar{display:none}
   .cat-tab,.ftab,.preset-btn{flex-shrink:0!important}
 }
+
+/* ヒーロースクロールヒント */
+.hero-scroll-hint{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:20px;opacity:.65}
+.hero-scroll-hint span{font-size:10px;color:rgba(255,255,255,.8);letter-spacing:.08em;font-weight:600}
+.hero-scroll-arrow{width:16px;height:16px;border-right:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8);transform:rotate(45deg);animation:sArrow 1.6s ease-in-out infinite}
+@keyframes sArrow{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+@media(max-width:480px){.hero-scroll-hint{display:none}}
+/* ヒーロー背景アニメーション */
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(74,222,128,.07) 0%,transparent 55%);pointer-events:none;animation:heroBg 7s ease-in-out infinite;z-index:0}
+@keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 </head>
 <body>

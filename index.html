@@ -56,8 +56,9 @@ nav{background:var(--white);padding:0 32px;height:64px;display:flex;justify-cont
 .hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 55%,var(--green-light) 100%);min-height:88vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 32px}
 .hero-bg-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 60px)}
 .hero-bg-circle{position:absolute;border-radius:50%;background:rgba(255,255,255,.04)}
-.hero-bg-circle.c1{width:600px;height:600px;top:-200px;right:-100px}
-.hero-bg-circle.c2{width:300px;height:300px;bottom:-100px;left:10%}
+.hero-bg-circle.c1{width:600px;height:600px;top:-200px;right:-100px;animation:floatCircle 8s ease-in-out infinite}
+.hero-bg-circle.c2{width:300px;height:300px;bottom:-100px;left:10%;animation:floatCircle 12s ease-in-out infinite reverse}
+@keyframes floatCircle{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
 
 .hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center;position:relative;z-index:1}
 @media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:40px}}
@@ -85,6 +86,14 @@ nav{background:var(--white);padding:0 32px;height:64px;display:flex;justify-cont
 .hstat{text-align:left}
 .hstat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:#fff;line-height:1}
 .hstat-label{font-size:11px;color:rgba(255,255,255,.6);margin-top:4px}
+
+/* スクロールダウン矢印 */
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;opacity:.7;transition:opacity .2s}
+.scroll-hint:hover{opacity:1}
+.scroll-hint span{font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.1em;font-weight:600}
+.scroll-arrow{width:22px;height:22px;border-right:2px solid rgba(255,255,255,.7);border-bottom:2px solid rgba(255,255,255,.7);transform:rotate(45deg);animation:bounceDown 1.6s ease-in-out infinite}
+@keyframes bounceDown{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+@media(max-width:640px){.scroll-hint{display:none}}
 
 .tool-cards{display:flex;flex-direction:column;gap:12px}
 .tool-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;text-decoration:none}
@@ -262,11 +271,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
 
       <div class="hero-stats">
         <div class="hstat">
-          <div class="hstat-num">10</div>
+          <div class="hstat-num" data-count="10" data-suffix=""></div>
           <div class="hstat-label">つのシミュレーター</div>
         </div>
         <div class="hstat">
-          <div class="hstat-num">28</div>
+          <div class="hstat-num" data-count="28" data-suffix=""></div>
           <div class="hstat-label">本のFP記事</div>
         </div>
         <div class="hstat">
@@ -281,7 +290,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
       <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">▶ よく使われているツール</div>
       <div class="tool-cards">
         <a href="loan-check.html" class="tool-card hot">
-          <div class="tool-card-icon"></div>
+          <div class="tool-card-icon">🏠</div>
           <div class="tool-card-text">
             <div class="tool-card-title">住宅ローン金利リスク診断<span class="hot-badge">人気</span></div>
             <div class="tool-card-desc">変動 vs 固定・返済負担率をチェック</div>
@@ -289,7 +298,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="tool-card-arrow">›</div>
         </a>
         <a href="asset-sim.html" class="tool-card">
-          <div class="tool-card-icon"></div>
+          <div class="tool-card-icon">📈</div>
           <div class="tool-card-text">
             <div class="tool-card-title">将来資産シミュレーター</div>
             <div class="tool-card-desc">NISA積立で老後資産がわかる</div>
@@ -297,7 +306,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="tool-card-arrow">›</div>
         </a>
         <a href="retirement-gap.html" class="tool-card">
-          <div class="tool-card-icon">️</div>
+          <div class="tool-card-icon">🏖️</div>
           <div class="tool-card-text">
             <div class="tool-card-title">老後資金不足額シミュレーター</div>
             <div class="tool-card-desc">いくら足りないか・月積立額を計算</div>
@@ -305,7 +314,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="tool-card-arrow">›</div>
         </a>
         <a href="nisa-ideco-sim.html" class="tool-card">
-          <div class="tool-card-icon"></div>
+          <div class="tool-card-icon">🎁</div>
           <div class="tool-card-text">
             <div class="tool-card-title">NISA vs iDeCo 比較</div>
             <div class="tool-card-desc">節税効果を3口座で比較</div>
@@ -313,7 +322,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="tool-card-arrow">›</div>
         </a>
         <a href="furusato-sim.html" class="tool-card">
-          <div class="tool-card-icon"></div>
+          <div class="tool-card-icon">🗾</div>
           <div class="tool-card-text">
             <div class="tool-card-title">ふるさと納税 上限額計算</div>
             <div class="tool-card-desc">家族構成・住宅ローン控除を反映</div>
@@ -321,7 +330,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="tool-card-arrow">›</div>
         </a>
         <a href="loan-refinance.html" class="tool-card">
-          <div class="tool-card-icon"></div>
+          <div class="tool-card-icon">🔄</div>
           <div class="tool-card-text">
             <div class="tool-card-title">住宅ローン借り換えシミュレーター</div>
             <div class="tool-card-desc">手数料回収期間・総節約額を計算</div>
@@ -329,7 +338,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
           <div class="tool-card-arrow">›</div>
         </a>
         <a href="lifeplan.html" class="tool-card hot">
-          <div class="tool-card-icon"></div>
+          <div class="tool-card-icon">📋</div>
           <div class="tool-card-text">
             <div class="tool-card-title">総合ライフプラン表<span class="hot-badge">NEW</span></div>
             <div class="tool-card-desc">6ステップで家計の年別推移を一覧化</div>
@@ -341,6 +350,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
         <a href="simulation.html">全10ツールを見る →</a>
       </div>
     </div>
+  </div>
+  <!-- スクロール誘導 -->
+  <div class="scroll-hint" onclick="document.querySelector('.why').scrollIntoView({behavior:'smooth'})">
+    <span>SCROLL</span>
+    <div class="scroll-arrow"></div>
   </div>
 </section>
 
@@ -684,6 +698,33 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
 },{threshold:0.12});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+/* カウントアップアニメーション */
+(function(){
+  function countUp(el,target,suffix,duration){
+    var start=0,step=target/Math.round(duration/16);
+    var timer=setInterval(function(){
+      start=Math.min(start+step,target);
+      el.textContent=Math.round(start)+suffix;
+      if(start>=target){el.textContent=target+suffix;clearInterval(timer);}
+    },16);
+  }
+  var counted=false;
+  var statsObs=new IntersectionObserver(function(entries){
+    if(counted||!entries[0].isIntersecting) return;
+    counted=true;
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      countUp(el,parseInt(el.dataset.count),el.dataset.suffix||'',1200);
+    });
+    statsObs.disconnect();
+  },{threshold:0.5});
+  var statsEl=document.querySelector('.hero-stats');
+  if(statsEl) statsObs.observe(statsEl);
+  // 初期値をセット（アニメーション前）
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    el.textContent='0'+(el.dataset.suffix||'');
+  });
+})();
 
 // カテゴリーフィルター
 document.querySelectorAll('.filter-btn').forEach(function(btn){
