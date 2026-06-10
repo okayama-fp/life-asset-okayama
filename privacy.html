@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -41,9 +39,8 @@
     footer{background:var(--navy);color:rgba(255,255,255,0.8);text-align:center;padding:32px 24px;font-size:0.8rem}
     footer a{color:#22c55e}
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498"
-     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css">
+<script src="/js/cookie-consent.js"></script>
 </head>
 <body>
 <header>
@@ -64,7 +61,7 @@
 
 <div class="page-wrap">
   <h1>プライバシーポリシー</h1>
-  <p class="updated">最終更新日：2026年5月23日</p>
+  <p class="updated">最終更新日：2026年6月10日</p>
 
   <p>ライフアセットオフィス（以下「当サイト」）は、ユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。</p>
 
@@ -80,7 +77,9 @@
   <ul>
     <li>お問い合わせフォームからご提供いただいた氏名・メールアドレス・お問い合わせ内容</li>
     <li>Cookieによるアクセス情報（ページ閲覧履歴、IPアドレスなど）</li>
-    <li>Google Analyticsによるアクセス解析データ</li>
+    <li>Google Analyticsによるアクセス解析データ（Cookie同意後のみ）</li>
+    <li>シミュレーターへの入力値（サーバーへは送信されず、ブラウザ内のみで処理されます）</li>
+    <li>ブラウザのlocalStorageへの最近閲覧したシミュレーター情報（端末内のみに保存、サーバーへは送信しません）</li>
   </ul>
 
   <h2>3. 個人情報の利用目的</h2>
@@ -90,27 +89,42 @@
     <li>アクセス解析によるサイト改善</li>
   </ul>
 
-  <h2>4. Cookieについて</h2>
-  <p>当サイトでは、利便性向上・アクセス解析・広告配信のためにCookieを使用しています。ブラウザの設定でCookieを無効にすることができますが、一部機能が利用できなくなる場合があります。</p>
+  <h2>4. データの保存期間</h2>
+  <ul>
+    <li><strong>お問い合わせデータ：</strong>返信後1年間保存し、その後削除します</li>
+    <li><strong>Google Analyticsデータ：</strong>Googleのポリシーに基づき最大26ヶ月間保存されます</li>
+    <li><strong>localStorageデータ：</strong>ブラウザのキャッシュ消去まで端末内に保存されます（サーバーへは送信されません）</li>
+  </ul>
 
-  <h2>5. 広告・アフィリエイトについて</h2>
-  <p>現在、当サイトでは広告・アフィリエイトリンクの掲載は行っていませんが、将来的に導入を検討しています。掲載を開始した際は、本ページにて改めてご案内いたします。</p>
+  <h2>5. Cookieについて</h2>
+  <p>当サイトでは、利便性向上・アクセス解析・広告配信のためにCookieを使用しています。初回アクセス時にCookie同意バナーが表示され、「同意して続ける」を選択した場合のみ解析・広告Cookieが有効になります。「必要なもののみ」を選択した場合、解析・広告用Cookieは使用されません。ブラウザの設定でCookieを無効にすることもできます。</p>
 
   <h2>6. Google Analyticsについて</h2>
-  <p>当サイトではGoogle Analyticsを使用してアクセス解析を行っています。Google Analyticsはデータ収集のためにCookieを使用します。収集されたデータは匿名で処理され、個人を特定するものではありません。</p>
+  <p>当サイトではGoogle Analytics（GA4）を使用してアクセス解析を行っています。ユーザーがCookie同意を行った場合にのみ有効になります。収集されたデータは匿名で処理され、個人を特定するものではありません。</p>
   <p>Google Analyticsのオプトアウトは<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">こちら</a>から行えます。</p>
 
-  <h2>7. 個人情報の第三者提供</h2>
-  <p>当サイトは、法令に基づく場合を除き、ユーザーの個人情報を第三者に提供することはありません。</p>
+  <h2>7. Google AdSenseについて</h2>
+  <p>当サイトではGoogle AdSense（広告ID：ca-pub-1266918303152498）を使用した広告を配信しています。ユーザーがCookie同意を行った場合にのみ広告スクリプトが読み込まれます。Googleはユーザーの興味・関心に基づいた広告を配信するためにCookieを使用する場合があります。</p>
+  <p>広告のパーソナライズ設定は<a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google広告設定</a>から変更できます。</p>
 
-  <h2>8. 免責事項</h2>
-  <p>当サイトに掲載する情報は、正確性・完全性を保証するものではありません。当サイトの情報をもとに行った投資・資産運用等の判断は、ユーザー自身の責任において行ってください。</p>
+  <h2>8. Cloudflare Turnstileについて</h2>
+  <p>当サイトのお問い合わせフォームでは、スパム対策のためCloudflare Turnstile（CAPTCHA）を使用しています。フォーム利用時に、ユーザーのブラウザ情報がCloudflare社のサーバーに送信される場合があります。詳細はCloudflareの<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>をご確認ください。</p>
+
+  <h2>9. 個人情報の第三者提供</h2>
+  <p>当サイトは、法令に基づく場合を除き、ユーザーの個人情報を第三者に提供することはありません。ただし、以下のサービスはユーザーのデータを各社のポリシーに基づき処理します。</p>
+  <ul>
+    <li>Google LLC（Google Analytics・AdSense）</li>
+    <li>Cloudflare, Inc.（Turnstile CAPTCHA）</li>
+  </ul>
+
+  <h2>10. 免責事項</h2>
+  <p>当サイトに掲載する情報は、正確性・完全性を保証するものではありません。当サイトの情報をもとに行った投資・資産運用等の判断は、ユーザー自身の責任において行ってください。当サイトは金融商品取引業（投資助言業）の登録を受けておらず、個別の投資アドバイスは提供しておりません。</p>
   <p>当サイトのブログ記事はAIによる自動生成コンテンツを含みます。内容の正確性については随時確認を行っておりますが、最新情報は各公式サイトをご確認ください。</p>
 
-  <h2>9. プライバシーポリシーの変更</h2>
+  <h2>11. プライバシーポリシーの変更</h2>
   <p>本ポリシーは、必要に応じて予告なく変更することがあります。変更後のポリシーは当ページに掲載した時点で効力を生じます。</p>
 
-  <h2>10. お問い合わせ</h2>
+  <h2>12. お問い合わせ</h2>
   <p>本ポリシーに関するお問い合わせは、<a href="contact.html">お問い合わせページ</a>またはメール（<span id="priv-email2"></span><script>(function(){var p='info',d='lifeassetoffice.net';document.getElementById('priv-email2').textContent=p+'@'+d;})();</script>）までご連絡ください。</p>
 </div>
 
