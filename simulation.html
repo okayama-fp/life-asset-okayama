@@ -40,7 +40,24 @@ a { color: inherit; text-decoration: none; }
 #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
 
 /* ─── Hero ─── */
-.hero { background-color: #1a4a30; background-image: linear-gradient(135deg,#0f2d1c 0%,#1a4a30 60%,#1a3060 100%); color: #fff; padding: 52px 24px 44px; text-align: center; }
+.hero { background-color: #1a4a30; background-image: linear-gradient(135deg,#0f2d1c 0%,#1a4a30 60%,#1a3060 100%); color: #fff; padding: 52px 24px 56px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 70% 30%, rgba(74,222,128,.08) 0%, transparent 60%); pointer-events:none; animation: heroPulse 6s ease-in-out infinite; }
+@keyframes heroPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+
+/* クイック検索 */
+.hero-search { max-width: 480px; margin: 24px auto 0; position: relative; }
+.hero-search input { width: 100%; padding: 14px 48px 14px 20px; border-radius: 50px; border: none; font-size: 14px; font-family: inherit; background: rgba(255,255,255,.15); color: #fff; outline: none; backdrop-filter: blur(8px); }
+.hero-search input::placeholder { color: rgba(255,255,255,.6); }
+.hero-search input:focus { background: rgba(255,255,255,.22); }
+.hero-search-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; pointer-events: none; }
+.no-result-msg { text-align:center; color: var(--text-light); padding: 40px 0; font-size: 14px; display: none; }
+
+/* スクロール矢印 */
+.sim-scroll-hint { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 28px; opacity: .6; }
+.sim-scroll-hint span { font-size: 10px; color: rgba(255,255,255,.7); letter-spacing: .1em; font-weight: 600; }
+.sim-scroll-arrow { width: 18px; height: 18px; border-right: 2px solid rgba(255,255,255,.7); border-bottom: 2px solid rgba(255,255,255,.7); transform: rotate(45deg); animation: bounceDown 1.6s ease-in-out infinite; }
+@keyframes bounceDown { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(6px)} }
+@media(max-width:480px){ .sim-scroll-hint{display:none} }
 .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
 .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
@@ -297,11 +314,11 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   <p class="hero-lead">スライダーを動かすだけ。お金の疑問を今すぐ数字で確認。</p>
   <div class="stat-row">
     <div class="stat-item">
-      <div class="stat-num">9</div>
+      <div class="stat-num" data-count="9" data-suffix="">0</div>
       <div class="stat-label">ツール</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">0</div>
+      <div class="stat-num">無料</div>
       <div class="stat-label">登録不要</div>
     </div>
     <div class="stat-item">
@@ -312,6 +329,14 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       <div class="stat-num">📱</div>
       <div class="stat-label">スマホ対応</div>
     </div>
+  </div>
+  <div class="hero-search">
+    <input type="search" id="simSearch" placeholder="🔍 シミュレーターを検索（例：老後、NISA、ローン）" oninput="filterSims(this.value)">
+    <span class="hero-search-icon"></span>
+  </div>
+  <div class="sim-scroll-hint">
+    <span>SCROLL</span>
+    <div class="sim-scroll-arrow"></div>
   </div>
 </div>
 
@@ -478,6 +503,8 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
   </div>
 
+  <div class="no-result-msg">🔍 該当するシミュレーターが見つかりませんでした。キーワードを変えて検索してください。</div>
+
   <div class="cta-box">
     <h2>シミュレーション結果をもとにご相談ください。</h2>
     <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>FPが個別のご状況に合わせてアドバイスします。</p>
@@ -501,6 +528,38 @@ window.addEventListener('scroll', function(){
   document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
 });
 
+/* カウントアップ */
+(function(){
+  function countUp(el,target,suffix,dur){
+    var s=0,step=target/Math.round(dur/16);
+    var t=setInterval(function(){s=Math.min(s+step,target);el.textContent=Math.round(s)+suffix;if(s>=target){el.textContent=target+suffix;clearInterval(t);}},16);
+  }
+  setTimeout(function(){
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      countUp(el,parseInt(el.dataset.count),el.dataset.suffix||'',1000);
+    });
+  },300);
+})();
+
+/* シミュレーター検索 */
+function filterSims(query){
+  var q=query.trim().toLowerCase();
+  var cards=document.querySelectorAll('.tool-card');
+  var visible=0;
+  cards.forEach(function(card){
+    var text=(card.textContent||'').toLowerCase();
+    var match=!q||text.indexOf(q)!==-1;
+    card.classList.toggle('hidden',!match);
+    if(match) visible++;
+  });
+  var msg=document.querySelector('.no-result-msg');
+  if(msg) msg.style.display=(visible===0&&q)?'block':'none';
+  // カテゴリタブをリセット
+  if(q){
+    document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active')});
+  }
+}
+
 (function(){
   var tabs = document.querySelectorAll('.cat-tab');
   var cards = document.querySelectorAll('.tool-card');
@@ -509,6 +568,9 @@ window.addEventListener('scroll', function(){
       var cat = tab.dataset.cat;
       tabs.forEach(function(t){ t.classList.remove('active'); });
       tab.classList.add('active');
+      // 検索クリア
+      var searchEl = document.getElementById('simSearch');
+      if(searchEl) searchEl.value = '';
       cards.forEach(function(card){
         if(cat === 'all' || card.dataset.cat === cat){
           card.classList.remove('hidden');
