@@ -1097,7 +1097,7 @@ function renderMethod(){
   // 完全共同
   var fs=70;if(incDiff>2)fs+=15;if(wM===0)fs=100;
   styles[0].score=Math.min(100,fs);
-  styles[0].reason=wM===0?'片方が専業主婦/夫の場合は完全共同が唯一の選択肢です。':incDiff>2?'収入差が大きいため完全共同が最も公平で効率的です。':'収入差があっても公平感が生まれにくい、最も貯蓄効率の高い管理方法です。';
+  styles[0].reason=wM===0?'片方が専業主婦/夫の場合は完全共同が唯一の選択肢です。':incDiff>2?'収入差が大きいため完全共同が最も公平で効率的です。':'収入差があっても公平感が生まれにくい、家計を一元管理できる方法です。';
   // 収入比例
   var rs=60;if(incDiff>1.3&&incDiff<3)rs+=25;if(incDiff>=1.3)rs+=10;
   styles[1].score=Math.min(100,rs);
@@ -1136,7 +1136,7 @@ function renderMethod(){
     html='<div class="style-card full">'+
       '<span class="style-badge" style="background:#c8e6d4;color:#0f4d2a">⭐ FPイチ推し：収入差があっても公平</span>'+
       '<div class="style-title">完全共同管理</div>'+
-      '<div class="style-subtitle">2人の収入を全て1つの口座で管理。透明性が最高で貯蓄効率No.1。</div>'+
+      '<div class="style-subtitle">2人の収入を全て1つの口座で管理。透明性が最高で家計全体を一元管理できます。</div>'+
       '<div class="style-nums">'+
         '<div class="style-num-box"><div class="style-num-label">Aの月入金額</div><div class="style-num-val">'+fmtMan(hM)+'</div></div>'+
         '<div class="style-num-box"><div class="style-num-label">Bの月入金額</div><div class="style-num-val">'+fmtMan(wM)+'</div></div>'+
@@ -1146,7 +1146,7 @@ function renderMethod(){
         '<div class="style-num-box"><div class="style-num-label">Bのお小遣い目安</div><div class="style-num-val">'+fmtMan(wPocket)+'</div></div>'+
       '</div>'+
       '<div class="style-pros-cons">'+
-        '<div class="pros-box"><strong>✓ メリット</strong>収支が完全に見える<br>貯蓄効率が最も高い<br>収入差があっても不公平感なし<br>育休中も仕組みが変わらない</div>'+
+        '<div class="pros-box"><strong>✓ メリット</strong>収支が完全に見える<br>家計が見渡しやすい<br>収入差があっても不公平感なし<br>育休中も仕組みが変わらない</div>'+
         '<div class="cons-box"><strong>✗ デメリット</strong>お互いの支出が全て見える<br>プライバシーが少ない<br>信頼関係が前提条件になる<br>個人の自由支出の確保が必要</div>'+
       '</div>'+
       '<div class="style-steps"><div class="style-steps-title">▶ 今すぐやること（5ステップ）</div>'+
