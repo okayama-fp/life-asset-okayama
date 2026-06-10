@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🍣 すし処 大将 ― 寿司屋経営シミュレーション</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --w:#8b5a2b;--wd:#5c3a1a;--p:#fdf6e3;--ink:#2b2118;
+  --r:#c0392b;--g:#1e8449;--gd:#27ae60;--go:#f39c12;--b:#2471a3;
+  --bg:#1a0f06;--bg2:#2c1e12;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',Meiryo,sans-serif;
+  background:var(--bg) url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M0 0h40v40H0z'/%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23fff' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E") fixed;
+  color:var(--ink);min-height:100vh;padding:10px}
+
+.wrap{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+
+/* のれん */
+.noren{background:linear-gradient(160deg,#1a3a5c 0%,#0d2137 100%);
+  border-radius:0 0 20px 20px;padding:14px 20px 20px;text-align:center;
+  color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.55);position:relative;overflow:hidden}
+.noren::before{content:'';position:absolute;top:-50%;left:-20%;width:60%;height:200%;
+  background:rgba(255,255,255,.04);transform:rotate(15deg)}
+.noren::after{content:'';position:absolute;left:5%;right:5%;bottom:-5px;height:10px;
+  background:repeating-linear-gradient(90deg,#2471a3 0 36px,transparent 36px 44px);border-radius:0 0 6px 6px}
+.noren h1{font-size:28px;font-weight:900;letter-spacing:8px;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.noren .sub{font-size:11px;opacity:.7;letter-spacing:2px;margin-top:4px}
+.season-badge{display:inline-block;padding:2px 12px;border-radius:50px;font-size:11px;
+  font-weight:700;margin-top:8px;border:1px solid rgba(255,255,255,.25)}
+
+/* ステータス */
+.status{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.stat{background:var(--p);border-radius:12px;padding:9px 6px;text-align:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.stat.s-money::after{background:var(--gd)}
+.stat.s-rep::after{background:var(--go)}
+.stat.s-day::after{background:var(--b)}
+.stat.s-cust::after{background:var(--r)}
+.stat .lbl{font-size:10px;color:#8a7a60;margin-bottom:2px}
+.stat .val{font-size:15px;font-weight:900}
+.val.m{color:var(--g)} .val.r{color:var(--go)}
+
+/* パネル共通 */
+.panel{background:var(--p);border-radius:16px;padding:16px;
+  box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.panel h2{font-size:15px;font-weight:900;margin-bottom:10px;
+  padding-bottom:8px;border-bottom:2px dashed #d9c9a8;
+  display:flex;align-items:center;gap:8px}
+.ph{margin-left:auto;font-size:10px;font-weight:700;
+  background:var(--w);color:#fff;padding:3px 10px;border-radius:50px}
+
+/* タブ */
+.tabs{display:flex;gap:4px;margin-bottom:10px}
+.tab{flex:1;border:none;border-radius:8px;padding:8px 4px;font-size:12px;
+  font-weight:700;cursor:pointer;background:#e8dcc4;color:#8a7a60;transition:.2s}
+.tab.on{background:var(--w);color:#fff}
+
+/* ネタグリッド */
+.neta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.neta{border:2px solid #e0d3b8;border-radius:12px;padding:10px;
+  background:#fff;transition:border-color .2s,opacity .2s}
+.neta.sold-out{opacity:.5}
+.neta.seasonal{border-color:#e91e63;background:#fff5f8}
+.n-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.n-em{font-size:24px}
+.n-nm{font-size:13px;font-weight:900}
+.n-rk{font-size:10px;color:#8a7a60}
+.n-info{display:flex;justify-content:space-between;font-size:11px;color:#6b5d45;margin-bottom:5px}
+.n-info b{color:var(--ink)}
+.buy-row{display:flex;gap:4px;margin-bottom:6px}
+.buy-row button,.price-row button{border:none;border-radius:8px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.buy-row button{flex:1;padding:6px 0;font-size:11px;background:var(--w);color:#fff}
+.buy-row button:hover{opacity:.85}
+.buy-row button:disabled{background:#c5b698;cursor:not-allowed}
+.price-row{display:flex;align-items:center;gap:5px}
+.price-row button{width:28px;height:28px;background:var(--b);color:#fff;font-size:14px}
+.pv{flex:1;text-align:center;font-size:14px;font-weight:900;color:var(--r)}
+.seasonal-tag{font-size:10px;background:#e91e63;color:#fff;
+  padding:2px 8px;border-radius:50px;margin-top:4px;display:inline-block}
+
+/* 店内ビュー */
+.shopbox{background:linear-gradient(180deg,#2c1209,#1a0c04);
+  border-radius:14px;padding:12px;margin-bottom:10px}
+.counter{display:flex;gap:6px;justify-content:center;
+  background:linear-gradient(180deg,#6b4423,#8b5a2b);
+  border-radius:10px;padding:12px 8px 8px;margin-bottom:8px;
+  box-shadow:inset 0 -6px 0 var(--wd)}
+.seat{font-size:28px;width:42px;text-align:center;transition:transform .3s}
+.seat.eat{animation:munch .5s ease infinite alternate}
+@keyframes munch{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+.shop-log{min-height:180px;max-height:260px;overflow-y:auto;
+  color:#f0e6d2;font-size:12.5px;line-height:2;padding:2px 4px}
+.ev{animation:fadein .4s ease}
+.ev.sale{color:#7dcea0}.ev.miss{color:#f1948a}
+.ev.vip{color:#f8c471;font-weight:700}.ev.info{color:#aed6f1}
+@keyframes fadein{from{opacity:0;transform:translateY(5px)}to{opacity:1}}
+
+/* プログレスバー */
+.prog-wrap{background:rgba(255,255,255,.1);border-radius:50px;height:6px;margin-bottom:8px}
+.prog-bar{height:6px;border-radius:50px;background:linear-gradient(90deg,#f39c12,#e74c3c);
+  transition:width .5s ease}
+
+/* 結果 */
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.ri{background:#fff;border-radius:10px;padding:10px 12px;border:1px solid #e0d3b8}
+.ri .rl{font-size:10px;color:#8a7a60}.ri .rv{font-size:17px;font-weight:900}
+.rv.p{color:var(--g)}.rv.n{color:var(--r)}
+.comment{background:#fff;border-radius:10px;padding:12px;border:1px solid #e0d3b8;
+  font-size:12.5px;margin-bottom:10px;line-height:1.8}
+
+/* スタッフ */
+.staff-card{display:flex;align-items:center;gap:10px;background:#fff;
+  border:2px solid #e0d3b8;border-radius:12px;padding:10px;margin-bottom:8px}
+.staff-card.hired{border-color:var(--gd)}
+.s-em{font-size:28px;flex-shrink:0}
+.s-info{flex:1}
+.s-info h4{font-size:13px;font-weight:900}
+.s-info p{font-size:11px;color:#8a7a60}
+.s-info .s-wage{font-size:11px;color:var(--r)}
+.staff-card button{border:none;border-radius:50px;padding:7px 16px;
+  font-size:12px;font-weight:700;cursor:pointer;background:var(--gd);color:#fff;white-space:nowrap}
+.staff-card button:disabled{background:#c5b698;cursor:not-allowed}
+.hired-mark{font-size:12px;font-weight:900;color:var(--gd);white-space:nowrap}
+
+/* 改装 */
+.upg{display:flex;align-items:center;gap:10px;background:#fff;
+  border:2px solid #e0d3b8;border-radius:12px;padding:10px;margin-bottom:8px}
+.upg.done{border-color:var(--go);background:#fffaf0}
+.upg-em{font-size:26px;flex-shrink:0}
+.upg-info{flex:1}
+.upg-info h4{font-size:13px;font-weight:900}
+.upg-info p{font-size:11px;color:#8a7a60}
+.upg button{border:none;border-radius:50px;padding:7px 16px;
+  font-size:12px;font-weight:700;cursor:pointer;background:var(--go);color:#fff;white-space:nowrap}
+.upg button:disabled{background:#c5b698;cursor:not-allowed}
+.done-mark{font-size:12px;font-weight:900;color:var(--go);white-space:nowrap}
+
+/* ボタン */
+.bigbtn{display:block;width:100%;border:none;border-radius:50px;padding:14px;
+  font-size:15px;font-weight:900;cursor:pointer;color:#fff;
+  box-shadow:0 5px 18px rgba(0,0,0,.3);transition:transform .15s,opacity .2s;margin-top:8px}
+.bigbtn:hover{transform:translateY(-2px)}
+.bigbtn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-open{background:linear-gradient(90deg,#c0392b,#e74c3c)}
+.btn-next{background:linear-gradient(90deg,var(--g),var(--gd))}
+.bigbtn.blue{background:linear-gradient(90deg,var(--b),#3498db)}
+
+/* ランキング */
+.rank-row{display:flex;align-items:center;gap:8px;padding:6px 10px;
+  border-radius:8px;margin-bottom:4px;background:#fff;border:1px solid #e0d3b8;font-size:13px}
+.rank-row .rk-num{font-size:14px;font-weight:900;width:22px;text-align:center}
+.rank-row .rk-bar{flex:1;height:8px;background:#e0d3b8;border-radius:50px;overflow:hidden;margin:0 6px}
+.rank-row .rk-fill{height:8px;background:var(--go);border-radius:50px}
+
+/* イベント通知 */
+.event-box{background:linear-gradient(90deg,#6c3483,#9b59b6);
+  border-radius:12px;padding:12px 14px;color:#fff;font-size:12.5px;
+  margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
+
+/* ゲームオーバー・クリア */
+.go-box{text-align:center;padding:28px 16px}
+.go-box .big-em{font-size:64px;margin-bottom:10px}
+.go-box h2{font-size:22px;border:none;justify-content:center}
+.go-box p{font-size:12.5px;color:#8a7a60;margin:8px 0 4px}
+.go-box .score{font-size:28px;font-weight:900;color:var(--go);margin:8px 0}
+
+/* トースト */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.85);color:#fff;font-size:12.5px;font-weight:700;
+  padding:10px 24px;border-radius:50px;opacity:0;pointer-events:none;
+  z-index:99;transition:opacity .3s;white-space:nowrap}
+.toast.show{opacity:1}
+
+.hidden{display:none!important}
+
+@media(max-width:480px){
+  .status{grid-template-columns:repeat(2,1fr)}
+  .neta-grid{grid-template-columns:1fr 1fr}
+  .result-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- のれん -->
+<div class="noren">
+  <h1>🍣 すし処 大将</h1>
+  <div class="sub">― 寿司屋経営シミュレーション ―</div>
+  <div id="season-badge" class="season-badge">🌸 春</div>
+</div>
+
+<!-- ステータス -->
+<div class="status">
+  <div class="stat s-money"><div class="lbl">所持金</div><div class="val m" id="st-money">¥50,000</div></div>
+  <div class="stat s-day"><div class="lbl">営業日</div><div class="val" id="st-day">1日目</div></div>
+  <div class="stat s-rep"><div class="lbl">評判</div><div class="val r" id="st-rep">★☆☆☆☆</div></div>
+  <div class="stat s-cust"><div class="lbl">累計客数</div><div class="val" id="st-cust">0人</div></div>
+</div>
+
+<!-- イベント -->
+<div id="event-box" class="event-box hidden"></div>
+
+<!-- 仕入れ＆スタッフ＆改装 -->
+<div class="panel" id="phase-buy">
+  <h2>🏪 準備フェーズ <span class="ph">開店前</span></h2>
+  <div class="tabs">
+    <button class="tab on" id="tab-buy" onclick="switchTab('buy')">🐟 仕入れ・価格</button>
+    <button class="tab" id="tab-staff" onclick="switchTab('staff')">👨‍🍳 スタッフ</button>
+    <button class="tab" id="tab-upg" onclick="switchTab('upg')">🔨 改装</button>
+    <button class="tab" id="tab-rank" onclick="switchTab('rank')">🏆 ランキング</button>
+  </div>
+  <div id="tab-content-buy"><div class="neta-grid" id="neta-grid"></div></div>
+  <div id="tab-content-staff" class="hidden"><div id="staff-list"></div></div>
+  <div id="tab-content-upg" class="hidden"><div id="upg-list"></div></div>
+  <div id="tab-content-rank" class="hidden"><div id="rank-list"></div></div>
+  <button class="bigbtn btn-open" id="btn-open" onclick="openShop()">🏮 開店する！</button>
+</div>
+
+<!-- 営業中 -->
+<div class="panel hidden" id="phase-open">
+  <h2>🏮 営業中 <span class="ph" id="time-tag">11:00</span></h2>
+  <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+  <div class="shopbox">
+    <div class="counter" id="counter"></div>
+    <div class="shop-log" id="shop-log"></div>
+  </div>
+</div>
+
+<!-- 結果 -->
+<div class="panel hidden" id="phase-result">
+  <h2>📊 本日の売上報告 <span class="ph">閉店</span></h2>
+  <div class="result-grid" id="result-grid"></div>
+  <div class="comment" id="result-comment"></div>
+  <div id="sell-rank"></div>
+  <button class="bigbtn btn-next" onclick="nextDay()">☀️ 次の日へ</button>
+</div>
+
+<!-- ゲームオーバー -->
+<div class="panel hidden" id="phase-go">
+  <div class="go-box">
+    <div class="big-em">😢</div>
+    <h2>倒産…</h2>
+    <p id="go-text"></p>
+    <div class="score" id="go-score"></div>
+    <button class="bigbtn btn-open" onclick="resetGame()">🔄 もう一度はじめる</button>
+  </div>
+</div>
+
+<!-- クリア -->
+<div class="panel hidden" id="phase-clear">
+  <div class="go-box">
+    <div class="big-em">🎊</div>
+    <h2>名店認定！おめでとう！</h2>
+    <p>評判5つ星・累計1,000人達成！あなたの寿司屋は岡山で最も有名な名店になりました！</p>
+    <div class="score" id="clear-score"></div>
+    <button class="bigbtn btn-next" onclick="nextDay()">🍣 さらに続ける</button>
+    <button class="bigbtn btn-open" style="margin-top:6px" onclick="resetGame()">🔄 最初からやり直す</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+/* ──────── ネタ定義 ──────── */
+// pop: 客が注文する重み / seasonal: 季節ネタか / season: 出る季節 0=春1=夏2=秋3=冬
+const NETA = [
+  {id:'tamago', name:'玉子',    e:'🍳',  rank:'定番',  cost:30,  base:100, pop:8 },
+  {id:'ika',   name:'イカ',    e:'🦑',  rank:'定番',  cost:50,  base:130, pop:9 },
+  {id:'ebi',   name:'エビ',    e:'🦐',  rank:'定番',  cost:70,  base:160, pop:10},
+  {id:'kani',  name:'カニ',    e:'🦀',  rank:'人気',  cost:110, base:240, pop:7 },
+  {id:'salmon',name:'サーモン',e:'🐟',  rank:'人気',  cost:90,  base:200, pop:14},
+  {id:'maguro',name:'マグロ',  e:'🔴',  rank:'人気',  cost:120, base:250, pop:13},
+  {id:'ikura', name:'イクラ',  e:'🟠',  rank:'高級',  cost:180, base:380, pop:6 },
+  {id:'uni',   name:'ウニ',    e:'🟡',  rank:'高級',  cost:260, base:520, pop:5 },
+  {id:'otoro', name:'大トロ',  e:'✨',  rank:'最高級',cost:400, base:780, pop:4 },
+  {id:'sanma', name:'サンマ',  e:'🐠',  rank:'季節',  cost:60,  base:140, pop:12, seasonal:true, season:2},
+  {id:'shisamo',name:'シシャモ',e:'🐡', rank:'季節',  cost:55,  base:130, pop:10, seasonal:true, season:2},
+  {id:'kazunoko',name:'数の子', e:'🟤', rank:'季節',  cost:200, base:440, pop:7,  seasonal:true, season:3},
+  {id:'hamaguri',name:'はまぐり',e:'🐚',rank:'季節',  cost:130, base:290, pop:8,  seasonal:true, season:0},
+  {id:'aji',   name:'アジ',    e:'🐟',  rank:'夏限定',cost:65,  base:150, pop:11, seasonal:true, season:1},
+];
+
+/* ──────── スタッフ定義 ──────── */
+const STAFF = [
+  {id:'helper',  name:'アルバイト',   e:'🧑',  wage:2000,  effect:'接客ミス軽減・客の機会損失20%減'},
+  {id:'chef2',   name:'副料理長',     e:'👨‍🍳', wage:5000,  effect:'人気ネタの注文確率+15%・評判上昇速度UP'},
+  {id:'cashier', name:'レジ係',       e:'💁',  wage:1500,  effect:'日本酒オーダー率が2倍に'},
+  {id:'cleaner', name:'清掃スタッフ', e:'🧹',  wage:1200,  effect:'衛生評価UP・評判下落を防ぐ'},
+];
+
+/* ──────── 改装定義 ──────── */
+const UPGRADES = [
+  {id:'noren',   name:'本格のれん',   e:'🏮',  cost:20000, desc:'評判が上がりやすくなる'},
+  {id:'fridge',  name:'業務用冷蔵庫', e:'🧊',  cost:50000, desc:'売れ残りの半分を翌日持ち越せる'},
+  {id:'seats',   name:'カウンター増設',e:'🪑', cost:80000, desc:'席数4→7席（来客数アップ）'},
+  {id:'sake',    name:'日本酒メニュー',e:'🍶', cost:40000, desc:'30%の確率で+¥500/客'},
+  {id:'tv',      name:'テレビ取材',   e:'📺',  cost:120000,desc:'来客数が大幅アップ'},
+  {id:'garden',  name:'坪庭リノベ',   e:'🌿',  cost:90000, desc:'高級客（VIP）が増える'},
+  {id:'sign',    name:'LEDサイン',    e:'💡',  cost:35000, desc:'夜の来客数が増える'},
+];
+
+/* ──────── 季節イベント ──────── */
+const EVENTS = {
+  0:[{title:'🌸 花見シーズン！',msg:'お花見帰りの客が増えます。エビ・はまぐりが人気！',bonus:'hanami'}],
+  1:[{title:'🏖️ 夏休みスタート！',msg:'家族連れが増えます。売り切れに注意！',bonus:'summer'}],
+  2:[{title:'🍂 食欲の秋！',msg:'サンマ・シシャモが旬。仕入れチャンス！',bonus:'autumn'}],
+  3:[{title:'⛄ 年末年始',msg:'数の子が人気！高単価ネタが売れやすい！',bonus:'newyear'}],
+};
+
+/* ──────── セーブ ──────── */
+const KEY = 'sushi-v3';
+let G;
+
+function def() {
+  const s={}, p={};
+  NETA.forEach(n=>{s[n.id]=0; p[n.id]=n.base;});
+  return {money:50000,day:1,rep:1.0,total:0,
+    stock:s,price:p,upgrades:[],staff:[],
+    season:0,dayInSeason:0,lifeEarnings:0,
+    sellHistory:{},cleared:false};
+}
+function ld(){
+  try{const r=localStorage.getItem(KEY);if(r){G=JSON.parse(r);return;}}catch(e){}
+  G=def();
+}
+function sv(){try{localStorage.setItem(KEY,JSON.stringify(G));}catch(e){}}
+function resetGame(){
+  if(!confirm('セーブデータを消してやり直しますか？'))return;
+  localStorage.removeItem(KEY);
+  G=def();
+  ['phase-go','phase-clear','phase-result','phase-open'].forEach(id=>id$(id).classList.add('hidden'));
+  id$('phase-buy').classList.remove('hidden');
+  renderAll();toast('🎉 新しいお店をオープンしました！');
+}
+
+/* ──────── ユーティリティ ──────── */
+const id$=id=>document.getElementById(id);
+const yen=n=>'¥'+Math.round(n).toLocaleString();
+const repStr=r=>{const f=Math.round(Math.min(5,r));return'★'.repeat(f)+'☆'.repeat(5-f)};
+const SEASON_INFO=[
+  {name:'春',e:'🌸',col:'#e91e63'},
+  {name:'夏',e:'☀️',col:'#f39c12'},
+  {name:'秋',e:'🍂',col:'#795548'},
+  {name:'冬',e:'⛄',col:'#2471a3'},
+];
+function getSeason(){return SEASON_INFO[G.season];}
+
+function toast(msg){
+  const t=id$('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+/* ──────── タブ切替 ──────── */
+function switchTab(name){
+  ['buy','staff','upg','rank'].forEach(t=>{
+    id$('tab-'+t).classList.toggle('on',t===name);
+    id$('tab-content-'+t).classList.toggle('hidden',t!==name);
+  });
+  if(name==='rank')renderRank();
+}
+
+/* ──────── レンダリング ──────── */
+function renderAll(){
+  renderStatus();renderNeta();renderStaff();renderUpg();
+}
+
+function renderStatus(){
+  id$('st-money').textContent=yen(G.money);
+  id$('st-day').textContent=G.day+'日目';
+  id$('st-rep').textContent=repStr(G.rep);
+  id$('st-cust').textContent=G.total+'人';
+  const s=getSeason();
+  id$('season-badge').textContent=s.e+' '+s.name;
+  id$('season-badge').style.background=s.col+'33';
+  id$('season-badge').style.borderColor=s.col+'88';
+}
+
+function renderNeta(){
+  const avail=NETA.filter(n=>!n.seasonal||n.season===G.season);
+  id$('neta-grid').innerHTML=avail.map(n=>{
+    const st=G.stock[n.id]||0,pr=G.price[n.id]||n.base;
+    const over=pr/n.base;
+    const overCol=over>1.3?'color:#c0392b':over<0.9?'color:#1e8449':'';
+    const b5ok=G.money>=n.cost*5,b10ok=G.money>=n.cost*10;
+    return`<div class="neta${st===0&&G.day>1?' sold-out':''}${n.seasonal?' seasonal':''}">
+      <div class="n-top"><span class="n-em">${n.e}</span>
+        <div><div class="n-nm">${n.name}</div><div class="n-rk">${n.rank}・仕入¥${n.cost}</div></div>
+      </div>
+      <div class="n-info"><span>在庫</span><b>${st}貫</b></div>
+      <div class="buy-row">
+        <button onclick="buy('${n.id}',5)" ${b5ok?'':'disabled'}>+5貫<br>¥${(n.cost*5).toLocaleString()}</button>
+        <button onclick="buy('${n.id}',10)" ${b10ok?'':'disabled'}>+10貫<br>¥${(n.cost*10).toLocaleString()}</button>
+      </div>
+      <div class="price-row">
+        <button onclick="cp('${n.id}',-10)">－</button>
+        <div class="pv" style="${overCol}">${yen(pr)}</div>
+        <button onclick="cp('${n.id}',10)">＋</button>
+      </div>
+      ${n.seasonal?'<div class="seasonal-tag">'+getSeason().e+' 旬ネタ</div>':''}
+    </div>`;
+  }).join('');
+  id$('btn-open').disabled=NETA.every(n=>!G.stock[n.id]);
+}
+
+function renderStaff(){
+  id$('staff-list').innerHTML=STAFF.map(s=>{
+    const hired=G.staff.includes(s.id);
+    return`<div class="staff-card${hired?' hired':''}">
+      <span class="s-em">${s.e}</span>
+      <div class="s-info">
+        <h4>${s.name}</h4>
+        <p>${s.effect}</p>
+        <div class="s-wage">日給 ${yen(s.wage)}</div>
+      </div>
+      ${hired
+        ?'<span class="hired-mark">✓ 勤務中</span>'
+        :`<button onclick="hireStaff('${s.id}')" ${G.money<s.wage?'disabled':''}>採用 ${yen(s.wage)}</button>`}
+    </div>`;
+  }).join('');
+}
+
+function renderUpg(){
+  id$('upg-list').innerHTML=UPGRADES.map(u=>{
+    const owned=G.upgrades.includes(u.id);
+    return`<div class="upg${owned?' done':''}">
+      <span class="upg-em">${u.e}</span>
+      <div class="upg-info"><h4>${u.name}</h4><p>${u.desc}</p></div>
+      ${owned
+        ?'<span class="done-mark">✓ 導入済</span>'
+        :`<button onclick="buyUpg('${u.id}')" ${G.money<u.cost?'disabled':''}>${yen(u.cost)}</button>`}
+    </div>`;
+  }).join('');
+}
+
+function renderRank(){
+  const h=G.sellHistory||{};
+  const arr=NETA.map(n=>({n,v:h[n.id]||0})).sort((a,b)=>b.v-a.v);
+  const max=arr[0].v||1;
+  id$('rank-list').innerHTML='<p style="font-size:11px;color:#8a7a60;margin-bottom:8px">累計販売数ランキング</p>'
+    +arr.map((x,i)=>`
+    <div class="rank-row">
+      <div class="rk-num">${['🥇','🥈','🥉','4','5','6','7','8','9','10','11','12','13','14'][i]}</div>
+      <span>${x.n.e}${x.n.name}</span>
+      <div class="rk-bar"><div class="rk-fill" style="width:${(x.v/max*100).toFixed(1)}%"></div></div>
+      <span style="font-size:11px;font-weight:700;width:48px;text-align:right">${x.v}貫</span>
+    </div>`).join('');
+}
+
+/* ──────── 仕入れ・価格 ──────── */
+function buy(id,qty){
+  const n=NETA.find(x=>x.id===id);
+  const c=n.cost*qty;if(G.money<c)return;
+  G.money-=c;G.stock[id]=(G.stock[id]||0)+qty;
+  sv();renderAll();
+}
+function cp(id,d){
+  G.price[id]=Math.max(10,(G.price[id]||NETA.find(x=>x.id===id).base)+d);
+  sv();renderNeta();
+}
+function hireStaff(id){
+  const s=STAFF.find(x=>x.id===id);
+  if(G.money<s.wage||G.staff.includes(id))return;
+  G.money-=s.wage;G.staff.push(id);sv();renderAll();
+  toast(s.e+' '+s.name+'を採用しました！');
+}
+function buyUpg(id){
+  const u=UPGRADES.find(x=>x.id===id);
+  if(G.money<u.cost||G.upgrades.includes(id))return;
+  G.money-=u.cost;G.upgrades.push(id);sv();renderAll();
+  toast(u.e+' '+u.name+'を導入しました！');
+}
+
+/* ──────── 開店シミュレーション ──────── */
+let dayStats=null,simTimer=null;
+const NAMES=['常連の田中さん','サラリーマン','OLさん','大学生','観光客','おじいちゃん','親子連れ','外国人','地元の主婦','グルメブロガー','記念日カップル'];
+const SEAT_FACES=['😀','😋','🧔','👩','👴','👦','🧑‍🦱','👩‍🦰','🧓','👨‍💼'];
+
+function openShop(){
+  id$('phase-buy').classList.add('hidden');
+  id$('phase-open').classList.remove('hidden');
+  id$('shop-log').innerHTML='';
+  id$('prog-bar').style.width='0%';
+
+  dayStats={revenue:0,served:0,missed:0,waste:0,soldCount:{},startMoney:G.money};
+  NETA.forEach(n=>{dayStats.soldCount[n.id]=0;});
+
+  const seats=G.upgrades.includes('seats')?7:4;
+  id$('counter').innerHTML=Array.from({length:seats},(_,i)=>`<div class="seat" id="seat-${i}">🪑</div>`).join('');
+
+  // 来客数計算
+  let visits=10+Math.floor(G.rep*4)+Math.floor(Math.random()*6);
+  if(G.upgrades.includes('tv')) visits+=10;
+  if(G.upgrades.includes('sign')) visits+=Math.floor(visits*0.2);
+  const bonusEvents=G._currentEvent?G._currentEvent.bonus:'';
+  if(bonusEvents==='summer'||bonusEvents==='hanami') visits+=5;
+  if(bonusEvents==='newyear') visits+=8;
+  visits=Math.min(visits,55);
+
+  let tick=0;
+  logEv('🏮 のれんを出しました。いらっしゃいませ！','info');
+
+  simTimer=setInterval(()=>{
+    tick++;
+    const ratio=tick/visits;
+    const hour=11+Math.floor(ratio*10),min=(tick*23)%60;
+    id$('time-tag').textContent=`${hour}:${String(min).padStart(2,'0')}`;
+    id$('prog-bar').style.width=(ratio*100).toFixed(1)+'%';
+    simulateCustomer(seats);
+    if(tick>=visits){
+      clearInterval(simTimer);
+      id$('prog-bar').style.width='100%';
+      setTimeout(closeShop,1600);
+    }
+  },750);
+}
+
+function simulateCustomer(seats){
+  const si=Math.floor(Math.random()*seats);
+  const seat=id$('seat-'+si);
+  if(seat){
+    seat.textContent=SEAT_FACES[Math.floor(Math.random()*SEAT_FACES.length)];
+    seat.classList.add('eat');
+    setTimeout(()=>{seat.textContent='🪑';seat.classList.remove('eat');},1500);
+  }
+
+  const who=NAMES[Math.floor(Math.random()*NAMES.length)];
+  const isVip=G.upgrades.includes('garden')?Math.random()<0.18:Math.random()<0.08;
+
+  // ネタ抽選
+  const avail=NETA.filter(n=>!n.seasonal||n.season===G.season);
+  const pool=[];
+  avail.forEach(n=>{
+    let w=n.pop;
+    if(G.staff.includes('chef2')&&(n.rank==='人気'||n.rank==='高級')) w=Math.floor(w*1.15);
+    for(let i=0;i<w;i++)pool.push(n);
+  });
+  const want=pool[Math.floor(Math.random()*pool.length)];
+
+  const qty=isVip?3+Math.floor(Math.random()*4):1+Math.floor(Math.random()*3);
+
+  if(!G.stock[want.id]||G.stock[want.id]<=0){
+    // スタッフ軽減
+    if(G.staff.includes('helper')&&Math.random()<0.2){
+      logEv(`🔄 ${who}「${want.name}がないなら…イカにします」`,'info');
+      return;// 品切れだが帰らない
+    }
+    dayStats.missed++;
+    let repLoss=0.04;
+    if(G.staff.includes('cleaner')) repLoss*=0.7;
+    G.rep=Math.max(1.0,G.rep-repLoss);
+    logEv(`😞 ${who}「${want.name}が切れてる…」帰ってしまった`,'miss');
+    return;
+  }
+
+  // 価格チェック
+  const pr=G.price[want.id]||want.base;
+  const over=pr/want.base;
+  let chance=1.0;
+  if(over>1.0) chance=Math.max(0.1,1.0-(over-1.0)*1.5);
+  if(isVip) chance=Math.min(1.0,chance+0.15);
+
+  if(Math.random()>chance){
+    dayStats.missed++;
+    G.rep=Math.max(1.0,G.rep-0.02);
+    logEv(`💸 ${who}「${want.name}${yen(pr)}は高いな…」と帰っていった`,'miss');
+    return;
+  }
+
+  // 販売
+  const sell=Math.min(qty,G.stock[want.id]);
+  G.stock[want.id]-=sell;
+  let amount=pr*sell;
+
+  // 日本酒
+  const sakeRate=G.staff.includes('cashier')?0.5:0.25;
+  if(G.upgrades.includes('sake')&&Math.random()<sakeRate){
+    amount+=500;
+    if(!isVip) logEv(`🍶 ${who} 日本酒も注文！（+¥500）`,'vip');
+  }
+
+  dayStats.revenue+=amount;
+  dayStats.served++;
+  dayStats.soldCount[want.id]=(dayStats.soldCount[want.id]||0)+sell;
+  G.sellHistory=G.sellHistory||{};
+  G.sellHistory[want.id]=(G.sellHistory[want.id]||0)+sell;
+  G.total++;
+  G.lifeEarnings=(G.lifeEarnings||0)+amount;
+
+  // 評判
+  let rg=0.025;
+  if(over<=0.95) rg+=0.015;
+  if(want.rank==='高級'||want.rank==='最高級') rg+=0.02;
+  if(G.upgrades.includes('noren')) rg*=1.4;
+  if(G.staff.includes('chef2')) rg*=1.2;
+  G.rep=Math.min(5.0,G.rep+rg);
+
+  if(isVip){
+    logEv(`👑 ${who}「${want.e}${want.name}×${sell}貫、最高！」${yen(amount)}`,'vip');
+  }else{
+    logEv(`🍣 ${who}→${want.e}${want.name}×${sell}貫 ${yen(amount)}`,'sale');
+  }
+  renderStatus();
+}
+
+function logEv(txt,cls){
+  const log=id$('shop-log');
+  const d=document.createElement('div');
+  d.className='ev '+cls;d.textContent=txt;
+  log.appendChild(d);log.scrollTop=log.scrollHeight;
+}
+
+/* ──────── 閉店・結果 ──────── */
+function closeShop(){
+  logEv('🌙 閉店しました。お疲れ様でした！','info');
+
+  // 廃棄
+  let waste=0;
+  NETA.forEach(n=>{
+    const left=G.stock[n.id]||0;
+    if(left>0){
+      if(G.upgrades.includes('fridge')){
+        const keep=Math.floor(left/2);
+        waste+=(left-keep)*n.cost;G.stock[n.id]=keep;
+      }else{
+        waste+=left*n.cost;G.stock[n.id]=0;
+      }
+    }
+  });
+  dayStats.waste=waste;
+
+  // スタッフ日給
+  let staffCost=0;
+  G.staff.forEach(id=>{const s=STAFF.find(x=>x.id===id);if(s)staffCost+=s.wage;});
+
+  const fixed=3000+(G.upgrades.includes('seats')?1500:0);
+  const total=dayStats.revenue-fixed-waste-staffCost;
+  G.money+=total;
+
+  id$('phase-open').classList.add('hidden');
+  id$('phase-result').classList.remove('hidden');
+
+  // ベストセラー
+  let best=null;
+  NETA.forEach(n=>{if(!best||dayStats.soldCount[n.id]>(dayStats.soldCount[best.id]||0))best=n;});
+
+  id$('result-grid').innerHTML=`
+    <div class="ri"><div class="rl">売上</div><div class="rv p">+${yen(dayStats.revenue)}</div></div>
+    <div class="ri"><div class="rl">固定費</div><div class="rv n">−${yen(fixed)}</div></div>
+    <div class="ri"><div class="rl">廃棄損失</div><div class="rv n">−${yen(waste)}</div></div>
+    <div class="ri"><div class="rl">スタッフ日給</div><div class="rv n">−${yen(staffCost)}</div></div>
+    <div class="ri"><div class="rl">接客数</div><div class="rv">${dayStats.served}人</div></div>
+    <div class="ri"><div class="rl">機会損失</div><div class="rv n">${dayStats.missed}人</div></div>
+  `;
+
+  let cmt;
+  if(total>20000) cmt=`🎉 大繁盛！純利益 ${yen(total)}。${best?best.e+best.name+'が大人気':''}！この調子で改装も検討しよう。`;
+  else if(total>8000) cmt=`😊 好調！純利益 ${yen(total)}。${best?'一番は'+best.e+best.name:''}。さらなる上積みを狙おう！`;
+  else if(total>0) cmt=`😐 かろうじて黒字（${yen(total)}）。価格と仕入れ量のバランスを調整しよう。`;
+  else cmt=`😨 赤字です（${yen(total)}）。廃棄を減らし、値段設定を見直そう！`;
+  if(dayStats.missed>=6) cmt+=' ⚠️ 品切れで帰客多数。人気ネタを増やして！';
+
+  id$('result-comment').textContent=cmt;
+
+  // 本日の売上ランキング
+  const soldArr=NETA.map(n=>({n,v:dayStats.soldCount[n.id]||0})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+  id$('sell-rank').innerHTML=soldArr.length
+    ?'<p style="font-size:11px;font-weight:700;color:#8a7a60;margin-bottom:6px">本日の販売ランキング</p>'
+      +soldArr.slice(0,5).map((x,i)=>`
+      <div class="rank-row">
+        <div class="rk-num">${['🥇','🥈','🥉','4','5'][i]}</div>
+        <span>${x.n.e}${x.n.name}</span>
+        <span style="margin-left:auto;font-weight:700">${x.v}貫 ${yen(x.v*G.price[x.n.id])}</span>
+      </div>`).join('')
+    :'';
+
+  G.day++;
+  // 季節更新（7日で1季節）
+  G.dayInSeason=(G.dayInSeason||0)+1;
+  if(G.dayInSeason>=7){G.dayInSeason=0;G.season=(G.season+1)%4;}
+  G._currentEvent=null;
+
+  sv();renderStatus();
+
+  // クリア判定
+  if(!G.cleared&&G.rep>=4.9&&G.total>=1000){
+    G.cleared=true;sv();
+    setTimeout(()=>{
+      id$('phase-result').classList.add('hidden');
+      id$('clear-score').textContent='累計売上 '+yen(G.lifeEarnings)+'！';
+      id$('phase-clear').classList.remove('hidden');
+    },600);
+    return;
+  }
+
+  // 倒産判定
+  const minBuy=Math.min(...NETA.filter(n=>!n.seasonal||n.season===G.season).map(n=>n.cost*5));
+  if(G.money<minBuy){
+    setTimeout(()=>{
+      id$('phase-result').classList.add('hidden');
+      id$('go-text').textContent=G.day-1+'日間営業。累計'+G.total+'人に寿司を握りました。';
+      id$('go-score').textContent='累計売上 '+yen(G.lifeEarnings||0);
+      id$('phase-go').classList.remove('hidden');
+    },600);
+  }
+}
+
+function nextDay(){
+  id$('phase-result').classList.add('hidden');
+  id$('phase-clear').classList.add('hidden');
+  id$('phase-buy').classList.remove('hidden');
+
+  // イベント表示
+  const evs=EVENTS[G.season];
+  if(evs&&G.dayInSeason===0){
+    const ev=evs[Math.floor(Math.random()*evs.length)];
+    G._currentEvent=ev;
+    const box=id$('event-box');
+    box.innerHTML=`<span style="font-size:22px">📣</span><div><b>${ev.title}</b><br>${ev.msg}</div>`;
+    box.classList.remove('hidden');
+  }else{
+    id$('event-box').classList.add('hidden');
+  }
+
+  sv();renderAll();
+  toast('☀️ '+G.day+'日目の朝！今日も頑張ろう！');
+}
+
+/* ──────── 起動 ──────── */
+ld();renderAll();
+</script>
+</body>
+</html>
