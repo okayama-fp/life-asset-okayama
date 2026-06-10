@@ -85,9 +85,14 @@ a{text-decoration:none;color:inherit}
 
 /* ── フィルター ── */
 .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-.ftab{padding:7px 16px;border-radius:99px;font-size:13px;font-weight:600;color:var(--ink3);background:var(--white);border:1.5px solid var(--bd);cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.ftab{padding:7px 16px;border-radius:99px;font-size:13px;font-weight:600;color:var(--ink3);background:var(--white);border:1.5px solid var(--bd);cursor:pointer;transition:all .15s;font-family:var(--sans);min-height:44px;display:inline-flex;align-items:center}
 .ftab:hover{border-color:var(--g);color:var(--g)}
 .ftab.on{background:var(--g);color:white;border-color:var(--g)}
+@media(max-width:640px){
+  .filter-row{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none;margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}
+  .filter-row::-webkit-scrollbar{display:none}
+  .ftab{flex-shrink:0}
+}
 
 /* ── 記事カード ── */
 .art-list{display:flex;flex-direction:column;gap:16px}
