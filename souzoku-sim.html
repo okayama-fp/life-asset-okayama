@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/souzoku-sim.html">
+<title>相続税シミュレーター｜基礎控除・配偶者軽減を考慮した概算計算｜ライフアセットオフィス</title>
+<meta name="description" content="家族構成と資産（不動産・金融資産・生命保険・負債）を入力するだけで相続税を概算。基礎控除・生命保険非課税枠・配偶者の税額軽減を自動考慮。対策案も表示。登録不要・無料。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="相続税シミュレーター｜基礎控除・配偶者軽減を考慮した概算計算">
+<meta property="og:description" content="家族構成と資産を入力するだけで相続税を概算。生命保険非課税枠・配偶者軽減も自動考慮し、対策案を表示します。">
+<meta property="og:url" content="https://lifeassetoffice.net/souzoku-sim.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
+  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
+  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+  --red: #dc2626; --redl: #fff1f2;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
+.hero { position:relative;overflow:hidden;background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
+.hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
+.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
+.main { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
+.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+.preset-label { font-size: 12px; font-weight: 700; color: var(--text-light); }
+.preset-btn { padding: 8px 16px; border-radius: 50px; border: 1.5px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; font-family: inherit; transition: all .2s; }
+.preset-btn:hover, .preset-btn.active { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
+.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.field { margin-bottom: 20px; }
+.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
+.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
+.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
+.seg-row { display: flex; gap: 8px; }
+.seg-btn { flex: 1; padding: 9px 8px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; font-size: 12.5px; font-weight: 700; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; }
+.seg-btn.active { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
+.seg-note { font-size: 10.5px; color: var(--text-light); margin-top: 4px; }
+.result-panel { position: sticky; top: 76px; display: flex; flex-direction: column; gap: 16px; }
+@media(max-width:700px){ .result-panel { position: static; } }
+.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+.result-header { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); padding: 22px 24px; }
+.result-header-label { font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: .1em; margin-bottom: 6px; }
+.result-total { font-size: clamp(28px,5vw,40px); font-weight: 900; color: #fff; line-height: 1.1; }
+.result-total span { font-size: 16px; font-weight: 400; opacity: .75; }
+.result-mult-badge { display: inline-block; background: #4ade80; color: #1a3d2b; font-size: 12px; font-weight: 900; padding: 3px 12px; border-radius: 20px; margin-top: 10px; }
+.result-body { padding: 20px 24px; }
+.result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.result-row:last-child { border-bottom: none; }
+.result-k { font-size: 12.5px; color: var(--text-light); }
+.result-v { font-size: 16px; font-weight: 700; color: var(--navy); }
+.result-v.gain { color: var(--sky); }
+.result-v.minus { color: #dc2626; }
+.chart-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+.chart-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.bd-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
+.bd-seg { height: 100%; transition: width .3s; min-width: 0; }
+.bd-seg.fudosan { background: #1a7a4a; }
+.bd-seg.kinyu   { background: #0ea5e9; }
+.bd-seg.hoken   { background: #8b5cf6; }
+.bd-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+.bd-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text); }
+.bd-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.bd-amt { margin-left: auto; font-weight: 700; color: var(--navy); white-space: nowrap; }
+.advice-card { margin: 24px 0 0; padding: 20px 22px; border-radius: 14px; font-size: 14px; line-height: 1.8; transition: all .3s; }
+.advice-card.default { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.advice-card.warn    { background: #fffbeb; border: 1.5px solid #fde68a; }
+.advice-title { font-size: 13px; font-weight: 800; letter-spacing: .05em; margin-bottom: 8px; }
+.advice-card.default .advice-title { color: #15803d; }
+.advice-card.warn .advice-title { color: #92400e; }
+.advice-steps { list-style: none; margin-top: 8px; }
+.advice-steps li { padding: 4px 0 4px 20px; position: relative; font-size: 13.5px; }
+.advice-steps li::before { content: '▶'; position: absolute; left: 0; font-size: 9px; top: 7px; opacity: .7; }
+.quick-table-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: 0 2px 12px rgba(0,0,0,.05); margin-top: 28px; }
+.quick-table-card h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.quick-table-note { font-size: 11.5px; color: var(--text-light); margin-bottom: 12px; }
+.quick-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.quick-table th { background: var(--sky-pale); color: var(--navy); padding: 8px 6px; text-align: center; font-size: 11.5px; }
+.quick-table td { padding: 7px 6px; border-bottom: 1px solid var(--border); text-align: center; }
+.quick-table tr:last-child td { border-bottom: none; }
+@media(max-width:520px){ .quick-table { font-size: 11px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
+.fp-section { margin-top: 40px; }
+.fp-section-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
+.fp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.fp-card p { font-size: 12.5px; color: var(--text-light); line-height: 1.75; }
+.warn-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
+.sim-cta { background: linear-gradient(135deg,var(--navy),var(--navy-soft)); border-radius: 16px; padding: 32px; text-align: center; margin-top: 28px; }
+.sim-cta h3 { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.sim-cta p { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 20px; }
+.sim-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.btn-sim-contact { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(90deg,var(--sky),var(--sky-light)); color: #fff; font-size: 14px; font-weight: 800; padding: 13px 28px; border-radius: 50px; transition: transform .2s, opacity .2s; }
+.btn-sim-contact:hover { transform: translateY(-2px); opacity: .9; }
+.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
+.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
+.util-btn:hover { border-color:var(--sky); color:var(--sky); }
+.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
+.util-btn.x-share:hover { opacity:.8; }
+.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-toast.show { opacity:1; transform:none; }
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+footer a { color: #22c55e; }
+@media (max-width:480px){
+  input[type=range]{height:6px!important;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--sky);box-shadow:0 2px 8px rgba(0,0,0,.25);border:3px solid #fff;cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--sky);box-shadow:0 2px 8px rgba(0,0,0,.25);border:3px solid #fff;cursor:pointer}
+  button,.preset-btn,.seg-btn{min-height:44px!important}
+  .hero{padding:32px 16px 24px!important}
+  .bd-legend{grid-template-columns:1fr!important}
+  .fp-grid{grid-template-columns:1fr!important}
+}
+</style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="service/">サービス</a>
+      <a href="simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
+  <h1>相続税シミュレーター</h1>
+  <p class="hero-lead">家族構成と資産（不動産・金融資産・生命保険・負債）を入力するだけ。基礎控除・生命保険非課税枠・配偶者の税額軽減を自動で考慮し、相続税を概算します。</p>
+  <div class="hero-badges">
+    <span class="hero-tag">基礎控除を自動計算</span>
+    <span class="hero-tag">配偶者軽減を考慮</span>
+    <span class="hero-tag">対策案つき</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="util-bar">
+    <button class="util-btn" onclick="copyShareUrl()">🔗 条件入りURLをコピー</button>
+    <button class="util-btn x-share" onclick="shareX()">𝕏 結果をシェア</button>
+    <button class="util-btn" onclick="window.print()">🖨 印刷</button>
+  </div>
+
+  <div class="preset-row">
+    <span class="preset-label">かんたんプリセット：</span>
+    <button class="preset-btn" onclick="applyPreset(1,2,3000,2000,1000,0,this)">配偶者＋子2人・自宅あり</button>
+    <button class="preset-btn" onclick="applyPreset(1,1,5000,5000,2000,500,this)">配偶者＋子1人・資産1億</button>
+    <button class="preset-btn" onclick="applyPreset(0,2,4000,3000,0,0,this)">子2人のみ（二次相続）</button>
+  </div>
+
+  <div class="tool-grid">
+
+    <div class="input-panel">
+      <h2>👨‍👩‍👧‍👦 家族構成と資産を入力</h2>
+
+      <div class="field">
+        <div class="field-label"><span>配偶者</span></div>
+        <div class="seg-row">
+          <button class="seg-btn active" id="sp1" onclick="setSpouse(1)">いる</button>
+          <button class="seg-btn" id="sp0" onclick="setSpouse(0)">いない</button>
+        </div>
+        <div class="seg-note">※配偶者は法定相続分（または1.6億円）まで相続税がかかりません</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>子どもの人数</span><span class="field-val"><span id="v-kids">2</span>人</span></div>
+        <input type="range" id="in-kids" min="0" max="5" step="1" value="2" oninput="calc()">
+        <div class="field-ticks"><span>0人</span><span>5人</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>不動産評価額（自宅・土地など）</span><span class="field-val"><span id="v-fudosan">3,000</span>万円</span></div>
+        <input type="range" id="in-fudosan" min="0" max="20000" step="100" value="3000" oninput="calc()">
+        <div class="field-ticks"><span>0</span><span>2億円</span></div>
+        <div class="seg-note">※相続税評価額（固定資産税評価額や路線価ベース。時価の7〜8割が目安）</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>金融資産（預貯金・株式・投信）</span><span class="field-val"><span id="v-kinyu">2,000</span>万円</span></div>
+        <input type="range" id="in-kinyu" min="0" max="20000" step="100" value="2000" oninput="calc()">
+        <div class="field-ticks"><span>0</span><span>2億円</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>死亡保険金（生命保険）</span><span class="field-val"><span id="v-hoken">1,000</span>万円</span></div>
+        <input type="range" id="in-hoken" min="0" max="10000" step="100" value="1000" oninput="calc()">
+        <div class="field-ticks"><span>0</span><span>1億円</span></div>
+        <div class="seg-note">※契約者・被保険者＝被相続人、受取人＝相続人の契約を想定（500万円×法定相続人が非課税）</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>負債・葬式費用</span><span class="field-val"><span id="v-fusai">0</span>万円</span></div>
+        <input type="range" id="in-fusai" min="0" max="10000" step="100" value="0" oninput="calc()">
+        <div class="field-ticks"><span>0</span><span>1億円</span></div>
+      </div>
+    </div>
+
+    <div class="result-panel">
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-header-label">相続税の概算（配偶者軽減 適用後）</div>
+          <div class="result-total"><span id="r-total">0</span><span> 万円</span></div>
+          <div class="result-mult-badge" id="r-badge">基礎控除内なら申告不要の場合も</div>
+        </div>
+        <div class="result-body">
+          <div class="result-row"><span class="result-k">課税価格の合計</span><span class="result-v" id="r-kazei">0万円</span></div>
+          <div class="result-row"><span class="result-k">基礎控除額（3,000万＋600万×法定相続人）</span><span class="result-v gain" id="r-kojo">4,800万円</span></div>
+          <div class="result-row"><span class="result-k">生命保険の非課税枠（500万×法定相続人）</span><span class="result-v gain" id="r-hokenwaku">1,500万円</span></div>
+          <div class="result-row"><span class="result-k">課税遺産総額</span><span class="result-v" id="r-isan">0万円</span></div>
+          <div class="result-row"><span class="result-k">相続税の総額（軽減前）</span><span class="result-v" id="r-zeisogaku">0万円</span></div>
+          <div class="result-row"><span class="result-k">配偶者の税額軽減による減額</span><span class="result-v gain" id="r-keigen">−0万円</span></div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">📊 遺産の内訳</div>
+        <div class="bd-bar">
+          <div class="bd-seg fudosan" id="bar-fudosan" style="width:50%"></div>
+          <div class="bd-seg kinyu" id="bar-kinyu" style="width:33%"></div>
+          <div class="bd-seg hoken" id="bar-hoken" style="width:17%"></div>
+        </div>
+        <div class="bd-legend">
+          <div class="bd-item"><span class="bd-dot" style="background:#1a7a4a"></span>不動産<span class="bd-amt" id="amt-fudosan">3,000万</span></div>
+          <div class="bd-item"><span class="bd-dot" style="background:#0ea5e9"></span>金融資産<span class="bd-amt" id="amt-kinyu">2,000万</span></div>
+          <div class="bd-item"><span class="bd-dot" style="background:#8b5cf6"></span>生命保険<span class="bd-amt" id="amt-hoken">1,000万</span></div>
+        </div>
+      </div>
+
+      <div class="advice-card default" id="advice-card">
+        <div class="advice-title" id="advice-title">💡 FPからのワンポイント</div>
+        <div id="advice-body">入力値を変更すると、状況に応じた対策案を表示します。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-table-card">
+    <h3>📋 遺産総額別の相続税 早見表</h3>
+    <div class="quick-table-note">配偶者＋子2人で法定相続分どおりに分割し、配偶者の税額軽減を適用した場合の概算（生命保険非課税枠などは未考慮）</div>
+    <table class="quick-table">
+      <thead><tr><th>遺産総額</th><th>相続税の総額（軽減前）</th><th>配偶者軽減 適用後</th></tr></thead>
+      <tbody>
+        <tr><td>5,000万円</td><td>20万円</td><td>10万円</td></tr>
+        <tr><td>8,000万円</td><td>350万円</td><td>175万円</td></tr>
+        <tr><td>1億円</td><td>630万円</td><td>315万円</td></tr>
+        <tr><td>1.5億円</td><td>1,495万円</td><td>748万円</td></tr>
+        <tr><td>2億円</td><td>2,700万円</td><td>1,350万円</td></tr>
+        <tr><td>3億円</td><td>5,720万円</td><td>2,860万円</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fp-section">
+    <div class="fp-section-title">🎓 相続税対策の基本（FP解説）</div>
+    <div class="fp-grid">
+      <div class="fp-card">
+        <div class="fp-card-title">🎁 暦年贈与（年110万円）</div>
+        <p>1人あたり年110万円までの贈与は贈与税がかかりません。子・孫へ計画的に贈与することで相続財産を圧縮できます。相続開始前7年以内の贈与は持ち戻しの対象になる点に注意。</p>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🛡 生命保険の非課税枠</div>
+        <p>死亡保険金は「500万円×法定相続人」まで非課税。預貯金のままだと全額課税対象ですが、終身保険に組み替えると非課税枠を活用でき、納税資金の準備にもなります。</p>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">🏠 小規模宅地等の特例</div>
+        <p>同居親族などが自宅を相続する場合、土地の評価額を最大80％減額（330㎡まで）できる特例です。適用には申告が必要で要件も細かいため、税理士への確認をおすすめします。</p>
+      </div>
+      <div class="fp-card">
+        <div class="fp-card-title">⚖️ 二次相続まで見据えた分割</div>
+        <p>配偶者軽減を最大限使うと一次相続の税額は減りますが、二次相続（配偶者が亡くなった時）で税負担が重くなることがあります。トータルでの最適化が重要です。</p>
+      </div>
+    </div>
+    <div class="warn-box">⚠️ 本シミュレーターは法定相続分どおりに分割した場合の簡易概算です。小規模宅地等の特例・障害者控除・未成年者控除・相次相続控除などは考慮していません。実際の申告・対策は税理士等の専門家にご相談ください。</div>
+  </div>
+
+  <div class="sim-cta">
+    <h3>相続対策は「早く始めるほど」選択肢が増えます</h3>
+    <p>暦年贈与・保険の組み替え・不動産の評価——状況に応じた進め方を一緒に整理しませんか？</p>
+    <div class="sim-cta-btns">
+      <a href="contact.html" class="btn-sim-contact">📩 無料で相談してみる</a>
+    </div>
+  </div>
+
+</div>
+
+<div style="max-width:920px;margin:0 auto 20px;padding:0 20px"><div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。税務の個別アドバイスを提供するものではありません。実際の相続税申告・対策は税理士にご相談ください。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。</div></div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+</footer>
+
+<div class="util-toast" id="toast"></div>
+
+<script>
+window.addEventListener('scroll', function(){
+  var el = document.documentElement;
+  document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
+});
+
+var spouse = 1;
+
+function setSpouse(v){
+  spouse = v;
+  document.getElementById('sp1').classList.toggle('active', v===1);
+  document.getElementById('sp0').classList.toggle('active', v===0);
+  calc();
+}
+
+function fmt(n){ return Math.round(n).toLocaleString('ja-JP'); }
+
+// 相続税速算表（取得金額: 万円）
+function taxOn(man){
+  if(man<=0) return 0;
+  if(man<=1000)  return man*0.10;
+  if(man<=3000)  return man*0.15-50;
+  if(man<=5000)  return man*0.20-200;
+  if(man<=10000) return man*0.30-700;
+  if(man<=20000) return man*0.40-1700;
+  if(man<=30000) return man*0.45-2700;
+  if(man<=60000) return man*0.50-4200;
+  return man*0.55-7200;
+}
+
+function calc(){
+  var kids    = +document.getElementById('in-kids').value;
+  var fudosan = +document.getElementById('in-fudosan').value;
+  var kinyu   = +document.getElementById('in-kinyu').value;
+  var hoken   = +document.getElementById('in-hoken').value;
+  var fusai   = +document.getElementById('in-fusai').value;
+
+  document.getElementById('v-kids').textContent = kids;
+  document.getElementById('v-fudosan').textContent = fmt(fudosan);
+  document.getElementById('v-kinyu').textContent = fmt(kinyu);
+  document.getElementById('v-hoken').textContent = fmt(hoken);
+  document.getElementById('v-fusai').textContent = fmt(fusai);
+
+  // 法定相続人数（配偶者＋子。子0で配偶者のみの場合は1人として簡略化）
+  var heirs = spouse + kids;
+  if(heirs===0){ heirs = 1; }
+
+  // 生命保険非課税枠
+  var hokenWaku = 500 * heirs;
+  var hokenKazei = Math.max(0, hoken - hokenWaku);
+
+  // 課税価格
+  var kazei = Math.max(0, fudosan + kinyu + hokenKazei - fusai);
+
+  // 基礎控除
+  var kojo = 3000 + 600 * heirs;
+  var isan = Math.max(0, kazei - kojo);
+
+  // 法定相続分で按分して税額計算
+  var zeiSogaku = 0;
+  if(isan > 0){
+    if(spouse===1 && kids>0){
+      var spShare = isan/2;
+      zeiSogaku += taxOn(spShare);
+      for(var i=0;i<kids;i++) zeiSogaku += taxOn(isan/2/kids);
+    } else if(spouse===1 && kids===0){
+      zeiSogaku += taxOn(isan);
+    } else if(kids>0){
+      for(var j=0;j<kids;j++) zeiSogaku += taxOn(isan/kids);
+    } else {
+      zeiSogaku += taxOn(isan);
+    }
+  }
+
+  // 配偶者の税額軽減：法定相続分どおり取得なら配偶者分は非課税
+  var keigen = 0;
+  if(spouse===1 && zeiSogaku>0){
+    keigen = (kids>0) ? zeiSogaku/2 : zeiSogaku;
+  }
+  var total = Math.max(0, zeiSogaku - keigen);
+
+  document.getElementById('r-total').textContent = fmt(total);
+  document.getElementById('r-kazei').textContent = fmt(kazei)+'万円';
+  document.getElementById('r-kojo').textContent = fmt(kojo)+'万円';
+  document.getElementById('r-hokenwaku').textContent = fmt(hokenWaku)+'万円';
+  document.getElementById('r-isan').textContent = fmt(isan)+'万円';
+  document.getElementById('r-zeisogaku').textContent = fmt(zeiSogaku)+'万円';
+  document.getElementById('r-keigen').textContent = '−'+fmt(keigen)+'万円';
+
+  var badge = document.getElementById('r-badge');
+  if(isan<=0){
+    badge.textContent = '✅ 基礎控除の範囲内（相続税ゼロの見込み）';
+  } else {
+    badge.textContent = '課税遺産総額 '+fmt(isan)+'万円に課税';
+  }
+
+  // 内訳バー
+  var gross = fudosan + kinyu + hoken;
+  var bf = gross>0 ? fudosan/gross*100 : 0;
+  var bk = gross>0 ? kinyu/gross*100 : 0;
+  var bh = gross>0 ? hoken/gross*100 : 0;
+  document.getElementById('bar-fudosan').style.width = bf+'%';
+  document.getElementById('bar-kinyu').style.width = bk+'%';
+  document.getElementById('bar-hoken').style.width = bh+'%';
+  document.getElementById('amt-fudosan').textContent = fmt(fudosan)+'万';
+  document.getElementById('amt-kinyu').textContent = fmt(kinyu)+'万';
+  document.getElementById('amt-hoken').textContent = fmt(hoken)+'万';
+
+  // アドバイス
+  var card = document.getElementById('advice-card');
+  var title = document.getElementById('advice-title');
+  var body = document.getElementById('advice-body');
+  var tips = [];
+  if(isan<=0){
+    card.className = 'advice-card default';
+    title.textContent = '✅ 現状は基礎控除の範囲内です';
+    tips.push('現在の資産構成なら相続税はかからない見込みです（基礎控除 '+fmt(kojo)+'万円）。');
+    if(hoken===0 && kinyu>=1000) tips.push('預貯金の一部を終身保険（非課税枠 '+fmt(hokenWaku)+'万円）に組み替えると、将来の資産増加にも備えられます。');
+    tips.push('不動産の評価額が上がったり金融資産が増えると課税対象になる可能性があるため、数年ごとの見直しをおすすめします。');
+  } else {
+    card.className = 'advice-card warn';
+    title.textContent = '⚠️ 相続税の課税が見込まれます（対策の余地あり）';
+    var nokoriWaku = Math.max(0, hokenWaku - hoken);
+    if(nokoriWaku>0 && kinyu>=nokoriWaku) tips.push('生命保険の非課税枠が '+fmt(nokoriWaku)+'万円残っています。預貯金を終身保険へ組み替えると課税価格を圧縮できます。');
+    tips.push('暦年贈与（年110万円×相続人'+heirs+'人＝年'+fmt(110*heirs)+'万円）を10年続けると約'+fmt(110*heirs*10)+'万円の財産移転が可能です。');
+    if(fudosan>=2000) tips.push('自宅に同居親族が住み続ける場合、小規模宅地等の特例で土地評価を最大80％減額できる可能性があります（税理士に要確認）。');
+    if(spouse===1) tips.push('配偶者軽減を最大限使うと一次相続は有利ですが、二次相続の税額が増えることがあります。トータルで設計しましょう。');
+  }
+  body.innerHTML = '<ul class="advice-steps">' + tips.map(function(t){return '<li>'+t+'</li>';}).join('') + '</ul>';
+}
+
+function applyPreset(sp,kids,fudosan,kinyu,hoken,fusai,btn){
+  setSpouse(sp);
+  document.getElementById('in-kids').value = kids;
+  document.getElementById('in-fudosan').value = fudosan;
+  document.getElementById('in-kinyu').value = kinyu;
+  document.getElementById('in-hoken').value = hoken;
+  document.getElementById('in-fusai').value = fusai;
+  document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn) btn.classList.add('active');
+  calc();
+}
+
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+function buildShareUrl(){
+  var p = new URLSearchParams();
+  p.set('sp', spouse);
+  p.set('k', document.getElementById('in-kids').value);
+  p.set('f', document.getElementById('in-fudosan').value);
+  p.set('m', document.getElementById('in-kinyu').value);
+  p.set('h', document.getElementById('in-hoken').value);
+  p.set('d', document.getElementById('in-fusai').value);
+  return location.origin + location.pathname + '?' + p.toString();
+}
+
+function copyShareUrl(){
+  var url = buildShareUrl();
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ showToast('🔗 URLをコピーしました'); }); }
+}
+
+function shareX(){
+  var total = document.getElementById('r-total').textContent;
+  var text = '相続税シミュレーターで概算したら ' + total + '万円 でした。\n基礎控除・配偶者軽減も自動計算 ↓\n';
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://lifeassetoffice.net/souzoku-sim.html'), '_blank', 'noopener');
+}
+
+// URLパラメータ復元
+(function(){
+  var q = new URLSearchParams(location.search);
+  function clampInt(v, min, max, def){
+    var n = parseInt(v, 10);
+    if(isNaN(n)) return def;
+    return Math.min(max, Math.max(min, n));
+  }
+  if(q.has('sp')) spouse = clampInt(q.get('sp'),0,1,1);
+  document.getElementById('sp1').classList.toggle('active', spouse===1);
+  document.getElementById('sp0').classList.toggle('active', spouse===0);
+  if(q.has('k')) document.getElementById('in-kids').value = clampInt(q.get('k'),0,5,2);
+  if(q.has('f')) document.getElementById('in-fudosan').value = clampInt(q.get('f'),0,20000,3000);
+  if(q.has('m')) document.getElementById('in-kinyu').value = clampInt(q.get('m'),0,20000,2000);
+  if(q.has('h')) document.getElementById('in-hoken').value = clampInt(q.get('h'),0,10000,1000);
+  if(q.has('d')) document.getElementById('in-fusai').value = clampInt(q.get('d'),0,10000,0);
+  calc();
+})();
+
+// 最近見たシミュレーター
+(function(){
+  try {
+    var k = 'la_sim_recent', u = location.pathname, n = '相続税シミュレーター';
+    var arr = JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){return x.u!==u;});
+    arr.unshift({u:u,n:n,t:Date.now()});
+    localStorage.setItem(k, JSON.stringify(arr.slice(0,5)));
+  } catch(e){}
+})();
+</script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

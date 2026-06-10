@@ -61,37 +61,34 @@
 
 ---
 
-## ページ構成（gh-pages）
+## ページ構成（gh-pages・2026-06-10時点）
 
 | ファイル | 内容 |
 |----------|------|
 | `index.html` | トップページ |
-| `future-plans.html` | ライフプランニング |
-| `simulation.html` | 資産シミュレーター |
-| `advisor.html` | アドバイザー業務（老後・相続・保険） |
-| `loan.html` | 融資シミュレーター |
-| `muscat.html` | 別サービス：極上マスカット農園 |
+| `simulation.html` | シミュレーター一覧（12ツール） |
+| `lifeplan.html` | ライフプラン表シミュレーター |
+| `couples-sim.html` | 夫婦の家計シミュレーター |
+| `asset-sim.html` / `fire-sim.html` / `nisa-ideco-sim.html` | 資産運用系 |
+| `retirement-gap.html` / `education-sim.html` | 老後・教育費 |
+| `loan-check.html` / `loan-refinance.html` / `prepayment-sim.html` | 住宅ローン系 |
+| `furusato-sim.html` / `souzoku-sim.html` | 税金系（ふるさと納税・相続税） |
+| `tedori-sim.html` | 手取り計算 |
+| `insurance-check.html` | 保険チェック |
+| `blog/` | ブログ（post-411〜556＋index.html） |
+| `blog-*.html` | ルート直下の特集記事5本 |
+| `contact.html` / `privacy.html` | お問い合わせ・プライバシーポリシー |
+| `js/cookie-consent.js` | Cookie同意バナー（GA4/AdSenseは同意後のみ読込） |
+| `sitemap.xml` | サイトマップ（新ページ追加時に必ず更新） |
 | `images/` | ローカル画像フォルダ |
 
 ---
 
-## オープンPR一覧（2026-05-02時点）
+## PR運用（2026-06-10時点）
 
-| PR# | タイトル | 優先度 | 状態 |
-|-----|----------|--------|------|
-| #14 | 外部画像URLをローカルフォルダパスに変更 | 高 | Draft |
-| #13 | ライフアセットオフィスへリブランド | 高 | Open |
-| #12 | ホームページ完成（お客様の声・相談の流れ・フォーム追加） | 中 | Open |
-| #10 | CLAUDE.md追加（役割ベースセッション） | 低 | Draft |
-| #9 | Buffalo HDD 自動修復スクリプト | 低 | Draft |
-| #8 | 写真・動画 自動整理スクリプト | 低 | Draft |
-| #7 | Cloudflare APIトークン無効化スクリプト | 低 | Open |
-| #6 | ConoHa → Cloudflare 移行スクリプト | 低 | Draft |
-| #5 | ライフアセットオフィス ホームページ完成版 | 低 | Draft |
-| #4 | フッターを削除 | 低 | Draft |
-| #3 | Revert プロフィールタグ | 低 | Draft |
-| #2 | 株・経済ニュース自動取得 | 低 | Draft |
-| #1 | ファミリーアセットデザイン完成版 | 低 | Draft |
+- 旧PR #1〜14 はすべてクローズ・マージ済み
+- 現在は作業ブランチ `claude/change-default-to-local-Rlmws` → `gh-pages` へのsquashマージで運用
+- マージ後は必ず `git fetch origin gh-pages && git merge origin/gh-pages` でブランチを同期する
 
 ---
 
@@ -175,9 +172,8 @@
 
 ---
 
-## 次のアクション（私が把握している課題）
+## 次のアクション（2026-06-10時点）
 
-- [ ] `images/` フォルダに実際の画像ファイルを配置（ユーザー作業）
-- [ ] PR #14 をレビュー → `gh-pages` へマージ
-- [ ] PR #13 の内容を確認して整理
-- [ ] 古いDraft PRの整理（クローズ検討）
+- [ ] 相続税の個別試算・資産承継プラン（ユーザーから家族構成・資産一覧の提供待ち。汎用版は `souzoku-sim.html` で公開済み）
+- [ ] AdSense審査状況の確認（ユーザー作業）
+- [ ] ブログ記事の定期追加（post-557以降。テンプレート規約に従うこと）
