@@ -32,7 +32,7 @@
   --green:#1a6b3c;--green-dark:#0f4d2a;--green-light:#2d8a52;--green-pale:#e8f5ee;--green-mid:#c8e6d4;
   --red:#c0392b;--red-pale:#fdecea;--yellow:#d4820a;--yellow-pale:#fef6e4;
   --blue:#1a4fa0;--blue-pale:#e8f0fb;
-  --sky:#0ea5e9;--navy:#0f3460;
+  --sky:#1a7a4a;--navy:#1a3d2b;
   --ink:#0d0d0d;--gray:#6b7280;--border:#e5e7eb;--bg:#f8faf7;--white:#fff;
   --shadow:0 4px 24px rgba(0,0,0,.08);--radius:14px;
 }
@@ -204,6 +204,8 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <a href="/" class="nav-logo">ライフアセットオフィス<span>あなたの未来に、確かな安心と成長を。</span></a>
   <div class="nav-actions">
     <a href="simulation.html" class="nav-home">← シミュレーター一覧</a>
+    <a href="blog/" class="nav-home">ブログ</a>
+    <a href="contact.html" class="nav-home">お問い合わせ</a>
     <button class="nav-btn save" onclick="saveData()">データ保存</button>
     <label class="nav-btn load" style="cursor:pointer">読み込む<input type="file" id="load-file" accept=".json" style="display:none" onchange="loadData(event)"></label>
     <button class="nav-btn csv" onclick="downloadCSV()" id="btn-csv" style="display:none">CSV</button>
@@ -1368,7 +1370,7 @@ function calcTH(){
     if(!r)return '';
     const low=r.g<=1030000;
     const warn=r.g<=1300000&&r.g>1030000;
-    return `<div style="background:#fff;border:1px solid #e0f2fe;border-radius:10px;padding:14px 16px;margin-bottom:12px">
+    return `<div style="background:#fff;border:1px solid #c8e6d4;border-radius:10px;padding:14px 16px;margin-bottom:12px">
       <div style="font-weight:700;font-size:13px;margin-bottom:10px;color:var(--navy)">${title}</div>
       ${row('税込年収',r.g,'color:#555')}
       ${row('社会保険料',-r.shakai,'color:#f59e0b')}
@@ -1396,5 +1398,6 @@ function applyTH(who,val){
   showToast('✅ 手取り'+val+'万円を入力しました');
 }
 </script>
+<footer style="text-align:center;padding:28px 16px;font-size:12px;color:#64748b;">© 2026 ライフアセットオフィス｜<a href="privacy.html" style="color:inherit;">プライバシーポリシー</a>｜<a href="contact.html" style="color:inherit;">お問い合わせ</a></footer>
 </body>
 </html>
