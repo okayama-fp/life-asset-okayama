@@ -12,7 +12,7 @@
 <title>ライフアセットオフィス｜住宅ローン・資産運用・老後資金 FP情報サイト</title>
 <meta name="description" content="FP技能士が運営する中立な情報サイト。住宅ローン金利リスク診断・老後資金・NISA/iDeCo・ふるさと納税など複数のシミュレーターと最新FPブログ記事を公開中。登録不要・無料。">
 <meta property="og:title" content="ライフアセットオフィス｜住宅ローン・資産運用・老後資金 FP情報サイト">
-<meta property="og:description" content="登録不要のFPシミュレーター10種と最新記事28本。住宅ローン・資産運用・老後資金の不安を数字で解決。">
+<meta property="og:description" content="登録不要のFPシミュレーターと最新FP記事。住宅ローン・資産運用・老後資金の不安を数字で解決。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lifeassetoffice.net/">
 <meta property="og:site_name" content="ライフアセットオフィス">
@@ -250,8 +250,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
       </p>
 
       <div class="value-pills">
-        <div class="vpill">シミュレーター10種</div>
-        <div class="vpill">FPブログ28本</div>
+        <div class="vpill" id="pill-sim">シミュレーター14種</div>
+        <div class="vpill" id="pill-blog">FPブログ46本</div>
         <div class="vpill">登録不要</div>
         <div class="vpill">⚖️ 中立・売り込みなし</div>
       </div>
@@ -271,11 +271,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
 
       <div class="hero-stats">
         <div class="hstat">
-          <div class="hstat-num" data-count="10" data-suffix=""></div>
+          <div class="hstat-num" id="stat-sim" data-count="14" data-suffix=""></div>
           <div class="hstat-label">つのシミュレーター</div>
         </div>
         <div class="hstat">
-          <div class="hstat-num" data-count="28" data-suffix=""></div>
+          <div class="hstat-num" id="stat-blog" data-count="46" data-suffix=""></div>
           <div class="hstat-label">本のFP記事</div>
         </div>
         <div class="hstat">
@@ -347,7 +347,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
         </a>
       </div>
       <div class="panel-footer">
-        <a href="simulation.html">全10ツールを見る →</a>
+        <a href="simulation.html" id="all-tools-link">全14ツールを見る →</a>
       </div>
     </div>
   </div>
@@ -745,6 +745,32 @@ document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
       if(start>=target){el.textContent=target+suffix;clearInterval(timer);}
     },16);
   }
+  // ── 自動カウント：ページ内のカード数・sitemapの記事数から実数を反映 ──
+  var simCount = document.querySelectorAll('#tools .sim-card').length;
+  if(simCount > 0){
+    var statSim = document.getElementById('stat-sim');
+    if(statSim) statSim.dataset.count = simCount;
+    var pillSim = document.getElementById('pill-sim');
+    if(pillSim) pillSim.textContent = 'シミュレーター' + simCount + '種';
+    var allLink = document.getElementById('all-tools-link');
+    if(allLink) allLink.textContent = '全' + simCount + 'ツールを見る →';
+    var simTitle = document.querySelector('#tools .section-title');
+    if(simTitle) simTitle.textContent = simCount + 'のシミュレーター';
+  }
+  fetch('/sitemap.xml').then(function(r){ return r.text(); }).then(function(xml){
+    var m = xml.match(/lifeassetoffice\.net\/(blog\/post-|blog-)[^<]*</g);
+    if(!m || !m.length) return;
+    var blogCount = m.length;
+    var statBlog = document.getElementById('stat-blog');
+    if(statBlog){
+      statBlog.dataset.count = blogCount;
+      // 既にカウントアップ済みなら表示を直接更新
+      if(counted) statBlog.textContent = blogCount + (statBlog.dataset.suffix||'');
+    }
+    var pillBlog = document.getElementById('pill-blog');
+    if(pillBlog) pillBlog.textContent = 'FPブログ' + blogCount + '本';
+  }).catch(function(){});
+
   var counted=false;
   var statsObs=new IntersectionObserver(function(entries){
     if(counted||!entries[0].isIntersecting) return;
