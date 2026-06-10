@@ -118,6 +118,22 @@ a { color: inherit; text-decoration: none; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+
+/* ─── Utility bar ─── */
+.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
+.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
+.util-btn:hover { border-color:var(--sky); color:var(--sky); }
+.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
+.util-btn.x-share:hover { opacity:.8; }
+.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-toast.show { opacity:1; transform:none; }
+@media print {
+  header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,.cta-contact-box,footer,#pb { display:none!important; }
+  .tool-grid { grid-template-columns:1fr!important; }
+  .result-panel { position:static!important; }
+  body { background:#fff!important; }
+  .main { padding:8px 0!important; }
+}
 </style>
 </head>
 <body>
@@ -164,6 +180,12 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <button class="preset-btn" onclick="applyPreset('high')">高所得者</button>
     <button class="preset-btn" onclick="applyPreset('housewife')">専業主婦iDeCo</button>
   </div>
+  <div class="util-bar">
+    <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
+    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
+    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+  </div>
+  <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
     <div class="input-panel">
       <h2>あなたの情報を入力</h2>
@@ -407,6 +429,7 @@ function calc() {
     annualTaxSaving = monthly * 12 * taxRate(income);
   }
   updateAdvice(currentTab, diff, annualTaxSaving, income, years);
+  updateUrlParams({inc:sliders.income,m:sliders.monthly,y:sliders.years,r:sliders.rate,tab:currentTab});
   if(typeof gtag==='function'){
     gtag('event','simulate_nisa',{account_type:currentTab,monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',years:years,rate:rate,income_range:(Math.floor(income/100)*100)+'〜'+(Math.floor(income/100)*100+100)+'万'});
   }
@@ -556,7 +579,55 @@ window.addEventListener('scroll', function() {
   document.getElementById('pb').style.width = pct + '%';
 });
 
-calc();
+function buildShareUrl() {
+  var p=new URLSearchParams({inc:sliders.income,m:sliders.monthly,y:sliders.years,r:sliders.rate,tab:currentTab}); return location.origin+location.pathname+'?'+p.toString();
+}
+function updateUrlParams(vals) {
+  var p = new URLSearchParams(vals);
+  history.replaceState(null,'','?'+p.toString());
+}
+function loadFromUrl() {
+  var p=new URLSearchParams(location.search);
+  var map={inc:'sl-income',m:'sl-monthly',y:'sl-years',r:'sl-rate'};
+  var lmap={inc:'income',m:'monthly',y:'years',r:'rate'};
+  var any=false;
+  Object.keys(map).forEach(function(k){
+    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
+  });
+  if(p.has('tab')){setTab(p.get('tab'));}
+  return any;
+}
+function copySimUrl() {
+  var url = buildShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('URLをコピーしました！'); });
+  } else {
+    var ta=document.createElement('textarea'); ta.value=url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    showToast('URLをコピーしました！');
+  }
+}
+function showToast(msg) {
+  var t=document.getElementById('util-toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); },2500);
+}
+function printSim() { window.print(); }
+function shareX() {
+  var text='NISA・iDeCo節税メリットを計算しました！\n課税口座との差額: '+document.getElementById('r-diff').textContent+'\n積立'+sliders.monthly+'万円/月・'+sliders.years+'年・利回り'+sliders.rate+'%\n#ライフアセットオフィス #NISA #iDeCo';
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
+}
+(function(){
+  try {
+    var k='la_sim_recent',u=location.pathname,n='NISA・iDeCo節税メリット計算';
+    var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
+    a.unshift({u:u,n:n,ts:Date.now()});
+    localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
+  } catch(e) {}
+})();
+
+if(!loadFromUrl()) calc();
+else calc();
 </script>
 </body>
 </html>
