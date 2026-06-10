@@ -235,9 +235,34 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 @media (max-width: 520px) {
   .stat-row { gap: 20px; }
   .stat-num { font-size: 1.6rem; }
-  .cat-tabs { gap: 6px; }
-  .cat-tab { padding: 7px 14px; font-size: 12px; }
-  .flow-grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-tab { padding: 7px 14px; font-size: 12px; flex-shrink: 0; }
+  .flow-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .flow-card { padding: 14px 10px 12px; }
+  .flow-icon { font-size: 22px; }
+  .flow-title { font-size: 12px; }
+  .flow-sub { font-size: 10px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-card { padding: 18px 16px 14px; }
+  .main { padding: 28px 16px 60px; }
+  .hero { padding: 36px 16px 30px; }
+  .hero-lead { font-size: 13px; }
+  .cta-box { padding: 28px 18px; }
+}
+/* カテゴリタブ横スクロール */
+@media (max-width: 600px) {
+  .cat-tabs {
+    flex-wrap: nowrap; overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px; scrollbar-width: none;
+    margin-bottom: 20px;
+  }
+  .cat-tabs::-webkit-scrollbar { display: none; }
+}
+/* タッチターゲット */
+.cat-tab, .tool-link, .cta-btn { min-height: 44px; }
+@media (hover: none) {
+  .tool-card:hover { transform: none; box-shadow: 0 2px 12px rgba(0,0,0,.05); border-color: var(--border); }
+  .flow-card:hover { transform: none; box-shadow: 0 1px 6px rgba(0,0,0,.04); border-color: var(--border); }
 }
 </style>
 </head>
