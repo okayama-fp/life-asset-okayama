@@ -22,19 +22,30 @@
 
 ---
 
-## デザインシステム（最新版: gh-pages）
+## デザインシステム（最新版: gh-pages・緑系）
 
 ```css
---sky:       #0ea5e9   /* メインカラー（スカイブルー） */
---sky-light: #38bdf8
---sky-pale:  #e0f2fe
---navy:      #0f3460   /* テキスト・見出し */
---navy-soft: #1e4d8c
+--sky:       #1a7a4a   /* メインカラー（グリーン） */
+--sky-light: #22c55e
+--sky-pale:  #dcfce7
+--navy:      #1a3d2b   /* テキスト・見出し（濃緑） */
+--navy-soft: #1f5c40
 ```
 
-- フォント: Hiragino Kaku Gothic ProN / Noto Sans JP
-- ロゴ: グラデーション "Life Asset"（#4facfe → #00f2fe）
+- フォント: Hiragino Kaku Gothic ProN / Noto Sans JP（本文）、Noto Serif JP（見出し）
+- ロゴ: グラデーション "Life Asset"（#1a7a4a → #4ade80）
 - キャラクター: ライフアセットくん（`images/life-asset-kun.png`）
+
+### ブログ記事テンプレート規約（厳守）
+
+**今後のブログ記事はすべて `blog/post-542.html` のデザイン・構造に統一する。**
+
+- **CSSは記事内に埋め込む**（`<style>` ブロック）。`<!--STYLE-->` プレースホルダーを残さない
+- ベース: post-542 のスタイルブロック＋補完CSS（post-544〜555に適用済みのもの）
+- 使用クラス: `article-hero`（濃緑グラデーション）・`article-body`・`compare-table` または `table-wrap`・`callout`（info/safe/warning）・`stat-box`・`timeline`・`toc`・`summary-box`・`fp-comment`・`related-section`
+- 必須要素: canonical・OGP・Twitter Card・schema.org（Article + BreadcrumbList）・`/js/cookie-consent.js`・AI開示行（10px・#94a3b8）・免責欄・関連記事・フッター（プライバシーリンク付き）
+- タイトル形式: `[記事タイトル]｜ライフアセットオフィス`（60文字以内）
+- 新規記事追加時は `blog/index.html` のカード追加と `sitemap.xml` 登録も同時に行う
 
 ---
 

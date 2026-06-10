@@ -177,6 +177,53 @@
   .chat-topic{font-size:0.8rem;padding:8px 12px;min-height:40px}
   .btn-send{min-height:44px}
 }
+
+    /* ── 6/10記事用 補完スタイル（6/9デザイン準拠） ── */
+    .toc { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--sky); border-radius: 12px; padding: 20px 24px; margin: 24px 0 8px; }
+    .toc-title { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--sky); margin-bottom: 10px; }
+    .toc ol { padding-left: 20px; margin: 0; }
+    .toc li { font-size: 14px; color: var(--text); margin: 6px 0; line-height: 1.7; }
+    .toc a { color: var(--navy); }
+    .toc a:hover { color: var(--sky); text-decoration: underline; }
+
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0 28px; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: #fff; }
+    .table-wrap th { background: var(--navy); color: #fff; padding: 10px 14px; text-align: left; font-weight: 700; white-space: nowrap; }
+    .table-wrap td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.7; }
+    .table-wrap tr:nth-child(even) td { background: #f8fafc; }
+
+    .callout { border-radius: 12px; padding: 18px 20px; margin: 20px 0 28px; font-size: 14px; line-height: 1.85; }
+    .callout-info { background: var(--sky-pale); border: 1px solid #86efac; }
+    .callout-safe { background: var(--greenl); border: 1px solid var(--greenb); }
+    .callout-warning { background: var(--amberl); border: 1px solid var(--amberb); }
+    .callout strong { color: var(--navy); }
+
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 20px 0 28px; }
+    .stat-box { background: #fff; border: 1.5px solid var(--greenb); border-radius: 12px; padding: 18px 16px; text-align: center; }
+    .stat-label { font-size: 12px; color: var(--text-light); font-weight: 600; margin-bottom: 8px; line-height: 1.5; }
+    .stat-value { font-size: 1.6rem; font-weight: 900; color: var(--sky); font-family: 'Noto Serif JP', serif; }
+    .stat-sub { font-size: 11px; color: var(--text-light); margin-top: 6px; }
+
+    .timeline { margin: 20px 0 28px; }
+    .tl-item { display: flex; gap: 14px; margin-bottom: 18px; }
+    .tl-dot { width: 32px; height: 32px; border-radius: 50%; background: var(--sky); color: #fff; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .tl-body { flex: 1; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+    .tl-body h4 { font-size: 14.5px; font-weight: 700; color: var(--navy); margin: 0 0 6px; }
+    .tl-body p { font-size: 13.5px; margin: 0; line-height: 1.8; }
+
+    .tool-cta-box { background: linear-gradient(135deg, var(--greenl), #dcfce7); border: 1.5px solid #86efac; border-radius: 14px; padding: 22px 24px; margin: 28px 0; }
+    .cta-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .tool-cta-box p { font-size: 13.5px; margin-bottom: 12px; }
+    .tool-cta-box a { display: inline-block; background: var(--sky); color: #fff; font-size: 13.5px; font-weight: 700; padding: 9px 22px; border-radius: 22px; }
+
+    .risk-low { color: var(--green); font-weight: 700; }
+    .article-vol { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 3px 12px; font-size: 11px; font-weight: 700; }
+    .disclaimer { background: #f0f2f0; border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; font-size: 12px; color: #6a7a6e; line-height: 1.7; margin-top: 32px; }
+
+    @media(max-width:600px){
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .table-wrap table { font-size: 12px; }
+    }
 </style>
   <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">
