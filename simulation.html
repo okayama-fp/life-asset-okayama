@@ -10,9 +10,9 @@
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/simulation.html">
 <title>FPシミュレーター一覧｜ライフアセットオフィス</title>
-<meta name="description" content="資産・老後資金・NISA/iDeCo・ふるさと納税・住宅ローン・保険・FIRE・教育費など9つのFPシミュレーターが揃っています。登録不要でリアルタイム計算。">
+<meta name="description" content="資産・老後資金・NISA/iDeCo・ふるさと納税・住宅ローン・保険・FIRE・教育費・手取り計算・繰り上げ返済など11のFPシミュレーターが揃っています。登録不要でリアルタイム計算。">
 <meta property="og:title" content="FPシミュレーター一覧｜ライフアセットオフィス">
-<meta property="og:description" content="9つのFPシミュレーター。スライダーを動かすだけで即計算。登録不要。">
+<meta property="og:description" content="11のFPシミュレーター。スライダーを動かすだけで即計算。登録不要。">
 <meta property="og:url" content="https://lifeassetoffice.net/simulation.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
@@ -30,7 +30,7 @@
   --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
   --navy: #1a3d2b; --navy-soft: #1f5c40;
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
-  --c-asset: #0ea5e9; --c-tax: #f59e0b; --c-loan: #ef4444; --c-other: #8b5cf6;
+  --c-asset: #0ea5e9; --c-tax: #f59e0b; --c-loan: #ef4444; --c-other: #8b5cf6; --c-income: #10b981;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -89,7 +89,8 @@ a { color: inherit; text-decoration: none; }
 .cat-tab[data-cat="asset"].active { background: var(--c-asset); border-color: var(--c-asset); }
 .cat-tab[data-cat="tax"].active { background: var(--c-tax); border-color: var(--c-tax); }
 .cat-tab[data-cat="loan"].active { background: var(--c-loan); border-color: var(--c-loan); }
-.cat-tab[data-cat="other"].active { background: var(--c-other); border-color: var(--c-other); }
+.cat-tab[data-cat="other"].active  { background: var(--c-other);  border-color: var(--c-other); }
+.cat-tab[data-cat="income"].active { background: var(--c-income); border-color: var(--c-income); }
 
 /* ─── Tools grid ─── */
 .tools-grid {
@@ -117,10 +118,11 @@ a { color: inherit; text-decoration: none; }
   top: 0; left: 0; right: 0;
   height: 3px;
 }
-.tool-card[data-cat="asset"]::before { background: var(--c-asset); }
-.tool-card[data-cat="tax"]::before   { background: var(--c-tax); }
-.tool-card[data-cat="loan"]::before  { background: var(--c-loan); }
-.tool-card[data-cat="other"]::before { background: var(--c-other); }
+.tool-card[data-cat="asset"]::before  { background: var(--c-asset); }
+.tool-card[data-cat="tax"]::before    { background: var(--c-tax); }
+.tool-card[data-cat="loan"]::before   { background: var(--c-loan); }
+.tool-card[data-cat="other"]::before  { background: var(--c-other); }
+.tool-card[data-cat="income"]::before { background: var(--c-income); }
 
 .tool-card:hover {
   transform: translateY(-4px);
@@ -136,10 +138,11 @@ a { color: inherit; text-decoration: none; }
   font-size: 22px;
   flex-shrink: 0;
 }
-.tool-card[data-cat="asset"] .tool-icon { background: #e0f2fe; }
-.tool-card[data-cat="tax"]   .tool-icon { background: #fef3c7; }
-.tool-card[data-cat="loan"]  .tool-icon { background: #fee2e2; }
-.tool-card[data-cat="other"] .tool-icon { background: #ede9fe; }
+.tool-card[data-cat="asset"]  .tool-icon { background: #e0f2fe; }
+.tool-card[data-cat="tax"]    .tool-icon { background: #fef3c7; }
+.tool-card[data-cat="loan"]   .tool-icon { background: #fee2e2; }
+.tool-card[data-cat="other"]  .tool-icon { background: #ede9fe; }
+.tool-card[data-cat="income"] .tool-icon { background: #d1fae5; }
 
 .tool-header { display: flex; align-items: center; gap: 12px; }
 
@@ -159,10 +162,11 @@ a { color: inherit; text-decoration: none; }
   border-radius: 10px;
   margin-top: 3px;
 }
-.tool-card[data-cat="asset"] .tool-cat-badge { background: #e0f2fe; color: #0284c7; }
-.tool-card[data-cat="tax"]   .tool-cat-badge { background: #fef3c7; color: #d97706; }
-.tool-card[data-cat="loan"]  .tool-cat-badge { background: #fee2e2; color: #dc2626; }
-.tool-card[data-cat="other"] .tool-cat-badge { background: #ede9fe; color: #7c3aed; }
+.tool-card[data-cat="asset"]  .tool-cat-badge { background: #e0f2fe; color: #0284c7; }
+.tool-card[data-cat="tax"]    .tool-cat-badge { background: #fef3c7; color: #d97706; }
+.tool-card[data-cat="loan"]   .tool-cat-badge { background: #fee2e2; color: #dc2626; }
+.tool-card[data-cat="other"]  .tool-cat-badge { background: #ede9fe; color: #7c3aed; }
+.tool-card[data-cat="income"] .tool-cat-badge { background: #d1fae5; color: #059669; }
 
 .tool-desc {
   font-size: 12.5px;
@@ -314,7 +318,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   <p class="hero-lead">スライダーを動かすだけ。お金の疑問を今すぐ数字で確認。</p>
   <div class="stat-row">
     <div class="stat-item">
-      <div class="stat-num" data-count="9" data-suffix="">0</div>
+      <div class="stat-num" data-count="11" data-suffix="">0</div>
       <div class="stat-label">ツール</div>
     </div>
     <div class="stat-item">
@@ -389,6 +393,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
     <button class="cat-tab" data-cat="tax">税制優遇</button>
     <button class="cat-tab" data-cat="loan">住宅ローン</button>
     <button class="cat-tab" data-cat="other">保険・その他</button>
+    <button class="cat-tab" data-cat="income">家計・収入</button>
   </div>
 
   <div class="tools-grid" id="toolsGrid">
@@ -501,6 +506,30 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       <a class="tool-link" href="education-sim.html">使ってみる</a>
     </div>
 
+    <div class="tool-card" data-cat="income">
+      <div class="tool-header">
+        <div class="tool-icon">💴</div>
+        <div class="tool-meta">
+          <div class="tool-name">手取り計算シミュレーター</div>
+          <span class="tool-cat-badge">家計・収入</span>
+        </div>
+      </div>
+      <div class="tool-desc">額面年収から手取りを即計算。社会保険料・所得税・住民税の内訳も確認。年収帯別の手取り早見表つき。</div>
+      <a class="tool-link" href="tedori-sim.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="loan">
+      <div class="tool-header">
+        <div class="tool-icon">🏠</div>
+        <div class="tool-meta">
+          <div class="tool-name">繰り上げ返済シミュレーター</div>
+          <span class="tool-cat-badge">住宅ローン</span>
+        </div>
+      </div>
+      <div class="tool-desc">期間短縮型と返済額軽減型を比較。利息削減額をリアルタイムで計算し、最適な繰り上げ返済方法をアドバイスします。</div>
+      <a class="tool-link" href="prepayment-sim.html">使ってみる</a>
+    </div>
+
   </div>
 
   <div class="no-result-msg">🔍 該当するシミュレーターが見つかりませんでした。キーワードを変えて検索してください。</div>
@@ -588,7 +617,8 @@ function filterSims(query){
   var ICONS = {
     'asset-sim.html':'📈','retirement-gap.html':'🏖️','nisa-ideco-sim.html':'🎁',
     'furusato-sim.html':'🗾','loan-check.html':'🔍','loan-refinance.html':'🏠',
-    'insurance-check.html':'🛡️','fire-sim.html':'🔥','education-sim.html':'🎓'
+    'insurance-check.html':'🛡️','fire-sim.html':'🔥','education-sim.html':'🎓',
+    'tedori-sim.html':'💴','prepayment-sim.html':'🏠'
   };
   function relTime(ts){
     var d = Date.now() - ts;
