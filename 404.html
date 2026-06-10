@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<title>404 - ページが見つかりません｜ライフアセットオフィス</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #faf8f4;
+    --green: #1a6b3c;
+    --green-pale: #e8f5ee;
+    --green-mid: #c8e6d4;
+    --muted: #6b7280;
+    --border: #e0d9ce;
+    --white: #fff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo { font-size: 17px; font-weight: 900; color: var(--green); text-decoration: none; }
+  .nav-logo span { font-size: 10px; font-weight: 400; color: var(--muted); display: block; }
+  .nav-links { display: flex; gap: 24px; font-size: 13px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: #fff; border: none; border-radius: 20px; padding: 8px 18px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  @media(max-width:640px) { .nav-links { display: none; } }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .err-code {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(80px, 16vw, 140px);
+    font-weight: 500;
+    color: var(--green-mid);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -.04em;
+  }
+  .err-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .err-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    max-width: 660px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  .goto-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all .2s;
+    display: block;
+    text-align: left;
+  }
+  .goto-card:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(26,107,60,.1); transform: translateY(-2px); }
+  .goto-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+  .goto-label { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+  .goto-title { font-size: 14px; font-weight: 700; color: var(--green); }
+  .goto-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+
+  .back-link {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 2px;
+  }
+  .back-link:hover { color: var(--green); border-color: var(--green); }
+
+  footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></a>
+  <div class="nav-links">
+    <a href="/">ホーム</a>
+    <a href="/lifeplan.html">ライフプラン</a>
+    <a href="/blog/">ブログ</a>
+    <a href="/contact.html">お問い合わせ</a>
+  </div>
+  <button class="nav-cta" onclick="window.location.href='/contact.html'">お問い合わせ</button>
+</nav>
+
+<main class="main">
+  <div class="err-code">404</div>
+  <h1 class="err-title">ページが見つかりません</h1>
+  <p class="err-desc">
+    お探しのページは移動・削除されたか、URLが間違っている可能性があります。<br>
+    以下からご希望のページをお探しください。
+  </p>
+
+  <div class="card-grid">
+    <a href="/" class="goto-card">
+      <span class="goto-icon">🏠</span>
+      <div class="goto-label">Top</div>
+      <div class="goto-title">トップページ</div>
+      <div class="goto-desc">サービス概要・シミュレーター一覧</div>
+    </a>
+    <a href="/lifeplan.html" class="goto-card">
+      <span class="goto-icon">📊</span>
+      <div class="goto-label">Simulator</div>
+      <div class="goto-title">ライフプランシミュレーター</div>
+      <div class="goto-desc">登録不要・無料・15分で完成</div>
+    </a>
+    <a href="/blog/" class="goto-card">
+      <span class="goto-icon">📝</span>
+      <div class="goto-label">Blog</div>
+      <div class="goto-title">FPブログ</div>
+      <div class="goto-desc">家計・NISA・老後・住宅ローン解説</div>
+    </a>
+    <a href="/contact.html" class="goto-card">
+      <span class="goto-icon">✉️</span>
+      <div class="goto-label">Contact</div>
+      <div class="goto-title">お問い合わせ</div>
+      <div class="goto-desc">FPへの個別相談・ご質問</div>
+    </a>
+  </div>
+
+  <a href="javascript:history.back()" class="back-link">← 前のページに戻る</a>
+</main>
+
+<footer>
+  © 2026 ライフアセットオフィス｜FP技能士が運営する中立な情報サイト
+</footer>
+
+</body>
+</html>
