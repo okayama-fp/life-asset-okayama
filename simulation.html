@@ -318,7 +318,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   <p class="hero-lead">スライダーを動かすだけ。お金の疑問を今すぐ数字で確認。</p>
   <div class="stat-row">
     <div class="stat-item">
-      <div class="stat-num" data-count="12" data-suffix="">0</div>
+      <div class="stat-num" data-count="14" data-suffix="">0</div>
       <div class="stat-label">ツール</div>
     </div>
     <div class="stat-item">
@@ -535,11 +535,35 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
         <div class="tool-icon">🏛️</div>
         <div class="tool-meta">
           <div class="tool-name">相続税シミュレーター</div>
-          <span class="tool-cat-badge">税金・控除</span>
+          <span class="tool-cat-badge">税制優遇</span>
         </div>
       </div>
       <div class="tool-desc">家族構成と資産を入力するだけで相続税を概算。基礎控除・生命保険非課税枠・配偶者軽減を自動考慮し、対策案も表示します。</div>
       <a class="tool-link" href="souzoku-sim.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="income">
+      <div class="tool-header">
+        <div class="tool-icon">📋</div>
+        <div class="tool-meta">
+          <div class="tool-name">総合ライフプラン表</div>
+          <span class="tool-cat-badge">家計・収入</span>
+        </div>
+      </div>
+      <div class="tool-desc">家族・収入・支出・住宅ローン・NISA・iDeCoを6ステップで入力。年別の家計推移表とグラフを自動生成。CSV出力・印刷対応。</div>
+      <a class="tool-link" href="lifeplan.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="income">
+      <div class="tool-header">
+        <div class="tool-icon">👫</div>
+        <div class="tool-meta">
+          <div class="tool-name">夫婦の家計合わせシミュレーター</div>
+          <span class="tool-cat-badge">家計・収入</span>
+        </div>
+      </div>
+      <div class="tool-desc">2人の収入・支出を入力するだけ。家計スタイル診断・ヘルススコア・FIRE計算・老後ギャップ・iDeCo節税を自動診断。</div>
+      <a class="tool-link" href="couples-sim.html">使ってみる</a>
     </div>
 
   </div>
@@ -630,7 +654,8 @@ function filterSims(query){
     'asset-sim.html':'📈','retirement-gap.html':'🏖️','nisa-ideco-sim.html':'🎁',
     'furusato-sim.html':'🗾','loan-check.html':'🔍','loan-refinance.html':'🏠',
     'insurance-check.html':'🛡️','fire-sim.html':'🔥','education-sim.html':'🎓',
-    'tedori-sim.html':'💴','prepayment-sim.html':'🏠','souzoku-sim.html':'🏛️'
+    'tedori-sim.html':'💴','prepayment-sim.html':'🏠','souzoku-sim.html':'🏛️',
+    'lifeplan.html':'📋','couples-sim.html':'👫'
   };
   function relTime(ts){
     var d = Date.now() - ts;
