@@ -375,6 +375,23 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   .reality-section { padding: 20px 16px; }
   .action-section { padding: 20px 16px; }
 }
+
+/* ─── Utility bar ─── */
+.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
+.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
+.util-btn:hover { border-color:var(--sky); color:var(--sky); }
+.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
+.util-btn.x-share:hover { opacity:.8; }
+.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-toast.show { opacity:1; transform:none; }
+.from-asset-banner { background:var(--greenl); border:1.5px solid var(--greenb); border-radius:10px; padding:10px 16px; margin-bottom:16px; font-size:13px; color:var(--navy); font-weight:700; display:none; }
+@media print {
+  header,.hero,.preset-row,.util-bar,.scenario-section,.reality-section,.action-section,footer,#pb { display:none!important; }
+  .tool-grid { grid-template-columns:1fr!important; }
+  .result-panel { position:static!important; }
+  body { background:#fff!important; }
+  .main { padding:8px 0!important; }
+}
 </style>
 </head>
 <body>
@@ -421,6 +438,13 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
     <button class="preset-btn" onclick="applyPreset('comfort')">ゆとり老後</button>
   </div>
 
+  <div class="util-bar">
+    <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
+    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
+    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+  </div>
+  <div class="util-toast" id="util-toast"></div>
+  <div class="from-asset-banner" id="from-asset-banner">📈 資産シミュレーターの結果を反映しました。数値を確認・調整してください。</div>
   <div class="tool-grid">
     <!-- 入力パネル -->
     <div class="input-panel">
@@ -870,6 +894,7 @@ function calc() {
   renderChart(totalNeeded, totalPension, savings, nisa, ideco, invest, Math.max(gap, 0));
   updateNextAction(gap, monthlyNeed, covPct, yearsToRetire);
   calcExtra();
+  updateUrlParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate});
   if(typeof gtag==='function'){
     gtag('event','simulate_retirement_gap',{age_group:age<40?'30代':age<50?'40代':age<60?'50代':'60代',retire_age:retire,expense_range:(Math.floor(expense/5)*5)+'〜'+(Math.floor(expense/5)*5+5)+'万',result:gap>0?'shortage':'sufficient'});
   }
@@ -1025,7 +1050,82 @@ window.addEventListener('scroll', function() {
   document.getElementById('pb').style.width = pct + '%';
 });
 
-calc();
+function buildShareUrl() {
+  var p=new URLSearchParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate}); return location.origin+location.pathname+'?'+p.toString();
+}
+function updateUrlParams(vals) {
+  var p = new URLSearchParams(vals);
+  history.replaceState(null,'','?'+p.toString());
+}
+function loadFromUrl() {
+  var p=new URLSearchParams(location.search);
+  var map={age:'sl-age',ret:'sl-retire',exp:'sl-expense',pen:'sl-pension',sav:'sl-savings',ls:'sl-lifespan',nisa:'sl-nisa',ideco:'sl-ideco',inv:'sl-invest',r:'sl-rate'};
+  var lmap={age:'age',ret:'retire',exp:'expense',pen:'pension',sav:'savings',ls:'lifespan',nisa:'nisa',ideco:'ideco',inv:'invest',r:'rate'};
+  var any=false;
+  Object.keys(map).forEach(function(k){
+    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
+  });
+  return any;
+}
+function copySimUrl() {
+  var url = buildShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('URLをコピーしました！'); });
+  } else {
+    var ta=document.createElement('textarea'); ta.value=url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    showToast('URLをコピーしました！');
+  }
+}
+function showToast(msg) {
+  var t=document.getElementById('util-toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); },2500);
+}
+function printSim() { window.print(); }
+function shareX() {
+  var gap=document.getElementById('result-amount').textContent; var lbl=document.getElementById('result-label').textContent; var text='老後資金シミュレーターで試しました！\n'+lbl+': '+gap+'\n月生活費'+sliders.expense+'万円・年金'+sliders.pension+'万円/月\n#ライフアセットオフィス #老後資金';
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
+}
+(function(){
+  try {
+    var k='la_sim_recent',u=location.pathname,n='老後資金不足額シミュレーター';
+    var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
+    a.unshift({u:u,n:n,ts:Date.now()});
+    localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
+  } catch(e) {}
+})();
+
+(function(){
+  try {
+    var k='la_sim_recent',u=location.pathname,n='老後資金不足額シミュレーター';
+    var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
+    a.unshift({u:u,n:n,ts:Date.now()});
+    localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
+  } catch(e) {}
+  // Load values from asset-sim linkage
+  try {
+    var fromAsset = JSON.parse(localStorage.getItem('la_from_asset')||'null');
+    if (fromAsset) {
+      localStorage.removeItem('la_from_asset');
+      var invEl = document.getElementById('sl-invest');
+      if (invEl && fromAsset.invest) {
+        var v = Math.min(Math.round(fromAsset.invest/100)*100, 10000);
+        invEl.value = v; sliders.invest = v;
+        document.getElementById('lbl-invest').textContent = v.toLocaleString()+'万円';
+      }
+      if (fromAsset.rate) {
+        var rEl = document.getElementById('sl-rate');
+        if (rEl) { rEl.value = fromAsset.rate; sliders.rate = parseFloat(fromAsset.rate); document.getElementById('lbl-rate').textContent = fromAsset.rate+'%'; }
+      }
+      var banner = document.getElementById('from-asset-banner');
+      if (banner) banner.style.display = 'block';
+    }
+  } catch(e) {}
+})();
+
+if(!loadFromUrl()) calc();
+else calc();
 syncExtra(document.getElementById('sl-extra').value);
 </script>
 </body>

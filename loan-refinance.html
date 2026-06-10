@@ -113,6 +113,22 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 .fp-card td { padding: 5px 8px; border-bottom: 1px solid var(--border); text-align: center; font-size: 11.5px; }
 .fp-card tr:last-child td { border-bottom: none; }
 .warn-box { background: var(--amberl); border: 1px solid var(--amberb); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
+
+/* ─── Utility bar ─── */
+.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
+.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
+.util-btn:hover { border-color:var(--sky); color:var(--sky); }
+.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
+.util-btn.x-share:hover { opacity:.8; }
+.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-toast.show { opacity:1; transform:none; }
+@media print {
+  header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,.cta-contact-box,footer,#pb { display:none!important; }
+  .tool-grid { grid-template-columns:1fr!important; }
+  .result-panel { position:static!important; }
+  body { background:#fff!important; }
+  .main { padding:8px 0!important; }
+}
 </style>
 </head>
 <body>
@@ -158,6 +174,12 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <button class="preset-btn" onclick="applyPreset('fixed2var')">2021年固定→変動</button>
     <button class="preset-btn" onclick="applyPreset('var2fixed')">変動→固定（金利上昇対策）</button>
   </div>
+  <div class="util-bar">
+    <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
+    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
+    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+  </div>
+  <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
     <div class="input-panel">
       <h2>現在のローン情報</h2>
@@ -392,6 +414,7 @@ function calc() {
 
   renderChart(m1, m2);
   updateAdvice(totalSave, monthlySave, breakeven);
+  updateUrlParams({bal:sliders.balance,r1:sliders.rate1,per:sliders.period,r2:sliders.rate2,fee:sliders.fee});
   if(typeof gtag==='function'){
     gtag('event','simulate_loan_refinance',{balance_range:(Math.floor(bal/500)*500)+'〜'+(Math.floor(bal/500)*500+500)+'万',result:totalSave>0?'save':'costly',breakeven_months:isFinite(breakeven)?Math.round(breakeven):null,period:period});
   }
@@ -440,7 +463,54 @@ window.addEventListener('scroll', function() {
   document.getElementById('pb').style.width = pct + '%';
 });
 
-calc();
+function buildShareUrl() {
+  var p=new URLSearchParams({bal:sliders.balance,r1:sliders.rate1,per:sliders.period,r2:sliders.rate2,fee:sliders.fee}); return location.origin+location.pathname+'?'+p.toString();
+}
+function updateUrlParams(vals) {
+  var p = new URLSearchParams(vals);
+  history.replaceState(null,'','?'+p.toString());
+}
+function loadFromUrl() {
+  var p=new URLSearchParams(location.search);
+  var map={bal:'sl-balance',r1:'sl-rate1',per:'sl-period',r2:'sl-rate2',fee:'sl-fee'};
+  var lmap={bal:'balance',r1:'rate1',per:'period',r2:'rate2',fee:'fee'};
+  var any=false;
+  Object.keys(map).forEach(function(k){
+    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
+  });
+  return any;
+}
+function copySimUrl() {
+  var url = buildShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('URLをコピーしました！'); });
+  } else {
+    var ta=document.createElement('textarea'); ta.value=url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    showToast('URLをコピーしました！');
+  }
+}
+function showToast(msg) {
+  var t=document.getElementById('util-toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); },2500);
+}
+function printSim() { window.print(); }
+function shareX() {
+  var save=document.getElementById('result-amount').textContent; var text='住宅ローン借り換えシミュレーターで試しました！\n総節約額: '+save+'\n残債'+sliders.balance+'万円・金利'+sliders.rate1+'%→'+sliders.rate2+'%\n#ライフアセットオフィス #住宅ローン';
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
+}
+(function(){
+  try {
+    var k='la_sim_recent',u=location.pathname,n='住宅ローン借り換え節約シミュレーター';
+    var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
+    a.unshift({u:u,n:n,ts:Date.now()});
+    localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
+  } catch(e) {}
+})();
+
+if(!loadFromUrl()) calc();
+else calc();
 </script>
 </body>
 </html>

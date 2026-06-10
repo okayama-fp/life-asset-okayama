@@ -112,6 +112,43 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 .fp-card td { padding: 5px 8px; border-bottom: 1px solid var(--border); text-align: center; font-size: 11.5px; }
 .fp-card tr:last-child td { border-bottom: none; }
 .warn-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #78350f; margin-top: 12px; line-height: 1.7; }
+/* ─── Utility bar ─── */
+.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
+.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
+.util-btn:hover { border-color:var(--sky); color:var(--sky); }
+.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
+.util-btn.x-share:hover { opacity:.8; }
+.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-toast.show { opacity:1; transform:none; }
+/* ─── Inflation ─── */
+.inf-note { font-size:11px; color:var(--text-light); margin-top:3px; }
+.real-rate-row { display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--border); }
+.real-rate-badge { font-size:13px; font-weight:700; color:#d97706; }
+/* ─── Scenario compare ─── */
+.scenario-compare { margin:28px 0 0; }
+.scenario-compare h3 { font-size:15px; font-weight:800; color:var(--navy); margin-bottom:16px; padding-bottom:10px; border-bottom:2px solid var(--sky-pale); }
+.sc-grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+@media(max-width:580px){ .sc-grid3 { grid-template-columns:1fr; } }
+.sc-col3 { border:1.5px solid var(--border); border-radius:14px; overflow:hidden; }
+.sc-col3.current { border-color:var(--sky); box-shadow:0 0 0 3px rgba(26,122,74,.1); }
+.sc-head3 { padding:10px 12px; text-align:center; font-size:11.5px; font-weight:800; }
+.sc-head3.pess { background:#fff1f2; color:#991b1b; }
+.sc-head3.base { background:var(--sky-pale); color:var(--navy); }
+.sc-head3.opti { background:#dcfce7; color:#14532d; }
+.sc-body3 { padding:14px 10px; text-align:center; background:#fff; }
+.sc-total3 { font-size:1.3rem; font-weight:900; color:var(--navy); }
+.sc-sub3 { font-size:11px; color:var(--text-light); margin-top:3px; }
+/* ─── Sim link ─── */
+.btn-sim-link { display:inline-flex; align-items:center; gap:7px; background:#fff; border:2px solid var(--sky); color:var(--sky); font-size:13px; font-weight:700; padding:12px 22px; border-radius:50px; transition:all .2s; cursor:pointer; font-family:inherit; }
+.btn-sim-link:hover { background:var(--sky); color:#fff; }
+/* ─── Print ─── */
+@media print {
+  header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,footer,#pb { display:none!important; }
+  .tool-grid { grid-template-columns:1fr!important; }
+  .result-panel { position:static!important; }
+  body { background:#fff!important; }
+  .main { padding:8px 0!important; }
+}
 </style>
 </head>
 <body>
@@ -158,6 +195,12 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <button class="preset-btn" id="pre-40" onclick="applyPreset('40s')">40代モデル</button>
     <button class="preset-btn" id="pre-nisa" onclick="applyPreset('nisa')">NISA満額</button>
   </div>
+  <div class="util-bar">
+    <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
+    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
+    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+  </div>
+  <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
     <div class="input-panel">
       <h2>条件を入力</h2>
@@ -181,6 +224,12 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         <input type="range" id="sl-years" min="5" max="40" step="5" value="30" oninput="syncLabel('years',this.value);calc()">
         <div class="field-ticks"><span>5年</span><span>20年</span><span>40年</span></div>
       </div>
+      <div class="field">
+        <div class="field-label">インフレ率（年）<span class="field-val" id="lbl-inf">2.5%</span></div>
+        <input type="range" id="sl-inf" min="0" max="5" step="0.5" value="2.5" oninput="syncLabel('inf',this.value);calc()">
+        <div class="field-ticks"><span>0%</span><span>2.5%</span><span>5%</span></div>
+        <div class="inf-note">実質利回り＝名目利回り－インフレ率</div>
+      </div>
     </div>
 
     <div class="result-panel">
@@ -194,6 +243,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
           <div class="result-row"><span class="result-k">元本合計</span><span class="result-v" id="r-principal">―万円</span></div>
           <div class="result-row"><span class="result-k">運用益</span><span class="result-v gain" id="r-gain">―万円</span></div>
           <div class="result-row"><span class="result-k">運用益の割合</span><span class="result-v" id="r-ratio">―%</span></div>
+          <div class="real-rate-row"><span class="result-k">実質利回り（インフレ調整後）</span><span class="real-rate-badge" id="r-real-rate">―%</span></div>
         </div>
       </div>
       <div class="chart-card">
@@ -206,6 +256,11 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <div class="advice-card default" id="advice-card">
     <div class="advice-title" id="advice-title">FPアドバイス</div>
     <div id="advice-body"></div>
+  </div>
+
+  <div class="scenario-compare">
+    <h3>📊 3シナリオ比較（楽観・基本・悲観）</h3>
+    <div class="sc-grid3" id="sc-grid3"></div>
   </div>
 
   <section class="fp-section">
@@ -263,7 +318,8 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <p>「どの金融商品を選べばいい？」「NISAとiDeCoの使い分けは？」<br>シミュレーション結果を持ってお気軽にお問い合わせください。</p>
     <div class="sim-cta-btns">
       <a href="contact.html" class="btn-sim-contact">お問い合わせ</a>
-      <button class="btn-sim-share" onclick="shareResult()">𝕏 結果をシェア</button>
+      <button class="btn-sim-share" onclick="shareX()">𝕏 結果をシェア</button>
+      <button class="btn-sim-link" onclick="linkToRetirement()">📊 老後資金へ連携 →</button>
     </div>
   </div>
 </div>
@@ -345,6 +401,7 @@ function syncLabel(key, val) {
   else if (key==='monthly') document.getElementById('lbl-monthly').textContent = (val%1===0?val:val.toFixed(1))+'万円';
   else if (key==='rate') document.getElementById('lbl-rate').textContent = parseFloat(val).toFixed(1)+'%';
   else if (key==='years') document.getElementById('lbl-years').textContent = val+'年';
+  else if (key==='inf') document.getElementById('lbl-inf').textContent = parseFloat(val).toFixed(1)+'%';
 }
 function calcFV(initialMan, monthlyMan, rateAnnual, years) {
   var total = initialMan*10000, monthly = monthlyMan*10000, r = rateAnnual/100/12, n = years*12;
@@ -356,7 +413,10 @@ function calc() {
   var monthly = parseFloat(document.getElementById('sl-monthly').value);
   var rate    = parseFloat(document.getElementById('sl-rate').value);
   var years   = parseInt(document.getElementById('sl-years').value);
+  var inf     = parseFloat(document.getElementById('sl-inf').value);
+  var realRate = Math.max(rate - inf, 0);
   var totalMan = calcFV(initial, monthly, rate, years);
+  var realTotalMan = calcFV(initial, monthly, realRate, years);
   var principalMan = Math.round(initial + monthly*12*years);
   var gainMan = totalMan - principalMan;
   var mult = principalMan>0 ? (totalMan/principalMan).toFixed(1) : '―';
@@ -366,8 +426,11 @@ function calc() {
   document.getElementById('r-principal').textContent   = principalMan.toLocaleString()+'万円';
   document.getElementById('r-gain').textContent        = gainMan.toLocaleString()+'万円';
   document.getElementById('r-ratio').textContent       = (principalMan>0?Math.round(gainMan/totalMan*100):0)+'%';
+  document.getElementById('r-real-rate').textContent   = realRate.toFixed(1)+'%（実質 '+ realTotalMan.toLocaleString()+'万円）';
   updateChart(initial, monthly, rate, years);
   updateAdvice(totalMan, principalMan, gainMan, rate, years);
+  renderScenarios(initial, monthly, rate, years, inf);
+  updateUrlParams({ i:initial, m:monthly, r:rate, y:years, inf:inf });
   if(typeof gtag==='function'){
     gtag('event','simulate_asset',{initial_range:(Math.floor(initial/100)*100)+'〜'+(Math.floor(initial/100)*100+100)+'万',monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',rate:rate,years:years});
   }
@@ -390,16 +453,111 @@ function updateChart(initial, monthly, rate, years) {
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11},boxWidth:12,padding:12}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y.toLocaleString()+'万円';}}}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11}}},y:{stacked:true,ticks:{font:{size:10},callback:function(v){return v.toLocaleString()+'万';}},grid:{color:'#f1f5f9'}}}}
   });
 }
-function shareResult() {
-  var total=document.getElementById('r-total').textContent, years=document.getElementById('sl-years').value, rate=document.getElementById('sl-rate').value;
-  var text='資産シミュレーターで試してみました！\n'+years+'年後の資産：約'+total+'万円（想定利回り'+rate+'%）';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://lifeassetoffice.net/asset-sim.html'),'_blank','noopener,noreferrer');
+function renderScenarios(initial, monthly, rate, years, inf) {
+  var scenarios = [
+    { label:'😰 悲観シナリオ', rate: Math.max(rate-2,0.5), cls:'pess' },
+    { label:'📊 基本シナリオ', rate: rate, cls:'base', current:true },
+    { label:'🚀 楽観シナリオ', rate: rate+2, cls:'opti' }
+  ];
+  var grid = document.getElementById('sc-grid3');
+  grid.innerHTML = scenarios.map(function(sc) {
+    var total = calcFV(initial, monthly, sc.rate, years);
+    var principal = Math.round(initial + monthly*12*years);
+    var realR = Math.max(sc.rate - inf, 0);
+    var realTotal = calcFV(initial, monthly, realR, years);
+    return '<div class="sc-col3' + (sc.current?' current':'') + '">'
+      + '<div class="sc-head3 ' + sc.cls + '">' + sc.label + '<br>（利回り' + sc.rate.toFixed(1) + '%）</div>'
+      + '<div class="sc-body3">'
+      + '<div class="sc-total3">' + (total>=10000?(total/10000).toFixed(1)+'億':total.toLocaleString()+'万') + '円</div>'
+      + '<div class="sc-sub3">実質: ' + (realTotal>=10000?(realTotal/10000).toFixed(1)+'億':realTotal.toLocaleString()+'万') + '円</div>'
+      + '<div class="sc-sub3" style="margin-top:4px">元本の' + (principal>0?(total/principal).toFixed(1):'―') + '倍</div>'
+      + '</div></div>';
+  }).join('');
 }
+
+function buildShareUrl() {
+  var p = new URLSearchParams({
+    i: document.getElementById('sl-initial').value,
+    m: document.getElementById('sl-monthly').value,
+    r: document.getElementById('sl-rate').value,
+    y: document.getElementById('sl-years').value,
+    inf: document.getElementById('sl-inf').value
+  });
+  return location.origin + location.pathname + '?' + p.toString();
+}
+
+function updateUrlParams(vals) {
+  var p = new URLSearchParams(vals);
+  history.replaceState(null, '', '?' + p.toString());
+}
+
+function loadFromUrl() {
+  var p = new URLSearchParams(location.search);
+  var map = { i:'sl-initial', m:'sl-monthly', r:'sl-rate', y:'sl-years', inf:'sl-inf' };
+  var labelMap = { i:'initial', m:'monthly', r:'rate', y:'years', inf:'inf' };
+  var any = false;
+  Object.keys(map).forEach(function(k) {
+    if (p.has(k)) {
+      var el = document.getElementById(map[k]);
+      if (el) { el.value = p.get(k); syncLabel(labelMap[k], p.get(k)); any = true; }
+    }
+  });
+  return any;
+}
+
+function copySimUrl() {
+  var url = buildShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('URLをコピーしました！'); });
+  } else {
+    var ta = document.createElement('textarea'); ta.value = url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    showToast('URLをコピーしました！');
+  }
+}
+
+function showToast(msg) {
+  var t = document.getElementById('util-toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+function printSim() { window.print(); }
+
+function shareX() {
+  var total = document.getElementById('r-total').textContent;
+  var years = document.getElementById('sl-years').value;
+  var rate  = document.getElementById('sl-rate').value;
+  var text  = '資産シミュレーターで試してみました！\n' + years + '年後の資産：約' + total + '万円（想定利回り' + rate + '%）\n#ライフアセットオフィス';
+  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(buildShareUrl()), '_blank', 'noopener,noreferrer');
+}
+
+function linkToRetirement() {
+  try {
+    localStorage.setItem('la_from_asset', JSON.stringify({
+      invest: parseInt(document.getElementById('r-total').textContent.replace(/,/g,'')),
+      rate: document.getElementById('sl-rate').value
+    }));
+  } catch(e) {}
+  location.href = 'retirement-gap.html';
+}
+
 (function(){
-  syncLabel('initial', document.getElementById('sl-initial').value);
-  syncLabel('monthly', document.getElementById('sl-monthly').value);
-  syncLabel('rate',    document.getElementById('sl-rate').value);
-  syncLabel('years',   document.getElementById('sl-years').value);
+  // Track recent visit
+  try {
+    var k = 'la_sim_recent', u = location.pathname, n = '資産シミュレーター';
+    var a = JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u !== u; });
+    a.unshift({ u:u, n:n, ts:Date.now() });
+    localStorage.setItem(k, JSON.stringify(a.slice(0,5)));
+  } catch(e) {}
+
+  if (!loadFromUrl()) {
+    syncLabel('initial', document.getElementById('sl-initial').value);
+    syncLabel('monthly', document.getElementById('sl-monthly').value);
+    syncLabel('rate',    document.getElementById('sl-rate').value);
+    syncLabel('years',   document.getElementById('sl-years').value);
+    syncLabel('inf',     document.getElementById('sl-inf').value);
+  }
   calc();
 })();
 window.addEventListener('scroll', function(){

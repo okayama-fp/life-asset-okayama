@@ -197,12 +197,47 @@ footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
+/* ─── Recent tools ─── */
+.section-label {
+  font-size: 13px; font-weight: 700; color: var(--text-light);
+  letter-spacing: .08em; text-transform: uppercase;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.section-label::before { content: ''; display: inline-block; width: 3px; height: 14px; background: var(--sky); border-radius: 2px; }
+
+.recent-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+.recent-chip {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff; border: 1.5px solid var(--border);
+  border-radius: 50px; padding: 7px 16px 7px 10px;
+  font-size: 13px; font-weight: 700; color: var(--navy);
+  text-decoration: none; transition: border-color .2s, background .2s;
+  white-space: nowrap;
+}
+.recent-chip:hover { border-color: var(--sky); background: var(--sky-pale); }
+.recent-chip-icon { font-size: 16px; }
+.recent-chip-ts { font-size: 10px; color: var(--text-light); font-weight: 400; margin-left: 2px; }
+
+/* ─── Recommend flow ─── */
+.flow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
+.flow-card {
+  background: #fff; border: 1.5px solid var(--border); border-radius: 14px;
+  padding: 18px 14px 14px; text-align: center; cursor: pointer;
+  transition: all .2s; text-decoration: none; display: block;
+  box-shadow: 0 1px 6px rgba(0,0,0,.04);
+}
+.flow-card:hover { border-color: var(--sky); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,122,74,.12); }
+.flow-icon { font-size: 26px; margin-bottom: 6px; }
+.flow-title { font-size: 13px; font-weight: 800; color: var(--navy); line-height: 1.4; margin-bottom: 4px; }
+.flow-sub { font-size: 11px; color: var(--text-light); line-height: 1.5; }
+
 /* ─── Responsive ─── */
 @media (max-width: 520px) {
   .stat-row { gap: 20px; }
   .stat-num { font-size: 1.6rem; }
   .cat-tabs { gap: 6px; }
   .cat-tab { padding: 7px 14px; font-size: 12px; }
+  .flow-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -256,6 +291,47 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 </div>
 
 <div class="main">
+
+  <!-- 最近使ったツール -->
+  <div id="recent-section" style="display:none;">
+    <div class="section-label">最近使ったツール</div>
+    <div class="recent-grid" id="recentGrid"></div>
+  </div>
+
+  <!-- おすすめフロー -->
+  <div class="section-label">あなたの状況からスタート</div>
+  <div class="flow-grid">
+    <a class="flow-card" href="asset-sim.html">
+      <div class="flow-icon">📈</div>
+      <div class="flow-title">まず資産を増やしたい</div>
+      <div class="flow-sub">積立・利回りをシミュレーション</div>
+    </a>
+    <a class="flow-card" href="retirement-gap.html">
+      <div class="flow-icon">🏖️</div>
+      <div class="flow-title">老後資金が不安</div>
+      <div class="flow-sub">不足額を今すぐ診断</div>
+    </a>
+    <a class="flow-card" href="nisa-ideco-sim.html">
+      <div class="flow-icon">🎁</div>
+      <div class="flow-title">NISAで節税したい</div>
+      <div class="flow-sub">税制優遇の効果を比較</div>
+    </a>
+    <a class="flow-card" href="loan-refinance.html">
+      <div class="flow-icon">🏠</div>
+      <div class="flow-title">住宅ローンを見直したい</div>
+      <div class="flow-sub">借り換え節約額を計算</div>
+    </a>
+    <a class="flow-card" href="fire-sim.html">
+      <div class="flow-icon">🔥</div>
+      <div class="flow-title">早期リタイアを目指したい</div>
+      <div class="flow-sub">FIRE達成年齢を試算</div>
+    </a>
+    <a class="flow-card" href="education-sim.html">
+      <div class="flow-icon">🎓</div>
+      <div class="flow-title">子供の教育費が気になる</div>
+      <div class="flow-sub">必要積立額をプランニング</div>
+    </a>
+  </div>
 
   <div class="cat-tabs">
     <button class="cat-tab active" data-cat="all">すべて</button>
@@ -417,6 +493,40 @@ window.addEventListener('scroll', function(){
       });
     });
   });
+})();
+
+(function(){
+  var ICONS = {
+    'asset-sim.html':'📈','retirement-gap.html':'🏖️','nisa-ideco-sim.html':'🎁',
+    'furusato-sim.html':'🗾','loan-check.html':'🔍','loan-refinance.html':'🏠',
+    'insurance-check.html':'🛡️','fire-sim.html':'🔥','education-sim.html':'🎓'
+  };
+  function relTime(ts){
+    var d = Date.now() - ts;
+    if(d < 60000) return 'たった今';
+    if(d < 3600000) return Math.floor(d/60000) + '分前';
+    if(d < 86400000) return Math.floor(d/3600000) + '時間前';
+    return Math.floor(d/86400000) + '日前';
+  }
+  try {
+    var recent = JSON.parse(localStorage.getItem('la_sim_recent') || '[]');
+    recent = recent.slice(0, 3);
+    if(recent.length > 0){
+      var grid = document.getElementById('recentGrid');
+      recent.forEach(function(item){
+        var filename = item.url.split('/').pop().split('?')[0];
+        var icon = ICONS[filename] || '🔗';
+        var a = document.createElement('a');
+        a.className = 'recent-chip';
+        a.href = item.url;
+        a.innerHTML = '<span class="recent-chip-icon">'+icon+'</span>'
+          + '<span>' + item.name + '</span>'
+          + '<span class="recent-chip-ts">' + relTime(item.ts) + '</span>';
+        grid.appendChild(a);
+      });
+      document.getElementById('recent-section').style.display = 'block';
+    }
+  } catch(e){}
 })();
 </script>
 </body>
