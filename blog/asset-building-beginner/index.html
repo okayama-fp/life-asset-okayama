@@ -66,7 +66,22 @@
     .footer-logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(90deg, #1a7a4a, #4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .footer-contact a { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.75); }
     @media (max-width: 768px) { nav { display: none; } .article-wrap { grid-template-columns: 1fr; } .article-hero { padding: 32px 24px; } .article-body { padding: 28px 24px; } }
-  </style>
+  
+@media print{
+  #pb,header,.action-bar,.chat-widget,.share,.share-section,.post-nav,footer,button,.hamburger{display:none!important}
+  body{font-size:12pt;line-height:1.7;color:#000;background:#fff}
+  .article-body,.article-content{max-width:100%;padding:0}
+  .article-body section{box-shadow:none!important;border:1px solid #ccc;page-break-inside:avoid}
+  h2{page-break-after:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+}
+
+.action-bar{max-width:760px;margin:12px auto 0;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap}
+.action-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;color:#1e293b}
+.action-btn:hover{border-color:#1a7a4a;color:#1a7a4a}
+.action-btn.bm-active{background:#f0fdf4;border-color:#1a7a4a;color:#1a7a4a}
+.action-btn.liked{background:#fce7f3;border-color:#fb7185;color:#e11d48}
+</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266918303152498"
      crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/style.css">
@@ -100,7 +115,9 @@
       </div>
     </div>
     <div class="article-body">
-      <div class="toc">
+      
+<div class="action-bar"><button class="action-btn" id="bm-btn" onclick="toggleBookmark(this,'asset-beginner')">🔖 ブックマーク</button><button class="action-btn" id="like-btn" onclick="toggleLike(this,'asset-beginner')">👍 参考になった</button></div>
+<div class="toc">
         <div class="toc-title">目次</div>
         <ol>
           <li><a href="#step1">STEP 1：現在の家計を「見える化」する</a></li>
@@ -152,6 +169,35 @@
     </div>
   </div>
 </footer>
+
+(function(){
+  var BMKey='lap_bm',RateKey='lap_rate';
+  window.toggleBookmark=function(btn,id){
+    var bms=JSON.parse(localStorage.getItem(BMKey)||'[]');
+    var idx=bms.findIndex(function(b){return b.id===id});
+    if(idx>=0){bms.splice(idx,1);btn.innerHTML='🔖 ブックマーク';btn.classList.remove('bm-active')}
+    else{bms.push({id:id,title:document.title,url:location.pathname});btn.innerHTML='✅ 保存済み';btn.classList.add('bm-active')}
+    localStorage.setItem(BMKey,JSON.stringify(bms));
+  };
+  window.toggleLike=function(btn,id){
+    var r=JSON.parse(localStorage.getItem(RateKey)||'{}');
+    if(r[id]){delete r[id];btn.innerHTML='👍 参考になった';btn.classList.remove('liked')}
+    else{r[id]=1;btn.innerHTML='✅ 役に立った！';btn.classList.add('liked')}
+    localStorage.setItem(RateKey,JSON.stringify(r));
+  };
+  window.copyLink=function(){
+    var url=location.href;
+    if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('リンクをコピーしました！')})}
+    else{var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('リンクをコピーしました！')}
+  };
+  var pid=location.pathname.split('/').pop().replace('.html','');
+  if(!pid||pid==='index')pid='asset-beginner';
+  var bms=JSON.parse(localStorage.getItem(BMKey)||'[]');
+  var r=JSON.parse(localStorage.getItem(RateKey)||'{}');
+  var bb=document.getElementById('bm-btn'),lb=document.getElementById('like-btn');
+  if(bb&&bms.find(function(b){return b.id===pid})){bb.innerHTML='✅ 保存済み';bb.classList.add('bm-active')}
+  if(lb&&r[pid]){lb.innerHTML='✅ 役に立った！';lb.classList.add('liked')}
+})();
 <script src="/nav.js" defer></script>
 </body>
 </html>
