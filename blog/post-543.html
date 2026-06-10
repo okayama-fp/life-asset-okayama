@@ -219,8 +219,26 @@
       .tool-cta-box { padding: 24px 18px; }
       nav { display: none; }
     }
-  </style>
+  
+@media print{
+  #pb,header,.action-bar,.chat-widget,.share,.share-section,.post-nav,footer,button,.hamburger{display:none!important}
+  body{font-size:12pt;line-height:1.7;color:#000;background:#fff}
+  .article-body,.article-content{max-width:100%;padding:0}
+  .article-body section{box-shadow:none!important;border:1px solid #ccc;page-break-inside:avoid}
+  h2{page-break-after:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+}
+
+.action-bar{max-width:760px;margin:12px auto 0;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap}
+.action-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;color:#1e293b}
+.action-btn:hover{border-color:#1a7a4a;color:#1a7a4a}
+.action-btn.bm-active{background:#f0fdf4;border-color:#1a7a4a;color:#1a7a4a}
+.action-btn.liked{background:#fce7f3;border-color:#fb7185;color:#e11d48}
+</style>
   <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://lifeassetoffice.net/blog/post-543.html#article","url":"https://lifeassetoffice.net/blog/post-543.html","headline":"住宅ローン完全攻略2026","description":"変動金利の上昇で何が起きる？年齢・年収・子どもの人数別に「今やるべき行動」を全パターン解説。借り換え・繰り上げ返済の損益分岐点から専門家への相談タイミングまで2026年最新版。","datePublished":"2026-06-03T00:00:00+09:00","dateModified":"2026-06-03T00:00:00+09:00","author":{"@type":"Organization","name":"ライフアセットオフィス FP","url":"https://lifeassetoffice.net/"},"publisher":{"@type":"Organization","name":"ライフアセットオフィス","url":"https://lifeassetoffice.net/","logo":{"@type":"ImageObject","url":"https://lifeassetoffice.net/images/fp-avatar.png"}},"image":"https://lifeassetoffice.net/images/og-blog.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://lifeassetoffice.net/blog/post-543.html"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://lifeassetoffice.net/"},{"@type":"ListItem","position":2,"name":"ブログ","item":"https://lifeassetoffice.net/blog/"},{"@type":"ListItem","position":3,"name":"住宅ローン完全攻略2026","item":"https://lifeassetoffice.net/blog/post-543.html"}]}]}
+</script>
 </head>
 <body>
 <div id="pb"></div>
@@ -264,7 +282,9 @@
 
 <div class="article-wrap">
 
-  <div class="toc">
+  
+<div class="action-bar"><button class="action-btn" id="bm-btn" onclick="toggleBookmark(this,'post-543')">🔖 ブックマーク</button><button class="action-btn" id="like-btn" onclick="toggleLike(this,'post-543')">👍 参考になった</button></div>
+<div class="toc">
     <div class="toc-title">目次</div>
     <ol>
       <li><a href="#sec1">2026年の住宅ローン金利の現状</a></li>
@@ -901,7 +921,9 @@
     <a href="../loan-check.html">診断してみる →</a>
   </div>
 
-  <div class="share-section">
+  
+<div class="la-sim-cta" style="max-width:760px;margin:0 auto 32px;padding:0 24px;"><div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><div style="font-size:2rem;">🏠</div><div style="flex:1;min-width:180px;"><div style="font-size:0.75rem;font-weight:700;color:#15803d;margin-bottom:3px;">📊 関連シミュレーター</div><div style="font-size:0.9rem;font-weight:700;color:#1a3d2b;">住宅ローン借り換え節約シミュレーターで試してみる</div></div><a href="/loan-refinance.html" style="display:inline-block;background:#1a7a4a;color:#fff;font-size:0.85rem;font-weight:700;padding:10px 22px;border-radius:22px;white-space:nowrap;">試してみる →</a></div></div>
+<div class="share-section">
     <h3>この記事をシェアする</h3>
     
   </div>
@@ -933,6 +955,35 @@
 
 <script>
 </script>
+
+(function(){
+  var BMKey='lap_bm',RateKey='lap_rate';
+  window.toggleBookmark=function(btn,id){
+    var bms=JSON.parse(localStorage.getItem(BMKey)||'[]');
+    var idx=bms.findIndex(function(b){return b.id===id});
+    if(idx>=0){bms.splice(idx,1);btn.innerHTML='🔖 ブックマーク';btn.classList.remove('bm-active')}
+    else{bms.push({id:id,title:document.title,url:location.pathname});btn.innerHTML='✅ 保存済み';btn.classList.add('bm-active')}
+    localStorage.setItem(BMKey,JSON.stringify(bms));
+  };
+  window.toggleLike=function(btn,id){
+    var r=JSON.parse(localStorage.getItem(RateKey)||'{}');
+    if(r[id]){delete r[id];btn.innerHTML='👍 参考になった';btn.classList.remove('liked')}
+    else{r[id]=1;btn.innerHTML='✅ 役に立った！';btn.classList.add('liked')}
+    localStorage.setItem(RateKey,JSON.stringify(r));
+  };
+  window.copyLink=function(){
+    var url=location.href;
+    if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('リンクをコピーしました！')})}
+    else{var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('リンクをコピーしました！')}
+  };
+  var pid=location.pathname.split('/').pop().replace('.html','');
+  if(!pid||pid==='index')pid='asset-beginner';
+  var bms=JSON.parse(localStorage.getItem(BMKey)||'[]');
+  var r=JSON.parse(localStorage.getItem(RateKey)||'{}');
+  var bb=document.getElementById('bm-btn'),lb=document.getElementById('like-btn');
+  if(bb&&bms.find(function(b){return b.id===pid})){bb.innerHTML='✅ 保存済み';bb.classList.add('bm-active')}
+  if(lb&&r[pid]){lb.innerHTML='✅ 役に立った！';lb.classList.add('liked')}
+})();
 <script src="/nav.js" defer></script>
 </body>
 </html>

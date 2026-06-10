@@ -13,6 +13,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="FP資格者が家計管理・新NISA・節税・ライフプランについてわかりやすく発信するブログです。">
 <link rel="canonical" href="https://lifeassetoffice.net/blog/">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Life Asset ブログ | ライフアセットオフィス">
+  <meta property="og:description" content="FP資格者が家計管理・新NISA・節税・ライフプランについてわかりやすく発信するブログです。">
+  <meta property="og:url" content="https://lifeassetoffice.net/blog/">
+  <meta property="og:image" content="https://lifeassetoffice.net/images/og-blog.png">
+  <meta property="og:site_name" content="ライフアセットオフィス">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Life Asset ブログ | ライフアセットオフィス">
+  <meta name="twitter:description" content="FP資格者が家計管理・新NISA・節税・ライフプランについてわかりやすく発信するブログです。">
+  <meta name="twitter:site" content="@lifeasset_fp">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -174,6 +186,14 @@ footer{background:#0f4d2e;padding:36px 20px 24px;color:rgba(255,255,255,.4)}
   .acard-excerpt{display:none}
   .acard-title{font-size:15px}
 }
+
+/* ── PAGINATION ── */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:28px;flex-wrap:wrap}
+.pg-btn{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;padding:0 10px;border-radius:10px;border:1.5px solid var(--bd);background:var(--white);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.pg-btn:hover{border-color:var(--g);color:var(--g);background:var(--g-l)}
+.pg-btn.active{background:var(--g);border-color:var(--g);color:#fff}
+.pg-btn:disabled{opacity:.35;cursor:not-allowed}
+.pg-info{font-size:12px;color:var(--ink4);margin:0 4px}
 </style>
 </head>
 <body>
@@ -552,6 +572,9 @@ footer{background:#0f4d2e;padding:36px 20px 24px;color:rgba(255,255,255,.4)}
       </a>
 
     </div><!-- /art-list -->
+
+    <div class="pagination" id="pagination"></div>
+
   </div><!-- /main-col -->
 
   <!-- SIDEBAR -->
@@ -656,16 +679,68 @@ footer{background:#0f4d2e;padding:36px 20px 24px;color:rgba(255,255,255,.4)}
 </footer>
 
 <script>
+var ITEMS_PER_PAGE = 10;
+var currentPage = 1;
+var currentCat  = 'all';
+
 window.addEventListener('scroll', function() {
   document.getElementById('nav').classList.toggle('on', window.scrollY > 10);
 });
 
+function getVisible() {
+  var all = document.querySelectorAll('.acard');
+  var visible = [];
+  all.forEach(function(c) {
+    if (currentCat === 'all' || c.classList.contains('d-' + currentCat)) visible.push(c);
+  });
+  return visible;
+}
+
+function renderPage() {
+  var visible = getVisible();
+  var total   = visible.length;
+  var pages   = Math.ceil(total / ITEMS_PER_PAGE);
+  var start   = (currentPage - 1) * ITEMS_PER_PAGE;
+  var end     = start + ITEMS_PER_PAGE;
+
+  // Show/hide all cards
+  document.querySelectorAll('.acard').forEach(function(c) { c.style.display = 'none'; });
+  visible.forEach(function(c, i) { c.style.display = (i >= start && i < end) ? 'block' : 'none'; });
+
+  // Render pagination
+  var pg = document.getElementById('pagination');
+  pg.innerHTML = '';
+  if (pages <= 1) return;
+
+  function addBtn(label, page, disabled, active) {
+    var btn = document.createElement('button');
+    btn.className = 'pg-btn' + (active ? ' active' : '');
+    btn.innerHTML = label;
+    btn.disabled  = disabled;
+    if (!disabled && !active) {
+      btn.onclick = function() { currentPage = page; renderPage(); window.scrollTo({top:0,behavior:'smooth'}); };
+    }
+    pg.appendChild(btn);
+  }
+
+  addBtn('←', currentPage - 1, currentPage === 1, false);
+  for (var p = 1; p <= pages; p++) {
+    addBtn(p, p, false, p === currentPage);
+  }
+  addBtn('→', currentPage + 1, currentPage === pages, false);
+
+  var info = document.createElement('span');
+  info.className = 'pg-info';
+  info.textContent = total + '件中 ' + (start + 1) + '–' + Math.min(end, total) + '件';
+  pg.appendChild(info);
+}
+
 function doFilter(tab, cat) {
   document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('on'); });
   tab.classList.add('on');
-  document.querySelectorAll('.acard').forEach(function(c) {
-    c.style.display = (cat === 'all' || c.classList.contains('d-' + cat)) ? 'block' : 'none';
-  });
+  currentCat  = cat;
+  currentPage = 1;
+  renderPage();
 }
 
 function doFilterFromSidebar(cat) {
@@ -676,10 +751,12 @@ function doFilterFromSidebar(cat) {
       t.classList.add('on');
     }
   });
-  document.querySelectorAll('.acard').forEach(function(c) {
-    c.style.display = c.classList.contains('d-' + cat) ? 'block' : 'none';
-  });
+  currentCat  = cat;
+  currentPage = 1;
+  renderPage();
 }
+
+document.addEventListener('DOMContentLoaded', renderPage);
 </script>
 
 </body>
