@@ -288,6 +288,45 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   .tool-card:hover { transform: none; box-shadow: 0 2px 12px rgba(0,0,0,.05); border-color: var(--border); }
   .flow-card:hover { transform: none; box-shadow: 0 1px 6px rgba(0,0,0,.04); border-color: var(--border); }
 }
+
+/* ─── スマホ：全体像を1画面で見せるコンパクトモード ─── */
+@media (max-width: 480px) {
+  /* ヒーローを極限まで小さく */
+  .hero { padding: 14px 16px 16px; }
+  .hero h1 { font-size: 1.15rem; margin-bottom: 0; }
+  .hero-badge { font-size: 10px; padding: 4px 10px; margin-bottom: 10px; }
+  .stat-row, .hero-lead, .hero-search, .sim-scroll-hint { display: none !important; }
+
+  /* 「あなたの状況から」フローと最近使ったツールを非表示 */
+  .flow-grid, .section-label:not(.cat-section-label), #recent-section { display: none !important; }
+
+  /* カテゴリタブを小さく1行に */
+  .cat-tabs { margin-bottom: 10px; gap: 5px; }
+  .cat-tab { padding: 5px 10px; font-size: 11px; min-height: 34px; }
+
+  /* メインの余白を詰める */
+  .main { padding: 12px 12px 40px; }
+
+  /* ツールカードをコンパクトリスト形式に */
+  .tools-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .tool-card {
+    padding: 10px 10px 10px;
+    gap: 6px;
+    border-radius: 10px;
+  }
+  /* 説明文・ボタンを非表示、アイコン＋名前だけ表示 */
+  .tool-desc, .tool-link { display: none; }
+  .tool-card { cursor: pointer; }
+  .tool-header { gap: 8px; }
+  .tool-icon { width: 32px; height: 32px; font-size: 16px; border-radius: 8px; flex-shrink: 0; }
+  .tool-name { font-size: 11.5px; line-height: 1.35; }
+  .tool-cat-badge { display: none; }
+  /* カードタップで遷移するためリンク化 */
+  .tool-card { text-decoration: none; display: block; }
+}
 </style>
 <script src="/js/cookie-consent.js"></script>
 </head>
@@ -634,6 +673,20 @@ window.addEventListener('scroll', function(){
   var el = document.documentElement;
   document.getElementById('pb').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
 });
+
+/* スマホコンパクトモード：カード全体タップで遷移 */
+(function(){
+  if(window.innerWidth > 480) return;
+  document.querySelectorAll('.tool-card').forEach(function(card){
+    var link = card.querySelector('.tool-link');
+    if(!link) return;
+    var href = link.getAttribute('href');
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e){
+      if(!e.target.closest('a')) location.href = href;
+    });
+  });
+})();
 
 /* カウントアップ */
 (function(){
