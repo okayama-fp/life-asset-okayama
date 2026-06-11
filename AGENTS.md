@@ -12,7 +12,7 @@
 |------|------|
 | サービス名 | ライフアセットオフィス |
 | 英語名 | Life Asset Partners |
-| メール | lifeassetpartners@gmail.com |
+| メール | info@lifeassetoffice.net |
 | 公開URL | https://lifeassetoffice.net/ |
 | リポジトリ | okayama-fp/life-asset-okayama |
 
@@ -106,7 +106,7 @@
 <a href="#" id="mail-link"></a>
 <script>
   (function(){
-    var u='lifeassetpartners',d='gmail.com';
+    var u='info',d='lifeassetoffice.net';
     document.getElementById('mail-link').href='https://mail.google.com/mail/?view=cm&fs=1&to='+u+'@'+d;
   })();
 </script>
