@@ -35,7 +35,7 @@
       --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
       --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
       --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
-      --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
+      --red: #16a34a; --redl: #fff1f2; --redb: #fecdd3;
       --blue: #1d4ed8; --bluel: #eff6ff; --blueb: #bfdbfe;
       --purple: #7c3aed; --purplel: #f5f3ff; --purpleb: #ddd6fe;
     }
@@ -101,7 +101,7 @@
     .callout { padding: 18px 22px; margin: 20px 0 24px; border-radius: 10px; font-size: 14.5px; line-height: 1.85; }
     .callout-warning { background: var(--amberl); border-left: 4px solid var(--amber); }
     .callout-safe { background: var(--greenl); border-left: 4px solid var(--green); }
-    .callout-danger { background: var(--redl); border-left: 4px solid var(--red); }
+    .callout-danger { background: var(--redl); border-left: 4px solid var(--accent); }
     .callout-info { background: var(--bluel); border-left: 4px solid var(--blue); }
     .callout strong { color: var(--navy); }
 
@@ -119,7 +119,7 @@
     tr:nth-child(even) td { background: var(--greenl); }
 
     /* リスクバッジ */
-    .risk-high { color: var(--red); font-weight: 700; }
+    .risk-high { color: var(--accent); font-weight: 700; }
     .risk-mid { color: var(--amber); font-weight: 700; }
     .risk-low { color: var(--green); font-weight: 700; }
 
@@ -141,7 +141,7 @@
     .action-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 14px; line-height: 1.75; }
     .action-item:last-child { border-bottom: none; }
     .action-num { min-width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
-    .badge-urgent { background: var(--red); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+    .badge-urgent { background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
     .badge-high { background: var(--amber); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
     .badge-mid { background: var(--green); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
 
@@ -150,7 +150,7 @@
     .checklist li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px dotted var(--border); font-size: 14.5px; line-height: 1.8; }
     .checklist li:last-child { border-bottom: none; }
     .check-o { color: var(--green); font-weight: 700; flex-shrink: 0; }
-    .check-x { color: var(--red); font-weight: 700; flex-shrink: 0; }
+    .check-x { color: var(--accent); font-weight: 700; flex-shrink: 0; }
 
     /* タイムライン */
     .timeline { margin: 24px 0 32px; position: relative; padding-left: 0; }
@@ -373,7 +373,7 @@
       </div>
       <div class="rate-bar-item">
         <div class="rate-bar-label"><span>フラット35（35年固定）</span><span class="val">2.71%</span></div>
-        <div class="rate-bar-track"><div class="rate-bar-fill" style="width:39%; background:#dc2626;"></div></div>
+        <div class="rate-bar-track"><div class="rate-bar-fill" style="width:39%; background:#16a34a;"></div></div>
       </div>
     </div>
 
