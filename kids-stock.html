@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/kids-stock.html">
+<title>株式投資キッズ版シミュレーター｜ライフアセットオフィス</title>
+<meta name="description" content="架空の会社の株を売り買い！ニュースで株価が動く理由がわかる、子供向け株式投資シミュレーター。">
+<meta property="og:title" content="株式投資キッズ版シミュレーター｜ライフアセットオフィス">
+<meta property="og:description" content="架空の会社の株を売り買い！ニュースで株価が動く理由がわかる、子供向け株式投資シミュレーター。">
+<meta property="og:url" content="https://lifeassetoffice.net/kids-stock.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<link rel="stylesheet" href="/style.css">
+<style>
+:root {
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f0fdf4; --text: #1e293b; --text-light: #64748b; --border: #d1fae5;
+  --card-bg: #fff; --up: #16a34a; --down: #dc2626; --neutral: #64748b;
+  --gold: #d97706;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* ─── Hero ─── */
+.hero {
+  background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 60%, #1a3060 100%);
+  color: #fff; padding: 48px 24px 52px; text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(74,222,128,.08) 0%, transparent 60%);
+  pointer-events: none; animation: heroPulse 6s ease-in-out infinite;
+}
+@keyframes heroPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35);
+  color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+}
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
+.hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; line-height: 1.25; margin-bottom: 12px; }
+.hero h1 .emoji-big { font-size: clamp(2rem, 5vw, 3rem); display: block; margin-bottom: 6px; }
+.hero-lead { font-size: 15px; color: rgba(255,255,255,.82); max-width: 520px; margin: 0 auto 20px; }
+.hero-game-notice {
+  display: inline-block;
+  background: rgba(255,220,50,.18); border: 1.5px solid rgba(255,220,50,.5);
+  color: #fde68a; font-size: 12px; font-weight: 700; padding: 6px 18px;
+  border-radius: 50px; letter-spacing: .05em;
+}
+
+/* ─── Main Layout ─── */
+.main { max-width: 1040px; margin: 0 auto; padding: 28px 16px 80px; }
+
+/* ─── Game status bar ─── */
+.game-status-bar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: 12px; background: var(--navy); color: #fff; border-radius: 16px;
+  padding: 16px 24px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(26,61,43,.2);
+}
+.turn-info { display: flex; align-items: center; gap: 12px; }
+.turn-badge {
+  background: rgba(74,222,128,.15); border: 1.5px solid rgba(74,222,128,.35);
+  color: #4ade80; font-size: 13px; font-weight: 800; padding: 6px 16px; border-radius: 50px;
+}
+.turn-label { font-size: 14px; color: rgba(255,255,255,.75); }
+.turn-progress-wrap { flex: 1; min-width: 120px; max-width: 200px; }
+.turn-progress-track { background: rgba(255,255,255,.15); border-radius: 4px; height: 6px; margin-top: 6px; }
+.turn-progress-fill { background: linear-gradient(90deg, #22c55e, #4ade80); height: 6px; border-radius: 4px; transition: width .4s; }
+.btn-next-turn {
+  background: linear-gradient(90deg, var(--sky), var(--sky-light));
+  color: #fff; border: none; font-size: 15px; font-weight: 800;
+  padding: 12px 28px; border-radius: 50px; cursor: pointer;
+  transition: transform .15s, box-shadow .15s; font-family: inherit;
+  box-shadow: 0 4px 16px rgba(34,197,94,.35);
+}
+.btn-next-turn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,197,94,.45); }
+.btn-next-turn:disabled { opacity: .45; cursor: default; transform: none; }
+.btn-next-turn:active:not(:disabled) { transform: translateY(0); }
+
+/* ─── Layout columns ─── */
+.game-columns { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
+@media (max-width: 820px) { .game-columns { grid-template-columns: 1fr; } }
+
+/* ─── Panel shared ─── */
+.panel {
+  background: var(--card-bg); border: 1px solid #d1fae5;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(26,122,74,.07);
+}
+.panel-head {
+  background: linear-gradient(90deg, var(--navy), var(--navy-soft));
+  color: #fff; padding: 14px 20px; display: flex; align-items: center; gap: 10px;
+}
+.panel-head h2 { font-size: 15px; font-weight: 800; }
+.panel-head .ph-icon { font-size: 18px; }
+.panel-body { padding: 16px 18px; }
+
+/* ─── Portfolio panel ─── */
+.portfolio-totals {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
+}
+.pf-stat {
+  background: #f8fafc; border: 1px solid var(--border); border-radius: 12px;
+  padding: 12px 14px; text-align: center;
+}
+.pf-stat-label { font-size: 10px; color: var(--text-light); font-weight: 700; letter-spacing: .06em; margin-bottom: 4px; }
+.pf-stat-value { font-size: 1.15rem; font-weight: 900; color: var(--navy); }
+.pf-stat-value.up { color: var(--up); }
+.pf-stat-value.down { color: var(--down); }
+.pf-stat-value.neutral { color: var(--neutral); }
+
+.holdings-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.holdings-table th { text-align: left; padding: 6px 8px; color: var(--text-light); font-size: 11px; font-weight: 700; border-bottom: 2px solid var(--border); }
+.holdings-table td { padding: 8px 8px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+.holdings-table tbody tr:last-child td { border-bottom: none; }
+.holdings-row-empty { color: var(--text-light); font-size: 12px; text-align: center; padding: 16px 0; }
+
+/* ─── Company grid ─── */
+.company-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+.company-card {
+  background: var(--card-bg); border: 2px solid var(--border);
+  border-radius: 16px; padding: 16px 18px;
+  box-shadow: 0 1px 8px rgba(26,122,74,.05);
+  transition: border-color .2s, box-shadow .2s;
+}
+.company-card:hover { border-color: var(--sky-light); box-shadow: 0 4px 20px rgba(26,122,74,.12); }
+.company-card.price-up { border-color: #86efac; background: #f0fdf4; }
+.company-card.price-down { border-color: #fca5a5; background: #fff5f5; }
+
+.company-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.company-info { flex: 1; }
+.company-name { font-size: 16px; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 6px; }
+.company-desc { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.company-volatility { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-top: 4px; }
+.vol-low { background: #dcfce7; color: #166534; }
+.vol-mid { background: #fef3c7; color: #92400e; }
+.vol-high { background: #fee2e2; color: #991b1b; }
+
+.company-price-area { text-align: right; flex-shrink: 0; }
+.current-price { font-size: 1.5rem; font-weight: 900; color: var(--navy); line-height: 1; }
+.current-price .yen { font-size: 14px; font-weight: 700; }
+.price-change { font-size: 12px; font-weight: 800; margin-top: 4px; }
+.price-change.up { color: var(--up); }
+.price-change.down { color: var(--down); }
+.price-change.flat { color: var(--neutral); }
+
+/* Sparkline */
+.sparkline-wrap { margin: 8px 0 12px; }
+.sparkline-label { font-size: 10px; color: var(--text-light); margin-bottom: 4px; letter-spacing: .05em; }
+.sparkline { display: block; width: 100%; height: 36px; }
+
+/* Buy/Sell controls */
+.trade-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.trade-input-wrap { display: flex; align-items: center; gap: 6px; }
+.trade-qty-label { font-size: 11px; color: var(--text-light); font-weight: 700; white-space: nowrap; }
+.trade-qty {
+  width: 72px; padding: 7px 10px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 14px; font-family: inherit;
+  text-align: center; font-weight: 700;
+  outline: none; transition: border-color .15s;
+}
+.trade-qty:focus { border-color: var(--sky); }
+.holding-info { font-size: 11px; color: var(--text-light); margin-left: 2px; white-space: nowrap; }
+.btn-buy, .btn-sell {
+  padding: 8px 18px; border: none; border-radius: 50px;
+  font-size: 13px; font-weight: 800; cursor: pointer; font-family: inherit;
+  transition: opacity .15s, transform .1s;
+}
+.btn-buy { background: linear-gradient(90deg,#16a34a,#22c55e); color: #fff; }
+.btn-sell { background: linear-gradient(90deg,#dc2626,#ef4444); color: #fff; }
+.btn-buy:hover, .btn-sell:hover { opacity: .88; transform: translateY(-1px); }
+.btn-buy:active, .btn-sell:active { transform: translateY(0); }
+.btn-buy:disabled, .btn-sell:disabled { opacity: .38; cursor: default; transform: none; }
+
+/* ─── News area ─── */
+.news-panel {
+  margin-bottom: 20px;
+  background: var(--card-bg); border: 2px solid #fef08a;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.news-head {
+  background: linear-gradient(90deg, #92400e, #b45309);
+  color: #fff; padding: 12px 18px; display: flex; align-items: center; gap: 8px;
+}
+.news-head h2 { font-size: 14px; font-weight: 800; }
+.news-body { padding: 14px 18px; }
+.news-title { font-size: 17px; font-weight: 900; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.news-explain { font-size: 13px; color: var(--text); line-height: 1.75; }
+.news-explain strong { color: var(--navy); }
+.news-placeholder { font-size: 13px; color: var(--text-light); text-align: center; padding: 12px 0; }
+
+/* Education callout inside news */
+.edu-callout {
+  margin-top: 12px;
+  background: var(--sky-pale); border-left: 4px solid var(--sky);
+  border-radius: 0 12px 12px 0; padding: 12px 14px;
+}
+.edu-callout-label { font-size: 10px; font-weight: 800; color: var(--sky); letter-spacing: .1em; margin-bottom: 5px; }
+.edu-callout p { font-size: 12px; color: var(--navy); line-height: 1.7; }
+
+/* ─── Trade feedback toast ─── */
+.trade-toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--navy); color: #fff; font-size: 13px; font-weight: 700;
+  padding: 10px 24px; border-radius: 50px; z-index: 9000;
+  opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none;
+  white-space: nowrap;
+}
+.trade-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.trade-toast.error { background: #dc2626; }
+.trade-toast.success-buy { background: #16a34a; }
+.trade-toast.success-sell { background: #b45309; }
+
+/* ─── Game Over overlay ─── */
+.game-over-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.65);
+  z-index: 8000; display: flex; align-items: center; justify-content: center;
+  padding: 24px; backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.game-over-overlay.active { opacity: 1; pointer-events: all; }
+.game-over-box {
+  background: #fff; border-radius: 24px; max-width: 560px; width: 100%;
+  overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,.3);
+  transform: scale(.92); transition: transform .35s;
+}
+.game-over-overlay.active .game-over-box { transform: scale(1); }
+.game-over-head {
+  background: linear-gradient(135deg, var(--navy), #2d6a4f);
+  color: #fff; padding: 32px 28px 24px; text-align: center;
+}
+.game-over-emoji { font-size: 3.5rem; margin-bottom: 10px; display: block; }
+.game-over-head h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 8px; }
+.game-over-head p { font-size: 13px; color: rgba(255,255,255,.75); }
+.game-over-body { padding: 24px 28px; }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.result-stat { text-align: center; background: #f8fafc; border-radius: 14px; padding: 16px 10px; }
+.result-stat-label { font-size: 11px; color: var(--text-light); font-weight: 700; margin-bottom: 6px; }
+.result-stat-value { font-size: 1.3rem; font-weight: 900; color: var(--navy); }
+.result-stat-value.up { color: var(--up); }
+.result-stat-value.down { color: var(--down); }
+.result-grade {
+  text-align: center; background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 2px solid #f59e0b; border-radius: 16px; padding: 16px;
+  margin-bottom: 20px;
+}
+.grade-label { font-size: 11px; font-weight: 800; color: #92400e; letter-spacing: .1em; margin-bottom: 6px; }
+.grade-value { font-size: 2.5rem; font-weight: 900; color: #92400e; line-height: 1; }
+.grade-comment { font-size: 13px; color: #78350f; margin-top: 6px; }
+.lessons-box { background: var(--sky-pale); border-radius: 14px; padding: 16px 18px; margin-bottom: 20px; }
+.lessons-box h3 { font-size: 13px; font-weight: 800; color: var(--sky); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.lessons-box ul { list-style: none; padding: 0; }
+.lessons-box li { font-size: 12px; color: var(--navy); padding: 5px 0; display: flex; align-items: flex-start; gap: 7px; line-height: 1.6; }
+.lessons-box li::before { content: '✔'; color: var(--sky); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+.disclaimer-mini { font-size: 10px; color: var(--text-light); text-align: center; line-height: 1.6; margin-bottom: 16px; }
+.btn-restart {
+  display: block; width: 100%;
+  background: linear-gradient(90deg, var(--sky), var(--sky-light));
+  color: #fff; border: none; border-radius: 50px;
+  font-size: 16px; font-weight: 800; padding: 15px;
+  cursor: pointer; font-family: inherit; transition: opacity .15s, transform .15s;
+}
+.btn-restart:hover { opacity: .9; transform: translateY(-2px); }
+
+/* ─── Disclaimer ─── */
+.disclaimer-bar {
+  background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 12px;
+  padding: 12px 16px; margin-bottom: 20px; display: flex; gap: 10px; align-items: flex-start;
+}
+.disclaimer-bar .di-icon { font-size: 18px; flex-shrink: 0; }
+.disclaimer-bar p { font-size: 12px; color: #78350f; line-height: 1.7; }
+.disclaimer-bar strong { font-weight: 800; }
+
+/* ─── Footer ─── */
+footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 28px 24px 20px; text-align: center; }
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .75; margin-top: 8px; line-height: 1.8; }
+footer a { color: rgba(255,255,255,.7); text-decoration: underline; }
+footer a:hover { color: #fff; }
+
+/* ─── Responsive ─── */
+@media (max-width: 520px) {
+  .portfolio-totals { grid-template-columns: 1fr 1fr; }
+  .pf-stat-value { font-size: 1rem; }
+  .current-price { font-size: 1.25rem; }
+  .company-card { padding: 12px 14px; }
+  .result-grid { grid-template-columns: 1fr 1fr; }
+  .game-over-body { padding: 18px 18px; }
+  .btn-next-turn { padding: 11px 20px; font-size: 14px; }
+}
+@media (max-width: 380px) {
+  .trade-controls { flex-direction: column; align-items: flex-start; }
+}
+</style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge"><span class="hero-dot"></span>無料・登録不要・ゲームです</div>
+  <h1>
+    <span class="emoji-big">📈</span>
+    株式投資キッズ版シミュレーター
+  </h1>
+  <p class="hero-lead">架空の会社の株を売り買いして、お金の仕組みを楽しく学ぼう！<br>ニュースが出るたびに株価が動く理由がわかるよ。</p>
+  <span class="hero-game-notice">⚠️ これはゲームです。ここで使うお金はすべて架空のゲーム用コインです。</span>
+</div>
+
+<div class="main">
+
+  <!-- 免責・ゲーム説明 -->
+  <div class="disclaimer-bar">
+    <span class="di-icon">🎮</span>
+    <p>
+      <strong>ゲームのルール：</strong>
+      このシミュレーターは<strong>学習・ゲーム目的のみ</strong>です。登場する会社はすべて架空で、使うお金は「ゲーム内のおもちゃのお金（コイン）」です。実際の株式投資とは異なります。投資の勧誘ではありません。
+    </p>
+  </div>
+
+  <!-- ゲームステータスバー -->
+  <div class="game-status-bar" id="statusBar">
+    <div class="turn-info">
+      <div class="turn-badge" id="turnBadge">第 1 ターン</div>
+      <div class="turn-label">残り <span id="turnsLeft">20</span> ターン</div>
+    </div>
+    <div class="turn-progress-wrap">
+      <div class="turn-progress-track">
+        <div class="turn-progress-fill" id="turnProgressFill" style="width:0%"></div>
+      </div>
+    </div>
+    <button class="btn-next-turn" id="btnNextTurn" onclick="nextTurn()">次のターン ▶</button>
+  </div>
+
+  <!-- ニュースエリア -->
+  <div class="news-panel">
+    <div class="news-head">
+      <span>📰</span>
+      <h2>今日のニュース</h2>
+    </div>
+    <div class="news-body" id="newsBody">
+      <p class="news-placeholder">「次のターン」ボタンを押すとニュースが届くよ！</p>
+    </div>
+  </div>
+
+  <!-- メインカラム -->
+  <div class="game-columns">
+
+    <!-- 左：会社グリッド -->
+    <div>
+      <div class="panel" style="margin-bottom:0; background:transparent; border:none; box-shadow:none;">
+        <div class="company-grid" id="companyGrid">
+          <!-- JS で生成 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：ポートフォリオパネル -->
+    <div>
+      <div class="panel" id="portfolioPanel">
+        <div class="panel-head">
+          <span class="ph-icon">💼</span>
+          <h2>わたしのポートフォリオ</h2>
+        </div>
+        <div class="panel-body">
+          <div class="portfolio-totals">
+            <div class="pf-stat">
+              <div class="pf-stat-label">所持コイン</div>
+              <div class="pf-stat-value" id="pfCash">10,000</div>
+            </div>
+            <div class="pf-stat">
+              <div class="pf-stat-label">株の評価額</div>
+              <div class="pf-stat-value" id="pfStockValue">0</div>
+            </div>
+            <div class="pf-stat">
+              <div class="pf-stat-label">合計資産</div>
+              <div class="pf-stat-value" id="pfTotal" style="color:var(--navy)">10,000</div>
+            </div>
+            <div class="pf-stat">
+              <div class="pf-stat-label">損益</div>
+              <div class="pf-stat-value neutral" id="pfPnl">± 0</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);font-weight:700;letter-spacing:.06em;margin-bottom:8px;">保有株一覧</div>
+          <table class="holdings-table">
+            <thead>
+              <tr>
+                <th>会社</th>
+                <th style="text-align:right">数量</th>
+                <th style="text-align:right">評価額</th>
+              </tr>
+            </thead>
+            <tbody id="holdingsBody">
+              <tr><td colspan="3" class="holdings-row-empty">まだ株を持っていないよ</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ゲームオーバーオーバーレイ -->
+<div class="game-over-overlay" id="gameOverOverlay">
+  <div class="game-over-box">
+    <div class="game-over-head">
+      <span class="game-over-emoji" id="gameOverEmoji">🎉</span>
+      <h2 id="gameOverTitle">ゲーム終了！</h2>
+      <p id="gameOverSubtitle">20ターン分の結果を見てみよう</p>
+    </div>
+    <div class="game-over-body">
+      <div class="result-grid">
+        <div class="result-stat">
+          <div class="result-stat-label">スタート</div>
+          <div class="result-stat-value">10,000</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">最終資産</div>
+          <div class="result-stat-value" id="finalTotal">—</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">損益</div>
+          <div class="result-stat-value" id="finalPnl">—</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">リターン</div>
+          <div class="result-stat-value" id="finalReturn">—</div>
+        </div>
+      </div>
+      <div class="result-grade">
+        <div class="grade-label">📊 投資家ランク</div>
+        <div class="grade-value" id="gradeValue">—</div>
+        <div class="grade-comment" id="gradeComment">—</div>
+      </div>
+      <div class="lessons-box">
+        <h3>📚 今日学んだこと</h3>
+        <ul>
+          <li>ニュースは株価に影響する。「なぜ動くか」を考えるのが大事！</li>
+          <li><strong>分散投資</strong>：1社に全部つぎ込まず、複数の会社に分けると安心。</li>
+          <li><strong>長期保有</strong>：短期の上下に惑わされず、じっくり持ち続けることも戦略のひとつ。</li>
+          <li><strong>感情で売買しない</strong>：「こわくなって売る」「興奮して買う」は損しやすい。</li>
+          <li>業種が違う会社の株は、同じニュースで逆の動きをすることがある。</li>
+        </ul>
+      </div>
+      <p class="disclaimer-mini">
+        ※ これはゲームです。実際の株式投資は元本保証がなく、損失が生じる場合があります。<br>
+        投資は十分な知識を持ったうえで、ご自身の判断と責任で行ってください。
+      </p>
+      <button class="btn-restart" onclick="restartGame()">🔄 もう一度あそぶ</button>
+    </div>
+  </div>
+</div>
+
+<!-- トースト通知 -->
+<div class="trade-toast" id="tradeToast"></div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+</footer>
+
+<script src="/nav.js" defer></script>
+<script>
+// ============================================================
+//  株式投資キッズ版シミュレーター — ゲームエンジン
+//  ※ このゲームで使うお金・会社はすべて架空です
+// ============================================================
+
+const STARTING_CASH = 10000;
+const MAX_TURNS = 20;
+const HISTORY_LEN = 10; // スパークライン用
+
+// ─── 会社定義 ───────────────────────────────────────────────
+const COMPANIES = [
+  {
+    id: 'candy',
+    emoji: '🍬',
+    name: 'アメちゃん製菓',
+    desc: 'お菓子メーカー・安定型',
+    volatility: 'low',
+    volLabel: '安定',
+    volClass: 'vol-low',
+    sector: ['candy'],
+    initPrice: 200,
+  },
+  {
+    id: 'game',
+    emoji: '🎮',
+    name: 'ピコピコゲームス',
+    desc: 'ゲームソフト会社・変動大',
+    volatility: 'high',
+    volLabel: '変動大',
+    volClass: 'vol-high',
+    sector: ['game'],
+    initPrice: 350,
+  },
+  {
+    id: 'robot',
+    emoji: '🤖',
+    name: 'みらいロボット',
+    desc: 'AI・ロボット企業・成長型',
+    volatility: 'mid',
+    volLabel: '中程度',
+    volClass: 'vol-mid',
+    sector: ['robot'],
+    initPrice: 480,
+  },
+  {
+    id: 'green',
+    emoji: '🌱',
+    name: 'グリーンエナジー',
+    desc: '環境・再エネ企業・中程度',
+    volatility: 'mid',
+    volLabel: '中程度',
+    volClass: 'vol-mid',
+    sector: ['green'],
+    initPrice: 310,
+  },
+  {
+    id: 'konbini',
+    emoji: '🏪',
+    name: 'どこでもコンビニ',
+    desc: 'コンビニチェーン・超安定',
+    volatility: 'low',
+    volLabel: '超安定',
+    volClass: 'vol-low',
+    sector: ['konbini'],
+    initPrice: 150,
+  },
+];
+
+// ─── ボラティリティ幅（ベースランダムウォーク） ─────────────
+const VOL_RANGE = { low: 0.03, mid: 0.06, high: 0.10 };
+
+// ─── ニュースイベント定義 ────────────────────────────────────
+const NEWS_EVENTS = [
+  {
+    id: 'n1',
+    headline: '🍭 大ヒット新商品発売！お菓子とゲームが大人気！',
+    affect: { candy: +0.18, game: +0.15 },
+    explain: '新しい商品がたくさん売れると、会社の「利益（もうけ）」が増えます。利益が増えると、その会社の株を買いたい人が増えるので、株価が上がります。',
+    edu: 'お店で新商品が売れているニュースを見たら「あの会社の株が上がるかも？」と考えてみよう。これが<strong>ファンダメンタルズ分析</strong>の第一歩だよ！',
+  },
+  {
+    id: 'n2',
+    headline: '☀️ 猛暑でアイスが飛ぶように売れた！',
+    affect: { candy: +0.22 },
+    explain: '暑い夏はアイスやジュースの売り上げが一気に増えます。アメちゃん製菓もアイス商品を出しているため、売上アップが期待され株価が上がりました。',
+    edu: '天気や季節も株価に影響するよ。「暑い夏→アイスが売れる→お菓子会社の株が上がる」という<strong>連鎖を読む力</strong>が投資家に大切なんだ。',
+  },
+  {
+    id: 'n3',
+    headline: '🕹️ 超話題の新型ゲーム機が発売！',
+    affect: { game: +0.28 },
+    explain: '新しいゲーム機が発売されると、そのゲーム機用のソフトが必要になります。ゲームソフトをたくさん作っているピコピコゲームスの売上が増えると期待されて株価が上がりました。',
+    edu: '関連業種の動きにも注目しよう。ゲーム機が売れれば<strong>ゲームソフト会社も恩恵を受ける</strong>。このように「つながり（バリューチェーン）」を考えるのも大事な分析方法だよ。',
+  },
+  {
+    id: 'n4',
+    headline: '🚦 AI規制の法律について国会で議論スタート',
+    affect: { robot: -0.20 },
+    explain: 'AIやロボットに新しい規制（ルール）ができると、開発・販売にコストがかかったり、一部の商品が売れなくなったりする可能性があります。そのため、みらいロボットの株価は下がりました。',
+    edu: '政府のルールも株価を動かすよ。これを<strong>規制リスク</strong>という。ビジネスに影響するニュースは常にチェックしよう。',
+  },
+  {
+    id: 'n5',
+    headline: '🌀 大型台風で多くのお店が一時休業',
+    affect: { konbini: -0.15 },
+    explain: '台風でお店が閉まると、その日の売上がゼロになってしまいます。どこでもコンビニは全国にたくさんお店があるので、台風の影響が大きいと判断され株価が下がりました。',
+    edu: '自然災害も株価に影響するよ。これを<strong>地政学リスク・自然災害リスク</strong>という。株はいつも「将来の利益」をもとに値段が決まるんだ。',
+  },
+  {
+    id: 'n6',
+    headline: '💚 再生可能エネルギーへの補助金が大幅増額！',
+    affect: { green: +0.25 },
+    explain: '政府がグリーンエネルギーにたくさんお金（補助金）を出してくれると、会社の費用が減り、利益が増えます。また「これからこの業界は伸びる！」と期待する人も増え、株価が上がりました。',
+    edu: '政府の政策は株価を大きく動かすよ。「補助金」「減税」「規制緩和」など<strong>追い風になる政策</strong>がある会社の株を探してみよう。',
+  },
+  {
+    id: 'n7',
+    headline: '📉 景気が悪くなったというニュースが広がった',
+    affect: { candy: -0.12, game: -0.18, robot: -0.16, green: -0.14, konbini: -0.10 },
+    explain: '景気が悪くなると、人々はお金を使うのを控えます。すると多くの会社の売上が下がり、全体的に株価が下がりやすくなります。これを「不景気相場」と呼びます。',
+    edu: 'ひとつのニュースで<strong>全体が下がることもある</strong>。これがこわいところ。でも、だからこそ業種の違う会社に分散投資することが大切なんだ。',
+  },
+  {
+    id: 'n8',
+    headline: '📊 ある会社が予想を超える好決算を発表！',
+    affect: null, // 後でランダム1社にプラス
+    explain: '「決算」とは、会社がどれだけ利益を出したかを発表することです。予想より良い結果だと「この会社は強い！」と投資家が評価し、株価が上がります。',
+    edu: '決算発表は株価が大きく動くタイミングだよ。「予想比」が大事で、同じ「黒字」でも<strong>予想より悪ければ株価は下がる</strong>ことも。',
+    isRandom: 'up',
+  },
+  {
+    id: 'n9',
+    headline: '😰 ある会社の社長が大きなミスを認めて謝罪',
+    affect: null, // 後でランダム1社にマイナス
+    explain: 'トップがミスをすると「この会社は信頼できる？」と疑問を持つ人が増えます。会社への信頼が落ちると、株を手放す人が増えて株価が下がります。',
+    edu: '経営者（社長・CEO）の信頼性も株価に影響するよ。これを<strong>ガバナンスリスク</strong>という。会社の中の人まで見るのが投資の深さだ。',
+    isRandom: 'down',
+  },
+];
+
+// ─── ゲーム状態 ──────────────────────────────────────────────
+let state = {};
+
+function initState() {
+  state = {
+    turn: 0,
+    cash: STARTING_CASH,
+    holdings: {}, // { id: quantity }
+    prices: {},   // { id: currentPrice }
+    history: {},  // { id: [price, ...] }
+    prevPrices: {},
+    gameOver: false,
+  };
+  COMPANIES.forEach(c => {
+    state.prices[c.id] = c.initPrice;
+    state.prevPrices[c.id] = c.initPrice;
+    state.history[c.id] = [c.initPrice];
+    state.holdings[c.id] = 0;
+  });
+}
+
+// ─── 価格更新 ────────────────────────────────────────────────
+function updatePrices(newsEvent) {
+  COMPANIES.forEach(c => {
+    state.prevPrices[c.id] = state.prices[c.id];
+
+    // ベースランダムウォーク
+    const range = VOL_RANGE[c.volatility];
+    const base = (Math.random() * 2 - 1) * range;
+
+    // ニュース補正
+    let newsBoost = 0;
+    if (newsEvent) {
+      if (newsEvent.affect && newsEvent.affect[c.id] !== undefined) {
+        newsBoost = newsEvent.affect[c.id];
+      }
+    }
+
+    const change = base + newsBoost;
+    let newPrice = Math.round(state.prices[c.id] * (1 + change));
+    newPrice = Math.max(1, Math.min(9999, newPrice));
+    state.prices[c.id] = newPrice;
+
+    // 履歴追加
+    state.history[c.id].push(newPrice);
+    if (state.history[c.id].length > HISTORY_LEN) {
+      state.history[c.id].shift();
+    }
+  });
+}
+
+// ─── ニュースイベントを選択 ──────────────────────────────────
+let usedNewsIds = [];
+
+function pickNewsEvent() {
+  // まだ使っていないものから選ぶ、なければリセット
+  let pool = NEWS_EVENTS.filter(n => !usedNewsIds.includes(n.id));
+  if (pool.length === 0) {
+    usedNewsIds = [];
+    pool = NEWS_EVENTS.slice();
+  }
+  const ev = pool[Math.floor(Math.random() * pool.length)];
+  usedNewsIds.push(ev.id);
+
+  // ランダム対象の解決
+  const resolved = Object.assign({}, ev);
+  if (ev.isRandom === 'up') {
+    const target = COMPANIES[Math.floor(Math.random() * COMPANIES.length)];
+    resolved.affect = { [target.id]: 0.22 };
+    resolved.targetName = target.name;
+    resolved.headline = `📊 ${target.name} が予想を超える好決算を発表！`;
+  } else if (ev.isRandom === 'down') {
+    const target = COMPANIES[Math.floor(Math.random() * COMPANIES.length)];
+    resolved.affect = { [target.id]: -0.22 };
+    resolved.targetName = target.name;
+    resolved.headline = `😰 ${target.name} の社長が大きなミスを認めて謝罪`;
+  }
+  return resolved;
+}
+
+// ─── 計算ヘルパー ────────────────────────────────────────────
+function calcStockValue() {
+  return COMPANIES.reduce((sum, c) => {
+    return sum + state.holdings[c.id] * state.prices[c.id];
+  }, 0);
+}
+
+function calcTotal() {
+  return state.cash + calcStockValue();
+}
+
+function fmtNum(n) {
+  return n.toLocaleString('ja-JP');
+}
+
+function pctChange(prev, curr) {
+  if (prev === 0) return 0;
+  return ((curr - prev) / prev) * 100;
+}
+
+// ─── UI 更新 ─────────────────────────────────────────────────
+
+function renderPortfolio() {
+  const stockVal = calcStockValue();
+  const total = calcTotal();
+  const pnl = total - STARTING_CASH;
+
+  document.getElementById('pfCash').textContent = fmtNum(Math.round(state.cash));
+  document.getElementById('pfStockValue').textContent = fmtNum(Math.round(stockVal));
+
+  const pfTotal = document.getElementById('pfTotal');
+  pfTotal.textContent = fmtNum(Math.round(total));
+
+  const pfPnl = document.getElementById('pfPnl');
+  pfPnl.className = 'pf-stat-value';
+  if (pnl > 0) {
+    pfPnl.textContent = '+ ' + fmtNum(Math.round(pnl));
+    pfPnl.classList.add('up');
+  } else if (pnl < 0) {
+    pfPnl.textContent = '− ' + fmtNum(Math.abs(Math.round(pnl)));
+    pfPnl.classList.add('down');
+  } else {
+    pfPnl.textContent = '± 0';
+    pfPnl.classList.add('neutral');
+  }
+
+  // 保有株テーブル
+  const tbody = document.getElementById('holdingsBody');
+  const hasHoldings = COMPANIES.some(c => state.holdings[c.id] > 0);
+  if (!hasHoldings) {
+    tbody.innerHTML = '<tr><td colspan="3" class="holdings-row-empty">まだ株を持っていないよ</td></tr>';
+    return;
+  }
+  tbody.innerHTML = COMPANIES.filter(c => state.holdings[c.id] > 0).map(c => {
+    const val = state.holdings[c.id] * state.prices[c.id];
+    return `<tr>
+      <td><span style="font-size:13px">${c.emoji} ${c.name}</span></td>
+      <td style="text-align:right;font-weight:800">${state.holdings[c.id]}</td>
+      <td style="text-align:right;font-weight:800">${fmtNum(val)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function buildSparkline(prices) {
+  const w = 200, h = 36, pad = 2;
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  const range = max - min || 1;
+  const pts = prices.map((p, i) => {
+    const x = pad + (i / (prices.length - 1 || 1)) * (w - pad * 2);
+    const y = h - pad - ((p - min) / range) * (h - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+
+  // 色：最後が最初より高ければ緑
+  const color = prices[prices.length - 1] >= prices[0] ? '#16a34a' : '#dc2626';
+  const fillColor = prices[prices.length - 1] >= prices[0] ? 'rgba(22,163,74,.08)' : 'rgba(220,38,38,.08)';
+
+  // 塗りつぶし用パス
+  const lastPt = pts[pts.length - 1].split(',');
+  const firstPt = pts[0].split(',');
+  const fillPath = `M${firstPt[0]},${h - pad} L${pts.join(' L')} L${lastPt[0]},${h - pad} Z`;
+
+  return `<svg class="sparkline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    <path d="${fillPath}" fill="${fillColor}"/>
+    <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${lastPt[0]}" cy="${lastPt[1]}" r="2.5" fill="${color}"/>
+  </svg>`;
+}
+
+function renderCompanies() {
+  const grid = document.getElementById('companyGrid');
+  grid.innerHTML = COMPANIES.map(c => {
+    const price = state.prices[c.id];
+    const prev = state.prevPrices[c.id];
+    const pct = pctChange(prev, price);
+    const pctStr = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
+    const pctClass = pct > 0.05 ? 'up' : pct < -0.05 ? 'down' : 'flat';
+    const cardClass = state.turn > 0 ? (pct > 0.05 ? 'price-up' : pct < -0.05 ? 'price-down' : '') : '';
+    const held = state.holdings[c.id];
+    const maxBuy = Math.floor(state.cash / price);
+
+    return `<div class="company-card ${cardClass}" id="card-${c.id}">
+      <div class="company-header">
+        <div class="company-info">
+          <div class="company-name">${c.emoji} ${c.name}</div>
+          <div class="company-desc">${c.desc}</div>
+          <span class="company-volatility ${c.volClass}">変動：${c.volLabel}</span>
+        </div>
+        <div class="company-price-area">
+          <div class="current-price"><span class="yen">🪙</span>${fmtNum(price)}</div>
+          <div class="price-change ${pctClass}">${state.turn === 0 ? '—' : pctStr}</div>
+        </div>
+      </div>
+      <div class="sparkline-wrap">
+        <div class="sparkline-label">直近の値動き（最大${HISTORY_LEN}ターン）</div>
+        ${buildSparkline(state.history[c.id])}
+      </div>
+      <div class="trade-controls">
+        <div class="trade-input-wrap">
+          <label class="trade-qty-label" for="qty-${c.id}">数量：</label>
+          <input class="trade-qty" type="number" id="qty-${c.id}" value="1" min="1" max="9999">
+        </div>
+        <span class="holding-info">保有：${held}株</span>
+        <button class="btn-buy" onclick="buyStock('${c.id}')" ${maxBuy < 1 ? 'disabled' : ''}>買う</button>
+        <button class="btn-sell" onclick="sellStock('${c.id}')" ${held < 1 ? 'disabled' : ''}>売る</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderNews(ev) {
+  if (!ev) {
+    document.getElementById('newsBody').innerHTML = '<p class="news-placeholder">「次のターン」ボタンを押すとニュースが届くよ！</p>';
+    return;
+  }
+
+  // 影響する会社名をリスト化
+  let affectedHtml = '';
+  if (ev.affect) {
+    const aff = Object.entries(ev.affect).map(([id, val]) => {
+      const co = COMPANIES.find(c => c.id === id);
+      if (!co) return '';
+      const arrow = val > 0 ? '⬆️ UP' : '⬇️ DOWN';
+      const color = val > 0 ? 'var(--up)' : 'var(--down)';
+      return `<span style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;color:${color};white-space:nowrap;">${co.emoji} ${co.name} ${arrow}</span>`;
+    }).join(' ');
+    affectedHtml = `<div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 6px;">${aff}</div>`;
+  }
+
+  document.getElementById('newsBody').innerHTML = `
+    <div class="news-title">📰 ${ev.headline}</div>
+    ${affectedHtml}
+    <div class="news-explain">${ev.explain}</div>
+    <div class="edu-callout">
+      <div class="edu-callout-label">📚 学習ポイント</div>
+      <p>${ev.edu}</p>
+    </div>
+  `;
+}
+
+function renderStatusBar() {
+  document.getElementById('turnBadge').textContent = `第 ${state.turn} ターン`;
+  document.getElementById('turnsLeft').textContent = MAX_TURNS - state.turn;
+  const pct = (state.turn / MAX_TURNS) * 100;
+  document.getElementById('turnProgressFill').style.width = pct + '%';
+  document.getElementById('btnNextTurn').disabled = state.gameOver;
+}
+
+// ─── 取引 ────────────────────────────────────────────────────
+function getQty(companyId) {
+  const el = document.getElementById('qty-' + companyId);
+  const v = parseInt(el ? el.value : '1', 10);
+  return isNaN(v) || v < 1 ? 1 : v;
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('tradeToast');
+  t.textContent = msg;
+  t.className = 'trade-toast ' + (type || '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function buyStock(id) {
+  if (state.gameOver) return;
+  const qty = getQty(id);
+  const price = state.prices[id];
+  const cost = price * qty;
+  const co = COMPANIES.find(c => c.id === id);
+
+  if (cost > state.cash) {
+    showToast('💸 コインが足りないよ！', 'error');
+    return;
+  }
+  state.cash -= cost;
+  state.holdings[id] += qty;
+  showToast(`✅ ${co.emoji} ${co.name} を ${qty}株 買ったよ！（${fmtNum(cost)}コイン）`, 'success-buy');
+  renderPortfolio();
+  renderCompanies();
+}
+
+function sellStock(id) {
+  if (state.gameOver) return;
+  const qty = getQty(id);
+  const held = state.holdings[id];
+  const co = COMPANIES.find(c => c.id === id);
+
+  if (qty > held) {
+    showToast(`📦 ${co.name} は ${held}株 しか持っていないよ！`, 'error');
+    return;
+  }
+  const price = state.prices[id];
+  const revenue = price * qty;
+  state.cash += revenue;
+  state.holdings[id] -= qty;
+  showToast(`💰 ${co.emoji} ${co.name} を ${qty}株 売ったよ！（${fmtNum(revenue)}コイン）`, 'success-sell');
+  renderPortfolio();
+  renderCompanies();
+}
+
+// ─── ターン進行 ──────────────────────────────────────────────
+let lastNewsEvent = null;
+
+function nextTurn() {
+  if (state.gameOver) return;
+  state.turn += 1;
+
+  const ev = pickNewsEvent();
+  lastNewsEvent = ev;
+  updatePrices(ev);
+  renderNews(ev);
+  renderPortfolio();
+  renderCompanies();
+  renderStatusBar();
+
+  if (state.turn >= MAX_TURNS) {
+    state.gameOver = true;
+    document.getElementById('btnNextTurn').disabled = true;
+    setTimeout(showGameOver, 800);
+  }
+
+  // スクロール：スマホで見やすく
+  const newsPanel = document.querySelector('.news-panel');
+  if (newsPanel) {
+    newsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// ─── ゲーム終了 ──────────────────────────────────────────────
+function showGameOver() {
+  const total = calcTotal();
+  const pnl = total - STARTING_CASH;
+  const ret = (pnl / STARTING_CASH) * 100;
+
+  document.getElementById('finalTotal').textContent = fmtNum(Math.round(total));
+  document.getElementById('finalTotal').className = 'result-stat-value ' + (total >= STARTING_CASH ? 'up' : 'down');
+
+  const pnlEl = document.getElementById('finalPnl');
+  if (pnl >= 0) {
+    pnlEl.textContent = '+ ' + fmtNum(Math.round(pnl));
+    pnlEl.className = 'result-stat-value up';
+  } else {
+    pnlEl.textContent = '− ' + fmtNum(Math.abs(Math.round(pnl)));
+    pnlEl.className = 'result-stat-value down';
+  }
+
+  const retEl = document.getElementById('finalReturn');
+  retEl.textContent = (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%';
+  retEl.className = 'result-stat-value ' + (ret >= 0 ? 'up' : 'down');
+
+  // グレード
+  let grade, comment, emoji;
+  if (ret >= 50) { grade = 'S'; comment = '天才投資家！圧倒的な成果だよ！すごい！'; emoji = '🏆'; }
+  else if (ret >= 25) { grade = 'A'; comment = '優秀な投資家！ニュースをしっかり活かせたね！'; emoji = '🎉'; }
+  else if (ret >= 10) { grade = 'B'; comment = 'よくできました！もう少しで大きなプラスだったね。'; emoji = '😊'; }
+  else if (ret >= 0)  { grade = 'C'; comment = 'プラスをキープできたよ！分散投資が大事だったね。'; emoji = '👍'; }
+  else if (ret >= -15) { grade = 'D'; comment = '少し損したけど、学べたことがいちばんの財産だよ！'; emoji = '💪'; }
+  else { grade = 'E'; comment = '損が出たけど大丈夫！これがゲームの良いところ。次は分散投資を試してみて！'; emoji = '😅'; }
+
+  document.getElementById('gameOverEmoji').textContent = emoji;
+  document.getElementById('gameOverTitle').textContent = `ゲーム終了！ ${grade}ランク達成！`;
+  document.getElementById('gameOverSubtitle').textContent = `${MAX_TURNS}ターン分の投資結果を見てみよう`;
+  document.getElementById('gradeValue').textContent = grade + ' ランク';
+  document.getElementById('gradeComment').textContent = comment;
+
+  document.getElementById('gameOverOverlay').classList.add('active');
+}
+
+function restartGame() {
+  document.getElementById('gameOverOverlay').classList.remove('active');
+  usedNewsIds = [];
+  initState();
+  renderNews(null);
+  renderPortfolio();
+  renderCompanies();
+  renderStatusBar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── 初期化 ──────────────────────────────────────────────────
+initState();
+renderPortfolio();
+renderCompanies();
+renderStatusBar();
+</script>
+</body>
+</html>
