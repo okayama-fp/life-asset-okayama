@@ -55,7 +55,6 @@
 | `simulation.html` | 資産シミュレーター |
 | `advisor.html` | アドバイザー業務（老後・相続・保険） |
 | `loan.html` | 融資シミュレーター |
-| `muscat.html` | 別サービス：極上マスカット農園 |
 | `images/` | ローカル画像フォルダ |
 
 ---
