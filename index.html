@@ -200,11 +200,20 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 @media(max-width:640px){
-  .hero{padding:60px 20px;min-height:auto}
-  .section{padding:56px 20px}
-  .hero-stats{gap:20px}
-  .hstat-num{font-size:22px}
-  .cta-box{padding:36px 24px}
+  .hero{padding:36px 16px 40px;min-height:auto}
+  .section{padding:48px 16px}
+  .hero-stats{gap:16px}
+  .hstat-num{font-size:20px}
+  .hero h1{font-size:clamp(22px,7vw,34px);margin-bottom:14px}
+  /* ピルを小さく・折り返し */
+  .value-pills{gap:7px;margin-bottom:22px}
+  .vpill{font-size:11px;padding:5px 10px}
+  /* CTAボタン幅を抑える */
+  .hero-ctas{flex-direction:column;gap:10px;margin-bottom:28px}
+  .cta-primary,.cta-secondary{width:100%;justify-content:center;font-size:14px;padding:14px 20px}
+  .cta-box{padding:28px 16px}
+  /* ヘッダーの「お問い合わせ」ボタンを非表示（小さすぎる） */
+  .btn-cta{display:none}
 }
 </style>
 <script src="/js/cookie-consent.js"></script>
