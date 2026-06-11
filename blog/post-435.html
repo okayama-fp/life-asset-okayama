@@ -400,7 +400,7 @@ function sendComment(){
   var title = document.title.replace(/｜.*$/,'').trim();
   var sub  = encodeURIComponent('【ブログコメント】' + title);
   var msg  = encodeURIComponent((name ? 'お名前：' + name + '\n\n' : '') + 'コメント：\n' + body + '\n\n記事URL：' + location.href);
-  window.open('https://mail.google.com/mail/?view=cm&fs=1&to=lifeassetpartners%40gmail.com&su=' + sub + '&body=' + msg, '_blank', 'noopener,noreferrer');
+  window.open('https://mail.google.com/mail/?view=cm&fs=1&to=info%40lifeassetoffice.net&su=' + sub + '&body=' + msg, '_blank', 'noopener,noreferrer');
 }
 </script>
 

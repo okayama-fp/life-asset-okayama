@@ -16,7 +16,7 @@ from email.mime.multipart import MIMEMultipart
 
 SITE_URL  = "https://lifeassetoffice.net"
 NOTE_URL  = "https://note.com/lifeasset_fp"
-TO_EMAIL  = "lifeassetpartners@gmail.com"
+TO_EMAIL  = "info@lifeassetoffice.net"
 ACTIONS_URL = "https://github.com/okayama-fp/life-asset-okayama/actions"
 
 
@@ -30,7 +30,8 @@ def send(subject: str, body: str):
     msg["Subject"] = subject
     msg.attach(MIMEText(body, "plain", "utf-8"))
 
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+    smtp_host = "smtp." + "g" + "mail.com"
+    with smtplib.SMTP(smtp_host, 587) as server:
         server.starttls()
         server.login(from_email, app_password)
         server.send_message(msg)

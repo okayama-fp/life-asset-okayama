@@ -32,7 +32,7 @@ ARTICLE_PATH     = f"blog/{ARTICLE_FILENAME}"
 BLOG_INDEX_PATH  = "blog/index.html"
 NOTE_DRAFT_PATH  = f"note-drafts/{DATE_STR}.md"
 
-CONTACT_EMAIL = "lifeassetpartners@gmail.com"
+CONTACT_EMAIL = "info@lifeassetoffice.net"
 SITE_URL      = "https://lifeassetoffice.net"
 NOTE_URL      = "https://note.com/lifeasset_fp"
 
