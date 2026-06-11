@@ -30,7 +30,7 @@
   --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
   --navy: #1a3d2b; --navy-soft: #1f5c40;
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
-  --c-asset: #0ea5e9; --c-tax: #f59e0b; --c-loan: #ef4444; --c-other: #8b5cf6; --c-income: #10b981;
+  --c-asset: #0ea5e9; --c-tax: #f59e0b; --c-loan: #ef4444; --c-other: #8b5cf6; --c-income: #10b981; --c-kids: #f59e0b;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -91,6 +91,7 @@ a { color: inherit; text-decoration: none; }
 .cat-tab[data-cat="loan"].active { background: var(--c-loan); border-color: var(--c-loan); }
 .cat-tab[data-cat="other"].active  { background: var(--c-other);  border-color: var(--c-other); }
 .cat-tab[data-cat="income"].active { background: var(--c-income); border-color: var(--c-income); }
+.cat-tab[data-cat="kids"].active   { background: #7c3aed; border-color: #7c3aed; }
 
 /* ─── Tools grid ─── */
 .tools-grid {
@@ -123,6 +124,7 @@ a { color: inherit; text-decoration: none; }
 .tool-card[data-cat="loan"]::before   { background: var(--c-loan); }
 .tool-card[data-cat="other"]::before  { background: var(--c-other); }
 .tool-card[data-cat="income"]::before { background: var(--c-income); }
+.tool-card[data-cat="kids"]::before   { background: #7c3aed; }
 
 .tool-card:hover {
   transform: translateY(-4px);
@@ -143,6 +145,7 @@ a { color: inherit; text-decoration: none; }
 .tool-card[data-cat="loan"]   .tool-icon { background: #fee2e2; }
 .tool-card[data-cat="other"]  .tool-icon { background: #ede9fe; }
 .tool-card[data-cat="income"] .tool-icon { background: #d1fae5; }
+.tool-card[data-cat="kids"]   .tool-icon { background: #ede9fe; }
 
 .tool-header { display: flex; align-items: center; gap: 12px; }
 
@@ -167,6 +170,7 @@ a { color: inherit; text-decoration: none; }
 .tool-card[data-cat="loan"]   .tool-cat-badge { background: #fee2e2; color: #dc2626; }
 .tool-card[data-cat="other"]  .tool-cat-badge { background: #ede9fe; color: #7c3aed; }
 .tool-card[data-cat="income"] .tool-cat-badge { background: #d1fae5; color: #059669; }
+.tool-card[data-cat="kids"]   .tool-cat-badge { background: #ede9fe; color: #7c3aed; }
 
 .tool-desc {
   font-size: 12.5px;
@@ -394,6 +398,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
     <button class="cat-tab" data-cat="loan">住宅ローン</button>
     <button class="cat-tab" data-cat="other">保険・その他</button>
     <button class="cat-tab" data-cat="income">家計・収入</button>
+    <button class="cat-tab" data-cat="kids">🎮 子ども学習</button>
   </div>
 
   <div class="tools-grid" id="toolsGrid">
@@ -564,6 +569,42 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       </div>
       <div class="tool-desc">2人の収入・支出を入力するだけ。家計スタイル診断・ヘルススコア・FIRE計算・老後ギャップ・iDeCo節税を自動診断。</div>
       <a class="tool-link" href="couples-sim.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="kids">
+      <div class="tool-header">
+        <div class="tool-icon">📒</div>
+        <div class="tool-meta">
+          <div class="tool-name">こどもお小遣い帳</div>
+          <span class="tool-cat-badge">子ども学習</span>
+        </div>
+      </div>
+      <div class="tool-desc">収入・支出を記録して貯金目標を達成しよう。「使う・貯める・増やす」3つの箱でお金を管理。親子レポート機能付き。</div>
+      <a class="tool-link" href="kids-money.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="kids">
+      <div class="tool-header">
+        <div class="tool-icon">🎲</div>
+        <div class="tool-meta">
+          <div class="tool-name">人生ゲーム風すごろく</div>
+          <span class="tool-cat-badge">子ども学習</span>
+        </div>
+      </div>
+      <div class="tool-desc">就職・結婚・住宅購入・NISAマス…お金の人生をボードゲームで体験。サイコロ＆アニメーション付き、1〜4人対応。</div>
+      <a class="tool-link" href="life-game.html">使ってみる</a>
+    </div>
+
+    <div class="tool-card" data-cat="kids">
+      <div class="tool-header">
+        <div class="tool-icon">📈</div>
+        <div class="tool-meta">
+          <div class="tool-name">株式投資キッズ版</div>
+          <span class="tool-cat-badge">子ども学習</span>
+        </div>
+      </div>
+      <div class="tool-desc">架空の会社の株を売り買い。ニュースで株価が動く理由をやさしく解説。20ターン制で最終成績を判定。</div>
+      <a class="tool-link" href="kids-stock.html">使ってみる</a>
     </div>
 
   </div>
