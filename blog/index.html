@@ -898,7 +898,16 @@ function doFilterFromSidebar(cat) {
   renderPage();
 }
 
-document.addEventListener('DOMContentLoaded', renderPage);
+document.addEventListener('DOMContentLoaded', function() {
+  /* URLパラメータでカテゴリを初期選択（例: /blog/?cat=nisa） */
+  var cat = null;
+  try { cat = new URLSearchParams(location.search).get('cat'); } catch(e) {}
+  if (cat && /^[a-z]+$/.test(cat)) {
+    doFilterFromSidebar(cat);
+  } else {
+    renderPage();
+  }
+});
 </script>
 
 </body>
