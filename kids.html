@@ -9,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/kids.html">
-<title>こどもお金学習ページ｜ライフアセットオフィス</title>
-<meta name="description" content="お小遣い帳・人生ゲーム・株式投資ゲームで楽しくお金を学ぼう！小学生・中学生向けの無料お金教育ツール。">
-<meta property="og:title" content="こどもお金学習ページ｜ライフアセットオフィス">
-<meta property="og:description" content="お小遣い帳・人生ゲーム・株式投資ゲームで楽しくお金を学ぼう！小学生・中学生向けの無料お金教育ツール。">
+<title>若者のためのお金教育｜中学生・高校生・大学生向け金融リテラシー｜ライフアセットオフィス</title>
+<meta name="description" content="中学生・高校生・大学生向けのお金教育ポータル。本格株式投資シミュレーター（日経225・ローソク足）から、お小遣い帳・人生ゲームまで。NISAや投資の仕組みをゲームで楽しく学べる無料ツール集。">
+<meta property="og:title" content="若者のためのお金教育｜中学生〜大学生向け金融リテラシー">
+<meta property="og:description" content="高校生・大学生向け本格株式シミュレーター・投資クイズから、小学生向けお小遣い帳まで。年代別にお金の知識が身につく無料ツール集。">
 <meta property="og:url" content="https://lifeassetoffice.net/kids.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
@@ -24,7 +24,8 @@
   --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
   --navy: #1a3d2b; --navy-soft: #1f5c40;
   --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
-  --kids-yellow: #fbbf24; --kids-orange: #f97316; --kids-blue: #3b82f6; --kids-purple: #8b5cf6;
+  --hs-blue: #1e40af; --hs-indigo: #4338ca; --hs-purple: #7c3aed;
+  --kids-yellow: #fbbf24; --kids-orange: #f97316; --kids-blue: #3b82f6;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -33,7 +34,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── Hero ─── */
 .hero {
-  background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 50%, #1a3060 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #0f2d4a 40%, #1a2d1c 100%);
   color: #fff;
   padding: 60px 24px 64px;
   text-align: center;
@@ -44,7 +45,9 @@ a { color: inherit; text-decoration: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 70% 30%, rgba(74,222,128,.1) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(59,130,246,.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(74,222,128,.1) 0%, transparent 50%);
   pointer-events: none;
 }
 .hero-stars {
@@ -55,20 +58,20 @@ a { color: inherit; text-decoration: none; }
 }
 .star {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: rgba(255,255,255,.6);
+  background: rgba(255,255,255,.55);
   animation: twinkle 3s ease-in-out infinite;
 }
-@keyframes twinkle { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:1;transform:scale(1.4)} }
+@keyframes twinkle { 0%,100%{opacity:.25;transform:scale(1)} 50%{opacity:1;transform:scale(1.5)} }
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(251,191,36,.15);
-  border: 1px solid rgba(251,191,36,.4);
-  color: #fde68a;
+  background: rgba(99,102,241,.18);
+  border: 1px solid rgba(99,102,241,.45);
+  color: #a5b4fc;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .1em;
@@ -77,43 +80,94 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 20px;
 }
 .hero h1 {
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
   font-weight: 900;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-bottom: 12px;
 }
 .hero-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,.8);
-  margin-bottom: 16px;
-  line-height: 1.6;
+  font-size: 15px;
+  color: rgba(255,255,255,.78);
+  margin-bottom: 20px;
+  line-height: 1.7;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero-target {
   display: inline-flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 16px;
 }
 .target-pill {
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.25);
-  color: rgba(255,255,255,.9);
   font-size: 12px;
   font-weight: 700;
   padding: 5px 14px;
   border-radius: 20px;
 }
+.target-pill.hs  { background: rgba(99,102,241,.22); border: 1px solid rgba(99,102,241,.45); color: #a5b4fc; }
+.target-pill.uni { background: rgba(139,92,246,.22); border: 1px solid rgba(139,92,246,.45); color: #c4b5fd; }
+.target-pill.mid { background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.35); color: #6ee7b7; }
+.target-pill.free{ background: rgba(255,255,255,.1);  border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.85); }
+
+/* ─── Anchor tabs ─── */
+.level-tabs {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  background: var(--navy);
+  border-bottom: 2px solid rgba(255,255,255,.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.level-tabs::-webkit-scrollbar { display: none; }
+.level-tab {
+  flex-shrink: 0;
+  padding: 13px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.level-tab:hover { color: #fff; }
+.level-tab.hs-tab  { border-color: transparent; }
+.level-tab.hs-tab:hover  { color: #a5b4fc; }
+.level-tab.mid-tab:hover { color: #6ee7b7; }
 
 /* ─── Main ─── */
 .main { max-width: 960px; margin: 0 auto; padding: 48px 20px 80px; }
 
-/* ─── Section title ─── */
+/* ─── Section headers ─── */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  padding: 4px 12px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.level-badge.advanced { background: linear-gradient(90deg,#4338ca,#7c3aed); color: #fff; }
+.level-badge.basic    { background: #059669; color: #fff; }
 .section-title {
   font-size: 1.25rem;
   font-weight: 900;
   color: var(--navy);
-  margin-bottom: 8px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -132,16 +186,153 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-light);
   margin-bottom: 28px;
   padding-left: 14px;
+  line-height: 1.75;
 }
 
-/* ─── Tool cards ─── */
+/* ─── FEATURED card (高校生・大学生向け) ─── */
+.featured-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f2d1c 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,.2);
+  margin-bottom: 56px;
+  border: 1.5px solid rgba(139,92,246,.3);
+  transition: transform .25s, box-shadow .25s;
+}
+.featured-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.28);
+}
+.featured-card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+@media (max-width: 640px) { .featured-card-inner { grid-template-columns: 1fr; } }
+
+.featured-left {
+  padding: 36px 32px;
+  color: #fff;
+}
+.featured-eyebrow {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .15em;
+  color: #a5b4fc;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.featured-title {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.featured-title em { color: #a5b4fc; font-style: normal; }
+.featured-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.featured-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.ftag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.8);
+}
+.ftag.hi { background: rgba(99,102,241,.25); border-color: rgba(99,102,241,.5); color: #a5b4fc; }
+.featured-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #4338ca, #7c3aed);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 13px 26px;
+  border-radius: 50px;
+  transition: opacity .2s, transform .2s;
+  box-shadow: 0 4px 20px rgba(99,102,241,.4);
+}
+.featured-link:hover { opacity: .9; transform: translateY(-2px); }
+.featured-link::after { content: '→'; }
+
+.featured-right {
+  background: rgba(255,255,255,.04);
+  border-left: 1px solid rgba(255,255,255,.08);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .featured-right { border-left: none; border-top: 1px solid rgba(255,255,255,.08); }
+}
+.fpoint {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.fpoint-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,.07);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fpoint-body {}
+.fpoint-title { font-size: 12px; font-weight: 800; color: #c4b5fd; margin-bottom: 2px; }
+.fpoint-desc  { font-size: 11.5px; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+/* ─── NISA promo ─── */
+.nisa-promo {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1.5px solid #86efac;
+  border-radius: 18px;
+  padding: 28px 28px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+@media(max-width:560px){ .nisa-promo { grid-template-columns: 1fr; } }
+.nisa-promo h3 { font-size: 15px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+.nisa-promo p  { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+.nisa-link {
+  display: inline-block;
+  background: var(--sky);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 11px 22px;
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: opacity .2s, transform .2s;
+}
+.nisa-link:hover { opacity: .88; transform: translateY(-1px); }
+
+/* ─── Tool cards (kids section) ─── */
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   margin-bottom: 56px;
 }
-
 .kids-card {
   background: #fff;
   border-radius: 20px;
@@ -157,7 +348,6 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 16px 40px rgba(26,122,74,.15);
   border-color: var(--sky);
 }
-
 .kids-card-header {
   padding: 28px 24px 20px;
   display: flex;
@@ -169,19 +359,8 @@ a { color: inherit; text-decoration: none; }
 .kids-card[data-color="green"] .kids-card-header  { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
 .kids-card[data-color="yellow"] .kids-card-header { background: linear-gradient(135deg, #fef9c3, #fde68a); }
 .kids-card[data-color="blue"] .kids-card-header   { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
-
-.kids-emoji {
-  font-size: 48px;
-  line-height: 1;
-  display: block;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
-}
-.kids-card-title {
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: var(--navy);
-  line-height: 1.3;
-}
+.kids-emoji { font-size: 48px; line-height: 1; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.kids-card-title { font-size: 1.1rem; font-weight: 900; color: var(--navy); line-height: 1.3; }
 .kids-card-badge {
   display: inline-block;
   font-size: 10px;
@@ -193,7 +372,6 @@ a { color: inherit; text-decoration: none; }
 .kids-card[data-color="green"] .kids-card-badge  { background: #16a34a; color: #fff; }
 .kids-card[data-color="yellow"] .kids-card-badge { background: #d97706; color: #fff; }
 .kids-card[data-color="blue"] .kids-card-badge   { background: #2563eb; color: #fff; }
-
 .kids-card-body {
   padding: 20px 24px 24px;
   flex: 1;
@@ -201,32 +379,10 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   gap: 14px;
 }
-.kids-card-desc {
-  font-size: 13.5px;
-  color: var(--text-light);
-  line-height: 1.75;
-  flex: 1;
-}
-.kids-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.kids-features li {
-  font-size: 12.5px;
-  color: var(--text);
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-.kids-features li::before {
-  content: '✓';
-  color: var(--sky);
-  font-weight: 900;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
+.kids-card-desc { font-size: 13.5px; color: var(--text-light); line-height: 1.75; flex: 1; }
+.kids-features { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.kids-features li { font-size: 12.5px; color: var(--text); display: flex; align-items: flex-start; gap: 8px; }
+.kids-features li::before { content: '✓'; color: var(--sky); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
 .kids-link {
   display: flex;
   align-items: center;
@@ -244,7 +400,7 @@ a { color: inherit; text-decoration: none; }
 .kids-card[data-color="yellow"] .kids-link { background: #d97706; color: #fff; }
 .kids-card[data-color="blue"] .kids-link   { background: #2563eb; color: #fff; }
 
-/* ─── About section ─── */
+/* ─── About box ─── */
 .about-box {
   background: linear-gradient(135deg, var(--navy), var(--navy-soft));
   border-radius: 20px;
@@ -252,20 +408,12 @@ a { color: inherit; text-decoration: none; }
   color: #fff;
   margin-bottom: 40px;
 }
-.about-box h2 {
-  font-size: 1.15rem;
-  font-weight: 900;
-  margin-bottom: 12px;
-}
-.about-box p {
-  font-size: 13.5px;
-  color: rgba(255,255,255,.8);
-  line-height: 1.8;
-}
+.about-box h2 { font-size: 1.15rem; font-weight: 900; margin-bottom: 12px; }
+.about-box p  { font-size: 13.5px; color: rgba(255,255,255,.8); line-height: 1.8; }
 .about-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
   margin-top: 24px;
 }
 .about-step {
@@ -275,25 +423,23 @@ a { color: inherit; text-decoration: none; }
   padding: 18px 16px;
   text-align: center;
 }
-.about-step-num {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #4ade80;
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.about-step-title {
-  font-size: 13px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-.about-step-desc {
-  font-size: 11.5px;
-  color: rgba(255,255,255,.65);
-  line-height: 1.55;
-}
+.about-step-num  { font-size: 1.8rem; font-weight: 900; color: #4ade80; line-height: 1; margin-bottom: 6px; }
+.about-step-title{ font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+.about-step-desc { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.55; }
 
-/* ─── Parent note ─── */
+/* ─── Student note ─── */
+.student-note {
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  border: 1.5px solid #c4b5fd;
+  border-radius: 14px;
+  padding: 20px 24px;
+  font-size: 13px;
+  color: #3730a3;
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+.student-note strong { display: block; font-size: 14px; margin-bottom: 6px; color: #312e81; }
+
 .parent-note {
   background: var(--sky-pale);
   border: 1.5px solid #86efac;
@@ -316,7 +462,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 2px 12px rgba(0,0,0,.05);
 }
 .cta-box h2 { font-size: 16px; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
-.cta-box p { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+.cta-box p  { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
 .cta-btn {
   display: inline-block;
   background: linear-gradient(90deg, var(--sky), var(--sky-light));
@@ -328,6 +474,13 @@ a { color: inherit; text-decoration: none; }
   transition: opacity .2s, transform .2s;
 }
 .cta-btn:hover { opacity: .9; transform: translateY(-2px); }
+
+/* ─── Divider ─── */
+.section-divider {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 48px 0 40px;
+}
 
 /* ─── Footer ─── */
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
@@ -341,6 +494,8 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   .tools-grid { grid-template-columns: 1fr; gap: 16px; }
   .about-box { padding: 28px 20px; }
   .about-steps { grid-template-columns: 1fr 1fr; }
+  .featured-left, .featured-right { padding: 24px 20px; }
+  .nisa-promo { padding: 22px 18px; }
 }
 </style>
 <script src="/js/cookie-consent.js"></script>
@@ -362,7 +517,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       <a href="kids.html">子ども学習</a>
       <a href="contact.html">お問い合わせ</a>
     </nav>
-    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <a href="contact.html" class="btn-cta nav-cta">お問い合わせ</a>
     <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -371,21 +526,118 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
 <div class="hero">
   <div class="hero-stars" id="heroStars"></div>
-  <div class="hero-badge">🌟 子ども向けお金教育</div>
-  <h1>楽しく学ぼう！<br>お金のきほん</h1>
-  <p class="hero-sub">ゲームや記録を通して、お金の大切さと上手な使い方を学べる3つのツール。</p>
+  <div class="hero-badge">📚 若者のためのお金教育ポータル</div>
+  <h1>お金のことを、<br>今から学ぼう。</h1>
+  <p class="hero-sub">
+    NISAをはじめる前に。就職・一人暮らしの前に。<br>
+    株式投資・家計管理・人生設計をゲームで体験できる無料ツール集。
+  </p>
   <div class="hero-target">
-    <span class="target-pill">📚 小学生〜中学生向け</span>
-    <span class="target-pill">🆓 無料・登録不要</span>
-    <span class="target-pill">👨‍👩‍👦 親子で一緒に</span>
+    <span class="target-pill hs">🏫 高校生向け</span>
+    <span class="target-pill uni">🎓 大学生向け</span>
+    <span class="target-pill mid">📚 中学生向け</span>
+    <span class="target-pill free">🆓 無料・登録不要</span>
   </div>
 </div>
 
+<nav class="level-tabs" aria-label="年代別コンテンツ">
+  <a class="level-tab hs-tab" href="#advanced">📊 高校生・大学生</a>
+  <a class="level-tab mid-tab" href="#basic">🎲 中学生・小学生</a>
+  <a class="level-tab" href="#why-money">💡 お金を学ぶ理由</a>
+</nav>
+
 <div class="main">
 
-  <div style="margin-bottom:12px;">
-    <div class="section-title">3つの学習ツール</div>
-    <p class="section-desc">ゲーム感覚でお金の仕組みを体験。楽しみながら「生きたお金の知識」が身につきます。</p>
+  <!-- ═══ 高校生・大学生向け ADVANCED SECTION ═══ -->
+  <div id="advanced" style="scroll-margin-top:48px;margin-bottom:12px;">
+    <div class="section-head">
+      <span class="level-badge advanced">📊 高校生・大学生向け — 発展編</span>
+    </div>
+    <div class="section-title">本格投資シミュレーターで「経済と株価」を体感する</div>
+    <p class="section-desc">
+      社会人になる前に知っておきたい「株式市場の仕組み」「NISAの意味」「中央銀行が相場を動かすしくみ」を、<br>
+      仮想資金300万円で実際に売買しながら学べます。
+    </p>
+  </div>
+
+  <!-- FEATURED: 日経225デモトレード2026 -->
+  <a class="featured-card" href="nikkei-demotrade.html">
+    <div class="featured-card-inner">
+      <div class="featured-left">
+        <div class="featured-eyebrow">🏆 メイン体験ツール · 高校生〜大学生</div>
+        <div class="featured-title">日経225<br><em>デモトレード 2026</em></div>
+        <p class="featured-desc">
+          2026年の日経平均6万円時代を想定した本格シミュレーター。仮想資金300万円で130銘柄を売買し、FRB・日銀・インフレ・地政学ニュースが株価を動かす様子をリアルタイムで体験。
+        </p>
+        <div class="featured-tags">
+          <span class="ftag hi">🔰 はじめてモード</span>
+          <span class="ftag hi">📊 プロモード</span>
+          <span class="ftag">🕯️ ローソク足チャート</span>
+          <span class="ftag">📰 経済ニュース連動</span>
+          <span class="ftag">✏️ 投資クイズ</span>
+          <span class="ftag">🏆 学習ミッション</span>
+        </div>
+        <span class="featured-link">デモトレードをはじめる</span>
+      </div>
+      <div class="featured-right">
+        <div class="fpoint">
+          <div class="fpoint-icon">🇺🇸</div>
+          <div class="fpoint-body">
+            <div class="fpoint-title">FRB・日銀ニュースで株価が動く</div>
+            <div class="fpoint-desc">利上げ・利下げ・インフレ指標など14種の経済イベントが業種別に価格へ影響。「なぜ上がった？」をリアルタイムで解説。</div>
+          </div>
+        </div>
+        <div class="fpoint">
+          <div class="fpoint-icon">🕯️</div>
+          <div class="fpoint-body">
+            <div class="fpoint-title">ローソク足チャート＋テクニカル指標</div>
+            <div class="fpoint-desc">プロモードではSMA・RSI・PER・配当利回りも表示。証券会社の画面と同じ感覚を体験できます。</div>
+          </div>
+        </div>
+        <div class="fpoint">
+          <div class="fpoint-icon">🎓</div>
+          <div class="fpoint-body">
+            <div class="fpoint-title">投資クイズ12問＋学習ミッション9種</div>
+            <div class="fpoint-desc">「円安で上がる業種は？」「利上げと株価の関係は？」など、授業では習わないお金の知識をクイズ形式で確認。</div>
+          </div>
+        </div>
+        <div class="fpoint">
+          <div class="fpoint-icon">📚</div>
+          <div class="fpoint-body">
+            <div class="fpoint-title">投資用語集14語収録</div>
+            <div class="fpoint-desc">ローソク足・RSI・PER・分散投資・損切りなど、株式投資の基本用語をやさしく解説。はじめて聞く言葉もすぐ調べられます。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- NISA promo -->
+  <div class="nisa-promo">
+    <div>
+      <h3>💡 NISAって何？ — 高校生・大学生が今すぐ知っておくべき制度</h3>
+      <p>
+        2024年から「新NISA」がスタートし、<strong>18歳以上なら誰でも年360万円まで非課税で投資できる</strong>時代になりました。
+        就職して収入が生まれたら最初に検討すべき制度です。シミュレーターで投資の感覚をつかんでから、実際のNISAを学んでみましょう。
+      </p>
+    </div>
+    <a class="nisa-link" href="nisa-ideco-sim.html">NISAの節税効果を計算する →</a>
+  </div>
+
+  <div class="student-note">
+    <strong>🎓 高校生・大学生の方へ</strong>
+    シミュレーター内の株価・ニュースはすべて<strong>擬似データ（架空）</strong>です。実際の相場を反映するものではなく、特定銘柄の推奨・投資勧誘でもありません。「お金の動く仕組み」を体感することを目的としています。実際の投資は成人後・余裕資金で行いましょう。
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══ 中学生・小学生向け BASIC SECTION ═══ -->
+  <div id="basic" style="scroll-margin-top:48px;margin-bottom:12px;">
+    <div class="section-head">
+      <span class="level-badge basic">🌱 中学生・小学生向け — 基礎編</span>
+    </div>
+    <div class="section-title">ゲームでお金のきほんを身につける</div>
+    <p class="section-desc">お小遣い帳・すごろく・株式ゲームで「使う・貯める・増やす」の感覚を楽しく学べる3ツール。</p>
   </div>
 
   <div class="tools-grid">
@@ -449,37 +701,56 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
   </div>
 
-  <div class="about-box">
-    <h2>🌱 なぜ子どものうちからお金を学ぶの？</h2>
-    <p>お金は生きていく上で欠かせないもの。でも学校ではなかなか教えてもらえません。<br>楽しみながら「使う」「貯める」「増やす」の感覚を身につけることで、大人になってからの大切な選択に役立ちます。</p>
-    <div class="about-steps">
-      <div class="about-step">
-        <div class="about-step-num">01</div>
-        <div class="about-step-title">使う</div>
-        <div class="about-step-desc">何にお金を使うか考える力。今必要か？本当に欲しいか？</div>
-      </div>
-      <div class="about-step">
-        <div class="about-step-num">02</div>
-        <div class="about-step-title">貯める</div>
-        <div class="about-step-desc">目標を決めて少しずつ貯める。我慢と達成感を学べる。</div>
-      </div>
-      <div class="about-step">
-        <div class="about-step-num">03</div>
-        <div class="about-step-title">増やす</div>
-        <div class="about-step-desc">投資の仕組みを知る。お金がお金を生む概念を体験。</div>
+  <!-- ═══ なぜお金を学ぶ ═══ -->
+  <div id="why-money" style="scroll-margin-top:48px;">
+    <div class="about-box">
+      <h2>💰 なぜ学校では教えてくれないお金の話を学ぶの？</h2>
+      <p>
+        日本の学校教育では「お金の増やし方」をほとんど教えません。でも社会人になれば、税金・保険・年金・投資の判断を自分でしなければならない場面が次々と来ます。
+        特に<strong>18〜20代で投資を始めるかどうか</strong>は、老後の資産に大きな差を生みます。
+      </p>
+      <div class="about-steps">
+        <div class="about-step">
+          <div class="about-step-num">使う</div>
+          <div class="about-step-title">支出の判断力</div>
+          <div class="about-step-desc">何にお金を使うか考える。衝動買いを防ぎ、優先順位をつける力。</div>
+        </div>
+        <div class="about-step">
+          <div class="about-step-num">貯める</div>
+          <div class="about-step-title">先取り貯蓄の習慣</div>
+          <div class="about-step-desc">収入が入ったら先に貯蓄。若い時期の習慣が一生の土台になる。</div>
+        </div>
+        <div class="about-step">
+          <div class="about-step-num">増やす</div>
+          <div class="about-step-title">複利と長期投資</div>
+          <div class="about-step-desc">NISAで月1万円を30年積立てると、利回り5%で約800万円に。20代で始めるほど有利。</div>
+        </div>
+        <div class="about-step">
+          <div class="about-step-num">守る</div>
+          <div class="about-step-title">保険と損切りの知識</div>
+          <div class="about-step-desc">必要な保険と不要な保険を見分け、損失が大きくなる前に手を打つ判断力。</div>
+        </div>
       </div>
     </div>
   </div>
 
+  <div class="student-note">
+    <strong>📊 高校生・大学生が今すぐできる3ステップ</strong>
+    ① <strong>デモトレード</strong>で株価が動く仕組みを体感する →
+    ② <strong>NISA・iDeCoシミュレーター</strong>で非課税の節税効果を数字で確認する →
+    ③ 社会人になったら<strong>余裕資金で少額から実際の積立NISA</strong>をスタートする
+  </div>
+
   <div class="parent-note">
-    <strong>👨‍👩‍👦 保護者の方へ</strong>
-    当ページの学習ツールはすべて架空・シミュレーションです。実際の金融取引や投資を行うものではありません。お子さんと一緒にゲームの結果について話し合うことで、より深い学びにつながります。データはすべてお使いのブラウザ内にのみ保存され、外部へ送信されることはありません。
+    <strong>👨‍👩‍👦 保護者・教育関係者の方へ</strong>
+    当ページの学習ツールはすべて架空データ・シミュレーションです。実際の金融取引や投資を促すものではありません。
+    学校の金融教育・家庭学習での活用も歓迎します。データはすべてブラウザ内に保存され、外部送信はありません。
   </div>
 
   <div class="cta-box">
-    <h2>大人向けシミュレーターもあります</h2>
-    <p>NISA・住宅ローン・老後資金など14種類のFPシミュレーターも無料で使えます。<br>お子さんと一緒にご家族の将来を考えてみませんか？</p>
-    <a href="simulation.html" class="cta-btn">シミュレーター一覧へ</a>
+    <h2>大人向けの本格シミュレーターも無料です</h2>
+    <p>住宅ローン・老後資金・NISA・iDeCoなど15種類。将来のお金の流れを数字で確かめましょう。</p>
+    <a href="simulation.html" class="cta-btn">全15シミュレーターを見る</a>
   </div>
 
 </div>
@@ -491,11 +762,10 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
 <script src="/nav.js" defer></script>
 <script>
-/* 星をランダム配置 */
 (function(){
   var container = document.getElementById('heroStars');
   if(!container) return;
-  for(var i = 0; i < 18; i++){
+  for(var i = 0; i < 22; i++){
     var s = document.createElement('div');
     s.className = 'star';
     s.style.left = Math.random()*100 + '%';
