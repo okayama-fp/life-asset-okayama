@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/kids-money.html">
+<title>こどもお小遣い帳｜ライフアセットオフィス</title>
+<meta name="description" content="おこづかいと支出を記録して、貯金目標を達成しよう！使う・貯める・増やすの3つのお金箱で上手にお金を管理。">
+<meta property="og:title" content="こどもお小遣い帳｜ライフアセットオフィス">
+<meta property="og:description" content="おこづかいと支出を記録して、貯金目標を達成しよう！使う・貯める・増やすの3つのお金箱で上手にお金を管理。">
+<meta property="og:url" content="https://lifeassetoffice.net/kids-money.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<link rel="stylesheet" href="/style.css">
+<script src="/js/cookie-consent.js"></script>
+<style>
+:root {
+  --sky: #1a7a4a;
+  --sky-light: #22c55e;
+  --sky-pale: #dcfce7;
+  --navy: #1a3d2b;
+  --navy-soft: #1f5c40;
+  --bg: #f8fafc;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --spend-color: #ef4444;
+  --save-color: #3b82f6;
+  --invest-color: #f59e0b;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--sky), var(--sky-light)); z-index: 9999; }
+
+/* ─── Hero ─── */
+.hero {
+  background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 60%, #103d28 100%);
+  color: #fff;
+  padding: 48px 24px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(74,222,128,.08) 0%, transparent 60%);
+  pointer-events: none;
+  animation: heroPulse 6s ease-in-out infinite;
+}
+@keyframes heroPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(74,222,128,.15);
+  border: 1px solid rgba(74,222,128,.35);
+  color: #86efac;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);} }
+.hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+.hero h1 .emoji { font-size: 1.1em; }
+.hero-lead { font-size: 14px; color: rgba(255,255,255,.78); }
+
+/* ─── Main layout ─── */
+.main { max-width: 900px; margin: 0 auto; padding: 36px 20px 80px; }
+
+/* ─── Section card ─── */
+.section-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--sky-pale);
+}
+.section-title .s-icon {
+  width: 36px; height: 36px;
+  background: var(--sky-pale);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── Form elements ─── */
+.form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 140px;
+}
+.form-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-light);
+}
+.form-group input,
+.form-group select {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--sky);
+  box-shadow: 0 0 0 3px rgba(26,122,74,.1);
+}
+.btn-add {
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--sky), var(--sky-light));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform .15s, box-shadow .15s;
+  flex-shrink: 0;
+}
+.btn-add:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26,122,74,.28); }
+.btn-add:active { transform: translateY(0); }
+
+/* ─── Money boxes (3 jars) ─── */
+.money-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+@media(max-width: 560px) { .money-boxes { grid-template-columns: 1fr; } }
+.money-box {
+  border-radius: 16px;
+  padding: 18px 16px;
+  text-align: center;
+  position: relative;
+  transition: transform .2s;
+}
+.money-box:hover { transform: translateY(-2px); }
+.money-box.spend { background: #fff1f2; border: 2px solid #fecdd3; }
+.money-box.save  { background: #eff6ff; border: 2px solid #bfdbfe; }
+.money-box.invest { background: #fffbeb; border: 2px solid #fde68a; }
+.box-icon { font-size: 2rem; line-height: 1; margin-bottom: 6px; }
+.box-label { font-size: 13px; font-weight: 800; margin-bottom: 2px; }
+.box-label.spend { color: var(--spend-color); }
+.box-label.save  { color: var(--save-color); }
+.box-label.invest { color: var(--invest-color); }
+.box-desc { font-size: 11px; color: var(--text-light); margin-bottom: 10px; }
+.box-pct-input {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+  transition: border-color .2s;
+}
+.money-box.spend .box-pct-input:focus { border-color: var(--spend-color); }
+.money-box.save  .box-pct-input:focus { border-color: var(--save-color); }
+.money-box.invest .box-pct-input:focus { border-color: var(--invest-color); }
+.box-amount { font-size: 12px; color: var(--text-light); margin-top: 6px; font-weight: 600; }
+.pct-total-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: flex-end;
+}
+.pct-total-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 800;
+}
+.pct-total-badge.ok   { background: var(--sky-pale); color: var(--navy); }
+.pct-total-badge.over { background: #fee2e2; color: #991b1b; }
+.pct-total-badge.under { background: #fef9c3; color: #854d0e; }
+
+/* ─── Goal / progress ─── */
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.goal-card {
+  background: var(--sky-pale);
+  border: 1.5px solid #bbf7d0;
+  border-radius: 16px;
+  padding: 16px 18px;
+  position: relative;
+}
+.goal-card-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.goal-progress-bar-wrap {
+  background: #d1fae5;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+  margin: 8px 0 6px;
+}
+.goal-progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--sky), var(--sky-light));
+  transition: width .6s cubic-bezier(.34,1.56,.64,1);
+}
+.goal-pct-label { font-size: 11px; font-weight: 700; color: var(--sky); }
+.goal-amounts { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+.goal-del-btn {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-light);
+  transition: color .2s;
+}
+.goal-del-btn:hover { color: #ef4444; }
+
+/* ─── Report summary ─── */
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+@media(max-width: 520px) { .report-summary { grid-template-columns: 1fr; } }
+.report-stat {
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: center;
+}
+.report-stat.income-stat { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.report-stat.expense-stat { background: #fff1f2; border: 1.5px solid #fecdd3; }
+.report-stat.balance-stat { background: #eff6ff; border: 1.5px solid #bfdbfe; }
+.report-stat-label { font-size: 11px; font-weight: 700; color: var(--text-light); margin-bottom: 4px; }
+.report-stat-value { font-size: 1.35rem; font-weight: 900; line-height: 1; }
+.report-stat.income-stat  .report-stat-value { color: #16a34a; }
+.report-stat.expense-stat .report-stat-value { color: var(--spend-color); }
+.report-stat.balance-stat .report-stat-value { color: var(--save-color); }
+
+/* ─── History list ─── */
+.history-list {
+  list-style: none;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+}
+.history-list:empty { display: none; }
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  transition: background .15s;
+}
+.history-item:last-child { border-bottom: none; }
+.history-item:hover { background: var(--sky-pale); }
+.h-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.h-badge.income  { background: #dcfce7; color: #15803d; }
+.h-badge.expense { background: #fee2e2; color: #991b1b; }
+.h-date { color: var(--text-light); font-size: 11px; flex-shrink: 0; }
+.h-name { flex: 1; font-weight: 600; }
+.h-amount { font-weight: 800; flex-shrink: 0; }
+.h-amount.income  { color: #16a34a; }
+.h-amount.expense { color: var(--spend-color); }
+.h-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  transition: color .2s;
+}
+.h-del:hover { color: #ef4444; }
+.history-empty {
+  text-align: center;
+  color: var(--text-light);
+  padding: 32px 16px;
+  font-size: 13px;
+}
+
+/* ─── Print button ─── */
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-soft));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  margin-top: 8px;
+}
+.btn-print:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(26,61,43,.25); }
+
+/* ─── Reset button ─── */
+.btn-danger {
+  padding: 10px 20px;
+  background: #fff;
+  color: #ef4444;
+  border: 1.5px solid #fecdd3;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.btn-danger:hover { background: #fff1f2; border-color: #ef4444; }
+
+/* ─── Month selector ─── */
+.month-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.month-row label { font-size: 13px; font-weight: 700; color: var(--text-light); }
+.month-select {
+  padding: 8px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+}
+.month-select:focus { border-color: var(--sky); }
+
+/* ─── Celebration popup ─── */
+.celebrate-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 8000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn .3s;
+}
+.celebrate-overlay.show { display: flex; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.celebrate-box {
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px 48px;
+  text-align: center;
+  max-width: 340px;
+  width: 90%;
+  box-shadow: 0 24px 64px rgba(0,0,0,.18);
+  animation: popIn .45s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.5);opacity:0} to{transform:scale(1);opacity:1} }
+.celebrate-emoji { font-size: 4rem; line-height: 1; margin-bottom: 12px; }
+.celebrate-title { font-size: 1.5rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+.celebrate-sub { font-size: 14px; color: var(--text-light); margin-bottom: 22px; }
+.celebrate-box .btn-add { width: 100%; }
+
+/* ─── Footer ─── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,.85);
+  padding: 32px 24px 24px;
+  text-align: center;
+}
+.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
+footer a { color: rgba(255,255,255,.7); text-decoration: underline; }
+
+/* ─── Print styles ─── */
+@media print {
+  #pb, .hero, .btn-add, .btn-print, .btn-danger, .h-del, .goal-del-btn,
+  .form-row, .month-row, .pct-total-row, header, footer,
+  .celebrate-overlay { display: none !important; }
+  body { background: #fff; font-size: 12px; }
+  .main { padding: 0; max-width: 100%; }
+  .section-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  .money-boxes { display: grid; }
+  .history-list { max-height: none; overflow: visible; }
+  .report-summary { display: grid; }
+}
+
+/* ─── Responsive ─── */
+@media(max-width: 640px) {
+  .section-card { padding: 20px 16px 18px; }
+  .form-row { flex-direction: column; }
+  .btn-add, .btn-danger { width: 100%; text-align: center; }
+  .pct-total-row { justify-content: center; }
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="simulation.html">シミュレーター</a>
+      <a href="blog/">ブログ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge"><span class="hero-dot"></span>こども向け・登録不要</div>
+  <h1><span class="emoji">💰</span> こどもお小遣い帳</h1>
+  <p class="hero-lead">おこづかいを記録して、かしこくお金を使おう！🌱</p>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Month selector -->
+  <div class="month-row">
+    <label for="monthSelect">📅 表示する月：</label>
+    <select id="monthSelect" class="month-select"></select>
+    <button class="btn-danger" id="resetMonthBtn">🗑️ この月のデータを削除</button>
+  </div>
+
+  <!-- 1. 収入記録 -->
+  <div class="section-card">
+    <div class="section-title">
+      <div class="s-icon">💴</div>
+      収入を記録しよう！
+    </div>
+
+    <!-- おこづかい -->
+    <p style="font-size:13px;font-weight:700;color:var(--text-light);margin-bottom:8px;">📬 おこづかい</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="allowanceAmt">金額（円）</label>
+        <input type="number" id="allowanceAmt" min="0" step="10" placeholder="例：1000">
+      </div>
+      <button class="btn-add" id="addAllowanceBtn">➕ 追加</button>
+    </div>
+
+    <!-- お手伝い報酬 -->
+    <p style="font-size:13px;font-weight:700;color:var(--text-light);margin-bottom:8px;margin-top:16px;">🧹 お手伝い報酬</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="choreDesc">お手伝いの内容</label>
+        <input type="text" id="choreDesc" maxlength="30" placeholder="例：お皿洗い">
+      </div>
+      <div class="form-group" style="max-width:140px;">
+        <label for="choreAmt">金額（円）</label>
+        <input type="number" id="choreAmt" min="0" step="10" placeholder="例：100">
+      </div>
+      <button class="btn-add" id="addChoreBtn">➕ 追加</button>
+    </div>
+  </div>
+
+  <!-- 2. 支出記録 -->
+  <div class="section-card">
+    <div class="section-title">
+      <div class="s-icon">🛍️</div>
+      使ったお金を記録しよう！
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="expenseCat">カテゴリ</label>
+        <select id="expenseCat">
+          <option value="おやつ">🍩 おやつ</option>
+          <option value="ゲーム">🎮 ゲーム</option>
+          <option value="本">📚 本</option>
+          <option value="文具">✏️ 文具</option>
+          <option value="その他">🎁 その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="expenseDesc">内容（任意）</label>
+        <input type="text" id="expenseDesc" maxlength="30" placeholder="例：コロコロコミック">
+      </div>
+      <div class="form-group" style="max-width:140px;">
+        <label for="expenseAmt">金額（円）</label>
+        <input type="number" id="expenseAmt" min="0" step="10" placeholder="例：500">
+      </div>
+      <button class="btn-add" id="addExpenseBtn">➕ 追加</button>
+    </div>
+  </div>
+
+  <!-- 3. 3つのお金箱 -->
+  <div class="section-card">
+    <div class="section-title">
+      <div class="s-icon">🏦</div>
+      3つのお金箱に分けよう！
+    </div>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:18px;">今月の収入をどうやって分けるか決めよう。合計が100%になるようにしてね！</p>
+
+    <div class="money-boxes">
+      <div class="money-box spend">
+        <div class="box-icon">🛒</div>
+        <div class="box-label spend">つかう</div>
+        <div class="box-desc">日常のおこづかい・おやつ</div>
+        <input type="number" class="box-pct-input" id="pctSpend" min="0" max="100" value="60">
+        <div style="font-size:11px;color:var(--text-light);margin-top:4px;">%</div>
+        <div class="box-amount" id="amtSpend">¥ 0</div>
+      </div>
+      <div class="money-box save">
+        <div class="box-icon">🐷</div>
+        <div class="box-label save">ためる</div>
+        <div class="box-desc">目標に向けて貯金</div>
+        <input type="number" class="box-pct-input" id="pctSave" min="0" max="100" value="30">
+        <div style="font-size:11px;color:var(--text-light);margin-top:4px;">%</div>
+        <div class="box-amount" id="amtSave">¥ 0</div>
+      </div>
+      <div class="money-box invest">
+        <div class="box-icon">📈</div>
+        <div class="box-label invest">ふやす</div>
+        <div class="box-desc">将来の投資・NISA用</div>
+        <input type="number" class="box-pct-input" id="pctInvest" min="0" max="100" value="10">
+        <div style="font-size:11px;color:var(--text-light);margin-top:4px;">%</div>
+        <div class="box-amount" id="amtInvest">¥ 0</div>
+      </div>
+    </div>
+
+    <div class="pct-total-row">
+      <span style="color:var(--text-light);font-size:13px;">合計：</span>
+      <span class="pct-total-badge ok" id="pctTotalBadge">100%</span>
+    </div>
+  </div>
+
+  <!-- 4. 貯金目標 -->
+  <div class="section-card">
+    <div class="section-title">
+      <div class="s-icon">🎯</div>
+      貯金目標を設定しよう！
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="goalName">目標の名前</label>
+        <input type="text" id="goalName" maxlength="30" placeholder="例：Nintendo Switch">
+      </div>
+      <div class="form-group" style="max-width:150px;">
+        <label for="goalTarget">目標金額（円）</label>
+        <input type="number" id="goalTarget" min="1" step="100" placeholder="例：40000">
+      </div>
+      <div class="form-group" style="max-width:150px;">
+        <label for="goalCurrent">いまの貯金（円）</label>
+        <input type="number" id="goalCurrent" min="0" step="100" placeholder="例：8000">
+      </div>
+      <button class="btn-add" id="addGoalBtn">➕ 追加</button>
+    </div>
+
+    <div class="goal-grid" id="goalGrid">
+      <div class="history-empty" id="goalEmpty" style="background:var(--sky-pale);border-radius:14px;padding:24px;font-size:13px;color:var(--text-light);">🎯 まだ目標がないよ！上に入力して追加しよう。</div>
+    </div>
+  </div>
+
+  <!-- 5. 収支レポート -->
+  <div class="section-card">
+    <div class="section-title">
+      <div class="s-icon">📊</div>
+      今月の収支レポート
+    </div>
+
+    <div class="report-summary">
+      <div class="report-stat income-stat">
+        <div class="report-stat-label">💴 収入合計</div>
+        <div class="report-stat-value" id="totalIncome">¥0</div>
+      </div>
+      <div class="report-stat expense-stat">
+        <div class="report-stat-label">🛍️ 支出合計</div>
+        <div class="report-stat-value" id="totalExpense">¥0</div>
+      </div>
+      <div class="report-stat balance-stat">
+        <div class="report-stat-label">💎 差額</div>
+        <div class="report-stat-value" id="totalBalance">¥0</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;font-weight:700;color:var(--text-light);margin-bottom:10px;">📋 収支履歴</p>
+    <ul class="history-list" id="historyList"></ul>
+    <div class="history-empty" id="historyEmpty" style="margin-top:8px;">まだ記録がないよ！収入や支出を追加してみよう 😊</div>
+  </div>
+
+  <!-- 6. 親子レポート印刷 -->
+  <div class="section-card" style="text-align:center;padding:24px 28px;">
+    <p style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">👨‍👩‍👧 おうちの人に見せよう！</p>
+    <p style="font-size:12px;color:var(--text-light);margin-bottom:16px;">印刷用レポートを表示して、おうちの人と一緒に確認しよう。</p>
+    <button class="btn-print" id="printBtn">🖨️ 印刷用レポートを表示</button>
+  </div>
+
+</div><!-- /main -->
+
+<!-- Celebration overlay -->
+<div class="celebrate-overlay" id="celebrateOverlay">
+  <div class="celebrate-box">
+    <div class="celebrate-emoji">🎉</div>
+    <div class="celebrate-title">目標達成！</div>
+    <div class="celebrate-sub" id="celebrateSub">すごい！貯金目標を達成したよ！</div>
+    <button class="btn-add" id="celebrateClose">やった～！閉じる 🙌</button>
+  </div>
+</div>
+
+<div style="max-width:900px;margin:0 auto 20px;padding:0 20px">
+  <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">
+    ⚠️ <strong>免責事項：</strong>本ツールはお子様のお金の学習を目的としたものです。金融・投資・税務アドバイスを提供するものではありません。
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+</footer>
+
+<script src="/nav.js" defer></script>
+<script>
+// ─── Progress bar on scroll ───
+window.addEventListener('scroll', function () {
+  var el = document.documentElement;
+  document.getElementById('pb').style.width =
+    (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
+});
+
+// ─── Storage key & helpers ───
+var STORAGE_KEY = 'la_kids_money';
+
+function pad(n) { return String(n).padStart(2, '0'); }
+function todayStr() {
+  var d = new Date();
+  return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+}
+function currentYM() {
+  var d = new Date();
+  return d.getFullYear() + '-' + pad(d.getMonth() + 1);
+}
+function fmtYen(n) {
+  return '¥' + Number(n).toLocaleString('ja-JP');
+}
+
+// ─── Data structure ───
+// data = { months: { "YYYY-MM": { records: [...], goals: [...], boxes: {spend,save,invest} } } }
+function loadData() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return { months: {} };
+}
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+function getMonth(data, ym) {
+  if (!data.months[ym]) {
+    data.months[ym] = { records: [], goals: [], boxes: { spend: 60, save: 30, invest: 10 } };
+  }
+  return data.months[ym];
+}
+
+// ─── State ───
+var appData = loadData();
+var activeYM = currentYM();
+
+// ─── Month selector ───
+function buildMonthOptions() {
+  var sel = document.getElementById('monthSelect');
+  var ym = currentYM();
+  // generate 6 months back to 3 months forward
+  var options = [];
+  for (var i = -12; i <= 3; i++) {
+    var d = new Date();
+    d.setDate(1);
+    d.setMonth(d.getMonth() + i);
+    var y = d.getFullYear();
+    var m = pad(d.getMonth() + 1);
+    options.push(y + '-' + m);
+  }
+  // also include any months with existing data
+  Object.keys(appData.months).forEach(function (k) {
+    if (options.indexOf(k) === -1) options.push(k);
+  });
+  options.sort();
+  sel.innerHTML = '';
+  options.forEach(function (o) {
+    var opt = document.createElement('option');
+    opt.value = o;
+    opt.textContent = o.replace('-', '年') + '月';
+    if (o === activeYM) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+document.getElementById('monthSelect').addEventListener('change', function () {
+  activeYM = this.value;
+  renderAll();
+});
+
+document.getElementById('resetMonthBtn').addEventListener('click', function () {
+  if (!confirm('この月のデータをすべて削除するよ？よろしい？')) return;
+  delete appData.months[activeYM];
+  saveData(appData);
+  renderAll();
+});
+
+// ─── Render all ───
+function renderAll() {
+  renderBoxes();
+  renderReport();
+  renderGoals();
+}
+
+// ─── Income: allowance ───
+document.getElementById('addAllowanceBtn').addEventListener('click', function () {
+  var amt = parseInt(document.getElementById('allowanceAmt').value, 10);
+  if (!amt || amt <= 0) { shake('allowanceAmt'); return; }
+  addRecord({ type: 'income', category: 'おこづかい', desc: 'おこづかい', amount: amt, date: todayStr() });
+  document.getElementById('allowanceAmt').value = '';
+});
+
+// ─── Income: chore ───
+document.getElementById('addChoreBtn').addEventListener('click', function () {
+  var desc = document.getElementById('choreDesc').value.trim() || 'お手伝い';
+  var amt = parseInt(document.getElementById('choreAmt').value, 10);
+  if (!amt || amt <= 0) { shake('choreAmt'); return; }
+  addRecord({ type: 'income', category: 'お手伝い', desc: desc, amount: amt, date: todayStr() });
+  document.getElementById('choreDesc').value = '';
+  document.getElementById('choreAmt').value = '';
+});
+
+// ─── Expense ───
+document.getElementById('addExpenseBtn').addEventListener('click', function () {
+  var cat = document.getElementById('expenseCat').value;
+  var desc = document.getElementById('expenseDesc').value.trim() || cat;
+  var amt = parseInt(document.getElementById('expenseAmt').value, 10);
+  if (!amt || amt <= 0) { shake('expenseAmt'); return; }
+  addRecord({ type: 'expense', category: cat, desc: desc, amount: amt, date: todayStr() });
+  document.getElementById('expenseDesc').value = '';
+  document.getElementById('expenseAmt').value = '';
+});
+
+function addRecord(rec) {
+  rec.id = Date.now() + Math.random();
+  var month = getMonth(appData, activeYM);
+  month.records.unshift(rec);
+  saveData(appData);
+  renderAll();
+}
+
+function deleteRecord(id) {
+  var month = getMonth(appData, activeYM);
+  month.records = month.records.filter(function (r) { return r.id !== id; });
+  saveData(appData);
+  renderAll();
+}
+
+// ─── Boxes ───
+['pctSpend', 'pctSave', 'pctInvest'].forEach(function (id) {
+  document.getElementById(id).addEventListener('input', function () {
+    var month = getMonth(appData, activeYM);
+    month.boxes.spend  = parseInt(document.getElementById('pctSpend').value, 10) || 0;
+    month.boxes.save   = parseInt(document.getElementById('pctSave').value, 10)  || 0;
+    month.boxes.invest = parseInt(document.getElementById('pctInvest').value, 10)|| 0;
+    saveData(appData);
+    renderBoxes();
+  });
+});
+
+function renderBoxes() {
+  var month = getMonth(appData, activeYM);
+  var boxes = month.boxes;
+  document.getElementById('pctSpend').value  = boxes.spend;
+  document.getElementById('pctSave').value   = boxes.save;
+  document.getElementById('pctInvest').value = boxes.invest;
+
+  var totalInc = calcTotalIncome(month);
+  document.getElementById('amtSpend').textContent  = fmtYen(Math.round(totalInc * boxes.spend  / 100));
+  document.getElementById('amtSave').textContent   = fmtYen(Math.round(totalInc * boxes.save   / 100));
+  document.getElementById('amtInvest').textContent = fmtYen(Math.round(totalInc * boxes.invest / 100));
+
+  var total = boxes.spend + boxes.save + boxes.invest;
+  var badge = document.getElementById('pctTotalBadge');
+  badge.textContent = total + '%';
+  badge.className = 'pct-total-badge ' + (total === 100 ? 'ok' : total > 100 ? 'over' : 'under');
+}
+
+// ─── Goals ───
+document.getElementById('addGoalBtn').addEventListener('click', function () {
+  var name    = document.getElementById('goalName').value.trim();
+  var target  = parseInt(document.getElementById('goalTarget').value, 10);
+  var current = parseInt(document.getElementById('goalCurrent').value, 10) || 0;
+  if (!name)          { shake('goalName');   return; }
+  if (!target || target <= 0) { shake('goalTarget'); return; }
+
+  var goal = { id: Date.now() + Math.random(), name: name, target: target, current: current };
+  var month = getMonth(appData, activeYM);
+  month.goals.push(goal);
+  saveData(appData);
+
+  document.getElementById('goalName').value    = '';
+  document.getElementById('goalTarget').value  = '';
+  document.getElementById('goalCurrent').value = '';
+
+  renderGoals();
+
+  if (current >= target) showCelebration(name);
+});
+
+function deleteGoal(id) {
+  var month = getMonth(appData, activeYM);
+  month.goals = month.goals.filter(function (g) { return g.id !== id; });
+  saveData(appData);
+  renderGoals();
+}
+
+function renderGoals() {
+  var month = getMonth(appData, activeYM);
+  var grid  = document.getElementById('goalGrid');
+  var empty = document.getElementById('goalEmpty');
+
+  // remove old cards (not the empty message)
+  Array.from(grid.querySelectorAll('.goal-card')).forEach(function (c) { c.remove(); });
+
+  if (!month.goals || month.goals.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  month.goals.forEach(function (g) {
+    var pct = Math.min(100, Math.round(g.current / g.target * 100));
+    var card = document.createElement('div');
+    card.className = 'goal-card';
+    card.innerHTML =
+      '<button class="goal-del-btn" data-id="' + g.id + '" title="削除">✕</button>' +
+      '<div class="goal-card-title">🎯 ' + escHtml(g.name) + '</div>' +
+      '<div class="goal-progress-bar-wrap"><div class="goal-progress-bar" style="width:' + pct + '%"></div></div>' +
+      '<div class="goal-pct-label">' + pct + '% 達成！' + (pct >= 100 ? ' 🎉' : '') + '</div>' +
+      '<div class="goal-amounts">' + fmtYen(g.current) + ' ／ ' + fmtYen(g.target) + '</div>';
+    grid.appendChild(card);
+
+    card.querySelector('.goal-del-btn').addEventListener('click', function () {
+      deleteGoal(g.id);
+    });
+  });
+}
+
+// ─── Report ───
+function calcTotalIncome(month) {
+  return (month.records || []).filter(function (r) { return r.type === 'income'; })
+    .reduce(function (s, r) { return s + r.amount; }, 0);
+}
+function calcTotalExpense(month) {
+  return (month.records || []).filter(function (r) { return r.type === 'expense'; })
+    .reduce(function (s, r) { return s + r.amount; }, 0);
+}
+
+var CAT_EMOJI = {
+  'おこづかい': '💴',
+  'お手伝い': '🧹',
+  'おやつ': '🍩',
+  'ゲーム': '🎮',
+  '本': '📚',
+  '文具': '✏️',
+  'その他': '🎁'
+};
+
+function renderReport() {
+  var month = getMonth(appData, activeYM);
+  var inc   = calcTotalIncome(month);
+  var exp   = calcTotalExpense(month);
+  var bal   = inc - exp;
+
+  document.getElementById('totalIncome').textContent  = fmtYen(inc);
+  document.getElementById('totalExpense').textContent = fmtYen(exp);
+  var balEl = document.getElementById('totalBalance');
+  balEl.textContent = fmtYen(bal);
+  balEl.style.color = bal >= 0 ? 'var(--save-color)' : 'var(--spend-color)';
+
+  var list  = document.getElementById('historyList');
+  var empty = document.getElementById('historyEmpty');
+  var records = month.records || [];
+
+  if (records.length === 0) {
+    list.style.display  = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+  list.style.display  = '';
+  empty.style.display = 'none';
+
+  list.innerHTML = '';
+  records.forEach(function (r) {
+    var li = document.createElement('li');
+    li.className = 'history-item';
+    var emoji = CAT_EMOJI[r.category] || '💰';
+    var sign  = r.type === 'income' ? '+' : '-';
+    li.innerHTML =
+      '<span class="h-badge ' + r.type + '">' + (r.type === 'income' ? '収入' : '支出') + '</span>' +
+      '<span class="h-date">' + escHtml(r.date) + '</span>' +
+      '<span class="h-name">' + emoji + ' ' + escHtml(r.desc) + '</span>' +
+      '<span class="h-amount ' + r.type + '">' + sign + fmtYen(r.amount) + '</span>' +
+      '<button class="h-del" data-id="' + r.id + '" title="削除">✕</button>';
+    li.querySelector('.h-del').addEventListener('click', function () {
+      deleteRecord(r.id);
+    });
+    list.appendChild(li);
+  });
+
+  // also update box amounts now that income may have changed
+  renderBoxes();
+}
+
+// ─── Celebration ───
+function showCelebration(goalName) {
+  document.getElementById('celebrateSub').textContent =
+    '「' + goalName + '」の目標を達成したよ！すごい！🌟';
+  document.getElementById('celebrateOverlay').classList.add('show');
+}
+document.getElementById('celebrateClose').addEventListener('click', function () {
+  document.getElementById('celebrateOverlay').classList.remove('show');
+});
+document.getElementById('celebrateOverlay').addEventListener('click', function (e) {
+  if (e.target === this) this.classList.remove('show');
+});
+
+// ─── Print ───
+document.getElementById('printBtn').addEventListener('click', function () {
+  window.print();
+});
+
+// ─── Utility: shake on bad input ───
+function shake(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.style.transition = 'transform .1s';
+  el.style.transform  = 'translateX(-6px)';
+  setTimeout(function () { el.style.transform = 'translateX(6px)'; }, 100);
+  setTimeout(function () { el.style.transform = 'translateX(-4px)'; }, 200);
+  setTimeout(function () { el.style.transform = 'translateX(0)'; el.style.border = '1.5px solid #ef4444'; }, 300);
+  setTimeout(function () { el.style.border = ''; }, 1000);
+}
+
+// ─── Utility: escape HTML ───
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ─── Init ───
+buildMonthOptions();
+renderAll();
+</script>
+</body>
+</html>
