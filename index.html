@@ -256,7 +256,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
       </div>
 
       <div class="hero-ctas">
-        <a href="#tools" class="cta-primary">
+        <a href="simulation.html" class="cta-primary">
           <span></span>
           <span>
             シミュレーターを使う
@@ -686,7 +686,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
     <h2>お金のことで迷ったら、<br>まず数字で確認しましょう。</h2>
     <p>売り込みなし・登録不要。<br>シミュレーターで「自分の場合どうなるか」を今すぐ確認できます。</p>
     <div class="cta-box-btns">
-      <a href="#tools" class="cta-btn-white">シミュレーターを使う</a>
+      <a href="simulation.html" class="cta-btn-white">シミュレーターを使う</a>
       <a href="contact.html" class="cta-btn-outline">お問い合わせ</a>
     </div>
   </div>
@@ -732,14 +732,6 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
 },{threshold:0.12});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-/* スマホ：「シミュレーターを使う」ボタンは総合診断シミュレーターページへ直接遷移 */
-(function(){
-  if(window.innerWidth > 768) return;
-  document.querySelectorAll('a[href="#tools"]').forEach(function(a){
-    a.setAttribute('href', 'simulation.html');
-  });
-})();
 
 /* カウントアップアニメーション */
 (function(){
