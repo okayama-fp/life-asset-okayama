@@ -733,6 +733,14 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.12});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
+/* スマホ：「シミュレーターを使う」ボタンは総合診断シミュレーターページへ直接遷移 */
+(function(){
+  if(window.innerWidth > 768) return;
+  document.querySelectorAll('a[href="#tools"]').forEach(function(a){
+    a.setAttribute('href', 'simulation.html');
+  });
+})();
+
 /* カウントアップアニメーション */
 (function(){
   function countUp(el,target,suffix,duration){
