@@ -693,6 +693,16 @@ function filterSims(query){
   });
 })();
 
+/* URLパラメータでカテゴリを初期選択（例: simulation.html?cat=kids） */
+(function(){
+  try {
+    var cat = new URLSearchParams(location.search).get('cat');
+    if(!cat) return;
+    var tab = document.querySelector('.cat-tab[data-cat="' + cat.replace(/[^a-z]/g,'') + '"]');
+    if(tab) tab.click();
+  } catch(e) {}
+})();
+
 (function(){
   var ICONS = {
     'asset-sim.html':'📈','retirement-gap.html':'🏖️','nisa-ideco-sim.html':'🎁',
