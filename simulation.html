@@ -272,15 +272,22 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   .hero-lead { font-size: 13px; }
   .cta-box { padding: 28px 18px; }
 }
-/* カテゴリタブ横スクロール */
+/* スマホ：カテゴリタブを横スクロールなしで全表示（折り返しグリッド） */
 @media (max-width: 600px) {
   .cat-tabs {
-    flex-wrap: nowrap; overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px; scrollbar-width: none;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
   }
-  .cat-tabs::-webkit-scrollbar { display: none; }
+  .cat-tab {
+    padding: 7px 2px;
+    font-size: 11px;
+    min-height: 38px;
+    border-radius: 10px;
+    text-align: center;
+    white-space: nowrap;
+  }
 }
 /* タッチターゲット */
 .cat-tab, .tool-link, .cta-btn { min-height: 44px; }
