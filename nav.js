@@ -23,7 +23,7 @@
         ['🏠 住宅ローン', '/simulation.html?cat=loan'],
         ['🛡️ 保険・その他', '/simulation.html?cat=other'],
         ['💴 家計・収入', '/simulation.html?cat=income'],
-        ['🎮 子ども学習', '/simulation.html?cat=kids'],
+        ['🎮 子ども学習', '/kids.html'],
         ['すべてのツールを見る →', '/simulation.html']
       ]
     },
