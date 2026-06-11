@@ -177,9 +177,22 @@ footer{background:#0f4d2e;padding:36px 20px 24px;color:rgba(255,255,255,.4)}
   .author-badges{display:none}
 }
 @media(max-width:520px){
-  .acard-body{padding:16px}
+  /* スマホ：全記事をコンパクト表示（タイトル＋カテゴリのみ） */
+  .pg-head{padding:18px 16px 14px}
+  .pg-title{font-size:1.15rem}
+  .pg-desc{display:none}
+  .art-list{gap:7px}
+  .acard{border-radius:10px}
+  .acard-top{height:3px}
+  .acard-body{padding:10px 14px}
   .acard-excerpt{display:none}
-  .acard-title{font-size:15px}
+  .acard-author{display:none}
+  .acard-title{font-size:13px;line-height:1.45;margin-bottom:0}
+  .acard-meta-row{margin-bottom:5px;gap:6px}
+  .acat{font-size:9px;padding:2px 7px}
+  .anew{font-size:9px}
+  .adate{font-size:10px}
+  .aread-time{display:none}
 }
 
 /* ── PAGINATION ── */
@@ -821,7 +834,8 @@ footer{background:#0f4d2e;padding:36px 20px 24px;color:rgba(255,255,255,.4)}
 </footer>
 
 <script>
-var ITEMS_PER_PAGE = 10;
+/* スマホはページ送りなしで全記事を一覧表示 */
+var ITEMS_PER_PAGE = (window.innerWidth <= 520) ? 9999 : 10;
 var currentPage = 1;
 var currentCat  = 'all';
 
