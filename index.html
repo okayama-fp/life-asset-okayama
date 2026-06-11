@@ -36,7 +36,7 @@
   --shadow:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 12px 48px rgba(0,0,0,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden}
+html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
 
 /* ── NAV ── */
@@ -215,6 +215,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
   .cta-box{padding:28px 16px}
   /* ヘッダーのお問い合わせボタンを非表示 */
   .nav-cta{display:none}
+  /* ロゴサブテキストを非表示（横幅節約） */
+  .logo-sub{display:none}
+  /* ヒーロー右サイドパネルを非表示（スマホには不要） */
+  .hero-right{display:none}
+  /* ヒーロー統計を非表示（コンパクト化） */
+  .hero-stats{display:none}
   /* ツールフィルターを横スクロールなしグリッドに */
   .tools-filter{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;overflow-x:visible;padding:10px 0;position:static;margin-bottom:14px}
   .filter-btn{flex-shrink:unset;padding:7px 4px;font-size:11px;min-height:36px;border-radius:10px;text-align:center;white-space:normal;line-height:1.3}
