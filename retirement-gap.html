@@ -964,7 +964,7 @@ function calc() {
   gapEl.className = 'stat-v ' + (gap > 0 ? 'bad' : 'good');
   document.getElementById('r-monthly').textContent = gap > 0 ? fmt(monthlyNeed)+'/月' : '積立不要';
 
-  renderChart(totalNeeded, totalPension, savings, nisa, ideco, invest, Math.max(gap, 0));
+  renderChart(totalNeeded, totalPension, projSavings, projNisa, projIdeco, projInvest, Math.max(gap, 0));
   updateNextAction(gap, monthlyNeed, covPct, yearsToRetire);
   calcExtra();
   updateUrlParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate});
@@ -1126,9 +1126,12 @@ window.addEventListener('scroll', function() {
 function buildShareUrl() {
   var p=new URLSearchParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate}); return location.origin+location.pathname+'?'+p.toString();
 }
+var _urlTimer = null;
 function updateUrlParams(vals) {
-  var p = new URLSearchParams(vals);
-  history.replaceState(null,'','?'+p.toString());
+  clearTimeout(_urlTimer);
+  _urlTimer = setTimeout(function() {
+    try { var p = new URLSearchParams(vals); history.replaceState(null,'','?'+p.toString()); } catch(e) {}
+  }, 300);
 }
 function loadFromUrl() {
   var p=new URLSearchParams(location.search);
@@ -1160,15 +1163,6 @@ function shareX() {
   var gap=document.getElementById('result-amount').textContent; var lbl=document.getElementById('result-label').textContent; var text='老後資金シミュレーターで試しました！\n'+lbl+': '+gap+'\n月生活費'+sliders.expense+'万円・年金'+sliders.pension+'万円/月\n#ライフアセットオフィス #老後資金';
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
 }
-(function(){
-  try {
-    var k='la_sim_recent',u=location.pathname,n='老後資金不足額シミュレーター';
-    var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
-    a.unshift({u:u,n:n,ts:Date.now()});
-    localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
-  } catch(e) {}
-})();
-
 (function(){
   try {
     var k='la_sim_recent',u=location.pathname,n='老後資金不足額シミュレーター';
