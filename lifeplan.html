@@ -1014,6 +1014,7 @@ function renderChildrenFields(){
     </div>`;
   }
   renderEducationFields();
+  setTimeout(initSteppers,0);
 }
 
 function renderEducationFields(){
@@ -1442,7 +1443,7 @@ function autoSave(){try{localStorage.setItem(_LS,JSON.stringify(collectAllInputs
     const d=localStorage.getItem(_LS);if(!d)return;
     applyAllInputs(JSON.parse(d));
     toggleSpouse();toggleHousing();
-    setTimeout(()=>{renderChildrenFields();initSteppers();},80);
+    setTimeout(initSteppers,80);
     showToast('前回の入力データを復元しました');
   }catch(e){}
 })();
