@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/mypage.html">
+<title>マイプラン保存庫｜ライフアセットオフィス</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+:root{--sky:#1a7a4a;--sky-light:#22c55e;--sky-pale:#dcfce7;--navy:#1a3d2b;--bg:#f8faf7;--white:#fff;--border:#e5e7eb;--gray:#6b7280;--red:#c0392b;--red-pale:#fdecea}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:var(--bg);color:#0d0d0d;line-height:1.7;-webkit-font-smoothing:antialiased}
+#pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--sky),var(--sky-light));z-index:9999}
+.hero{background:linear-gradient(135deg,var(--navy),var(--sky));color:#fff;padding:40px 24px 44px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:600;margin-bottom:14px}
+.hero h1{font-size:clamp(22px,4vw,32px);font-weight:900;margin-bottom:8px}
+.hero p{font-size:13px;color:rgba(255,255,255,.8);max-width:420px;margin:0 auto}
+.main{max-width:860px;margin:0 auto;padding:28px 20px 80px}
+.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.topbar-count{font-size:13px;color:var(--gray)}
+.topbar-count strong{color:var(--sky);font-weight:800;font-size:16px}
+.btn-new{display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:#fff;font-size:13px;font-weight:700;padding:9px 20px;border-radius:50px;text-decoration:none;transition:opacity .2s}
+.btn-new:hover{opacity:.85}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.plan-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:12px;transition:box-shadow .2s}
+.plan-card:hover{box-shadow:0 6px 24px rgba(26,122,74,.1)}
+.plan-card.review-due{border-color:#f59e0b;background:#fffdf0}
+.plan-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.plan-tool{display:flex;align-items:center;gap:7px}
+.plan-tool-icon{font-size:22px;line-height:1}
+.plan-tool-name{font-size:11px;color:var(--gray);font-weight:600}
+.plan-name{font-size:16px;font-weight:900;color:var(--navy);margin-top:2px;line-height:1.3}
+.review-badge{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;border:1px solid #fde68a;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#92400e;flex-shrink:0}
+.plan-date{font-size:11px;color:var(--gray)}
+.plan-metrics{display:flex;flex-wrap:wrap;gap:6px}
+.metric-pill{display:inline-flex;flex-direction:column;align-items:center;background:var(--sky-pale);border:1px solid #bbf7d0;border-radius:10px;padding:6px 12px;min-width:80px;text-align:center}
+.metric-pill.warn{background:#fef3c7;border-color:#fde68a}
+.metric-pill.danger{background:var(--red-pale);border-color:#f5b7b1}
+.metric-label{font-size:9px;color:var(--gray);font-weight:600;white-space:nowrap}
+.metric-val{font-size:13px;font-weight:800;color:var(--navy);line-height:1.3}
+.plan-actions{display:flex;gap:8px;margin-top:4px}
+.btn-open{flex:1;padding:10px;background:var(--sky);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.btn-open:hover{opacity:.85}
+.btn-delete{padding:10px 14px;background:var(--white);color:var(--gray);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-delete:hover{border-color:var(--red);color:var(--red)}
+.btn-rename{padding:10px 12px;background:var(--white);color:var(--sky);border:1.5px solid #bbf7d0;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-rename:hover{background:var(--sky-pale)}
+.empty-state{text-align:center;padding:72px 20px;color:var(--gray)}
+.empty-icon{font-size:54px;margin-bottom:16px}
+.empty-state h2{font-size:20px;font-weight:900;color:#0d0d0d;margin-bottom:10px}
+.empty-state p{font-size:13px;margin-bottom:24px}
+.compare-section{margin-top:36px}
+.compare-title{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--sky-pale);display:flex;align-items:center;gap:8px}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px;background:var(--white);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.compare-table th{background:var(--sky-pale);padding:10px 12px;font-weight:700;color:var(--navy);text-align:center;font-size:12px}
+.compare-table td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:center;font-size:13px}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td:first-child{text-align:left;color:var(--gray);font-size:12px;font-weight:600}
+.compare-best{color:var(--sky);font-weight:800}
+.rename-input{width:100%;padding:8px 12px;border:1.5px solid var(--sky);border-radius:8px;font-size:14px;font-family:inherit;outline:none;margin-bottom:6px}
+.toast{position:fixed;bottom:24px;right:24px;background:#0d0d0d;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+footer{background:var(--navy);color:rgba(255,255,255,.8);padding:28px 24px 24px;text-align:center;font-size:12px;margin-top:0}
+footer a{color:rgba(255,255,255,.6);text-decoration:none}
+@media(max-width:600px){.plans-grid{grid-template-columns:1fr}}
+</style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+<div id="pb"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="simulation.html">シミュレーター</a>
+      <a href="blog/">ブログ</a>
+      <a href="mypage.html" style="color:var(--sky);font-weight:700;">マイページ</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">🔒 登録不要・このデバイスのみ保存</div>
+  <h1>マイプラン保存庫</h1>
+  <p>シミュレーターで作ったプランを名前をつけて保存。いつでも呼び出して続きから始められます。</p>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-count">保存プラン: <strong id="plan-count">0</strong>件（最大20件）</div>
+    <a href="simulation.html" class="btn-new">＋ 新しくシミュレーション</a>
+  </div>
+
+  <div id="plans-grid" class="plans-grid"></div>
+
+  <div id="empty-state" class="empty-state" style="display:none">
+    <div class="empty-icon">📂</div>
+    <h2>まだプランが保存されていません</h2>
+    <p>シミュレーターで「⭐ プランを保存」を押すと<br>ここに表示されます。</p>
+    <a href="simulation.html" class="btn-new" style="display:inline-flex;margin:0 auto">シミュレーターを使う →</a>
+  </div>
+
+  <div id="compare-section" class="compare-section" style="display:none">
+    <div class="compare-title">📊 プラン比較</div>
+    <div id="compare-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+  <p style="margin-top:8px;font-size:11px;opacity:.5">※ プランデータはブラウザのローカルストレージに保存されます。ブラウザのデータを削除すると消えます。</p>
+</footer>
+
+<script src="/nav.js" defer></script>
+<script>
+const _KEY = 'la_plans_v1';
+
+function getPlans(){ try{ return JSON.parse(localStorage.getItem(_KEY)||'[]'); }catch(e){ return []; } }
+function savePlans(p){ try{ localStorage.setItem(_KEY,JSON.stringify(p)); }catch(e){} }
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function fmtDate(ts){ return new Date(ts).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'}); }
+function fmtMan(v){ return v>=10000?(v/10000).toFixed(1).replace(/\.0$/,'')+'億':v.toLocaleString()+'万'; }
+function daysSince(ts){ return Math.floor((Date.now()-ts)/(1000*3600*24)); }
+
+function renderPlan(plan, idx){
+  const isDue = daysSince(plan.savedAt) >= 180;
+  const s = plan.summary || {};
+  const card = document.createElement('div');
+  card.className = 'plan-card' + (isDue?' review-due':'');
+  card.dataset.idx = idx;
+
+  let metricsHtml = '';
+  if(plan.tool === 'lifeplan'){
+    const depCls = s.depleteAge ? 'danger' : s.minAsset < 0 ? 'warn' : '';
+    metricsHtml = `
+      <div class="metric-pill"><span class="metric-label">ピーク資産</span><span class="metric-val">${fmtMan(s.peakAsset||0)}円</span></div>
+      <div class="metric-pill ${s.retireAsset>0?'':'warn'}"><span class="metric-label">定年時資産</span><span class="metric-val">${fmtMan(s.retireAsset||0)}円</span></div>
+      <div class="metric-pill ${depCls}"><span class="metric-label">枯渇リスク</span><span class="metric-val">${s.depleteAge?s.depleteAge+'歳':'問題なし'}</span></div>`;
+  } else if(plan.tool === 'asset-sim'){
+    metricsHtml = `
+      <div class="metric-pill"><span class="metric-label">${s.years||30}年後の資産</span><span class="metric-val">${fmtMan(s.totalAsset||0)}円</span></div>
+      <div class="metric-pill"><span class="metric-label">運用益</span><span class="metric-val">${fmtMan(s.gainAsset||0)}円</span></div>
+      <div class="metric-pill"><span class="metric-label">利回り</span><span class="metric-val">${(s.rate||5).toFixed(1)}%</span></div>`;
+  }
+
+  card.innerHTML = `
+    <div class="plan-header">
+      <div class="plan-tool">
+        <span class="plan-tool-icon">${plan.toolIcon||'📋'}</span>
+        <div>
+          <div class="plan-tool-name">${plan.toolName}</div>
+          <div class="plan-name" id="name-display-${idx}">${plan.name}</div>
+        </div>
+      </div>
+      ${isDue?'<span class="review-badge">⏰ 見直し時期</span>':''}
+    </div>
+    <div class="plan-date">保存日: ${fmtDate(plan.savedAt)}${isDue?' (' + daysSince(plan.savedAt) + '日前)':''}</div>
+    <div class="plan-metrics">${metricsHtml}</div>
+    <div class="plan-actions">
+      <button class="btn-open" onclick="openPlan(${idx})">開いて復元 →</button>
+      <button class="btn-rename" onclick="renamePlan(${idx})" title="名前を変更">✏️</button>
+      <button class="btn-delete" onclick="deletePlan(${idx})">削除</button>
+    </div>`;
+  return card;
+}
+
+function openPlan(idx){
+  const plans = getPlans();
+  const p = plans[idx];
+  if(!p) return;
+  try{
+    if(p.tool === 'lifeplan') localStorage.setItem('lp_autosave_v2', JSON.stringify(p.data));
+    else if(p.tool === 'asset-sim') localStorage.setItem('la_asset_sim', JSON.stringify(p.data));
+  }catch(e){}
+  location.href = p.toolUrl;
+}
+
+function deletePlan(idx){
+  if(!confirm('このプランを削除してよろしいですか？')) return;
+  const plans = getPlans();
+  plans.splice(idx,1);
+  savePlans(plans);
+  showToast('削除しました');
+  renderAll();
+}
+
+function renamePlan(idx){
+  const plans = getPlans();
+  const p = plans[idx];
+  const el = document.getElementById('name-display-'+idx);
+  if(!el) return;
+  const input = document.createElement('input');
+  input.className = 'rename-input';
+  input.value = p.name;
+  input.maxLength = 30;
+  el.replaceWith(input);
+  input.focus();
+  input.select();
+  const done = ()=>{
+    const newName = input.value.trim() || p.name;
+    plans[idx].name = newName;
+    savePlans(plans);
+    input.replaceWith(Object.assign(document.createElement('div'),{className:'plan-name',id:'name-display-'+idx,textContent:newName}));
+    showToast('プラン名を変更しました');
+    renderCompare(plans);
+  };
+  input.addEventListener('blur', done);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') done(); if(e.key==='Escape'){ input.replaceWith(Object.assign(document.createElement('div'),{className:'plan-name',id:'name-display-'+idx,textContent:p.name})); }});
+}
+
+function renderCompare(plans){
+  const lifeplanPlans = plans.filter(p=>p.tool==='lifeplan');
+  const assetPlans    = plans.filter(p=>p.tool==='asset-sim');
+  const sec = document.getElementById('compare-section');
+  const body = document.getElementById('compare-body');
+
+  let html = '';
+  if(lifeplanPlans.length >= 2){
+    const a=lifeplanPlans[0], b=lifeplanPlans[1];
+    const sa=a.summary||{}, sb=b.summary||{};
+    const cmp=(va,vb)=>va>vb?'compare-best':'';
+    html += `<h3 style="font-size:14px;font-weight:700;color:var(--sky);margin-bottom:10px">📋 ${a.name} vs ${b.name}</h3>
+    <table class="compare-table">
+      <tr><th>項目</th><th>${a.name}</th><th>${b.name}</th></tr>
+      <tr><td>ピーク資産</td><td class="${cmp(sa.peakAsset,sb.peakAsset)}">${fmtMan(sa.peakAsset||0)}円</td><td class="${cmp(sb.peakAsset,sa.peakAsset)}">${fmtMan(sb.peakAsset||0)}円</td></tr>
+      <tr><td>定年時資産</td><td class="${cmp(sa.retireAsset,sb.retireAsset)}">${fmtMan(sa.retireAsset||0)}円</td><td class="${cmp(sb.retireAsset,sa.retireAsset)}">${fmtMan(sb.retireAsset||0)}円</td></tr>
+      <tr><td>最低資産</td><td class="${cmp(sa.minAsset,sb.minAsset)}">${fmtMan(sa.minAsset||0)}円</td><td class="${cmp(sb.minAsset,sa.minAsset)}">${fmtMan(sb.minAsset||0)}円</td></tr>
+      <tr><td>枯渇リスク</td><td class="${!sa.depleteAge?'compare-best':''}">${sa.depleteAge?sa.depleteAge+'歳で枯渇':'問題なし'}</td><td class="${!sb.depleteAge?'compare-best':''}">${sb.depleteAge?sb.depleteAge+'歳で枯渇':'問題なし'}</td></tr>
+      <tr><td>試算年齢</td><td>〜${sa.planEndAge||90}歳</td><td>〜${sb.planEndAge||90}歳</td></tr>
+    </table><div style="margin-bottom:20px"></div>`;
+  }
+  if(assetPlans.length >= 2){
+    const a=assetPlans[0], b=assetPlans[1];
+    const sa=a.summary||{}, sb=b.summary||{};
+    const cmp=(va,vb)=>va>vb?'compare-best':'';
+    html += `<h3 style="font-size:14px;font-weight:700;color:var(--sky);margin-bottom:10px">📈 ${a.name} vs ${b.name}</h3>
+    <table class="compare-table">
+      <tr><th>項目</th><th>${a.name}</th><th>${b.name}</th></tr>
+      <tr><td>${sa.years||30}年後の資産</td><td class="${cmp(sa.totalAsset,sb.totalAsset)}">${fmtMan(sa.totalAsset||0)}円</td><td class="${cmp(sb.totalAsset,sa.totalAsset)}">${fmtMan(sb.totalAsset||0)}円</td></tr>
+      <tr><td>運用益</td><td class="${cmp(sa.gainAsset,sb.gainAsset)}">${fmtMan(sa.gainAsset||0)}円</td><td class="${cmp(sb.gainAsset,sa.gainAsset)}">${fmtMan(sb.gainAsset||0)}円</td></tr>
+      <tr><td>利回り</td><td>${(sa.rate||5).toFixed(1)}%</td><td>${(sb.rate||5).toFixed(1)}%</td></tr>
+      <tr><td>月額積立</td><td>${sa.monthly||0}万円</td><td>${sb.monthly||0}万円</td></tr>
+    </table>`;
+  }
+
+  if(html){ sec.style.display='block'; body.innerHTML=html; }
+  else{ sec.style.display='none'; }
+}
+
+function renderAll(){
+  const plans = getPlans();
+  const grid = document.getElementById('plans-grid');
+  const empty = document.getElementById('empty-state');
+  document.getElementById('plan-count').textContent = plans.length;
+  grid.innerHTML = '';
+  if(plans.length === 0){ empty.style.display='block'; return; }
+  empty.style.display='none';
+  plans.forEach((p,i)=>grid.appendChild(renderPlan(p,i)));
+  renderCompare(plans);
+}
+
+renderAll();
+
+window.addEventListener('scroll',()=>{
+  const el=document.documentElement;
+  document.getElementById('pb').style.width=(el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+});
+</script>
+</body>
+</html>

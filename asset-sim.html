@@ -9,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/asset-sim.html">
-<title>資産シミュレーター｜NISA・積立・老後資金｜ライフアセットオフィス</title>
-<meta name="description" content="現在の資産・毎月の積立・利回り・運用年数を入力するだけ。将来の資産額をリアルタイムでシミュレーション。元本と運用益をグラフで確認できます。">
+<title>資産未来予報｜NISA・積立・老後資金｜ライフアセットオフィス</title>
+<meta name="description" content="モンテカルロ500回試行で達成確率まで表示。積立・利回り・目標逆算・マイルストーン・取り崩しプランを網羅した本格資産シミュレーター。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="資産シミュレーター｜ライフアセットオフィス">
-<meta property="og:description" content="スライダーを動かすだけで将来の資産を即シミュレーション。元本・運用益をグラフで可視化。">
+<meta property="og:title" content="資産未来予報｜ライフアセットオフィス">
+<meta property="og:description" content="モンテカルロ500回試行で達成確率まで表示。目標逆算・マイルストーン・取り崩しプランを網羅した本格資産シミュレーター。">
 <meta property="og:url" content="https://lifeassetoffice.net/asset-sim.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
@@ -268,8 +268,8 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 
 <div class="hero">
   <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
-  <h1>将来の資産を今すぐシミュレーション</h1>
-  <p class="hero-lead">スライダーを動かすだけで即反映。元本・運用益をグラフで確認できます。</p>
+  <h1>資産未来予報<span style="font-size:55%;font-weight:500;opacity:.8;display:block;margin-top:6px">モンテカルロ500回試行で「なる確率」まで見える</span></h1>
+  <p class="hero-lead">目標逆算・達成確率・マイルストーン・取り崩しプランまで一気に確認。</p>
   <div class="hero-badges">
     <span class="hero-tag">リアルタイム計算</span>
     <span class="hero-tag">グラフで可視化</span>
@@ -289,6 +289,8 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
     <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+    <button class="util-btn" style="background:#f59e0b;border-color:#f59e0b;color:#fff" onclick="saveToPlanShelf()">⭐ プランを保存</button>
+    <a href="mypage.html" class="util-btn" style="color:var(--sky);border-color:var(--sky)">マイページ →</a>
   </div>
   <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
@@ -663,7 +665,7 @@ function shareX() {
   var total = document.getElementById('r-total').textContent;
   var years = document.getElementById('sl-years').value;
   var rate  = document.getElementById('sl-rate').value;
-  var text  = '資産シミュレーターで試してみました！\n' + years + '年後の資産：約' + total + '万円（想定利回り' + rate + '%）\n#ライフアセットオフィス';
+  var text  = '資産未来予報で試してみました！\n' + years + '年後の資産：約' + total + '万円（想定利回り' + rate + '%）\n#ライフアセットオフィス';
   window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(buildShareUrl()), '_blank', 'noopener,noreferrer');
 }
 
@@ -822,6 +824,31 @@ function renderDrawdown(totalMan, rate) {
     + '<div class="goal-stat"><div class="gs-label">運用せず30年取り崩し</div><div class="gs-val">月' + f(flat) + '</div><div class="gs-sub">現金のまま均等に取り崩し</div></div>';
 }
 
+/* ═══ マイページ プラン保存 ═══ */
+function saveToPlanShelf(){
+  var name=prompt('プランの名前を入力してください（最大30文字）','マイプラン');
+  if(name===null)return;
+  name=(name.trim()||'マイプラン').slice(0,30);
+  var initial=parseFloat(document.getElementById('sl-initial').value)||0;
+  var monthly=parseFloat(document.getElementById('sl-monthly').value)||0;
+  var rate=parseFloat(document.getElementById('sl-rate').value)||5;
+  var years=parseInt(document.getElementById('sl-years').value)||30;
+  var totalMan=calcFV(initial,monthly,rate,years);
+  var principalMan=Math.round(initial+monthly*12*years);
+  var gainMan=totalMan-principalMan;
+  var plans=[];try{plans=JSON.parse(localStorage.getItem('la_plans_v1')||'[]');}catch(e){}
+  if(plans.length>=20){alert('保存上限（20件）に達しています。マイページから削除してください。');return;}
+  plans.unshift({
+    id:'plan_'+Date.now(),name:name,
+    tool:'asset-sim',toolName:'資産未来予報',toolUrl:'asset-sim.html',toolIcon:'📈',
+    savedAt:Date.now(),
+    data:{i:document.getElementById('sl-initial').value,m:document.getElementById('sl-monthly').value,r:document.getElementById('sl-rate').value,y:document.getElementById('sl-years').value,inf:document.getElementById('sl-inf').value,g:document.getElementById('sl-goal').value},
+    summary:{totalAsset:totalMan,gainAsset:gainMan,rate:rate,years:years,monthly:monthly}
+  });
+  try{localStorage.setItem('la_plans_v1',JSON.stringify(plans));}catch(e){alert('保存に失敗しました');return;}
+  var t=document.getElementById('util-toast');if(t){t.textContent='✅ マイページに保存しました';t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+}
+
 /* ═══ 自動保存・復元 ═══ */
 function saveInputs() {
   try {
@@ -855,7 +882,7 @@ function restoreInputs() {
 (function(){
   // Track recent visit
   try {
-    var k = 'la_sim_recent', u = location.pathname, n = '資産シミュレーター';
+    var k = 'la_sim_recent', u = location.pathname, n = '資産未来予報';
     var a = JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u !== u; });
     a.unshift({ u:u, n:n, ts:Date.now() });
     localStorage.setItem(k, JSON.stringify(a.slice(0,5)));
