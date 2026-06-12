@@ -242,6 +242,14 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .sc-peak{font-size:10px;color:var(--gray);margin-top:6px}
 
 .chart-tip{background:#1e293b;color:#f1f5f9;padding:10px 14px;border-radius:8px;font-size:12px;pointer-events:none;position:fixed;z-index:999;min-width:160px;line-height:2;box-shadow:0 4px 16px rgba(0,0,0,.25);display:none}
+#summary-extra{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.delay-wrap{overflow-x:auto;margin-top:8px}
+.delay-table{width:100%;border-collapse:collapse;font-size:12px}
+.delay-table th{background:rgba(26,122,74,.08);padding:5px 8px;text-align:center;font-weight:700;font-size:11px;white-space:nowrap}
+.delay-table td{padding:5px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:12px}
+.delay-table tr:last-child td{border-bottom:none}
+.delay-best td{background:rgba(26,122,74,.07);font-weight:700;color:var(--green)}
+.recalc-spin{display:none;position:fixed;bottom:24px;left:24px;background:rgba(26,122,74,.92);color:#fff;padding:7px 14px;border-radius:8px;font-size:11px;z-index:9998;box-shadow:0 2px 10px rgba(0,0,0,.2)}
 </style>
 <script src="/js/cookie-consent.js"></script>
 </head>
@@ -748,6 +756,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <div id="plan-content" style="display:none">
   <div id="cond-summary-wrap"></div>
   <div class="summary-grid" id="summary-grid"></div>
+  <div id="summary-extra"></div>
   <div id="alerts"></div>
 
   <div class="card">
@@ -764,7 +773,10 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <span><span style="display:inline-block;width:10px;height:10px;background:#bfdbfe;border-radius:2px;margin-right:4px;vertical-align:middle"></span>NISA資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#a78bfa;border-radius:2px;margin-right:4px;vertical-align:middle"></span>投資資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#f59e0b;border-radius:2px;margin-right:4px;vertical-align:middle"></span>現金資産</span>
+      <span><span style="display:inline-block;width:24px;height:8px;background:rgba(26,122,74,.18);border-radius:2px;margin-right:4px;vertical-align:middle"></span>MC 25-75%帯</span>
+      <span style="border-bottom:1.5px dashed rgba(26,122,74,.5);display:inline-block;width:18px;margin-right:4px;vertical-align:middle"></span><span>MC中央値</span>
     </div>
+<div id="recalc-spin" class="recalc-spin">⟳ 自動再計算中…</div>
   </div>
 
   <div class="card">
@@ -878,6 +890,11 @@ function buildSVGChart(rows, opts={}){
   const step=Math.max(1,Math.ceil(rows.length/50));
   const pts=rows.filter((_,i)=>i%step===0||i===rows.length-1);
   const allVals=pts.flatMap(r=>[r.totalAsset,r.nisaAsset,r.cashAsset,r.investAsset||0]);
+  const {mcBands}=opts;
+  if(mcBands&&mcBands.length===rows.length){
+    const mcSamp=mcBands.filter((_,i)=>i%step===0||i===mcBands.length-1);
+    mcSamp.forEach(b=>allVals.push(b.p90));
+  }
   const maxV=Math.max(0,...allVals)*1.12||1000;
   const minV=Math.min(0,...allVals)<0?Math.min(0,...allVals)*1.1:0;
   const range=maxV-minV||1;
@@ -920,9 +937,22 @@ function buildSVGChart(rows, opts={}){
   // Hover data (compact)
   const hd=pts.map((r,i)=>({x:parseFloat(xOff(i).toFixed(1)),a:r.selfAge,y:r.yr,t:r.totalAsset,n:Math.round(r.nisaAsset),c:r.cashAsset,iv:Math.round(r.investAsset||0),id:Math.round(r.idecoAsset||0)}));
 
+  // Monte Carlo bands
+  let mcSVG='';
+  if(mcBands&&mcBands.length===rows.length){
+    const mcS=mcBands.filter((_,i)=>i%step===0||i===mcBands.length-1);
+    const mxY=v=>PT+cH-(((Math.min(maxV,Math.max(minV,v))-minV)/(maxV-minV||1))*cH);
+    const fwd=key=>mcS.map((_,i)=>`${xOff(i).toFixed(1)},${mxY(mcS[i][key]).toFixed(1)}`).join(' ');
+    const rev=key=>mcS.slice().reverse().map((_,ri)=>{const i=mcS.length-1-ri;return `${xOff(i).toFixed(1)},${mxY(mcS[i][key]).toFixed(1)}`;}).join(' ');
+    mcSVG=`
+  <polygon points="${fwd('p10')} ${rev('p90')}" fill="rgba(26,122,74,.06)"/>
+  <polygon points="${fwd('p25')} ${rev('p75')}" fill="rgba(26,122,74,.13)"/>
+  <polyline points="${fwd('p50')}" fill="none" stroke="rgba(26,122,74,.42)" stroke-width="1.5" stroke-dasharray="7,5"/>`;
+  }
+
   wrap.innerHTML=`<div style="position:relative">
 <svg id="lp-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${W}px;height:auto;display:block;cursor:crosshair">
-  ${yTicksSVG}${zeroLine}${milestonesSVG}
+  ${yTicksSVG}${zeroLine}${milestonesSVG}${mcSVG}
   <polygon points="${polyFill('nisaAsset',0)}" fill="rgba(96,165,250,.13)"/>
   <polygon points="${polyFill('totalAsset',Math.max(0,minV))}" fill="rgba(26,122,74,.09)"/>
   <polyline points="${poly('totalAsset')}" fill="none" stroke="#1a7a4a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
@@ -1344,7 +1374,52 @@ function _generatePlan(){
     </div>
   </div>`;
 
-  buildSVGChart(rows,{retireSelf,loanEndAge:loanBalance>0?ageSelf+loanYears:0,depleteAge:depleteRow?.selfAge||null});
+  // Monte Carlo: run 300 simulations to compute probability bands and success rate
+  const mc=runMonteCarlo(300,0.14);
+
+  // ⑥ 年金繰り下げ試算
+  if(pensionSelf>0&&ageSelf<65){
+    const delayOpts=calcPensionDelay(pensionSelf,ageSelf,planEndAge);
+    const bestRow=delayOpts.reduce((b,d)=>d.viable&&d.breakevenAge<planEndAge?d:b,{viable:false});
+    al.innerHTML+=`<div class="alert ok" style="border-color:var(--blue);background:var(--blue-pale);margin-bottom:16px">
+      <div style="font-size:13px;font-weight:900;margin-bottom:8px;color:var(--blue)">年金繰り下げ受給シミュレーション</div>
+      <div style="font-size:13px;line-height:1.8;margin-bottom:8px">
+        現在の年金設定 <strong>${fmt(pensionSelf)}万円/月</strong>。65歳から繰り下げると増額されます（0.7%/月増・最大84%増）。<br>
+        ${bestRow.viable?`<strong>${bestRow.d}年繰り下げ（${bestRow.startAge}歳から受給）が試算期間内で損益分岐点（${bestRow.breakevenAge}歳）を迎える最適解です。</strong>`:'試算期間内に損益分岐点を迎えるケースがありません。早期受給（65歳）が有利な可能性があります。'}
+      </div>
+      <div class="delay-wrap"><table class="delay-table">
+        <tr><th>繰り下げ年数</th><th>受給開始</th><th>増額後（月額）</th><th>増額率</th><th>損益分岐点</th><th>判定</th></tr>
+        <tr><td>繰り下げなし</td><td>65歳</td><td>${fmt(pensionSelf)}万円</td><td>±0%</td><td>—</td><td>基準</td></tr>
+        ${delayOpts.map(d=>`<tr${d.viable&&d===bestRow?' class="delay-best"':''}>
+          <td>+${d.d}年</td><td>${d.startAge}歳</td><td><strong>${d.monthly}万円</strong></td>
+          <td style="color:var(--green)">+${Math.round(d.factor*100-100)}%</td>
+          <td>${d.viable?d.breakevenAge+'歳':planEndAge+'歳超'}</td>
+          <td>${d.viable?(d===bestRow?'✅ 推奨':'○ 有効'):'△ 期間外'}</td>
+        </tr>`).join('')}
+      </table></div>
+      <div style="font-size:11px;color:var(--gray);margin-top:8px">※ 健康状態・税制・家計状況によって最適解は異なります。配偶者がいる場合、加給年金の消滅にも注意が必要です。</div>
+    </div>`;
+  }
+
+  // Summary extra: income replacement ratio + MC success rate
+  const pensionCoverageRate=livingCostRetire>0?Math.min(150,Math.round((pensionSelf+(hasSpouse?pensionSpouse:0))/livingCostRetire*100)):0;
+  const coverageCls=pensionCoverageRate>=80?'green':pensionCoverageRate>=50?'yellow':'red';
+  const coverageColor=pensionCoverageRate>=80?'var(--green)':pensionCoverageRate>=50?'var(--yellow)':'var(--red)';
+  const mcCls=mc.successRate>=80?'green':mc.successRate>=60?'yellow':'red';
+  const mcColor=mc.successRate>=80?'var(--green)':mc.successRate>=60?'var(--yellow)':'var(--red)';
+  document.getElementById('summary-extra').innerHTML=`
+    <div class="s-box ${coverageCls}">
+      <div class="s-label">年金カバー率</div>
+      <div class="s-val" style="color:${coverageColor}">${pensionCoverageRate}%</div>
+      <div class="s-sub">老後生活費に占める年金割合</div>
+    </div>
+    <div class="s-box ${mcCls}">
+      <div class="s-label">MC成功確率<span style="font-size:9px;color:var(--gray);font-weight:400;margin-left:4px">（300シミュ）</span></div>
+      <div class="s-val" style="color:${mcColor}">${mc.successRate}%</div>
+      <div class="s-sub">資産100万円以上で終える確率</div>
+    </div>`;
+
+  buildSVGChart(rows,{retireSelf,loanEndAge:loanBalance>0?ageSelf+loanYears:0,depleteAge:depleteRow?.selfAge||null,mcBands:mc.bands});
   renderConditionsSummary({ageSelf,hasSpouse,ageSpouse,childrenCount,incomeSelf,incomeSpouse,housingType,loanBalance,loanYears,nisaMonthly,idecoMonthly,savingsCurrent,investCurrent,planEndAge,retireSelf});
   renderScenarios(planEndAge);
 
@@ -1447,8 +1522,15 @@ function autoSave(){try{localStorage.setItem(_LS,JSON.stringify(collectAllInputs
     showToast('前回の入力データを復元しました');
   }catch(e){}
 })();
-document.addEventListener('change',e=>{if(e.target.matches('input,select'))autoSave();});
-document.addEventListener('input',e=>{if(e.target.matches('input[type="number"]'))autoSave();});
+let _autoRecalcTimer=null;
+function scheduleRecalc(){
+  if(document.getElementById('plan-content').style.display==='none')return;
+  const spin=document.getElementById('recalc-spin');if(spin)spin.style.display='block';
+  clearTimeout(_autoRecalcTimer);
+  _autoRecalcTimer=setTimeout(()=>{generatePlan();if(spin)spin.style.display='none';},800);
+}
+document.addEventListener('change',e=>{if(e.target.matches('input,select')){autoSave();scheduleRecalc();}});
+document.addEventListener('input',e=>{if(e.target.matches('input[type="number"]')){autoSave();scheduleRecalc();}});
 
 // ── ± Stepper buttons ──
 function initSteppers(){
@@ -1520,6 +1602,104 @@ function renderConditionsSummary(p){
     <div class="cond-title">📋 入力条件</div>
     <div class="cond-tags">${tags.map(t=>`<div class="cond-tag"><span>${t.l}</span><strong>${t.v}</strong></div>`).join('')}</div>
   </div>`;
+}
+
+// ── Monte Carlo engine ──
+function _bm(){const u=1-Math.random(),v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function _mcPct(arr,p){const i=(arr.length-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return lo===hi?arr[lo]:arr[lo]+(arr[hi]-arr[lo])*(i-lo);}
+function runMonteCarlo(N,sigma){
+  N=N||300;sigma=sigma||0.14;
+  const gi=(id,df)=>{df=df||0;const el=document.getElementById(id);if(!el)return df;const v=parseFloat(el.value);return isNaN(v)?df:v;};
+  const gi2=(id,df)=>{df=df||0;const el=document.getElementById(id);if(!el)return df;return parseInt(el.value)||df;};
+  const hasSpouse=document.getElementById('spouse-yn')?.value==='yes';
+  const ht=document.getElementById('housing-type')?.value||'owned_no_loan';
+  const p={
+    ageSelf:gi2('age-self',40),planEndAge:gi2('plan-end-age',90),retireSelf:gi2('retire-self',65),
+    hasSpouse,ageSpouse:hasSpouse?gi2('age-spouse',38):0,retireSpouse:hasSpouse?gi2('retire-spouse',60):0,
+    incomeSelf:gi('income-self'),incomeGrowth:gi('income-growth'),
+    incomeReemploy:gi('income-reemploy'),reemployEnd:gi2('reemploy-end',70),
+    incomeSpouse:hasSpouse?gi('income-spouse'):0,spouseWorkStart:hasSpouse?gi2('spouse-work-start',0):0,
+    incomeSpouseNew:hasSpouse?gi('income-spouse-new'):0,
+    pensionSelf:gi('pension-self'),pensionSpouse:hasSpouse?gi('pension-spouse'):0,
+    retirePay:gi('retirement-pay'),retirePaySp:hasSpouse?gi('retirement-pay-spouse'):0,
+    inheritance:gi('inheritance'),inheritanceAge:gi2('inheritance-age',60),
+    livingCost:gi('living-cost',25),livingCostR:gi('living-cost-retire',22),
+    inflation:gi('inflation'),medical:gi('medical-cost',3),
+    carCost:gi('car-cost'),carCycle:gi2('car-cycle',0),
+    reformCost:gi('reform-cost'),reformAge:gi2('reform-age',55),leisure:gi('leisure-cost'),
+    ht,loanBal:(ht==='owned_loan'||ht==='plan')?gi('loan-balance'):0,
+    loanRate:gi('loan-rate'),loanYears:gi2('loan-years',0),
+    rentCost:ht==='rent'?gi('rent-cost'):0,rentEndAge:ht==='rent'?gi2('rent-end-age',90):0,
+    nisaR:gi('nisa-rate'),idecoR:gi('ideco-rate'),invR:gi('invest-rate'),
+    nisaM:gi('nisa-monthly'),idecoM:gi('ideco-monthly'),
+    invCur:gi('invest-current'),invAnn:gi('invest-annual'),cash:gi('savings-current'),children:[]
+  };
+  const cc=gi2('children-count',0);
+  for(let i=1;i<=cc;i++)p.children.push({age:parseInt(document.getElementById('child-age-'+i)?.value)||0,edu:parseFloat(document.getElementById('edu-cost-'+i)?.value)||120});
+  function cm_(pb,r,y){const rm=r/100/12,n=y*12;if(rm===0)return pb*10000/n;return pb*10000*rm*Math.pow(1+rm,n)/(Math.pow(1+rm,n)-1);}
+  const lm_=p.loanYears>0&&p.loanBal>0?cm_(p.loanBal,p.loanRate,p.loanYears):0;
+  const la_=lm_*12/10000;
+  const totalY=p.planEndAge-p.ageSelf+1;
+  if(totalY<=0)return{bands:[],successRate:100};
+
+  const allRuns=Array.from({length:N},()=>{
+    let na=0,da=0,ia=p.invCur,ca=p.cash,lr=p.loanBal;
+    const perY=[];
+    for(let y=0;y<totalY;y++){
+      const sa=p.ageSelf+y,spa=p.hasSpouse?p.ageSpouse+y:0;
+      let iS=0;
+      if(sa<p.retireSelf)iS=p.incomeSelf*Math.pow(1+p.incomeGrowth/100,y);
+      else if(sa<p.reemployEnd)iS=p.incomeReemploy*12;
+      if(sa>=65)iS+=p.pensionSelf*12;
+      let iSp=0;
+      if(p.hasSpouse){
+        if(spa<p.retireSpouse){if(p.spouseWorkStart>0&&spa>=p.spouseWorkStart)iSp=p.incomeSpouseNew;else if(p.spouseWorkStart===0)iSp=p.incomeSpouse;}
+        if(spa>=65)iSp+=p.pensionSpouse*12;
+      }
+      let lump=0;
+      if(sa===p.retireSelf)lump+=p.retirePay;if(p.hasSpouse&&spa===p.retireSpouse)lump+=p.retirePaySp;if(sa===p.inheritanceAge)lump+=p.inheritance;
+      const inf=Math.pow(1+p.inflation/100,y);
+      const base=(sa>=p.retireSelf?p.livingCostR:p.livingCost)*12*inf+(sa>=75?p.medical*12:0);
+      let lExp=lr>0&&y<p.loanYears?la_:0,rExp=p.ht==='rent'&&sa<=p.rentEndAge?p.rentCost*12:0,eExp=0;
+      p.children.forEach(c=>{const cn=c.age+y;if(cn>=3&&cn<=5)eExp+=15;else if(cn>=6&&cn<=11)eExp+=20;else if(cn>=12&&cn<=14)eExp+=35;else if(cn>=15&&cn<=17)eExp+=50;else if(cn>=18&&cn<=21)eExp+=c.edu;});
+      let cExp=p.carCycle>0&&y>0&&y%p.carCycle===0&&sa<80?p.carCost:0,rfExp=sa===p.reformAge?p.reformCost:0;
+      const lsr=sa<75?p.leisure:0;
+      const nc=y<30?p.nisaM*12:0,dc=sa<60?p.idecoM*12:0;
+      const cf=(iS+iSp+lump)-base-lExp-rExp-eExp-cExp-rfExp-lsr-nc-dc;
+      const shock=_bm()*sigma;
+      const rN=Math.max(-5,p.nisaR+shock*100),rD=Math.max(-5,p.idecoR+shock*100),rI=Math.max(-5,p.invR+shock*100);
+      const _rn=rN/100/12,_Rn=Math.pow(1+_rn,12);
+      na=y<30?na*_Rn+(_rn===0?p.nisaM*12:p.nisaM*(_Rn-1)/_rn):na*_Rn;
+      const _ri=rD/100/12,_Ri=Math.pow(1+_ri,12);
+      da=sa<60?da*_Ri+(_ri===0?p.idecoM*12:p.idecoM*(_Ri-1)/_ri):da*(1+rD/100);
+      ia=ia*(1+rI/100)+p.invAnn;
+      ca+=cf;
+      if(ca<0){const d1=Math.min(-ca,ia);ia-=d1;ca+=d1;if(ca<0){const d2=Math.min(-ca,na);na-=d2;ca+=d2;}if(ca<0&&sa>=60){const d3=Math.min(-ca,da);da-=d3;ca+=d3;}}
+      if(lr>0){const _rm=p.loanRate/100/12,_n=p.loanYears*12,_pd=(y+1)*12;lr=_pd>=_n?0:(_rm===0?Math.round(p.loanBal*(1-_pd/_n)):Math.round(lm_*(1-Math.pow(1+_rm,-(_n-_pd)))/_rm/10000));}
+      perY.push(Math.max(0,ca)+na+da+ia);
+    }
+    return perY;
+  });
+
+  const bands=Array.from({length:totalY},(_,j)=>{
+    const s=allRuns.map(r=>r[j]).sort((a,b)=>a-b);
+    return{p10:_mcPct(s,.10),p25:_mcPct(s,.25),p50:_mcPct(s,.50),p75:_mcPct(s,.75),p90:_mcPct(s,.90)};
+  });
+  const successRate=Math.round(allRuns.filter(r=>r[r.length-1]>=100).length/N*100);
+  return{bands,successRate};
+}
+
+// ── Pension delay (繰り下げ) optimizer ──
+function calcPensionDelay(pensionSelf,ageSelf,planEndAge){
+  return[1,3,5,7,10].map(d=>{
+    const startAge=65+d;
+    const factor=1+0.084*d;
+    const monthly=pensionSelf*factor;
+    const lostTotal=pensionSelf*12*d;
+    const gainPerYear=(monthly-pensionSelf)*12;
+    const breakevenAge=gainPerYear>0?Math.round(startAge+lostTotal/gainPerYear):999;
+    return{d,startAge,monthly:Math.round(monthly*10)/10,factor,breakevenAge,viable:breakevenAge<=planEndAge};
+  });
 }
 
 // ── Scenario comparison ──
