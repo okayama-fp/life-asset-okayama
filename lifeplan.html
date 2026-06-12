@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/lifeplan.html">
-<title>総合ライフプラン表｜ライフアセットオフィス</title>
+<title>人生まるごと診断｜ライフアセットオフィス</title>
 <meta name="description" content="家族構成・収入・支出・住宅ローン・教育費・老後資金を一枚の表に。今後の家計の流れを年別で可視化する総合ライフプランシミュレーター。登録不要。">
-<meta property="og:title" content="総合ライフプラン表｜ライフアセットオフィス">
+<meta property="og:title" content="人生まるごと診断｜ライフアセットオフィス">
 <meta property="og:description" content="家族構成・収入・支出・住宅ローン・教育費・老後資金を入力して、年別のライフプラン表を生成。登録不要。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lifeassetoffice.net/lifeplan.html">
@@ -284,8 +284,8 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 
 <div class="hero">
   <div class="hero-badge">登録不要・6ステップで完成</div>
-  <h1>総合<em>ライフプラン表</em>を作成</h1>
-  <p>家族構成・収入・支出・住宅ローン・教育費・老後資金を一枚の表に。今後の家計の流れを年別で可視化します。</p>
+  <h1><em>人生まるごと</em>診断</h1>
+  <p>家族構成・収入・支出・住宅ローン・教育費・老後資金を一枚の表に。人生全体の家計を年別に診断します。</p>
   <div class="hero-steps">
     <div class="hero-step"><div class="hs-num">STEP 1</div><div class="hs-icon"></div><div class="hs-label">家族情報</div></div>
     <div class="hs-arrow">›</div>
@@ -337,7 +337,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
     <div class="step-line" id="line-5"></div>
     <div class="step-item" id="step-6" onclick="goStep(6)">
       <div class="step-dot" id="dot-6">6</div>
-      <div class="step-label">ライフプラン表</div>
+      <div class="step-label">診断結果</div>
     </div>
   </div>
 </div>
@@ -1560,7 +1560,7 @@ function confirmSavePlan(){
   const name=(document.getElementById('save-plan-name').value.trim()||'マイプラン').slice(0,30);
   let plans=[];try{plans=JSON.parse(localStorage.getItem(_PLAN_KEY)||'[]');}catch(e){}
   if(plans.length>=20){showToast('保存上限（20件）に達しています。マイページから削除してください。');return;}
-  plans.unshift({id:'plan_'+Date.now(),name,tool:'lifeplan',toolName:'総合ライフプラン表',toolUrl:'lifeplan.html',toolIcon:'📋',savedAt:Date.now(),data:collectAllInputs(),summary:lastPlanSummary});
+  plans.unshift({id:'plan_'+Date.now(),name,tool:'lifeplan',toolName:'人生まるごと診断',toolUrl:'lifeplan.html',toolIcon:'📋',savedAt:Date.now(),data:collectAllInputs(),summary:lastPlanSummary});
   try{localStorage.setItem(_PLAN_KEY,JSON.stringify(plans));}catch(e){showToast('保存に失敗しました');return;}
   document.getElementById('save-modal').style.display='none';
   showToast('✅ 保存しました！マイページで確認できます');
