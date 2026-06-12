@@ -261,6 +261,8 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
     <a href="simulation.html" class="nav-home">← シミュレーター一覧</a>
     <a href="blog/" class="nav-home">ブログ</a>
     <a href="contact.html" class="nav-home">お問い合わせ</a>
+    <button class="nav-btn" style="background:#f59e0b;color:#fff;border-color:#f59e0b;display:none" id="btn-save-plan" onclick="openSaveModal()">⭐ 保存</button>
+    <a href="mypage.html" class="nav-home" style="color:var(--green);font-weight:700">マイページ</a>
     <button class="nav-btn save" onclick="saveData()">データ保存</button>
     <label class="nav-btn load" style="cursor:pointer">読み込む<input type="file" id="load-file" accept=".json" style="display:none" onchange="loadData(event)"></label>
     <button class="nav-btn csv" onclick="downloadCSV()" id="btn-csv" style="display:none">CSV</button>
@@ -268,6 +270,17 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   </div>
 </nav>
 <div class="toast" id="toast"></div>
+<div id="save-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:28px;width:90%;max-width:400px;box-shadow:0 16px 48px rgba(0,0,0,.22)">
+    <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:6px">⭐ プランに名前をつけて保存</div>
+    <div style="font-size:12px;color:var(--gray);margin-bottom:16px">このブラウザのみ保存。最大20件。</div>
+    <input id="save-plan-name" type="text" maxlength="30" placeholder="例: 現在のプラン・積極投資版" style="width:100%;padding:10px 14px;border:1.5px solid var(--green-mid);border-radius:10px;font-size:14px;font-family:inherit;outline:none;margin-bottom:16px">
+    <div style="display:flex;gap:10px">
+      <button onclick="confirmSavePlan()" style="flex:1;padding:11px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">保存する</button>
+      <button onclick="document.getElementById('save-modal').style.display='none'" style="padding:11px 18px;background:var(--white);color:var(--gray);border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">キャンセル</button>
+    </div>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-badge">登録不要・6ステップで完成</div>
@@ -816,6 +829,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 <script>
 let lastRows=[];
 let lastHasSpouse=false;
+let lastPlanSummary=null;
 
 function collectAllInputs(){
   const data={};
@@ -1239,6 +1253,8 @@ function _generatePlan(){
   const depleteRow=rows.find(r=>r.totalAsset<100);
   const retireRow=rows.find(r=>r.selfAge===retireSelf)||rows[0];
   const retireAsset=retireRow?retireRow.totalAsset:0;
+  lastPlanSummary={peakAsset:Math.round(peakAsset),retireAsset:Math.round(retireAsset),minAsset:Math.round(minAsset),depleteAge:depleteRow?depleteRow.selfAge:null,planEndAge};
+  const bsp=document.getElementById('btn-save-plan');if(bsp)bsp.style.display='block';
 
   document.getElementById('summary-grid').innerHTML=`
     <div class="s-box green">
@@ -1531,6 +1547,26 @@ function scheduleRecalc(){
 }
 document.addEventListener('change',e=>{if(e.target.matches('input,select')){autoSave();scheduleRecalc();}});
 document.addEventListener('input',e=>{if(e.target.matches('input[type="number"]')){autoSave();scheduleRecalc();}});
+
+// ── マイページ プラン保存 ──
+const _PLAN_KEY='la_plans_v1';
+function openSaveModal(){
+  if(!lastPlanSummary){showToast('先にプランを生成してください');return;}
+  document.getElementById('save-plan-name').value='';
+  const m=document.getElementById('save-modal');m.style.display='flex';
+  setTimeout(()=>document.getElementById('save-plan-name').focus(),80);
+}
+function confirmSavePlan(){
+  const name=(document.getElementById('save-plan-name').value.trim()||'マイプラン').slice(0,30);
+  let plans=[];try{plans=JSON.parse(localStorage.getItem(_PLAN_KEY)||'[]');}catch(e){}
+  if(plans.length>=20){showToast('保存上限（20件）に達しています。マイページから削除してください。');return;}
+  plans.unshift({id:'plan_'+Date.now(),name,tool:'lifeplan',toolName:'総合ライフプラン表',toolUrl:'lifeplan.html',toolIcon:'📋',savedAt:Date.now(),data:collectAllInputs(),summary:lastPlanSummary});
+  try{localStorage.setItem(_PLAN_KEY,JSON.stringify(plans));}catch(e){showToast('保存に失敗しました');return;}
+  document.getElementById('save-modal').style.display='none';
+  showToast('✅ 保存しました！マイページで確認できます');
+}
+document.getElementById('save-modal').addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
+document.getElementById('save-plan-name').addEventListener('keydown',function(e){if(e.key==='Enter')confirmSavePlan();if(e.key==='Escape')document.getElementById('save-modal').style.display='none';});
 
 // ── ± Stepper buttons ──
 function initSteppers(){

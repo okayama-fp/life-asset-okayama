@@ -289,6 +289,8 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
     <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+    <button class="util-btn" style="background:#f59e0b;border-color:#f59e0b;color:#fff" onclick="saveToPlanShelf()">⭐ プランを保存</button>
+    <a href="mypage.html" class="util-btn" style="color:var(--sky);border-color:var(--sky)">マイページ →</a>
   </div>
   <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
@@ -820,6 +822,31 @@ function renderDrawdown(totalMan, rate) {
     '<div class="goal-stat"><div class="gs-label">4%ルール（資産を維持）</div><div class="gs-val">月' + f(rule4) + '</div><div class="gs-sub">年' + Math.round(totalMan*0.04).toLocaleString() + '万円・半永久的に取り崩し可</div></div>'
     + '<div class="goal-stat"><div class="gs-label">運用継続しながら30年取り崩し</div><div class="gs-val">月' + f(ann) + '</div><div class="gs-sub">利回り' + rate.toFixed(1) + '%を維持した場合</div></div>'
     + '<div class="goal-stat"><div class="gs-label">運用せず30年取り崩し</div><div class="gs-val">月' + f(flat) + '</div><div class="gs-sub">現金のまま均等に取り崩し</div></div>';
+}
+
+/* ═══ マイページ プラン保存 ═══ */
+function saveToPlanShelf(){
+  var name=prompt('プランの名前を入力してください（最大30文字）','マイプラン');
+  if(name===null)return;
+  name=(name.trim()||'マイプラン').slice(0,30);
+  var initial=parseFloat(document.getElementById('sl-initial').value)||0;
+  var monthly=parseFloat(document.getElementById('sl-monthly').value)||0;
+  var rate=parseFloat(document.getElementById('sl-rate').value)||5;
+  var years=parseInt(document.getElementById('sl-years').value)||30;
+  var totalMan=calcFV(initial,monthly,rate,years);
+  var principalMan=Math.round(initial+monthly*12*years);
+  var gainMan=totalMan-principalMan;
+  var plans=[];try{plans=JSON.parse(localStorage.getItem('la_plans_v1')||'[]');}catch(e){}
+  if(plans.length>=20){alert('保存上限（20件）に達しています。マイページから削除してください。');return;}
+  plans.unshift({
+    id:'plan_'+Date.now(),name:name,
+    tool:'asset-sim',toolName:'資産未来予報',toolUrl:'asset-sim.html',toolIcon:'📈',
+    savedAt:Date.now(),
+    data:{i:document.getElementById('sl-initial').value,m:document.getElementById('sl-monthly').value,r:document.getElementById('sl-rate').value,y:document.getElementById('sl-years').value,inf:document.getElementById('sl-inf').value,g:document.getElementById('sl-goal').value},
+    summary:{totalAsset:totalMan,gainAsset:gainMan,rate:rate,years:years,monthly:monthly}
+  });
+  try{localStorage.setItem('la_plans_v1',JSON.stringify(plans));}catch(e){alert('保存に失敗しました');return;}
+  var t=document.getElementById('util-toast');if(t){t.textContent='✅ マイページに保存しました';t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 }
 
 /* ═══ 自動保存・復元 ═══ */
