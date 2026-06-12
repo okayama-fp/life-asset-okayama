@@ -195,6 +195,53 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   .summary-grid{grid-template-columns:repeat(4,1fr)}
   @page{size:A4 landscape;margin:10mm}
 }
+
+/* ── Premium UX ── */
+.help-icon{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--border);color:var(--gray);font-size:9px;font-weight:700;cursor:help;position:relative;margin-left:4px;vertical-align:middle;flex-shrink:0;transition:background .15s}
+.help-icon:hover{background:var(--green-mid);color:var(--green)}
+.help-icon::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100%+8px);background:#1e293b;color:#f1f5f9;font-size:11px;font-weight:400;padding:8px 12px;border-radius:8px;white-space:pre-line;min-width:220px;max-width:280px;z-index:600;pointer-events:none;opacity:0;transition:opacity .15s;line-height:1.6;text-align:left;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.help-icon:hover::after{opacity:1}
+.help-icon::before{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100%+4px);border:5px solid transparent;border-top-color:#1e293b;z-index:601;opacity:0;transition:opacity .15s}
+.help-icon:hover::before{opacity:1}
+
+.field-row.stepper{padding:0}
+.field-row.stepper input[type="number"]{text-align:center;padding:9px 4px;-moz-appearance:textfield}
+.field-row.stepper input[type="number"]::-webkit-inner-spin-button,.field-row.stepper input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none}
+.stepper-btn{width:34px;border:none;background:transparent;color:var(--gray);font-size:17px;font-weight:400;cursor:pointer;padding:0;flex-shrink:0;transition:background .1s,color .1s;display:flex;align-items:center;justify-content:center;align-self:stretch}
+.stepper-btn.minus{border-right:1px solid var(--border)}
+.stepper-btn.plus{border-left:1px solid var(--border)}
+.stepper-btn:hover{background:var(--green-pale);color:var(--green)}
+.stepper-btn:active{background:var(--green-mid)}
+
+.empty-state{text-align:center;padding:64px 20px;color:var(--gray)}
+.empty-state-icon{font-size:52px;line-height:1;margin-bottom:16px}
+.empty-state h3{font-size:20px;font-weight:900;color:var(--ink);margin-bottom:10px}
+.empty-state p{font-size:13px;margin-bottom:24px;max-width:360px;margin-left:auto;margin-right:auto}
+
+.cond-summary{background:linear-gradient(135deg,var(--green-pale),#f0fdf4);border:1.5px solid var(--green-mid);border-radius:12px;padding:14px 18px;margin-bottom:16px}
+.cond-title{font-size:11px;font-weight:700;color:var(--green);margin-bottom:10px;letter-spacing:.04em}
+.cond-tags{display:flex;flex-wrap:wrap;gap:6px}
+.cond-tag{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--green-mid);border-radius:20px;padding:4px 11px;font-size:11px}
+.cond-tag span{color:var(--gray);font-size:10px}
+.cond-tag strong{color:var(--ink);font-weight:700}
+
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
+@media(max-width:580px){.sc-grid{grid-template-columns:1fr;gap:8px}}
+.sc-card{border-radius:12px;padding:16px 14px;border:1.5px solid;text-align:center}
+.sc-card.opt{background:#f0fdf4;border-color:#86efac}
+.sc-card.std{background:var(--green-pale);border-color:var(--green-mid)}
+.sc-card.pes{background:#fefce8;border-color:#fde047}
+.sc-name{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:6px}
+.sc-card.opt .sc-name{background:#dcfce7;color:#15803d}
+.sc-card.std .sc-name{background:var(--green-mid);color:var(--green-dark)}
+.sc-card.pes .sc-name{background:#fef08a;color:#854d0e}
+.sc-asset{font-family:'DM Mono',monospace;font-size:21px;font-weight:700;color:var(--ink);margin:6px 0 2px;line-height:1}
+.sc-asub{font-size:10px;color:var(--gray);margin-bottom:8px}
+.sc-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block}
+.sc-ok{background:#dcfce7;color:#15803d}.sc-warn{background:#fef08a;color:#92400e}.sc-danger{background:#fee2e2;color:#b91c1c}
+.sc-peak{font-size:10px;color:var(--gray);margin-top:6px}
+
+.chart-tip{background:#1e293b;color:#f1f5f9;padding:10px 14px;border-radius:8px;font-size:12px;pointer-events:none;position:fixed;z-index:999;min-width:160px;line-height:2;box-shadow:0 4px 16px rgba(0,0,0,.25);display:none}
 </style>
 <script src="/js/cookie-consent.js"></script>
 </head>
@@ -691,8 +738,23 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <div class="panel-title"><span class="icon"></span>あなたのライフプラン表</div>
   <p class="panel-desc" id="plan-desc">入力データをもとに生成したライフプラン表です。</p>
 
+  <div id="plan-empty-state" class="empty-state" style="display:none">
+    <div class="empty-state-icon">📊</div>
+    <h3>ライフプラン表がまだ生成されていません</h3>
+    <p>STEP 1〜5 で情報を入力してから「ライフプラン表を生成する」を押してください。</p>
+    <button class="btn-next" onclick="goStep(5)">STEP 5 で生成する →</button>
+  </div>
+
+  <div id="plan-content" style="display:none">
+  <div id="cond-summary-wrap"></div>
   <div class="summary-grid" id="summary-grid"></div>
   <div id="alerts"></div>
+
+  <div class="card">
+    <div class="card-title">シナリオ比較（利回りの感応度）</div>
+    <div class="sc-grid" id="scenario-grid"></div>
+    <p style="font-size:11px;color:var(--gray)">楽観＝全利回り+1%・悲観＝全利回り−1%（それ以外の条件は同じ）。最低資産は試算期間内の最も少ない総資産額。</p>
+  </div>
 
   <div class="card">
     <div class="card-title">金融資産の推移グラフ</div>
@@ -734,6 +796,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   <div class="disclaimer">
     ⚠ 本ツールは情報提供目的です。計算は入力値に基づく概算であり、実際の家計状況とは異なる場合があります。投資には元本割れのリスクがあります。重要な意思決定の前には必ずFP・税理士等の専門家にご相談ください。
   </div>
+  </div><!-- /plan-content -->
 </div>
 
 </div>
@@ -808,42 +871,94 @@ function downloadCSV(){
   showToast('CSVをダウンロードしました');
 }
 
-function buildSVGChart(rows){
+function buildSVGChart(rows, opts={}){
   const wrap=document.getElementById('svg-chart-wrap');if(!wrap)return;
-  const W=800,H=220,PL=60,PR=20,PT=16,PB=36;
+  const W=820,H=260,PL=68,PR=24,PT=22,PB=40;
   const cW=W-PL-PR,cH=H-PT-PB;
-  const step=Math.max(1,Math.ceil(rows.length/40));
+  const step=Math.max(1,Math.ceil(rows.length/50));
   const pts=rows.filter((_,i)=>i%step===0||i===rows.length-1);
   const allVals=pts.flatMap(r=>[r.totalAsset,r.nisaAsset,r.cashAsset,r.investAsset||0]);
-  const maxV=Math.max(0,...allVals)*1.1||1000;
-  const minV=Math.min(0,...allVals)*1.1;
+  const maxV=Math.max(0,...allVals)*1.12||1000;
+  const minV=Math.min(0,...allVals)<0?Math.min(0,...allVals)*1.1:0;
   const range=maxV-minV||1;
   const xOff=i=>PL+i*(cW/(pts.length-1||1));
   const yOff=v=>PT+cH-(((v-minV)/range)*cH);
-  const poly=key=>pts.map((r,i)=>`${xOff(i).toFixed(1)},${yOff(r[key]).toFixed(1)}`).join(' ');
+  const poly=key=>pts.map((r,i)=>`${xOff(i).toFixed(1)},${yOff(r[key]||0).toFixed(1)}`).join(' ');
   const polyFill=(key,base)=>{
-    const p=pts.map((r,i)=>`${xOff(i).toFixed(1)},${yOff(r[key]).toFixed(1)}`).join(' ');
+    const p=pts.map((r,i)=>`${xOff(i).toFixed(1)},${yOff(r[key]||0).toFixed(1)}`).join(' ');
     return `${xOff(0).toFixed(1)},${yOff(base).toFixed(1)} ${p} ${xOff(pts.length-1).toFixed(1)},${yOff(base).toFixed(1)}`;
   };
+  const fmtY=v=>v>=10000?Math.round(v/1000)+'千万':v>=1000?Math.round(v/100)/10+'千':Math.round(v)+'万';
   const ticks=5;
   const yTicks=Array.from({length:ticks+1},(_,i)=>minV+(range/ticks)*i);
   const yTicksSVG=yTicks.map(v=>`
     <line x1="${PL}" y1="${yOff(v).toFixed(1)}" x2="${W-PR}" y2="${yOff(v).toFixed(1)}" stroke="#e5e7eb" stroke-width="1"/>
-    <text x="${PL-6}" y="${(yOff(v)+4).toFixed(1)}" text-anchor="end" font-size="9" fill="#9ca3af">${Math.round(v)}万</text>`).join('');
-  const xStep=Math.max(1,Math.floor(pts.length/5));
-  const xTicksSVG=pts.filter((_,i)=>i%xStep===0||i===pts.length-1).map((r,_,arr,i=pts.indexOf(r))=>
-    `<text x="${xOff(i).toFixed(1)}" y="${H-6}" text-anchor="middle" font-size="9" fill="#9ca3af">${r.selfAge}歳</text>`).join('');
-  const zeroLine=minV<0?`<line x1="${PL}" y1="${yOff(0).toFixed(1)}" x2="${W-PR}" y2="${yOff(0).toFixed(1)}" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>`:'';
-  wrap.innerHTML=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${W}px;height:auto;display:block">
-    ${yTicksSVG}${zeroLine}
-    <polygon points="${polyFill('nisaAsset',0)}" fill="rgba(191,219,254,.3)"/>
-    <polygon points="${polyFill('totalAsset',Math.max(0,minV))}" fill="rgba(26,122,74,.08)"/>
-    <polyline points="${poly('totalAsset')}" fill="none" stroke="#1a7a4a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-    <polyline points="${poly('nisaAsset')}" fill="none" stroke="#93c5fd" stroke-width="1.5" stroke-linejoin="round"/>
-    <polyline points="${poly('investAsset')}" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round"/>
-    <polyline points="${poly('cashAsset')}" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3" stroke-linejoin="round"/>
-    ${xTicksSVG}
-  </svg>`;
+    <text x="${PL-6}" y="${(yOff(v)+4).toFixed(1)}" text-anchor="end" font-size="9" fill="#9ca3af">${fmtY(v)}</text>`).join('');
+  const xStep=Math.max(1,Math.floor(pts.length/6));
+  const xTicksSVG=pts.filter((_,i)=>i%xStep===0||i===pts.length-1).map(r=>{
+    const i=pts.indexOf(r);
+    return `<text x="${xOff(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9" fill="#9ca3af">${r.selfAge}歳</text>`;
+  }).join('');
+  const zeroLine=minV<0?`<line x1="${PL}" y1="${yOff(0).toFixed(1)}" x2="${W-PR}" y2="${yOff(0).toFixed(1)}" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>`:'';
+
+  // Milestone vertical lines
+  const {retireSelf=65,loanEndAge=0,depleteAge=null}=opts;
+  const msDefs=[
+    {age:retireSelf,label:`定年${retireSelf}歳`,color:'#1a7a4a'},
+    {age:65,label:'年金開始',color:'#3b82f6'},
+    {age:loanEndAge,label:'ローン完済',color:'#f59e0b'},
+    {age:depleteAge,label:'⚠枯渇',color:'#ef4444'},
+  ];
+  const milestonesSVG=msDefs.filter(m=>m.age).map(m=>{
+    const pi=pts.findIndex(r=>r.selfAge>=m.age);if(pi<0)return '';
+    const x=xOff(pi).toFixed(1);
+    const dash=m.color==='#ef4444'?'none':'6,4';
+    return `<line x1="${x}" y1="${PT}" x2="${x}" y2="${H-PB}" stroke="${m.color}" stroke-width="1.5" stroke-dasharray="${dash}" opacity="0.75"/>
+    <text x="${x}" y="${PT-5}" text-anchor="middle" font-size="8" fill="${m.color}" font-weight="700">${m.label}</text>`;
+  }).join('');
+
+  // Hover data (compact)
+  const hd=pts.map((r,i)=>({x:parseFloat(xOff(i).toFixed(1)),a:r.selfAge,y:r.yr,t:r.totalAsset,n:Math.round(r.nisaAsset),c:r.cashAsset,iv:Math.round(r.investAsset||0),id:Math.round(r.idecoAsset||0)}));
+
+  wrap.innerHTML=`<div style="position:relative">
+<svg id="lp-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${W}px;height:auto;display:block;cursor:crosshair">
+  ${yTicksSVG}${zeroLine}${milestonesSVG}
+  <polygon points="${polyFill('nisaAsset',0)}" fill="rgba(96,165,250,.13)"/>
+  <polygon points="${polyFill('totalAsset',Math.max(0,minV))}" fill="rgba(26,122,74,.09)"/>
+  <polyline points="${poly('totalAsset')}" fill="none" stroke="#1a7a4a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline points="${poly('nisaAsset')}" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linejoin="round"/>
+  <polyline points="${poly('investAsset')}" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round"/>
+  <polyline points="${poly('cashAsset')}" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3" stroke-linejoin="round"/>
+  <line id="lp-vline" x1="0" y1="${PT}" x2="0" y2="${H-PB}" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2" opacity="0"/>
+  ${xTicksSVG}
+</svg>
+<div id="lp-tip" class="chart-tip"></div>
+</div>`;
+
+  const svg=document.getElementById('lp-svg');
+  const tip=document.getElementById('lp-tip');
+  const vl=document.getElementById('lp-vline');
+  function nearest(cx){
+    const r=svg.getBoundingClientRect();
+    const sx=(cx-r.left)/r.width*W;
+    return hd.reduce((b,d)=>Math.abs(d.x-sx)<Math.abs(b.x-sx)?d:b,hd[0]);
+  }
+  function showTip(e,d){
+    vl.setAttribute('x1',d.x);vl.setAttribute('x2',d.x);vl.style.opacity='1';
+    const col=d.t<0?'#f87171':'#d1fae5';
+    const tot=d.t<0?`<span style="color:#f87171">▲${Math.abs(d.t).toLocaleString()}</span>`:d.t.toLocaleString();
+    tip.style.display='block';
+    tip.style.left=Math.min(e.clientX+14,window.innerWidth-175)+'px';
+    tip.style.top=(e.clientY-60)+'px';
+    tip.innerHTML=`<div style="font-weight:700;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:4px;margin-bottom:4px">${d.y}年 ${d.a}歳</div>
+総資産 <strong style="color:${col}">${tot}</strong>万<br>
+現金 <strong>${d.c.toLocaleString()}</strong>万 ／ NISA <strong>${d.n.toLocaleString()}</strong>万<br>
+iDeCo <strong>${d.id.toLocaleString()}</strong>万 ／ 投資 <strong>${d.iv.toLocaleString()}</strong>万`;
+  }
+  svg.addEventListener('mousemove',e=>{showTip(e,nearest(e.clientX));});
+  svg.addEventListener('mouseleave',()=>{vl.style.opacity='0';tip.style.display='none';});
+  svg.addEventListener('touchmove',e=>{e.preventDefault();const t=e.touches[0];showTip(t,nearest(t.clientX));},{passive:false});
+  svg.addEventListener('touchend',()=>{tip.style.display='none';});
 }
 
 function goStep(n){
@@ -857,6 +972,11 @@ function goStep(n){
     else if(i===n){s.classList.add('active');d.textContent=i}
     else{d.textContent=i}
     if(i<6){const l=document.getElementById('line-'+i);l.classList.toggle('done',i<n)}
+  }
+  if(n===6){
+    const hasData=lastRows.length>0;
+    document.getElementById('plan-empty-state').style.display=hasData?'none':'block';
+    document.getElementById('plan-content').style.display=hasData?'block':'none';
   }
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -1223,7 +1343,9 @@ function _generatePlan(){
     </div>
   </div>`;
 
-  buildSVGChart(rows);
+  buildSVGChart(rows,{retireSelf,loanEndAge:loanBalance>0?ageSelf+loanYears:0,depleteAge:depleteRow?.selfAge||null});
+  renderConditionsSummary({ageSelf,hasSpouse,ageSpouse,childrenCount,incomeSelf,incomeSpouse,housingType,loanBalance,loanYears,nisaMonthly,idecoMonthly,savingsCurrent,investCurrent,planEndAge,retireSelf});
+  renderScenarios(planEndAge);
 
   document.getElementById('plan-thead').innerHTML=`<tr>
     <th class="cat">西暦</th><th class="col-age">本人</th>${hasSpouse?'<th class="col-age">配偶者</th>':''}<th>主なイベント</th>
@@ -1288,6 +1410,8 @@ function _generatePlan(){
   lastRows=rows;lastHasSpouse=hasSpouse;
   document.getElementById('btn-csv').style.display='block';
   document.getElementById('btn-print').style.display='block';
+  document.getElementById('plan-content').style.display='block';
+  document.getElementById('plan-empty-state').style.display='none';
 
   if(typeof gtag==='function'){
     const rng=(v,s)=>(Math.floor(v/s)*s)+'〜'+(Math.floor(v/s)*s+s)+'万';
@@ -1309,6 +1433,189 @@ function _generatePlan(){
 toggleSpouse();
 toggleHousing();
 renderChildrenFields();
+
+// ── Auto-save / restore ──
+const _LS='lp_autosave_v2';
+function autoSave(){try{localStorage.setItem(_LS,JSON.stringify(collectAllInputs()));}catch(e){}}
+(function autoRestore(){
+  try{
+    const d=localStorage.getItem(_LS);if(!d)return;
+    applyAllInputs(JSON.parse(d));
+    toggleSpouse();toggleHousing();
+    setTimeout(()=>{renderChildrenFields();initSteppers();},80);
+    showToast('前回の入力データを復元しました');
+  }catch(e){}
+})();
+document.addEventListener('change',e=>{if(e.target.matches('input,select'))autoSave();});
+document.addEventListener('input',e=>{if(e.target.matches('input[type="number"]'))autoSave();});
+
+// ── ± Stepper buttons ──
+function initSteppers(){
+  document.querySelectorAll('.field-row').forEach(row=>{
+    if(row.classList.contains('stepper'))return;
+    const inp=row.querySelector('input[type="number"]');if(!inp)return;
+    row.classList.add('stepper');
+    const mk=(cls,sym)=>{
+      const b=document.createElement('button');b.type='button';b.className='stepper-btn '+cls;b.textContent=sym;
+      b.addEventListener('click',e=>{
+        e.preventDefault();
+        const s=Math.abs(parseFloat(inp.step)||1);
+        const mn=inp.min!==''?parseFloat(inp.min):-Infinity;
+        const mx=inp.max!==''?parseFloat(inp.max):Infinity;
+        const cur=parseFloat(inp.value)||0;
+        inp.value=Math.min(mx,Math.max(mn,Math.round((cur+(cls==='plus'?s:-s))*1000)/1000));
+        inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));
+      });return b;
+    };
+    row.insertBefore(mk('minus','−'),inp);row.appendChild(mk('plus','+'));
+  });
+}
+initSteppers();
+
+// ── Help tooltips ──
+const _TIPS={
+  'income-growth':'年収の昇給率。会社員は平均1〜2%。\n役職昇進があれば2〜3%が目安。',
+  'income-reemploy':'定年後の継続雇用・再就職の月収。\n定年前の約5〜6割が多い水準です。',
+  'pension-self':'「ねんきん定期便」または「ねんきんネット」\nに記載の月額見込み額を入力してください。',
+  'pension-spouse':'配偶者の年金月額見込み。\n専業主婦の場合は国民年金のみで約6万円前後。',
+  'inflation':'物価上昇率。日本の長期平均は約1%。\n近年は2〜3%で推移中。保守的に1〜2%推奨。',
+  'medical-cost':'75歳以降の医療・介護費の月額目安。\n厚労省データでは月平均3〜5万円。',
+  'nisa-rate':'全世界株インデックス（オルカン等）の\n長期平均は年4〜7%が目安。元本割れリスクあり。',
+  'ideco-rate':'iDeCoの想定運用利回り。\nインデックスファンドなら年4〜5%が目安。',
+  'invest-rate':'既存の投資資産の年間成長率。\n株式インデックス4〜6%、債券混合2〜3%が目安。',
+  'loan-rate':'変動金利の場合、将来的な金利上昇\n（+1〜2%）も想定しておくと安全です。',
+  'reform-cost':'部分リフォームは100〜300万円。\n外壁・屋根・水回り全交換は300〜600万円が目安。',
+  'living-cost':'食費・光熱費・通信費・保険料などの月額合計。\n旅行・住宅ローンは専用欄で入力（2重計上注意）。',
+  'savings-current':'普通預金・定期預金など現金性資産の合計。\nNISA・投資信託は「投資資産」欄に入力。',
+};
+(function initHelpTips(){
+  Object.entries(_TIPS).forEach(([id,tip])=>{
+    const el=document.getElementById(id);if(!el)return;
+    const label=el.closest('.field')?.querySelector('label');if(!label)return;
+    const icon=document.createElement('span');icon.className='help-icon';icon.textContent='?';icon.setAttribute('data-tip',tip);
+    label.appendChild(icon);
+  });
+})();
+
+// ── Conditions summary ──
+function renderConditionsSummary(p){
+  const {ageSelf,hasSpouse,ageSpouse,childrenCount,incomeSelf,incomeSpouse,housingType,loanBalance,loanYears,nisaMonthly,idecoMonthly,savingsCurrent,investCurrent,planEndAge,retireSelf}=p;
+  const tags=[
+    {l:'本人',v:`${ageSelf}歳・${retireSelf}歳定年`},
+    hasSpouse?{l:'配偶者',v:`${ageSpouse}歳`}:null,
+    childrenCount>0?{l:'子ども',v:`${childrenCount}人`}:null,
+    {l:'年収(手取)',v:`${incomeSelf}万円`},
+    hasSpouse&&incomeSpouse>0?{l:'配偶者年収',v:`${incomeSpouse}万円`}:null,
+    (housingType==='owned_loan'||housingType==='plan')?{l:'住宅ローン',v:`残${loanBalance}万・${loanYears}年`}:
+    housingType==='rent'?{l:'住宅',v:'賃貸'}:{l:'住宅',v:'持ち家（完済）'},
+    {l:'NISA',v:`${nisaMonthly}万/月`},
+    idecoMonthly>0?{l:'iDeCo',v:`${idecoMonthly}万/月`}:null,
+    savingsCurrent>0?{l:'現金',v:`${savingsCurrent}万`}:null,
+    investCurrent>0?{l:'投資資産',v:`${investCurrent}万`}:null,
+    {l:'試算期間',v:`〜${planEndAge}歳`},
+  ].filter(Boolean);
+  const wrap=document.getElementById('cond-summary-wrap');if(!wrap)return;
+  wrap.innerHTML=`<div class="cond-summary">
+    <div class="cond-title">📋 入力条件</div>
+    <div class="cond-tags">${tags.map(t=>`<div class="cond-tag"><span>${t.l}</span><strong>${t.v}</strong></div>`).join('')}</div>
+  </div>`;
+}
+
+// ── Scenario comparison ──
+function runScenario(rateAdj){
+  const gi=(id,def=0)=>{const el=document.getElementById(id);if(!el)return def;const v=parseFloat(el.value);return isNaN(v)?def:v;};
+  const gi2=(id,def=0)=>{const el=document.getElementById(id);if(!el)return def;return parseInt(el.value)||def;};
+  const ageSelf=gi2('age-self',40),planEndAge=gi2('plan-end-age',90),retireSelf=gi2('retire-self',65);
+  const hasSpouse=document.getElementById('spouse-yn')?.value==='yes';
+  const ageSpouse=hasSpouse?gi2('age-spouse',38):0;
+  const retireSpouse=hasSpouse?gi2('retire-spouse',60):0;
+  const incomeSelf=gi('income-self'),incomeGrowth=gi('income-growth');
+  const incomeReemploy=gi('income-reemploy'),reemployEnd=gi2('reemploy-end',70);
+  const incomeSpouse=hasSpouse?gi('income-spouse'):0;
+  const spouseWorkStart=hasSpouse?gi2('spouse-work-start',0):0;
+  const incomeSpouseNew=hasSpouse?gi('income-spouse-new'):0;
+  const pensionSelf=gi('pension-self'),pensionSpouse=hasSpouse?gi('pension-spouse'):0;
+  const retirePay=gi('retirement-pay'),retirePaySp=hasSpouse?gi('retirement-pay-spouse'):0;
+  const inheritance=gi('inheritance'),inheritanceAge=gi2('inheritance-age',60);
+  const livingCost=gi('living-cost',25),livingCostR=gi('living-cost-retire',22);
+  const inflation=gi('inflation'),medical=gi('medical-cost',3);
+  const carCost=gi('car-cost'),carCycle=gi2('car-cycle',0);
+  const reformCost=gi('reform-cost'),reformAge=gi2('reform-age',55);
+  const leisure=gi('leisure-cost');
+  const ht=document.getElementById('housing-type')?.value||'owned_no_loan';
+  const loanBal=(ht==='owned_loan'||ht==='plan')?gi('loan-balance'):0;
+  const loanRate=gi('loan-rate'),loanYears=gi2('loan-years',0);
+  const rentCost=ht==='rent'?gi('rent-cost'):0,rentEndAge=ht==='rent'?gi2('rent-end-age',90):0;
+  const nisaM=gi('nisa-monthly'),nisaR=Math.max(0,gi('nisa-rate')+rateAdj);
+  const idecoM=gi('ideco-monthly'),idecoR=Math.max(0,gi('ideco-rate')+rateAdj);
+  const invCur=gi('invest-current'),invR=Math.max(0,gi('invest-rate')+rateAdj);
+  const invAnn=gi('invest-annual'),cash=gi('savings-current');
+  const cc=gi2('children-count',0),children=[];
+  for(let i=1;i<=cc;i++)children.push({age:parseInt(document.getElementById('child-age-'+i)?.value)||0,edu:parseFloat(document.getElementById('edu-cost-'+i)?.value)||120});
+  function cm(p,r,y){const rm=r/100/12,n=y*12;if(rm===0)return p*10000/n;return p*10000*rm*Math.pow(1+rm,n)/(Math.pow(1+rm,n)-1);}
+  const lm=loanYears>0&&loanBal>0?cm(loanBal,loanRate,loanYears):0,la=lm*12/10000;
+  let na=0,da=0,ia=invCur,ca=cash,lr=loanBal;
+  let minA=Infinity,peakA=-Infinity,depleteAge=null,retireA=null;
+  const totalY=planEndAge-ageSelf+1;
+  for(let y=0;y<totalY;y++){
+    const sa=ageSelf+y,spa=hasSpouse?ageSpouse+y:0;
+    let iS=0;
+    if(sa<retireSelf)iS=incomeSelf*Math.pow(1+incomeGrowth/100,y);
+    else if(sa<reemployEnd)iS=incomeReemploy*12;
+    if(sa>=65)iS+=(pensionSelf*12)+(hasSpouse&&spa>=65?pensionSpouse*12:0);
+    let iSp=0;
+    if(hasSpouse){
+      if(spa<retireSpouse){if(spouseWorkStart>0&&spa>=spouseWorkStart)iSp=incomeSpouseNew;else if(spouseWorkStart===0)iSp=incomeSpouse;}
+      if(spa>=65&&sa<65)iSp+=pensionSpouse*12;
+    }
+    let lump=0;
+    if(sa===retireSelf)lump+=retirePay;
+    if(hasSpouse&&spa===retireSpouse)lump+=retirePaySp;
+    if(sa===inheritanceAge)lump+=inheritance;
+    const inf=Math.pow(1+inflation/100,y);
+    let base=(sa>=retireSelf?livingCostR:livingCost)*12*inf;
+    if(sa>=75)base+=medical*12;
+    let lExp=lr>0&&y<loanYears?la:0;
+    let rExp=ht==='rent'&&sa<=rentEndAge?rentCost*12:0;
+    let eExp=0;children.forEach(c=>{const cn=c.age+y;if(cn>=3&&cn<=5)eExp+=15;else if(cn>=6&&cn<=11)eExp+=20;else if(cn>=12&&cn<=14)eExp+=35;else if(cn>=15&&cn<=17)eExp+=50;else if(cn>=18&&cn<=21)eExp+=c.edu;});
+    let cExp=carCycle>0&&y>0&&y%carCycle===0&&sa<80?carCost:0;
+    let rfExp=sa===reformAge?reformCost:0;
+    const lsr=sa<75?leisure:0;
+    const nc=y<30?nisaM*12:0,dc=sa<60?idecoM*12:0;
+    const totExp=base+lExp+rExp+eExp+cExp+rfExp+lsr;
+    const cf=(iS+iSp+lump)-totExp-nc-dc;
+    const _rn=nisaR/100/12,_Rn=Math.pow(1+_rn,12);
+    na=y<30?na*_Rn+(_rn===0?nisaM*12:nisaM*(_Rn-1)/_rn):na*_Rn;
+    const _ri=idecoR/100/12,_Ri=Math.pow(1+_ri,12);
+    da=sa<60?da*_Ri+(_ri===0?idecoM*12:idecoM*(_Ri-1)/_ri):da*(1+idecoR/100);
+    ia=ia*(1+invR/100)+invAnn;ca+=cf;
+    if(ca<0){const d1=Math.min(-ca,ia);ia-=d1;ca+=d1;if(ca<0){const d2=Math.min(-ca,na);na-=d2;ca+=d2;}if(ca<0&&sa>=60){const d3=Math.min(-ca,da);da-=d3;ca+=d3;}}
+    if(lr>0){const _rm=loanRate/100/12,_n=loanYears*12,_pd=(y+1)*12;lr=_pd>=_n?0:(_rm===0?Math.round(loanBal*(1-_pd/_n)):Math.round(lm*(1-Math.pow(1+_rm,-(_n-_pd)))/_rm/10000));}
+    const tot=Math.max(0,ca)+na+da+ia;
+    if(tot<minA)minA=tot;if(tot>peakA)peakA=tot;
+    if(depleteAge===null&&tot<100)depleteAge=sa;
+    if(sa===retireSelf&&retireA===null)retireA=tot;
+  }
+  return{minA:Math.round(minA===Infinity?0:minA),peakA:Math.round(peakA===-Infinity?0:peakA),depleteAge,retireA:Math.round(retireA||0)};
+}
+
+function renderScenarios(planEndAge){
+  const wrap=document.getElementById('scenario-grid');if(!wrap)return;
+  const scs=[{label:'楽観',sub:'利回り+1%',adj:+1,cls:'opt'},{label:'標準',sub:'現在の設定',adj:0,cls:'std'},{label:'悲観',sub:'利回り−1%',adj:-1,cls:'pes'}];
+  const fmt=n=>Math.round(n).toLocaleString();
+  wrap.innerHTML=scs.map(sc=>{
+    const r=runScenario(sc.adj);
+    const badge=r.depleteAge?`<span class="sc-badge sc-danger">⚠ ${r.depleteAge}歳で枯渇</span>`:r.minA<500?`<span class="sc-badge sc-warn">⚠ 要注意水準</span>`:`<span class="sc-badge sc-ok">✅ 問題なし</span>`;
+    return `<div class="sc-card ${sc.cls}">
+      <div class="sc-name">${sc.label}シナリオ</div>
+      <div style="font-size:10px;color:var(--gray);margin-bottom:4px">${sc.sub}</div>
+      <div class="sc-asset">${fmt(r.minA)}<span style="font-size:12px;font-weight:400">万円</span></div>
+      <div class="sc-asub">期間中の最低資産</div>
+      ${badge}
+      <div class="sc-peak">ピーク ${fmt(r.peakA)}万円</div>
+    </div>`;
+  }).join('');
+}
 
 function toggleTH(){
   const b=document.getElementById('th-body');
