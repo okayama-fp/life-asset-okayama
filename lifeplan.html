@@ -872,7 +872,7 @@ function downloadCSV(){
 }
 
 function buildSVGChart(rows, opts={}){
-  const wrap=document.getElementById('svg-chart-wrap');if(!wrap)return;
+  const wrap=document.getElementById('svg-chart-wrap');if(!wrap||!rows.length)return;
   const W=820,H=260,PL=68,PR=24,PT=22,PB=40;
   const cW=W-PL-PR,cH=H-PT-PB;
   const step=Math.max(1,Math.ceil(rows.length/50));
@@ -1117,7 +1117,7 @@ function _generatePlan(){
     let incSelf=0;
     if(selfAge<retireSelf){incSelf=incomeSelf*Math.pow(1+incomeGrowth/100,y)}
     else if(selfAge<reemployEnd){incSelf=incomeReemploy*12}
-    if(selfAge>=65){incSelf+=(pensionSelf*12)+(hasSpouse&&spouseAge>=65?pensionSpouse*12:0)}
+    if(selfAge>=65)incSelf+=(pensionSelf*12);
 
     let incSpouse=0;
     if(hasSpouse){
@@ -1125,7 +1125,7 @@ function _generatePlan(){
         if(spouseWorkStart>0&&spouseAge>=spouseWorkStart)incSpouse=incomeSpouseNew;
         else if(spouseWorkStart===0)incSpouse=incomeSpouse;
       }
-      if(spouseAge>=65&&selfAge<65)incSpouse+=pensionSpouse*12;
+      if(spouseAge>=65)incSpouse+=pensionSpouse*12;
     }
 
     let lumpIncome=0;
@@ -1563,11 +1563,11 @@ function runScenario(rateAdj){
     let iS=0;
     if(sa<retireSelf)iS=incomeSelf*Math.pow(1+incomeGrowth/100,y);
     else if(sa<reemployEnd)iS=incomeReemploy*12;
-    if(sa>=65)iS+=(pensionSelf*12)+(hasSpouse&&spa>=65?pensionSpouse*12:0);
+    if(sa>=65)iS+=pensionSelf*12;
     let iSp=0;
     if(hasSpouse){
       if(spa<retireSpouse){if(spouseWorkStart>0&&spa>=spouseWorkStart)iSp=incomeSpouseNew;else if(spouseWorkStart===0)iSp=incomeSpouse;}
-      if(spa>=65&&sa<65)iSp+=pensionSpouse*12;
+      if(spa>=65)iSp+=pensionSpouse*12;
     }
     let lump=0;
     if(sa===retireSelf)lump+=retirePay;
