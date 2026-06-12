@@ -29,7 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --green:#1a6b3c;--green-dark:#0f4d2a;--green-light:#2d8a52;--green-pale:#e8f5ee;--green-mid:#c8e6d4;
+  --green:#1a7a4a;--green-dark:#0f4d2e;--green-light:#22c55e;--green-pale:#dcfce7;--green-mid:#bbe7cd;
   --red:#c0392b;--red-pale:#fdecea;--yellow:#d4820a;--yellow-pale:#fef6e4;
   --blue:#1a4fa0;--blue-pale:#e8f0fb;
   --sky:#1a7a4a;--navy:#1a3d2b;
@@ -132,15 +132,15 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .year-table .minus{color:var(--red);font-weight:700}
 .year-table .plus{color:var(--green)}
 .year-table tfoot td{background:var(--green-pale);font-weight:700;border-top:2px solid var(--green);color:var(--ink);font-size:11px}
-.year-table .retire-row td{border-top:2px dashed var(--green) !important;background:rgba(26,107,60,.07) !important}
+.year-table .retire-row td{border-top:2px dashed var(--green) !important;background:rgba(26,122,74,.07) !important}
 .year-table .row-depleted td{background:rgba(220,53,69,.12) !important}
 .year-table .row-depleted .year-label{color:var(--red);font-weight:900;background:rgba(220,53,69,.12) !important}
 .year-table .row-warn td{background:rgba(245,158,11,.08) !important}
 .year-table .row-warn .year-label{background:rgba(245,158,11,.08) !important}
 .year-table .row-milestone td{border-top:2px solid #3b82f6 !important;background:rgba(59,130,246,.06) !important}
 .year-table .row-milestone .year-label{background:rgba(59,130,246,.06) !important}
-.year-table .row-event td{background:rgba(26,107,60,.04) !important}
-.year-table .row-event .year-label{background:rgba(26,107,60,.04) !important}
+.year-table .row-event td{background:rgba(26,122,74,.04) !important}
+.year-table .row-event .year-label{background:rgba(26,122,74,.04) !important}
 
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
 .s-box{border-radius:12px;padding:16px;text-align:center;border:1.5px solid}
@@ -161,10 +161,10 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .btn-row{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;flex-wrap:wrap}
 .btn-back{background:var(--white);color:var(--gray);border:1.5px solid var(--border);border-radius:10px;padding:11px 24px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .15s}
 .btn-back:hover{border-color:var(--gray)}
-.btn-next{background:var(--green);color:#fff;border:none;border-radius:10px;padding:12px 32px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;box-shadow:0 3px 12px rgba(26,107,60,.3)}
+.btn-next{background:var(--green);color:#fff;border:none;border-radius:10px;padding:12px 32px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;box-shadow:0 3px 12px rgba(26,122,74,.3)}
 .btn-next:hover{background:var(--green-light);transform:translateY(-1px)}
-.btn-generate{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:10px;padding:14px 40px;font-size:15px;font-weight:900;font-family:inherit;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(26,107,60,.35)}
-.btn-generate:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,107,60,.45)}
+.btn-generate{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:10px;padding:14px 40px;font-size:15px;font-weight:900;font-family:inherit;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(26,122,74,.35)}
+.btn-generate:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,122,74,.45)}
 
 .disclaimer{background:#fff8e1;border-left:3px solid #f5d28a;border-radius:0 8px 8px 0;padding:10px 14px;font-size:11px;color:#856404;margin-top:20px;line-height:1.7}
 
@@ -698,7 +698,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
     <div class="card-title">金融資産の推移グラフ</div>
     <div id="svg-chart-wrap" style="width:100%;overflow-x:auto"></div>
     <div style="display:flex;gap:16px;font-size:11px;color:var(--gray);margin-top:8px;flex-wrap:wrap">
-      <span><span style="display:inline-block;width:10px;height:10px;background:#1a6b3c;border-radius:2px;margin-right:4px;vertical-align:middle"></span>総資産</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:#1a7a4a;border-radius:2px;margin-right:4px;vertical-align:middle"></span>総資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#bfdbfe;border-radius:2px;margin-right:4px;vertical-align:middle"></span>NISA資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#a78bfa;border-radius:2px;margin-right:4px;vertical-align:middle"></span>投資資産</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:#f59e0b;border-radius:2px;margin-right:4px;vertical-align:middle"></span>現金資産</span>
@@ -718,7 +718,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
       <span><span style="display:inline-block;width:10px;height:10px;background:rgba(220,53,69,.4);border-radius:2px;margin-right:4px;vertical-align:middle"></span>資産枯渇</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:rgba(245,158,11,.4);border-radius:2px;margin-right:4px;vertical-align:middle"></span>要注意（残高500万未満）</span>
       <span><span style="display:inline-block;width:10px;height:10px;background:rgba(59,130,246,.3);border-radius:2px;margin-right:4px;vertical-align:middle"></span>節目（定年・65歳）</span>
-      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(26,107,60,.15);border-radius:2px;margin-right:4px;vertical-align:middle"></span>イベントあり</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(26,122,74,.15);border-radius:2px;margin-right:4px;vertical-align:middle"></span>イベントあり</span>
     </div>
   </div>
 
@@ -776,7 +776,7 @@ function loadData(event){
       const data=JSON.parse(e.target.result);
       if(!data.inputs)throw new Error();
       applyAllInputs(data.inputs);
-      toggleSpouse();toggleHousing();renderChildrenFields();
+      toggleSpouse();toggleHousing();
       showToast('データを読み込みました');goStep(1);
     }catch{showToast('❌ 読み込みに失敗しました')}
   };
@@ -795,7 +795,7 @@ function downloadCSV(){
     rows.push([r.yr,r.selfAge,lastHasSpouse?r.spouseAge:'',r.events.join(' '),
       r.totalIncome,r.incSelf,r.incSpouse,r.lumpIncome,
       r.totalExpense,r.baseLiving,r.loanExp,r.rentExp,
-      r.eduExp,r.carExp,r.leisure,
+      r.eduExp,r.carExp+r.reformExp,r.leisure,
       r.cf,r.cashAsset,Math.round(r.nisaAsset),Math.round(r.idecoAsset),Math.round(r.investAsset||0),r.totalAsset,r.loanRemaining
     ].map(v=>v===undefined?'':v).join(','));
   });
@@ -837,8 +837,8 @@ function buildSVGChart(rows){
   wrap.innerHTML=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${W}px;height:auto;display:block">
     ${yTicksSVG}${zeroLine}
     <polygon points="${polyFill('nisaAsset',0)}" fill="rgba(191,219,254,.3)"/>
-    <polygon points="${polyFill('totalAsset',Math.max(0,minV))}" fill="rgba(26,107,60,.08)"/>
-    <polyline points="${poly('totalAsset')}" fill="none" stroke="#1a6b3c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <polygon points="${polyFill('totalAsset',Math.max(0,minV))}" fill="rgba(26,122,74,.08)"/>
+    <polyline points="${poly('totalAsset')}" fill="none" stroke="#1a7a4a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
     <polyline points="${poly('nisaAsset')}" fill="none" stroke="#93c5fd" stroke-width="1.5" stroke-linejoin="round"/>
     <polyline points="${poly('investAsset')}" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round"/>
     <polyline points="${poly('cashAsset')}" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3" stroke-linejoin="round"/>
@@ -945,7 +945,7 @@ function _generatePlan(){
   const leisureCost=parseFloat(g('leisure-cost'))||0;
 
   const housingType=g('housing-type','owned_no_loan');
-  const loanBalance=housingType==='owned_loan'?parseFloat(g('loan-balance'))||0:0;
+  const loanBalance=(housingType==='owned_loan'||housingType==='plan')?parseFloat(g('loan-balance'))||0:0;
   const loanRate=parseFloat(g('loan-rate'))||0;
   const loanYears=parseInt(g('loan-years'))||0;
   const rentCost=housingType==='rent'?parseFloat(g('rent-cost'))||0:0;
@@ -1052,11 +1052,11 @@ function _generatePlan(){
     let drawdown=0;
     if(cashAsset<0){
       const d1=Math.min(-cashAsset,investAsset);investAsset-=d1;cashAsset+=d1;drawdown+=d1;
-      if(cashAsset<0&&selfAge>=60){const d2=Math.min(-cashAsset,nisaAsset);nisaAsset-=d2;cashAsset+=d2;drawdown+=d2;}
+      if(cashAsset<0){const d2=Math.min(-cashAsset,nisaAsset);nisaAsset-=d2;cashAsset+=d2;drawdown+=d2;}
       if(cashAsset<0&&selfAge>=60){const d3=Math.min(-cashAsset,idecoAsset);idecoAsset-=d3;cashAsset+=d3;drawdown+=d3;}
     }
     if(loanRemaining>0){
-      const _rm=loanRate/100/12,_n=loanYears*12,_paid=y*12;
+      const _rm=loanRate/100/12,_n=loanYears*12,_paid=(y+1)*12;
       loanRemaining=_paid>=_n?0:(_rm===0?Math.round(loanBalance*(1-_paid/_n)):Math.round(loanMonthly*(1-Math.pow(1+_rm,-(_n-_paid)))/_rm/10000));
     }
     const totalAsset=Math.max(0,cashAsset)+nisaAsset+idecoAsset+investAsset;
@@ -1086,7 +1086,7 @@ function _generatePlan(){
   const minAsset=Math.min(...rows.map(r=>r.totalAsset));
   const peakAsset=Math.max(...rows.map(r=>r.totalAsset));
   const depleteRow=rows.find(r=>r.totalAsset<100);
-  const retireRow=rows.find(r=>r.selfAge===retireSelf);
+  const retireRow=rows.find(r=>r.selfAge===retireSelf)||rows[0];
   const retireAsset=retireRow?retireRow.totalAsset:0;
 
   document.getElementById('summary-grid').innerHTML=`
@@ -1123,7 +1123,7 @@ function _generatePlan(){
   const totalInterest=Math.max(0,totalRepay-loanBalance);
   const nisaAtRetire=retireRow?retireRow.nisaAsset:0;
   const nisaMaxMonthly=10;
-  const nisaUtilPct=Math.round(nisaMonthly/nisaMaxMonthly*100);
+  const nisaUtilPct=Math.min(100,Math.round(nisaMonthly/nisaMaxMonthly*100));
   const pensionMonthly=pensionSelf+(hasSpouse?pensionSpouse:0);
   const gapMonthly=livingCostRetire-pensionMonthly;
   const peakRow=rows.find(r=>r.totalAsset===peakAsset);
@@ -1175,7 +1175,7 @@ function _generatePlan(){
   al.innerHTML+=`<div class="alert ${nisaMonthly<5?'warn':'ok'}" style="margin-bottom:16px">
     <div style="font-size:13px;font-weight:900;margin-bottom:8px">NISA・iDeCo活用診断</div>
     <div style="font-size:13px;line-height:2">
-    NISA積立 <strong>${nisaMonthly}万円/月</strong>（上限10万円の <strong>${nisaUtilPct}%</strong> 活用） ／ iDeCo <strong>${idecoMonthly}万円/月</strong>。<br>
+    NISA積立 <strong>${nisaMonthly}万円/月</strong>（つみたて投資枠 上限10万円の <strong>${nisaUtilPct}%</strong> 活用） ／ iDeCo <strong>${idecoMonthly}万円/月</strong>。<br>
     ${retireSelf}歳時点のNISA推定残高：<strong>${fmt(nisaAtRetire)}万円</strong>（運用益は <strong>全額非課税</strong>）。<br><br>
     <strong>FPアドバイス：</strong><br>
     ${nisaMonthly<10?`NISA枠にはまだ月 <strong>${fmtM(nisaMaxMonthly-nisaMonthly)}万円</strong> の余裕があります。月1万円増やすだけでも${retireSelf}歳まで${Math.max(0,retireSelf-ageSelf)}年間積み立てると複利で <strong>数百万円以上</strong> の差になる可能性があります。`
@@ -1208,7 +1208,7 @@ function _generatePlan(){
   if(depleteRow||retireAsset<500) actions.push(`NISA積立を月<strong>${fmtM(Math.min(10,nisaMonthly+3))}万円</strong>に増額し、複利効果で老後資産を底上げする`);
   if(retireSelf<65) actions.push(`${retireSelf}〜65歳の<strong>年金空白期間（${65-retireSelf}年間）</strong>は再雇用・パートで月<strong>10〜15万円</strong>の収入を確保する`);
   if(loanBalance>0&&loanRepayAge>retireSelf) actions.push(`住宅ローンの<strong>繰上返済（期間短縮型）</strong>で定年前完済を目指す`);
-  if(childrenCount>0) actions.push(`教育費ピーク（大学進学時）に備え、<strong>ジュニアNISA・学資保険</strong>で先手を打つ`);
+  if(childrenCount>0) actions.push(`教育費ピーク（大学進学時）に備え、<strong>新NISA・学資保険</strong>で先手を打つ`);
   actions.push(`緊急予備資金として生活費<strong>6か月分（目安：${fmt(livingCost*6)}万円）</strong>を普通預金に確保しておく`);
   if(loanBalance>0&&loanRepayAge<=retireSelf) actions.push(`完済後の月<strong>${fmtM(loanMonthly/10000)}万円</strong>を即座にNISAに回す仕組みをつくる`);
   actions.push(`保険料の見直し（払いすぎ診断）で年間<strong>5〜15万円</strong>のコスト削減を検討する`);
@@ -1218,7 +1218,7 @@ function _generatePlan(){
     <ol style="margin:0 0 0 20px;font-size:13px;line-height:2.6">
       ${actions.map(a=>`<li>${a}</li>`).join('')}
     </ol>
-    <div style="margin-top:14px;padding:10px 14px;background:rgba(26,107,60,.08);border-radius:8px;font-size:11px;color:var(--green);line-height:1.9">
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(26,122,74,.08);border-radius:8px;font-size:11px;color:var(--green);line-height:1.9">
       ※ 本シミュレーションは概算であり、将来の結果を保証するものではありません。税制・社会保険制度の改正により実際の数値は変動します。具体的なプランニングはFP技能士にご相談ください。
     </div>
   </div>`;
@@ -1256,7 +1256,7 @@ function _generatePlan(){
     <td class="col-sec plus">${Math.round(r.nisaAsset).toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(r.idecoAsset).toLocaleString()}</td>
     <td class="plus">${Math.round(r.investAsset).toLocaleString()}</td>
-    <td class="${r.totalAsset<0?'minus':'plus'}" style="font-weight:700;background:linear-gradient(to right,rgba(26,107,60,.13) ${barPct}%,transparent ${barPct}%)">${r.totalAsset.toLocaleString()}</td>
+    <td class="${r.totalAsset<0?'minus':'plus'}" style="font-weight:700;background:linear-gradient(to right,rgba(26,122,74,.13) ${barPct}%,transparent ${barPct}%)">${r.totalAsset.toLocaleString()}</td>
   </tr>`;
   }).join('');
   const lifeIncome=rows.reduce((s,r)=>s+r.totalIncome,0);
@@ -1281,7 +1281,7 @@ function _generatePlan(){
     <td class="col-sec plus">${Math.round(finalRow.nisaAsset).toLocaleString()}</td>
     <td class="col-sec plus">${Math.round(finalRow.idecoAsset).toLocaleString()}</td>
     <td class="plus">${Math.round(finalRow.investAsset).toLocaleString()}</td>
-    <td class="${finalRow.totalAsset<0?'minus':'plus'}" style="font-size:13px;background:rgba(26,107,60,.18)">${finalRow.totalAsset.toLocaleString()}</td>
+    <td class="${finalRow.totalAsset<0?'minus':'plus'}" style="font-size:13px;background:rgba(26,122,74,.18)">${finalRow.totalAsset.toLocaleString()}</td>
   </tr>`;
 
   document.getElementById('plan-desc').textContent=`${ageSelf}歳〜${planEndAge}歳（${totalYears}年間）のライフプランです。数値は万円単位です。`;
