@@ -139,6 +139,26 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 /* ─── Sim link ─── */
 .btn-sim-link { display:inline-flex; align-items:center; gap:7px; background:#fff; border:2px solid var(--sky); color:var(--sky); font-size:13px; font-weight:700; padding:12px 22px; border-radius:50px; transition:all .2s; cursor:pointer; font-family:inherit; }
 .btn-sim-link:hover { background:var(--sky); color:#fff; }
+/* ─── Premium cards ─── */
+.premium-card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,.06); margin-top:28px; }
+.premium-card h3 { font-size:15px; font-weight:800; color:var(--navy); margin-bottom:16px; padding-bottom:10px; border-bottom:2px solid var(--sky-pale); }
+.goal-stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin-top:14px; }
+.goal-stat { background:var(--sky-bg); border:1px solid var(--sky-pale); border-radius:12px; padding:14px; text-align:center; }
+.goal-stat .gs-label { font-size:11px; color:var(--text-light); margin-bottom:4px; }
+.goal-stat .gs-val { font-size:19px; font-weight:900; color:var(--sky); line-height:1.2; }
+.goal-stat .gs-sub { font-size:10.5px; color:var(--text-light); margin-top:3px; }
+.goal-stat.warn .gs-val { color:#d97706; }
+.ms-table { width:100%; border-collapse:collapse; font-size:13px; }
+.ms-table th { background:var(--sky-pale); padding:8px; font-size:12px; color:var(--navy); text-align:center; }
+.ms-table td { padding:9px 8px; border-bottom:1px solid var(--border); text-align:center; }
+.ms-table tr:last-child td { border-bottom:none; }
+.ms-reached { color:var(--sky); font-weight:700; }
+.ms-out { color:var(--text-light); }
+.mc-badge { display:inline-block; padding:5px 16px; border-radius:20px; font-size:13.5px; font-weight:800; margin:2px 4px 2px 0; }
+.mc-good { background:#dcfce7; color:#15803d; }
+.mc-mid { background:#fef9c3; color:#a16207; }
+.mc-bad { background:#fee2e2; color:#b91c1c; }
+.premium-note { font-size:11px; color:var(--text-light); margin-top:10px; line-height:1.7; }
 /* ─── Print ─── */
 @media print {
   header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,footer,#pb { display:none!important; }
@@ -314,6 +334,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
           <div class="result-row"><span class="result-k">運用益</span><span class="result-v gain" id="r-gain">―万円</span></div>
           <div class="result-row"><span class="result-k">運用益の割合</span><span class="result-v" id="r-ratio">―%</span></div>
           <div class="real-rate-row"><span class="result-k">実質利回り（インフレ調整後）</span><span class="real-rate-badge" id="r-real-rate">―%</span></div>
+          <div class="result-row"><span class="result-k">NISA非課税メリット（税20.315%分）</span><span class="result-v gain" id="r-nisa-benefit">―万円</span></div>
         </div>
       </div>
       <div class="chart-card">
@@ -331,6 +352,34 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <div class="scenario-compare">
     <h3>📊 3シナリオ比較（楽観・基本・悲観）</h3>
     <div class="sc-grid3" id="sc-grid3"></div>
+  </div>
+
+  <div class="premium-card">
+    <h3>🎯 目標金額から逆算</h3>
+    <div class="field" style="margin-bottom:6px">
+      <div class="field-label">目標金額<span class="field-val" id="lbl-goal">3,000万円</span></div>
+      <input type="range" id="sl-goal" min="500" max="20000" step="500" value="3000" oninput="syncGoal(this.value);calcGoal();updateMCStats()">
+      <div class="field-ticks"><span>500万</span><span>1億</span><span>2億</span></div>
+    </div>
+    <div class="goal-stat-grid" id="goal-results"></div>
+  </div>
+
+  <div class="premium-card">
+    <h3>🔮 モンテカルロ未来予報（500回試行）</h3>
+    <div id="mc-stats" style="margin-bottom:12px"></div>
+    <div class="chart-wrap" style="height:240px"><canvas id="mcChart"></canvas></div>
+    <p class="premium-note">市場の値動き（年率±15%の標準偏差）を乱数で500回シミュレーション。濃い帯＝25〜75%の確率範囲、薄い帯＝10〜90%、緑線＝中央値。投資成果は保証されません。</p>
+  </div>
+
+  <div class="premium-card">
+    <h3>🏁 資産マイルストーン到達予測</h3>
+    <div id="milestones"></div>
+  </div>
+
+  <div class="premium-card">
+    <h3>💰 ゴール後の取り崩しプラン</h3>
+    <div class="goal-stat-grid" id="drawdown"></div>
+    <p class="premium-note">4%ルール＝米国の研究（Trinity Study）に基づく「年4%なら高確率で30年以上資産が持続する」目安。市場環境により結果は変動します。</p>
   </div>
 
   <section class="fp-section">
@@ -499,9 +548,15 @@ function calc() {
   document.getElementById('r-gain').textContent        = gainMan.toLocaleString()+'万円';
   document.getElementById('r-ratio').textContent       = (principalMan>0?Math.round(gainMan/totalMan*100):0)+'%';
   document.getElementById('r-real-rate').textContent   = realRate.toFixed(1)+'%（実質 '+ realTotalMan.toLocaleString()+'万円）';
+  document.getElementById('r-nisa-benefit').textContent = '約'+Math.round(Math.max(0,gainMan)*0.20315).toLocaleString()+'万円おトク';
   updateChart(initial, monthly, rate, years);
   updateAdvice(totalMan, principalMan, gainMan, rate, years);
   renderScenarios(initial, monthly, rate, years, inf);
+  calcGoal();
+  renderMilestones(initial, monthly, rate, years);
+  renderDrawdown(totalMan, rate);
+  scheduleMC();
+  saveInputs();
   updateUrlParams({ i:initial, m:monthly, r:rate, y:years, inf:inf });
   if(typeof gtag==='function'){
     gtag('event','simulate_asset',{initial_range:(Math.floor(initial/100)*100)+'〜'+(Math.floor(initial/100)*100+100)+'万',monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',rate:rate,years:years});
@@ -622,6 +677,181 @@ function linkToRetirement() {
   location.href = 'retirement-gap.html';
 }
 
+/* ═══ 目標金額の逆算 ═══ */
+function syncGoal(v) {
+  v = parseFloat(v);
+  document.getElementById('lbl-goal').textContent = v >= 10000 ? (v/10000).toFixed(1).replace(/\.0$/,'')+'億円' : v.toLocaleString()+'万円';
+}
+function calcGoal() {
+  var initial = parseFloat(document.getElementById('sl-initial').value);
+  var monthly = parseFloat(document.getElementById('sl-monthly').value);
+  var rate    = parseFloat(document.getElementById('sl-rate').value);
+  var years   = parseInt(document.getElementById('sl-years').value);
+  var goal    = parseFloat(document.getElementById('sl-goal').value);
+  var r = rate/100/12;
+
+  // 現在のペースで目標に到達する年数（最大100年）
+  var t = initial*10000, m = monthly*10000, months = 0;
+  while (t < goal*10000 && months < 1200) { t = t*(1+r)+m; months++; }
+  var reachYears = months < 1200 ? Math.ceil(months/12) : null;
+  if (initial >= goal) reachYears = 0;
+
+  // 設定年数で目標達成に必要な毎月積立額
+  var n = years*12, gw = Math.pow(1+r, n);
+  var reqM = r === 0 ? (goal*10000 - initial*10000)/n : (goal*10000 - initial*10000*gw)*r/(gw-1);
+  reqM = reqM/10000;
+  var diff = reqM - monthly;
+
+  var html = '';
+  html += '<div class="goal-stat' + (reachYears===null?' warn':'') + '">'
+    + '<div class="gs-label">現在のペースで到達</div>'
+    + '<div class="gs-val">' + (reachYears===0?'達成済み':reachYears!==null?reachYears+'年後':'未到達') + '</div>'
+    + '<div class="gs-sub">' + (reachYears!==null&&reachYears>0?(reachYears<=years?'✅ 設定期間内に到達':'⚠ 設定期間('+years+'年)を超過'):reachYears===0?'初期資産で達成しています':'100年以内に届きません') + '</div></div>';
+  html += '<div class="goal-stat' + (diff>0?' warn':'') + '">'
+    + '<div class="gs-label">' + years + '年で達成に必要な積立</div>'
+    + '<div class="gs-val">' + (reqM<=0?'0円':'月'+(Math.ceil(reqM*10)/10).toFixed(1)+'万円') + '</div>'
+    + '<div class="gs-sub">' + (reqM<=0?'積立なしでも達成見込み':diff>0?'今より月+'+(Math.ceil(diff*10)/10).toFixed(1)+'万円':'✅ 現在の積立で達成可能') + '</div></div>';
+  html += '<div class="goal-stat"><div class="gs-label">モンテカルロ達成確率</div>'
+    + '<div class="gs-val" id="goal-mc-prob">計算中…</div>'
+    + '<div class="gs-sub">500回試行で目標額以上の割合</div></div>';
+  document.getElementById('goal-results').innerHTML = html;
+}
+
+/* ═══ モンテカルロ ═══ */
+function randn() { var u = 1-Math.random(), v = Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+var mcChart = null, _mcTimer = null, _mcFinals = null, _mcPrincipal = 0;
+function scheduleMC() { clearTimeout(_mcTimer); _mcTimer = setTimeout(runMC, 350); }
+function runMC() {
+  var initial = parseFloat(document.getElementById('sl-initial').value);
+  var monthly = parseFloat(document.getElementById('sl-monthly').value);
+  var rate    = parseFloat(document.getElementById('sl-rate').value);
+  var years   = parseInt(document.getElementById('sl-years').value);
+  var N = 500, sigma = 0.15;
+  var yearVals = [], finals = [];
+  for (var k = 0; k < N; k++) {
+    var t = initial;
+    for (var y = 0; y < years; y++) {
+      var r = rate/100 + sigma*randn();
+      t = t*(1+r) + monthly*12;
+      if (t < 0) t = 0;
+      (yearVals[y] = yearVals[y] || []).push(t);
+    }
+    finals.push(t);
+  }
+  _mcFinals = finals;
+  _mcPrincipal = Math.round(initial + monthly*12*years);
+
+  var bands = yearVals.map(function(a) {
+    a.sort(function(x,y){return x-y;});
+    var pct = function(p){ var i=(a.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i); return Math.round(lo===hi?a[lo]:a[lo]+(a[hi]-a[lo])*(i-lo)); };
+    return { p10:pct(.10), p25:pct(.25), p50:pct(.50), p75:pct(.75), p90:pct(.90) };
+  });
+  updateMCStats();
+
+  if (typeof Chart === 'undefined') return;
+  var labels = bands.map(function(_,i){ return (i+1)+'年'; });
+  var ds = [
+    { label:'上位10%', data:bands.map(function(b){return b.p90;}), fill:'+1', backgroundColor:'rgba(26,122,74,.07)', borderColor:'rgba(26,122,74,.18)', borderWidth:1, pointRadius:0, tension:.3 },
+    { label:'上位25%', data:bands.map(function(b){return b.p75;}), fill:'+1', backgroundColor:'rgba(26,122,74,.16)', borderColor:'rgba(26,122,74,.3)', borderWidth:1, pointRadius:0, tension:.3 },
+    { label:'中央値',  data:bands.map(function(b){return b.p50;}), fill:false, borderColor:'#1a7a4a', borderWidth:2.5, pointRadius:0, tension:.3 },
+    { label:'下位25%', data:bands.map(function(b){return b.p25;}), fill:'-1', backgroundColor:'rgba(26,122,74,.16)', borderColor:'rgba(26,122,74,.3)', borderWidth:1, pointRadius:0, tension:.3 },
+    { label:'下位10%', data:bands.map(function(b){return b.p10;}), fill:'-1', backgroundColor:'rgba(26,122,74,.07)', borderColor:'rgba(26,122,74,.18)', borderWidth:1, pointRadius:0, tension:.3 }
+  ];
+  if (mcChart) { mcChart.data.labels = labels; mcChart.data.datasets.forEach(function(d,i){ d.data = ds[i].data; }); mcChart.update(); return; }
+  mcChart = new Chart(document.getElementById('mcChart').getContext('2d'), {
+    type: 'line',
+    data: { labels: labels, datasets: ds },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins: { legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ return c.dataset.label+': '+c.parsed.y.toLocaleString()+'万円'; } } } },
+      scales: { x:{ grid:{display:false}, ticks:{font:{size:10}, maxTicksLimit:10} }, y:{ ticks:{font:{size:10}, callback:function(v){ return v>=10000?(v/10000)+'億':v.toLocaleString()+'万'; }}, grid:{color:'#f1f5f9'} } },
+      interaction:{ mode:'index', intersect:false } }
+  });
+}
+function updateMCStats() {
+  if (!_mcFinals) return;
+  var goal = parseFloat(document.getElementById('sl-goal').value);
+  var N = _mcFinals.length;
+  var goalProb = Math.round(_mcFinals.filter(function(f){ return f >= goal; }).length / N * 100);
+  var safeProb = Math.round(_mcFinals.filter(function(f){ return f >= _mcPrincipal; }).length / N * 100);
+  var sorted = _mcFinals.slice().sort(function(a,b){ return a-b; });
+  var median = Math.round(sorted[Math.floor(N/2)]);
+  var gc = goalProb >= 70 ? 'mc-good' : goalProb >= 40 ? 'mc-mid' : 'mc-bad';
+  var sc = safeProb >= 80 ? 'mc-good' : safeProb >= 60 ? 'mc-mid' : 'mc-bad';
+  document.getElementById('mc-stats').innerHTML =
+    '<span class="mc-badge ' + gc + '">🎯 目標達成確率 ' + goalProb + '%</span>'
+    + '<span class="mc-badge ' + sc + '">🛡️ 元本割れしない確率 ' + safeProb + '%</span>'
+    + '<span class="mc-badge" style="background:var(--sky-pale);color:var(--navy)">📊 中央値 ' + (median>=10000?(median/10000).toFixed(1)+'億':median.toLocaleString()+'万') + '円</span>';
+  var gp = document.getElementById('goal-mc-prob');
+  if (gp) { gp.textContent = goalProb + '%'; gp.style.color = goalProb >= 70 ? 'var(--sky)' : goalProb >= 40 ? '#d97706' : '#b91c1c'; }
+}
+
+/* ═══ マイルストーン ═══ */
+function renderMilestones(initial, monthly, rate, years) {
+  var milestones = [1000, 3000, 5000, 10000];
+  var r = rate/100/12, t = initial*10000, m = monthly*10000;
+  var hit = {};
+  for (var mo = 0; mo <= 600; mo++) {
+    milestones.forEach(function(ms){ if (!(ms in hit) && t >= ms*10000) hit[ms] = mo; });
+    t = t*(1+r) + m;
+  }
+  var rows = milestones.map(function(ms) {
+    var label = ms >= 10000 ? '1億円' : ms.toLocaleString()+'万円';
+    if (ms in hit) {
+      var yy = Math.ceil(hit[ms]/12) || 0;
+      var inRange = yy <= years;
+      return '<tr><td>' + label + '</td>'
+        + '<td class="' + (inRange?'ms-reached':'ms-out') + '">' + (yy===0?'達成済み':yy+'年後') + '</td>'
+        + '<td>' + (inRange ? '✅ 期間内' : '△ 期間延長で到達') + '</td></tr>';
+    }
+    return '<tr><td>' + label + '</td><td class="ms-out">50年以内に未到達</td><td>—</td></tr>';
+  }).join('');
+  document.getElementById('milestones').innerHTML =
+    '<table class="ms-table"><tr><th>マイルストーン</th><th>到達時期</th><th>設定期間（' + years + '年）内？</th></tr>' + rows + '</table>';
+}
+
+/* ═══ 取り崩しプラン ═══ */
+function renderDrawdown(totalMan, rate) {
+  var r = rate/100/12, n = 360;
+  var rule4 = totalMan*0.04/12;
+  var ann = r === 0 ? totalMan/n : totalMan*r/(1-Math.pow(1+r,-n));
+  var flat = totalMan/n;
+  var f = function(v){ return v >= 1 ? (Math.round(v*10)/10).toFixed(1)+'万円' : Math.round(v*10000).toLocaleString()+'円'; };
+  document.getElementById('drawdown').innerHTML =
+    '<div class="goal-stat"><div class="gs-label">4%ルール（資産を維持）</div><div class="gs-val">月' + f(rule4) + '</div><div class="gs-sub">年' + Math.round(totalMan*0.04).toLocaleString() + '万円・半永久的に取り崩し可</div></div>'
+    + '<div class="goal-stat"><div class="gs-label">運用継続しながら30年取り崩し</div><div class="gs-val">月' + f(ann) + '</div><div class="gs-sub">利回り' + rate.toFixed(1) + '%を維持した場合</div></div>'
+    + '<div class="goal-stat"><div class="gs-label">運用せず30年取り崩し</div><div class="gs-val">月' + f(flat) + '</div><div class="gs-sub">現金のまま均等に取り崩し</div></div>';
+}
+
+/* ═══ 自動保存・復元 ═══ */
+function saveInputs() {
+  try {
+    localStorage.setItem('la_asset_sim', JSON.stringify({
+      i: document.getElementById('sl-initial').value,
+      m: document.getElementById('sl-monthly').value,
+      r: document.getElementById('sl-rate').value,
+      y: document.getElementById('sl-years').value,
+      inf: document.getElementById('sl-inf').value,
+      g: document.getElementById('sl-goal').value
+    }));
+  } catch(e) {}
+}
+function restoreInputs() {
+  try {
+    var d = JSON.parse(localStorage.getItem('la_asset_sim') || 'null');
+    if (!d) return false;
+    var map = { i:'sl-initial', m:'sl-monthly', r:'sl-rate', y:'sl-years', inf:'sl-inf', g:'sl-goal' };
+    var labelMap = { i:'initial', m:'monthly', r:'rate', y:'years', inf:'inf' };
+    Object.keys(map).forEach(function(k) {
+      if (d[k] === undefined) return;
+      var el = document.getElementById(map[k]);
+      if (!el) return;
+      el.value = d[k];
+      if (k === 'g') syncGoal(el.value); else syncLabel(labelMap[k], el.value);
+    });
+    return true;
+  } catch(e) { return false; }
+}
+
 (function(){
   // Track recent visit
   try {
@@ -631,13 +861,14 @@ function linkToRetirement() {
     localStorage.setItem(k, JSON.stringify(a.slice(0,5)));
   } catch(e) {}
 
-  if (!loadFromUrl()) {
+  if (!loadFromUrl() && !restoreInputs()) {
     syncLabel('initial', document.getElementById('sl-initial').value);
     syncLabel('monthly', document.getElementById('sl-monthly').value);
     syncLabel('rate',    document.getElementById('sl-rate').value);
     syncLabel('years',   document.getElementById('sl-years').value);
     syncLabel('inf',     document.getElementById('sl-inf').value);
   }
+  syncGoal(document.getElementById('sl-goal').value);
   calc();
 })();
 window.addEventListener('scroll', function(){
