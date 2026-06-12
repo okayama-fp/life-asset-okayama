@@ -36,15 +36,28 @@
 - ロゴ: グラデーション "Life Asset"（#1a7a4a → #4ade80）
 - キャラクター: ライフアセットくん（`images/life-asset-kun.png`）
 
-### ブログ記事テンプレート規約（厳守）
+### ブログ記事テンプレート規約（厳守・2026-06-12改定）
 
-**今後のブログ記事はすべて `blog/post-542.html` のデザイン・構造に統一する。**
+**今後のブログ記事はすべて `blog-mie-shouninyokkyuu.html` のデザイン・構造に統一する。**（旧規約の post-542 ベースは廃止）
 
-- **CSSは記事内に埋め込む**（`<style>` ブロック）。`<!--STYLE-->` プレースホルダーを残さない
-- ベース: post-542 のスタイルブロック＋補完CSS（post-544〜555に適用済みのもの）
-- 使用クラス: `article-hero`（濃緑グラデーション）・`article-body`・`compare-table` または `table-wrap`・`callout`（info/safe/warning）・`stat-box`・`timeline`・`toc`・`summary-box`・`fp-comment`・`related-section`
-- 必須要素: canonical・OGP・Twitter Card・schema.org（Article + BreadcrumbList）・`/js/cookie-consent.js`・AI開示行（10px・#94a3b8）・免責欄・関連記事・フッター（プライバシーリンク付き）
-- タイトル形式: `[記事タイトル]｜ライフアセットオフィス`（60文字以内）
+#### デザイン（CSSは記事内に `<style>` で埋め込む）
+- **カラーパレット**: `:root` 変数でブランド色に統一
+  - `--green:#1a7a4a` / `--green-dark:#1a3d2b` / `--green-light:#22c55e` / `--green-pale:#dcfce7` / `--green-mid:#bbf7d0`
+  - `--ink:#1e293b`（本文）/ `--navy:#1a3d2b`（見出し・表ヘッダー・フッター）/ `--paper:#f8fafc`（背景）/ `--cream:#f0fdf4`
+- **ヒーロー**: 濃緑グラデーション `#1a3d2b → #1f5c40 → #1a5fac`（**単色フォールバック `background-color` 必須**）、`em` アクセントは `#7ee8a2`、`hero-cat`（カテゴリバッジ）＋ `hero-meta`（日付・読了時間・編集部）
+- **見やすさの配色ルール**:
+  - 重要語 `strong` に緑マーカー風ハイライト（`linear-gradient(transparent 62%, var(--green-mid) 62%)`）
+  - h2 は帯デザイン（緑左ボーダー＋淡緑グラデーション背景）
+  - チェックリストは `✓緑丸バッジ（.ck）` / `×赤丸バッジ（.ck-x）`
+  - 表ヘッダーは濃緑グラデーション、hr は緑グラデーションライン
+- **構成パーツ**: `lead`（リード文ボックス・緑トップボーダー）→ `toc`（番号付き目次・アンカーリンク）→ `section`（id付き・`scroll-margin-top:80px`）→ `pull-quote`・`callout-key/warn/danger`・`case-box`・`table-wrap`・`checklist`・`tool-cta`(関連シミュレーターへのCTA) → `author`（FP編集部）→ `disclaimer`
+- **ナビ**: ヘッダーは `.topnav` クラスでスコープすること（**タグセレクタ `nav{}` は目次 `<nav class="toc">` に波及してスティッキー化バグを起こすため禁止**）。リンクは `/`・`/simulation.html`・`/blog/`（末尾スラッシュ）・お問い合わせボタンは `/contact.html` へ
+- フォント: Noto Serif JP（見出し）/ Noto Sans JP（本文）/ DM Mono（数字）
+
+#### 必須要素
+- canonical・OGP・Twitter Card・schema.org（Article + BreadcrumbList）・GA4タグ・`/js/cookie-consent.js`・favicon
+- AI開示行（10px・#94a3b8）・免責欄（disclaimer）・フッター（プライバシーリンク付き・`--navy` 背景）
+- タイトル形式: `[記事タイトル]｜Life Asset` または `｜ライフアセットオフィス`
 - 新規記事追加時は `blog/index.html` のカード追加と `sitemap.xml` 登録も同時に行う
 
 ---
