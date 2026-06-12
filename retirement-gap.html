@@ -9,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/retirement-gap.html">
-<title>老後資金不足額シミュレーター｜ライフアセットオフィス</title>
-<meta name="description" content="老後の月生活費・年金・貯蓄を入力するだけ。老後資金の不足額をリアルタイム計算。夫婦モデル・おひとりさまなどプリセット付き。登録不要。">
+<title>老後安心度診断｜何歳まで資産が持つ？｜ライフアセットオフィス</title>
+<meta name="description" content="安心度スコア・資産寿命（何歳まで持つか）・モンテカルロ300回の成功確率まで表示。年金繰り下げ効果・インフレ対応の本格老後資金診断。登録不要。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="老後資金不足額シミュレーター｜ライフアセットオフィス">
-<meta property="og:description" content="年金・貯蓄・生活費から老後資金の不足額を即計算。登録不要。">
+<meta property="og:title" content="老後安心度診断｜ライフアセットオフィス">
+<meta property="og:description" content="安心度スコア・資産寿命・モンテカルロ成功確率まで表示する本格老後資金診断。登録不要。">
 <meta property="og:url" content="https://lifeassetoffice.net/retirement-gap.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
@@ -462,6 +462,43 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 /* ヒーロー背景アニメーション */
 .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(74,222,128,.07) 0%,transparent 55%);pointer-events:none;animation:heroBg 7s ease-in-out infinite;z-index:-1}
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+/* ─── 安心度スコアカード ─── */
+.score-card{background:linear-gradient(135deg,var(--navy),var(--navy-soft));border-radius:16px;padding:22px 24px;color:#fff;box-shadow:0 2px 16px rgba(0,0,0,.12)}
+.score-head{font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.6);margin-bottom:6px}
+.score-row{display:flex;align-items:baseline;gap:10px}
+.score-num{font-size:clamp(38px,7vw,52px);font-weight:900;line-height:1}
+.score-max{font-size:14px;opacity:.6}
+.score-grade{display:inline-block;font-size:14px;font-weight:900;padding:3px 14px;border-radius:20px;margin-left:auto}
+.score-grade.s{background:#4ade80;color:#14532d}
+.score-grade.a{background:#86efac;color:#14532d}
+.score-grade.b{background:#fde68a;color:#78350f}
+.score-grade.c{background:#fdba74;color:#7c2d12}
+.score-grade.d{background:#fca5a5;color:#7f1d1d}
+.score-bars{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.score-bar-row{display:grid;grid-template-columns:96px 1fr 42px;align-items:center;gap:8px;font-size:11px}
+.score-bar-label{color:rgba(255,255,255,.7)}
+.score-bar-bg{height:6px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#4ade80,#86efac);transition:width .5s}
+.score-bar-val{text-align:right;font-weight:700}
+/* ─── プレミアムセクション ─── */
+.premium-section{margin-top:32px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.pm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.pm-stat{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;text-align:center}
+.pm-stat-label{font-size:11px;color:var(--text-light);font-weight:700;margin-bottom:4px}
+.pm-stat-val{font-size:clamp(20px,4vw,26px);font-weight:900;color:var(--navy);line-height:1.2}
+.pm-stat-val.good{color:var(--green)}
+.pm-stat-val.warn{color:var(--amber)}
+.pm-stat-val.bad{color:var(--red)}
+.pm-stat-sub{font-size:10px;color:var(--text-light);margin-top:3px}
+.dd-chart-wrap{position:relative;height:240px;margin-top:6px}
+.delay-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.delay-table th{background:var(--sky-pale);padding:8px 10px;font-weight:700;color:var(--navy);text-align:center;font-size:12px;white-space:nowrap}
+.delay-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:center}
+.delay-table tr:last-child td{border-bottom:none}
+.delay-best td{background:rgba(26,122,74,.07);font-weight:700;color:var(--sky)}
+.pm-note{font-size:11px;color:var(--text-light);margin-top:12px;line-height:1.7}
+@media(max-width:520px){.premium-section{padding:20px 16px}.delay-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 </style>
 <script src="/js/cookie-consent.js"></script>
 </head>
@@ -491,13 +528,13 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 </header>
 
 <div class="hero">
-  <div class="hero-badge"><span class="hero-dot"></span>登録不要・リアルタイム計算</div>
-  <h1>老後資金、いくら足りない？</h1>
-  <p class="hero-lead">年金・生活費・貯蓄を入力するだけ。老後資金の不足額をリアルタイムで計算します。</p>
+  <div class="hero-badge"><span class="hero-dot"></span>登録不要・リアルタイム診断</div>
+  <h1>あなたの老後、安心度は何点？</h1>
+  <p class="hero-lead">年金・生活費・貯蓄を入力するだけ。安心度スコア・不足額・資産寿命（何歳まで資産が持つか）をリアルタイムで診断します。</p>
   <div class="hero-tags">
-    <span class="hero-tag">不足額を即計算</span>
-    <span class="hero-tag">夫婦・おひとりさま対応</span>
-    <span class="hero-tag">積立シミュレーション付き</span>
+    <span class="hero-tag">安心度スコア</span>
+    <span class="hero-tag">資産寿命を計算</span>
+    <span class="hero-tag">モンテカルロ300回試行</span>
   </div>
 </div>
 
@@ -513,6 +550,8 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
     <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
+    <button class="util-btn" style="background:#f59e0b;border-color:#f59e0b;color:#fff" onclick="saveToPlanShelf()">⭐ プランを保存</button>
+    <a href="mypage.html" class="util-btn" style="color:var(--sky);border-color:var(--sky)">マイページ →</a>
   </div>
   <div class="util-toast" id="util-toast"></div>
   <div class="from-asset-banner" id="from-asset-banner">📈 資産シミュレーターの結果を反映しました。数値を確認・調整してください。</div>
@@ -580,10 +619,31 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
         <input type="range" id="sl-rate" min="0" max="7" step="0.5" value="3" oninput="sync('rate',this.value);calc()">
         <div class="field-ticks"><span>0%</span><span>3.5%</span><span>7%</span></div>
       </div>
+
+      <div class="field">
+        <div class="field-label">想定インフレ率（年率）<span class="field-val" id="lbl-inf">0%</span></div>
+        <input type="range" id="sl-inf" min="0" max="3" step="0.5" value="0" oninput="sync('inf',this.value);calc()">
+        <div class="field-ticks"><span>0%</span><span>1.5%</span><span>3%</span></div>
+        <div style="font-size:10px;color:var(--text-light);margin-top:3px">※ 生活費がインフレで増える前提の試算（年金は据え置き＝保守的）</div>
+      </div>
     </div>
 
     <!-- 結果パネル -->
     <div class="result-panel">
+
+      <!-- 安心度スコア -->
+      <div class="score-card">
+        <div class="score-head">老後安心度スコア</div>
+        <div class="score-row">
+          <span class="score-num" id="score-num">―</span><span class="score-max">/100点</span>
+          <span class="score-grade b" id="score-grade">―</span>
+        </div>
+        <div class="score-bars">
+          <div class="score-bar-row"><span class="score-bar-label">資金カバー率</span><div class="score-bar-bg"><div class="score-bar-fill" id="sb-cov" style="width:0%"></div></div><span class="score-bar-val" id="sbv-cov">―</span></div>
+          <div class="score-bar-row"><span class="score-bar-label">MC成功確率</span><div class="score-bar-bg"><div class="score-bar-fill" id="sb-mc" style="width:0%"></div></div><span class="score-bar-val" id="sbv-mc">―</span></div>
+          <div class="score-bar-row"><span class="score-bar-label">資産寿命</span><div class="score-bar-bg"><div class="score-bar-fill" id="sb-life" style="width:0%"></div></div><span class="score-bar-val" id="sbv-life">―</span></div>
+        </div>
+      </div>
 
       <!-- カバー率ゲージ -->
       <div class="coverage-card">
@@ -665,6 +725,45 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
         <a href="contact.html" class="cta-contact-btn">お問い合わせ →</a>
       </div>
     </div>
+  </div>
+
+  <!-- 取り崩しシミュレーション（資産寿命） -->
+  <div class="premium-section">
+    <div class="section-heading">
+      <span class="section-label-tag">PREMIUM</span>
+      <h2 class="section-title">🕰️ あなたの資産は何歳まで持つ？ — 資産寿命シミュレーション</h2>
+      <p class="section-lead">退職後、生活費（インフレ込み）から年金を引いた分を毎年取り崩した場合の資産推移。モンテカルロ300回試行で「運用のブレ」も考慮した成功確率を表示します。</p>
+    </div>
+    <div class="pm-stats">
+      <div class="pm-stat">
+        <div class="pm-stat-label">資産寿命（標準シナリオ）</div>
+        <div class="pm-stat-val" id="pm-life">―</div>
+        <div class="pm-stat-sub" id="pm-life-sub">資産が尽きる年齢</div>
+      </div>
+      <div class="pm-stat">
+        <div class="pm-stat-label">MC成功確率（300回試行）</div>
+        <div class="pm-stat-val" id="pm-mc">―</div>
+        <div class="pm-stat-sub" id="pm-mc-sub">想定年数まで資産が持つ確率</div>
+      </div>
+      <div class="pm-stat">
+        <div class="pm-stat-label">退職時の予測資産</div>
+        <div class="pm-stat-val" id="pm-assets">―</div>
+        <div class="pm-stat-sub">複利運用後</div>
+      </div>
+    </div>
+    <div class="dd-chart-wrap"><canvas id="ddChart"></canvas></div>
+    <div class="pm-note">薄い緑の帯はモンテカルロ試行の10〜90パーセンタイル（よくあるブレの範囲）、破線は中央値。実線は標準シナリオです。運用利回りのブレは投資資産の割合に応じて自動調整しています。</div>
+  </div>
+
+  <!-- 年金繰り下げ効果 -->
+  <div class="premium-section" id="delay-section">
+    <div class="section-heading">
+      <span class="section-label-tag">PREMIUM</span>
+      <h2 class="section-title">📅 年金繰り下げで安心度はどう変わる？</h2>
+      <p class="section-lead">年金は1ヶ月繰り下げるごとに0.7%増額（最大75歳で+84%）。あなたの年金月額で増額後の金額と損益分岐年齢を試算します。</p>
+    </div>
+    <div style="overflow-x:auto"><table class="delay-table" id="delay-table"></table></div>
+    <div class="pm-note">※ 損益分岐年齢＝繰り下げ期間中に受け取らなかった年金を、増額分で取り返せる年齢。これより長生きするなら繰り下げが有利です。健康状態・加給年金・税社会保険料の影響で最適解は変わります。</div>
   </div>
 
   <!-- 積立シミュレーション -->
@@ -879,12 +978,14 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
 <script src="/nav.js"></script>
 <script>
-var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30, nisa:0, ideco:0, invest:0, rate:3 };
+var sliders = { age:40, retire:65, expense:25, pension:15, savings:500, lifespan:30, nisa:0, ideco:0, invest:0, rate:3, inf:0 };
 var currentGap = 0;
+var lastCalc = null;
+var lastScore = null;
 
 function labelOf(key, val) {
   if (key==='age'||key==='retire') return val+'歳';
-  if (key==='rate') return val+'%';
+  if (key==='rate'||key==='inf') return parseFloat(val)+'%';
   if (key==='savings'||key==='nisa'||key==='ideco'||key==='invest') return parseInt(val).toLocaleString()+'万円';
   if (key==='lifespan') return val+'年';
   return val+'万円';
@@ -906,7 +1007,7 @@ function calc() {
       expense=sliders.expense, pension=sliders.pension,
       savings=sliders.savings, lifespan=sliders.lifespan,
       nisa=sliders.nisa, ideco=sliders.ideco, invest=sliders.invest,
-      rate=sliders.rate;
+      rate=sliders.rate, inf=sliders.inf;
   var yearsToRetire = Math.max(retire - age, 0);
   var monthsToRetire = yearsToRetire * 12;
   // 現在の資産を退職年齢まで複利運用した予測値
@@ -917,7 +1018,10 @@ function calc() {
   var projIdeco   = Math.round(ideco   * gf);
   var projInvest  = Math.round(invest  * gf);
   var totalAssets = projSavings + projNisa + projIdeco + projInvest;
-  var totalNeeded = expense * 12 * lifespan;
+  // 生活費はインフレ込みで合算（年金は据え置き＝保守的）
+  var totalNeeded = 0;
+  for (var t = 0; t < lifespan; t++) totalNeeded += expense * 12 * Math.pow(1 + inf / 100, yearsToRetire + t);
+  totalNeeded = Math.round(totalNeeded);
   var totalPension = pension * 12 * lifespan;
   var gap = totalNeeded - totalPension - totalAssets;
   var monthlyNeed = (gap > 0 && monthsToRetire > 0) ? gap / monthsToRetire : 0;
@@ -967,7 +1071,12 @@ function calc() {
   renderChart(totalNeeded, totalPension, projSavings, projNisa, projIdeco, projInvest, Math.max(gap, 0));
   updateNextAction(gap, monthlyNeed, covPct, yearsToRetire);
   calcExtra();
-  updateUrlParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate});
+  lastCalc = { totalAssets:totalAssets, investAssets:projNisa+projIdeco+projInvest, yearsToRetire:yearsToRetire, covPct:covPct, gap:gap };
+  document.getElementById('pm-assets').textContent = fmt(totalAssets);
+  scheduleDrawdown();
+  renderDelayTable();
+  saveLocal();
+  updateUrlParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate,inf:sliders.inf});
   if(typeof gtag==='function'){
     gtag('event','simulate_retirement_gap',{age_group:age<40?'30代':age<50?'40代':age<60?'50代':'60代',retire_age:retire,expense_range:(Math.floor(expense/5)*5)+'〜'+(Math.floor(expense/5)*5+5)+'万',result:gap>0?'shortage':'sufficient'});
   }
@@ -1117,6 +1226,166 @@ function calcExtra() {
     }
   });
 }
+/* ═══ 資産寿命・モンテカルロ・安心度スコア ═══ */
+function randn(){ var u=1-Math.random(),v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+
+// 退職後 t 年目（0始まり）の年間取り崩し額（万円）。生活費はインフレ込み、年金は据え置き
+function ddNet(t, yearsToRetire){
+  return sliders.expense*12*Math.pow(1+sliders.inf/100, yearsToRetire+t) - sliders.pension*12;
+}
+
+var ddChart=null, _ddTimer=null;
+function scheduleDrawdown(){ clearTimeout(_ddTimer); _ddTimer=setTimeout(runDrawdown,250); }
+
+function runDrawdown(){
+  if(!lastCalc) return;
+  var retire=sliders.retire, lifespan=sliders.lifespan, rate=sliders.rate;
+  var yearsToRetire=lastCalc.yearsToRetire, totalAssets=lastCalc.totalAssets;
+  var horizon=Math.min(105-retire, Math.max(lifespan+5, 25));
+
+  // 標準シナリオ（決定論）
+  var det=[], a=totalAssets, lifeAge=null;
+  for(var t=0;t<horizon;t++){
+    a = a*(1+rate/100) - ddNet(t,yearsToRetire);
+    if(a<=0 && lifeAge===null) lifeAge=retire+t+1;
+    det.push(Math.max(0,Math.round(a)));
+    if(a<=0) a=0;
+  }
+  var lifeTxt = lifeAge===null ? (retire+horizon>=105?'105歳超':(retire+horizon)+'歳超') : lifeAge+'歳';
+  var lifeEl=document.getElementById('pm-life');
+  lifeEl.textContent=lifeTxt;
+  var lifeOk = lifeAge===null || lifeAge>=retire+lifespan;
+  lifeEl.className='pm-stat-val '+(lifeOk?'good':(lifeAge>=retire+lifespan-5?'warn':'bad'));
+  document.getElementById('pm-life-sub').textContent = lifeOk?'想定年数（'+(retire+lifespan)+'歳）まで持ちます':'想定より早く尽きる可能性';
+
+  // モンテカルロ300回（投資資産の割合に応じてσを調整）
+  var investShare = totalAssets>0 ? lastCalc.investAssets/totalAssets : 0;
+  var sigma = 12*investShare; // 投資100%で年12ppのブレ
+  var N=300, paths=[], success=0;
+  for(var n=0;n<N;n++){
+    var b=totalAssets, path=[], alive=true;
+    for(var y=0;y<horizon;y++){
+      var r=rate+randn()*sigma;
+      b = b*(1+r/100) - ddNet(y,yearsToRetire);
+      if(b<=0){ b=0; if(y<lifespan) alive=false; }
+      path.push(b);
+    }
+    if(alive) success++;
+    paths.push(path);
+  }
+  var mcRate=Math.round(success/N*100);
+  var mcEl=document.getElementById('pm-mc');
+  mcEl.textContent=mcRate+'%';
+  mcEl.className='pm-stat-val '+(mcRate>=80?'good':mcRate>=60?'warn':'bad');
+
+  // バンド計算
+  var p10=[],p50=[],p90=[];
+  for(var yy=0;yy<horizon;yy++){
+    var col=paths.map(function(p){return p[yy];}).sort(function(x,z){return x-z;});
+    p10.push(Math.round(col[Math.floor(N*0.1)]));
+    p50.push(Math.round(col[Math.floor(N*0.5)]));
+    p90.push(Math.round(col[Math.floor(N*0.9)]));
+  }
+  renderDDChart(retire,horizon,det,p10,p50,p90);
+  updateScore(mcRate, lifeAge, retire, lifespan, horizon);
+}
+
+function renderDDChart(retire,horizon,det,p10,p50,p90){
+  if(typeof Chart==='undefined') return;
+  var labels=[]; for(var i=1;i<=horizon;i++) labels.push((retire+i)+'歳');
+  var ctx=document.getElementById('ddChart').getContext('2d');
+  if(ddChart) ddChart.destroy();
+  ddChart=new Chart(ctx,{
+    type:'line',
+    data:{labels:labels,datasets:[
+      {label:'楽観(90%タイル)',data:p90,borderColor:'rgba(26,122,74,.25)',backgroundColor:'rgba(26,122,74,.08)',fill:'+1',pointRadius:0,borderWidth:1,tension:.3},
+      {label:'中央値',data:p50,borderColor:'rgba(26,122,74,.55)',backgroundColor:'rgba(26,122,74,.08)',borderDash:[6,4],fill:'+1',pointRadius:0,borderWidth:1.5,tension:.3},
+      {label:'悲観(10%タイル)',data:p10,borderColor:'rgba(26,122,74,.25)',fill:false,pointRadius:0,borderWidth:1,tension:.3},
+      {label:'標準シナリオ',data:det,borderColor:'#1a7a4a',fill:false,pointRadius:0,borderWidth:2.5,tension:.3}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+Number(c.parsed.y).toLocaleString()+'万円';}}}},
+      scales:{y:{min:0,ticks:{callback:function(v){return v>=10000?(v/10000).toFixed(1)+'億':v.toLocaleString()+'万';}}},
+              x:{ticks:{maxTicksLimit:9}}}}
+  });
+}
+
+function updateScore(mcRate, lifeAge, retire, lifespan, horizon){
+  if(!lastCalc) return;
+  var covPct=lastCalc.covPct;
+  var covScore=Math.min(covPct,120)/120*40;
+  var mcScore=mcRate/100*35;
+  var lifeYears = lifeAge===null ? horizon : (lifeAge-retire);
+  var lifeScore=Math.min(lifeYears/lifespan,1)*25;
+  var total=Math.round(covScore+mcScore+lifeScore);
+  var grade = total>=85?['s','S 安心']:total>=70?['a','A 良好']:total>=55?['b','B 注意']:total>=40?['c','C 要対策']:['d','D 危険水域'];
+  document.getElementById('score-num').textContent=total;
+  var g=document.getElementById('score-grade'); g.className='score-grade '+grade[0]; g.textContent=grade[1];
+  document.getElementById('sb-cov').style.width=Math.min(covPct,100)+'%';
+  document.getElementById('sbv-cov').textContent=Math.min(covPct,999)+'%';
+  document.getElementById('sb-mc').style.width=mcRate+'%';
+  document.getElementById('sbv-mc').textContent=mcRate+'%';
+  var lifePct=Math.min(lifeYears/lifespan,1)*100;
+  document.getElementById('sb-life').style.width=lifePct+'%';
+  document.getElementById('sbv-life').textContent= lifeAge===null ? (retire+horizon)+'歳+' : lifeAge+'歳';
+  lastScore={score:total, mcRate:mcRate, lifeTxt: lifeAge===null?(retire+horizon)+'歳超':lifeAge+'歳'};
+}
+
+/* ═══ 年金繰り下げ比較表 ═══ */
+function renderDelayTable(){
+  var sec=document.getElementById('delay-section');
+  var pension=sliders.pension, lifespan=sliders.lifespan;
+  if(pension<=0){ sec.style.display='none'; return; }
+  sec.style.display='block';
+  var rows=[1,3,5,10].map(function(d){
+    var factor=1+0.084*d;
+    var monthly=Math.round(pension*factor*10)/10;
+    var breakeven=Math.round(((65+d)+d/(factor-1))*10)/10;
+    var viable=breakeven<=65+lifespan;
+    return {d:d,start:65+d,monthly:monthly,factor:factor,breakeven:breakeven,viable:viable};
+  });
+  var best=rows.filter(function(r){return r.viable;}).pop();
+  var html='<tr><th>受給開始</th><th>増額率</th><th>年金月額</th><th>損益分岐年齢</th><th>判定</th></tr>';
+  html+='<tr><td>65歳（基準）</td><td>―</td><td>'+pension+'万円</td><td>―</td><td>―</td></tr>';
+  rows.forEach(function(r){
+    var cls=(best&&r.d===best.d)?' class="delay-best"':'';
+    html+='<tr'+cls+'><td>'+r.start+'歳</td><td>+'+Math.round((r.factor-1)*100)+'%</td><td>'+r.monthly+'万円</td><td>約'+r.breakeven+'歳</td><td>'+(r.viable?'✓ '+Math.round(65+lifespan)+'歳まで生きるなら有利':'長生き前提')+'</td></tr>';
+  });
+  document.getElementById('delay-table').innerHTML=html;
+}
+
+/* ═══ マイページ保存・自動保存 ═══ */
+function saveToPlanShelf(){
+  var name=prompt('プランの名前を入力してください（最大30文字）','マイプラン');
+  if(name===null)return;
+  name=(name.trim()||'マイプラン').slice(0,30);
+  var plans=[];try{plans=JSON.parse(localStorage.getItem('la_plans_v1')||'[]');}catch(e){}
+  if(plans.length>=20){alert('保存上限（20件）に達しています。マイページから削除してください。');return;}
+  plans.unshift({
+    id:'plan_'+Date.now(),name:name,
+    tool:'retirement-gap',toolName:'老後安心度診断',toolUrl:'retirement-gap.html',toolIcon:'🏖️',
+    savedAt:Date.now(),
+    data:JSON.parse(JSON.stringify(sliders)),
+    summary:{score:lastScore?lastScore.score:0,gap:Math.round(currentGap),assetLife:lastScore?lastScore.lifeTxt:'―',mcSuccess:lastScore?lastScore.mcRate:0}
+  });
+  try{localStorage.setItem('la_plans_v1',JSON.stringify(plans));}catch(e){alert('保存に失敗しました');return;}
+  showToast('✅ マイページに保存しました');
+}
+function saveLocal(){ try{localStorage.setItem('la_retire_sim',JSON.stringify(sliders));}catch(e){} }
+function restoreLocal(){
+  try{
+    var d=JSON.parse(localStorage.getItem('la_retire_sim')||'null');
+    if(!d) return false;
+    Object.keys(sliders).forEach(function(k){
+      if(d[k]===undefined) return;
+      sliders[k]=parseFloat(d[k]);
+      var el=document.getElementById('sl-'+k); if(el) el.value=d[k];
+      var lbl=document.getElementById('lbl-'+k); if(lbl) lbl.textContent=labelOf(k,d[k]);
+    });
+    return true;
+  }catch(e){ return false; }
+}
+
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
@@ -1135,8 +1404,8 @@ function updateUrlParams(vals) {
 }
 function loadFromUrl() {
   var p=new URLSearchParams(location.search);
-  var map={age:'sl-age',ret:'sl-retire',exp:'sl-expense',pen:'sl-pension',sav:'sl-savings',ls:'sl-lifespan',nisa:'sl-nisa',ideco:'sl-ideco',inv:'sl-invest',r:'sl-rate'};
-  var lmap={age:'age',ret:'retire',exp:'expense',pen:'pension',sav:'savings',ls:'lifespan',nisa:'nisa',ideco:'ideco',inv:'invest',r:'rate'};
+  var map={age:'sl-age',ret:'sl-retire',exp:'sl-expense',pen:'sl-pension',sav:'sl-savings',ls:'sl-lifespan',nisa:'sl-nisa',ideco:'sl-ideco',inv:'sl-invest',r:'sl-rate',inf:'sl-inf'};
+  var lmap={age:'age',ret:'retire',exp:'expense',pen:'pension',sav:'savings',ls:'lifespan',nisa:'nisa',ideco:'ideco',inv:'invest',r:'rate',inf:'inf'};
   var any=false;
   Object.keys(map).forEach(function(k){
     if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
@@ -1160,12 +1429,12 @@ function showToast(msg) {
 }
 function printSim() { window.print(); }
 function shareX() {
-  var gap=document.getElementById('result-amount').textContent; var lbl=document.getElementById('result-label').textContent; var text='老後資金シミュレーターで試しました！\n'+lbl+': '+gap+'\n月生活費'+sliders.expense+'万円・年金'+sliders.pension+'万円/月\n#ライフアセットオフィス #老後資金';
+  var gap=document.getElementById('result-amount').textContent; var lbl=document.getElementById('result-label').textContent; var sc=document.getElementById('score-num').textContent; var text='老後安心度診断をやってみた！\n安心度スコア: '+sc+'点/100点\n'+lbl+': '+gap+'\n#ライフアセットオフィス #老後資金';
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
 }
 (function(){
   try {
-    var k='la_sim_recent',u=location.pathname,n='老後資金不足額シミュレーター';
+    var k='la_sim_recent',u=location.pathname,n='老後安心度診断';
     var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
     a.unshift({u:u,n:n,ts:Date.now()});
     localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
@@ -1191,8 +1460,8 @@ function shareX() {
   } catch(e) {}
 })();
 
-if(!loadFromUrl()) calc();
-else calc();
+if(!loadFromUrl()) restoreLocal();
+calc();
 syncExtra(document.getElementById('sl-extra').value);
 </script>
 </body>
