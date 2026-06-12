@@ -508,6 +508,7 @@ function calc() {
   }
 }
 function updateChart(initial, monthly, rate, years) {
+  if (typeof Chart === 'undefined') return;
   var steps=[], stepSize=Math.max(5,Math.round(years/4/5)*5);
   for(var y=stepSize;y<=years;y+=stepSize) steps.push(y);
   if(steps[steps.length-1]!==years) steps.push(years);
@@ -558,9 +559,16 @@ function buildShareUrl() {
   return location.origin + location.pathname + '?' + p.toString();
 }
 
+var _urlTimer = null;
 function updateUrlParams(vals) {
-  var p = new URLSearchParams(vals);
-  history.replaceState(null, '', '?' + p.toString());
+  // Safari は replaceState を30秒に100回超で SecurityError を投げるためデバウンス＋try/catch
+  clearTimeout(_urlTimer);
+  _urlTimer = setTimeout(function() {
+    try {
+      var p = new URLSearchParams(vals);
+      history.replaceState(null, '', '?' + p.toString());
+    } catch(e) {}
+  }, 300);
 }
 
 function loadFromUrl() {
@@ -571,7 +579,7 @@ function loadFromUrl() {
   Object.keys(map).forEach(function(k) {
     if (p.has(k)) {
       var el = document.getElementById(map[k]);
-      if (el) { el.value = p.get(k); syncLabel(labelMap[k], p.get(k)); any = true; }
+      if (el) { el.value = p.get(k); syncLabel(labelMap[k], el.value); any = true; }
     }
   });
   return any;
@@ -607,7 +615,7 @@ function shareX() {
 function linkToRetirement() {
   try {
     localStorage.setItem('la_from_asset', JSON.stringify({
-      invest: parseInt(document.getElementById('r-total').textContent.replace(/,/g,'')),
+      invest: parseInt(document.getElementById('r-total').textContent.replace(/,/g,'')) || 0,
       rate: document.getElementById('sl-rate').value
     }));
   } catch(e) {}
