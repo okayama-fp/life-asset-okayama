@@ -133,6 +133,24 @@ a { color: inherit; text-decoration: none; }
 }
 .tool-card.hidden { display: none; }
 
+.popular-badge {
+  position: absolute;
+  top: 10px; right: -32px;
+  background: linear-gradient(135deg, #e11d48, #f97316);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  padding: 4px 36px;
+  transform: rotate(38deg);
+  box-shadow: 0 2px 8px rgba(225,29,72,.35);
+  pointer-events: none;
+}
+.tool-card.popular {
+  border-color: #fda4af;
+  box-shadow: 0 4px 18px rgba(225,29,72,.12);
+}
+
 .tool-icon {
   width: 44px; height: 44px;
   border-radius: 12px;
@@ -449,6 +467,19 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 
   <div class="tools-grid" id="toolsGrid">
 
+    <div class="tool-card popular" data-cat="income">
+      <div class="popular-badge">人気 No.1</div>
+      <div class="tool-header">
+        <div class="tool-icon">📋</div>
+        <div class="tool-meta">
+          <div class="tool-name">総合ライフプラン表</div>
+          <span class="tool-cat-badge">家計・収入</span>
+        </div>
+      </div>
+      <div class="tool-desc">家族・収入・支出・住宅ローン・NISA・iDeCoを6ステップで入力。年別の家計推移表とグラフを自動生成。CSV出力・印刷対応。</div>
+      <a class="tool-link" href="lifeplan.html">使ってみる</a>
+    </div>
+
     <div class="tool-card" data-cat="asset">
       <div class="tool-header">
         <div class="tool-icon">📈</div>
@@ -591,18 +622,6 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
       </div>
       <div class="tool-desc">家族構成と資産を入力するだけで相続税を概算。基礎控除・生命保険非課税枠・配偶者軽減を自動考慮し、対策案も表示します。</div>
       <a class="tool-link" href="souzoku-sim.html">使ってみる</a>
-    </div>
-
-    <div class="tool-card" data-cat="income">
-      <div class="tool-header">
-        <div class="tool-icon">📋</div>
-        <div class="tool-meta">
-          <div class="tool-name">総合ライフプラン表</div>
-          <span class="tool-cat-badge">家計・収入</span>
-        </div>
-      </div>
-      <div class="tool-desc">家族・収入・支出・住宅ローン・NISA・iDeCoを6ステップで入力。年別の家計推移表とグラフを自動生成。CSV出力・印刷対応。</div>
-      <a class="tool-link" href="lifeplan.html">使ってみる</a>
     </div>
 
     <div class="tool-card" data-cat="income">
