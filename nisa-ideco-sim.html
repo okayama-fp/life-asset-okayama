@@ -289,7 +289,7 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
         <button class="emp-btn" id="emp-self" onclick="setEmp('self')">自営業<br><small style="font-weight:400">国民年金</small></button>
         <button class="emp-btn" id="emp-spouse" onclick="setEmp('spouse')">専業主婦(夫)<br><small style="font-weight:400">第3号被保険者</small></button>
       </div>
-      <div class="emp-hint" id="emp-hint">iDeCo上限: <strong id="ideco-limit-text">2.3万円/月</strong>（年間27.6万円）。掛金は全額所得控除になります。</div>
+      <div class="emp-hint" id="emp-hint">iDeCo上限: <strong>2.3万円/月</strong>（年間27.6万円）。掛金は全額所得控除になります。</div>
 
       <div class="field">
         <div class="field-label">年収<span class="field-val" id="lbl-income">500万円</span></div>
@@ -563,8 +563,7 @@ function setEmp(emp) {
     document.getElementById('emp-'+e).className='emp-btn'+(e===emp?' on':'');
   });
   var lim=IDECO_MAX[emp], ann=IDECO_ANNUAL[emp];
-  document.getElementById('ideco-limit-text').textContent=lim+'万円/月';
-  document.getElementById('emp-hint').innerHTML='iDeCo上限: <strong id="ideco-limit-text">'+lim+'万円/月</strong>（年間'+ann+'万円）。掛金は全額所得控除になります。';
+  document.getElementById('emp-hint').innerHTML='iDeCo上限: <strong>'+lim+'万円/月</strong>（年間'+ann+'万円）。掛金は全額所得控除になります。';
   calc();
 }
 
@@ -692,11 +691,14 @@ function updateAdvice(ci,cn,ct,m,emax,score,inc,annTax,y,diff) {
 
   var card=document.getElementById('advice-card');
   var cls='',lc,title,body,steps;
-  if(ci===0) {
+  if(cn===0 && ci<emax) {
+    // 積立額がiDeCo上限未満 → NISAゼロ、iDeCoも未満
     cls='warn'; lc='var(--amber)';
-    title='iDeCoを使っていません。節税機会を逃しています';
-    body='現在の積立額はiDeCo上限（'+emax+'万円/月）未満です。iDeCoを活用すると掛金が全額所得控除になり、年間'+Math.round(Math.min(m,emax)*12*effectiveTax(inc))+'万円前後の節税が可能です。';
-    steps=['まずNISAを開設し積立を開始（流動性が高く、緊急時でも引き出し可能）','生活費3〜6か月分の緊急資金を確保後、iDeCoを追加加入する','iDeCo掛金を毎月'+Math.min(emax,m)+'万円に設定すると年間'+fmt(Math.min(emax,m)*12*effectiveTax(inc))+'節税'];
+    var canAdd=(emax-ci).toFixed(1);
+    var maxTaxSave=fmt(emax*12*effectiveTax(inc));
+    title='積立額を増やすと節税がさらに最大化します';
+    body='現在iDeCoに毎月'+ci+'万円積立中（上限'+emax+'万の'+Math.round(ci/emax*100)+'%）。あと月'+canAdd+'万円増やしてiDeCo上限を満額活用し、余裕があればNISAも始めると節税効果が最大化します。';
+    steps=['iDeCo掛金を月'+emax+'万円（上限）まで増額すると年間節税が最大'+maxTaxSave+'になります','iDeCoを満額後、余剰分はNISA（年間360万・生涯1,800万まで非課税）へ振り向ける','まず生活費3〜6か月分の緊急資金を確保してからiDeCo増額を検討しましょう'];
   } else if(score>=85) {
     lc='var(--green)';
     title='節税フル活用！課税口座比 +'+fmt(diff)+'の優位性';
