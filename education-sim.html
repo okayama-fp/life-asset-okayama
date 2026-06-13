@@ -9,16 +9,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/education-sim.html">
-<title>教育費積立プランナー｜ライフアセットオフィス</title>
-<meta name="description" content="子供の年齢・進学コース・現在の積立額を入力するだけ。大学卒業までの教育費・不足額・必要月積立額をリアルタイム計算。文科省統計ベース。">
+<title>子どもの教育費 積立診断スコア｜ライフアセットオフィス</title>
+<meta name="description" content="子どもの年齢・進学コースを選ぶだけ。教育費積立の充足度を0〜100スコアで診断。不足額・必要月積立額をリアルタイム計算。文科省統計ベース。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="教育費積立プランナー｜ライフアセットオフィス">
-<meta property="og:description" content="進学コース別の教育費を文科省統計で計算。いくら積立が必要か即わかる。">
+<meta property="og:title" content="子どもの教育費 積立診断スコア｜ライフアセットオフィス">
+<meta property="og:description" content="進学コース別の教育費を文科省統計で計算。積立充足度スコアで見える化。いくら積立が必要か即わかる。">
 <meta property="og:url" content="https://lifeassetoffice.net/education-sim.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -41,7 +42,7 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 #pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
-.hero { position:relative;overflow:hidden;background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
+.hero { position:relative;overflow:hidden;background-color:#1a3d2b; background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 60%,#1a5fac 100%); color:#fff; padding:48px 24px 40px; text-align:center; }
 .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
 .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
@@ -63,7 +64,7 @@ a { color: inherit; text-decoration: none; }
 .field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
 .field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
 .field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
-.course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.course-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
 .seg-btn { padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 11.5px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; line-height: 1.4; }
 .seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
 .result-panel { position: sticky; top: 76px; }
@@ -227,12 +228,12 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     </a>
     <nav>
       <a href="/">ホーム</a>
-      <a href="tools.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
-      <a href="blog/">ブログ</a>
-      <a href="kids.html">子ども学習</a>
-      <a href="contact.html">お問い合わせ</a>
+      <a href="/simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/kids.html">子ども学習</a>
+      <a href="/contact.html">お問い合わせ</a>
     </nav>
-    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <a href="/contact.html" class="btn-cta">お問い合わせ</a>
     <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -256,6 +257,8 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     <span class="preset-label">プリセット：</span>
     <button class="preset-btn" onclick="applyPreset('allpub')">0歳から全公立</button>
     <button class="preset-btn" onclick="applyPreset('chuuju')">3歳から中学受験</button>
+    <button class="preset-btn" onclick="applyPreset('hispri')">6歳・高校私立コース</button>
+    <button class="preset-btn" onclick="applyPreset('newborn')">新生児・少し貯蓄あり</button>
   </div>
   <div class="util-bar">
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
@@ -278,6 +281,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         <div class="course-grid">
           <button class="seg-btn on" id="course-allpub" onclick="setCourse('allpub')">全公立</button>
           <button class="seg-btn" id="course-hispri" onclick="setCourse('hispri')">高校から私立</button>
+          <button class="seg-btn" id="course-midpri" onclick="setCourse('midpri')">中学から私立</button>
           <button class="seg-btn" id="course-unipri" onclick="setCourse('unipri')">大学から私立</button>
           <button class="seg-btn" id="course-allpri" onclick="setCourse('allpri')">全私立</button>
         </div>
@@ -328,6 +332,22 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         <canvas id="eduChart" height="220"></canvas>
       </div>
 
+      <div id="edu-score-card" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.08);margin-top:16px;">
+        <div style="padding:14px 18px 10px;background:var(--greenl);border-bottom:2px solid var(--greenb);text-align:center;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--green);margin-bottom:6px;">積立充足度スコア</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
+            <div id="es-num" style="font-size:3rem;font-weight:900;color:var(--navy);line-height:1;">0</div>
+            <div id="es-grade" style="font-size:2rem;font-weight:900;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:#dc2626;">D</div>
+          </div>
+          <div id="es-label" style="font-size:12px;color:var(--text-light);margin-top:6px;">計算中...</div>
+        </div>
+        <div style="padding:12px 16px;">
+          <div style="font-size:11px;color:var(--text-light);margin-bottom:6px;font-weight:700;">内訳</div>
+          <div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-light);margin-bottom:3px;"><span>費用カバー率</span><span id="es-sb1">―</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;"><div id="es-bar1" style="height:100%;background:var(--sky);border-radius:3px;width:0%;transition:width .4s;"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-light);margin-bottom:3px;"><span>準備期間ボーナス</span><span id="es-sb2">―</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;"><div id="es-bar2" style="height:100%;background:#16a34a;border-radius:3px;width:0%;transition:width .4s;"></div></div></div>
+        </div>
+      </div>
+
       <div class="cost-table-section">
         <h3>進学コース別 費用内訳（文科省統計ベース）</h3>
         <table class="cost-table">
@@ -340,7 +360,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
 <div class="cta-contact-box">
         <div class="cta-contact-text">教育費の積立プラン、FPと一緒に考えませんか？<br>お問い合わせを承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">お問い合わせ →</a>
+        <a href="/contact.html" class="cta-contact-btn">お問い合わせ →</a>
       </div>
     </div>
   </div>
@@ -410,7 +430,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 <div style="max-width:920px;margin:0 auto 20px;padding:0 20px"><div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。最終的な判断はご自身の責任で行ってください。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。</div></div>
 <footer>
   <div class="footer-logo">ライフアセットオフィス</div>
-  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+  <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
 </footer>
 
 <script src="/nav.js"></script>
@@ -433,6 +453,7 @@ var COSTS = {
 var COURSE_MAP = {
   allpub:  { kg:'pub', el:'pub', mid:'pub', hs:'pub', univ:'pub' },
   hispri:  { kg:'pub', el:'pub', mid:'pub', hs:'pri', univ:'pri_lit' },
+  midpri:  { kg:'pub', el:'pub', mid:'pri', hs:'pri', univ:'pri_lit' },
   unipri:  { kg:'pub', el:'pub', mid:'pub', hs:'pub', univ:'pri_lit' },
   allpri:  { kg:'pri', el:'pri', mid:'pri', hs:'pri', univ:'pri_lit' }
 };
@@ -452,7 +473,7 @@ function sync(key, val) {
 }
 function setCourse(c) {
   currentCourse = c;
-  ['allpub','hispri','unipri','allpri'].forEach(function(id) {
+  ['allpub','hispri','midpri','unipri','allpri'].forEach(function(id) {
     document.getElementById('course-'+id).className = 'seg-btn' + (id===c?' on':'');
   });
   calc();
@@ -526,6 +547,7 @@ function calc() {
   renderChart(childAge, savings, monthly, result.stages);
   renderCostTable(result.stages);
   updateAdvice(gap, yearsToUni, monthlyNeed, currentCourse);
+  updateEduScore(gap, result.total, yearsToUni);
   updateUrlParams({ca:sliders['child-age'],sav:sliders.savings,m:sliders.monthly,c:currentCourse});
   if(typeof gtag==='function'){
     gtag('event','simulate_education',{course:currentCourse,child_age:childAge,gap_result:gap>0?'shortage':'sufficient',monthly_savings_range:(Math.floor(monthly/1)*1)+'〜'+(Math.floor(monthly/1)*1+1)+'万'});
@@ -672,18 +694,21 @@ function renderCostTable(stages) {
 }
 
 function applyPreset(name) {
-  if (name === 'allpub') {
-    sliders['child-age'] = 0;
-    document.getElementById('sl-child-age').value = 0;
-    document.getElementById('lbl-child-age').textContent = '0歳';
-    setCourse('allpub');
-  } else if (name === 'chuuju') {
-    sliders['child-age'] = 3;
-    document.getElementById('sl-child-age').value = 3;
-    document.getElementById('lbl-child-age').textContent = '3歳';
-    setCourse('hispri');
-  }
-  calc();
+  var presets = {
+    allpub:  { 'child-age':0,  savings:0,   monthly:1,   course:'allpub' },
+    chuuju:  { 'child-age':3,  savings:0,   monthly:2,   course:'midpri' },
+    hispri:  { 'child-age':6,  savings:100, monthly:2,   course:'hispri' },
+    newborn: { 'child-age':0,  savings:50,  monthly:1.5, course:'allpub' }
+  };
+  var p = presets[name];
+  if (!p) return;
+  ['child-age','savings','monthly'].forEach(function(k) {
+    sliders[k] = p[k];
+    var sl = document.getElementById('sl-'+k);
+    if (sl) sl.value = p[k];
+    document.getElementById('lbl-'+k).textContent = labelOf(k, p[k]);
+  });
+  setCourse(p.course);
 }
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
@@ -694,9 +719,34 @@ window.addEventListener('scroll', function() {
 function buildShareUrl() {
   var p=new URLSearchParams({ca:sliders['child-age'],sav:sliders.savings,m:sliders.monthly,c:currentCourse}); return location.origin+location.pathname+'?'+p.toString();
 }
+function updateEduScore(gap, totalCost, yearsToUni) {
+  var coverage = totalCost > 0 ? (totalCost - Math.max(0, gap)) / totalCost : 1;
+  var coverageScore = Math.round(Math.min(1, coverage) * 70);
+  var timeBonus = yearsToUni >= 15 ? 30 : yearsToUni >= 10 ? 22 : yearsToUni >= 5 ? 12 : 5;
+  var sc = Math.min(100, coverageScore + timeBonus);
+  var grade = sc>=85?'S':sc>=70?'A':sc>=50?'B':sc>=30?'C':'D';
+  var col = sc>=85?'#1a7a4a':sc>=70?'#16a34a':sc>=50?'#d97706':sc>=30?'#ea580c':'#dc2626';
+  var lbl = sc>=85?'準備は万全です！':sc>=70?'ほぼ十分な積立ができています':sc>=50?'もう少し増額すると安心':sc>=30?'積立を増やすことをおすすめします':'緊急の対策が必要です';
+  document.getElementById('es-num').textContent = sc;
+  document.getElementById('es-num').style.color = col;
+  document.getElementById('es-grade').textContent = grade;
+  document.getElementById('es-grade').style.background = col;
+  document.getElementById('es-label').textContent = lbl;
+  document.getElementById('es-bar1').style.width = Math.min(100, Math.round(coverage * 100)) + '%';
+  document.getElementById('es-sb1').textContent = Math.min(100, Math.round(coverage * 100)) + '%';
+  document.getElementById('es-bar2').style.width = Math.round(timeBonus / 30 * 100) + '%';
+  document.getElementById('es-sb2').textContent = yearsToUni + '年';
+}
+
+var _urlTimer = null;
 function updateUrlParams(vals) {
-  var p = new URLSearchParams(vals);
-  history.replaceState(null,'','?'+p.toString());
+  clearTimeout(_urlTimer);
+  _urlTimer = setTimeout(function() {
+    try {
+      var p = new URLSearchParams(vals);
+      history.replaceState(null, '', '?' + p.toString());
+    } catch(e) {}
+  }, 300);
 }
 function loadFromUrl() {
   var p=new URLSearchParams(location.search);
