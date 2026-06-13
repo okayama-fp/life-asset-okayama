@@ -5,395 +5,239 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/life-game.html">
-<title>人生ゲーム風すごろく｜ライフアセットオフィス</title>
-<meta name="description" content="就職・結婚・住宅購入・NISA・保険…お金の一生を体験！最終的な資産額で結果が決まるボードゲーム。">
-<meta property="og:title" content="人生ゲーム風すごろく｜ライフアセットオフィス">
-<meta property="og:description" content="就職・結婚・住宅購入・NISA・保険…お金の一生を体験！最終的な資産額で結果が決まるボードゲーム。">
+<title>お金の一生すごろく｜ライフアセット道場｜ライフアセットオフィス</title>
+<meta name="description" content="就職・結婚・NISA・iDeCo・副業・年金…お金の一生を36マスで体験！FPが監修した本格的なお金の学習ゲーム。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="お金の一生すごろく｜ライフアセット道場">
+<meta property="og:description" content="就職・結婚・NISA・iDeCo・副業・年金…お金の一生を36マスで体験！FPが監修した本格的なお金の学習ゲーム。">
 <meta property="og:url" content="https://lifeassetoffice.net/life-game.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@lifeasset_fp">
 <link rel="stylesheet" href="/style.css">
+<script>
+window.addEventListener('cookie-consent-accepted', function() {
+  var s = document.createElement('script');
+  s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522';
+  document.head.appendChild(s);
+  s.onload = function() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', 'G-PKDH2DR522');
+    window._gtag = gtag;
+  };
+});
+</script>
 <script src="/js/cookie-consent.js"></script>
 <style>
 :root {
-  --sky: #1a7a4a;
-  --sky-light: #22c55e;
-  --sky-pale: #dcfce7;
-  --navy: #1a3d2b;
-  --navy-soft: #1f5c40;
-  --bg: #f0fdf4;
-  --text: #1e293b;
-  --text-light: #64748b;
-  --border: #bbf7d0;
-  --white: #ffffff;
+  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
+  --navy: #1a3d2b; --navy-soft: #1f5c40;
+  --bg: #f0fdf4; --text: #1e293b; --text-light: #64748b;
+  --border: #bbf7d0; --white: #ffffff;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 
-/* ─── Header (identical to simulation.html) ─── */
-header {
-  position: sticky; top: 0; z-index: 1000;
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(26,122,74,.08);
-}
-.header-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: center; gap: 24px;
-  padding: 0 20px; height: 64px;
-}
+/* ── Header ── */
+header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: 0 2px 8px rgba(26,122,74,.08); }
+.header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 0 20px; height: 64px; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
-.logo-main {
-  font-size: 1.3rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--sky) 0%, #4ade80 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.logo-main { font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg, var(--sky) 0%, #4ade80 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .tagline { font-size: 10px; color: var(--text-light); letter-spacing: .05em; }
-nav { display: flex; gap: 4px; margin-left: auto; }
-nav a {
-  padding: 8px 14px; border-radius: 8px; font-size: 13px;
-  font-weight: 600; color: var(--text-light);
-  transition: background .18s, color .18s;
-}
-nav a:hover { background: var(--sky-pale); color: var(--sky); }
-nav a.active { color: var(--sky); font-weight: 700; }
-.btn-cta {
-  background: var(--sky); color: #fff;
-  padding: 8px 18px; border-radius: 50px;
-  font-size: 13px; font-weight: 700;
-  transition: background .18s, transform .18s;
-  white-space: nowrap;
-}
+.topnav { display: flex; gap: 4px; margin-left: auto; }
+.topnav a { padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--text-light); transition: background .18s, color .18s; }
+.topnav a:hover { background: var(--sky-pale); color: var(--sky); }
+.topnav a.active { color: var(--sky); font-weight: 700; }
+.btn-cta { background: var(--sky); color: #fff; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; transition: background .18s, transform .18s; white-space: nowrap; }
 .btn-cta:hover { background: var(--navy); transform: translateY(-1px); }
-.hamburger {
-  display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 4px;
-}
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
-@media(max-width:768px){
-  nav { display: none; }
-  .btn-cta { display: none; }
-  .hamburger { display: flex; }
-}
+@media(max-width:768px){ .topnav{display:none;} .btn-cta{display:none;} .hamburger{display:flex;} }
 
-/* ─── Game Hero ─── */
-.game-hero {
-  background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 60%, #0f3a27 100%);
-  color: #fff; padding: 40px 24px 44px; text-align: center; position: relative; overflow: hidden;
-}
-.game-hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 70% 30%, rgba(74,222,128,.1) 0%, transparent 60%);
-  pointer-events: none;
-}
-.game-hero-badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35);
-  color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em;
-  padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
-}
-.game-hero h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; line-height: 1.3; margin-bottom: 8px; }
-.game-hero p { font-size: 14px; color: rgba(255,255,255,.75); }
+/* ── Hero ── */
+.game-hero { background: linear-gradient(135deg, #0f2d1c 0%, #1a4a30 60%, #0f3a27 100%); color: #fff; padding: 40px 24px 44px; text-align: center; position: relative; overflow: hidden; }
+.game-hero::before { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(74,222,128,.12) 0%, transparent 60%); pointer-events: none; }
+.game-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.35); color: #86efac; font-size: 11px; font-weight: 700; letter-spacing: .1em; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+.game-hero h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+.game-hero-sub { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 0; }
+.game-hero-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.game-hero-tag { font-size: 11px; color: rgba(255,255,255,.7); background: rgba(255,255,255,.1); border-radius: 20px; padding: 3px 10px; }
 
-/* ─── Main game container ─── */
-.game-wrap {
-  max-width: 1000px; margin: 0 auto; padding: 24px 16px 80px;
-}
+/* ── Game wrap ── */
+.game-wrap { max-width: 1000px; margin: 0 auto; padding: 24px 16px 80px; }
 
-/* ─── Player setup ─── */
-.setup-panel {
-  background: var(--white); border-radius: 20px;
-  border: 1.5px solid var(--border);
-  padding: 28px 24px; margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(26,122,74,.06);
-}
+/* ── Setup panel ── */
+.setup-panel { background: var(--white); border-radius: 20px; border: 1.5px solid var(--border); padding: 28px 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(26,122,74,.06); }
 .setup-panel h2 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
 .player-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-.player-btn {
-  padding: 10px 22px; border-radius: 50px; border: 2px solid var(--border);
-  background: var(--white); font-size: 14px; font-weight: 700;
-  color: var(--text-light); cursor: pointer; transition: all .2s;
-}
+.player-btn { padding: 10px 22px; border-radius: 50px; border: 2px solid var(--border); background: var(--white); font-size: 14px; font-weight: 700; color: var(--text-light); cursor: pointer; transition: all .2s; font-family: inherit; }
 .player-btn:hover { border-color: var(--sky); color: var(--sky); }
 .player-btn.selected { background: var(--sky); border-color: var(--sky); color: #fff; }
+.name-inputs { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 18px; }
+.name-input-wrap { display: flex; flex-direction: column; gap: 5px; }
+.name-input-wrap label { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.name-input { border: 2px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: 14px; font-family: inherit; outline: none; width: 100%; transition: border-color .2s; background: var(--white); color: var(--text); }
+.name-input:focus { border-color: var(--sky); }
 .setup-actions { margin-top: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.btn-start {
-  background: var(--sky); color: #fff; border: none;
-  padding: 12px 32px; border-radius: 50px; font-size: 15px; font-weight: 800;
-  cursor: pointer; transition: background .2s, transform .2s;
-  font-family: inherit;
-}
+.btn-start { background: var(--sky); color: #fff; border: none; padding: 12px 32px; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: background .2s, transform .2s; font-family: inherit; }
 .btn-start:hover { background: var(--navy); transform: translateY(-2px); }
 .btn-start:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
-.btn-newgame {
-  background: transparent; color: var(--sky); border: 2px solid var(--sky);
-  padding: 10px 24px; border-radius: 50px; font-size: 14px; font-weight: 700;
-  cursor: pointer; transition: all .2s; font-family: inherit; display: none;
-}
+.btn-newgame { background: transparent; color: var(--sky); border: 2px solid var(--sky); padding: 10px 24px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s; font-family: inherit; display: none; }
 .btn-newgame:hover { background: var(--sky-pale); }
 
-/* ─── Player scoreboard ─── */
-.scoreboard {
-  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
-}
-.score-card {
-  background: var(--white); border-radius: 16px; border: 2px solid var(--border);
-  padding: 14px 18px; flex: 1; min-width: 140px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.04); transition: border-color .3s;
-}
-.score-card.active-turn {
-  border-color: var(--sky-light);
-  box-shadow: 0 0 0 3px rgba(34,197,94,.2);
-}
-.score-player-name { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-.score-money { font-size: 1.3rem; font-weight: 900; color: var(--sky); }
+/* ── Scoreboard ── */
+.scoreboard { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.score-card { background: var(--white); border-radius: 16px; border: 2px solid var(--border); padding: 14px 18px; flex: 1; min-width: 140px; box-shadow: 0 2px 10px rgba(0,0,0,.04); transition: border-color .3s, box-shadow .3s; }
+.score-card.active-turn { border-color: var(--sky-light); box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+.score-player-name { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.score-money { font-size: 1.25rem; font-weight: 900; color: var(--sky); }
 .score-money.negative { color: #ef4444; }
-.score-pos { font-size: 11px; color: var(--text-light); margin-top: 4px; }
-.score-asset-icon { font-size: 18px; }
+.score-pos { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+.score-age { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; color: #fff; background: var(--navy); border-radius: 8px; padding: 1px 6px; margin-top: 4px; }
+.score-progress { height: 4px; background: #e2e8f0; border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.score-progress-bar { height: 100%; background: linear-gradient(90deg, var(--sky), var(--sky-light)); border-radius: 2px; transition: width .4s; }
 
-/* ─── Board ─── */
-.board-section {
-  background: var(--white); border-radius: 20px; border: 1.5px solid var(--border);
-  padding: 20px; margin-bottom: 20px;
-  box-shadow: 0 4px 24px rgba(26,122,74,.07);
-}
-.board-title { font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 16px; letter-spacing: .05em; }
-.board-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
-}
-.square {
-  border-radius: 12px;
-  border: 2px solid transparent;
-  padding: 6px 4px;
-  text-align: center;
-  font-size: 10px;
-  font-weight: 700;
-  min-height: 64px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px;
-  position: relative;
-  transition: transform .15s, box-shadow .15s;
-  cursor: default;
-}
-.square-emoji { font-size: 20px; line-height: 1; }
-.square-label { font-size: 9px; color: inherit; opacity: .85; }
-.square-num { font-size: 8px; opacity: .5; position: absolute; top: 3px; left: 5px; }
-
-/* Square type colors */
-.sq-start  { background: #fef9c3; border-color: #fde047; color: #713f12; }
-.sq-goal   { background: #fef3c7; border-color: #f59e0b; color: #92400e; animation: goalPulse 2s ease-in-out infinite; }
-@keyframes goalPulse { 0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.4)} 50%{box-shadow:0 0 0 6px rgba(245,158,11,0)} }
-.sq-job    { background: #dbeafe; border-color: #93c5fd; color: #1e3a8a; }
-.sq-marry  { background: #fce7f3; border-color: #f9a8d4; color: #831843; }
-.sq-house  { background: #fee2e2; border-color: #fca5a5; color: #7f1d1d; }
-.sq-stock  { background: #d1fae5; border-color: #6ee7b7; color: #064e3b; }
-.sq-nisa   { background: #e0e7ff; border-color: #a5b4fc; color: #1e1b4b; }
-.sq-insurance { background: #f3e8ff; border-color: #d8b4fe; color: #581c87; }
-.sq-tax    { background: #fef3c7; border-color: #fcd34d; color: #78350f; }
-.sq-bonus  { background: #d1fae5; border-color: #34d399; color: #064e3b; }
-.sq-sick   { background: #fee2e2; border-color: #f87171; color: #7f1d1d; }
-.sq-skill  { background: #e0f2fe; border-color: #7dd3fc; color: #0c4a6e; }
-.sq-lucky  { background: #fef9c3; border-color: #fde047; color: #713f12; }
-.sq-rest   { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
-
-/* Player tokens on square */
+/* ── Board ── */
+.board-section { background: var(--white); border-radius: 20px; border: 1.5px solid var(--border); padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(26,122,74,.07); }
+.board-title { font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 16px; letter-spacing: .05em; display: flex; align-items: center; gap: 8px; }
+.board-outer { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.board-grid { display: grid; grid-template-columns: 50px repeat(6, 1fr); gap: 5px; min-width: 480px; }
+.age-band-label { display: flex; align-items: center; justify-content: center; background: var(--navy); color: #fff; border-radius: 8px; font-size: 10px; font-weight: 800; letter-spacing: .08em; writing-mode: vertical-rl; text-orientation: mixed; padding: 6px 3px; }
+.square { border-radius: 10px; border: 2px solid transparent; padding: 5px 3px; text-align: center; font-size: 10px; font-weight: 700; min-height: 62px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; position: relative; transition: transform .15s, box-shadow .15s; cursor: default; }
+.square-emoji { font-size: 18px; line-height: 1; }
+.square-label { font-size: 8px; color: inherit; opacity: .85; line-height: 1.3; text-align: center; }
+.square-num { font-size: 7px; opacity: .45; position: absolute; top: 2px; left: 4px; }
 .token-row { display: flex; gap: 1px; flex-wrap: wrap; justify-content: center; margin-top: 2px; }
-.token {
-  width: 16px; height: 16px; border-radius: 50%;
-  font-size: 11px; display: flex; align-items: center; justify-content: center;
-  border: 1.5px solid rgba(255,255,255,.7);
-  box-shadow: 0 1px 4px rgba(0,0,0,.18);
-}
+.token { width: 14px; height: 14px; border-radius: 50%; font-size: 10px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgba(255,255,255,.7); box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+.square.current-player-here { transform: scale(1.1); box-shadow: 0 0 0 3px var(--sky-light), 0 4px 16px rgba(34,197,94,.3); z-index: 2; }
 
-/* Highlighted current active square */
-.square.current-player-here {
-  transform: scale(1.08);
-  box-shadow: 0 0 0 3px var(--sky-light), 0 4px 16px rgba(34,197,94,.3);
-  z-index: 2;
-}
+/* Square colors */
+.sq-start  { background:#fef9c3; border-color:#fde047; color:#713f12; }
+.sq-goal   { background:#fef3c7; border-color:#f59e0b; color:#92400e; animation: goalPulse 2s ease-in-out infinite; }
+@keyframes goalPulse { 0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.4)} 50%{box-shadow:0 0 0 6px rgba(245,158,11,0)} }
+.sq-job       { background:#dbeafe; border-color:#93c5fd; color:#1e3a8a; }
+.sq-marry     { background:#fce7f3; border-color:#f9a8d4; color:#831843; }
+.sq-house     { background:#fee2e2; border-color:#fca5a5; color:#7f1d1d; }
+.sq-stock     { background:#d1fae5; border-color:#6ee7b7; color:#064e3b; }
+.sq-nisa      { background:#e0e7ff; border-color:#a5b4fc; color:#1e1b4b; }
+.sq-insurance { background:#f3e8ff; border-color:#d8b4fe; color:#581c87; }
+.sq-tax       { background:#fef3c7; border-color:#fcd34d; color:#78350f; }
+.sq-bonus     { background:#d1fae5; border-color:#34d399; color:#064e3b; }
+.sq-sick      { background:#fee2e2; border-color:#f87171; color:#7f1d1d; }
+.sq-skill     { background:#e0f2fe; border-color:#7dd3fc; color:#0c4a6e; }
+.sq-lucky     { background:#fef9c3; border-color:#fde047; color:#713f12; }
+.sq-rest      { background:#f1f5f9; border-color:#cbd5e1; color:#475569; }
+.sq-ideco     { background:#ede9fe; border-color:#c4b5fd; color:#4c1d95; }
+.sq-sidejob   { background:#ffedd5; border-color:#fdba74; color:#7c2d12; }
+.sq-furusato  { background:#fce7f3; border-color:#f9a8d4; color:#881337; }
+.sq-emergency { background:#fee2e2; border-color:#ef4444; color:#7f1d1d; }
+.sq-pension   { background:#fefce8; border-color:#fde047; color:#713f12; }
+.sq-inherit   { background:#ccfbf1; border-color:#5eead4; color:#134e4a; }
 
-/* ─── Dice & Controls ─── */
-.dice-section {
-  background: var(--white); border-radius: 20px; border: 1.5px solid var(--border);
-  padding: 24px; margin-bottom: 20px;
-  box-shadow: 0 4px 24px rgba(26,122,74,.07);
-  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-}
+/* ── Dice & Controls ── */
+.dice-section { background: var(--white); border-radius: 20px; border: 1.5px solid var(--border); padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(26,122,74,.07); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .dice-wrap { display: flex; align-items: center; gap: 16px; }
-.dice {
-  width: 68px; height: 68px; border-radius: 16px;
-  background: var(--white); border: 3px solid var(--navy);
-  display: grid; place-items: center;
-  font-size: 36px; font-weight: 900;
-  box-shadow: 0 4px 16px rgba(0,0,0,.12);
-  user-select: none;
-  transition: transform .1s;
-}
-.dice.rolling {
-  animation: diceRoll .5s ease;
-}
-@keyframes diceRoll {
-  0%  { transform: rotate(0deg) scale(1); }
-  20% { transform: rotate(-15deg) scale(1.1); }
-  40% { transform: rotate(10deg) scale(0.9); }
-  60% { transform: rotate(-8deg) scale(1.05); }
-  80% { transform: rotate(5deg) scale(0.97); }
-  100%{ transform: rotate(0deg) scale(1); }
-}
-.btn-roll {
-  background: var(--sky); color: #fff; border: none;
-  padding: 14px 28px; border-radius: 50px; font-size: 15px; font-weight: 800;
-  cursor: pointer; transition: background .2s, transform .2s;
-  font-family: inherit;
-}
+.dice { width: 68px; height: 68px; border-radius: 16px; background: var(--white); border: 3px solid var(--navy); display: grid; place-items: center; font-size: 36px; font-weight: 900; box-shadow: 0 4px 16px rgba(0,0,0,.12); user-select: none; transition: transform .1s; }
+.dice.rolling { animation: diceRoll .5s ease; }
+@keyframes diceRoll { 0%{transform:rotate(0)scale(1)} 20%{transform:rotate(-15deg)scale(1.1)} 40%{transform:rotate(10deg)scale(.9)} 60%{transform:rotate(-8deg)scale(1.05)} 80%{transform:rotate(5deg)scale(.97)} 100%{transform:rotate(0)scale(1)} }
+.btn-roll { background: var(--sky); color: #fff; border: none; padding: 14px 28px; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: background .2s, transform .2s; font-family: inherit; }
 .btn-roll:hover:not(:disabled) { background: var(--navy); transform: translateY(-2px); }
 .btn-roll:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
 .turn-info { flex: 1; }
 .turn-name { font-size: 1.1rem; font-weight: 800; color: var(--navy); }
 .turn-sub { font-size: 13px; color: var(--text-light); margin-top: 4px; }
 
-/* ─── Event Popup ─── */
-.popup-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.55);
-  display: none; place-items: center; z-index: 2000;
-  padding: 16px;
-}
+/* ── Event Popup ── */
+.popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; place-items: center; z-index: 2000; padding: 16px; }
 .popup-overlay.open { display: grid; }
-.popup-box {
-  background: var(--white); border-radius: 24px;
-  max-width: 480px; width: 100%;
-  padding: 32px 28px; text-align: center;
-  box-shadow: 0 24px 64px rgba(0,0,0,.25);
-  animation: popIn .3s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes popIn {
-  from { transform: scale(.7) translateY(30px); opacity: 0; }
-  to   { transform: scale(1) translateY(0);    opacity: 1; }
-}
-.popup-emoji { font-size: 56px; margin-bottom: 10px; line-height: 1; }
-.popup-title { font-size: 1.3rem; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
-.popup-result {
-  font-size: 1.6rem; font-weight: 900; margin: 10px 0;
-}
+.popup-box { background: var(--white); border-radius: 24px; max-width: 480px; width: 100%; padding: 32px 28px; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,.25); animation: popIn .3s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(.7) translateY(30px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
+.popup-emoji { font-size: 52px; margin-bottom: 10px; line-height: 1; }
+.popup-title { font-size: 1.25rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+.popup-result { font-size: 1.55rem; font-weight: 900; margin: 8px 0; }
 .popup-result.plus { color: var(--sky); }
 .popup-result.minus { color: #ef4444; }
 .popup-result.neutral { color: var(--text-light); }
-.popup-explain {
-  font-size: 13px; color: var(--text-light); line-height: 1.75;
-  margin-bottom: 20px; text-align: left;
-  background: var(--sky-pale); border-radius: 12px; padding: 14px 16px;
-}
+.popup-explain { font-size: 13px; color: var(--text-light); line-height: 1.75; margin-bottom: 20px; text-align: left; background: var(--sky-pale); border-radius: 12px; padding: 14px 16px; }
 .popup-explain strong { color: var(--navy); }
-.btn-next {
-  background: var(--sky); color: #fff; border: none;
-  padding: 13px 36px; border-radius: 50px; font-size: 15px; font-weight: 800;
-  cursor: pointer; font-family: inherit; transition: background .2s;
-}
+.btn-next { background: var(--sky); color: #fff; border: none; padding: 13px 36px; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; transition: background .2s; }
 .btn-next:hover { background: var(--navy); }
 
-/* ─── Final Result ─── */
-.result-popup-box {
-  background: linear-gradient(135deg, #0f2d1c, #1a4a30);
-  color: #fff; border-radius: 24px;
-  max-width: 520px; width: 100%;
-  padding: 36px 28px; text-align: center;
-  box-shadow: 0 24px 64px rgba(0,0,0,.35);
-  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
-}
+/* ── Final Result ── */
+.result-popup-box { background: linear-gradient(135deg, #0f2d1c, #1a4a30); color: #fff; border-radius: 24px; max-width: 540px; width: 100%; padding: 36px 28px; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,.35); animation: popIn .4s cubic-bezier(.34,1.56,.64,1); max-height: 90vh; overflow-y: auto; }
 .result-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; }
-.result-grade {
-  font-size: 5rem; font-weight: 900; line-height: 1;
-  margin: 14px 0 8px;
-}
-.grade-S { color: #fde047; text-shadow: 0 0 20px rgba(253,224,71,.5); }
-.grade-A { color: #86efac; }
-.grade-B { color: #7dd3fc; }
-.grade-C { color: #fca5a5; }
-.result-money { font-size: 1.4rem; font-weight: 800; color: #86efac; margin-bottom: 16px; }
-.result-events {
-  text-align: left; background: rgba(255,255,255,.08); border-radius: 14px;
-  padding: 16px; margin: 16px 0; max-height: 200px; overflow-y: auto;
-  font-size: 12px; line-height: 1.9; color: rgba(255,255,255,.8);
-}
-.result-events h4 { color: #86efac; font-size: 13px; margin-bottom: 8px; }
-.result-grade-msg { font-size: 13px; color: rgba(255,255,255,.7); margin-bottom: 20px; }
-.result-players { margin-bottom: 20px; }
-.result-player-row {
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(255,255,255,.08); border-radius: 10px;
-  padding: 10px 14px; margin-bottom: 8px;
-}
+.result-grade { font-size: 4.5rem; font-weight: 900; line-height: 1; margin: 14px 0 8px; }
+.grade-S { color:#fde047; text-shadow: 0 0 24px rgba(253,224,71,.5); }
+.grade-A { color:#86efac; }
+.grade-B { color:#7dd3fc; }
+.grade-C { color:#fca5a5; }
+.grade-D { color:#f87171; }
+.result-money { font-size: 1.35rem; font-weight: 800; color: #86efac; margin-bottom: 14px; }
+.result-grade-msg { font-size: 13px; color: rgba(255,255,255,.75); margin-bottom: 16px; }
+.result-breakdown { background: rgba(255,255,255,.08); border-radius: 14px; padding: 14px 16px; margin: 12px 0; text-align: left; }
+.result-breakdown h4 { font-size: 12px; color: #86efac; margin-bottom: 10px; font-weight: 700; }
+.rb-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+.rb-row:last-child { border-bottom: none; }
+.rb-label { color: rgba(255,255,255,.7); }
+.rb-val-pos { color: #86efac; font-weight: 700; }
+.rb-val-neg { color: #fca5a5; font-weight: 700; }
+.rb-val-neu { color: #fff; font-weight: 700; }
+.result-events { text-align: left; background: rgba(255,255,255,.08); border-radius: 14px; padding: 14px 16px; margin: 12px 0; max-height: 160px; overflow-y: auto; font-size: 12px; line-height: 1.9; color: rgba(255,255,255,.8); }
+.result-events h4 { color: #86efac; font-size: 12px; margin-bottom: 8px; font-weight: 700; }
+.result-players { margin-bottom: 14px; }
+.result-player-row { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,.08); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
 .result-player-name { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; }
 .result-player-money { font-weight: 800; font-size: 15px; }
 .result-player-money.pos { color: #86efac; }
 .result-player-money.neg { color: #fca5a5; }
-.result-player-grade { font-size: 13px; font-weight: 700; }
-.btn-result-new {
-  background: #4ade80; color: var(--navy); border: none;
-  padding: 13px 36px; border-radius: 50px; font-size: 15px; font-weight: 800;
-  cursor: pointer; font-family: inherit; transition: transform .2s;
-}
+.result-player-grade { font-size: 12px; font-weight: 700; }
+.btn-result-new { background: #4ade80; color: var(--navy); border: none; padding: 13px 36px; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; transition: transform .2s; margin-top: 8px; }
 .btn-result-new:hover { transform: scale(1.04); }
 
-/* ─── Event log ─── */
-.log-section {
-  background: var(--white); border-radius: 20px; border: 1.5px solid var(--border);
-  padding: 20px; margin-bottom: 20px;
-  box-shadow: 0 4px 24px rgba(26,122,74,.07);
-}
+/* ── Event log ── */
+.log-section { background: var(--white); border-radius: 20px; border: 1.5px solid var(--border); padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 24px rgba(26,122,74,.07); }
 .log-title { font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 10px; }
-.log-list {
-  max-height: 140px; overflow-y: auto; display: flex; flex-direction: column-reverse;
-  gap: 6px;
-}
-.log-entry {
-  font-size: 12px; padding: 7px 12px; border-radius: 8px;
-  background: var(--sky-pale); color: var(--navy); display: flex; align-items: center; gap: 6px;
-}
-.log-entry .log-emoji { font-size: 14px; flex-shrink: 0; }
+.log-list { max-height: 140px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
+.log-entry { font-size: 12px; padding: 7px 12px; border-radius: 8px; background: var(--sky-pale); color: var(--navy); display: flex; align-items: center; gap: 6px; }
+.log-emoji { font-size: 13px; flex-shrink: 0; }
 
-/* ─── Footer ─── */
-footer {
-  background: var(--navy); color: rgba(255,255,255,.7);
-  text-align: center; padding: 24px 16px; font-size: 13px;
-}
+/* ── Confetti canvas ── */
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; display: none; }
+
+/* ── Footer ── */
+footer { background: var(--navy); color: rgba(255,255,255,.7); text-align: center; padding: 24px 16px; font-size: 13px; }
 footer a { color: #86efac; text-decoration: underline; }
 footer a:hover { color: #4ade80; }
 
-/* ─── Responsive ─── */
-@media(max-width: 600px) {
-  .board-grid { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-  .square { min-height: 54px; }
-  .square-emoji { font-size: 16px; }
+/* ── Responsive ── */
+@media(max-width:600px) {
+  .board-grid { grid-template-columns: 34px repeat(6, 1fr); gap: 3px; min-width: 340px; }
+  .age-band-label { font-size: 8px; padding: 4px 2px; }
+  .square { min-height: 50px; }
+  .square-emoji { font-size: 15px; }
   .dice-section { flex-direction: column; gap: 14px; }
   .scoreboard { gap: 8px; }
   .score-card { min-width: 120px; padding: 10px 12px; }
-}
-@media(max-width: 420px) {
-  .board-grid { grid-template-columns: repeat(4, 1fr); gap: 3px; }
   .popup-box, .result-popup-box { padding: 24px 16px; }
+}
+@media(max-width:380px) {
+  .board-grid { grid-template-columns: 28px repeat(6, 1fr); gap: 2px; }
+  .square { min-height: 44px; }
+  .square-label { display: none; }
 }
 </style>
 </head>
 <body>
+
+<canvas id="confetti-canvas"></canvas>
 
 <header>
   <div class="header-inner">
@@ -403,14 +247,14 @@ footer a:hover { color: #4ade80; }
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
-    <nav>
+    <nav class="topnav">
       <a href="/">ホーム</a>
-      <a href="simulation.html">シミュレーター</a>
-      <a href="blog/">ブログ</a>
-      <a href="kids.html">子ども学習</a>
-      <a href="contact.html">お問い合わせ</a>
+      <a href="/simulation.html">シミュレーター</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/kids.html" class="active">子ども学習</a>
+      <a href="/contact.html">お問い合わせ</a>
     </nav>
-    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <a href="/contact.html" class="btn-cta">お問い合わせ</a>
     <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -418,9 +262,15 @@ footer a:hover { color: #4ade80; }
 </header>
 
 <div class="game-hero">
-  <div class="game-hero-badge">🎲 お金の勉強ゲーム</div>
-  <h1>人生ゲーム風すごろく</h1>
-  <p>就職・結婚・住宅購入・NISA・保険…お金の一生を体験しよう！</p>
+  <div class="game-hero-badge">🎲 ライフアセット道場</div>
+  <h1>お金の一生すごろく</h1>
+  <p class="game-hero-sub">20代〜70代の人生を36マスで体験。お金の正解を学ぼう！</p>
+  <div class="game-hero-tags">
+    <span class="game-hero-tag">💍 結婚・住宅</span>
+    <span class="game-hero-tag">🎁 NISA・iDeCo</span>
+    <span class="game-hero-tag">💼 副業・スキルUP</span>
+    <span class="game-hero-tag">🏛️ 年金・相続</span>
+  </div>
 </div>
 
 <div class="game-wrap">
@@ -434,6 +284,7 @@ footer a:hover { color: #4ade80; }
       <button class="player-btn" data-n="3">3人</button>
       <button class="player-btn" data-n="4">4人</button>
     </div>
+    <div class="name-inputs" id="nameInputs" style="display:none;"></div>
     <div class="setup-actions">
       <button class="btn-start" id="btnStart" disabled>ゲームスタート！</button>
     </div>
@@ -444,8 +295,10 @@ footer a:hover { color: #4ade80; }
 
   <!-- Board -->
   <div class="board-section" id="boardSection" style="display:none;">
-    <div class="board-title">📋 すごろくボード（30マス）</div>
-    <div class="board-grid" id="boardGrid"></div>
+    <div class="board-title">📋 お金の一生 すごろくボード（36マス）</div>
+    <div class="board-outer">
+      <div class="board-grid" id="boardGrid"></div>
+    </div>
   </div>
 
   <!-- Dice & controls -->
@@ -467,7 +320,7 @@ footer a:hover { color: #4ade80; }
     <div class="log-list" id="logList"></div>
   </div>
 
-</div><!-- /.game-wrap -->
+</div>
 
 <!-- Event popup -->
 <div class="popup-overlay" id="popupOverlay">
@@ -490,7 +343,7 @@ footer a:hover { color: #4ade80; }
 </div>
 
 <footer>
-  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+  <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
 </footer>
 
 <script src="/nav.js" defer></script>
@@ -498,191 +351,188 @@ footer a:hover { color: #4ade80; }
 (function() {
 'use strict';
 
-// ────────────────────────────────────────────
-// Square definitions (30 squares: 0=start, 29=goal)
-// ────────────────────────────────────────────
-const SQUARE_TYPES = [
-  // 0
-  { type:'start',     emoji:'🏁', label:'スタート', cls:'sq-start' },
-  // 1
-  { type:'job',       emoji:'🏢', label:'就職',     cls:'sq-job' },
-  // 2
-  { type:'lucky',     emoji:'⭐', label:'ラッキー',  cls:'sq-lucky' },
-  // 3
-  { type:'tax',       emoji:'💸', label:'税金',     cls:'sq-tax' },
-  // 4
-  { type:'skill',     emoji:'🎓', label:'スキルUP', cls:'sq-skill' },
-  // 5
-  { type:'rest',      emoji:'💤', label:'休憩',     cls:'sq-rest' },
-  // 6
-  { type:'marry',     emoji:'💍', label:'結婚',     cls:'sq-marry' },
-  // 7
-  { type:'bonus',     emoji:'💰', label:'ボーナス', cls:'sq-bonus' },
-  // 8
-  { type:'stock',     emoji:'📈', label:'株式投資', cls:'sq-stock' },
-  // 9
-  { type:'sick',      emoji:'😷', label:'病気・入院', cls:'sq-sick' },
-  // 10
-  { type:'nisa',      emoji:'🎁', label:'NISA',     cls:'sq-nisa' },
-  // 11
-  { type:'rest',      emoji:'💤', label:'休憩',     cls:'sq-rest' },
-  // 12
-  { type:'house',     emoji:'🏠', label:'住宅購入', cls:'sq-house' },
-  // 13
-  { type:'tax',       emoji:'💸', label:'税金',     cls:'sq-tax' },
-  // 14
-  { type:'lucky',     emoji:'⭐', label:'ラッキー',  cls:'sq-lucky' },
-  // 15
-  { type:'insurance', emoji:'🛡️', label:'保険',     cls:'sq-insurance' },
-  // 16
-  { type:'skill',     emoji:'🎓', label:'スキルUP', cls:'sq-skill' },
-  // 17
-  { type:'bonus',     emoji:'💰', label:'ボーナス', cls:'sq-bonus' },
-  // 18
-  { type:'stock',     emoji:'📈', label:'株式投資', cls:'sq-stock' },
-  // 19
-  { type:'sick',      emoji:'😷', label:'病気・入院', cls:'sq-sick' },
-  // 20
-  { type:'rest',      emoji:'💤', label:'休憩',     cls:'sq-rest' },
-  // 21
-  { type:'nisa',      emoji:'🎁', label:'NISA',     cls:'sq-nisa' },
-  // 22
-  { type:'job',       emoji:'🏢', label:'昇進！',   cls:'sq-job' },
-  // 23
-  { type:'marry',     emoji:'💍', label:'家族増える', cls:'sq-marry' },
-  // 24
-  { type:'lucky',     emoji:'⭐', label:'ラッキー',  cls:'sq-lucky' },
-  // 25
-  { type:'tax',       emoji:'💸', label:'税金',     cls:'sq-tax' },
-  // 26
-  { type:'insurance', emoji:'🛡️', label:'保険',     cls:'sq-insurance' },
-  // 27
-  { type:'skill',     emoji:'🎓', label:'スキルUP', cls:'sq-skill' },
-  // 28
-  { type:'bonus',     emoji:'💰', label:'ボーナス', cls:'sq-bonus' },
-  // 29
-  { type:'goal',      emoji:'🏆', label:'ゴール！', cls:'sq-goal' },
+// ── Board definition (36 squares, 6 rows × 6 cols) ──
+const AGE_BANDS = ['20代','30代','40代','50代','60代','70代以降'];
+const TOTAL = 36;
+const COLS  = 6;
+
+const SQUARES = [
+  // Row 0: 20代
+  { type:'start',     emoji:'🏁', label:'スタート',    cls:'sq-start' },      // 0
+  { type:'job',       emoji:'🏢', label:'就職',         cls:'sq-job' },        // 1
+  { type:'bonus',     emoji:'💰', label:'初任給',       cls:'sq-bonus' },      // 2
+  { type:'tax',       emoji:'💸', label:'税金',         cls:'sq-tax' },        // 3
+  { type:'skill',     emoji:'🎓', label:'スキルUP',     cls:'sq-skill' },      // 4
+  { type:'lucky',     emoji:'⭐', label:'ラッキー',     cls:'sq-lucky' },      // 5
+  // Row 1: 30代
+  { type:'marry',     emoji:'💍', label:'結婚',         cls:'sq-marry' },      // 6
+  { type:'ideco',     emoji:'🏦', label:'iDeCo開始',   cls:'sq-ideco' },      // 7
+  { type:'house',     emoji:'🏠', label:'住宅購入',     cls:'sq-house' },      // 8
+  { type:'nisa',      emoji:'🎁', label:'NISA',         cls:'sq-nisa' },       // 9
+  { type:'sick',      emoji:'😷', label:'病気・入院',   cls:'sq-sick' },       // 10
+  { type:'rest',      emoji:'💤', label:'休憩',         cls:'sq-rest' },       // 11
+  // Row 2: 40代
+  { type:'sidejob',   emoji:'💼', label:'副業',         cls:'sq-sidejob' },    // 12
+  { type:'stock',     emoji:'📈', label:'株式投資',     cls:'sq-stock' },      // 13
+  { type:'tax',       emoji:'💸', label:'税金',         cls:'sq-tax' },        // 14
+  { type:'skill',     emoji:'🎓', label:'スキルUP',     cls:'sq-skill' },      // 15
+  { type:'insurance', emoji:'🛡️', label:'保険',         cls:'sq-insurance' },  // 16
+  { type:'lucky',     emoji:'⭐', label:'ラッキー',     cls:'sq-lucky' },      // 17
+  // Row 3: 50代
+  { type:'rest',      emoji:'💤', label:'休憩',         cls:'sq-rest' },       // 18
+  { type:'job',       emoji:'🏢', label:'昇進',         cls:'sq-job' },        // 19
+  { type:'family',    emoji:'👨‍👩‍👧', label:'子ども独立',   cls:'sq-marry' },      // 20
+  { type:'furusato',  emoji:'🎌', label:'ふるさと納税', cls:'sq-furusato' },   // 21
+  { type:'stock',     emoji:'📈', label:'株式投資',     cls:'sq-stock' },      // 22
+  { type:'emergency', emoji:'🚨', label:'緊急出費',     cls:'sq-emergency' },  // 23
+  // Row 4: 60代
+  { type:'retire',    emoji:'💰', label:'退職金',       cls:'sq-bonus' },      // 24
+  { type:'nisa',      emoji:'🎁', label:'NISA満期',     cls:'sq-nisa' },       // 25
+  { type:'ideco',     emoji:'🏦', label:'iDeCo受取',   cls:'sq-ideco' },      // 26
+  { type:'skill',     emoji:'🎓', label:'再雇用',       cls:'sq-skill' },      // 27
+  { type:'insurance', emoji:'🛡️', label:'保険見直し',   cls:'sq-insurance' },  // 28
+  { type:'rest',      emoji:'💤', label:'休憩',         cls:'sq-rest' },       // 29
+  // Row 5: 70代以降
+  { type:'pension',   emoji:'🏛️', label:'年金受給',     cls:'sq-pension' },    // 30
+  { type:'lucky',     emoji:'💰', label:'配当収入',     cls:'sq-lucky' },      // 31
+  { type:'inherit',   emoji:'📜', label:'相続',         cls:'sq-inherit' },    // 32
+  { type:'tax',       emoji:'💸', label:'相続税',       cls:'sq-tax' },        // 33
+  { type:'lucky',     emoji:'🎁', label:'贈与',         cls:'sq-lucky' },      // 34
+  { type:'goal',      emoji:'🏆', label:'ゴール！',     cls:'sq-goal' },       // 35
 ];
 
-const PLAYER_COLORS  = ['#1a7a4a','#e53e3e','#d97706','#7c3aed'];
-const PLAYER_EMOJIS  = ['🧑','👩','🧒','👦'];
-const PLAYER_LABELS  = ['プレイヤー1','プレイヤー2','プレイヤー3','プレイヤー4'];
-const DICE_FACES     = ['⚀','⚁','⚂','⚃','⚄','⚅'];
-const START_MONEY    = 100; // 万円
+const PLAYER_COLORS = ['#1a7a4a','#e53e3e','#d97706','#7c3aed'];
+const PLAYER_EMOJIS = ['🧑','👩','🧒','👦'];
+const PLAYER_LABELS = ['プレイヤー1','プレイヤー2','プレイヤー3','プレイヤー4'];
+const DICE_FACES    = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+const START_MONEY   = 100;
 
-// ────────────────────────────────────────────
-// State
-// ────────────────────────────────────────────
-let numPlayers   = 0;
-let players      = [];   // { name, emoji, color, money, pos, events, finished }
-let currentTurn  = 0;
-let rolling      = false;
-let gameActive   = false;
+// ── State ──
+let numPlayers = 0;
+let players    = [];
+let currentTurn = 0;
+let rolling    = false;
+let gameActive = false;
 
-// ────────────────────────────────────────────
-// DOM refs
-// ────────────────────────────────────────────
-const setupPanel    = document.getElementById('setupPanel');
-const btnStart      = document.getElementById('btnStart');
-const scoreboard    = document.getElementById('scoreboard');
-const boardSection  = document.getElementById('boardSection');
-const boardGrid     = document.getElementById('boardGrid');
-const diceSection   = document.getElementById('diceSection');
-const diceDisplay   = document.getElementById('diceDisplay');
-const btnRoll       = document.getElementById('btnRoll');
-const btnNewGame    = document.getElementById('btnNewGame');
-const turnName      = document.getElementById('turnName');
-const turnSub       = document.getElementById('turnSub');
-const logSection    = document.getElementById('logSection');
-const logList       = document.getElementById('logList');
-const popupOverlay  = document.getElementById('popupOverlay');
-const popupEmoji    = document.getElementById('popupEmoji');
-const popupTitle    = document.getElementById('popupTitle');
-const popupResult   = document.getElementById('popupResult');
-const popupExplain  = document.getElementById('popupExplain');
-const btnNext       = document.getElementById('btnNext');
+// ── DOM ──
+const setupPanel   = document.getElementById('setupPanel');
+const btnStart     = document.getElementById('btnStart');
+const nameInputs   = document.getElementById('nameInputs');
+const scoreboard   = document.getElementById('scoreboard');
+const boardSection = document.getElementById('boardSection');
+const boardGrid    = document.getElementById('boardGrid');
+const diceSection  = document.getElementById('diceSection');
+const diceDisplay  = document.getElementById('diceDisplay');
+const btnRoll      = document.getElementById('btnRoll');
+const btnNewGame   = document.getElementById('btnNewGame');
+const turnName     = document.getElementById('turnName');
+const turnSub      = document.getElementById('turnSub');
+const logSection   = document.getElementById('logSection');
+const logList      = document.getElementById('logList');
+const popupOverlay = document.getElementById('popupOverlay');
+const popupEmoji   = document.getElementById('popupEmoji');
+const popupTitle   = document.getElementById('popupTitle');
+const popupResult  = document.getElementById('popupResult');
+const popupExplain = document.getElementById('popupExplain');
+const btnNext      = document.getElementById('btnNext');
 const resultOverlay = document.getElementById('resultOverlay');
 const resultContent = document.getElementById('resultContent');
 const btnResultNew  = document.getElementById('btnResultNew');
 
-// ────────────────────────────────────────────
-// Player select buttons
-// ────────────────────────────────────────────
-document.querySelectorAll('.player-btn').forEach(btn => {
+// ── Player count select ──
+document.querySelectorAll('.player-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
-    document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.player-btn').forEach(function(b) { b.classList.remove('selected'); });
     this.classList.add('selected');
     numPlayers = parseInt(this.dataset.n, 10);
+    buildNameInputs(numPlayers);
     btnStart.disabled = false;
   });
 });
+
+function buildNameInputs(n) {
+  nameInputs.innerHTML = '';
+  nameInputs.style.display = n > 0 ? 'grid' : 'none';
+  for (var i = 0; i < n; i++) {
+    var wrap = document.createElement('div');
+    wrap.className = 'name-input-wrap';
+    wrap.innerHTML =
+      '<label><span style="color:' + PLAYER_COLORS[i] + '">' + PLAYER_EMOJIS[i] + '</span> プレイヤー' + (i+1) + 'の名前</label>' +
+      '<input class="name-input" type="text" maxlength="10" placeholder="' + PLAYER_LABELS[i] + '" data-idx="' + i + '">';
+    nameInputs.appendChild(wrap);
+  }
+}
 
 btnStart.addEventListener('click', startGame);
 btnNewGame.addEventListener('click', resetGame);
 btnResultNew.addEventListener('click', resetGame);
 btnNext.addEventListener('click', closePopup);
 
-// ────────────────────────────────────────────
-// Start game
-// ────────────────────────────────────────────
+// ── Start game ──
 function startGame() {
   players = [];
-  for (let i = 0; i < numPlayers; i++) {
+  var inputs = nameInputs.querySelectorAll('.name-input');
+  for (var i = 0; i < numPlayers; i++) {
+    var inputName = inputs[i] ? inputs[i].value.trim() : '';
     players.push({
-      name:     PLAYER_LABELS[i],
-      emoji:    PLAYER_EMOJIS[i],
-      color:    PLAYER_COLORS[i],
-      money:    START_MONEY,
-      pos:      0,
-      events:   [],
-      finished: false,
+      name:        inputName || PLAYER_LABELS[i],
+      emoji:       PLAYER_EMOJIS[i],
+      color:       PLAYER_COLORS[i],
+      money:       START_MONEY,
+      pos:         0,
+      events:      [],
+      finished:    false,
+      income:      0,
+      expenses:    0,
+      idecoBalance: 0,
+      married:     false,
+      hasHouse:    false,
+      skillUps:    0,
     });
   }
   currentTurn = 0;
   rolling     = false;
   gameActive  = true;
 
-  setupPanel.style.display    = 'none';
-  scoreboard.style.display    = 'flex';
-  boardSection.style.display  = 'block';
-  diceSection.style.display   = 'flex';
-  logSection.style.display    = 'block';
-  btnNewGame.style.display     = 'inline-block';
+  setupPanel.style.display   = 'none';
+  scoreboard.style.display   = 'flex';
+  boardSection.style.display = 'block';
+  diceSection.style.display  = 'flex';
+  logSection.style.display   = 'block';
+  btnNewGame.style.display   = 'inline-block';
 
   logList.innerHTML = '';
   renderBoard();
   renderScoreboard();
   updateTurnInfo();
+
+  if (window._gtag) window._gtag('event', 'life_game_start', { players: numPlayers });
 }
 
-// ────────────────────────────────────────────
-// Render board (snake layout)
-// ────────────────────────────────────────────
+// ── Render board ──
 function renderBoard() {
   boardGrid.innerHTML = '';
-  // Create 30 squares; lay out as 6-per-row zigzag
-  // Row 0 (sq 0-5): L→R, Row 1 (sq 6-11): R→L, Row 2 (sq 12-17): L→R,
-  // Row 3 (sq 18-23): R→L, Row 4 (sq 24-29): L→R
-  const cols   = 6;
-  const total  = 30;
-  const rows   = Math.ceil(total / cols);
-  const layout = [];
+  var rows = TOTAL / COLS;
 
-  for (let r = 0; r < rows; r++) {
-    const start = r * cols;
-    const end   = Math.min(start + cols, total);
-    const row   = [];
-    for (let c = start; c < end; c++) row.push(c);
-    if (r % 2 === 1) row.reverse();
-    layout.push(row);
-  }
+  for (var r = 0; r < rows; r++) {
+    // Age band label
+    var lbl = document.createElement('div');
+    lbl.className = 'age-band-label';
+    lbl.textContent = AGE_BANDS[r];
+    boardGrid.appendChild(lbl);
 
-  for (const row of layout) {
-    for (const idx of row) {
-      const sq   = SQUARE_TYPES[idx];
-      const div  = document.createElement('div');
+    // Squares for this row
+    var start = r * COLS;
+    var rowNums = [];
+    for (var c = 0; c < COLS; c++) rowNums.push(start + c);
+    if (r % 2 === 1) rowNums.reverse();
+
+    for (var k = 0; k < rowNums.length; k++) {
+      var idx = rowNums[k];
+      var sq  = SQUARES[idx];
+      var div = document.createElement('div');
       div.className = 'square ' + sq.cls;
-      div.id        = 'sq-' + idx;
+      div.id = 'sq-' + idx;
       div.innerHTML =
         '<span class="square-num">' + idx + '</span>' +
         '<span class="square-emoji">' + sq.emoji + '</span>' +
@@ -691,84 +541,80 @@ function renderBoard() {
       boardGrid.appendChild(div);
     }
   }
-
   renderTokens();
 }
 
 function renderTokens() {
-  // Clear all token rows
-  document.querySelectorAll('.token-row').forEach(el => el.innerHTML = '');
-  document.querySelectorAll('.square').forEach(sq => sq.classList.remove('current-player-here'));
-
-  players.forEach((p, i) => {
-    const tr = document.getElementById('tokens-' + p.pos);
+  document.querySelectorAll('.token-row').forEach(function(el) { el.innerHTML = ''; });
+  document.querySelectorAll('.square').forEach(function(sq) { sq.classList.remove('current-player-here'); });
+  players.forEach(function(p, i) {
+    var tr = document.getElementById('tokens-' + p.pos);
     if (!tr) return;
-    const tok = document.createElement('div');
+    var tok = document.createElement('div');
     tok.className = 'token';
     tok.style.background = p.color;
     tok.textContent = p.emoji;
     tok.title = p.name;
     tr.appendChild(tok);
-    // Highlight current player's square
     if (i === currentTurn && gameActive) {
-      const sqEl = document.getElementById('sq-' + p.pos);
+      var sqEl = document.getElementById('sq-' + p.pos);
       if (sqEl) sqEl.classList.add('current-player-here');
     }
   });
 }
 
-// ────────────────────────────────────────────
-// Scoreboard
-// ────────────────────────────────────────────
+// ── Scoreboard ──
+function getAgeBand(pos) {
+  return AGE_BANDS[Math.min(Math.floor(pos / COLS), AGE_BANDS.length - 1)];
+}
+
 function renderScoreboard() {
   scoreboard.innerHTML = '';
-  players.forEach((p, i) => {
-    const card = document.createElement('div');
+  players.forEach(function(p, i) {
+    var card = document.createElement('div');
     card.className = 'score-card' + (i === currentTurn && gameActive ? ' active-turn' : '');
     card.id = 'score-' + i;
-    const isNeg = p.money < 0;
+    var isNeg = p.money < 0;
+    var pct = Math.min(100, Math.round(p.pos / (TOTAL - 1) * 100));
     card.innerHTML =
       '<div class="score-player-name">' +
-        '<span class="score-asset-icon" style="color:' + p.color + '">' + p.emoji + '</span>' +
-        '<span style="color:' + p.color + '">' + p.name + '</span>' +
-        (p.finished ? ' <span style="font-size:11px;color:#9ca3af">（ゴール）</span>' : '') +
+        '<span style="color:' + p.color + '">' + p.emoji + '</span>' +
+        '<span style="color:' + p.color + ';font-weight:800">' + p.name + '</span>' +
+        (p.finished ? '<span style="font-size:10px;color:#9ca3af">（ゴール）</span>' : '') +
       '</div>' +
       '<div class="score-money ' + (isNeg ? 'negative' : '') + '">' +
         (isNeg ? '▼' : '') + Math.abs(p.money).toLocaleString() + '万円' +
       '</div>' +
-      '<div class="score-pos">マス ' + p.pos + ' / 29</div>';
+      '<div class="score-age">' + getAgeBand(p.pos) + '</div>' +
+      '<div class="score-pos">マス ' + p.pos + ' / ' + (TOTAL-1) + '</div>' +
+      '<div class="score-progress"><div class="score-progress-bar" style="width:' + pct + '%"></div></div>';
     scoreboard.appendChild(card);
   });
 }
 
-// ────────────────────────────────────────────
-// Turn info
-// ────────────────────────────────────────────
+// ── Turn info ──
 function updateTurnInfo() {
-  const p = players[currentTurn];
+  var p = players[currentTurn];
   turnName.textContent = p.emoji + ' ' + p.name + ' のターン';
   turnName.style.color = p.color;
-  turnSub.textContent  = '現在の資産：' + p.money.toLocaleString() + '万円　（マス ' + p.pos + '）';
+  turnSub.textContent  = '現在の資産：' + p.money.toLocaleString() + '万円　（マス ' + p.pos + '　' + getAgeBand(p.pos) + '）';
   btnRoll.disabled     = !gameActive || rolling;
 }
 
-// ────────────────────────────────────────────
-// Dice roll
-// ────────────────────────────────────────────
+// ── Dice roll ──
 btnRoll.addEventListener('click', function() {
   if (rolling || !gameActive) return;
   rolling = true;
   btnRoll.disabled = true;
 
-  let ticks = 0;
-  const maxTicks = 12;
-  const iv = setInterval(function() {
-    const r = Math.floor(Math.random() * 6);
-    diceDisplay.textContent = DICE_FACES[r];
+  var ticks = 0;
+  var maxTicks = 12;
+  var iv = setInterval(function() {
+    diceDisplay.textContent = DICE_FACES[Math.floor(Math.random() * 6)];
     ticks++;
     if (ticks >= maxTicks) {
       clearInterval(iv);
-      const finalRoll = Math.floor(Math.random() * 6) + 1;
+      var finalRoll = Math.floor(Math.random() * 6) + 1;
       diceDisplay.textContent = DICE_FACES[finalRoll - 1];
       diceDisplay.classList.add('rolling');
       setTimeout(function() {
@@ -779,27 +625,22 @@ btnRoll.addEventListener('click', function() {
   }, 60);
 });
 
-// ────────────────────────────────────────────
-// Move player
-// ────────────────────────────────────────────
+// ── Move player ──
 function movePlayer(steps) {
-  const p     = players[currentTurn];
-  const oldPos = p.pos;
-  const newPos = Math.min(p.pos + steps, 29);
+  var p      = players[currentTurn];
+  var oldPos = p.pos;
+  var newPos = Math.min(p.pos + steps, TOTAL - 1);
 
-  // Animate movement step by step
   animateMove(oldPos, newPos, p, function() {
     p.pos = newPos;
     renderTokens();
     renderScoreboard();
 
-    if (newPos === 29) {
+    if (newPos === TOTAL - 1) {
       p.finished = true;
-      addLog(p, '🏆', p.name + ' がゴールに到達しました！');
+      addLog(p, '🏆', p.name + ' がゴールに到達！');
       setTimeout(function() {
-        showGoalEvent(p, function() {
-          checkAllFinished();
-        });
+        showGoalEvent(p, function() { checkAllFinished(); });
       }, 200);
     } else {
       setTimeout(function() {
@@ -814,148 +655,142 @@ function movePlayer(steps) {
 
 function animateMove(from, to, p, cb) {
   if (from === to) { cb(); return; }
-  let cur = from;
+  var cur = from;
   function step() {
     cur = Math.min(cur + 1, to);
     p.pos = cur;
     renderTokens();
-    if (cur < to) {
-      setTimeout(step, 120);
-    } else {
-      setTimeout(cb, 100);
-    }
+    if (cur < to) setTimeout(step, 110);
+    else setTimeout(cb, 100);
   }
   setTimeout(step, 80);
 }
 
-// ────────────────────────────────────────────
-// Square events
-// ────────────────────────────────────────────
+// ── Square events ──
 function triggerSquareEvent(pos, p, cb) {
-  const sq = SQUARE_TYPES[pos];
-  switch(sq.type) {
+  var sq = SQUARES[pos];
+
+  switch (sq.type) {
 
     case 'job':
-      if (pos <= 5) {
-        // First job
+      if (pos === 1) {
         applyMoney(p, +50, cb, {
-          emoji:'🏢', title:'就職おめでとう！',
-          resultText:'+50万円',
-          resultClass:'plus',
+          emoji:'🏢', title:'就職おめでとう！', resultText:'+50万円（初任給ボーナス）', resultClass:'plus',
           explain: '<strong>就職</strong>とは、会社に入って働きはじめること。\n' +
             '毎月お給料（<strong>給与</strong>）がもらえます。\n' +
             '今回は初任給ボーナスとして <strong>+50万円</strong> がもらえました！\n\n' +
             '💡 日本の新社会人の平均初任給は約22万円/月。1年で約264万円ほどになります。',
         });
       } else {
-        // Promotion
-        applyMoney(p, +80, cb, {
-          emoji:'🏢', title:'昇進！ステージアップ！',
-          resultText:'+80万円',
-          resultClass:'plus',
+        applyMoney(p, +100, cb, {
+          emoji:'🏢', title:'昇進！管理職に！', resultText:'+100万円（昇給・ボーナス）', resultClass:'plus',
           explain: '<strong>昇進</strong>とは、会社での役職・評価が上がること。\n' +
-            '責任が増える分、お給料も増えます。\n' +
-            '今回は昇給・特別ボーナスで <strong>+80万円</strong> がもらえました！',
+            '50代の管理職昇進で給与が大幅UP。\n' +
+            '今回は昇給と役職手当で <strong>+100万円</strong> がもらえました！\n\n' +
+            '💡 スキルUPを重ねてきた人ほど、昇進・昇給しやすくなります。',
         });
       }
       break;
 
     case 'marry':
-      if (!p._married) {
-        p._married = true;
-        applyMoney(p, +30, cb, {
-          emoji:'💍', title:'結婚しました！',
-          resultText:'+30万円/年（パートナー収入）',
-          resultClass:'plus',
-          explain: '<strong>結婚</strong>すると、パートナーも一緒に生活費を分担できます。\n' +
+      if (!p.married) {
+        p.married = true;
+        applyMoney(p, +40, cb, {
+          emoji:'💍', title:'結婚しました！', resultText:'+40万円（パートナー収入）', resultClass:'plus',
+          explain: '<strong>結婚</strong>すると、パートナーと生活費を分担できます。\n' +
             '2人で協力することで <strong>年収</strong>が増え、貯蓄もしやすくなります。\n' +
-            'パートナーの年収分として <strong>+30万円</strong> がプラスされました！\n\n' +
-            '💡 共働きの夫婦は老後の資産形成がより有利になります。',
+            'パートナーの年収分として <strong>+40万円</strong> がプラスされました！\n\n' +
+            '💡 共働きの夫婦は老後の資産形成が約1.7倍有利といわれています。',
         });
       } else {
-        // Family grows
-        applyMoney(p, +20, cb, {
-          emoji:'👶', title:'家族が増えました！',
-          resultText:'教育費 -15万円 / 幸福度 UP',
-          resultClass:'neutral',
-          explain: '<strong>子どもが生まれる</strong>と教育費・生活費が増えますが、家族の絆も深まります。\n' +
-            '教育費の準備は早いほど安心。<strong>学資保険</strong>や<strong>NISA</strong>を活用しましょう！\n\n' +
-            '今回は家族の幸福ボーナスで収支はプラスマイナスゼロ。',
+        applyMoney(p, +30, cb, {
+          emoji:'💍', title:'結婚記念日！', resultText:'+30万円（記念ボーナス）', resultClass:'plus',
+          explain: '結婚記念日に特別ボーナス！\n' +
+            '<strong>+30万円</strong> がもらえました。\n\n' +
+            '💡 夫婦で家計を見直す良い機会です。',
         });
-        rolling = false;
-        advanceTurn();
-        // Already called next
-        return;
       }
       break;
 
+    case 'family':
+      applyMoney(p, +60, cb, {
+        emoji:'👨‍👩‍👧', title:'子どもが独立しました！', resultText:'+60万円（教育費終了）', resultClass:'plus',
+        explain: '<strong>子どもの独立</strong>は家計的にも大きなイベント。\n' +
+          'これまで毎年かかっていた教育費・生活費の負担がゼロになります。\n' +
+          '教育費終了で <strong>+60万円</strong>（節約分）が手元に戻りました！\n\n' +
+          '💡 子どもが独立したら、老後に向けた資産形成を加速させましょう。\n' +
+          'iDeCoやNISAでの積立がさらに大切になります。',
+      });
+      break;
+
     case 'house':
-      if (!p._hasHouse) {
-        p._hasHouse = true;
-        // Net: -200 cost but +500 asset value — simplified: net +300 in display
-        p.money += 300; // asset net
-        p.events.push({ emoji:'🏠', text:'住宅購入（ローン-200万円・資産+500万円→純資産+300万円）' });
-        addLog(p, '🏠', p.name + ' が住宅を購入！ 資産 +300万円（純額）');
+      if (!p.hasHouse) {
+        p.hasHouse = true;
+        p.money += 200;
+        p.income += 500;
+        p.expenses += 300;
+        p.events.push({ emoji:'🏠', text:'住宅購入（資産+500万円、ローン-300万円→純資産+200万円）' });
+        addLog(p, '🏠', p.name + ' が住宅を購入！ 純資産 +200万円');
         showPopup({
           emoji:'🏠', title:'住宅購入！',
-          resultText:'住宅ローン -200万円 / 住宅資産 +500万円',
+          resultText:'ローン -300万円 / 住宅資産 +500万円',
           resultClass:'plus',
           explain: '<strong>住宅ローン</strong>とは、家を買うためにお金を借りること。\n' +
             '毎月返済が必要ですが、家自体は <strong>資産</strong>として残ります。\n' +
-            'ローン支出 -200万円ですが、住宅の資産価値は +500万円。\n' +
-            '差し引き純資産として <strong>+300万円</strong> をプラスしました！\n\n' +
-            '💡 実際には35年ローンなど長期計画が重要。金利・固定か変動かもポイントです。',
-          cb: function() {
-            rolling = false;
-            renderScoreboard(); updateTurnInfo(); advanceTurn();
-          }
+            'ローン支出 -300万円ですが、住宅資産は +500万円。\n' +
+            '純資産として <strong>+200万円</strong> をプラスしました！\n\n' +
+            '💡 実際には35年ローンなど長期計画が重要。\n' +
+            '金利・固定か変動かも重要なポイントです。',
+          cb: function() { rolling = false; renderScoreboard(); updateTurnInfo(); cb(); }
         });
         return;
       } else {
-        applyMoney(p, +30, cb, {
-          emoji:'🏠', title:'住宅の価値が上がった！',
-          resultText:'+30万円（不動産評価額UP）',
-          resultClass:'plus',
+        applyMoney(p, +50, cb, {
+          emoji:'🏠', title:'住宅の価値が上がった！', resultText:'+50万円（不動産評価額UP）', resultClass:'plus',
           explain: '<strong>不動産</strong>は市場の状況によって価値が変わります。\n' +
-            '今回は地価・物件評価が上がり、資産価値が <strong>+30万円</strong> 増えました！',
+            '今回は地価・物件評価が上がり、資産価値が <strong>+50万円</strong> 増えました！\n\n' +
+            '💡 住宅は「負債」ではなく、うまく活用すれば大きな資産になります。',
         });
       }
       break;
 
     case 'stock': {
-      const win = Math.random() < 0.5;
-      const base = Math.round(p.money * 0.1); // 10%
-      if (win) {
-        const gain = Math.max(10, Math.round(base * 1.2));
+      var variants = [
+        { win:true,  ratio:1.3, msg:'株価が急上昇！インデックス投資が大当たり！' },
+        { win:true,  ratio:1.15, msg:'コツコツ積立が実を結んだ！' },
+        { win:false, ratio:0.85, msg:'景気後退で株価が下落…' },
+        { win:false, ratio:0.7, msg:'個別株が暴落！分散の大切さを学んだ。' },
+      ];
+      var v = variants[Math.floor(Math.random() * variants.length)];
+      var base = Math.max(20, Math.round(p.money * 0.12));
+      if (v.win) {
+        var gain = Math.max(15, Math.round(base * (v.ratio - 1) * 5));
         applyMoney(p, +gain, cb, {
-          emoji:'📈', title:'株式投資：大当たり！',
-          resultText:'+' + gain + '万円（資産×1.2）',
-          resultClass:'plus',
+          emoji:'📈', title:v.msg, resultText:'+' + gain + '万円', resultClass:'plus',
           explain: '<strong>株式投資</strong>とは、会社の一部をお金で買うこと。\n' +
             '会社が成長すれば資産が増えます（<strong>値上がり益</strong>）。\n' +
-            '今回は運よく株価が上がり <strong>+' + gain + '万円</strong> の利益！\n\n' +
-            '💡 でも株は必ず上がるとは限りません。長期・分散・積立が安全の基本です。',
+            '今回は株価が上がり <strong>+' + gain + '万円</strong> の利益！\n\n' +
+            '💡 長期・分散・積立がリスクを抑えて資産を増やす基本です。\n' +
+            'NISAを活用すると利益に税金がかかりません。',
         });
       } else {
-        const loss = Math.max(5, Math.round(base * 0.8));
+        var loss = Math.max(10, Math.round(base * (1 - v.ratio) * 4));
         applyMoney(p, -loss, cb, {
-          emoji:'📉', title:'株式投資：損失…',
-          resultText:'-' + loss + '万円（資産×0.8）',
-          resultClass:'minus',
+          emoji:'📉', title:v.msg, resultText:'-' + loss + '万円', resultClass:'minus',
           explain: '<strong>株式投資</strong>はリターンもある反面、<strong>リスク</strong>もあります。\n' +
             '今回は株価が下がり <strong>-' + loss + '万円</strong> の損失になりました。\n\n' +
-            '💡 一気に大金を投資するのは危険！<strong>NISA</strong>で少額から積み立てる方法が初心者向けです。',
+            '💡 一気に大金を投資するのは危険！\n' +
+            'NISA・iDeCoで少額から積み立てる方法が初心者向けです。',
         });
       }
       break;
     }
 
     case 'nisa': {
-      const nisaGain = 20;
-      applyMoney(p, +nisaGain, cb, {
-        emoji:'🎁', title:'NISAで非課税投資！',
-        resultText:'+' + nisaGain + '万円（税金ゼロ！）',
-        resultClass:'plus',
+      var nisaAmt = pos === 9 ? 25 : 80;
+      var nisaTitle = pos === 9 ? 'NISA積立をスタート！' : 'NISA満期！利益が非課税で受け取れた！';
+      applyMoney(p, +nisaAmt, cb, {
+        emoji:'🎁', title:nisaTitle, resultText:'+' + nisaAmt + '万円（非課税！）', resultClass:'plus',
         explain: '<strong>NISA（ニーサ）</strong>とは「少額投資非課税制度」のこと。\n' +
           '通常、投資の利益には <strong>約20%の税金</strong> がかかります。\n' +
           'でもNISA口座を使えば <strong>利益に税金がかからない</strong>のです！\n\n' +
@@ -967,103 +802,247 @@ function triggerSquareEvent(pos, p, cb) {
       break;
     }
 
-    case 'insurance': {
-      applyMoney(p, -5, cb, {
-        emoji:'🛡️', title:'保険に加入しました',
-        resultText:'-5万円/年（保険料）',
-        resultClass:'minus',
-        explain: '<strong>保険</strong>とは、もしものときのために備えるしくみ。\n' +
-          '毎年少しずつ「保険料」を払い、大きなリスクに備えます。\n\n' +
-          '主な保険の種類：\n' +
-          '　🏥 <strong>医療保険</strong>：病気・ケガの医療費をカバー\n' +
-          '　🧑 <strong>生命保険</strong>：亡くなったとき家族にお金が渡る\n' +
-          '　🏠 <strong>火災保険</strong>：家が火事になったときに備える\n\n' +
-          '💡 保険は「払い続けること」が大切。本当に必要な保険を選びましょう！',
+    case 'ideco':
+      if (pos === 7) {
+        var idecoContrib = 30;
+        p.idecoBalance += idecoContrib;
+        applyMoney(p, -idecoContrib, cb, {
+          emoji:'🏦', title:'iDeCoで老後準備スタート！', resultText:'-' + idecoContrib + '万円（老後のための積立）', resultClass:'minus',
+          explain: '<strong>iDeCo（イデコ）</strong>とは「個人型確定拠出年金」のこと。\n' +
+            '自分で積み立てた分が <strong>全額所得控除</strong> になり、税金が安くなります。\n\n' +
+            '今回は ' + idecoContrib + '万円を積み立てました。\n' +
+            '老後（ゴール近く）に運用益込みで受け取れます！\n\n' +
+            '💡 iDeCoは60歳まで引き出せませんが、その分じっくり増やせます。\n' +
+            'iDeCo残高: <strong>' + p.idecoBalance + '万円</strong>',
+        });
+      } else {
+        var idecoReceive = Math.round(p.idecoBalance * 1.6 + 40);
+        p.idecoBalance = 0;
+        applyMoney(p, +idecoReceive, cb, {
+          emoji:'🏦', title:'iDeCo受取！30年間の運用成果！', resultText:'+' + idecoReceive + '万円（運用益込み）', resultClass:'plus',
+          explain: '<strong>iDeCoの受取</strong>。積み立ててきたお金が運用益込みで戻ってきます！\n\n' +
+            '30年間の積立と運用で <strong>+' + idecoReceive + '万円</strong> を受け取りました。\n\n' +
+            '💡 iDeCoは受取時も「退職所得控除」や「公的年金等控除」が使えて\n' +
+            '税金が大幅に優遇されます。',
+        });
+      }
+      break;
+
+    case 'sidejob': {
+      var sideOptions = [
+        { emoji:'🖥️', title:'プログラミング副業が軌道に！', amt:+40 },
+        { emoji:'✍️', title:'ライター副業で収入GET！', amt:+25 },
+        { emoji:'📷', title:'写真販売で不労所得！', amt:+20 },
+        { emoji:'🎓', title:'オンライン講師として活躍！', amt:+35 },
+      ];
+      var sv = sideOptions[Math.floor(Math.random() * sideOptions.length)];
+      applyMoney(p, sv.amt, cb, {
+        emoji: sv.emoji, title: sv.title, resultText:'+' + sv.amt + '万円（副業収入）', resultClass:'plus',
+        explain: '<strong>副業（サイドビジネス）</strong>とは、本業以外で得る収入のこと。\n' +
+          'スキルや趣味を活かして収入源を増やせます。\n\n' +
+          '今回は副業で <strong>+' + sv.amt + '万円</strong> の収入がありました！\n\n' +
+          '💡 副業収入が年間20万円を超えると確定申告が必要です。\n' +
+          '収入が増えたら節税（iDeCo・ふるさと納税）も合わせて考えましょう。',
       });
       break;
     }
 
+    case 'furusato': {
+      var donation = 5;
+      var refund   = 4;
+      var net = refund - donation;
+      applyMoney(p, net, cb, {
+        emoji:'🎌', title:'ふるさと納税！返礼品もGET！', resultText:(net >= 0 ? '+' : '') + net + '万円（実質負担2,000円）', resultClass: net >= 0 ? 'plus' : 'neutral',
+        explain: '<strong>ふるさと納税</strong>とは、応援したい自治体に寄附をして\n' +
+          '税金の控除（還付）が受けられる制度です。\n\n' +
+          '今回：寄附 ' + donation + '万円 → 税還付 ' + refund + '万円＋返礼品\n' +
+          '（実質負担は <strong>2,000円</strong> だけ！）\n\n' +
+          '💡 返礼品（肉・魚介・米など）も受け取れるため、\n' +
+          '実質的にはお得な制度です。\n' +
+          '年収に応じた「控除上限額」を確認して活用しましょう。',
+      });
+      break;
+    }
+
+    case 'insurance':
+      if (pos === 16) {
+        applyMoney(p, -8, cb, {
+          emoji:'🛡️', title:'保険に加入しました', resultText:'-8万円/年（保険料）', resultClass:'minus',
+          explain: '<strong>保険</strong>とは、もしものときのために備えるしくみ。\n' +
+            '毎年少しずつ「保険料」を払い、大きなリスクに備えます。\n\n' +
+            '主な保険の種類：\n' +
+            '　🏥 <strong>医療保険</strong>：病気・ケガの医療費をカバー\n' +
+            '　🧑 <strong>生命保険</strong>：亡くなったとき家族にお金が渡る\n' +
+            '　🏠 <strong>火災保険</strong>：家が火事になったときに備える\n\n' +
+            '💡 保険は「払い続けること」が大切。本当に必要な保険を選びましょう！',
+        });
+      } else {
+        applyMoney(p, +15, cb, {
+          emoji:'🛡️', title:'保険を見直してスリム化！', resultText:'+15万円（不要な保険を解約）', resultClass:'plus',
+          explain: '<strong>60代は保険の見直し時</strong>。\n' +
+            '子どもが独立し、ローンも終わりに近づくと\n' +
+            '必要な保障額が減るため、保険料を削減できます。\n\n' +
+            '不要な保険を解約して <strong>+15万円</strong>（節約分）が浮きました！\n\n' +
+            '💡 保険の見直しはFPへの相談がおすすめです。',
+        });
+      }
+      break;
+
     case 'tax': {
-      const taxAmt = 10;
-      applyMoney(p, -taxAmt, cb, {
-        emoji:'💸', title:'税金を納めました',
-        resultText:'-' + taxAmt + '万円（所得税）',
-        resultClass:'minus',
-        explain: '<strong>税金</strong>とは、国や地域のためにみんなで出し合うお金。\n' +
-          '収入があると <strong>所得税</strong>や<strong>住民税</strong>がかかります。\n\n' +
-          '主な税金の種類：\n' +
-          '　💼 <strong>所得税</strong>：働いて得た収入にかかる税金\n' +
-          '　🏠 <strong>固定資産税</strong>：家や土地を持つとかかる税金\n' +
-          '　🛒 <strong>消費税</strong>：モノを買うときにかかる税金（現在10%）\n\n' +
-          '💡 税金は学校・病院・道路など社会のインフラに使われています。',
+      var taxVariants = [
+        { emoji:'💸', title:'所得税を納めました', amt:-12, explain: '<strong>所得税</strong>は収入にかかる税金。\n累進課税なので、収入が増えると税率も上がります。\n\n主な税率：\n　195万円以下：5%\n　695万円以下：20%\n　900万円以下：23%\n\n💡 iDeCoやふるさと納税で課税所得を減らすと節税できます。' },
+        { emoji:'🏠', title:'固定資産税を納めました', amt:-15, explain: '<strong>固定資産税</strong>は土地・建物を持つとかかる税金。\n毎年1月1日時点の所有者に課税されます。\n\n標準税率：課税標準額の<strong>1.4%</strong>\n住宅用地は特例で最大6分の1に軽減されます。\n\n💡 マイホームを持ったら毎年の税金も計画に入れておきましょう。' },
+        { emoji:'💸', title:'住民税を納めました', amt:-10, explain: '<strong>住民税</strong>は都道府県・市区町村に納める税金。\n一般的に所得の約10%（均等割+所得割）です。\n\n💡 ふるさと納税を使うと住民税の控除が受けられます。' },
+      ];
+      var tax = taxVariants[Math.floor(Math.random() * taxVariants.length)];
+      if (pos === 33) {
+        tax = { emoji:'💸', title:'相続税を支払いました', amt:-40, explain: '<strong>相続税</strong>とは、財産を相続したときにかかる税金。\n基礎控除：3,000万円 + 600万円 × 法定相続人の数\n\n例：相続人が2人なら\n　3,000 + 600×2 ＝ 4,200万円まで非課税！\n\n💡 相続対策には生前贈与・生命保険・相続税対策の不動産活用などがあります。\n早めにFPや税理士に相談しましょう。' };
+      }
+      applyMoney(p, tax.amt, cb, {
+        emoji: tax.emoji, title: tax.title, resultText: tax.amt + '万円', resultClass:'minus',
+        explain: tax.explain,
       });
       break;
     }
 
     case 'bonus': {
-      const bonusAmt = 50;
+      var bonusAmt = 60;
       applyMoney(p, +bonusAmt, cb, {
-        emoji:'💰', title:'ボーナスが出た！',
-        resultText:'+' + bonusAmt + '万円',
-        resultClass:'plus',
+        emoji:'💰', title:'ボーナスが出た！', resultText:'+' + bonusAmt + '万円', resultClass:'plus',
         explain: '<strong>ボーナス（賞与）</strong>とは、会社が年2回（夏・冬）に\n' +
           '基本給とは別に支払う特別なお給料のこと。\n\n' +
-          '💡 ボーナスは会社の業績や個人の評価によって変わります。\n' +
-          'ボーナスをそのまま使わず、<strong>NISA</strong>や<strong>貯蓄</strong>に回すのが賢い使い方！',
+          '💡 ボーナスをそのまま使わず、<strong>NISA</strong>や<strong>貯蓄</strong>に回すのが賢い使い方！\n' +
+          '今回は <strong>+' + bonusAmt + '万円</strong> がもらえました。',
+      });
+      break;
+    }
+
+    case 'retire': {
+      var retireAmt = 200;
+      applyMoney(p, +retireAmt, cb, {
+        emoji:'💰', title:'退職金を受け取りました！', resultText:'+' + retireAmt + '万円（退職金）', resultClass:'plus',
+        explain: '<strong>退職金</strong>とは、会社を定年退職するときに支払われる特別な報酬。\n' +
+          '平均的な大卒・大企業では <strong>約2,000万円前後</strong>といわれています（ゲームでは簡略化）。\n\n' +
+          '💡 退職金には<strong>退職所得控除</strong>という大きな税優遇があります。\n' +
+          '勤続年数 × 70万円（20年超）が控除されるため、税負担は非常に少ないです。',
       });
       break;
     }
 
     case 'sick': {
-      const sickAmt = 30;
-      applyMoney(p, -sickAmt, cb, {
-        emoji:'😷', title:'病気で入院してしまった…',
-        resultText:'-' + sickAmt + '万円（医療費）',
-        resultClass:'minus',
+      var sickVariants = [
+        { emoji:'😷', title:'インフルエンザで入院…', amt:-20 },
+        { emoji:'🏥', title:'手術が必要になってしまった…', amt:-50 },
+        { emoji:'😴', title:'過労で1か月休業…', amt:-30 },
+      ];
+      var sv2 = sickVariants[Math.floor(Math.random() * sickVariants.length)];
+      applyMoney(p, sv2.amt, cb, {
+        emoji: sv2.emoji, title: sv2.title, resultText: sv2.amt + '万円（医療費）', resultClass:'minus',
         explain: '<strong>入院費</strong>は数日で数十万円かかることもあります。\n' +
           '日本には <strong>健康保険</strong>があり、医療費の7〜9割を国が負担してくれます。\n' +
           '（自己負担は原則3割）\n\n' +
           '💡 さらに一定額以上は <strong>高額療養費制度</strong>で戻ってきます。\n' +
-          '医療保険に入っておくと、入院時の出費を減らせます。\n' +
-          '今回は保険がなかったため <strong>-' + sickAmt + '万円</strong> の出費に。',
+          '医療保険に入っておくと、入院時の出費を大幅に減らせます。\n' +
+          '今回は <strong>' + sv2.amt + '万円</strong> の出費になりました。',
       });
       break;
     }
 
     case 'skill': {
-      const skillGain = 20;
+      var skillLabels = ['資格取得', '語学力UP', 'ITスキルUP', 'リーダーシップ研修', 'MBA取得'];
+      var sLabel = skillLabels[p.skillUps % skillLabels.length];
+      p.skillUps++;
+      var skillGain = 20 + p.skillUps * 5;
       p.money += skillGain;
-      p._skillBonus = (p._skillBonus || 0) + skillGain;
-      p.events.push({ emoji:'🎓', text:'スキルアップ！年収+' + skillGain + '万円UP' });
-      addLog(p, '🎓', p.name + ' がスキルアップ！ 年収 +' + skillGain + '万円');
+      p.income += skillGain;
+      p.events.push({ emoji:'🎓', text: sLabel + '！年収+' + skillGain + '万円UP' });
+      addLog(p, '🎓', p.name + ' が' + sLabel + '！年収 +' + skillGain + '万円');
       showPopup({
-        emoji:'🎓', title:'スキルアップ！',
+        emoji:'🎓', title: sLabel + '！',
         resultText:'年収 +' + skillGain + '万円 UP',
         resultClass:'plus',
         explain: '<strong>スキルアップ</strong>とは、資格の取得や学習で自分の能力を高めること。\n' +
           '能力が上がると <strong>昇給</strong>や<strong>転職</strong>で年収を増やせます。\n\n' +
-          '例：ITパスポート・FP・簿記・英語力など\n\n' +
+          '例：ITパスポート・FP・簿記・英語力・MBA など\n\n' +
           '💡 若いうちに学ぶ習慣をつけると、将来の選択肢がぐっと広がります！\n' +
-          '年収が <strong>+' + skillGain + '万円</strong> 増えました。',
-        cb: function() {
-          rolling = false;
-          renderScoreboard(); updateTurnInfo(); advanceTurn();
-        }
+          '今回は <strong>+' + skillGain + '万円</strong> 年収が上がりました（通算' + p.skillUps + '回目）。',
+        cb: function() { rolling = false; renderScoreboard(); updateTurnInfo(); cb(); }
       });
       return;
     }
 
+    case 'emergency': {
+      var emergencies = [
+        { emoji:'🚗', title:'車が故障してしまった！', amt:-30, tip:'緊急の出費に備えて<strong>生活防衛資金</strong>（生活費の3〜6か月分）を別口座に確保しておきましょう。' },
+        { emoji:'🏥', title:'家族が緊急入院！', amt:-50, tip:'大きな医療費は<strong>高額療養費制度</strong>で一部戻ってきます。また医療保険で備えることも大切です。' },
+        { emoji:'🔥', title:'給湯器が壊れて交換が必要に…', amt:-25, tip:'家電・設備の修繕費は突然やってきます。住宅の維持費として毎年収入の1〜2%を積み立てておくと安心です。' },
+        { emoji:'💔', title:'一時的な収入減少…', amt:-40, tip:'収入が減ったときのために、<strong>生活防衛資金</strong>と<strong>就業不能保険</strong>を組み合わせておきましょう。' },
+      ];
+      var em = emergencies[Math.floor(Math.random() * emergencies.length)];
+      applyMoney(p, em.amt, cb, {
+        emoji: em.emoji, title: em.title, resultText: em.amt + '万円（緊急出費）', resultClass:'minus',
+        explain: '予期せぬ緊急出費が発生しました。\n\n' +
+          '今回は <strong>' + em.amt + '万円</strong> の出費になりました。\n\n' +
+          '💡 ' + em.tip,
+      });
+      break;
+    }
+
+    case 'pension': {
+      var pensionAmt = 30;
+      applyMoney(p, +pensionAmt, cb, {
+        emoji:'🏛️', title:'年金を受け取りました！', resultText:'+' + pensionAmt + '万円（年金）', resultClass:'plus',
+        explain: '<strong>公的年金</strong>とは、老後の生活を支える社会保険。\n' +
+          '国民年金＋厚生年金で、平均的な夫婦の受取額は月約23万円（年274万円）。\n\n' +
+          '今回は1年分の年金として <strong>+' + pensionAmt + '万円</strong>。\n\n' +
+          '💡 年金は何歳から受け取るかで金額が変わります。\n' +
+          '65歳→70歳に繰下げると <strong>42%増額</strong> になります！\n' +
+          'iDeCoや私的年金と組み合わせて老後を豊かに。',
+      });
+      break;
+    }
+
+    case 'inherit': {
+      var isReceive = Math.random() < 0.6;
+      if (isReceive) {
+        var inheritAmt = 50 + Math.floor(Math.random() * 3) * 25;
+        applyMoney(p, +inheritAmt, cb, {
+          emoji:'📜', title:'相続を受けました！', resultText:'+' + inheritAmt + '万円（相続財産）', resultClass:'plus',
+          explain: '<strong>相続</strong>とは、亡くなった方の財産を受け継ぐこと。\n' +
+            '今回は <strong>+' + inheritAmt + '万円</strong> の相続財産を受け取りました。\n\n' +
+            '💡 相続税の基礎控除は「3,000万円 + 600万円×法定相続人数」。\n' +
+            '相続対策は生前から行うことが大切です。\n' +
+            '生前贈与（年110万円まで非課税）も有効な手段のひとつです。',
+        });
+      } else {
+        applyMoney(p, -30, cb, {
+          emoji:'📜', title:'相続手続き・費用が発生…', resultText:'-30万円（相続手続き費用）', resultClass:'minus',
+          explain: '相続には手続き費用や税金がかかることがあります。\n' +
+            '今回は手続き費用として <strong>-30万円</strong> の出費に。\n\n' +
+            '💡 相続はトラブルになりやすいため、<strong>遺言書</strong>の作成や\n' +
+            '家族での話し合いが事前に重要です。\n' +
+            '司法書士や弁護士への相談も検討しましょう。',
+        });
+      }
+      break;
+    }
+
     case 'lucky': {
-      const luckyAmt = 10 + Math.floor(Math.random() * 5) * 10; // 10,20,30,40,50
-      applyMoney(p, +luckyAmt, cb, {
-        emoji:'⭐', title:'ラッキー！',
-        resultText:'+' + luckyAmt + '万円',
-        resultClass:'plus',
-        explain: '思わぬ <strong>臨時収入</strong> が入りました！\n\n' +
-          '（遺産相続・副業収入・投資配当・宝くじ…など様々なラッキーがあります）\n\n' +
-          '💡 突然のお金は「あぶく銭」とも言います。\n' +
-          '使い方次第で資産になるかどうかが決まります。\n' +
-          'まずは生活防衛資金（生活費3〜6か月分）を確保しましょう！',
+      var luckies = [
+        { emoji:'💸', title:'臨時収入！', amt:+30 },
+        { emoji:'🎰', title:'投資信託の分配金が入った！', amt:+40 },
+        { emoji:'🎁', title:'両親から生前贈与！', amt:+50 },
+        { emoji:'📊', title:'副業が思いがけず大ヒット！', amt:+35 },
+        { emoji:'🏅', title:'表彰されて報奨金をもらった！', amt:+25 },
+      ];
+      var lk = luckies[Math.floor(Math.random() * luckies.length)];
+      applyMoney(p, lk.amt, cb, {
+        emoji: lk.emoji, title: lk.title, resultText:'+' + lk.amt + '万円', resultClass:'plus',
+        explain: '思わぬ <strong>ラッキーな収入</strong> が入りました！\n\n' +
+          '（遺産相続・副業収入・投資配当・報奨金…など様々なラッキーがあります）\n\n' +
+          '💡 突然のお金は使ってしまいがち。\n' +
+          'まずは<strong>生活防衛資金</strong>（生活費3〜6か月分）を確保して、\n' +
+          '残りはNISAやiDeCoに回すのがベストです！',
       });
       break;
     }
@@ -1071,27 +1050,24 @@ function triggerSquareEvent(pos, p, cb) {
     case 'rest':
     default:
       showPopup({
-        emoji:'💤', title:'休憩マス',
-        resultText:'変化なし',
-        resultClass:'neutral',
+        emoji:'💤', title:'休憩マス', resultText:'変化なし', resultClass:'neutral',
         explain: 'このマスは <strong>休憩マス</strong>。今回は何も起こりません。\n\n' +
           '人生にも「何もない日」があります。それが実は一番大切かも？\n\n' +
-          '💡 毎日節約・投資を意識するより、たまにリセットして家計を見直すことも大切です。',
-        cb: function() {
-          rolling = false;
-          advanceTurn();
-        }
+          '💡 毎日節約・投資を意識するより、たまにリセットして\n' +
+          '家計全体を見直すことが大切です。\n' +
+          '年に1回は「ねんきん定期便」「家計の棚卸し」をしてみましょう。',
+        cb: function() { rolling = false; advanceTurn(); }
       });
       return;
   }
 }
 
-// ────────────────────────────────────────────
-// Helper: apply money change and show popup
-// ────────────────────────────────────────────
+// ── applyMoney helper ──
 function applyMoney(p, delta, cb, opts) {
   p.money += delta;
-  const sign = delta >= 0 ? '+' : '';
+  if (delta > 0) p.income += delta;
+  else p.expenses += Math.abs(delta);
+  var sign = delta >= 0 ? '+' : '';
   p.events.push({ emoji: opts.emoji, text: opts.title + '（' + sign + delta + '万円）' });
   addLog(p, opts.emoji, p.name + ' — ' + opts.title + '（' + sign + delta + '万円）');
   showPopup({
@@ -1109,19 +1085,16 @@ function applyMoney(p, delta, cb, opts) {
   });
 }
 
-// ────────────────────────────────────────────
-// Show popup
-// ────────────────────────────────────────────
-let pendingPopupCb = null;
+// ── Popup ──
+var pendingPopupCb = null;
 
 function showPopup(opts) {
-  popupEmoji.textContent    = opts.emoji;
-  popupTitle.textContent    = opts.title;
-  popupResult.textContent   = opts.resultText;
-  popupResult.className     = 'popup-result ' + (opts.resultClass || 'neutral');
-  // Convert \n to <br>
-  popupExplain.innerHTML    = opts.explain.replace(/\n/g, '<br>');
-  pendingPopupCb            = opts.cb || null;
+  popupEmoji.textContent  = opts.emoji;
+  popupTitle.textContent  = opts.title;
+  popupResult.textContent = opts.resultText;
+  popupResult.className   = 'popup-result ' + (opts.resultClass || 'neutral');
+  popupExplain.innerHTML  = (opts.explain || '').replace(/\n/g, '<br>');
+  pendingPopupCb          = opts.cb || null;
   popupOverlay.classList.add('open');
   renderScoreboard();
   updateTurnInfo();
@@ -1129,20 +1102,18 @@ function showPopup(opts) {
 
 function closePopup() {
   popupOverlay.classList.remove('open');
-  const cb = pendingPopupCb;
+  var cb = pendingPopupCb;
   pendingPopupCb = null;
   if (cb) cb();
 }
 
-// ────────────────────────────────────────────
-// Goal event
-// ────────────────────────────────────────────
+// ── Goal event ──
 function showGoalEvent(p, cb) {
   showPopup({
-    emoji: '🏆',
+    emoji:'🏆',
     title: p.name + ' ゴール！',
-    resultText: '最終資産：' + p.money.toLocaleString() + '万円',
-    resultClass: p.money >= 100 ? 'plus' : 'minus',
+    resultText:'最終資産：' + p.money.toLocaleString() + '万円',
+    resultClass: p.money >= START_MONEY ? 'plus' : 'minus',
     explain: 'おめでとう！ゴールに到達しました！\n' +
       '最終的な資産は <strong>' + p.money.toLocaleString() + '万円</strong> です。\n\n' +
       '💡 人生ゲームのゴールは「お金持ちになること」だけではありません。\n' +
@@ -1152,35 +1123,28 @@ function showGoalEvent(p, cb) {
   });
 }
 
-// ────────────────────────────────────────────
-// Advance turn
-// ────────────────────────────────────────────
+// ── Advance turn ──
 function advanceTurn() {
-  // Check if all finished
-  if (players.every(p => p.finished)) {
+  if (players.every(function(p) { return p.finished; })) {
     showFinalResult();
     return;
   }
-  // Find next unfinished player
-  let next = (currentTurn + 1) % numPlayers;
-  let attempts = 0;
+  var next = (currentTurn + 1) % numPlayers;
+  var attempts = 0;
   while (players[next].finished && attempts < numPlayers) {
     next = (next + 1) % numPlayers;
     attempts++;
   }
   currentTurn = next;
-  rolling     = false;
+  rolling = false;
   btnRoll.disabled = false;
   renderTokens();
   renderScoreboard();
   updateTurnInfo();
 }
 
-// ────────────────────────────────────────────
-// Check all finished
-// ────────────────────────────────────────────
 function checkAllFinished() {
-  if (players.every(p => p.finished)) {
+  if (players.every(function(p) { return p.finished; })) {
     setTimeout(showFinalResult, 400);
   } else {
     rolling = false;
@@ -1188,61 +1152,57 @@ function checkAllFinished() {
   }
 }
 
-// ────────────────────────────────────────────
-// Final result
-// ────────────────────────────────────────────
+// ── Grade ──
 function getGrade(money) {
-  if (money >= 400) return 'S';
-  if (money >= 250) return 'A';
-  if (money >= 100) return 'B';
-  return 'C';
+  if (money >= 700) return 'S';
+  if (money >= 450) return 'A';
+  if (money >= 200) return 'B';
+  if (money >= 100) return 'C';
+  return 'D';
 }
 function gradeMsg(g) {
-  if (g === 'S') return '素晴らしい！資産形成の天才！将来はきっと安心できます🌟';
-  if (g === 'A') return 'とても優秀！お金の使い方がうまいです！';
-  if (g === 'B') return 'まずまず。もう少し投資や節約を意識してみよう！';
-  return '資産がマイナスに…。でも大丈夫！今から学べばまだ間に合います💪';
+  if (g === 'S') return '素晴らしい！資産形成の天才！NISA・iDeCo・スキルアップを完璧に活用しました🌟';
+  if (g === 'A') return 'とても優秀！お金の使い方・増やし方がうまいです！あとは老後の不安もほぼなし。';
+  if (g === 'B') return 'まずまず。もう少しNISA・iDeCo・スキルアップを意識するとさらに良くなります！';
+  if (g === 'C') return '出発点とほぼ同じ…。投資・節税・副業を意識してみよう。今からでも遅くない！';
+  return '資産がマイナスに…。でも大丈夫！今から学べばまだ間に合います💪 まずは家計の見直しから。';
 }
 
+// ── Final result ──
 function showFinalResult() {
   gameActive = false;
   btnRoll.disabled = true;
+  launchConfetti();
 
-  let html = '';
+  var html = '';
 
   if (numPlayers === 1) {
-    const p     = players[0];
-    const grade = getGrade(p.money);
+    var p     = players[0];
+    var grade = getGrade(p.money);
     html += '<div class="result-grade grade-' + grade + '">' + grade + '</div>';
     html += '<div class="result-money">' + p.money.toLocaleString() + '万円</div>';
     html += '<div class="result-grade-msg">' + gradeMsg(grade) + '</div>';
-    html += '<div class="result-events"><h4>あなたの人生イベント</h4>';
-    p.events.forEach(function(ev) {
-      html += ev.emoji + ' ' + ev.text + '<br>';
-    });
+    html += buildBreakdown(p);
+    html += '<div class="result-events"><h4>あなたの人生イベント（' + p.events.length + '件）</h4>';
+    p.events.forEach(function(ev) { html += ev.emoji + ' ' + ev.text + '<br>'; });
     html += '</div>';
   } else {
-    // Multi-player ranking
-    const sorted = [...players].sort((a, b) => b.money - a.money);
+    var sorted = players.slice().sort(function(a, b) { return b.money - a.money; });
     html += '<div style="font-size:1.1rem;font-weight:800;color:#86efac;margin-bottom:14px;">最終ランキング</div>';
     html += '<div class="result-players">';
     sorted.forEach(function(p, rank) {
-      const grade = getGrade(p.money);
-      const isPos = p.money >= START_MONEY;
+      var grade  = getGrade(p.money);
+      var isPos  = p.money >= START_MONEY;
+      var medals = ['🥇','🥈','🥉','🏅'];
       html +=
         '<div class="result-player-row">' +
-          '<div class="result-player-name" style="color:' + p.color + '">' +
-            (rank === 0 ? '🥇' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : '🏅') +
-            ' ' + p.emoji + ' ' + p.name +
-          '</div>' +
-          '<div class="result-player-money ' + (isPos ? 'pos' : 'neg') + '">' +
-            p.money.toLocaleString() + '万円' +
-          '</div>' +
+          '<div class="result-player-name" style="color:' + p.color + '">' + medals[rank] + ' ' + p.emoji + ' ' + p.name + '</div>' +
+          '<div class="result-player-money ' + (isPos ? 'pos' : 'neg') + '">' + p.money.toLocaleString() + '万円</div>' +
           '<div class="result-player-grade">評価：' + grade + '</div>' +
         '</div>';
     });
     html += '</div>';
-    // Winner events
+    html += buildBreakdown(sorted[0]);
     html += '<div class="result-events"><h4>' + sorted[0].emoji + ' ' + sorted[0].name + ' のイベント</h4>';
     sorted[0].events.forEach(function(ev) { html += ev.emoji + ' ' + ev.text + '<br>'; });
     html += '</div>';
@@ -1250,47 +1210,117 @@ function showFinalResult() {
 
   resultContent.innerHTML = html;
   resultOverlay.classList.add('open');
+
+  if (window._gtag) window._gtag('event', 'life_game_finish', {
+    players: numPlayers,
+    winner_money: players[0] ? players[0].money : 0
+  });
 }
 
-// ────────────────────────────────────────────
-// Log
-// ────────────────────────────────────────────
+function buildBreakdown(p) {
+  var net = p.money - START_MONEY;
+  return '<div class="result-breakdown">' +
+    '<h4>💹 お金の動き</h4>' +
+    '<div class="rb-row"><span class="rb-label">スタート資金</span><span class="rb-val-neu">' + START_MONEY.toLocaleString() + '万円</span></div>' +
+    '<div class="rb-row"><span class="rb-label">合計収入</span><span class="rb-val-pos">+' + p.income.toLocaleString() + '万円</span></div>' +
+    '<div class="rb-row"><span class="rb-label">合計支出</span><span class="rb-val-neg">-' + p.expenses.toLocaleString() + '万円</span></div>' +
+    '<div class="rb-row"><span class="rb-label">最終資産</span><span class="rb-val-neu">' + p.money.toLocaleString() + '万円</span></div>' +
+    '<div class="rb-row"><span class="rb-label">スキルUP回数</span><span class="rb-val-pos">' + p.skillUps + '回</span></div>' +
+    '<div class="rb-row"><span class="rb-label">iDeCo積立</span><span class="rb-val-pos">' + (p.married ? '💍あり' : 'なし') + ' ／ ' + (p.hasHouse ? '🏠あり' : '持ち家なし') + '</span></div>' +
+  '</div>';
+}
+
+// ── Log ──
 function addLog(p, emoji, text) {
-  const entry = document.createElement('div');
+  var entry = document.createElement('div');
   entry.className = 'log-entry';
   entry.innerHTML =
     '<span class="log-emoji">' + emoji + '</span>' +
-    '<span style="color:' + p.color + ';font-weight:700;">' + p.name + '</span> ' +
+    '<span style="color:' + p.color + ';font-weight:700">' + p.name + '</span> ' +
     '<span>' + text.replace(p.name + ' — ', '').replace(p.name + ' ', '') + '</span>';
   logList.prepend(entry);
 }
 
-// ────────────────────────────────────────────
-// Reset
-// ────────────────────────────────────────────
+// ── Reset ──
 function resetGame() {
   resultOverlay.classList.remove('open');
   popupOverlay.classList.remove('open');
 
-  scoreboard.style.display    = 'none';
-  boardSection.style.display  = 'none';
-  diceSection.style.display   = 'none';
-  logSection.style.display    = 'none';
-  setupPanel.style.display    = 'block';
-  btnNewGame.style.display    = 'none';
+  scoreboard.style.display   = 'none';
+  boardSection.style.display = 'none';
+  diceSection.style.display  = 'none';
+  logSection.style.display   = 'none';
+  setupPanel.style.display   = 'block';
+  btnNewGame.style.display   = 'none';
 
-  document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.player-btn').forEach(function(b) { b.classList.remove('selected'); });
+  nameInputs.style.display = 'none';
+  nameInputs.innerHTML = '';
   btnStart.disabled = true;
   numPlayers = 0;
   players    = [];
   gameActive = false;
   rolling    = false;
+  pendingPopupCb = null;
   diceDisplay.textContent = '🎲';
   boardGrid.innerHTML     = '';
   scoreboard.innerHTML    = '';
   logList.innerHTML       = '';
   turnName.textContent    = '— のターン';
   turnSub.textContent     = '';
+}
+
+// ── Confetti ──
+function launchConfetti() {
+  var canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.display = 'block';
+  var ctx = canvas.getContext('2d');
+  var colors = ['#1a7a4a','#22c55e','#4ade80','#fde047','#f59e0b','#ef4444','#3b82f6','#a78bfa','#f9a8d4'];
+  var particles = [];
+  for (var i = 0; i < 180; i++) {
+    particles.push({
+      x:    Math.random() * canvas.width,
+      y:    -10 - Math.random() * 300,
+      vx:   (Math.random() - 0.5) * 5,
+      vy:   2.5 + Math.random() * 4,
+      size: 6 + Math.random() * 9,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * Math.PI * 2,
+      spin:  (Math.random() - 0.5) * 0.18,
+      shape: Math.random() < 0.5 ? 'rect' : 'circle',
+    });
+  }
+  var frame = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var allGone = true;
+    particles.forEach(function(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.angle += p.spin;
+      if (p.y < canvas.height + 20) allGone = false;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.globalAlpha = Math.max(0, 1 - frame / 220);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'circle') {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+      }
+      ctx.restore();
+    });
+    frame++;
+    if (!allGone && frame < 240) requestAnimationFrame(animate);
+    else canvas.style.display = 'none';
+  }
+  animate();
 }
 
 })();
