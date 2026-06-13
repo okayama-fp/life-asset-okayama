@@ -2,16 +2,30 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>日経225デモトレード2026｜本格株式投資シミュレーター｜ライフアセットオフィス</title>
-<meta name="description" content="2026年の日経平均6万円時代を想定した本格株式投資シミュレーター。仮想資金300万円・ローソク足チャート・FRBや日銀の金融政策イベント付き。高校生・大学生から学べる「はじめてモード」とテクニカル指標付き「プロモード」を搭載。">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<title>株式投資スキル診断｜日経225マーケット道場2026｜ライフアセットオフィス</title>
+<meta name="description" content="2026年・日経平均6万円時代の仮想市場で株式投資を体験。投資スキルスコアで実力を診断。FRB・日銀イベント・ローソク足チャート・ミッション・クイズ付き。無料・登録不要。">
 <link rel="canonical" href="https://lifeassetoffice.net/nikkei-demotrade.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="日経225デモトレード2026｜本格株式投資シミュレーター">
-<meta property="og:description" content="日経平均6万円時代の仮想市場で株式投資を疑似体験。FRB・日銀・インフレ・地政学イベントで「ニュースと株価の関係」を学べる教育用シミュレーター。">
+<meta property="og:title" content="株式投資スキル診断｜日経225マーケット道場2026">
+<meta property="og:description" content="仮想資金300万円・日経225全銘柄で本格デモトレード体験。投資スキルスコアであなたの実力を可視化。経済イベント・ミッション・クイズで学べる教育シミュレーター。">
 <meta property="og:url" content="https://lifeassetoffice.net/nikkei-demotrade.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
 <script src="/js/cookie-consent.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -262,7 +276,7 @@ body.mode-beginner .pro-only{display:none!important}
 <body class="mode-beginner">
 
 <div class="topbar">
-  <a class="topbar-logo" href="/simulation.html">← Life Asset <span>デモトレード 2026</span></a>
+  <a class="topbar-logo" href="/simulation.html">← Life Asset <span>マーケット道場 2026</span></a>
   <div class="topbar-right">
     <div class="mode-switch">
       <button class="mode-btn beginner-m active" id="mode-beginner" onclick="setMode('beginner')">🔰 はじめて</button>
@@ -398,9 +412,43 @@ body.mode-beginner .pro-only{display:none!important}
         <div class="pf-item"><div class="pf-label">総資産</div><div class="pf-value" id="pf-total">¥3,000,000</div></div>
         <div class="pf-item"><div class="pf-label">含み損益</div><div class="pf-value" id="pf-pnl">¥0</div></div>
       </div>
+      <div id="skill-score-card" style="margin:10px 14px 4px;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;">
+        <div style="padding:12px 14px 8px;background:linear-gradient(135deg,rgba(59,158,255,.10),rgba(0,217,126,.07));border-bottom:1px solid var(--border);text-align:center;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--blue);margin-bottom:5px;">投資スキルスコア</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:14px;">
+            <div id="sk-num" style="font-size:2.6rem;font-weight:900;color:var(--text);line-height:1;font-family:var(--mono);">0</div>
+            <div id="sk-grade" style="font-size:1.5rem;font-weight:900;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--text3);">D</div>
+          </div>
+          <div id="sk-label" style="font-size:11px;color:var(--text2);margin-top:4px;">まず取引してみよう</div>
+        </div>
+        <div style="padding:9px 13px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-bottom:2px;"><span>運用成績</span><span id="sk-sb1" style="font-family:var(--mono)">―</span></div>
+              <div style="height:3px;background:var(--surface);border-radius:2px;overflow:hidden;"><div id="sk-bar1" style="height:100%;background:var(--green);border-radius:2px;width:0%;transition:width .4s;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-bottom:2px;"><span>分散度</span><span id="sk-sb2" style="font-family:var(--mono)">―</span></div>
+              <div style="height:3px;background:var(--surface);border-radius:2px;overflow:hidden;"><div id="sk-bar2" style="height:100%;background:var(--blue);border-radius:2px;width:0%;transition:width .4s;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-bottom:2px;"><span>ミッション</span><span id="sk-sb3" style="font-family:var(--mono)">―</span></div>
+              <div style="height:3px;background:var(--surface);border-radius:2px;overflow:hidden;"><div id="sk-bar3" style="height:100%;background:var(--purple);border-radius:2px;width:0%;transition:width .4s;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-bottom:2px;"><span>クイズ正解</span><span id="sk-sb4" style="font-family:var(--mono)">―</span></div>
+              <div style="height:3px;background:var(--surface);border-radius:2px;overflow:hidden;"><div id="sk-bar4" style="height:100%;background:var(--yellow);border-radius:2px;width:0%;transition:width .4s;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="reset-btn" onclick="resetGame()">🔄 リセット（仮想資金300万円に戻す）</button>
       <div class="section-label">保有銘柄（損益順）</div>
       <div id="position-list"><div class="empty-state">保有銘柄なし<br>銘柄を選んで取引してください</div></div>
+      <div id="sector-breakdown" style="display:none;padding:10px 14px;border-top:1px solid var(--border);">
+        <div style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.08em;margin-bottom:7px;">保有業種内訳</div>
+        <div id="sector-bars"></div>
+      </div>
     </div>
 
     <div id="right-history" style="display:none">
@@ -901,6 +949,7 @@ function execOrder(){
   }
   if(lastEventTime&&Date.now()-lastEventTime<60000)checkMission('news_trade');
   updatePortfolio();updateTopbar();renderHistoryList();
+  try{gtag('event','demo_trade',{trade_type:orderSide,stock_code:selectedCode,stock_sector:s.sector,qty,price:Math.round(price)});}catch(e){}
   saveState();
 }
 
@@ -932,16 +981,75 @@ function updatePortfolio(){
     const price=getCurrentPrice(code);
     return{code,pos,price,pnl:(price-pos.avgPrice)*pos.qty,pct:(price-pos.avgPrice)/pos.avgPrice*100};
   }).sort((a,b)=>b.pnl-a.pnl);
-  if(!entries.length){pl.innerHTML='<div class="empty-state">保有銘柄なし<br>銘柄を選んで取引してください</div>';return;}
-  pl.innerHTML=entries.map(e=>{
-    const s=STOCKS.find(x=>x.code===e.code);
-    const cls=e.pnl>0?'up':e.pnl<0?'down':'flat';
-    const sign=e.pnl>=0?'+':'';
-    return `<div class="position-item" onclick="selectStock('${e.code}')">
-      <div class="pos-header"><span class="pos-name">${s?.name||e.code}</span><span class="pos-pnl ${cls}">${sign}¥${Math.round(e.pnl).toLocaleString()}</span></div>
-      <div class="pos-prices"><span>${e.pos.qty.toLocaleString()}株 / 平均¥${e.pos.avgPrice.toFixed(1)}</span><span class="${cls}">現在¥${e.price.toLocaleString()}（${sign}${e.pct.toFixed(2)}%）</span></div>
+  if(!entries.length){
+    pl.innerHTML='<div class="empty-state">保有銘柄なし<br>銘柄を選んで取引してください</div>';
+    const bd=document.getElementById('sector-breakdown');
+    if(bd)bd.style.display='none';
+  } else {
+    pl.innerHTML=entries.map(e=>{
+      const s=STOCKS.find(x=>x.code===e.code);
+      const cls=e.pnl>0?'up':e.pnl<0?'down':'flat';
+      const sign=e.pnl>=0?'+':'';
+      return `<div class="position-item" onclick="selectStock('${e.code}')">
+        <div class="pos-header"><span class="pos-name">${s?.name||e.code}</span><span class="pos-pnl ${cls}">${sign}¥${Math.round(e.pnl).toLocaleString()}</span></div>
+        <div class="pos-prices"><span>${e.pos.qty.toLocaleString()}株 / 平均¥${e.pos.avgPrice.toFixed(1)}</span><span class="${cls}">現在¥${e.price.toLocaleString()}（${sign}${e.pct.toFixed(2)}%）</span></div>
+      </div>`;
+    }).join('');
+    updateSectorBreakdown(evalTotal);
+  }
+  updateSkillScore(evalTotal);
+}
+
+function updateSectorBreakdown(evalTotal){
+  const bd=document.getElementById('sector-breakdown');
+  const sb=document.getElementById('sector-bars');
+  if(!bd||!sb)return;
+  if(!evalTotal){bd.style.display='none';return;}
+  bd.style.display='block';
+  const secs={};
+  Object.entries(positions).forEach(([code,pos])=>{
+    const s=STOCKS.find(x=>x.code===code);
+    if(s){const v=getCurrentPrice(code)*pos.qty;secs[s.sector]=(secs[s.sector]||0)+v;}
+  });
+  const sorted=Object.entries(secs).sort((a,b)=>b[1]-a[1]);
+  const colors=['var(--blue)','var(--green)','var(--purple)','var(--yellow)','#ff9d3b','var(--red)'];
+  sb.innerHTML=sorted.map(([sec,val],i)=>{
+    const pct=val/evalTotal*100;
+    return `<div style="margin-bottom:5px;">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-bottom:2px;"><span>${sec}</span><span style="font-family:var(--mono)">${pct.toFixed(0)}%</span></div>
+      <div style="height:4px;background:var(--surface);border-radius:2px;overflow:hidden;"><div style="height:100%;width:${pct.toFixed(1)}%;background:${colors[i%colors.length]};border-radius:2px;"></div></div>
     </div>`;
   }).join('');
+}
+
+function updateSkillScore(evalTotal){
+  const total=(evalTotal||0)+cash;
+  const returnPct=(total-INITIAL_CASH)/INITIAL_CASH*100;
+  const pnlScore=returnPct<=0?0:Math.min(40,Math.round(returnPct*8));
+  const sectorCount=new Set(Object.keys(positions).map(c=>STOCKS.find(x=>x.code===c)?.sector).filter(Boolean)).size;
+  const divScore=Math.min(30,sectorCount*6);
+  const doneMissions=Object.keys(missionsDone).filter(k=>missionsDone[k]).length;
+  const missionScore=Math.round(doneMissions/MISSIONS.length*20);
+  const quizScore=quizStats.total>0?Math.round(quizStats.correct/quizStats.total*10):0;
+  const sc=Math.min(100,pnlScore+divScore+missionScore+quizScore);
+  const grade=sc>=85?'S':sc>=70?'A':sc>=50?'B':sc>=30?'C':'D';
+  const col=sc>=85?'var(--green)':sc>=70?'var(--blue)':sc>=50?'var(--yellow)':sc>=30?'#ff9d3b':'var(--text3)';
+  const lbl=sc>=85?'伝説のトレーダー！':sc>=70?'上級投資家':sc>=50?'中級トレーダー':sc>=30?'見習い投資家':'まず取引してみよう';
+  const numEl=document.getElementById('sk-num');
+  const gradeEl=document.getElementById('sk-grade');
+  if(!numEl)return;
+  numEl.textContent=sc; numEl.style.color=col;
+  gradeEl.textContent=grade; gradeEl.style.background=col;
+  gradeEl.style.color=(sc>=50&&sc<85)?'#000':'#fff';
+  document.getElementById('sk-label').textContent=lbl;
+  document.getElementById('sk-bar1').style.width=(pnlScore/40*100)+'%';
+  document.getElementById('sk-sb1').textContent=returnPct>=0?'+'+returnPct.toFixed(1)+'%':returnPct.toFixed(1)+'%';
+  document.getElementById('sk-bar2').style.width=(divScore/30*100)+'%';
+  document.getElementById('sk-sb2').textContent=sectorCount+'業種';
+  document.getElementById('sk-bar3').style.width=(missionScore/20*100)+'%';
+  document.getElementById('sk-sb3').textContent=doneMissions+'/'+MISSIONS.length;
+  document.getElementById('sk-bar4').style.width=(quizScore/10*100)+'%';
+  document.getElementById('sk-sb4').textContent=quizStats.total>0?quizStats.correct+'/'+quizStats.total+'問':'未挑戦';
 }
 
 function updateTopbar(){
@@ -1254,6 +1362,7 @@ function answerQuiz(btn,correct,qi){
   document.getElementById('quiz-score').textContent=`正解数 ${quizStats.correct}/${quizStats.total}`;
   document.getElementById('quiz-next').style.display='inline-block';
   if(quizStats.correct>=5)checkMission('quiz5');
+  updateSkillScore(0);
   saveState();
 }
 
@@ -1281,6 +1390,7 @@ function checkMission(id){
   missionsDone[id]=true;
   showToast(`🏆 ミッション達成！\n${m.icon} ${m.name}`,'mission-toast');
   renderMissions();
+  updateSkillScore(0);
   saveState();
 }
 function renderMissions(){
@@ -1300,6 +1410,7 @@ function saveState(){
     localStorage.setItem(LS_KEY,JSON.stringify({
       cash,positions,
       history:history.slice(0,50),
+      newsFeed:newsFeed.slice(0,20),
       missionsDone,quizStats,mode
     }));
   }catch(e){}
@@ -1311,6 +1422,7 @@ function loadState(){
     if(typeof d.cash==='number')cash=d.cash;
     if(d.positions)positions=d.positions;
     if(d.history)history=d.history;
+    if(d.newsFeed)newsFeed=d.newsFeed;
     if(d.missionsDone)missionsDone=d.missionsDone;
     if(d.quizStats)quizStats=d.quizStats;
     if(d.mode)mode=d.mode;
@@ -1327,6 +1439,8 @@ updatePortfolio();
 updateTopbar();
 renderHistoryList();
 renderMissions();
+renderNewsList();
+updateSkillScore(0);
 updateClock();
 setMode(mode);
 setInterval(()=>{tickPrices();filterStocks();updateClock();},3000);
