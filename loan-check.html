@@ -8,22 +8,23 @@
   <link rel="canonical" href="https://lifeassetoffice.net/loan-check.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
-  <title>住宅ローン金利リスク診断｜返済負担率・控除逆ざや・繰上返済効果｜ライフアセットオフィス</title>
+  <title>住宅ローン 総合リスク診断｜返済負担率・控除逆ざや・繰上返済効果｜ライフアセットオフィス</title>
   <meta name="description" content="借入残高・金利・年収を入力するだけ。返済負担率・金利上昇リスク・住宅ローン控除の逆ざや・繰上返済の節約効果を一括診断。登録不要。">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="住宅ローン金利リスク診断｜返済負担率・控除逆ざや・繰上返済効果">
+  <meta property="og:title" content="住宅ローン 総合リスク診断｜返済負担率・控除逆ざや・繰上返済効果">
   <meta property="og:description" content="金利上昇リスクと住宅ローン控除をまとめて診断。逆ざや判定・実質金利・繰上返済節約効果も即確認。登録不要。">
   <meta property="og:url" content="https://lifeassetoffice.net/loan-check.html">
   <meta property="og:site_name" content="ライフアセットオフィス">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="住宅ローン金利リスク診断｜返済負担率・控除逆ざや・繰上返済効果">
+  <meta name="twitter:title" content="住宅ローン 総合リスク診断｜返済負担率・控除逆ざや・繰上返済効果">
   <meta name="twitter:description" content="金利上昇リスクと住宅ローン控除をまとめて診断。逆ざや判定・実質金利も即確認。">
   <meta name="twitter:site" content="@lifeasset_fp">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -231,7 +232,6 @@
     @media(max-width:480px){
       .main { padding: 16px 14px 60px; }
       .result-panel { position: static; }
-      nav { display: none; }
     }
   
 /* ═══════════════════════════════════
@@ -312,18 +312,18 @@
 
 <header>
   <div class="header-inner">
-    <a href="index.html">
+    <a href="/">
       <div class="logo-text">
         <div class="name">Life Asset</div>
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
     <nav>
-      <a href="index.html">ホーム</a>
-      <a href="simulation.html">シミュレーター</a>
-      <a href="blog/index.html">ブログ</a>
+      <a href="/">ホーム</a>
+      <a href="/simulation.html">シミュレーター</a>
+      <a href="/blog/">ブログ</a>
     </nav>
-    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <a href="/contact.html" class="btn-cta">お問い合わせ</a>
     <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -332,7 +332,7 @@
 
 <div class="hero">
   <div class="hero-badge"><span class="hero-dot"></span>登録不要・リアルタイム計算</div>
-  <h1>住宅ローン<br>金利リスク診断</h1>
+  <h1>住宅ローン<br>総合リスク診断</h1>
   <p class="hero-lead">借入残高・金利・年収を入力するだけ。返済負担率・金利上昇リスク・住宅ローン控除の逆ざやを一括診断します。</p>
   <div class="hero-tags">
     <span class="hero-tag">返済負担率チェック</span>
@@ -348,6 +348,12 @@
     <!-- INPUT PANEL -->
     <div class="input-panel">
       <div class="panel-title">あなたの情報を入力</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">
+        <button style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:11.5px;font-weight:700;background:#fff;color:var(--text-light);cursor:pointer;font-family:inherit;" onclick="applyPreset('avg')">平均的サラリーマン</button>
+        <button style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:11.5px;font-weight:700;background:#fff;color:var(--text-light);cursor:pointer;font-family:inherit;" onclick="applyPreset('couple')">共働き世帯</button>
+        <button style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:11.5px;font-weight:700;background:#fff;color:var(--text-light);cursor:pointer;font-family:inherit;" onclick="applyPreset('heavy')">重い返済</button>
+        <button style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:11.5px;font-weight:700;background:#fff;color:var(--text-light);cursor:pointer;font-family:inherit;" onclick="applyPreset('senior')">定年間近</button>
+      </div>
 
       <div class="field">
         <div class="field-label">借入残高<span class="field-val" id="lbl-principal">2,500万円</span></div>
@@ -461,12 +467,28 @@
 
           <div id="cta-box" class="cta-contact-box low">
             <div class="cta-contact-text" id="cta-contact-text">余裕があるうちに資産運用を始めませんか？NISAやiDeCoの活用をFPがお問い合わせに対応します。</div>
-            <a href="contact.html" class="cta-contact-btn">お問い合わせする →</a>
+            <a href="/contact.html" class="cta-contact-btn">お問い合わせする →</a>
           </div>
 
           <div class="share-row" style="margin-top:8px;">
           </div>
 
+        </div>
+      </div>
+      <div id="loan-score-card" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.08);margin-top:16px;">
+        <div style="padding:14px 18px 10px;background:#f0fdf4;border-bottom:2px solid #bbf7d0;text-align:center;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#16a34a;margin-bottom:6px;">返済健全性スコア</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
+            <div id="ls-num" style="font-size:3rem;font-weight:900;color:var(--navy);line-height:1;">―</div>
+            <div id="ls-grade" style="font-size:2rem;font-weight:900;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:#16a34a;">―</div>
+          </div>
+          <div id="ls-label" style="font-size:12px;color:var(--text-light);margin-top:6px;">計算中...</div>
+        </div>
+        <div style="padding:12px 16px;">
+          <div style="font-size:11px;color:var(--text-light);margin-bottom:6px;font-weight:700;">内訳</div>
+          <div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-light);margin-bottom:3px;"><span>返済負担率</span><span id="ls-sb1">―</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;"><div id="ls-bar1" style="height:100%;border-radius:3px;transition:width .4s;width:0%;background:var(--sky);"></div></div></div>
+          <div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-light);margin-bottom:3px;"><span>完済年齢</span><span id="ls-sb2">―</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;"><div id="ls-bar2" style="height:100%;border-radius:3px;transition:width .4s;width:0%;background:#16a34a;"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-light);margin-bottom:3px;"><span>金利上昇耐性</span><span id="ls-sb3">―</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;"><div id="ls-bar3" style="height:100%;border-radius:3px;transition:width .4s;width:0%;background:#d97706;"></div></div></div>
         </div>
       </div>
     </div>
@@ -620,15 +642,15 @@
     <div class="blog-link-section">
       <h2>関連記事を読む</h2>
       <div class="blog-links">
-        <a href="blog/post-543.html" class="blog-link-card">
+        <a href="/blog/post-543.html" class="blog-link-card">
           <div class="tag">🏠 住宅ローン完全攻略</div>
           <h3>住宅ローン完全攻略2026｜金利上昇時代に今すぐやるべきこと全パターン解説</h3>
         </a>
-        <a href="blog/post-540.html" class="blog-link-card">
+        <a href="/blog/post-540.html" class="blog-link-card">
           <div class="tag">🏠 住宅ローン破綻の構造</div>
           <h3>住宅ローン危機2025「地方で新築を建てた瞬間、資産が消える」</h3>
         </a>
-        <a href="blog/post-539.html" class="blog-link-card">
+        <a href="/blog/post-539.html" class="blog-link-card">
           <div class="tag">🏠 逆ざや確認</div>
           <h3>繰上返済より「逆ざや確認」が先。住宅ローン金利リスク診断ツールの使い方</h3>
         </a>
@@ -637,17 +659,15 @@
   </div>
 </div>
 
-<div style="max-width:900px;margin:0 auto 8px;padding:0 16px;font-size:11px;color:#78716c;line-height:1.6;">【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。実際の返済額・控除額はご契約の金融機関・税務署にご確認ください。</div>
-
 
 <div style="max-width:920px;margin:0 auto 20px;padding:0 20px"><div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。最終的な判断はご自身の責任で行ってください。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。</div></div>
 <footer>
   <div class="footer-logo">Life Asset — ライフアセットオフィス</div>
   <div class="footer-contact">
-    <a href="contact.html">お問い合わせ</a>
-    ｜<a href="privacy.html">プライバシーポリシー</a>
+    <a href="/contact.html">お問い合わせ</a>
+    ｜<a href="/privacy.html">プライバシーポリシー</a>
   </div>
-  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+  <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
 </footer>
 
 <script>
@@ -844,6 +864,8 @@ function calc() {
 
   calcDeduction(P, rate, inc);
   calcExtra();
+  updateLoanScore(ratio, endAge, level);
+  updateLoanUrl(P, rate, yrs, age, inc);
   if(typeof gtag==='function'){
     gtag('event','simulate_loan_check',{balance_range:(Math.floor(P/500)*500)+'〜'+(Math.floor(P/500)*500+500)+'万',rate:rate,years:yrs,result:ratio>35?'over':ratio>25?'warn':'ok'});
   }
@@ -973,6 +995,62 @@ function shareResult() {
   var text  = '住宅ローン金利リスク診断をしてみました。\n返済負担率：'+ratio+'、判定：'+risk+'\n\nあなたも診断してみてください👇';
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://lifeassetoffice.net/loan-check.html'), '_blank', 'noopener,noreferrer');
 }
+
+function applyPreset(p) {
+  var presets = {
+    avg:    { P:2500, rate:0.6,  yrs:25, age:35, inc:30, type:'var' },
+    couple: { P:4000, rate:1.05, yrs:30, age:32, inc:50, type:'var' },
+    heavy:  { P:5000, rate:1.05, yrs:35, age:38, inc:35, type:'var' },
+    senior: { P:1000, rate:1.80, yrs:10, age:55, inc:40, type:'fix' }
+  };
+  var v = presets[p]; if(!v) return;
+  document.getElementById('sl-principal').value = v.P; document.getElementById('lbl-principal').textContent = v.P.toLocaleString()+'万円';
+  document.getElementById('sl-rate').value = v.rate; document.getElementById('lbl-rate').textContent = v.rate.toFixed(2)+'%';
+  document.getElementById('sl-years').value = v.yrs; document.getElementById('lbl-years').textContent = v.yrs+'年';
+  document.getElementById('sl-age').value = v.age; document.getElementById('lbl-age').textContent = v.age+'歳';
+  document.getElementById('in-income').value = v.inc;
+  setType(v.type);
+}
+
+function calcLoanScore(ratio, endAge, riskLevel) {
+  var ratioScore = ratio <= 20 ? 100 : ratio <= 25 ? 85 : ratio <= 30 ? 65 : ratio <= 35 ? 40 : 20;
+  var ageScore = endAge <= 60 ? 100 : endAge <= 65 ? 75 : endAge <= 70 ? 45 : 20;
+  var riskScore = riskLevel === 'low' ? 90 : riskLevel === 'mid' ? 55 : 25;
+  return Math.round(ratioScore * 0.40 + ageScore * 0.35 + riskScore * 0.25);
+}
+
+function updateLoanScore(ratio, endAge, riskLevel) {
+  var sc = calcLoanScore(ratio, endAge, riskLevel);
+  var grade = sc>=85?'S':sc>=70?'A':sc>=50?'B':sc>=30?'C':'D';
+  var col = sc>=85?'#1a7a4a':sc>=70?'#16a34a':sc>=50?'#d97706':sc>=30?'#ea580c':'#dc2626';
+  var lbl = sc>=85?'健全な返済計画です！':sc>=70?'良好な返済状況':sc>=50?'注意が必要な項目あり':sc>=30?'リスクがあります':'要対策：今すぐ見直しを';
+  document.getElementById('ls-num').textContent = sc; document.getElementById('ls-num').style.color = col;
+  document.getElementById('ls-grade').textContent = grade; document.getElementById('ls-grade').style.background = col;
+  document.getElementById('ls-label').textContent = lbl;
+  var ratioBar = ratio<=20?100:ratio<=25?80:ratio<=30?60:ratio<=35?35:15;
+  var ageBar = endAge<=60?100:endAge<=65?70:endAge<=70?40:15;
+  var riskBar = riskLevel==='low'?90:riskLevel==='mid'?50:20;
+  document.getElementById('ls-bar1').style.width = ratioBar+'%'; document.getElementById('ls-sb1').textContent = ratio.toFixed(1)+'%';
+  document.getElementById('ls-bar2').style.width = ageBar+'%'; document.getElementById('ls-sb2').textContent = endAge+'歳';
+  document.getElementById('ls-bar3').style.width = riskBar+'%'; document.getElementById('ls-sb3').textContent = riskLevel==='low'?'良好':riskLevel==='mid'?'注意':'危険';
+}
+
+var urlTimer = null;
+function updateLoanUrl(P, rate, yrs, age, inc) {
+  clearTimeout(urlTimer);
+  urlTimer = setTimeout(function() {
+    try { history.replaceState(null,'','?P='+P+'&r='+rate+'&y='+yrs+'&a='+age+'&inc='+inc+'&t='+loanType); } catch(e){}
+  }, 300);
+}
+(function(){
+  var p = new URLSearchParams(location.search);
+  if(p.get('P')){ document.getElementById('sl-principal').value=p.get('P'); document.getElementById('lbl-principal').textContent=parseFloat(p.get('P')).toLocaleString()+'万円'; }
+  if(p.get('r')){ document.getElementById('sl-rate').value=p.get('r'); document.getElementById('lbl-rate').textContent=parseFloat(p.get('r')).toFixed(2)+'%'; }
+  if(p.get('y')){ document.getElementById('sl-years').value=p.get('y'); document.getElementById('lbl-years').textContent=p.get('y')+'年'; }
+  if(p.get('a')){ document.getElementById('sl-age').value=p.get('a'); document.getElementById('lbl-age').textContent=p.get('a')+'歳'; }
+  if(p.get('inc')){ document.getElementById('in-income').value=p.get('inc'); }
+  if(p.get('t')){ setType(p.get('t')); }
+})();
 
 (function(){ syncExtra(); calc(); })();
 

@@ -5,20 +5,20 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/nisa-ideco-sim.html">
-<title>NISA・iDeCo節税メリット計算ツール｜ライフアセットオフィス</title>
-<meta name="description" content="年収・積立額・年数から、NISA・iDeCoの節税メリットを即計算。課税口座との差額をグラフで比較。登録不要。">
+<title>NISA・iDeCo 節税診断｜ライフアセットオフィス</title>
+<meta name="description" content="職業タイプ・年収・積立額から節税活用スコアを即診断。NISA・iDeCo・課税口座・最適コンビの4シナリオ比較と最適配分提案つき。登録不要。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="NISA・iDeCo節税メリット計算ツール｜ライフアセットオフィス">
-<meta property="og:description" content="NISA・iDeCo・課税口座の運用差額をリアルタイム比較。節税メリットを数字で確認。">
+<meta property="og:title" content="NISA・iDeCo 節税診断｜ライフアセットオフィス">
+<meta property="og:description" content="節税活用スコアで現状を可視化。4口座シナリオ比較・iDeCo上限自動計算・最適配分アドバイス。">
 <meta property="og:url" content="https://lifeassetoffice.net/nisa-ideco-sim.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@lifeasset_fp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -29,180 +29,195 @@
 <link rel="stylesheet" href="/style.css">
 <style>
 :root {
-  --sky: #1a7a4a; --sky-light: #22c55e; --sky-pale: #dcfce7;
-  --navy: #1a3d2b; --navy-soft: #1f5c40;
-  --bg: #f8fafc; --text: #1e293b; --text-light: #64748b; --border: #e2e8f0;
-  --green: #16a34a; --greenl: #f0fdf4; --greenb: #bbf7d0;
-  --red: #dc2626; --redl: #fff1f2; --redb: #fecdd3;
-  --amber: #d97706; --amberl: #fffbeb; --amberb: #fde68a;
+  --green:#1a7a4a; --green-dark:#1a3d2b; --green-light:#22c55e;
+  --green-pale:#dcfce7; --green-mid:#bbf7d0;
+  --ink:#1e293b; --navy:#1a3d2b; --paper:#f8fafc; --cream:#f0fdf4;
+  --amber:#d97706; --amberl:#fffbeb; --amberb:#fde68a;
+  --red:#dc2626; --border:#e2e8f0; --muted:#64748b;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
-a { color: inherit; text-decoration: none; }
-#pb { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg,var(--sky),var(--sky-light)); z-index: 9999; }
-.hero { position:relative;overflow:hidden;background: #1a7a4a; color: #fff; padding: 48px 24px 40px; text-align: center; }
-.hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 11px; letter-spacing: .1em; margin-bottom: 18px; }
-.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);} }
-.hero h1 { font-size: clamp(1.4rem,4.5vw,2.1rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
-.hero-lead { font-size: 14.5px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.85; }
-.hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 13px; font-size: 12px; }
-.main { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
-.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
-.preset-label { font-size: 12px; font-weight: 700; color: var(--text-light); }
-.preset-btn { padding: 8px 16px; border-radius: 50px; border: 1.5px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; font-family: inherit; transition: all .2s; }
-.preset-btn:hover { background: var(--sky-pale); border-color: var(--sky); color: var(--sky); }
-.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
-@media(max-width:700px){ .tool-grid { grid-template-columns: 1fr; } }
-.input-panel { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-.input-panel h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
-.field { margin-bottom: 20px; }
-.field-label { font-size: 12.5px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-.field-val { font-size: 15px; font-weight: 700; color: var(--navy); }
-.field input[type=range] { width: 100%; accent-color: var(--sky); cursor: pointer; height: 4px; }
-.field-ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 4px; }
-.seg { display: flex; gap: 4px; }
-.seg-btn { flex: 1; padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 700; background: #fff; color: var(--text-light); cursor: pointer; font-family: inherit; transition: all .2s; text-align: center; }
-.seg-btn.on { background: var(--sky); border-color: var(--sky); color: #fff; }
-.result-panel { position: sticky; top: 76px; }
-@media(max-width:480px){ .result-panel { position: static; } }
-.result-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
-.result-header { padding: 18px 22px 14px; background: var(--greenl); border-bottom: 2px solid var(--greenb); text-align: center; }
-.result-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: var(--green); margin-bottom: 4px; }
-.result-amount { font-size: clamp(1.8rem,5vw,2.6rem); font-weight: 900; color: var(--green); line-height: 1.1; }
-.result-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
-.result-body { padding: 18px 20px; }
-.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
-.stat-row:last-child { border-bottom: none; }
-.stat-k { font-size: 12.5px; color: var(--text-light); }
-.stat-v { font-size: 15px; font-weight: 700; color: var(--navy); }
-.stat-v.good { color: var(--green); }
-.stat-v.warn { color: var(--amber); }
-.chart-wrap { margin: 16px 0; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
-.chart-wrap h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
-.cta-contact-box { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: linear-gradient(135deg, #1a3d2b, #1f5c40); text-align: center; }
-.cta-contact-text { font-size: 12.5px; color: rgba(255,255,255,0.88); margin-bottom: 10px; line-height: 1.65; }
-.cta-contact-btn { display: inline-block; background: #fff; color: var(--navy); font-size: 13px; font-weight: 800; padding: 9px 22px; border-radius: 50px; transition: box-shadow .2s, transform .2s; }
-.cta-contact-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
-.advice-card { background: #fff; border: 2px solid var(--sky); border-radius: 16px; padding: 22px 24px; margin-top: 28px; transition: border-color .3s; }
-.advice-card.good { border-color: var(--green); }
-.advice-card.warn { border-color: var(--amber); }
-.advice-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; margin-bottom: 10px; }
-.advice-title { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-.advice-body { font-size: 13.5px; color: var(--text); line-height: 1.85; margin-bottom: 14px; }
-.advice-steps { list-style: none; }
-.advice-steps li { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
-.advice-steps li:last-child { border-bottom: none; }
-.step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--sky); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-.advice-card.good .step-num { background: var(--green); }
-.advice-card.warn .step-num { background: var(--amber); }
-.fp-section { margin-top: 36px; }
-.fp-section h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sky-pale); }
-.fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media(max-width:600px){ .fp-grid { grid-template-columns: 1fr; } }
-.fp-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
-.fp-card-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-.fp-card-body { font-size: 12.5px; color: var(--text); line-height: 1.85; }
-.fp-card-body ul { padding-left: 16px; margin-top: 6px; }
-.fp-card-body li { margin-bottom: 5px; }
-.fp-compare-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
-.fp-compare-table th { background: var(--navy); color: #fff; padding: 8px 10px; text-align: center; font-size: 11.5px; }
-.fp-compare-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: center; }
-.fp-compare-table tr:last-child td { border-bottom: none; }
-.fp-compare-table td:first-child { text-align: left; font-weight: 700; color: var(--text-light); }
-.warn-box { background: var(--amberl); border-left: 4px solid var(--amber); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 16px; font-size: 12.5px; line-height: 1.8; color: #92400e; }
-footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
-.footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:var(--ink);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+#pb{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--green),var(--green-light));z-index:9999;transition:width .1s}
 
-/* ─── Utility bar ─── */
-.util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
-.util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
-.util-btn:hover { border-color:var(--sky); color:var(--sky); }
-.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
-.util-btn.x-share:hover { opacity:.8; }
-.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
-.util-toast.show { opacity:1; transform:none; }
-@media print {
-  header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,.cta-contact-box,footer,#pb { display:none!important; }
-  .tool-grid { grid-template-columns:1fr!important; }
-  .result-panel { position:static!important; }
-  body { background:#fff!important; }
-  .main { padding:8px 0!important; }
-}
-
-/* ═══════════════════════════════════
-   スマホ最適化 (480px以下)
-═══════════════════════════════════ */
-@media (max-width:480px){
-  /* スライダー：タッチ面を拡大 */
-  input[type=range]{height:6px!important;cursor:pointer}
-  input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;width:28px;height:28px;border-radius:50%;
-    background:var(--sky,#1a7a4a);box-shadow:0 2px 8px rgba(0,0,0,.25);
-    border:3px solid #fff;cursor:pointer}
-  input[type=range]::-moz-range-thumb{
-    width:28px;height:28px;border-radius:50%;
-    background:var(--sky,#1a7a4a);box-shadow:0 2px 8px rgba(0,0,0,.25);
-    border:3px solid #fff;cursor:pointer}
-  /* タッチターゲット最低44px */
-  button,.btn,.preset-btn,.seg-btn,.cat-tab,.action-btn{min-height:44px!important}
-  .tool-link,.cta-btn,.btn-sim-contact,.btn-sim-link{
-    min-height:48px!important;display:flex!important;align-items:center;justify-content:center}
-  /* ユーティリティバー */
-  .util-bar{gap:6px;padding:8px 12px}
-  .util-btn{padding:8px 12px!important;font-size:12px!important;min-height:40px!important}
-  /* ヒーロー */
-  .hero{padding:32px 16px 24px!important}
-  .hero-lead{font-size:13px}
-  /* フィールドラベル */
-  .field-label{font-size:13px}
-  .field-val{font-size:14px!important}
-  .field{margin-bottom:20px}
-  /* 結果カード */
-  .result-panel{padding:20px 16px!important;border-radius:14px!important}
-  .result-total{font-size:clamp(28px,7vw,40px)!important}
-  /* 3シナリオ比較：縦積み */
-  .sc-grid3{grid-template-columns:1fr!important}
-  /* メイングリッド */
-  .fp-grid,.fp-grid-3,.grid-2,.grid-3{grid-template-columns:1fr!important}
-  /* 比較テーブル */
-  .compare-table,.fp-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-  /* チャート */
-  .chart-wrap{height:180px!important}
-  /* CTAボックス */
-  .cta-box,.sim-cta{padding:24px 16px!important}
-  /* コメントセクション */
-  section[style]{padding:24px 16px!important}
-  /* hover状態をタッチデバイスでリセット */
-}
-@media(hover:none){
-  .preset-btn:hover,.cat-tab:hover,.util-btn:hover,.tool-card:hover,
-  .action-btn:hover,.share-btn:hover,.flow-card:hover{
-    transform:none!important;background:inherit;border-color:inherit;color:inherit}
-}
-/* 横スクロール可能タブ（320px対応） */
-@media(max-width:600px){
-  .cat-tabs,.filter-row{
-    flex-wrap:nowrap!important;overflow-x:auto!important;
-    -webkit-overflow-scrolling:touch;
-    padding-bottom:6px;
-    scrollbar-width:none}
-  .cat-tabs::-webkit-scrollbar,.filter-row::-webkit-scrollbar{display:none}
-  .cat-tab,.ftab,.preset-btn{flex-shrink:0!important}
-}
-
-/* ヒーロースクロールヒント */
-.hero-scroll-hint{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:20px;opacity:.65}
-.hero-scroll-hint span{font-size:10px;color:rgba(255,255,255,.8);letter-spacing:.08em;font-weight:600}
-.hero-scroll-arrow{width:16px;height:16px;border-right:2px solid rgba(255,255,255,.8);border-bottom:2px solid rgba(255,255,255,.8);transform:rotate(45deg);animation:sArrow 1.6s ease-in-out infinite}
-@keyframes sArrow{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
-@media(max-width:480px){.hero-scroll-hint{display:none}}
-/* ヒーロー背景アニメーション */
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(74,222,128,.07) 0%,transparent 55%);pointer-events:none;animation:heroBg 7s ease-in-out infinite;z-index:-1}
+/* Hero */
+.hero{position:relative;overflow:hidden;background-color:var(--navy);background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 55%,#1a5fac 100%);color:#fff;padding:52px 24px 44px;text-align:center}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(74,222,128,.07) 0%,transparent 55%);pointer-events:none;animation:heroBg 7s ease-in-out infinite;z-index:0}
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.hero>*{position:relative;z-index:1}
+.hero-cat{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 14px;font-size:11px;letter-spacing:.1em;margin-bottom:16px;font-weight:700}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:#6ee7b7;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,4.5vw,2.3rem);font-weight:900;line-height:1.3;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:#7ee8a2}
+.hero-meta{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12px;opacity:.8;margin-bottom:14px}
+.hero-lead{font-size:14px;opacity:.85;max-width:580px;margin:0 auto 18px;line-height:1.9}
+.hero-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.hero-tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 13px;font-size:12px}
+
+/* Main */
+.main{max-width:960px;margin:0 auto;padding:28px 20px 80px}
+.preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+.preset-label{font-size:12px;font-weight:700;color:var(--muted)}
+.preset-btn{padding:8px 16px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;transition:all .2s}
+.preset-btn:hover{background:var(--green-pale);border-color:var(--green);color:var(--green)}
+.util-bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;align-items:center}
+.util-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 15px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
+.util-btn:hover{border-color:var(--green);color:var(--green)}
+.util-btn.x-share{background:#000;border-color:#000;color:#fff}
+.util-btn.x-share:hover{opacity:.8}
+.util-toast{position:fixed;bottom:24px;right:24px;background:#0f172a;color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.util-toast.show{opacity:1;transform:none}
+
+/* Tool grid */
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-bottom:28px}
+@media(max-width:720px){.tool-grid{grid-template-columns:1fr}}
+
+/* Input panel */
+.input-panel{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.input-panel h2{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--green-pale)}
+.panel-sub{font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:8px}
+.emp-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.emp-btn{padding:10px 8px;border:1.5px solid var(--border);border-radius:10px;font-size:12px;font-weight:700;background:#fff;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;line-height:1.4}
+.emp-btn.on{background:var(--green-pale);border-color:var(--green);color:var(--navy)}
+.emp-hint{font-size:11.5px;color:var(--muted);background:var(--cream);border-radius:8px;padding:8px 12px;margin-bottom:18px;line-height:1.6}
+.emp-hint strong{color:var(--navy)}
+.field{margin-bottom:20px}
+.field-label{font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.field-val{font-size:15px;font-weight:700;color:var(--navy)}
+.field input[type=range]{width:100%;accent-color:var(--green);cursor:pointer;height:4px}
+.field-ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px}
+
+/* Score panel */
+.result-panel{position:sticky;top:76px}
+@media(max-width:480px){.result-panel{position:static}}
+.score-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.08);margin-bottom:16px}
+.score-header{padding:22px 22px 18px;background-color:var(--navy);background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 100%);text-align:center}
+.score-header-label{font-size:11px;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.7);margin-bottom:8px}
+.score-circle{display:flex;align-items:baseline;justify-content:center;gap:4px}
+.score-num{font-size:clamp(3rem,8vw,4rem);font-weight:900;color:#fff;line-height:1;font-family:'Courier New',monospace}
+.score-unit{font-size:18px;font-weight:700;color:rgba(255,255,255,.7)}
+.score-grade{font-size:13px;font-weight:700;margin-top:8px;padding:4px 16px;border-radius:20px;display:inline-block}
+.score-body{padding:16px 18px}
+.sub-score-row{margin-bottom:13px}
+.sub-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.sub-name{font-weight:700;color:var(--ink)}
+.sub-val{font-weight:700;color:var(--navy)}
+.sub-bar-bg{height:7px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.sub-bar{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.key-result{background:var(--cream);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.key-label{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin-bottom:3px}
+.key-val{font-size:1.2rem;font-weight:900;color:var(--navy)}
+.key-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* CTA */
+.cta-box{margin-top:14px;padding:16px 18px;border-radius:12px;background:linear-gradient(135deg,#1a3d2b,#1f5c40);text-align:center}
+.cta-text{font-size:12.5px;color:rgba(255,255,255,.88);margin-bottom:10px;line-height:1.65}
+.cta-btn{display:inline-block;background:#fff;color:var(--navy);font-size:13px;font-weight:800;padding:9px 22px;border-radius:50px;transition:box-shadow .2s,transform .2s}
+.cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.25)}
+
+/* Section cards */
+.sc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:24px}
+.sc-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--green-pale);display:flex;align-items:center;gap:8px}
+.sc-title::before{content:'';display:inline-block;width:4px;height:18px;background:var(--green);border-radius:2px;flex-shrink:0}
+
+/* Scenario cards */
+.sc-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+@media(max-width:640px){.sc-grid4{grid-template-columns:1fr 1fr}}
+.sc-item{border:1.5px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;transition:all .2s}
+.sc-item.best{border-color:var(--green);background:var(--cream)}
+.sc-name{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;line-height:1.3}
+.sc-name.best{color:var(--green)}
+.sc-val{font-size:1.05rem;font-weight:900;color:var(--navy)}
+.sc-val.best{color:var(--green)}
+.sc-diff{font-size:11px;color:var(--green);font-weight:700;margin-top:3px}
+
+/* Milestone table */
+.mtable{width:100%;border-collapse:collapse;font-size:13px}
+.mtable th{background:var(--navy);color:#fff;padding:10px 12px;text-align:center;font-size:12px}
+.mtable th:first-child{text-align:left}
+.mtable td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:center}
+.mtable td:first-child{text-align:left;font-weight:700;color:var(--muted)}
+.mtable tr:last-child td{border-bottom:none}
+.mtable .best{color:var(--green);font-weight:800}
+.mtable tr:hover td{background:var(--paper)}
+
+/* Gauge */
+.gauge-wrap{margin-bottom:14px}
+.gauge-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.gauge-name{font-size:12.5px;font-weight:700;color:var(--ink)}
+.gauge-val{font-size:13px;font-weight:700;color:var(--navy)}
+.gauge-bg{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.gauge-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.gauge-note{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* iDeCo grid */
+.ideco-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:560px){.ideco-grid{grid-template-columns:1fr}}
+.ideco-kv{background:var(--cream);border-radius:10px;padding:14px 16px}
+.ideco-k{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin-bottom:4px}
+.ideco-v{font-size:1.1rem;font-weight:900;color:var(--navy)}
+.ideco-s{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* Alloc rows */
+.alloc-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:13.5px}
+.alloc-badge{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff}
+.alloc-badge.nisa{background:#22c55e}
+.alloc-badge.ideco{background:#3b82f6}
+.alloc-badge.taxable{background:#94a3b8}
+.alloc-name{font-weight:800;color:var(--navy)}
+.alloc-amount{font-size:12px;color:var(--muted)}
+
+/* Advice card */
+.advice-card{background:#fff;border:2px solid var(--green);border-radius:16px;padding:22px 24px;margin-top:16px}
+.advice-card.warn{border-color:var(--amber)}
+.advice-label{font-size:11px;font-weight:700;letter-spacing:.12em;margin-bottom:10px;color:var(--green)}
+.advice-card.warn .advice-label{color:var(--amber)}
+.advice-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px}
+.advice-body{font-size:13px;color:var(--ink);line-height:1.85;margin-bottom:14px}
+.advice-steps{list-style:none}
+.advice-steps li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.7}
+.advice-steps li:last-child{border-bottom:none}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.advice-card.warn .step-num{background:var(--amber)}
+
+/* FP guide */
+.fp-section{margin-top:8px}
+.fp-section-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--green-pale)}
+.fp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.fp-grid{grid-template-columns:1fr}}
+.fp-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+.fp-card-title{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:8px}
+.fp-card-body{font-size:12.5px;color:var(--ink);line-height:1.85}
+.fp-card-body ul{padding-left:16px;margin-top:6px}
+.fp-card-body li{margin-bottom:5px}
+.fp-cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+.fp-cmp th{background:var(--navy);color:#fff;padding:8px 10px;text-align:center;font-size:11.5px}
+.fp-cmp td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:center}
+.fp-cmp tr:last-child td{border-bottom:none}
+.fp-cmp td:first-child{text-align:left;font-weight:700;color:var(--muted)}
+.warn-box{background:var(--amberl);border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:14px 16px;margin-top:16px;font-size:12.5px;line-height:1.8;color:#92400e}
+
+/* Footer */
+footer{background:var(--navy);color:rgba(255,255,255,.85);padding:32px 24px 24px;text-align:center}
+.footer-logo{font-size:1rem;font-weight:700;margin-bottom:8px}
+footer p{font-size:.72rem;opacity:.55;margin-top:12px}
+
+/* Mobile */
+@media(max-width:480px){
+  input[type=range]{height:6px!important}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--green);box-shadow:0 2px 8px rgba(0,0,0,.25);border:3px solid #fff;cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--green);box-shadow:0 2px 8px rgba(0,0,0,.25);border:3px solid #fff;cursor:pointer}
+  button,.preset-btn,.emp-btn,.util-btn{min-height:44px!important}
+  .hero{padding:36px 16px 28px!important}
+}
+@media print{
+  header,.hero,.preset-row,.util-bar,.cta-box,footer,#pb{display:none!important}
+  .tool-grid{grid-template-columns:1fr!important}
+  .result-panel{position:static!important}
+  .main{padding:8px 0!important}
+}
 </style>
 <script src="/js/cookie-consent.js"></script>
 </head>
@@ -219,12 +234,12 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     </a>
     <nav>
       <a href="/">ホーム</a>
-      <a href="tools.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
-      <a href="blog/">ブログ</a>
-      <a href="kids.html">子ども学習</a>
-      <a href="contact.html">お問い合わせ</a>
+      <a href="/simulation.html" style="color:var(--sky);font-weight:700;">シミュレーター</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/kids.html">子ども学習</a>
+      <a href="/contact.html">お問い合わせ</a>
     </nav>
-    <a href="contact.html" class="btn-cta">お問い合わせ</a>
+    <a href="/contact.html" class="btn-cta">お問い合わせ</a>
     <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -232,147 +247,216 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 </header>
 
 <div class="hero">
-  <div class="hero-badge"><span class="hero-badge-dot"></span>登録不要・リアルタイム計算</div>
-  <h1>NISAとiDeCo、どっちがトク？</h1>
-  <p class="hero-lead">年収・積立額・運用年数を入力するだけ。NISA・iDeCo・課税口座の差額をリアルタイムで比較します。</p>
-  <div class="hero-badges">
-    <span class="hero-tag">節税メリット即計算</span>
-    <span class="hero-tag">3口座比較グラフ</span>
-    <span class="hero-tag">iDeCo所得控除も計算</span>
+  <div class="hero-cat"><span class="hero-dot"></span>登録不要・リアルタイム診断</div>
+  <h1>NISA・iDeCo <em>節税診断</em></h1>
+  <div class="hero-meta">
+    <span>📊 節税活用スコア算出</span>
+    <span>📈 4シナリオ比較</span>
+    <span>💡 最適配分提案</span>
+  </div>
+  <p class="hero-lead">職業タイプと年収を入力するだけで節税活用スコアを算出。NISA・iDeCo・課税口座・最適コンビの4パターンを比較し、あなたに最適な積立戦略を提案します。</p>
+  <div class="hero-tags">
+    <span class="hero-tag">iDeCo上限自動計算</span>
+    <span class="hero-tag">4口座シナリオ比較</span>
+    <span class="hero-tag">節税スコア100点診断</span>
+    <span class="hero-tag">最適配分アドバイス</span>
   </div>
 </div>
-
 
 <div class="main">
   <div class="preset-row">
     <span class="preset-label">プリセット：</span>
-    <button class="preset-btn" onclick="applyPreset('salary')">サラリーマン標準</button>
-    <button class="preset-btn" onclick="applyPreset('high')">高所得者</button>
-    <button class="preset-btn" onclick="applyPreset('housewife')">専業主婦iDeCo</button>
+    <button class="preset-btn" onclick="applyPreset('salary')">会社員・標準</button>
+    <button class="preset-btn" onclick="applyPreset('high')">高所得・共働き</button>
+    <button class="preset-btn" onclick="applyPreset('self')">自営業・フル活用</button>
+    <button class="preset-btn" onclick="applyPreset('spouse')">専業主婦・積立開始</button>
   </div>
   <div class="util-bar">
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
-    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
+    <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー</button>
     <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
   </div>
   <div class="util-toast" id="util-toast"></div>
+
   <div class="tool-grid">
+    <!-- Input -->
     <div class="input-panel">
       <h2>あなたの情報を入力</h2>
+      <div class="panel-sub">職業タイプ（iDeCo上限が変わります）</div>
+      <div class="emp-row">
+        <button class="emp-btn on" id="emp-employee" onclick="setEmp('employee')">会社員<br><small style="font-weight:400">企業年金なし</small></button>
+        <button class="emp-btn" id="emp-gov" onclick="setEmp('gov')">公務員<br><small style="font-weight:400">確定給付年金あり</small></button>
+        <button class="emp-btn" id="emp-self" onclick="setEmp('self')">自営業<br><small style="font-weight:400">国民年金</small></button>
+        <button class="emp-btn" id="emp-spouse" onclick="setEmp('spouse')">専業主婦(夫)<br><small style="font-weight:400">第3号被保険者</small></button>
+      </div>
+      <div class="emp-hint" id="emp-hint">iDeCo上限: <strong>2.3万円/月</strong>（年間27.6万円）。掛金は全額所得控除になります。</div>
 
       <div class="field">
         <div class="field-label">年収<span class="field-val" id="lbl-income">500万円</span></div>
         <input type="range" id="sl-income" min="200" max="2000" step="50" value="500" oninput="sync('income',this.value);calc()">
         <div class="field-ticks"><span>200万</span><span>1,100万</span><span>2,000万</span></div>
       </div>
-
       <div class="field">
         <div class="field-label">毎月の積立額<span class="field-val" id="lbl-monthly">3万円</span></div>
-        <input type="range" id="sl-monthly" min="1" max="10" step="1" value="3" oninput="sync('monthly',this.value);calc()">
-        <div class="field-ticks"><span>1万</span><span>5万</span><span>10万</span></div>
+        <input type="range" id="sl-monthly" min="1" max="30" step="1" value="3" oninput="sync('monthly',this.value);calc()">
+        <div class="field-ticks"><span>1万</span><span>15万</span><span>30万</span></div>
       </div>
-
       <div class="field">
         <div class="field-label">運用年数<span class="field-val" id="lbl-years">20年</span></div>
         <input type="range" id="sl-years" min="5" max="40" step="1" value="20" oninput="sync('years',this.value);calc()">
         <div class="field-ticks"><span>5年</span><span>22年</span><span>40年</span></div>
       </div>
-
       <div class="field">
         <div class="field-label">想定利回り（年率）<span class="field-val" id="lbl-rate">5%</span></div>
         <input type="range" id="sl-rate" min="1" max="8" step="0.5" value="5" oninput="sync('rate',this.value);calc()">
         <div class="field-ticks"><span>1%</span><span>4.5%</span><span>8%</span></div>
       </div>
-
-      <div class="field">
-        <div class="field-label">口座タイプ</div>
-        <div class="seg">
-          <button class="seg-btn on" id="tab-nisa" onclick="setTab('nisa')">NISA</button>
-          <button class="seg-btn" id="tab-ideco" onclick="setTab('ideco')">iDeCo</button>
-          <button class="seg-btn" id="tab-taxable" onclick="setTab('taxable')">課税口座</button>
-        </div>
-      </div>
     </div>
 
+    <!-- Score panel -->
     <div class="result-panel">
-      <div class="result-card">
-        <div class="result-header">
-          <div class="result-label" id="account-label">NISA 運用後の資産</div>
-          <div class="result-amount" id="result-amount">―</div>
-          <div class="result-sub" id="result-sub">課税口座比: ―</div>
+      <div class="score-card">
+        <div class="score-header">
+          <div class="score-header-label">節税活用スコア</div>
+          <div class="score-circle">
+            <span class="score-num" id="score-num">-</span>
+            <span class="score-unit">点</span>
+          </div>
+          <div class="score-grade" id="score-grade">診断中...</div>
         </div>
-        <div class="result-body">
-          <div class="stat-row">
-            <span class="stat-k">元本合計</span>
-            <span class="stat-v" id="r-principal">―</span>
+        <div class="score-body">
+          <div class="sub-score-row">
+            <div class="sub-label"><span class="sub-name">NISA活用率</span><span class="sub-val" id="ss-nisa-val">-%</span></div>
+            <div class="sub-bar-bg"><div class="sub-bar" id="ss-nisa-bar" style="width:0%;background:#22c55e"></div></div>
           </div>
-          <div class="stat-row">
-            <span class="stat-k">運用益（税引後）</span>
-            <span class="stat-v good" id="r-gain">―</span>
+          <div class="sub-score-row">
+            <div class="sub-label"><span class="sub-name">iDeCo活用率</span><span class="sub-val" id="ss-ideco-val">-%</span></div>
+            <div class="sub-bar-bg"><div class="sub-bar" id="ss-ideco-bar" style="width:0%;background:#3b82f6"></div></div>
           </div>
-          <div class="stat-row">
-            <span class="stat-k">課税口座との差額</span>
-            <span class="stat-v good" id="r-diff">―</span>
+          <div class="sub-score-row">
+            <div class="sub-label"><span class="sub-name">長期運用評価</span><span class="sub-val" id="ss-years-val">-%</span></div>
+            <div class="sub-bar-bg"><div class="sub-bar" id="ss-years-bar" style="width:0%;background:#a855f7"></div></div>
           </div>
-          <div class="stat-row" id="ideco-row" style="display:none">
-            <span class="stat-k">iDeCo年間所得控除</span>
-            <span class="stat-v good" id="r-deduction">―</span>
-          </div>
-          <div class="stat-row" id="ideco-tax-row" style="display:none">
-            <span class="stat-k">iDeCo年間節税額</span>
-            <span class="stat-v good" id="r-ideco-tax">―</span>
+          <div style="margin-top:14px">
+            <div class="key-result">
+              <div class="key-label">NISA+iDeCo 最適コンビ（終値）</div>
+              <div class="key-val" id="kr-combo">―</div>
+              <div class="key-sub" id="kr-combo-diff">―</div>
+            </div>
+            <div class="key-result">
+              <div class="key-label">iDeCo 累計節税額（概算）</div>
+              <div class="key-val" id="kr-taxsave">―</div>
+              <div class="key-sub" id="kr-taxsave-sub">―</div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="chart-wrap">
-        <h3>NISA・iDeCo・課税口座 比較（万円）</h3>
-        <canvas id="nisaChart" height="220"></canvas>
-      </div>
-<div class="cta-contact-box">
-        <div class="cta-contact-text">NISA・iDeCoの選び方、お問い合わせください。<br>お問い合わせを承っています。</div>
-        <a href="contact.html" class="cta-contact-btn">お問い合わせ →</a>
+      <div class="cta-box">
+        <div class="cta-text">NISA・iDeCoの最適戦略を<br>FPに個別相談できます。</div>
+        <a href="/contact.html" class="cta-btn">無料でお問い合わせ →</a>
       </div>
     </div>
   </div>
 
-  <div id="advice-card" class="advice-card" style="display:none;"></div>
+  <!-- 4 Scenario comparison -->
+  <div class="sc">
+    <div class="sc-title">4口座シナリオ比較（<span id="years-label">20</span>年後の資産）</div>
+    <div class="sc-grid4">
+      <div class="sc-item"><div class="sc-name">課税口座のみ</div><div class="sc-val" id="sc-a">―</div><div class="sc-diff" id="sc-a-d"></div></div>
+      <div class="sc-item"><div class="sc-name">NISAのみ</div><div class="sc-val" id="sc-b">―</div><div class="sc-diff" id="sc-b-d"></div></div>
+      <div class="sc-item"><div class="sc-name">iDeCoのみ</div><div class="sc-val" id="sc-c">―</div><div class="sc-diff" id="sc-c-d"></div></div>
+      <div class="sc-item best"><div class="sc-name best">★ NISA+iDeCo</div><div class="sc-val best" id="sc-d">―</div><div class="sc-diff" id="sc-d-d">課税口座比</div></div>
+    </div>
+    <canvas id="compChart" height="220"></canvas>
+  </div>
 
+  <!-- Milestone table -->
+  <div class="sc">
+    <div class="sc-title">マイルストーン：年数別 資産比較（万円）</div>
+    <div style="overflow-x:auto">
+      <table class="mtable">
+        <thead>
+          <tr>
+            <th>時点</th><th>元本</th><th>課税口座</th><th>NISAのみ</th><th>iDeCoのみ</th><th class="best">NISA+iDeCo</th>
+          </tr>
+        </thead>
+        <tbody id="milestone-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NISA gauge + iDeCo detail -->
+  <div class="sc">
+    <div class="sc-title">NISA 生涯投資枠・iDeCo 積立詳細</div>
+
+    <div style="margin-bottom:24px">
+      <div style="font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:12px">NISA 生涯投資枠（1,800万円）の進捗予測</div>
+      <div class="gauge-wrap">
+        <div class="gauge-label">
+          <span class="gauge-name">つみたて投資枠（年120万・上限1,200万）</span>
+          <span class="gauge-val" id="g-tsumitate-reach">―</span>
+        </div>
+        <div class="gauge-bg"><div class="gauge-fill" id="g-tsumitate-bar" style="width:0%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div></div>
+        <div class="gauge-note" id="g-tsumitate-note"></div>
+      </div>
+      <div class="gauge-wrap">
+        <div class="gauge-label">
+          <span class="gauge-name">生涯合計枠（最大1,800万円）</span>
+          <span class="gauge-val" id="g-total-reach">―</span>
+        </div>
+        <div class="gauge-bg"><div class="gauge-fill" id="g-total-bar" style="width:0%;background:linear-gradient(90deg,#1a7a4a,#22c55e)"></div></div>
+        <div class="gauge-note" id="g-total-note"></div>
+      </div>
+    </div>
+
+    <div class="ideco-grid">
+      <div class="ideco-kv"><div class="ideco-k">iDeCo 毎月積立</div><div class="ideco-v" id="id-monthly">―</div><div class="ideco-s" id="id-monthly-s">―</div></div>
+      <div class="ideco-kv"><div class="ideco-k">年間節税額（概算）</div><div class="ideco-v" id="id-annual-tax">―</div><div class="ideco-s" id="id-annual-tax-s">―</div></div>
+      <div class="ideco-kv"><div class="ideco-k">累計節税額（<span id="id-years-lbl">20</span>年）</div><div class="ideco-v" id="id-total-tax">―</div><div class="ideco-s">再投資で資産が加速</div></div>
+      <div class="ideco-kv"><div class="ideco-k">退職所得控除（一時金受取）</div><div class="ideco-v" id="id-ret-ded">―</div><div class="ideco-s" id="id-ret-note">―</div></div>
+    </div>
+    <div class="warn-box">iDeCoの退職所得控除は企業退職金と通算されます。退職金が多い場合は控除額が減る可能性があります。受取方法（一時金・年金・組み合わせ）の最適化はFPへご相談ください。</div>
+  </div>
+
+  <!-- Optimal allocation & advice -->
+  <div class="sc">
+    <div class="sc-title">あなたへの最適積立配分アドバイス</div>
+    <div id="alloc-body"></div>
+    <div id="advice-card"></div>
+  </div>
+
+  <!-- FP guide -->
   <div class="fp-section">
-    <h3>FPが教える NISA・iDeCo 完全ガイド</h3>
+    <div class="fp-section-title">FPが教える NISA・iDeCo 完全ガイド</div>
     <div class="fp-grid">
       <div class="fp-card">
-        <div class="fp-card-title">NISA（新NISA）の特徴</div>
-        <div class="fp-card-body">
-          <ul>
-            <li><strong>非課税期間：無期限</strong>（旧NISAは有期限）</li>
-            <li>年間投資枠：つみたて120万円＋成長240万円＝計360万円</li>
-            <li>生涯投資枠：1,800万円（成長枠は1,200万円上限）</li>
-            <li>いつでも引き出し可能。教育費・住宅購入など目的を問わない</li>
-            <li>所得控除なし。課税所得を下げる効果はないが、運用益が永久非課税</li>
-          </ul>
-        </div>
+        <div class="fp-card-title">新NISA の特徴</div>
+        <div class="fp-card-body"><ul>
+          <li><strong>非課税期間：無期限</strong>（旧NISAは有期限）</li>
+          <li>年間枠：つみたて120万＋成長240万＝計360万円</li>
+          <li>生涯投資枠：1,800万円（成長枠は1,200万円上限）</li>
+          <li>いつでも引き出し可能・目的を問わない</li>
+          <li>所得控除なし。運用益が永久非課税</li>
+        </ul></div>
       </div>
       <div class="fp-card">
-        <div class="fp-card-title">iDeCoの特徴</div>
-        <div class="fp-card-body">
-          <ul>
-            <li><strong>掛金が全額所得控除</strong>→所得税・住民税が即年に節税</li>
-            <li>運用益も非課税で複利が続く</li>
-            <li>受取時も退職所得控除・公的年金等控除の優遇あり</li>
-            <li><strong>60歳まで引き出し不可</strong>（老後専用の強制貯蓄）</li>
-            <li>掛金上限：会社員2.3万/月、自営業6.8万/月、専業主婦2万/月</li>
-          </ul>
-        </div>
+        <div class="fp-card-title">iDeCo の特徴</div>
+        <div class="fp-card-body"><ul>
+          <li><strong>掛金が全額所得控除</strong>→所得税＋住民税を即節税</li>
+          <li>運用益も非課税（NISA同様）</li>
+          <li>受取時：退職所得控除（一時金）または公的年金控除（年金）</li>
+          <li><strong>60歳まで引き出し不可</strong>（老後専用の強制貯蓄）</li>
+          <li>手数料：月170〜560円（金融機関により異なる）</li>
+        </ul></div>
       </div>
       <div class="fp-card">
         <div class="fp-card-title">NISA vs iDeCo どちらを優先？</div>
         <div class="fp-card-body">
-          <table class="fp-compare-table">
+          <table class="fp-cmp">
             <thead><tr><th>観点</th><th>NISA</th><th>iDeCo</th></tr></thead>
             <tbody>
-              <tr><td>流動性</td><td>高い（いつでも可）</td><td>低い（60歳まで不可）</td></tr>
-              <tr><td>節税タイミング</td><td>運用益のみ</td><td>今すぐ＋運用益</td></tr>
+              <tr><td>流動性</td><td>高い</td><td>低い（60歳〜）</td></tr>
+              <tr><td>節税タイミング</td><td>受取時</td><td>今すぐ＋受取時</td></tr>
               <tr><td>向いている人</td><td>全員・目的問わず</td><td>高所得・老後特化</td></tr>
               <tr><td>FP推奨順</td><td>1番目</td><td>2番目</td></tr>
             </tbody>
@@ -380,326 +464,364 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         </div>
       </div>
       <div class="fp-card">
-        <div class="fp-card-title">長期積立で重要な3原則</div>
-        <div class="fp-card-body">
-          <ul>
-            <li><strong>長期</strong>：10年以上保有することで元本割れリスクが大幅に低下。20年以上ではほぼゼロに近い（過去実績）</li>
-            <li><strong>積立</strong>：毎月定額を自動購入すると「ドルコスト平均法」により平均取得単価が下がる</li>
-            <li><strong>分散</strong>：全世界株式インデックスや国内・海外債券を組み合わせることでリスクを分散</li>
-          </ul>
-        </div>
+        <div class="fp-card-title">長期積立の3大原則</div>
+        <div class="fp-card-body"><ul>
+          <li><strong>長期</strong>：20年以上で元本割れリスクがほぼゼロ（過去実績）</li>
+          <li><strong>積立</strong>：毎月定額でドルコスト平均法が機能</li>
+          <li><strong>分散</strong>：全世界株式インデックスで地域・企業リスクを分散</li>
+        </ul></div>
       </div>
     </div>
-    <div class="warn-box">
-      運用利回りはあくまでシミュレーション上の仮定値です。実際の投資は元本割れリスクがあります。iDeCoは加入・運営管理手数料（月170〜600円）がかかるため、節税効果と比較して判断してください。個別の最適戦略はFPへご相談ください。
-    </div>
+    <div class="warn-box">本シミュレーターは参考値です。実際の投資は元本割れリスクがあります。iDeCoの手数料・企業年金との調整・退職金との退職所得控除の通算など、個別の事情によって結果は大きく異なります。最終的な判断はFPへご相談の上ご自身でお決めください。</div>
   </div>
 </div>
 
-
-<div style="max-width:920px;margin:0 auto 20px;padding:0 20px"><div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。最終的な判断はご自身の責任で行ってください。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。</div></div>
+<div style="max-width:960px;margin:0 auto 20px;padding:0 20px">
+  <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。最終的な判断はご自身の責任で行ってください。</div>
+</div>
 <footer>
   <div class="footer-logo">ライフアセットオフィス</div>
-  <p>© 2026 ライフアセットオフィス｜<a href="privacy.html">プライバシーポリシー</a>｜<a href="contact.html">お問い合わせ</a></p>
+  <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
 </footer>
 
 <script src="/nav.js"></script>
 <script>
+// ─── State ───────────────────────────────
 var sliders = { income:500, monthly:3, years:20, rate:5 };
-var currentTab = 'nisa';
+var currentEmp = 'employee';
+var IDECO_MAX = { employee:2.3, gov:1.2, self:6.8, spouse:2.3 };
+var IDECO_ANNUAL = { employee:27.6, gov:14.4, self:81.6, spouse:27.6 };
+var compChart = null;
 
-function labelOf(key, val) {
-  if (key==='income') return parseInt(val).toLocaleString()+'万円';
-  if (key==='monthly') return val+'万円';
-  if (key==='years') return val+'年';
-  if (key==='rate') return val+'%';
-  return val;
-}
-function sync(key, val) {
-  sliders[key] = parseFloat(val);
-  document.getElementById('lbl-'+key).textContent = labelOf(key, val);
-}
-function setTab(tab) {
-  currentTab = tab;
-  ['nisa','ideco','taxable'].forEach(function(t) {
-    document.getElementById('tab-'+t).className = 'seg-btn' + (t===tab?' on':'');
-  });
-  document.getElementById('ideco-row').style.display = tab==='ideco' ? '' : 'none';
-  document.getElementById('ideco-tax-row').style.display = tab==='ideco' ? '' : 'none';
-  calc();
-}
-
-function calcFV(monthly, years, rate) {
-  var r = rate / 100 / 12;
-  var n = years * 12;
-  if (r === 0) return monthly * n;
-  return monthly * ((Math.pow(1+r, n) - 1) / r);
-}
-function taxRate(income) {
-  if (income < 195) return 0.05;
-  if (income < 330) return 0.10;
-  if (income < 695) return 0.20;
-  if (income < 900) return 0.23;
-  if (income < 1800) return 0.33;
-  return 0.40;
-}
+// ─── Helpers ────────────────────────────
 function fmt(v) {
-  if (isNaN(v)||!isFinite(v)) return '―';
+  if (!isFinite(v)||isNaN(v)) return '―';
   var abs = Math.abs(v);
   if (abs >= 10000) return (v/10000).toFixed(2)+'億円';
-  return Math.round(v).toLocaleString()+'万円';
+  if (abs >= 1) return Math.round(v).toLocaleString()+'万円';
+  return Math.round(v*10000).toLocaleString()+'円';
+}
+function fmtS(v) {
+  if (!isFinite(v)||isNaN(v)) return '―';
+  if (Math.abs(v)>=10000) return (v/10000).toFixed(1)+'億';
+  return Math.round(v).toLocaleString()+'万';
+}
+function labelOf(k,v) {
+  if(k==='income') return parseInt(v).toLocaleString()+'万円';
+  if(k==='monthly') return v+'万円';
+  if(k==='years') return v+'年';
+  if(k==='rate') return v+'%';
+  return v;
+}
+function sync(k,v) {
+  sliders[k]=parseFloat(v);
+  document.getElementById('lbl-'+k).textContent=labelOf(k,v);
+}
+function marginalTax(inc) {
+  if(inc<195) return 0.05;
+  if(inc<330) return 0.10;
+  if(inc<695) return 0.20;
+  if(inc<900) return 0.23;
+  if(inc<1800) return 0.33;
+  return 0.40;
+}
+function effectiveTax(inc) { return marginalTax(inc)+0.10; } // +住民税10%
+
+function calcFV(m,y,r) {
+  var rate=r/100/12, n=y*12;
+  if(rate===0) return m*n;
+  return m*((Math.pow(1+rate,n)-1)/rate);
+}
+function taxableFV(m,y,r) {
+  var g=calcFV(m,y,r), p=m*y*12;
+  return p+(g-p)*(1-0.20315);
+}
+function retirementDed(y) {
+  if(y<=20) return y*40;
+  return 20*40+(y-20)*70;
+}
+function scenarioA(m,y,r) { return taxableFV(m,y,r); }
+function scenarioB(m,y,r) { // NISA only
+  var ni=Math.min(m,30), ti=m-ni;
+  return calcFV(ni,y,r)+(ti>0?taxableFV(ti,y,r):0);
+}
+function scenarioC(m,y,r,emax) { // iDeCo only
+  var ci=Math.min(m,emax), ct=m-ci;
+  return calcFV(ci,y,r)+(ct>0?taxableFV(ct,y,r):0);
+}
+function scenarioD(m,y,r,emax) { // NISA+iDeCo optimal
+  var di=Math.min(m,emax);
+  var dn=Math.min(m-di,30);
+  var dt=m-di-dn;
+  return calcFV(di,y,r)+calcFV(dn,y,r)+(dt>0?taxableFV(dt,y,r):0);
 }
 
-var chart = null;
+// ─── Employment ──────────────────────────
+function setEmp(emp) {
+  currentEmp=emp;
+  ['employee','gov','self','spouse'].forEach(function(e){
+    document.getElementById('emp-'+e).className='emp-btn'+(e===emp?' on':'');
+  });
+  var lim=IDECO_MAX[emp], ann=IDECO_ANNUAL[emp];
+  document.getElementById('emp-hint').innerHTML='iDeCo上限: <strong>'+lim+'万円/月</strong>（年間'+ann+'万円）。掛金は全額所得控除になります。';
+  calc();
+}
+
+// ─── Main calc ───────────────────────────
 function calc() {
-  var monthly = sliders.monthly, years = sliders.years,
-      rate = sliders.rate, income = sliders.income;
-  var principal = monthly * years * 12;
-  var grossFV = calcFV(monthly, years, rate);
-  var grossGain = grossFV - principal;
+  var inc=sliders.income, m=sliders.monthly, y=sliders.years, r=sliders.rate;
+  var emax=IDECO_MAX[currentEmp];
 
-  var nisaFV = grossFV;
-  var taxableGain = grossGain * (1 - 0.20315);
-  var taxableFV = principal + taxableGain;
-  var idecoFV = grossFV;
+  var fvA=scenarioA(m,y,r);
+  var fvB=scenarioB(m,y,r);
+  var fvC=scenarioC(m,y,r,emax);
+  var fvD=scenarioD(m,y,r,emax);
 
-  var selectedFV, selectedGain;
-  if (currentTab === 'nisa') {
-    selectedFV = nisaFV;
-    selectedGain = grossGain;
-  } else if (currentTab === 'ideco') {
-    selectedFV = idecoFV;
-    selectedGain = grossGain;
+  var comboIdeco=Math.min(m,emax);
+  var comboNisa=Math.min(m-comboIdeco,30);
+  var etr=effectiveTax(inc);
+  var annTax=comboIdeco*12*etr;
+  var totTax=annTax*y;
+  var retDed=retirementDed(y);
+  var idecoFV=calcFV(comboIdeco,y,r);
+
+  // Score
+  var nisaPct=Math.min(100,comboNisa>0?(comboNisa/30)*100:0);
+  var idecoPct=Math.min(100,comboIdeco>0?(comboIdeco/emax)*100:0);
+  var yrsPct=Math.min(100,(y/20)*100);
+  var score=Math.round(nisaPct*0.40+idecoPct*0.35+yrsPct*0.25);
+
+  var grade,gc;
+  if(score>=90){grade='Sランク：節税フル活用！';gc='#22c55e';}
+  else if(score>=75){grade='Aランク：かなり優秀';gc='#16a34a';}
+  else if(score>=60){grade='Bランク：まだ伸びしろあり';gc='#d97706';}
+  else if(score>=40){grade='Cランク：改善が必要';gc='#f97316';}
+  else{grade='Dランク：今すぐ行動を！';gc='#dc2626';}
+
+  // Update score card
+  document.getElementById('score-num').textContent=score;
+  var ge=document.getElementById('score-grade');
+  ge.textContent=grade; ge.style.background=gc+'22'; ge.style.color=gc;
+  document.getElementById('ss-nisa-val').textContent=Math.round(nisaPct)+'%';
+  document.getElementById('ss-nisa-bar').style.width=nisaPct+'%';
+  document.getElementById('ss-ideco-val').textContent=Math.round(idecoPct)+'%';
+  document.getElementById('ss-ideco-bar').style.width=idecoPct+'%';
+  document.getElementById('ss-years-val').textContent=Math.round(yrsPct)+'%';
+  document.getElementById('ss-years-bar').style.width=yrsPct+'%';
+  document.getElementById('kr-combo').textContent=fmt(fvD);
+  document.getElementById('kr-combo-diff').textContent='課税口座比 +'+fmt(fvD-fvA);
+  document.getElementById('kr-taxsave').textContent=fmt(totTax);
+  document.getElementById('kr-taxsave-sub').textContent='年間'+fmt(annTax)+' × '+y+'年（複利効果除く概算）';
+
+  // Scenario cards
+  document.getElementById('sc-a').textContent=fmt(fvA);
+  document.getElementById('sc-b').textContent=fmt(fvB);
+  document.getElementById('sc-b-d').textContent='+'+fmt(fvB-fvA)+' vs課税';
+  document.getElementById('sc-c').textContent=fmt(fvC);
+  document.getElementById('sc-c-d').textContent='+'+fmt(fvC-fvA)+' vs課税';
+  document.getElementById('sc-d').textContent=fmt(fvD);
+  document.getElementById('sc-d-d').textContent='+'+fmt(fvD-fvA)+' vs課税';
+  document.getElementById('years-label').textContent=y;
+
+  // Milestone table
+  var rows=[5,10,20,30].filter(function(v){return v<=y;});
+  if(!rows.length||rows[rows.length-1]!==y) rows.push(y);
+  var tb=document.getElementById('milestone-body'); tb.innerHTML='';
+  rows.forEach(function(yr){
+    var p=m*yr*12;
+    var a=fmtS(scenarioA(m,yr,r));
+    var b=fmtS(scenarioB(m,yr,r));
+    var c=fmtS(scenarioC(m,yr,r,emax));
+    var d=fmtS(scenarioD(m,yr,r,emax));
+    tb.innerHTML+='<tr><td>'+yr+'年後</td><td>'+fmtS(p)+'</td><td>'+a+'</td><td>'+b+'</td><td>'+c+'</td><td class="best">'+d+'</td></tr>';
+  });
+
+  // NISA gauges
+  var nisaAnnual=comboNisa*12;
+  if(comboNisa>0){
+    var yrsTsumitate=1200/Math.min(nisaAnnual,120);
+    var tPct=Math.min(100,(y/yrsTsumitate)*100);
+    document.getElementById('g-tsumitate-bar').style.width=tPct+'%';
+    document.getElementById('g-tsumitate-reach').textContent=yrsTsumitate<=y?'達成見込み':Math.ceil(yrsTsumitate)+'年で満額';
+    document.getElementById('g-tsumitate-note').textContent=Math.min(nisaAnnual,120)+'万円/年ペースでつみたて枠1,200万円到達まで'+Math.ceil(yrsTsumitate)+'年';
+    var yrsTotal=1800/nisaAnnual;
+    var ttPct=Math.min(100,(y/yrsTotal)*100);
+    document.getElementById('g-total-bar').style.width=ttPct+'%';
+    document.getElementById('g-total-reach').textContent=yrsTotal<=y?'達成見込み':Math.ceil(yrsTotal)+'年で満額';
+    document.getElementById('g-total-note').textContent=nisaAnnual+'万円/年ペースで生涯枠1,800万円到達まで'+Math.ceil(yrsTotal)+'年';
   } else {
-    selectedFV = taxableFV;
-    selectedGain = taxableGain;
-  }
-  var diff = selectedFV - taxableFV;
-
-  document.getElementById('account-label').textContent =
-    (currentTab==='nisa'?'NISA':currentTab==='ideco'?'iDeCo':'課税口座') + ' 運用後の資産';
-  document.getElementById('result-amount').textContent = fmt(selectedFV);
-  document.getElementById('result-sub').textContent = '課税口座比: +' + fmt(Math.max(diff,0));
-  document.getElementById('r-principal').textContent = fmt(principal);
-  document.getElementById('r-gain').textContent = fmt(selectedGain);
-  var diffEl = document.getElementById('r-diff');
-  diffEl.textContent = diff >= 0 ? '+'+fmt(diff) : fmt(diff);
-  diffEl.className = 'stat-v ' + (diff >= 0 ? 'good' : 'warn');
-
-  if (currentTab === 'ideco') {
-    var annualDed = monthly * 12;
-    var tr = taxRate(income);
-    var annualTax = annualDed * tr;
-    document.getElementById('r-deduction').textContent = fmt(annualDed)+'/年';
-    document.getElementById('r-ideco-tax').textContent = fmt(annualTax)+'/年';
+    document.getElementById('g-tsumitate-bar').style.width='0%';
+    document.getElementById('g-tsumitate-reach').textContent='NISA未使用';
+    document.getElementById('g-tsumitate-note').textContent='NISAを活用すると運用益が永久非課税になります';
+    document.getElementById('g-total-bar').style.width='0%';
+    document.getElementById('g-total-reach').textContent='NISA未使用';
+    document.getElementById('g-total-note').textContent='生涯枠1,800万円まで運用益が非課税になります';
   }
 
-  renderChart(nisaFV, idecoFV, taxableFV, years, monthly, rate);
+  // iDeCo details
+  document.getElementById('id-monthly').textContent=comboIdeco>0?comboIdeco+'万円/月':'未使用';
+  document.getElementById('id-monthly-s').textContent=comboIdeco>0?'上限'+emax+'万の'+Math.round(comboIdeco/emax*100)+'%を活用':'積立額がiDeCo上限('+emax+'万)未満です';
+  document.getElementById('id-annual-tax').textContent=comboIdeco>0?fmt(annTax)+'/年':'―';
+  document.getElementById('id-annual-tax-s').textContent=comboIdeco>0?'実効税率'+Math.round(etr*100)+'%（所得税'+Math.round(marginalTax(inc)*100)+'%＋住民税10%）':'iDeCoを使うと節税できます';
+  document.getElementById('id-years-lbl').textContent=y;
+  document.getElementById('id-total-tax').textContent=comboIdeco>0?fmt(totTax):'―';
+  document.getElementById('id-ret-ded').textContent=fmt(retDed);
+  document.getElementById('id-ret-note').textContent=idecoFV<=retDed?'積立額('+fmtS(idecoFV)+')は控除内→受取時も非課税':'積立額('+fmtS(idecoFV)+')が控除('+fmtS(retDed)+')を超える可能性あり';
 
-  var annualTaxSaving = 0;
-  if (currentTab === 'ideco') {
-    annualTaxSaving = monthly * 12 * taxRate(income);
-  }
-  updateAdvice(currentTab, diff, annualTaxSaving, income, years);
-  updateUrlParams({inc:sliders.income,m:sliders.monthly,y:sliders.years,r:sliders.rate,tab:currentTab});
+  // Alloc + advice
+  updateAdvice(comboIdeco,comboNisa,m-comboIdeco-comboNisa,m,emax,score,inc,annTax,y,fvD-fvA);
+
+  // Chart
+  renderChart(m,y,r,emax);
+
+  // URL
+  updateUrl({inc:inc,m:m,y:y,r:r,emp:currentEmp});
+
   if(typeof gtag==='function'){
-    gtag('event','simulate_nisa',{account_type:currentTab,monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',years:years,rate:rate,income_range:(Math.floor(income/100)*100)+'〜'+(Math.floor(income/100)*100+100)+'万'});
+    gtag('event','simulate_nisa',{emp_type:currentEmp,monthly:m,years:y,rate:r,score:score});
   }
 }
 
-function updateAdvice(tab, diff, annualTaxSaving, income, years) {
-  var card = document.getElementById('advice-card');
-  card.style.display = '';
-  var cls, labelColor, title, body, steps;
+function updateAdvice(ci,cn,ct,m,emax,score,inc,annTax,y,diff) {
+  var comboTax=Math.max(0,ct);
+  var html='<div class="alloc-row"><span class="alloc-badge ideco">iD</span><div class="alloc-detail"><div class="alloc-name">iDeCo：'+ci+'万円/月</div><div class="alloc-amount">年'+(ci*12).toFixed(1)+'万円 | 年間節税'+(ci>0?Math.round(annTax)+'万円':'0円')+'</div></div></div>';
+  html+='<div class="alloc-row"><span class="alloc-badge nisa">N</span><div class="alloc-detail"><div class="alloc-name">NISA：'+cn+'万円/月</div><div class="alloc-amount">年'+(cn*12).toFixed(1)+'万円 | 運用益非課税</div></div></div>';
+  if(comboTax>0) html+='<div class="alloc-row"><span class="alloc-badge taxable">課</span><div class="alloc-detail"><div class="alloc-name">課税口座：'+comboTax+'万円/月</div><div class="alloc-amount">NISA+iDeCo枠を超えた分</div></div></div>';
+  document.getElementById('alloc-body').innerHTML=html;
 
-  if (tab === 'taxable') {
-    cls = 'warn';
-    labelColor = 'var(--amber)';
-    title = '課税口座のままでは損をしています';
-    body = '課税口座では運用益に20.315%の税金がかかります。NISAやiDeCoに切り替えるだけで、同じ積立・同じ利回りでも数十〜数百万円の差が生まれます。今すぐ行動する価値があります。';
-    steps = [
-      'SBI証券・楽天証券・auカブコム等でNISA口座を開設（申込から開設まで最短1週間）',
-      '課税口座の積立をNISAへ移行する（既存の課税口座保有分は売却せず保有継続でもよい）',
-      '余裕があれば並行してiDeCoも検討（所得控除の節税効果が課税口座との差をさらに拡大）'
-    ];
-  } else if (tab === 'ideco') {
-    var totalTaxSaving = Math.round(annualTaxSaving * years);
-    if (annualTaxSaving < 10000) {
-      cls = '';
-      labelColor = 'var(--sky)';
-      title = 'iDeCoは老後資産の強制貯蓄として有効です';
-      body = '現在の所得税率では年間節税効果は小さめですが、運用益の非課税と強制的に老後資産を積み立てられる点でiDeCoには価値があります。NISAと組み合わせるのが最適です。';
-      steps = [
-        'まずNISAを優先して開設・積立を始める（流動性が高く汎用性が高い）',
-        'iDeCoは60歳まで引き出せないため、生活費の3〜6か月分の緊急資金を確保してから加入を検討',
-        '将来、収入が増えたタイミングでiDeCo掛金を増額すると節税効果が大きくなる'
-      ];
-    } else {
-      cls = 'good';
-      labelColor = 'var(--green)';
-      var annualManWen = Math.round(annualTaxSaving / 10000 * 10) / 10;
-      var totalManWen = Math.round(totalTaxSaving / 10000 * 10) / 10;
-      title = years + '年間で約' + totalManWen + '万円の節税効果が見込まれます';
-      body = 'iDeCoの掛金は全額所得控除のため、年間約' + annualManWen + '万円の税金が戻ります。この節税額を再投資すれば複利で資産が加速します。';
-      steps = [
-        '掛金上限まで積立てることで節税を最大化（会社員2.3万/月、自営業6.8万/月）',
-        '受取時は「一時金」として受取ると退職所得控除が適用され課税が最小化できる',
-        'NISAと並行して活用し、NISAは自由に使える資産・iDeCoは老後専用資産として役割を分担'
-      ];
-    }
+  var card=document.getElementById('advice-card');
+  var cls='',lc,title,body,steps;
+  if(cn===0 && ci<emax) {
+    // 積立額がiDeCo上限未満 → NISAゼロ、iDeCoも未満
+    cls='warn'; lc='var(--amber)';
+    var canAdd=(emax-ci).toFixed(1);
+    var maxTaxSave=fmt(emax*12*effectiveTax(inc));
+    title='積立額を増やすと節税がさらに最大化します';
+    body='現在iDeCoに毎月'+ci+'万円積立中（上限'+emax+'万の'+Math.round(ci/emax*100)+'%）。あと月'+canAdd+'万円増やしてiDeCo上限を満額活用し、余裕があればNISAも始めると節税効果が最大化します。';
+    steps=['iDeCo掛金を月'+emax+'万円（上限）まで増額すると年間節税が最大'+maxTaxSave+'になります','iDeCoを満額後、余剰分はNISA（年間360万・生涯1,800万まで非課税）へ振り向ける','まず生活費3〜6か月分の緊急資金を確保してからiDeCo増額を検討しましょう'];
+  } else if(score>=85) {
+    lc='var(--green)';
+    title='節税フル活用！課税口座比 +'+fmt(diff)+'の優位性';
+    body='NISA・iDeCo両方を最大限活用しています。課税口座と比較して'+fmt(diff)+'多く資産を築けます。あとは継続と段階的な増額が鍵です。';
+    steps=['積立額を少しずつ増やしNISAの生涯枠1,800万円を計画的に埋める','iDeCoは60歳時点の受取方法を事前に検討。一時金か年金かで税負担が異なる','年収が上がったらiDeCo上限の再確認を。転職・独立時は特に要注意'];
+  } else if(score>=60) {
+    lc='var(--green)';
+    title='良い活用状況。さらに最適化できます';
+    body='節税Bランクです。積立額を増やすか運用期間を延ばすことでスコアが大幅に改善します。';
+    steps=['iDeCo掛金を上限（'+emax+'万円/月）まで増額すると年間節税が最大化','NISAの積立も増やし生涯枠1,800万円の達成年数を短縮','ボーナスをNISA成長投資枠（240万/年）へ一括投資すると枠消化が加速'];
   } else {
-    if (diff < 500000) {
-      cls = '';
-      labelColor = 'var(--sky)';
-      title = 'NISAを始めるだけで着実に差が広がります';
-      body = '積立額・期間・利回りを伸ばすほど、NISAの非課税メリットは拡大します。まだ始めていない方は今すぐ口座開設を。既に始めている方は積立額の増額を検討しましょう。';
-      steps = [
-        'NISA口座を開設し「つみたて投資枠」で全世界株式・S&P500連動インデックスを選択',
-        '毎月の積立額を無理のない範囲で設定し、自動積立にして継続する（人間は相場が下がると売りたくなるため自動化が重要）',
-        '年末に「来年から月1万円増額」のような小さなステップアップを習慣化する'
-      ];
-    } else if (diff < 2000000) {
-      cls = 'good';
-      labelColor = 'var(--green)';
-      title = 'NISAで課税口座より' + fmt(diff) + '多く資産を築けます';
-      body = '非課税の恩恵が数百万円規模になっています。この差は長期になるほど加速します。年間投資枠を最大限活用し、iDeCoとの組み合わせも検討する段階です。';
-      steps = [
-        '年間360万円の投資枠（つみたて120万＋成長240万）を計画的に使い切る',
-        '生涯投資枠1,800万円を達成するまでの年数を逆算してペースを設定する',
-        'iDeCoも並行して活用すると所得控除（今すぐ節税）＋運用益非課税の二重効果が得られる'
-      ];
-    } else {
-      cls = 'good';
-      labelColor = 'var(--green)';
-      title = 'NISAの節税効果は' + fmt(diff) + '。総合的な資産設計を';
-      body = '課税口座に対して' + fmt(diff) + 'の優位性があります。この規模になると、NISA・iDeCo・ふるさと納税・生命保険控除を組み合わせたトータルな節税設計が重要です。';
-      steps = [
-        'NISA成長投資枠240万円も活用し、インデックス＋ETF等でポートフォリオを多様化',
-        'iDeCoで年間の所得控除を確保し、確定申告で還付を受け取ってその分を再投資',
-        '総合的な節税ポートフォリオ（NISA・iDeCo・ふるさと納税・控除）をFPと設計することで効果が最大化する'
-      ];
-    }
+    cls='warn'; lc='var(--amber)';
+    title='節税活用の改善余地があります';
+    body='積立期間が短いか活用額が少ない状態です。長期積立の効果は複利で加速するため、早く始めることが最も重要です。';
+    steps=['今すぐNISAを開設し、少額（月1万円）でも積立を開始する','運用年数を延ばす意識で、なるべく早期に始めて積立期間を確保する','収入が安定したらiDeCoも追加し所得控除による即時節税を獲得する'];
   }
 
-  var html = '<div class="advice-label" style="color:' + labelColor + '">あなたへのアドバイス</div>';
-  html += '<div class="advice-title">' + title + '</div>';
-  html += '<div class="advice-body">' + body + '</div>';
-  html += '<ol class="advice-steps">';
-  steps.forEach(function(s, i) {
-    html += '<li><span class="step-num">' + (i + 1) + '</span><span>' + s + '</span></li>';
-  });
-  html += '</ol>';
-  card.className = 'advice-card' + (cls ? ' ' + cls : '');
-  card.innerHTML = html;
+  var h='<div class="advice-label" style="color:'+lc+'">あなたへのアドバイス</div>';
+  h+='<div class="advice-title">'+title+'</div>';
+  h+='<div class="advice-body">'+body+'</div>';
+  h+='<ol class="advice-steps">';
+  steps.forEach(function(s,i){h+='<li><span class="step-num">'+(i+1)+'</span><span>'+s+'</span></li>';});
+  h+='</ol>';
+  card.className='advice-card'+(cls?' '+cls:'');
+  card.innerHTML=h;
 }
 
-function renderChart(nisaFV, idecoFV, taxableFV, years, monthly, rate) {
-  var ctx = document.getElementById('nisaChart').getContext('2d');
-  if (chart) chart.destroy();
-  var labels = [], nisaData = [], idecoData = [], taxData = [];
-  for (var y = 1; y <= years; y++) {
-    labels.push(y+'年後');
-    var gfv = calcFV(monthly, y, rate);
-    var p = monthly * y * 12;
-    nisaData.push(Math.round(gfv));
-    idecoData.push(Math.round(gfv));
-    taxData.push(Math.round(p + (gfv-p)*(1-0.20315)));
+function renderChart(m,y,r,emax) {
+  var ctx=document.getElementById('compChart').getContext('2d');
+  if(compChart) compChart.destroy();
+  var step=Math.max(1,Math.floor(y/8));
+  var labels=[],aD=[],bD=[],cD=[],dD=[];
+  for(var t=1;t<=y;t++){
+    if(t%step!==0&&t!==y) continue;
+    labels.push(t+'年');
+    aD.push(Math.round(scenarioA(m,t,r)));
+    bD.push(Math.round(scenarioB(m,t,r)));
+    cD.push(Math.round(scenarioC(m,t,r,emax)));
+    dD.push(Math.round(scenarioD(m,t,r,emax)));
   }
-  var step = Math.max(1, Math.floor(years/8));
-  var filteredLabels = labels.filter(function(_, i){ return (i+1)%step===0; });
-  var filteredNisa = nisaData.filter(function(_, i){ return (i+1)%step===0; });
-  var filteredIdeco = idecoData.filter(function(_, i){ return (i+1)%step===0; });
-  var filteredTax = taxData.filter(function(_, i){ return (i+1)%step===0; });
-  chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: filteredLabels,
-      datasets: [
-        { label:'NISA', data: filteredNisa, borderColor:'#22c55e', backgroundColor:'rgba(34,197,94,0.08)', tension:0.3, fill:false },
-        { label:'iDeCo', data: filteredIdeco, borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.08)', tension:0.3, fill:false, borderDash:[5,3] },
-        { label:'課税口座', data: filteredTax, borderColor:'#94a3b8', backgroundColor:'rgba(148,163,184,0.08)', tension:0.3, fill:false }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { position: 'bottom' } },
-      scales: {
-        y: { ticks: { callback: function(v){ return (v/10000>=1?(v/10000).toFixed(0)+'億':v)+'万'; } } }
-      }
+  compChart=new Chart(ctx,{
+    type:'line',
+    data:{labels:labels,datasets:[
+      {label:'NISA+iDeCo',data:dD,borderColor:'#1a7a4a',backgroundColor:'rgba(26,122,74,.10)',tension:.3,fill:true,borderWidth:2.5},
+      {label:'NISAのみ',data:bD,borderColor:'#22c55e',backgroundColor:'transparent',tension:.3,fill:false,borderDash:[4,3]},
+      {label:'iDeCoのみ',data:cD,borderColor:'#3b82f6',backgroundColor:'transparent',tension:.3,fill:false,borderDash:[4,3]},
+      {label:'課税口座',data:aD,borderColor:'#94a3b8',backgroundColor:'transparent',tension:.3,fill:false}
+    ]},
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:function(ctx){var v=ctx.raw;return ctx.dataset.label+': '+(v>=10000?(v/10000).toFixed(2)+'億':v.toLocaleString())+'万円';}}}
+      },
+      scales:{y:{ticks:{callback:function(v){return v>=10000?(v/10000).toFixed(1)+'億':v.toLocaleString()+'万';}}}}
     }
   });
 }
 
+// ─── Presets ────────────────────────────
 function applyPreset(name) {
-  var presets = {
-    salary:    { income:500, monthly:3, years:20, rate:5 },
-    high:      { income:1200, monthly:8, years:25, rate:6 },
-    housewife: { income:200, monthly:2, years:30, rate:4 }
+  var presets={
+    salary:{emp:'employee',income:500,monthly:3,years:20,rate:5},
+    high:{emp:'employee',income:1200,monthly:10,years:25,rate:6},
+    self:{emp:'self',income:600,monthly:8,years:25,rate:5},
+    spouse:{emp:'spouse',income:200,monthly:2,years:30,rate:4}
   };
-  var p = presets[name];
-  Object.keys(p).forEach(function(k) {
-    sliders[k] = p[k];
-    var sl = document.getElementById('sl-'+k);
-    if (sl) sl.value = p[k];
-    document.getElementById('lbl-'+k).textContent = labelOf(k, p[k]);
+  var p=presets[name];
+  setEmp(p.emp);
+  ['income','monthly','years','rate'].forEach(function(k){
+    sliders[k]=p[k];
+    var sl=document.getElementById('sl-'+k);
+    if(sl) sl.value=p[k];
+    document.getElementById('lbl-'+k).textContent=labelOf(k,p[k]);
   });
   calc();
 }
-window.addEventListener('scroll', function() {
-  var h = document.documentElement;
-  var pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
-  document.getElementById('pb').style.width = pct + '%';
+
+// ─── Scroll progress ─────────────────────
+window.addEventListener('scroll',function(){
+  var h=document.documentElement;
+  var pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('pb').style.width=pct+'%';
 });
 
-function buildShareUrl() {
-  var p=new URLSearchParams({inc:sliders.income,m:sliders.monthly,y:sliders.years,r:sliders.rate,tab:currentTab}); return location.origin+location.pathname+'?'+p.toString();
+// ─── URL ─────────────────────────────────
+var urlTimer=null;
+function updateUrl(v){
+  clearTimeout(urlTimer);
+  urlTimer=setTimeout(function(){try{history.replaceState(null,'','?'+new URLSearchParams(v).toString());}catch(e){}},300);
 }
-function updateUrlParams(vals) {
-  var p = new URLSearchParams(vals);
-  history.replaceState(null,'','?'+p.toString());
+function buildShareUrl(){
+  return location.origin+location.pathname+'?'+new URLSearchParams({inc:sliders.income,m:sliders.monthly,y:sliders.years,r:sliders.rate,emp:currentEmp}).toString();
 }
-function loadFromUrl() {
+function loadFromUrl(){
   var p=new URLSearchParams(location.search);
-  var map={inc:'sl-income',m:'sl-monthly',y:'sl-years',r:'sl-rate'};
-  var lmap={inc:'income',m:'monthly',y:'years',r:'rate'};
+  var map={inc:'income',m:'monthly',y:'years',r:'rate'};
   var any=false;
   Object.keys(map).forEach(function(k){
-    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
+    if(p.has(k)){var key=map[k];sliders[key]=parseFloat(p.get(k));var sl=document.getElementById('sl-'+key);if(sl)sl.value=p.get(k);document.getElementById('lbl-'+key).textContent=labelOf(key,p.get(k));any=true;}
   });
-  if(p.has('tab')){setTab(p.get('tab'));}
+  if(p.has('emp')) setEmp(p.get('emp'));
   return any;
 }
-function copySimUrl() {
-  var url = buildShareUrl();
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(function(){ showToast('URLをコピーしました！'); });
-  } else {
-    var ta=document.createElement('textarea'); ta.value=url;
-    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-    showToast('URLをコピーしました！');
-  }
+function copySimUrl(){
+  var url=buildShareUrl();
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){showToast('URLをコピーしました！');});}
+  else{var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();showToast('URLをコピーしました！');}
 }
-function showToast(msg) {
-  var t=document.getElementById('util-toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); },2500);
-}
-function printSim() { window.print(); }
-function shareX() {
-  var text='NISA・iDeCo節税メリットを計算しました！\n課税口座との差額: '+document.getElementById('r-diff').textContent+'\n積立'+sliders.monthly+'万円/月・'+sliders.years+'年・利回り'+sliders.rate+'%\n#ライフアセットオフィス #NISA #iDeCo';
+function showToast(msg){var t=document.getElementById('util-toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+function printSim(){window.print();}
+function shareX(){
+  var score=document.getElementById('score-num').textContent;
+  var text='NISA・iDeCo 節税診断をやってみました！\n節税活用スコア: '+score+'点\n積立'+sliders.monthly+'万円/月・'+sliders.years+'年・利回り'+sliders.rate+'%\n#ライフアセットオフィス #NISA #iDeCo #節税';
   window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
 }
-(function(){
-  try {
-    var k='la_sim_recent',u=location.pathname,n='NISA・iDeCo節税メリット計算';
-    var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){ return x.u!==u; });
-    a.unshift({u:u,n:n,ts:Date.now()});
-    localStorage.setItem(k,JSON.stringify(a.slice(0,5)));
-  } catch(e) {}
-})();
 
-if(!loadFromUrl()) calc();
-else calc();
+// ─── Init ─────────────────────────────────
+(function(){
+  try{var k='la_sim_recent',u=location.pathname,n='NISA・iDeCo 節税診断';var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){return x.u!==u;});a.unshift({u:u,n:n,ts:Date.now()});localStorage.setItem(k,JSON.stringify(a.slice(0,5)));}catch(e){}
+})();
+loadFromUrl();
+calc();
 </script>
 </body>
 </html>
