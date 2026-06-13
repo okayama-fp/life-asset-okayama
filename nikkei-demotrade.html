@@ -759,6 +759,7 @@ function tickPrices(){
     el.textContent=nv.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
   });
   checkMission('rich5');
+  checkMission('rich10');
   updatePortfolioHistory();
   saveState();
 }
@@ -1045,12 +1046,16 @@ function execOrder(){
     showToast(`${s.name} ${qty}株 売却完了\n損益: ${pnl>=0?'+':''}¥${Math.round(pnl).toLocaleString()}`,pnl>=0?'buy-toast':'sell-toast');
     checkMission('first_sell');
     if(pnl>0)checkMission('profit_take');
+    if(pnl>=100000)checkMission('big_gain');
     if(pnl<0)checkMission('loss_cut');
   }
   if(lastEventTime&&Date.now()-lastEventTime<60000)checkMission('news_trade');
   updatePortfolio();updateTopbar();renderHistoryList();
   updatePortfolioHistory();
-  try{gtag('event','demo_trade',{trade_type:orderSide,stock_code:selectedCode,stock_sector:s.sector,qty,price:Math.round(price)});}catch(e){}
+  sessionTradeCount++;
+  const stEl=document.getElementById('session-trades');
+  if(stEl)stEl.textContent=`🔄 ${sessionTradeCount}回`;
+  if(window._gtag)window._gtag('event','demo_trade',{trade_type:orderSide,stock_code:selectedCode,stock_sector:s.sector,qty,price:Math.round(price)});
   saveState();
 }
 
@@ -1101,6 +1106,44 @@ function updatePortfolio(){
     }).join('');
     updateSectorBreakdown(evalTotal);
   }
+  // FP アドバイスTip
+  const tipEl=document.getElementById('fp-tip');
+  const warnEl=document.getElementById('risk-warn');
+  if(tipEl&&warnEl){
+    const entries2=Object.entries(positions).map(([code,pos])=>{
+      const price=getCurrentPrice(code);
+      return{code,pos,price,pct:(price-pos.avgPrice)/pos.avgPrice*100};
+    });
+    if(!entries2.length){tipEl.style.display='none';warnEl.style.display='none';}
+    else{
+      let evalT2=0;const secs2={};
+      entries2.forEach(e=>{const s=STOCKS.find(x=>x.code===e.code);if(s){secs2[s.sector]=(secs2[s.sector]||0)+e.price*e.pos.qty;evalT2+=e.price*e.pos.qty;}});
+      const maxSec=Object.entries(secs2).sort((a,b)=>b[1]-a[1])[0];
+      const maxConc=maxSec?maxSec[1]/evalT2:0;
+      if(maxConc>0.6){
+        warnEl.style.display='block';
+        warnEl.textContent=`⚠️ リスク警告: ${maxSec[0]}セクターに資産の${Math.round(maxConc*100)}%が集中しています。複数業種に分散しましょう。`;
+      } else {
+        warnEl.style.display='none';
+      }
+      // FP tip
+      const tip=entries2.length===1?`💡 FP Tip: 1銘柄集中は大きなリスクです。他業種も検討しましょう。`
+        :entries2.length>=5?`✅ FP Tip: ${entries2.length}銘柄に分散できています。さらに業種を広げると理想的です。`
+        :null;
+      if(tip){tipEl.style.display='block';tipEl.textContent=tip;}
+      else tipEl.style.display='none';
+    }
+  }
+  // ポジション大幅変動アラート（±10%）
+  Object.entries(positions).forEach(([code,pos])=>{
+    const price=getCurrentPrice(code);
+    const pct=(price-pos.avgPrice)/pos.avgPrice*100;
+    if(!pos._alerted10&&Math.abs(pct)>=10){
+      pos._alerted10=true;
+      const s=STOCKS.find(x=>x.code===code);
+      if(s)showToast(`${pct>0?'🚀':'⚠️'} ${s.name} が買値から${pct>0?'+':''}${pct.toFixed(1)}%！`,pct>0?'buy-toast':'sell-toast');
+    }
+  });
   updateSkillScore();
   renderTradeStats();
 }
@@ -1144,14 +1187,18 @@ function updatePortfolioHistory(){
 }
 function renderPortfolioMiniChart(){
   const mc=document.getElementById('pf-mini-chart');
+  const lgEl=document.getElementById('mini-legend');
   if(!mc)return;
   if(portfolioHistory.length<2){
     mc.innerHTML='<div class="pf-mini-head"><span>資産推移</span><span style="color:var(--text3)">取引後に表示</span></div>';
+    if(lgEl)lgEl.innerHTML='';
     return;
   }
   const vals=portfolioHistory;
-  const W=260,H=40,PAD=2;
-  const minV=Math.min(...vals,INITIAL_CASH*0.95),maxV=Math.max(...vals,INITIAL_CASH*1.01);
+  const bench=nikkeiHistory.slice(-vals.length);
+  const W=260,H=44,PAD=2;
+  const allVals=[...vals,...bench.filter(Boolean),INITIAL_CASH*0.95,INITIAL_CASH*1.01];
+  const minV=Math.min(...allVals),maxV=Math.max(...allVals);
   const range=maxV-minV||100;
   const n=vals.length;
   const xfn=i=>PAD+(W-PAD*2)*i/Math.max(1,n-1);
@@ -1161,12 +1208,18 @@ function renderPortfolioMiniChart(){
   const pct=(lastV-INITIAL_CASH)/INITIAL_CASH*100;
   const col=pct>=0?'#00d97e':'#ff4d6a';
   const baseY=yfn(INITIAL_CASH).toFixed(1);
-  mc.innerHTML=`<div class="pf-mini-head"><span>資産推移</span><span style="color:${col}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div>
+  let benchPts='';
+  if(bench.length>1){
+    benchPts=`<polyline points="${bench.map((v,i)=>`${xfn(i+Math.max(0,n-bench.length)).toFixed(1)},${yfn(v).toFixed(1)}`).join(' ')}" fill="none" stroke="#445566" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.7"/>`;
+  }
+  mc.innerHTML=`<div class="pf-mini-head"><span>資産推移 vs 日経平均</span><span style="color:${col}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div>
     <svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block">
       <line x1="${PAD}" y1="${baseY}" x2="${W-PAD}" y2="${baseY}" stroke="#2a3a52" stroke-width="0.5" stroke-dasharray="2,3"/>
+      ${benchPts}
       <polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linejoin="round" opacity="0.9"/>
       <circle cx="${xfn(n-1).toFixed(1)}" cy="${yfn(lastV).toFixed(1)}" r="2.5" fill="${col}"/>
     </svg>`;
+  if(lgEl)lgEl.innerHTML=`<span><span class="legend-dot" style="background:${col}"></span>あなたの資産</span><span><span class="legend-dot" style="background:#445566"></span>日経平均ベンチマーク</span>`;
 }
 
 function renderTradeStats(){
@@ -1365,6 +1418,18 @@ const EVENTS=[
  {id:'earnings-down',icon:'📉',title:'',dynamic:'down',
   lesson:'決算が市場の予想より悪い（下方修正など）と、その銘柄は失望売りで急落します。<b>1つの銘柄に集中投資していると、この一撃で大きな損失</b>になります。分散投資が大切な理由がここにあります。',
   pro:'ガイダンス下方修正でネガティブサプライズ。目標株価引き下げが続き戻り売り優勢の展開へ。'},
+ {id:'japan-gdp',icon:'🇯🇵',title:'日本のGDP成長率が予想を上回る — 景気拡大が鮮明に',
+  lesson:'GDP（国内総生産）は国の経済規模・成長を示す最重要指標のひとつです。予想を上回るGDPは企業業績の改善期待を高め、株式市場全体に買いが入りやすくなります。特に内需関連株が物色されやすいパターンです。',
+  pro:'日本GDPポジティブサプライズ。内需関連に資金流入。円高バイアスが輸出株の上値を一部抑制。',
+  fx:0.5,market:1.0,sectors:{小売:1.5,不動産:1.2,運輸:0.8,機械:0.8,輸送機:-0.5}},
+ {id:'ai-infra',icon:'🤖',title:'大手ITが国内でAIデータセンター建設を発表',
+  lesson:'AIの普及でデータセンターの需要が急拡大しています。電力・建設・半導体関連など幅広い業種に恩恵が及び、日本のインフラ関連株が注目されます。電力消費の急増で電力株が買われる一方、競争激化を懸念するIT企業は下がることもあります。',
+  pro:'AI設備投資拡大でデータセンター関連（電力・建設・冷却システム）が物色。半導体製造装置にも恩恵。',
+  fx:0.2,market:0.6,sectors:{電機:2.0,精密:1.5,電力:1.8,機械:1.2,不動産:0.8,IT:-0.5}},
+ {id:'yen-intervention',icon:'🏦',title:'財務省・日銀が為替介入を実施 — 急激な円高へ',
+  lesson:'急激な円安が続くと、日本政府（財務省）が円を買ってドルを売る「為替介入」を実施することがあります。これにより急速な円高が起きます。円高は輸出企業（自動車・電機）に逆風ですが、輸入品が安くなるため小売・食品には追い風です。',
+  pro:'円安阻止の介入観測と実弾介入。輸出主力（自動車・電機）はGAAP業績悪化懸念で売り。内需・小売はコスト安の恩恵。',
+  fx:-3.0,market:-0.8,sectors:{輸送機:-2.5,電機:-2.0,精密:-1.5,機械:-1.0,食品:0.8,小売:1.0}},
 ];
 
 function fireEvent(){
@@ -1544,6 +1609,10 @@ const QUIZ=[
  {q:'「損切り」とは何をすること?',c:['損失を確定させて被害の拡大を防ぐ','下がった株を買い増す','配当金を受け取る'],a:0,exp:'損切りは「これ以上の損失を防ぐための撤退」。感情に流されず事前に決めたルールで実行するのがプロの鉄則です。'},
  {q:'米CPIが予想を大きく上回ったとき、最初に市場で警戒されるのは？',c:['FRBの利上げ','企業の増配','円高の進行'],a:0,exp:'インフレ指標が強いと「FRBが利上げで抑えにくる」という警戒が走り、株（特にIT株）が売られやすくなります。'},
  {q:'1つの銘柄に全資産を投資することの最大のリスクは？',c:['その会社の悪材料1つで資産が激減する','手数料が高くなる','配当がもらえない'],a:0,exp:'下方修正や不祥事が出れば一撃で大きな損失に。だからこそ業種・銘柄の分散が大切です。'},
+ {q:'配当利回り3%の株を100万円分保有すると、年間いくらの配当が見込める？（税引前）',c:['3万円','30万円','300円'],a:0,exp:'配当利回り3%×100万円＝3万円（年間）。ただし実際には約20%の税金がかかります。NISA口座なら非課税で受け取れます。'},
+ {q:'「ゴールデンクロス」とは？',c:['短期移動平均が長期移動平均を下から上に抜くこと','長期移動平均が短期を上抜けること','株価が年初来高値を更新すること'],a:0,exp:'SMA5（短期）がSMA25（長期）を下から上に抜くことをゴールデンクロスといい、買いシグナルとされます。逆の「デッドクロス」は売りシグナルです。'},
+ {q:'RSIが70以上になったとき、一般的にどう読む？',c:['買われすぎの状態（反転注意）','売られすぎの状態（押し目買い）','まだ上昇余地がある'],a:0,exp:'RSI（相対力指数）は0〜100で動き、70以上で「買われすぎ」として反落に注意、30以下で「売られすぎ」として反発に期待します。'},
+ {q:'「含み損」とは？',c:['保有中の株の評価損（まだ売っていない）','実際に売却して確定した損失','手数料の合計金額'],a:0,exp:'含み損は「まだ売っていない帳簿上の損失」。実際に売却して初めて「実現損」になります。損切りするかどうかはこのタイミングで判断します。'},
 ];
 function openQuiz(){
   const remaining=QUIZ.map((_,i)=>i).filter(i=>!quizStats.asked.includes(i));
@@ -1573,6 +1642,8 @@ function answerQuiz(btn,correct,qi){
   document.getElementById('quiz-score').textContent=`正解数 ${quizStats.correct}/${quizStats.total}`;
   document.getElementById('quiz-next').style.display='inline-block';
   if(quizStats.correct>=5)checkMission('quiz5');
+  // Check 5 consecutive correct (simplified: if last 5 all correct)
+  if(quizStats.total>=5&&quizStats.correct===quizStats.total)checkMission('all_quiz');
   updateSkillScore();
   saveState();
 }
@@ -1591,13 +1662,18 @@ const MISSIONS=[
  {id:'five_stocks',icon:'🌐',name:'5銘柄ポートフォリオ',desc:'5つ以上の銘柄を同時に保有する'},
  {id:'five_sectors',icon:'🗺️',name:'5業種分散マスター',desc:'5つ以上の業種の銘柄を同時に保有する'},
  {id:'news5',icon:'📡',name:'マーケットウォッチャー',desc:'5件以上の経済ニュースを受信する'},
+ {id:'rich10',icon:'🚀',name:'総資産+10%達成',desc:'総資産を330万円以上に増やす'},
+ {id:'watch3',icon:'⭐',name:'ウォッチリスト活用',desc:'3銘柄をウォッチリストに追加する'},
+ {id:'big_gain',icon:'💎',name:'一撃10万円利益',desc:'1回の売却で10万円以上の利益を出す'},
+ {id:'all_quiz',icon:'🏆',name:'クイズ全問正解（5連続）',desc:'クイズを5問連続で正解する'},
 ];
 function checkMission(id){
   if(missionsDone[id])return;
-  if(id==='rich5'){
+  if(id==='rich5'||id==='rich10'){
     let evalTotal=0;
     Object.entries(positions).forEach(([code,pos])=>evalTotal+=getCurrentPrice(code)*pos.qty);
-    if(cash+evalTotal<INITIAL_CASH*1.05)return;
+    const threshold=id==='rich5'?INITIAL_CASH*1.05:INITIAL_CASH*1.10;
+    if(cash+evalTotal<threshold)return;
   }
   const m=MISSIONS.find(x=>x.id===id);
   if(!m)return;
