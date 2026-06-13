@@ -8,23 +8,29 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
-<title>株式投資スキル診断｜日経225マーケット道場2026｜ライフアセットオフィス</title>
-<meta name="description" content="2026年・日経平均6万円時代の仮想市場で株式投資を体験。投資スキルスコアで実力を診断。FRB・日銀イベント・ローソク足チャート・ミッション・クイズ付き。無料・登録不要。">
+<title>日経225 投資道場 Pro｜スキル診断・デモトレード2026｜ライフアセットオフィス</title>
+<meta name="description" content="2026年・日経平均6万円時代の仮想市場で株式投資を体験。投資スキルスコアで実力を診断。買値マーカー・ウォッチリスト・FP advisor tip・FRB・日銀イベント・ミッション・クイズ付き。無料・登録不要。">
 <link rel="canonical" href="https://lifeassetoffice.net/nikkei-demotrade.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="株式投資スキル診断｜日経225マーケット道場2026">
+<meta property="og:title" content="日経225 投資道場 Pro｜スキル診断・デモトレード2026">
 <meta property="og:description" content="仮想資金300万円・日経225全銘柄で本格デモトレード体験。投資スキルスコアであなたの実力を可視化。経済イベント・ミッション・クイズで学べる教育シミュレーター。">
 <meta property="og:url" content="https://lifeassetoffice.net/nikkei-demotrade.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@lifeasset_fp">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PKDH2DR522');
+window.addEventListener('cookie-consent-accepted',function(){
+  var s=document.createElement('script');
+  s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522';
+  document.head.appendChild(s);
+  s.onload=function(){
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-PKDH2DR522');
+    window._gtag=gtag;
+  };
+});
 </script>
 <script src="/js/cookie-consent.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,12 +293,25 @@ body.mode-beginner .pro-only{display:none!important}
 .winrate-fill{height:100%;border-radius:2px;transition:width .4s}
 /* CHART TOOLTIP */
 .chart-tooltip{position:absolute;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;font-size:11px;font-family:var(--mono);pointer-events:none;z-index:30;white-space:nowrap;display:none;line-height:1.8;box-shadow:0 4px 16px rgba(0,0,0,.6)}
+/* WATCHLIST */
+.wl-btn{background:none;border:none;cursor:pointer;font-size:12px;padding:0 3px;color:var(--text3);transition:color .15s;line-height:1;flex-shrink:0}
+.wl-btn.watched{color:#f5c842}
+.wl-btn:hover{color:#f5c842}
+/* SESSION STATS */
+.session-stat{font-size:11px;color:var(--text2);font-family:var(--mono);white-space:nowrap;padding:4px 8px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);flex-shrink:0}
+/* RISK WARNING */
+.risk-warn{margin:6px 14px;padding:8px 12px;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.3);border-radius:8px;font-size:11px;color:var(--yellow);display:none;line-height:1.6}
+/* BENCHMARK LEGEND */
+.mini-legend{display:flex;align-items:center;gap:10px;font-size:9px;color:var(--text3);margin-top:3px;padding:0 14px 6px}
+.legend-dot{display:inline-block;width:10px;height:2px;border-radius:1px;vertical-align:middle;margin-right:3px}
+/* FP TIP */
+.fp-tip{margin:6px 14px;padding:9px 12px;background:var(--blue-bg);border:1px solid rgba(59,158,255,.25);border-radius:8px;font-size:11px;color:var(--blue);display:none;line-height:1.6}
 </style>
 </head>
 <body class="mode-beginner">
 
 <div class="topbar">
-  <a class="topbar-logo" href="/simulation.html">← Life Asset <span>マーケット道場 2026</span></a>
+  <a class="topbar-logo" href="/simulation.html">← Life Asset <span>投資道場 Pro 2026</span></a>
   <div class="topbar-right">
     <div class="mode-switch">
       <button class="mode-btn beginner-m active" id="mode-beginner" onclick="setMode('beginner')">🔰 はじめて</button>
@@ -301,6 +320,8 @@ body.mode-beginner .pro-only{display:none!important}
     <button class="top-icon-btn" onclick="openModal('guide-modal')">📖 ガイド</button>
     <button class="top-icon-btn" onclick="openModal('gloss-modal')">📚 用語集</button>
     <button class="top-icon-btn" onclick="openQuiz()">✏️ クイズ</button>
+    <span class="session-stat" id="session-timer">⏱ 0:00</span>
+    <span class="session-stat" id="session-trades">🔄 0回</span>
     <span class="topbar-cash" id="top-cash">¥3,000,000</span>
     <span class="topbar-pnl" id="top-pnl">損益 ¥0</span>
   </div>
@@ -461,7 +482,10 @@ body.mode-beginner .pro-only{display:none!important}
         </div>
       </div>
       <div class="pf-mini" id="pf-mini-chart"></div>
+      <div class="mini-legend" id="mini-legend"></div>
       <button class="reset-btn" onclick="resetGame()">🔄 リセット（仮想資金300万円に戻す）</button>
+      <div class="risk-warn" id="risk-warn"></div>
+      <div class="fp-tip" id="fp-tip"></div>
       <div class="section-label">保有銘柄（損益順）</div>
       <div id="position-list"><div class="empty-state">保有銘柄なし<br>銘柄を選んで取引してください</div></div>
       <div class="trade-stats" id="trade-stats"></div>
@@ -673,6 +697,10 @@ let missionsDone={};
 let quizStats={asked:[],correct:0,total:0};
 let portfolioHistory=[];
 let filterTick=0;
+let nikkeiHistory=[];
+let watchlist=new Set();
+let sessionStart=Date.now();
+let sessionTradeCount=0;
 let prevScore=-1;
 let prevGrade='';
 let bestScore=0;
@@ -749,10 +777,12 @@ function selectSector(s,btn){
   filterStocks();
 }
 function filterStocks(){
+  const listEl=document.getElementById('stock-list');
+  const savedScroll=listEl?listEl.scrollTop:0;
   const q=document.getElementById('search-input').value.toLowerCase();
   const filtered=STOCKS.filter(s=>(currentSector==='全て'||s.sector===currentSector)&&(!q||s.name.includes(q)||s.code.includes(q)));
   document.getElementById('stock-count').textContent=filtered.length+'銘柄';
-  document.getElementById('stock-list').innerHTML=filtered.map(s=>{
+  listEl.innerHTML=filtered.map(s=>{
     const price=getCurrentPrice(s.code);
     const arr=priceData[s.code];
     const prev=arr[arr.length-2]||price;
@@ -760,14 +790,41 @@ function filterStocks(){
     const pct=chg/prev*100;
     const cls=chg>0?'up':chg<0?'down':'flat';
     const sign=chg>0?'+':'';
+    const isWatched=watchlist.has(s.code);
+    const hasPosStr=positions[s.code]?`<span style="font-size:9px;color:var(--green);font-family:var(--mono)">保有</span>`:'';
     return `<div class="stock-item${s.code===selectedCode?' selected':''}" onclick="selectStock('${s.code}')">
-      <div><div class="stock-name">${s.name}</div><div class="stock-code">${s.code} · ${s.sector}</div></div>
-      <div>
-        <div class="stock-price ${cls}">¥${price.toLocaleString()}</div>
-        <div class="stock-change ${cls}">${sign}${chg.toFixed(1)}（${sign}${pct.toFixed(2)}%）</div>
+      <div style="min-width:0;flex:1">
+        <div class="stock-name" style="display:flex;align-items:center;gap:5px">${s.name} ${hasPosStr}</div>
+        <div class="stock-code">${s.code} · ${s.sector}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px">
+        <div>
+          <div class="stock-price ${cls}">¥${price.toLocaleString()}</div>
+          <div class="stock-change ${cls}">${sign}${chg.toFixed(1)}（${sign}${pct.toFixed(2)}%）</div>
+        </div>
+        <button class="wl-btn${isWatched?' watched':''}" onclick="toggleWatch(event,'${s.code}')" title="ウォッチリスト">${isWatched?'★':'☆'}</button>
       </div>
     </div>`;
   }).join('');
+  if(listEl)listEl.scrollTop=savedScroll;
+}
+
+function toggleWatch(e,code){
+  e.stopPropagation();
+  if(watchlist.has(code))watchlist.delete(code);
+  else{
+    watchlist.add(code);
+    if(watchlist.size>=3)checkMission('watch3');
+  }
+  filterStocks();
+  saveState();
+}
+function updateSessionStats(){
+  const elapsed=Math.floor((Date.now()-sessionStart)/1000);
+  const m=Math.floor(elapsed/60);
+  const s=String(elapsed%60).padStart(2,'0');
+  const el=document.getElementById('session-timer');
+  if(el)el.textContent=`⏱ ${m}:${s}`;
 }
 
 function selectStock(code){
@@ -899,6 +956,16 @@ function drawCandleChart(candles){
   // 価格軸ラベル
   out+=`<text x="${W-PAD-2}" y="${PAD+9}" font-size="10" fill="#8899b0" text-anchor="end" font-family="monospace">${Math.round(max).toLocaleString()}</text>`;
   out+=`<text x="${W-PAD-2}" y="${H-PAD-2}" font-size="10" fill="#8899b0" text-anchor="end" font-family="monospace">${Math.round(min).toLocaleString()}</text>`;
+  // 保有中の場合、平均取得単価を黄色破線で表示
+  if(selectedCode&&positions[selectedCode]){
+    const avgP=positions[selectedCode].avgPrice;
+    if(avgP>=min&&avgP<=max){
+      const ay=y(avgP);
+      out+=`<line x1="${PAD}" y1="${ay.toFixed(1)}" x2="${W-PAD}" y2="${ay.toFixed(1)}" stroke="#f5c842" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.85"/>`;
+      out+=`<rect x="${PAD}" y="${Math.max(PAD,(ay-11)).toFixed(1)}" width="76" height="12" fill="${'var(--bg)'}" rx="2" opacity="0.75"/>`;
+      out+=`<text x="${(PAD+3)}" y="${Math.max(PAD+9,(ay-1)).toFixed(1)}" font-size="9" fill="#f5c842" font-family="monospace">avg ¥${Math.round(avgP).toLocaleString()}</text>`;
+    }
+  }
   svg.innerHTML=out;
   // 出来高（擬似）：値動きが大きいローソクほど出来高が多い想定
   const vs=document.getElementById('vol-chart');
@@ -1060,12 +1127,19 @@ function updateSectorBreakdown(evalTotal){
   }).join('');
 }
 
+function getNikkeiBenchmark(){
+  let totalRet=0;
+  STOCKS.forEach(s=>{totalRet+=(getCurrentPrice(s.code)-s.base)/s.base;});
+  return INITIAL_CASH*(1+totalRet/STOCKS.length);
+}
 function updatePortfolioHistory(){
   let evalTotal=0;
   Object.entries(positions).forEach(([code,pos])=>evalTotal+=getCurrentPrice(code)*pos.qty);
   const v=Math.round(cash+evalTotal);
   portfolioHistory.push(v);
   if(portfolioHistory.length>120)portfolioHistory.shift();
+  nikkeiHistory.push(Math.round(getNikkeiBenchmark()));
+  if(nikkeiHistory.length>120)nikkeiHistory.shift();
   renderPortfolioMiniChart();
 }
 function renderPortfolioMiniChart(){
