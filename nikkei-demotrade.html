@@ -131,7 +131,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .guide-btn:hover{background:var(--blue);color:#fff}
 
 /* SVG CHART */
-.chart-wrap{padding:16px 20px;border-bottom:1px solid var(--border)}
+.chart-wrap{padding:16px 20px;border-bottom:1px solid var(--border);position:relative}
 .chart-svg-wrap{background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
 .chart-timeframes{display:flex;gap:4px;margin-bottom:10px;align-items:center;flex-wrap:wrap}
 .tf-btn{padding:3px 10px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:11px;font-family:var(--mono);cursor:pointer;transition:all .15s}
@@ -271,6 +271,22 @@ body.mode-beginner .pro-only{display:none!important}
 /* FOOTER */
 .sim-footer{border-top:1px solid var(--border);padding:14px 20px;font-size:10px;color:var(--text3);line-height:1.8;text-align:center;background:var(--surface)}
 .sim-footer a{color:var(--text2)}
+/* SCORE ANIMATION */
+@keyframes scoreUpPop{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.score-pop{animation:scoreUpPop .35s ease}
+.best-badge{font-size:9px;background:rgba(165,107,250,.12);color:var(--purple);border:1px solid rgba(165,107,250,.25);border-radius:4px;padding:1px 7px;font-family:var(--mono);display:inline-block;margin-top:3px}
+/* PORTFOLIO MINI CHART */
+.pf-mini{padding:6px 14px 4px}
+.pf-mini-head{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:3px;font-weight:700;letter-spacing:.04em}
+/* TRADE STATS */
+.trade-stats{padding:4px 14px 8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.ts-item{background:var(--surface2);border-radius:6px;padding:6px 8px;text-align:center}
+.ts-label{font-size:9px;color:var(--text3);line-height:1.3;margin-bottom:2px}
+.ts-val{font-size:12px;font-weight:700;font-family:var(--mono)}
+.winrate-bar{height:2px;background:var(--surface);border-radius:2px;overflow:hidden;margin-top:4px}
+.winrate-fill{height:100%;border-radius:2px;transition:width .4s}
+/* CHART TOOLTIP */
+.chart-tooltip{position:absolute;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;font-size:11px;font-family:var(--mono);pointer-events:none;z-index:30;white-space:nowrap;display:none;line-height:1.8;box-shadow:0 4px 16px rgba(0,0,0,.6)}
 </style>
 </head>
 <body class="mode-beginner">
@@ -350,6 +366,7 @@ body.mode-beginner .pro-only{display:none!important}
     </div>
 
     <div class="chart-wrap">
+      <div class="chart-tooltip" id="chart-tooltip"></div>
       <div class="chart-timeframes">
         <button class="tf-btn active" onclick="setTF(this,'1D')">1日</button>
         <button class="tf-btn" onclick="setTF(this,'1W')">1週</button>
@@ -420,6 +437,7 @@ body.mode-beginner .pro-only{display:none!important}
             <div id="sk-grade" style="font-size:1.5rem;font-weight:900;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--text3);">D</div>
           </div>
           <div id="sk-label" style="font-size:11px;color:var(--text2);margin-top:4px;">まず取引してみよう</div>
+          <div><span class="best-badge" id="sk-best"></span></div>
         </div>
         <div style="padding:9px 13px;">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
@@ -442,9 +460,11 @@ body.mode-beginner .pro-only{display:none!important}
           </div>
         </div>
       </div>
+      <div class="pf-mini" id="pf-mini-chart"></div>
       <button class="reset-btn" onclick="resetGame()">🔄 リセット（仮想資金300万円に戻す）</button>
       <div class="section-label">保有銘柄（損益順）</div>
       <div id="position-list"><div class="empty-state">保有銘柄なし<br>銘柄を選んで取引してください</div></div>
+      <div class="trade-stats" id="trade-stats"></div>
       <div id="sector-breakdown" style="display:none;padding:10px 14px;border-top:1px solid var(--border);">
         <div style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.08em;margin-bottom:7px;">保有業種内訳</div>
         <div id="sector-bars"></div>
@@ -651,6 +671,15 @@ let newsFeed=[];
 let lastEventTime=0;
 let missionsDone={};
 let quizStats={asked:[],correct:0,total:0};
+let portfolioHistory=[];
+let filterTick=0;
+let prevScore=-1;
+let prevGrade='';
+let bestScore=0;
+let lastCandles=[];
+let lastCandleConf={PAD:12,slotW:1};
+const GRADE_ORDER=['D','C','B','A','S'];
+try{const bs=parseInt(localStorage.getItem(LS_KEY+'-best'));if(bs>0)bestScore=bs;}catch(e){}
 
 const sectors=['全て',...new Set(STOCKS.map(s=>s.sector))];
 
@@ -702,6 +731,7 @@ function tickPrices(){
     el.textContent=nv.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
   });
   checkMission('rich5');
+  updatePortfolioHistory();
   saveState();
 }
 
@@ -843,6 +873,7 @@ function drawCandleChart(candles){
   const range=max-min||1;
   const slotW=(W-PAD*2)/n;
   const bodyW=Math.max(2,Math.min(14,slotW*0.65));
+  lastCandles=candles; lastCandleConf={PAD,slotW};
   const y=v=>H-PAD-((v-min)/range)*(H-PAD*2);
   let out='';
   // グリッド線
@@ -933,7 +964,9 @@ function execOrder(){
     history.unshift({type:'buy',code:selectedCode,name:s.name,price,qty,total,time:new Date()});
     showToast(`${s.name} ${qty}株 買付完了\n¥${Math.round(total).toLocaleString()}`,'buy-toast');
     checkMission('first_buy');
-    if(new Set(Object.keys(positions).map(c=>STOCKS.find(x=>x.code===c)?.sector)).size>=3)checkMission('diversify');
+    if(new Set(Object.keys(positions).map(c=>STOCKS.find(x=>x.code===c)?.sector).filter(Boolean)).size>=3)checkMission('diversify');
+    if(Object.keys(positions).length>=5)checkMission('five_stocks');
+    if(new Set(Object.keys(positions).map(c=>STOCKS.find(x=>x.code===c)?.sector).filter(Boolean)).size>=5)checkMission('five_sectors');
   } else {
     const pos=positions[selectedCode];
     if(!pos||pos.qty<qty){showToast('保有株数が不足しています','error-toast');return;}
@@ -949,15 +982,19 @@ function execOrder(){
   }
   if(lastEventTime&&Date.now()-lastEventTime<60000)checkMission('news_trade');
   updatePortfolio();updateTopbar();renderHistoryList();
+  updatePortfolioHistory();
   try{gtag('event','demo_trade',{trade_type:orderSide,stock_code:selectedCode,stock_sector:s.sector,qty,price:Math.round(price)});}catch(e){}
   saveState();
 }
 
 function resetGame(){
   if(!confirm('リセットしますか？保有・履歴・ミッション達成状況がすべて消えます'))return;
-  cash=INITIAL_CASH;positions={};history=[];missionsDone={};quizStats={asked:[],correct:0,total:0};
+  cash=INITIAL_CASH;positions={};history=[];newsFeed=[];portfolioHistory=[];
+  missionsDone={};quizStats={asked:[],correct:0,total:0};
+  prevScore=-1;prevGrade='';
   try{localStorage.removeItem(LS_KEY);}catch(e){}
-  updatePortfolio();updateTopbar();renderHistoryList();renderMissions();
+  updatePortfolio();updateTopbar();renderHistoryList();renderMissions();renderNewsList();
+  renderPortfolioMiniChart();renderTradeStats();
   showToast('リセットしました。仮想資金300万円からスタート','error-toast');
 }
 
@@ -997,7 +1034,8 @@ function updatePortfolio(){
     }).join('');
     updateSectorBreakdown(evalTotal);
   }
-  updateSkillScore(evalTotal);
+  updateSkillScore();
+  renderTradeStats();
 }
 
 function updateSectorBreakdown(evalTotal){
@@ -1022,8 +1060,88 @@ function updateSectorBreakdown(evalTotal){
   }).join('');
 }
 
-function updateSkillScore(evalTotal){
-  const total=(evalTotal||0)+cash;
+function updatePortfolioHistory(){
+  let evalTotal=0;
+  Object.entries(positions).forEach(([code,pos])=>evalTotal+=getCurrentPrice(code)*pos.qty);
+  const v=Math.round(cash+evalTotal);
+  portfolioHistory.push(v);
+  if(portfolioHistory.length>120)portfolioHistory.shift();
+  renderPortfolioMiniChart();
+}
+function renderPortfolioMiniChart(){
+  const mc=document.getElementById('pf-mini-chart');
+  if(!mc)return;
+  if(portfolioHistory.length<2){
+    mc.innerHTML='<div class="pf-mini-head"><span>資産推移</span><span style="color:var(--text3)">取引後に表示</span></div>';
+    return;
+  }
+  const vals=portfolioHistory;
+  const W=260,H=40,PAD=2;
+  const minV=Math.min(...vals,INITIAL_CASH*0.95),maxV=Math.max(...vals,INITIAL_CASH*1.01);
+  const range=maxV-minV||100;
+  const n=vals.length;
+  const xfn=i=>PAD+(W-PAD*2)*i/Math.max(1,n-1);
+  const yfn=v=>H-PAD-((v-minV)/range)*(H-PAD*2);
+  const pts=vals.map((v,i)=>`${xfn(i).toFixed(1)},${yfn(v).toFixed(1)}`).join(' ');
+  const lastV=vals[n-1];
+  const pct=(lastV-INITIAL_CASH)/INITIAL_CASH*100;
+  const col=pct>=0?'#00d97e':'#ff4d6a';
+  const baseY=yfn(INITIAL_CASH).toFixed(1);
+  mc.innerHTML=`<div class="pf-mini-head"><span>資産推移</span><span style="color:${col}">${pct>=0?'+':''}${pct.toFixed(2)}%</span></div>
+    <svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block">
+      <line x1="${PAD}" y1="${baseY}" x2="${W-PAD}" y2="${baseY}" stroke="#2a3a52" stroke-width="0.5" stroke-dasharray="2,3"/>
+      <polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linejoin="round" opacity="0.9"/>
+      <circle cx="${xfn(n-1).toFixed(1)}" cy="${yfn(lastV).toFixed(1)}" r="2.5" fill="${col}"/>
+    </svg>`;
+}
+
+function renderTradeStats(){
+  const el=document.getElementById('trade-stats');
+  if(!el)return;
+  const sells=history.filter(h=>h.type==='sell'&&h.pnl!==undefined);
+  const wins=sells.filter(h=>h.pnl>0).length;
+  const winRate=sells.length?Math.round(wins/sells.length*100):0;
+  const realPnl=sells.reduce((s,h)=>s+h.pnl,0);
+  const winCol=winRate>=50?'var(--green)':'var(--red)';
+  el.innerHTML=`
+    <div class="ts-item"><div class="ts-label">取引回数</div><div class="ts-val">${history.length}</div></div>
+    <div class="ts-item">
+      <div class="ts-label">勝率</div>
+      <div class="ts-val" style="color:${winCol}">${winRate}%</div>
+      <div class="winrate-bar"><div class="winrate-fill" style="width:${winRate}%;background:${winCol}"></div></div>
+    </div>
+    <div class="ts-item"><div class="ts-label">実現損益</div><div class="ts-val" style="color:${realPnl>=0?'var(--green)':'var(--red)'};font-size:11px">${realPnl>=0?'+':''}¥${Math.round(realPnl).toLocaleString()}</div></div>`;
+}
+
+function setupChartHover(){
+  const svgEl=document.getElementById('price-chart');
+  const tip=document.getElementById('chart-tooltip');
+  const wrap=document.querySelector('.chart-wrap');
+  if(!svgEl||!tip||!wrap)return;
+  svgEl.addEventListener('mousemove',e=>{
+    if(!lastCandles.length){tip.style.display='none';return;}
+    const rect=svgEl.getBoundingClientRect();
+    const wrapRect=wrap.getBoundingClientRect();
+    const svgX=(e.clientX-rect.left)/rect.width*800;
+    const idx=Math.max(0,Math.min(lastCandles.length-1,Math.floor((svgX-lastCandleConf.PAD)/lastCandleConf.slotW)));
+    const c=lastCandles[idx];
+    if(!c){tip.style.display='none';return;}
+    const pctChg=(c.c-c.o)/c.o*100;
+    const col=c.c>=c.o?'#00d97e':'#ff4d6a';
+    tip.style.display='block';
+    const relX=e.clientX-wrapRect.left;
+    const relY=e.clientY-wrapRect.top;
+    tip.style.left=(relX>wrapRect.width/2?relX-175:relX+14)+'px';
+    tip.style.top=Math.max(8,relY-55)+'px';
+    tip.innerHTML=`<span style="color:var(--text3);font-size:9px;display:block;margin-bottom:1px">OHLC</span>始値 ¥${c.o.toLocaleString()}<br>高値 <span style="color:#00d97e">¥${c.h.toLocaleString()}</span><br>安値 <span style="color:#ff4d6a">¥${c.l.toLocaleString()}</span><br>終値 <b style="color:${col}">¥${c.c.toLocaleString()}</b><br><span style="color:${col}">${pctChg>=0?'▲':'▼'} ${Math.abs(pctChg).toFixed(2)}%</span>`;
+  });
+  svgEl.addEventListener('mouseleave',()=>{tip.style.display='none';});
+}
+
+function updateSkillScore(){
+  let evalTotal=0;
+  Object.entries(positions).forEach(([code,pos])=>evalTotal+=getCurrentPrice(code)*pos.qty);
+  const total=evalTotal+cash;
   const returnPct=(total-INITIAL_CASH)/INITIAL_CASH*100;
   const pnlScore=returnPct<=0?0:Math.min(40,Math.round(returnPct*8));
   const sectorCount=new Set(Object.keys(positions).map(c=>STOCKS.find(x=>x.code===c)?.sector).filter(Boolean)).size;
@@ -1038,6 +1156,24 @@ function updateSkillScore(evalTotal){
   const numEl=document.getElementById('sk-num');
   const gradeEl=document.getElementById('sk-grade');
   if(!numEl)return;
+  // Animate on score change
+  if(sc!==prevScore&&prevScore>=0){
+    numEl.classList.remove('score-pop');
+    void numEl.offsetWidth;
+    numEl.classList.add('score-pop');
+  }
+  // Rank up toast
+  if(prevGrade&&grade!==prevGrade&&GRADE_ORDER.indexOf(grade)>GRADE_ORDER.indexOf(prevGrade)){
+    showToast(`🎖️ ランクアップ！ ${prevGrade} → ${grade}`,'mission-toast');
+  }
+  prevScore=sc; prevGrade=grade;
+  // Best score
+  if(sc>bestScore){
+    bestScore=sc;
+    try{localStorage.setItem(LS_KEY+'-best',bestScore);}catch(e){}
+  }
+  const bsEl=document.getElementById('sk-best');
+  if(bsEl)bsEl.textContent=bestScore>0?'ベスト: '+bestScore:'';
   numEl.textContent=sc; numEl.style.color=col;
   gradeEl.textContent=grade; gradeEl.style.background=col;
   gradeEl.style.color=(sc>=50&&sc<85)?'#000':'#fff';
@@ -1192,6 +1328,7 @@ function fireEvent(){
   lastEventTime=Date.now();
   newsFeed.unshift(record);
   if(newsFeed.length>30)newsFeed.pop();
+  if(newsFeed.length>=5)checkMission('news5');
   document.getElementById('ticker-text').textContent=`${ev.icon} ${record.title}`;
   document.getElementById('ticker-time').textContent=record.time.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
   renderNewsList();
@@ -1362,7 +1499,7 @@ function answerQuiz(btn,correct,qi){
   document.getElementById('quiz-score').textContent=`正解数 ${quizStats.correct}/${quizStats.total}`;
   document.getElementById('quiz-next').style.display='inline-block';
   if(quizStats.correct>=5)checkMission('quiz5');
-  updateSkillScore(0);
+  updateSkillScore();
   saveState();
 }
 
@@ -1377,6 +1514,9 @@ const MISSIONS=[
  {id:'rich5',icon:'📈',name:'総資産+5%達成',desc:'総資産を315万円以上に増やす'},
  {id:'try_pro',icon:'📊',name:'プロモード体験',desc:'プロモードに切り替えてテクニカル指標を見る'},
  {id:'quiz5',icon:'🎓',name:'クイズマスター',desc:'投資クイズに5問正解する'},
+ {id:'five_stocks',icon:'🌐',name:'5銘柄ポートフォリオ',desc:'5つ以上の銘柄を同時に保有する'},
+ {id:'five_sectors',icon:'🗺️',name:'5業種分散マスター',desc:'5つ以上の業種の銘柄を同時に保有する'},
+ {id:'news5',icon:'📡',name:'マーケットウォッチャー',desc:'5件以上の経済ニュースを受信する'},
 ];
 function checkMission(id){
   if(missionsDone[id])return;
@@ -1390,7 +1530,7 @@ function checkMission(id){
   missionsDone[id]=true;
   showToast(`🏆 ミッション達成！\n${m.icon} ${m.name}`,'mission-toast');
   renderMissions();
-  updateSkillScore(0);
+  updateSkillScore();
   saveState();
 }
 function renderMissions(){
@@ -1411,6 +1551,7 @@ function saveState(){
       cash,positions,
       history:history.slice(0,50),
       newsFeed:newsFeed.slice(0,20),
+      portfolioHistory:portfolioHistory.slice(-60),
       missionsDone,quizStats,mode
     }));
   }catch(e){}
@@ -1423,6 +1564,7 @@ function loadState(){
     if(d.positions)positions=d.positions;
     if(d.history)history=d.history;
     if(d.newsFeed)newsFeed=d.newsFeed;
+    if(d.portfolioHistory)portfolioHistory=d.portfolioHistory;
     if(d.missionsDone)missionsDone=d.missionsDone;
     if(d.quizStats)quizStats=d.quizStats;
     if(d.mode)mode=d.mode;
@@ -1440,10 +1582,17 @@ updateTopbar();
 renderHistoryList();
 renderMissions();
 renderNewsList();
-updateSkillScore(0);
+renderTradeStats();
+renderPortfolioMiniChart();
+updateSkillScore();
 updateClock();
 setMode(mode);
-setInterval(()=>{tickPrices();filterStocks();updateClock();},3000);
+setupChartHover();
+setInterval(()=>{
+  tickPrices();
+  if(++filterTick%3===0)filterStocks();
+  updateClock();
+},3000);
 setTimeout(()=>{fireEvent();scheduleEvents();},20000);
 // 初回訪問者にはガイドを表示
 try{
