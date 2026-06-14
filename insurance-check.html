@@ -129,9 +129,11 @@ nav.toc a:hover{text-decoration:underline}
 .inp-g select{padding:9px 12px;border:1.5px solid var(--bdr);border-radius:6px;font-size:14px;color:var(--ink);background:#fff;font-family:inherit}
 .inp-g select:focus{outline:none;border-color:var(--ga)}
 .rr{display:flex;align-items:center;gap:10px}
+.rr input[type=range]{flex:1}
 .rv{font-size:15px;font-weight:700;color:var(--gd);min-width:60px;text-align:right}
-input[type=range]{-webkit-appearance:none;height:6px;border-radius:3px;background:var(--bdr);outline:none}
+input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--bdr);outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ga);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ga);cursor:pointer;border:none}
 @media(max-width:600px){.inp-grid{grid-template-columns:1fr}}
 
 /* ── calc btn ── */
@@ -193,6 +195,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .ti-g{display:flex;flex-direction:column;gap:5px}
 .ti-g label{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--sub)}
 .ti-row{display:flex;align-items:center;gap:8px}
+.ti-row input[type=range]{flex:1}
 .ti-val{font-size:14px;font-weight:700;color:var(--gd);min-width:56px;text-align:right}
 .ti-g select{padding:8px 10px;border:1.5px solid var(--bdr);border-radius:6px;font-size:13px;color:var(--ink);background:#fff;font-family:inherit;width:100%}
 .tr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
@@ -817,6 +820,7 @@ function calcInsurance(){
   const asset=parseInt(document.getElementById('asset').value);
   const premium=parseFloat(document.getElementById('premium').value);
   const spouse=document.getElementById('spouse').value;
+  const health=document.getElementById('health').value;
   const cancer=document.getElementById('cancer').value;
   const defense=document.getElementById('defense').value;
 
@@ -874,12 +878,17 @@ function calcInsurance(){
     verdicts.push({name:'死亡保険',badge:'noneed',need:'不要',reason:'扶養家族なし、または子ども独立済み。団信加入の持ち家なら住宅ローンも消滅。'});
   }
   verdicts.push({name:'終身保険・養老保険（貯蓄型）',badge:'noneed',need:'不要',reason:'保険料の約30%が事業費コスト。同額をNISA積立すれば長期で大きな差。資産形成は保険でなく投資信託で。'});
-  if(hasDefense&&hasAsset){
+  if(health==='bad'){
+    verdicts.push({name:'医療保険',badge:'cond',need:'要検討（注意あり）',reason:`持病・治療中の場合、新規加入で告知義務違反リスクや引受拒否の可能性があります。加入できたとしても既往症は免責になるケースが多く、実質的な保障が限られます。まず主治医に相談の上、引受緩和型・無告知型保険を比較検討してください。`});
+  }else if(hasDefense&&hasAsset){
     verdicts.push({name:'医療保険',badge:'noneed',need:'不要',reason:`入院時の実質負担は月約${nyuinTotal}万円（手取り${tedoriM}万円の${nyuinRatio}%）。生活防衛資金があれば現金対応可能。医療保険料をNISAに回す方が合理的。`});
   }else{
     verdicts.push({name:'医療保険',badge:'cond',need:'慎重に検討',reason:`入院時の実質負担 月約${nyuinTotal}万円が手取り${tedoriM}万円の${nyuinRatio}%を占める。まず生活防衛資金（月手取り×6ヶ月＝${Math.round(tedoriM*6)}万円）の積立を優先。`});
   }
-  verdicts.push({name:'がん保険',badge:cancer==='high'?'cond':'noneed',need:cancer==='high'?'要検討':'基本不要',reason:cancer==='high'?'強いリスク意識がある場合は通院型・実費補償型を検討。ただし支払条件が治療の進歩に追いつかないリスクあり。':'高額療養費制度でほぼカバー可能。特別なリスク意識がなければ不要。'});
+  const cancerBadge=(cancer==='high'||health==='bad')?'cond':'noneed';
+  const cancerNeed=(cancer==='high'||health==='bad')?'要検討':'基本不要';
+  const cancerReason=(cancer==='high'||health==='bad')?'リスク意識が高い、または健康上の懸念がある場合は通院型・実費補償型を検討。ただし支払条件が治療の進歩に追いつかないリスクあり。持病がある場合は引受緩和型のみ加入可能なケースも多い。':'高額療養費制度でほぼカバー可能。特別なリスク意識がなければ不要。';
+  verdicts.push({name:'がん保険',badge:cancerBadge,need:cancerNeed,reason:cancerReason});
   if(isFreelance){
     verdicts.push({name:'就業不能保険',badge:'need',need:'必要',reason:'フリーランスは傷病手当金なし。長期就業不能リスクに公的保障が薄いため民間保険で備えることを推奨。'});
   }else{
@@ -928,6 +937,7 @@ window.addEventListener('scroll',function(){
 
 // 初期化
 calcTedoriPanel();
+updateIncome();
 </script>
 </body>
 </html>
