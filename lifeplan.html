@@ -934,7 +934,14 @@ function buildSVGChart(rows, opts={}){
     const p=pts.map((r,i)=>`${xOff(i).toFixed(1)},${yOff(r[key]||0).toFixed(1)}`).join(' ');
     return `${xOff(0).toFixed(1)},${yOff(base).toFixed(1)} ${p} ${xOff(pts.length-1).toFixed(1)},${yOff(base).toFixed(1)}`;
   };
-  const fmtY=v=>v>=10000?Math.round(v/1000)+'千万':v>=1000?Math.round(v/100)/10+'千':Math.round(v)+'万';
+  const fmtY=v=>{
+    const s=v<0?'-':'',a=Math.abs(v);
+    if(a>=10000){const o=parseFloat((a/10000).toFixed(1));return s+o+'億';}
+    const k=parseFloat((a/1000).toFixed(1));
+    if(k>=10){return s+(k/10).toFixed(1).replace(/\.0$/,'')+'億';} // 千万単位で繰り上がり時
+    if(a>=1000){return s+k+'千万';}
+    return s+Math.round(a)+'万';
+  };
   const ticks=5;
   const yTicks=Array.from({length:ticks+1},(_,i)=>minV+(range/ticks)*i);
   const yTicksSVG=yTicks.map(v=>`
@@ -1437,10 +1444,12 @@ function _generatePlan(){
       ${canDefer?`<div id="ptab-content-delay" class="pension-tab-content">
         <p style="font-size:11px;color:var(--gray);margin-bottom:6px">65歳以降に受給を遅らせると <strong>0.7%/月（8.4%/年）増額</strong>。最大75歳まで繰り下げ可（上限+84%）。受給開始後は増額分を含め終身。</p>
         <div class="delay-wrap"><table class="delay-table">
-          <tr><th>繰り下げ</th><th>受給開始</th><th>月額</th><th>増額率</th><th>損益分岐点</th><th>判定</th></tr>
-          <tr><td>なし（基準）</td><td>65歳</td><td>${fmt(pensionSelf)}万円</td><td>±0%</td><td>—</td><td>基準</td></tr>
+          <tr><th>繰り下げ</th><th>受給開始</th><th>月額</th><th>増額率（65歳比）</th><th>損益分岐点</th><th>判定</th></tr>
+          ${ageSelf>=65
+            ?`<tr><td>今すぐ受給（基準）</td><td>${ageSelf}歳</td><td>${delayOpts[0]?delayOpts[0].baseMonthly:fmt(pensionSelf)}万円</td><td>+${Math.round((1+0.084*Math.max(0,ageSelf-65))*100-100)}%（65歳比）</td><td>—</td><td>現時点の選択</td></tr>`
+            :`<tr><td>なし（基準）</td><td>65歳</td><td>${fmt(pensionSelf)}万円</td><td>±0%</td><td>—</td><td>基準</td></tr>`}
           ${delayOpts.map(d=>`<tr${bestDelay&&bestDelay.viable&&d===bestDelay?' class="delay-best"':''}>
-            <td>+${d.d}年</td><td>${d.startAge}歳</td><td><strong>${d.monthly}万円</strong></td>
+            <td>+${d.d}年${ageSelf>=65?'（今より）':''}</td><td>${d.startAge}歳</td><td><strong>${d.monthly}万円</strong></td>
             <td style="color:var(--green)">+${Math.round(d.factor*100-100)}%</td>
             <td>${d.viable?d.breakevenAge+'歳':planEndAge+'歳超'}</td>
             <td>${d.viable?(bestDelay&&d===bestDelay?'✅ 推奨':'○ 有効'):'△ 期間外'}</td>
@@ -1776,16 +1785,22 @@ function runMonteCarlo(N,sigma){
 
 // ── Pension delay (繰り下げ) optimizer ──
 function calcPensionDelay(pensionSelf,ageSelf,planEndAge){
-  const maxDefer=Math.min(10,75-Math.max(65,ageSelf));
+  const baseAge=Math.max(65,ageSelf); // 65歳未満なら65、すでに65超なら現在年齢が起点
+  const maxDefer=Math.min(10,75-baseAge);
   const opts=[];
+  // 65歳以上の場合、今すぐ受給した場合の月額を基準とする
+  const baseTotalDeferred=Math.max(0,ageSelf-65);
+  const baseFactor=1+0.084*baseTotalDeferred;
+  const baseMonthly=ageSelf>=65?pensionSelf*baseFactor:pensionSelf;
   for(let d=1;d<=maxDefer;d++){
-    const startAge=65+d;
-    const factor=1+0.084*d;
-    const monthly=pensionSelf*factor;
-    const lostTotal=pensionSelf*12*d;
-    const gainPerYear=(monthly-pensionSelf)*12;
+    const startAge=baseAge+d;
+    const totalDeferred=startAge-65; // 65歳からの通算繰り下げ年数（増額率算出用）
+    const factor=1+0.084*totalDeferred;
+    const monthly=Math.round(pensionSelf*factor*10)/10;
+    const lostTotal=baseMonthly*12*d; // 今すぐ受給しなかった場合の機会損失
+    const gainPerYear=(monthly-baseMonthly)*12;
     const breakevenAge=gainPerYear>0?Math.round(startAge+lostTotal/gainPerYear):999;
-    opts.push({d,startAge,monthly:Math.round(monthly*10)/10,factor,breakevenAge,viable:breakevenAge<=planEndAge});
+    opts.push({d,startAge,monthly,factor,breakevenAge,viable:breakevenAge<=planEndAge,baseMonthly:Math.round(baseMonthly*10)/10,baseAge});
   }
   return opts;
 }
