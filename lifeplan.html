@@ -531,7 +531,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
     <div class="grid-2">
       <div class="field">
         <label>本人の年金（65歳基準・月額見込み）</label>
-        <div class="field-row"><input type="number" id="pension-self" value="14" min="0"><span class="field-unit">万円/月</span></div>
+        <div class="field-row"><input type="number" id="pension-self" value="14" min="0" oninput="updatePensionPreview()"><span class="field-unit">万円/月</span></div>
       </div>
       <div class="field" id="pension-spouse-field">
         <label>配偶者の年金（65歳基準・月額見込み）</label>
