@@ -250,6 +250,11 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .delay-table tr:last-child td{border-bottom:none}
 .delay-best td{background:rgba(26,122,74,.07);font-weight:700;color:var(--green)}
 .recalc-spin{display:none;position:fixed;bottom:24px;left:24px;background:rgba(26,122,74,.92);color:#fff;padding:7px 14px;border-radius:8px;font-size:11px;z-index:9998;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.update-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:#1a3d2b;border-top:2px solid var(--green);padding:12px 20px;z-index:9997;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 -4px 16px rgba(0,0,0,.15)}
+.update-bar-msg{font-size:13px;color:#dcfce7}
+.update-bar-msg span{font-size:11px;color:#86efac;display:block;margin-top:2px}
+.update-bar-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;white-space:nowrap;transition:background .15s}
+.update-bar-btn:hover{background:#158a3e}
 </style>
 <script src="/js/cookie-consent.js"></script>
 </head>
@@ -270,6 +275,10 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   </div>
 </nav>
 <div class="toast" id="toast"></div>
+<div class="update-bar" id="update-bar">
+  <div class="update-bar-msg">条件を変更しました<span>ボタンを押すと変更をライフプラン表に反映します</span></div>
+  <button class="update-bar-btn" onclick="generatePlan()">変更を確定して結果を見る →</button>
+</div>
 <div id="save-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;align-items:center;justify-content:center">
   <div style="background:#fff;border-radius:16px;padding:28px;width:90%;max-width:400px;box-shadow:0 16px 48px rgba(0,0,0,.22)">
     <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:6px">⭐ プランに名前をつけて保存</div>
@@ -830,6 +839,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 let lastRows=[];
 let lastHasSpouse=false;
 let lastPlanSummary=null;
+let currentStep=1;
 
 function collectAllInputs(){
   const data={};
@@ -1006,6 +1016,7 @@ iDeCo <strong>${d.id.toLocaleString()}</strong>万 ／ 投資 <strong>${d.iv.toL
 }
 
 function goStep(n){
+  currentStep=n;
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+n).classList.add('active');
   for(let i=1;i<=6;i++){
@@ -1022,6 +1033,8 @@ function goStep(n){
     document.getElementById('plan-empty-state').style.display=hasData?'none':'block';
     document.getElementById('plan-content').style.display=hasData?'block':'none';
   }
+  const bar=document.getElementById('update-bar');
+  if(bar)bar.style.display=(n!==6&&lastRows.length>0)?'flex':'none';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1540,7 +1553,7 @@ function autoSave(){try{localStorage.setItem(_LS,JSON.stringify(collectAllInputs
 })();
 let _autoRecalcTimer=null;
 function scheduleRecalc(){
-  if(document.getElementById('plan-content').style.display==='none')return;
+  if(currentStep!==6)return;
   const spin=document.getElementById('recalc-spin');if(spin)spin.style.display='block';
   clearTimeout(_autoRecalcTimer);
   _autoRecalcTimer=setTimeout(()=>{generatePlan();if(spin)spin.style.display='none';},800);
