@@ -19,12 +19,18 @@
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@lifeasset_fp">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PKDH2DR522');
+window.addEventListener('cookie-consent-accepted',function(){
+  var s=document.createElement('script');
+  s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-PKDH2DR522';
+  document.head.appendChild(s);
+  s.onload=function(){
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());gtag('config','G-PKDH2DR522');
+    window._gtag=gtag;
+  };
+});
 </script>
 <link rel="stylesheet" href="/style.css">
 <style>
