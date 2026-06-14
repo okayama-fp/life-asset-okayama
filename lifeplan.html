@@ -527,18 +527,39 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
   </div>
 
   <div class="card">
-    <div class="card-title">年金収入（65歳以降）</div>
+    <div class="card-title">年金収入</div>
     <div class="grid-2">
       <div class="field">
-        <label>本人の年金（月額見込み）</label>
+        <label>本人の年金（65歳基準・月額見込み）</label>
         <div class="field-row"><input type="number" id="pension-self" value="14" min="0"><span class="field-unit">万円/月</span></div>
       </div>
-      <div class="field">
-        <label>配偶者の年金（月額見込み）</label>
+      <div class="field" id="pension-spouse-field">
+        <label>配偶者の年金（65歳基準・月額見込み）</label>
         <div class="field-row"><input type="number" id="pension-spouse" value="6" min="0"><span class="field-unit">万円/月</span></div>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--gray);margin-top:8px">※年金見込み額は「ねんきん定期便」または「ねんきんネット」でご確認ください</p>
+    <p style="font-size:11px;color:var(--gray);margin:8px 0 12px">※月額は「ねんきん定期便」または「ねんきんネット」の65歳時の見込み額を入力してください</p>
+    <div class="grid-2">
+      <div class="field">
+        <label>本人の受給開始年齢 <span style="font-size:10px;color:var(--blue)">(60〜75歳)</span></label>
+        <div class="field-row stepper">
+          <button class="stepper-btn minus" onclick="stepVal('pension-start-self',-1,60,75);updatePensionPreview()">−</button>
+          <input type="number" id="pension-start-self" value="65" min="60" max="75" oninput="updatePensionPreview()">
+          <button class="stepper-btn plus" onclick="stepVal('pension-start-self',1,60,75);updatePensionPreview()">+</button>
+          <span class="field-unit">歳</span>
+        </div>
+      </div>
+      <div class="field" id="pension-start-spouse-field">
+        <label>配偶者の受給開始年齢 <span style="font-size:10px;color:var(--blue)">(60〜75歳)</span></label>
+        <div class="field-row stepper">
+          <button class="stepper-btn minus" onclick="stepVal('pension-start-spouse',-1,60,75);updatePensionPreview()">−</button>
+          <input type="number" id="pension-start-spouse" value="65" min="60" max="75" oninput="updatePensionPreview()">
+          <button class="stepper-btn plus" onclick="stepVal('pension-start-spouse',1,60,75);updatePensionPreview()">+</button>
+          <span class="field-unit">歳</span>
+        </div>
+      </div>
+    </div>
+    <div id="pension-preview" style="margin-top:10px;padding:10px 14px;background:var(--bg);border-radius:8px;border:1px solid var(--border);font-size:12px;line-height:2;display:none"></div>
   </div>
 
   <div class="card">
@@ -955,10 +976,10 @@ function buildSVGChart(rows, opts={}){
   const zeroLine=minV<0?`<line x1="${PL}" y1="${yOff(0).toFixed(1)}" x2="${W-PR}" y2="${yOff(0).toFixed(1)}" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>`:'';
 
   // Milestone vertical lines
-  const {retireSelf=65,loanEndAge=0,depleteAge=null}=opts;
+  const {retireSelf=65,loanEndAge=0,depleteAge=null,pensionStart=65}=opts;
   const msDefs=[
     {age:retireSelf,label:`定年${retireSelf}歳`,color:'#1a7a4a'},
-    {age:65,label:'年金開始',color:'#3b82f6'},
+    {age:pensionStart,label:`年金開始${pensionStart!==65?pensionStart+'歳':''}`,color:'#3b82f6'},
     {age:loanEndAge,label:'ローン完済',color:'#f59e0b'},
     {age:depleteAge,label:'⚠枯渇',color:'#ef4444'},
   ];
@@ -1054,6 +1075,22 @@ function toggleSpouse(){
   const yn=document.getElementById('spouse-yn').value;
   document.getElementById('spouse-fields').style.display=yn==='yes'?'block':'none';
   document.getElementById('spouse-income-card').style.display=yn==='yes'?'block':'none';
+  const spf=document.getElementById('pension-start-spouse-field');
+  if(spf)spf.style.display=yn==='yes'?'':'none';
+}
+function updatePensionPreview(){
+  const base=parseFloat(document.getElementById('pension-self')?.value)||0;
+  const p=document.getElementById('pension-preview');if(!p)return;
+  if(!base){p.style.display='none';return;}
+  const sa=Math.min(75,Math.max(60,parseInt(document.getElementById('pension-start-self')?.value)||65));
+  const factor=sa<65?1-0.048*(65-sa):sa>65?1+0.084*(sa-65):1;
+  const adj=Math.round(base*factor*10)/10;
+  const delta=Math.round((factor-1)*100);
+  const color=sa<65?'#b91c1c':sa>65?'var(--green)':'var(--gray)';
+  const sign=delta>=0?'+':'';
+  const label=sa===65?'標準受給':sa<65?`繰り上げ受給（-${Math.round((1-factor)*100)}%）`:`繰り下げ受給（+${Math.round((factor-1)*100)}%）`;
+  p.style.display='block';
+  p.innerHTML=`<strong>${sa}歳受給</strong>（${label}）：月額 <strong style="color:${color};font-size:15px">${adj}万円</strong>　65歳比 <strong style="color:${color}">${sign}${delta}%</strong>`;
 }
 function toggleHousing(){
   const t=document.getElementById('housing-type').value;
@@ -1119,6 +1156,12 @@ function _generatePlan(){
   const incomeSpouseNew=hasSpouse?parseFloat(g('income-spouse-new'))||0:0;
   const pensionSelf=parseFloat(g('pension-self'))||0;
   const pensionSpouse=hasSpouse?parseFloat(g('pension-spouse'))||0:0;
+  const pensionStartSelf=Math.min(75,Math.max(60,parseInt(g('pension-start-self'))||65));
+  const pensionStartSpouse=hasSpouse?Math.min(75,Math.max(60,parseInt(g('pension-start-spouse'))||65)):65;
+  // 65歳基準から受給開始年齢に応じた係数で月額を調整
+  const pensionFactor=sa=>{if(sa<65)return 1-0.048*(65-sa);if(sa>65)return 1+0.084*(sa-65);return 1;};
+  const pensionSelfAdj=Math.round(pensionSelf*pensionFactor(pensionStartSelf)*10)/10;
+  const pensionSpouseAdj=hasSpouse?Math.round(pensionSpouse*pensionFactor(pensionStartSpouse)*10)/10:0;
   const retirePay=parseFloat(g('retirement-pay'))||0;
   const retirePaySpouse=hasSpouse?parseFloat(g('retirement-pay-spouse'))||0:0;
   const inheritance=parseFloat(g('inheritance'))||0;
@@ -1186,7 +1229,7 @@ function _generatePlan(){
     let incSelf=0;
     if(selfAge<retireSelf){incSelf=incomeSelf*Math.pow(1+incomeGrowth/100,y)}
     else if(selfAge<reemployEnd){incSelf=incomeReemploy*12}
-    if(selfAge>=65)incSelf+=(pensionSelf*12);
+    if(selfAge>=pensionStartSelf)incSelf+=(pensionSelfAdj*12);
 
     let incSpouse=0;
     if(hasSpouse){
@@ -1194,7 +1237,7 @@ function _generatePlan(){
         if(spouseWorkStart>0&&spouseAge>=spouseWorkStart)incSpouse=incomeSpouseNew;
         else if(spouseWorkStart===0)incSpouse=incomeSpouse;
       }
-      if(spouseAge>=65)incSpouse+=pensionSpouse*12;
+      if(spouseAge>=pensionStartSpouse)incSpouse+=pensionSpouseAdj*12;
     }
 
     let lumpIncome=0;
@@ -1254,7 +1297,7 @@ function _generatePlan(){
     const events=[];
     if(selfAge===retireSelf)events.push('本人定年');
     if(hasSpouse&&spouseAge===retireSpouse)events.push('配偶者定年');
-    if(selfAge===65)events.push('年金開始');
+    if(selfAge===pensionStartSelf)events.push(pensionStartSelf===65?'年金開始':`年金開始(${pensionStartSelf}歳)`);
     children.forEach((c,i)=>{
       const cn=c.age+y;
       if(cn===18)events.push(`第${i+1}子大学入学`);
@@ -1263,7 +1306,7 @@ function _generatePlan(){
     if(selfAge===reformAge&&reformCost>0)events.push(`リフォーム${Math.round(reformCost)}万`);
     if(carExp>0)events.push(`車買替${Math.round(carExp)}万`);
     if(drawdown>10)events.push(`▼取崩${Math.round(drawdown)}万`);
-    const pensionInc=Math.round((selfAge>=65?pensionSelf*12:0)+(hasSpouse&&spouseAge>=65?pensionSpouse*12:0));
+    const pensionInc=Math.round((selfAge>=pensionStartSelf?pensionSelfAdj*12:0)+(hasSpouse&&spouseAge>=pensionStartSpouse?pensionSpouseAdj*12:0));
 
     rows.push({yr,selfAge,spouseAge,events,
       incSelf:Math.round(incSelf),incSpouse:Math.round(incSpouse),lumpIncome:Math.round(lumpIncome),totalIncome:Math.round(totalIncome),
@@ -1425,17 +1468,82 @@ function _generatePlan(){
     const delayOpts=canDefer?calcPensionDelay(pensionSelf,ageSelf,planEndAge):[];
     const earlyOpts=canEarly?calcPensionEarly(pensionSelf,ageSelf,planEndAge):[];
     const bestDelay=delayOpts.length>0?delayOpts.reduce((b,d)=>d.viable&&(!b.viable||d.breakevenAge<=b.breakevenAge)?d:b,{viable:false}):null;
+
+    // 生涯受給総額シミュレーション（60/65/70/75歳で比較）
+    const lifeCompare=[60,65,70,75].map(sa=>{
+      if(sa>planEndAge)return null;
+      const f=pensionFactor(sa);
+      const m=Math.round(pensionSelf*f*10)/10;
+      const total=Math.round(m*12*(planEndAge-sa));
+      return{sa,m,total,adj:Math.round(f*100-100)};
+    }).filter(Boolean);
+    const chosenCompare=lifeCompare.find(c=>c.sa===pensionStartSelf)||lifeCompare[0];
+
+    // パーソナライズアドバイス
+    const isRich=minAsset>=3000&&!depleteRow;
+    const isPoor=!!depleteRow||(minAsset<500&&retireAsset>=0);
+    let adviceColor,adviceIcon,adviceTitle,adviceBody;
+    if(isRich){
+      adviceColor='var(--green)';adviceIcon='💰';
+      adviceTitle='資産が充分あります — 元気な60代に年金を活用する選択肢も';
+      adviceBody=`最低資産が<strong>${Math.round(minAsset).toLocaleString()}万円</strong>あり、資産で生活を十分まかなえます。<br>
+      <strong>繰り上げ受給（60〜64歳）</strong>は月額が減りますが、体が元気な内に使える資金が増えます。旅行・趣味・家族へのプレゼントなど人生を豊かにする選択肢です。<br>
+      ただし<strong>減額は一生涯永久に続く</strong>点に注意。60代後半〜70代以降も豊かな生活を送りたい場合は、65歳受給か繰り下げも検討してください。`;
+    } else if(isPoor){
+      adviceColor='#b91c1c';adviceIcon='⚠';
+      adviceTitle='資産が少なめです — できるだけ長く働き、年金を繰り下げて月額を増やしましょう';
+      adviceBody=`${depleteRow?`<strong>試算では${depleteRow.selfAge}歳頃に資産が枯渇</strong>する見込みです。`:`最低資産が<strong>${Math.round(minAsset).toLocaleString()}万円</strong>と少なめです。`}<br>
+      おすすめの戦略：① 定年後も<strong>再雇用・パートなどで就労を継続</strong>し年金受給を遅らせる。② <strong>70〜75歳まで繰り下げ</strong>ると月額が${Math.round((pensionFactor(70)-1)*100)}〜${Math.round((pensionFactor(75)-1)*100)}%増加し、老後の生活基盤が安定します。③ NISA・iDeCoで資産を着実に増やす。`;
+    } else {
+      adviceColor=pensionStartSelf<65?'#92400e':'var(--blue)';adviceIcon=pensionStartSelf<65?'📌':'ℹ';
+      adviceTitle=pensionStartSelf<65?`繰り上げ受給（${pensionStartSelf}歳〜）を選択中 — 損益分岐点にご注意`:`バランス型プラン — 健康状態に合わせて受給年齢を調整しましょう`;
+      adviceBody=pensionStartSelf<65
+        ?`現在 <strong>${pensionStartSelf}歳から受給</strong>に設定中（月額 <strong>${fmt(pensionSelfAdj)}万円</strong>）。65歳受給に比べ月額が<strong>${Math.round((1-pensionFactor(pensionStartSelf))*100)}%少なく</strong>なりますが、より長い期間受給できます。<br>
+        <strong>元気に過ごせる60代前半に使いたいお金がある場合</strong>は有効な選択です。ただし損益分岐点（${earlyOpts.find(e=>e.startAge===pensionStartSelf)?.breakevenAge||'—'}歳）を超えると65歳受給の方が累計で有利になります。`
+        :`65〜67歳程度での受給開始が多くの人にとってバランスがとれた選択です。<br>
+        <strong>健康に不安がある・まとまったお金が必要</strong>なら早め受給を、<strong>元気で長生きに自信がある・就労を続けられる</strong>なら繰り下げをご検討ください。`;
+    }
+
     const rec=bestDelay&&bestDelay.viable
-      ?`📈 <strong>${bestDelay.d}年繰り下げ（${bestDelay.startAge}歳〜）が有力</strong>：月額+${Math.round(bestDelay.factor*100-100)}%増、損益分岐点は${bestDelay.breakevenAge}歳。${planEndAge}歳まで試算すると累計で有利です。`
+      ?`📈 <strong>${bestDelay.d}年繰り下げ（${bestDelay.startAge}歳〜）が有力</strong>：月額+${Math.round(bestDelay.factor*100-100)}%増、損益分岐点${bestDelay.breakevenAge}歳。`
       :canDefer?'試算期間内に損益分岐点を迎えるケースがありません。健康状態や資金需要を踏まえ、65歳受給も選択肢です。'
       :'繰り下げ可能期間（〜75歳）を過ぎています。';
     const spouseNote=hasSpouse&&pensionSpouse>0?`配偶者年金 <strong>${fmt(pensionSpouse)}万円/月</strong> の受給タイミングも同様に検討できます。`:'';
     // 繰り上げの旧ルール判定：2026年時点で64歳以上（1962年4月以前生まれ）は減額率-0.5%/月
     const earlyRateNote=ageSelf>=64?'（旧ルール：-0.5%/月適用）':'（新ルール：-0.4%/月適用）';
+    // パーソナライズアドバイス + 生涯受給比較
+    al.innerHTML+=`<div style="border-left:4px solid ${adviceColor};background:${adviceColor}18;border-radius:10px;padding:14px 18px;margin-bottom:14px">
+      <div style="font-size:14px;font-weight:900;color:${adviceColor};margin-bottom:8px">${adviceIcon} ${adviceTitle}</div>
+      <div style="font-size:13px;line-height:1.9;margin-bottom:12px">${adviceBody}</div>
+      <div style="overflow-x:auto">
+        <table style="font-size:11px;border-collapse:collapse;width:100%;min-width:420px">
+          <tr style="background:rgba(0,0,0,.07)">
+            <th style="padding:5px 8px;text-align:left;font-weight:700;white-space:nowrap">受給開始年齢</th>
+            <th style="padding:5px 8px;text-align:right;white-space:nowrap">月額（調整後）</th>
+            <th style="padding:5px 8px;text-align:right;white-space:nowrap">65歳比</th>
+            <th style="padding:5px 8px;text-align:right;white-space:nowrap">〜${planEndAge}歳の生涯累計</th>
+            <th style="padding:5px 8px;text-align:center;white-space:nowrap">区分</th>
+          </tr>
+          ${lifeCompare.map(c=>{
+            const isCur=c.sa===pensionStartSelf;
+            const sign=c.adj>=0?'+':'';
+            const amtColor=c.adj>0?'var(--green)':c.adj<0?'#b91c1c':'inherit';
+            return `<tr style="${isCur?'background:rgba(26,122,74,.12);font-weight:700':''}">
+              <td style="padding:5px 8px;white-space:nowrap">${c.sa}歳${isCur?'　<span style="background:var(--green);color:#fff;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700">現在の設定</span>':''}</td>
+              <td style="padding:5px 8px;text-align:right;color:${amtColor}">${c.m}万円</td>
+              <td style="padding:5px 8px;text-align:right;color:${amtColor}">${sign}${c.adj}%</td>
+              <td style="padding:5px 8px;text-align:right">${Math.round(c.total).toLocaleString()}万円</td>
+              <td style="padding:5px 8px;text-align:center;font-size:10px;color:var(--gray)">${c.sa===60?'繰上最大':c.sa===65?'標準':c.sa===70?'10年繰下':'最大繰下（+84%）'}</td>
+            </tr>`;
+          }).join('')}
+        </table>
+        <p style="font-size:10px;color:var(--gray);margin-top:4px">※ 生涯累計は${planEndAge}歳まで生存した場合の試算です。</p>
+      </div>
+    </div>`;
     al.innerHTML+=`<div class="alert ok" style="border-color:var(--blue);background:var(--blue-pale);margin-bottom:16px">
-      <div style="font-size:13px;font-weight:900;margin-bottom:6px;color:var(--blue)">年金受給タイミング最適化シミュレーション</div>
+      <div style="font-size:13px;font-weight:900;margin-bottom:6px;color:var(--blue)">年金受給タイミング詳細シミュレーション</div>
       <div style="font-size:13px;line-height:1.8;margin-bottom:10px">
-        本人年金：<strong>${fmt(pensionSelf)}万円/月</strong>${spouseNote?'　'+spouseNote:''}<br>${rec}
+        本人年金（65歳基準）：<strong>${fmt(pensionSelf)}万円/月</strong>　→ 現在の設定：<strong style="color:${pensionStartSelf<65?'#b91c1c':pensionStartSelf>65?'var(--green)':'var(--gray)'}">${pensionStartSelf}歳受給・${fmt(pensionSelfAdj)}万円/月</strong>${spouseNote?'<br>'+spouseNote:''}<br>${rec}
       </div>
       <div class="pension-tab-row">
         ${canDefer?`<button class="pension-tab active" id="ptab-delay" onclick="switchPensionTab('delay')">📈 繰り下げ受給（増額）</button>`:''}
@@ -1493,7 +1601,7 @@ function _generatePlan(){
       <div class="s-sub">資産100万円以上で終える確率</div>
     </div>`;
 
-  buildSVGChart(rows,{retireSelf,loanEndAge:loanBalance>0?ageSelf+loanYears:0,depleteAge:depleteRow?.selfAge||null,mcBands:mc.bands});
+  buildSVGChart(rows,{retireSelf,loanEndAge:loanBalance>0?ageSelf+loanYears:0,depleteAge:depleteRow?.selfAge||null,mcBands:mc.bands,pensionStart:pensionStartSelf});
   renderConditionsSummary({ageSelf,hasSpouse,ageSpouse,childrenCount,incomeSelf,incomeSpouse,housingType,loanBalance,loanYears,nisaMonthly,idecoMonthly,savingsCurrent,investCurrent,planEndAge,retireSelf});
   renderScenarios(planEndAge);
 
@@ -1852,6 +1960,11 @@ function runScenario(rateAdj){
   const spouseWorkStart=hasSpouse?gi2('spouse-work-start',0):0;
   const incomeSpouseNew=hasSpouse?gi('income-spouse-new'):0;
   const pensionSelf=gi('pension-self'),pensionSpouse=hasSpouse?gi('pension-spouse'):0;
+  const _pssf=Math.min(75,Math.max(60,parseInt(document.getElementById('pension-start-self')?.value)||65));
+  const _psspf=hasSpouse?Math.min(75,Math.max(60,parseInt(document.getElementById('pension-start-spouse')?.value)||65)):65;
+  const _pf=sa=>sa<65?1-0.048*(65-sa):sa>65?1+0.084*(sa-65):1;
+  const pensionSelfAdj2=Math.round(pensionSelf*_pf(_pssf)*10)/10;
+  const pensionSpouseAdj2=hasSpouse?Math.round(pensionSpouse*_pf(_psspf)*10)/10:0;
   const retirePay=gi('retirement-pay'),retirePaySp=hasSpouse?gi('retirement-pay-spouse'):0;
   const inheritance=gi('inheritance'),inheritanceAge=gi2('inheritance-age',60);
   const livingCost=gi('living-cost',25),livingCostR=gi('living-cost-retire',22);
@@ -1879,11 +1992,11 @@ function runScenario(rateAdj){
     let iS=0;
     if(sa<retireSelf)iS=incomeSelf*Math.pow(1+incomeGrowth/100,y);
     else if(sa<reemployEnd)iS=incomeReemploy*12;
-    if(sa>=65)iS+=pensionSelf*12;
+    if(sa>=_pssf)iS+=pensionSelfAdj2*12;
     let iSp=0;
     if(hasSpouse){
       if(spa<retireSpouse){if(spouseWorkStart>0&&spa>=spouseWorkStart)iSp=incomeSpouseNew;else if(spouseWorkStart===0)iSp=incomeSpouse;}
-      if(spa>=65)iSp+=pensionSpouse*12;
+      if(spa>=_psspf)iSp+=pensionSpouseAdj2*12;
     }
     let lump=0;
     if(sa===retireSelf)lump+=retirePay;
