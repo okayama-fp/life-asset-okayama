@@ -129,9 +129,11 @@ nav.toc a:hover{text-decoration:underline}
 .inp-g select{padding:9px 12px;border:1.5px solid var(--bdr);border-radius:6px;font-size:14px;color:var(--ink);background:#fff;font-family:inherit}
 .inp-g select:focus{outline:none;border-color:var(--ga)}
 .rr{display:flex;align-items:center;gap:10px}
+.rr input[type=range]{flex:1}
 .rv{font-size:15px;font-weight:700;color:var(--gd);min-width:60px;text-align:right}
-input[type=range]{-webkit-appearance:none;height:6px;border-radius:3px;background:var(--bdr);outline:none}
+input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--bdr);outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ga);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ga);cursor:pointer;border:none}
 @media(max-width:600px){.inp-grid{grid-template-columns:1fr}}
 
 /* ── calc btn ── */
@@ -193,6 +195,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .ti-g{display:flex;flex-direction:column;gap:5px}
 .ti-g label{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--sub)}
 .ti-row{display:flex;align-items:center;gap:8px}
+.ti-row input[type=range]{flex:1}
 .ti-val{font-size:14px;font-weight:700;color:var(--gd);min-width:56px;text-align:right}
 .ti-g select{padding:8px 10px;border:1.5px solid var(--bdr);border-radius:6px;font-size:13px;color:var(--ink);background:#fff;font-family:inherit;width:100%}
 .tr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
@@ -255,10 +258,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
 <div class="ic-hero">
   <div class="ic-inner">
-    <div class="ic-tag">保険 完全解説 ／ FP解説付き</div>
-    <h1>その保険、本当に<em>必要ですか？</em><br>公的保障を知れば、答えは出る。</h1>
-    <p class="ic-lead">日本の公的保険は世界最強レベルです。その事実を知らずに民間保険に入ると、必要のない保険料を何十年も払い続けることになります。FPが「保険屋が嫌がる本当のこと」を解説します。</p>
-    <div class="ic-meta">ライフアセットオフィス FP執筆 ／ 参考：後田亨『いらない保険』講談社＋α新書</div>
+    <div class="ic-tag">保険と公的保障 ／ 知識整理ガイド</div>
+    <h1>その保険、本当に<em>必要ですか？</em><br>公的保障を知れば、比較できる。</h1>
+    <p class="ic-lead">日本の公的保険は世界有数の水準です。その内容を把握した上で民間保険と比較することが、適切な保障選びの第一歩です。本サイトは保険・公的保障に関する一般的な知識を情報提供目的で解説します。</p>
+    <div class="ic-meta">ライフアセットオフィス 情報提供 ／ 参考文献：後田亨『いらない保険』講談社＋α新書</div>
   </div>
 </div>
 
@@ -411,8 +414,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <!-- 保険診断シミュレーター -->
     <div class="sim-wrap">
       <div class="sim-hdr">
-        <h3>保険必要性 本格診断シミュレーター</h3>
-        <p>公的保障との重複を考慮した、FP視点の判定エンジン</p>
+        <h3>公的保障との比較チェックシミュレーター</h3>
+        <p>情報提供目的の参考ツールです。保険の解約・加入は専門家にご相談ください</p>
       </div>
       <div class="sim-body">
         <div class="tabs">
@@ -539,7 +542,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
           </div>
         </div>
 
-        <button class="calc-btn" onclick="calcInsurance()">🔍 診断する（公的保障との重複を考慮）</button>
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:12px;color:#78350f;line-height:1.7;margin-bottom:8px">
+          ⚠️ <strong>ご確認ください：</strong>本シミュレーターは公的保障と保険料水準の比較を目的とした<strong>参考情報ツール</strong>です。特定の保険商品の解約・加入を推奨するものではありません。保険契約の変更には保険募集人または独立系FPへのご相談をおすすめします。
+        </div>
+        <button class="calc-btn" onclick="calcInsurance()">🔍 公的保障と比較チェックする</button>
 
         <div class="res-panel" id="res-panel">
           <div class="res-score">
@@ -563,7 +569,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 
           <div class="kr-box" id="kr-detail"></div>
 
-          <h4 style="font-size:14px;font-weight:700;color:var(--gd);margin-bottom:12px">📊 保険種類別 判定結果</h4>
+          <h4 style="font-size:14px;font-weight:700;color:var(--gd);margin-bottom:6px">📊 保険種類別 参考チェック結果</h4>
+          <p style="font-size:11px;color:#94a3b8;margin-bottom:10px">※下記は一般的傾向の参考情報です。特定の契約の解約・変更を推奨するものではありません。</p>
           <div class="vlist" id="verdict-list"></div>
 
           <div class="saving">
@@ -586,18 +593,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <!-- Section 4 -->
   <section class="ic-sec" id="verdict">
     <div class="sec-num">SECTION 04</div>
-    <h2>保険種類別「要・不要」判定表</h2>
-    <p>後田亨氏の主張と公的保障の内容を踏まえた、FP視点の判定表です。</p>
+    <h2>保険種類別 一般的な優先度の目安</h2>
+    <p>後田亨氏の著書と公的保障の内容を踏まえた、一般的な傾向の参考情報です。個人の状況によって最適解は異なります。</p>
     <table class="jt">
-      <thead><tr><th>保険種類</th><th>判定</th><th>理由</th></tr></thead>
+      <thead><tr><th>保険種類</th><th>一般的な傾向</th><th>解説（参考）</th></tr></thead>
       <tbody>
-        <tr><td><strong>掛け捨て死亡保険</strong><br>（定期・収入保障）</td><td><span class="jcond">条件付き必要</span></td><td>子どもが独立するまでの期間限定で有効。遺族年金で不足する分を補う最小額のみ。子ども独立後は不要。</td></tr>
-        <tr><td><strong>終身保険・養老保険</strong></td><td><span class="jno">不要</span></td><td>保険料の約30%が手数料コスト。貯蓄・資産形成目的なら投資信託（NISA）のほうが長期では圧倒的に有利。保障の「陳腐化」リスクもある。</td></tr>
-        <tr><td><strong>医療保険</strong></td><td><span class="jno">基本不要</span></td><td>高額療養費制度で月の自己負担は最大約8〜9万円に上限。6ヶ月以上の生活防衛資金があれば、医療保険なしで対応可能なケースが多い。</td></tr>
-        <tr><td><strong>がん保険</strong></td><td><span class="jcond">慎重に検討</span></td><td>治療の長期化・通院治療への移行で、支払条件が合わないケースが増加。家系や強いリスク意識がある場合のみ、通院型・実費補償型を検討。</td></tr>
-        <tr><td><strong>就業不能保険</strong></td><td><span class="jcond">フリーランスは必要</span></td><td>会社員は傷病手当金（最長18ヶ月・給与2/3）があるため優先度低。フリーランス・自営業者は公的保障がなく、就業不能リスクへの備えが必須。</td></tr>
-        <tr><td><strong>介護保険（民間）</strong></td><td><span class="jno">原則不要</span></td><td>公的介護保険制度で現物給付（介護サービス）が受けられる。民間の介護保険は保険料が高く、支払条件が厳しいことが多い。</td></tr>
-        <tr><td><strong>学資保険</strong></td><td><span class="jno">不要</span></td><td>返戻率が低く流動性もない。同額をNISA積立すれば10〜15年で圧倒的に有利。子どもの教育費はNISAで積み立てるのが現代の正解。</td></tr>
+        <tr><td><strong>掛け捨て死亡保険</strong><br>（定期・収入保障）</td><td><span class="jcond">状況次第</span></td><td>子どもが独立するまでの期間、遺族年金で不足する分を補う形で活用されるケースが多いです。子ども独立後は優先度が下がる傾向があります。</td></tr>
+        <tr><td><strong>終身保険・養老保険</strong></td><td><span class="jno">優先度低め</span></td><td>保険料の約30%が事業費コスト。資産形成を目的とする場合は積立投資との比較を検討される方が多いです。保障内容の「陳腐化」リスクも考慮を。</td></tr>
+        <tr><td><strong>医療保険</strong></td><td><span class="jno">優先度低め（※）</span></td><td>高額療養費制度で月の自己負担に上限があります。6ヶ月以上の生活防衛資金がある場合、優先度が下がるケースが多いとされます（個人差あり）。</td></tr>
+        <tr><td><strong>がん保険</strong></td><td><span class="jcond">状況次第</span></td><td>治療の長期化・通院治療への移行で支払条件が合わないケースが増えています。リスク意識や家族歴に応じて通院型・実費補償型を比較検討されることをおすすめします。</td></tr>
+        <tr><td><strong>就業不能保険</strong></td><td><span class="jcond">雇用形態次第</span></td><td>会社員は傷病手当金（最長18ヶ月・給与2/3）があります。フリーランス・自営業者は公的保障が手薄な場合があり、検討される方が多いです。</td></tr>
+        <tr><td><strong>介護保険（民間）</strong></td><td><span class="jno">優先度低め</span></td><td>公的介護保険制度で現物給付（介護サービス）が受けられます。民間の介護保険は支払条件を必ず確認することをおすすめします。</td></tr>
+        <tr><td><strong>学資保険</strong></td><td><span class="jno">優先度低め</span></td><td>返戻率が低く流動性もない点が特徴です。教育費の積立方法として、他の手段との比較検討をおすすめします。</td></tr>
         <tr><td><strong>火災保険・地震保険</strong></td><td><span class="jneed">必要</span></td><td>公的保障がなく、損失が個人で対処できないレベルに達しうる。掛け捨てで必要最小限を継続することが合理的。</td></tr>
         <tr><td><strong>自動車保険（対人・対物）</strong></td><td><span class="jneed">必要</span></td><td>対人賠償は億単位になりうるリスク。自賠責だけでは到底カバーできない。任意保険は生命保険より優先度が高い。</td></tr>
       </tbody>
@@ -607,7 +614,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <!-- Section 5 -->
   <section class="ic-sec" id="howto">
     <div class="sec-num">SECTION 05</div>
-    <h2>正しい保険の選び方——FPの結論</h2>
+    <h2>保険の見直しを考えるためのステップ</h2>
     <div class="lead-box">
       保険を考える正しい順序は「公的保障の把握 → 自己資産の確認 → 不足分だけ民間保険で補う」です。この順序を逆にすると、不要な保険に何十年も払い続けることになります。
     </div>
@@ -628,7 +635,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
 
   <div class="disclaimer">
-    ⚠️ 本記事は情報提供を目的としており、特定の金融商品・保険商品の推奨・解約を促すものではありません。参考文献として後田亨『いらない保険』（講談社＋α新書）の論旨を紹介していますが、書籍の全内容を代表するものではありません。シミュレーターの計算結果は参考値です。保険の見直しにあたっては、独立系FP・保険代理店等の専門家にご相談ください。当サイトは金融商品取引業（投資助言業）の登録を行っておりません。
+    ⚠️ <strong>免責事項・法的ご注意：</strong>本ページは一般的な金融・保険リテラシーの向上を目的とした情報提供コンテンツです。特定の保険商品の推奨・解約・加入変更を促すものではなく、保険業法に基づく保険募集行為は一切行っておりません。シミュレーターの計算結果および保険種類別チェック結果はあくまで参考情報であり、個人の状況に対する具体的なアドバイスではありません。保険契約の変更・解約にあたっては、保険募集人または独立系FP等の専門家にご相談ください。参考文献として後田亨『いらない保険』（講談社＋α新書）の論旨を紹介していますが、当サイトは同書・著者と利害関係はありません。当サイトは金融商品取引業（投資助言業）の登録を行っておりません。記載内容は2026年6月時点の情報に基づきます。
   </div>
   <div class="ai-disc">※本コンテンツはAI（Claude）が生成したものです。</div>
 </div>
@@ -817,6 +824,7 @@ function calcInsurance(){
   const asset=parseInt(document.getElementById('asset').value);
   const premium=parseFloat(document.getElementById('premium').value);
   const spouse=document.getElementById('spouse').value;
+  const health=document.getElementById('health').value;
   const cancer=document.getElementById('cancer').value;
   const defense=document.getElementById('defense').value;
 
@@ -869,24 +877,30 @@ function calcInsurance(){
 
   if(hasKid){
     const badge=spouseWorks?'cond':'need';
-    verdicts.push({name:'死亡保険（定期・収入保障）',badge,need:spouseWorks?'条件付き必要':'必要',reason:spouseWorks?`子どもが独立するまで定期保険を検討。遺族年金（${izokuText}）で不足する分のみ最小額で。配偶者が就労中なら少額で十分。`:`収入保障保険（掛け捨て）が有効。遺族年金（${izokuText}）との差額分のみ。子ども独立後は解約。`});
+    verdicts.push({name:'死亡保険（定期・収入保障）',badge,need:spouseWorks?'状況次第で要検討':'要確認',reason:spouseWorks?`子どもが独立するまでの期間、定期保険を検討する方が多いです。遺族年金（${izokuText}）で不足する分のみ最小額で。配偶者が就労中なら少額で済むケースが多いです。`:`収入保障保険（掛け捨て）が選択肢になる方が多いです。遺族年金（${izokuText}）との差額分のみを補う形が一般的です。子ども独立後は保障額の見直しをおすすめします。`});
   }else{
-    verdicts.push({name:'死亡保険',badge:'noneed',need:'不要',reason:'扶養家族なし、または子ども独立済み。団信加入の持ち家なら住宅ローンも消滅。'});
+    const homeNote=home==='own'?'団信加入の場合、住宅ローン残債は保険対象となります。':'';
+    verdicts.push({name:'死亡保険',badge:'noneed',need:'優先度低め',reason:`扶養家族がいない、または子どもが独立済みの場合、死亡保険の優先度は低いケースが多いです。${homeNote}`});
   }
-  verdicts.push({name:'終身保険・養老保険（貯蓄型）',badge:'noneed',need:'不要',reason:'保険料の約30%が事業費コスト。同額をNISA積立すれば長期で大きな差。資産形成は保険でなく投資信託で。'});
-  if(hasDefense&&hasAsset){
-    verdicts.push({name:'医療保険',badge:'noneed',need:'不要',reason:`入院時の実質負担は月約${nyuinTotal}万円（手取り${tedoriM}万円の${nyuinRatio}%）。生活防衛資金があれば現金対応可能。医療保険料をNISAに回す方が合理的。`});
+  verdicts.push({name:'終身保険・養老保険（貯蓄型）',badge:'noneed',need:'優先度低め',reason:'保険料の約30%が事業費コスト。資産形成を目的とする場合、積立投資との比較検討をおすすめします。保障内容の「陳腐化」リスクも考慮を。'});
+  if(health==='bad'){
+    verdicts.push({name:'医療保険',badge:'cond',need:'要確認（注意あり）',reason:'持病・治療中の場合、新規加入では告知義務があり、引受審査や条件付き加入となるケースがあります。引受緩和型・無告知型保険も含め、保険募集人へのご相談をおすすめします。'});
+  }else if(hasDefense&&hasAsset){
+    verdicts.push({name:'医療保険',badge:'noneed',need:'優先度低め',reason:`入院時の実質負担は月約${nyuinTotal}万円（手取り${tedoriM}万円の${nyuinRatio}%相当）。生活防衛資金がある場合、高額療養費制度と組み合わせることで多くのケースに対応できます。必要性は個人の状況によります。`});
   }else{
-    verdicts.push({name:'医療保険',badge:'cond',need:'慎重に検討',reason:`入院時の実質負担 月約${nyuinTotal}万円が手取り${tedoriM}万円の${nyuinRatio}%を占める。まず生活防衛資金（月手取り×6ヶ月＝${Math.round(tedoriM*6)}万円）の積立を優先。`});
+    verdicts.push({name:'医療保険',badge:'cond',need:'状況次第で要検討',reason:`入院時の実質負担 月約${nyuinTotal}万円が手取り${tedoriM}万円の${nyuinRatio}%を占めます。まず生活防衛資金（月手取り×6ヶ月＝${Math.round(tedoriM*6)}万円目安）の積立を優先することを多くのFPが推奨しています。`});
   }
-  verdicts.push({name:'がん保険',badge:cancer==='high'?'cond':'noneed',need:cancer==='high'?'要検討':'基本不要',reason:cancer==='high'?'強いリスク意識がある場合は通院型・実費補償型を検討。ただし支払条件が治療の進歩に追いつかないリスクあり。':'高額療養費制度でほぼカバー可能。特別なリスク意識がなければ不要。'});
+  const cancerBadge=(cancer==='high'||health==='bad')?'cond':'noneed';
+  const cancerNeed=(cancer==='high'||health==='bad')?'要確認':'優先度低め';
+  const cancerReason=(cancer==='high'||health==='bad')?'ご本人の健康状態や家族歴によって優先度が変わります。通院型・実費補償型など支払条件をよく確認した上で、保険募集人へのご相談をおすすめします。':'高額療養費制度でほぼカバーできるケースが多いです。特別なリスク要因がなければ優先度は低めになります。';
+  verdicts.push({name:'がん保険',badge:cancerBadge,need:cancerNeed,reason:cancerReason});
   if(isFreelance){
-    verdicts.push({name:'就業不能保険',badge:'need',need:'必要',reason:'フリーランスは傷病手当金なし。長期就業不能リスクに公的保障が薄いため民間保険で備えることを推奨。'});
+    verdicts.push({name:'就業不能保険',badge:'need',need:'要確認',reason:'フリーランス・自営業の場合は傷病手当金がありません。長期の就業不能時の収入補填として検討する方が多いです。保険内容の条件（待機期間・対象疾病）を必ずご確認ください。'});
   }else{
-    verdicts.push({name:'就業不能保険',badge:'noneed',need:'優先度低',reason:`会社員の傷病手当金は月約${shougai}万円（手取り${tedoriM}万円の${shougaiRatio}%）・最長18ヶ月。ただしボーナス${bonus}万円分は含まれないため、ボーナス依存度が高い人は注意。`});
+    verdicts.push({name:'就業不能保険',badge:'noneed',need:'優先度低め',reason:`会社員の傷病手当金は月約${shougai}万円（手取り${tedoriM}万円の${shougaiRatio}%）・最長18ヶ月あります。ボーナス${bonus}万円分は傷病手当金の計算に含まれない点に注意が必要です。`});
   }
-  verdicts.push({name:'学資保険',badge:'noneed',need:'不要',reason:'返戻率が低く流動性もない。教育費積立はNISAが圧倒的に有利。'});
-  verdicts.push({name:'火災保険・地震保険',badge:'need',need:'必要',reason:'公的保障なし・損失が個人で対処できないレベルに達しうる。生命保険より優先度が高い。'});
+  verdicts.push({name:'学資保険',badge:'noneed',need:'優先度低め',reason:'返戻率が低く流動性もない点が特徴です。教育費の積立方法として積立投資との比較検討をおすすめします。'});
+  verdicts.push({name:'火災保険・地震保険',badge:'need',need:'要確認',reason:'公的保障の対象外で、損失が大きくなるリスクがあります。加入状況・補償内容を定期的に確認することをおすすめします。'});
 
   document.getElementById('verdict-list').innerHTML=verdicts.map(v=>`
     <div class="vi">
@@ -928,6 +942,7 @@ window.addEventListener('scroll',function(){
 
 // 初期化
 calcTedoriPanel();
+updateIncome();
 </script>
 </body>
 </html>
