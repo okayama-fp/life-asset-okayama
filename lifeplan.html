@@ -1734,6 +1734,15 @@ function confirmSavePlan(){
 document.getElementById('save-modal').addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
 document.getElementById('save-plan-name').addEventListener('keydown',function(e){if(e.key==='Enter')confirmSavePlan();if(e.key==='Escape')document.getElementById('save-modal').style.display='none';});
 
+// ── stepVal: inline onclick用ヘルパー（pension-start-self/spouse など既存stepperクラス行） ──
+function stepVal(id,dir,mn,mx){
+  const inp=document.getElementById(id);if(!inp)return;
+  const cur=parseFloat(inp.value)||0;
+  inp.value=Math.min(mx,Math.max(mn,cur+dir));
+  inp.dispatchEvent(new Event('input',{bubbles:true}));
+  inp.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
 // ── ± Stepper buttons ──
 function initSteppers(){
   document.querySelectorAll('.field-row').forEach(row=>{
