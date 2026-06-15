@@ -151,6 +151,32 @@ footer{background:var(--navy);color:rgba(255,255,255,.85);padding:32px 24px 24px
 footer p{font-size:0.72rem;opacity:.7;margin:12px 0 0}
 footer a{color:var(--green-light);text-decoration:underline}
 
+/* 体験談ボックス */
+.exp-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid var(--green-mid);border-left:6px solid var(--green);border-radius:10px;padding:32px 28px 24px;margin:36px 0;position:relative}
+.exp-box::before{content:'実体験';position:absolute;top:-13px;left:18px;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;padding:3px 14px;border-radius:3px}
+.exp-box .exp-title{font-family:'Noto Serif JP',serif;font-size:17px;color:var(--navy);margin-bottom:16px;font-weight:700;line-height:1.55}
+.exp-box p{font-size:14.5px;line-height:2;margin-bottom:14px;color:var(--ink)}
+.exp-box p:last-child{margin-bottom:0}
+.exp-result{background:var(--white);border:1px solid var(--green-mid);border-radius:8px;padding:16px 10px;margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.exp-num{font-family:'DM Mono',monospace;font-size:20px;color:var(--green);font-weight:500;line-height:1}
+.exp-num.loss{color:var(--red)}
+.exp-label{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+
+/* 「カモ」バナー */
+.camo-banner{background:linear-gradient(135deg,var(--green-dark),#1f5c40);border-radius:10px;padding:26px 28px;margin:36px 0;text-align:center;color:#fff}
+.camo-banner p{font-family:'Noto Serif JP',serif;font-size:clamp(16px,3vw,20px);font-weight:700;color:#fff;margin:0;line-height:1.8}
+.camo-banner p em{color:#7ee8a2;font-style:normal}
+.camo-banner small{display:block;font-size:13px;color:rgba(255,255,255,.65);margin-top:10px;font-family:'Noto Sans JP',sans-serif;font-weight:400;line-height:1.7}
+
+/* 行動ステップ */
+.action-steps{display:flex;flex-direction:column;gap:14px;margin:28px 0}
+.action-step{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start;box-shadow:var(--shadow)}
+.step-num{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;font-family:'DM Mono',monospace;font-size:15px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.step-time{display:inline-block;font-size:10px;font-weight:700;color:var(--green);background:var(--green-pale);padding:2px 8px;border-radius:3px;margin-bottom:6px;letter-spacing:.06em}
+.step-body h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.step-body p{font-size:13px;color:var(--muted);margin:0;line-height:1.85}
+
 @media(max-width:600px){
   article{padding:40px 18px 60px}
   .hero{padding:48px 18px 56px}
@@ -158,6 +184,9 @@ footer a{color:var(--green-light);text-decoration:underline}
   .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:12px 0}
   .stat-item:last-child{border-bottom:none}
   .compare-grid{grid-template-columns:1fr}
+  .exp-result{grid-template-columns:1fr;gap:12px}
+  .exp-result>div{border-bottom:1px solid var(--border);padding-bottom:10px}
+  .exp-result>div:last-child{border-bottom:none}
 }
 </style>
 <script type="application/ld+json">
@@ -351,6 +380,34 @@ footer a{color:var(--green-light);text-decoration:underline}
     </div>
 
     <p>保険が必要な場合は<strong>掛け捨て保険（定期保険・収入保障保険）</strong>で最低限の保障を確保し、残りの保険料相当額をNISA・iDeCoで運用する——この分離戦略が、同じ予算でより高い資産形成と保障の両立を可能にします。</p>
+
+    <!-- 実体験 -->
+    <div class="exp-box">
+      <div class="exp-title">「7年間で80万円の損失……解約してオルカンに全額入れたら2年で取り戻した」</div>
+      <p>
+        FPとして相談を受けているなかで、まさに同じ経験をした方の話です。<br>
+        毎月<strong>7万円</strong>の貯蓄型保険に加入して7年目。「そろそろ老後のためにと思って」と始めたものでした。払込総額は約<strong>588万円</strong>。ところがある日、解約した場合の返戻金額を確認したところ、約<strong>508万円</strong>と書いてあった。
+      </p>
+      <p>
+        <strong>80万円の損失</strong>——7年間、毎月コツコツ払い続けた結果がこれでした。「涙が出た」という言葉が忘れられません。でも、そこで立ち止まらなかったことが大きな分岐点になりました。
+      </p>
+      <p>
+        迷わず解約。受け取った508万円を<strong>すぐに全額オルカン（eMAXIS Slim全世界株式）</strong>へ。「これ以上損はできない」という覚悟で、含み損を抱えながらも淡々と保有し続けました。
+      </p>
+      <p>
+        結果——<strong>2年で80万円の損失を完全に取り戻し</strong>、今は運用5年目に入り、損した80万円の約2倍にあたる利益が出ています。最初の7年間と比べると、「知らないとこんなに差がつくのか」と驚いたと言います。
+      </p>
+      <div class="exp-result">
+        <div><div class="exp-num loss">▲80万円</div><div class="exp-label">貯蓄保険7年で<br>出た損失</div></div>
+        <div><div class="exp-num">2年</div><div class="exp-label">オルカン移行後<br>損失を回収するまで</div></div>
+        <div><div class="exp-num">約160万円+</div><div class="exp-label">運用5年目時点の<br>利益（損失の約2倍）</div></div>
+      </div>
+    </div>
+
+    <div class="camo-banner">
+      <p>金融の仕組みを<em>「知らない」</em>だけで、<br>あなたは静かに<em>カモ</em>にされています。</p>
+      <small>悪意があるわけではありません。ただ、構造的に「知っている人が得をし、知らない人が払う側になる」仕組みになっているのが金融業界の現実です。</small>
+    </div>
   </section>
 
   <!-- SEC6 -->
@@ -416,22 +473,65 @@ footer a{color:var(--green-light);text-decoration:underline}
 
   <!-- SEC8 -->
   <section id="sec8">
-    <h2>では、どうすればいいのか——正しい選び方</h2>
-    <p>手数料の罠を避けるための原則はシンプルです。<strong>「低コスト・長期・分散」</strong>——この3つの組み合わせが、資産形成の最強の武器になります。</p>
+    <h2>では、どうすればいいのか——今日から動ける具体的な4ステップ</h2>
+    <p>手数料の罠を避けるための原則はシンプルです。<strong>「低コスト・長期・分散」</strong>——この3つを今日から始める具体的な行動に落とし込みます。難しいことはひとつもありません。</p>
 
-    <h3>投資信託：ネット証券でインデックスファンドを選ぶ</h3>
-    <p>SBI証券・楽天証券・マネックス証券などのネット証券では、信託報酬0.05〜0.2%程度の低コストインデックスファンドが揃っています。購入手数料（ノーロード）も無料です。銀行窓口には行かず、ネット証券のNISA口座でインデックスファンドを積み立てる——これだけで手数料コストは劇的に下がります。</p>
+    <div class="action-steps">
+      <div class="action-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-time">今日・15分</div>
+          <h4>保険証券を全部引っ張り出して「解約返戻金」を確認する</h4>
+          <p>引き出しの奥にある保険証券を探してください。「解約返戻金額表」または「解約返戻率」の欄を見てください。払込保険料の合計より少なければ、その差額が今の「損失額」です。貯蓄型保険に入っている方の多くが、これをやって初めて損していると気づきます。保険会社のコールセンターに電話すれば「現時点の解約返戻金」をすぐ教えてもらえます。</p>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-time">今週・30分</div>
+          <h4>ネット証券（SBI証券か楽天証券）でNISA口座を開設する</h4>
+          <p>スマホで完結します。マイナンバーカードがあれば最短即日で申請できます。銀行にNISAがある方は移管（他社移管）手続きが可能です。ネット証券に変えるだけで、取り扱える低コストファンドの選択肢が一気に広がります。開設費・口座維持費は無料です。</p>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-time">口座開設後・10分</div>
+          <h4>「eMAXIS Slim全世界株式（オール・カントリー）」で積立設定をする</h4>
+          <p>通称「オルカン」。信託報酬は年0.05775%（2024年以降の水準）と驚異的な低コストで、日本を含む全世界約3,000銘柄に分散投資できます。月々いくらでも構いません。まず<strong>月1万円から始めて自動積立にする</strong>だけでOK。判断が必要なのはここだけ。あとは放置が正解です。</p>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-time">1〜3ヶ月以内</div>
+          <h4>貯蓄型保険を見直し、掛け捨て保険＋NISA積立に切り替える</h4>
+          <p>「解約すると損が出る」という心理的なハードルが最大の壁です。しかし、<strong>今後も払い続けることで損失は拡大するのか、今解約したほうが中長期では得なのか</strong>を冷静に試算することが大切です。必要な保障（死亡・就業不能）だけを掛け捨て保険で確保し、浮いた差額をNISAへ。同じ月々の支出でも、30年後の資産は大きく変わります。迷う場合は独立系FPへの相談がおすすめです。</p>
+        </div>
+      </div>
+    </div>
 
-    <h3>保険：掛け捨てと投資を分離する</h3>
-    <p>貯蓄性保険は解約し（ただし解約控除の確認が必要）、必要な保障は<strong>掛け捨ての定期保険・収入保障保険</strong>で最低限確保します。浮いた保険料はNISA・iDeCoへ。同じ月々の支出で、保障と資産形成を効率的に分離できます。</p>
+    <div class="callout callout-key">
+      <strong>「損切り」が怖い方へ——損失を確定させることへの恐怖は自然な感情です</strong><br>
+      「解約したら80万円損する」と聞いて二の足を踏む方も多いです。でも視点を変えてください。その80万円はすでに使われてしまった過去のコストです。今後も貯蓄型保険を持ち続けることで、<strong>機会損失（本来得られたはずの運用益）</strong>はさらに膨らみ続けます。勇気をもって次の一手を打った方が、長期的には圧倒的に有利になるケースがほとんどです。
+    </div>
 
-    <h3>NISAとiDeCoを最大活用する</h3>
-    <p>新NISA（年間360万円まで非課税）とiDeCo（掛金が全額所得控除）は、手数料の低いインデックスファンドと組み合わせることで最大の効果を発揮します。節税効果と低コスト運用の二重のメリットを活かしましょう。</p>
+    <h3>投資信託・保険・NISAの選択基準まとめ</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>場面</th><th>やめるべきこと</th><th>代わりにやること</th></tr>
+        <tr><td><strong>投資信託を買う</strong></td><td class="td-red">銀行・郵便局の窓口で購入</td><td class="td-grn">ネット証券でノーロードのインデックスファンド</td></tr>
+        <tr><td><strong>NISAを作る</strong></td><td class="td-red">銀行NISAのまま</td><td class="td-grn">SBI証券・楽天証券でNISA口座開設</td></tr>
+        <tr><td><strong>保険に入る</strong></td><td class="td-red">貯蓄型・終身・外貨建保険</td><td class="td-grn">掛け捨て定期保険＋浮いた差額をNISAへ</td></tr>
+        <tr><td><strong>銘柄選び</strong></td><td class="td-red">アクティブファンド（信託報酬1.5%以上）</td><td class="td-grn">オルカンやS&P500インデックス（0.1%以下）</td></tr>
+        <tr><td><strong>売買頻度</strong></td><td class="td-red">証券会社の提案で頻繁に乗り換える</td><td class="td-grn">長期保有・定期積立・ほったらかし</td></tr>
+      </table>
+    </div>
 
     <div class="tool-cta">
       <div class="tool-cta-text">
         <h3>NISA・iDeCoシミュレーターで将来の資産を試算する</h3>
-        <p>月々の積立額と運用利率から、NISAとiDeCoを組み合わせた場合の将来資産を計算できます。</p>
+        <p>月々の積立額と想定利率を入力するだけ。低コスト運用を続けた場合の将来資産が数秒でわかります。</p>
       </div>
       <a href="/nisa-ideco-sim.html" class="tool-cta-btn">シミュレーターを使う →</a>
     </div>
@@ -440,7 +540,7 @@ footer a{color:var(--green-light);text-decoration:underline}
   <!-- SEC9 -->
   <section id="sec9">
     <h2>今すぐできる手数料チェックリスト</h2>
-    <p>手元にある金融商品を、今すぐこのリストで確認してみましょう。1つでも当てはまる項目があれば、見直しの余地があります。</p>
+    <p>手元にある金融商品を、今すぐこのリストで確認してみましょう。<strong>1つでも当てはまる項目があれば、見直しの余地があります</strong>。知っているだけで、あなたの資産は何十万円・何百万円単位で変わります。</p>
 
     <ul class="checklist">
       <li><span class="ck-x">×</span><div><strong>銀行・郵便局の窓口で投資信託を購入している</strong><br>信託報酬が年1%以上のケースがほとんど。ネット証券への移行を検討。</div></li>
