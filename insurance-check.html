@@ -774,8 +774,13 @@ function calcInsurance(){
   const verdicts=[];
 
   if(hasKid){
-    const badge=spouseWorks?'cond':'need';
-    verdicts.push({name:'死亡保険（定期・収入保障）',badge,need:spouseWorks?'状況次第で要検討':'要確認',reason:spouseWorks?`子どもが独立するまでの期間、定期保険を検討する方が多いです。遺族年金（${izokuText}）で不足する分のみ最小額で。配偶者が就労中なら少額で済むケースが多いです。`:`収入保障保険（掛け捨て）が選択肢になる方が多いです。遺族年金（${izokuText}）との差額分のみを補う形が一般的です。子ども独立後は保障額の見直しをおすすめします。`});
+    const assetBuf=asset>=500?`流動資産${asset}万円が遺族の生活基盤として追加バッファーになります。`:'';
+    const badge=spouseWorks?'cond':(asset>=1000?'cond':'need');
+    const need=spouseWorks?'状況次第で要検討':(asset>=1000?'状況次第で要検討':'要確認');
+    const reason=spouseWorks
+      ?`子どもが独立するまでの期間、定期保険の検討が一般的です。遺族年金（${izokuText}）で不足する分のみ最小額で。配偶者が就労中なら保障額を抑えられるケースが多いです。${assetBuf}`
+      :`収入保障保険（掛け捨て）が選択肢になる方が多いです。遺族年金（${izokuText}）との差額分のみを補う形が一般的です。${assetBuf}子ども独立後は保障額を大幅に見直せます。`;
+    verdicts.push({name:'死亡保険（定期・収入保障）',badge,need,reason});
   }else{
     const homeNote=home==='own'?'団信加入の場合、住宅ローン残債は保険対象となります。':'';
     verdicts.push({name:'死亡保険',badge:'noneed',need:'優先度低め',reason:`扶養家族がいない、または子どもが独立済みの場合、死亡保険の優先度は低いケースが多いです。${homeNote}`});
@@ -784,7 +789,11 @@ function calcInsurance(){
   if(health==='bad'){
     verdicts.push({name:'医療保険',badge:'cond',need:'要確認（注意あり）',reason:'持病・治療中の場合、新規加入では告知義務があり、引受審査や条件付き加入となるケースがあります。引受緩和型・無告知型保険も含め、保険募集人へのご相談をおすすめします。'});
   }else if(hasDefense&&hasAsset){
-    verdicts.push({name:'医療保険',badge:'noneed',need:'優先度低め',reason:`入院時の実質負担は月約${nyuinTotal}万円（手取り${tedoriM}万円の${nyuinRatio}%相当）。生活防衛資金がある場合、高額療養費制度と組み合わせることで多くのケースに対応できます。必要性は個人の状況によります。`});
+    const monthsCover=nyuinTotal>0?Math.round(asset/nyuinTotal):0;
+    const assetDetail=asset>=500
+      ?`流動資産${asset}万円は入院実質費用（月${nyuinTotal}万円）の約${monthsCover}ヶ月分に相当します。高額療養費制度（月上限${kouryou.limit.toLocaleString()}円）と組み合わせれば、医療保険なしでほとんどの入院リスクに対応可能な水準です。`
+      :`流動資産${asset}万円と生活防衛資金が確保されており、入院実質費用（月${nyuinTotal}万円）は高額療養費制度と合わせて対応できます。`;
+    verdicts.push({name:'医療保険',badge:'noneed',need:'優先度低め',reason:assetDetail});
   }else{
     verdicts.push({name:'医療保険',badge:'cond',need:'状況次第で要検討',reason:`入院時の実質負担 月約${nyuinTotal}万円が手取り${tedoriM}万円の${nyuinRatio}%を占めます。まず生活防衛資金（月手取り×6ヶ月＝${Math.round(tedoriM*6)}万円目安）の積立を優先することを多くのFPが推奨しています。`});
   }
@@ -793,9 +802,14 @@ function calcInsurance(){
   const cancerReason=(cancer==='high'||health==='bad')?'ご本人の健康状態や家族歴によって優先度が変わります。通院型・実費補償型など支払条件をよく確認した上で、保険募集人へのご相談をおすすめします。':'高額療養費制度でほぼカバーできるケースが多いです。特別なリスク要因がなければ優先度は低めになります。';
   verdicts.push({name:'がん保険',badge:cancerBadge,need:cancerNeed,reason:cancerReason});
   if(isFreelance){
-    verdicts.push({name:'就業不能保険',badge:'need',need:'要確認',reason:'フリーランス・自営業の場合は傷病手当金がありません。長期の就業不能時の収入補填として検討する方が多いです。保険内容の条件（待機期間・対象疾病）を必ずご確認ください。'});
+    const assetBuf=asset>=300?`流動資産${asset}万円が短期の緊急バッファーになりますが、`:'';
+    verdicts.push({name:'就業不能保険',badge:'need',need:'要確認',reason:`${assetBuf}フリーランス・自営業の場合は傷病手当金がありません。長期（3ヶ月以上）の就業不能時の収入補填として検討する方が多いです。待機期間・対象疾病・支払上限の条件を必ずご確認ください。`});
   }else{
-    verdicts.push({name:'就業不能保険',badge:'noneed',need:'優先度低め',reason:`会社員の傷病手当金は月約${shougai}万円（手取り${tedoriM}万円の${shougaiRatio}%）・最長18ヶ月あります。ボーナス${bonus}万円分は傷病手当金の計算に含まれない点に注意が必要です。`});
+    const shougaiTotal=Math.round(shougai*18);
+    const assetNote=asset>=500
+      ?`流動資産${asset}万円も加わり、傷病手当金合計最大${shougaiTotal}万円と合わせて長期療養にも対応できる水準です。`
+      :`ボーナス${bonus}万円分は傷病手当金の計算に含まれない点に注意が必要です。`;
+    verdicts.push({name:'就業不能保険',badge:'noneed',need:'優先度低め',reason:`会社員の傷病手当金は月約${shougai}万円（手取り${tedoriM}万円の${shougaiRatio}%）・最長18ヶ月（受取総額最大約${shougaiTotal}万円）あります。${assetNote}`});
   }
   verdicts.push({name:'学資保険',badge:'noneed',need:'優先度低め',reason:'返戻率が低く流動性もない点が特徴です。教育費の積立方法として積立投資との比較検討をおすすめします。'});
   verdicts.push({name:'火災保険・地震保険',badge:'need',need:'要確認',reason:'公的保障の対象外で、損失が大きくなるリスクがあります。加入状況・補償内容を定期的に確認することをおすすめします。'});
@@ -808,14 +822,35 @@ function calcInsurance(){
 
   const noneedCount=verdicts.filter(v=>v.badge==='noneed').length;
   let score=Math.round((noneedCount/verdicts.length)*60+(hasDefense?20:0)+(hasAsset?20:0));
+  if(asset>=500)score+=5;
+  if(asset>=1000)score+=5;
   const incomeRatio=(premium*12)/income*100;
   if(incomeRatio>15)score-=15;else if(incomeRatio>10)score-=8;else if(incomeRatio<3)score+=10;
   score=Math.min(98,Math.max(10,score));
   document.getElementById('score-num').textContent=score;
+  const defenseAmt=Math.round(tedoriM*6);
   let title,desc;
-  if(score>=80){title='保険は最小化できる状態です';desc='公的保障と資産で多くのリスクをカバーできています。不要な保険を整理し、浮いた保険料をNISA・iDeCoに回しましょう。';}
-  else if(score>=55){title='一部の保険は見直し余地があります';desc='基本的な備えはできていますが、貯蓄型保険・過剰な医療保険は見直しポイントです。まず生活防衛資金の充実を優先してください。';}
-  else{title='公的保障の把握と防衛資金の確保が先決です';desc=`まず高額療養費（月上限${kouryou.limit.toLocaleString()}円）・傷病手当金（月${shougai}万円）の実額を把握し、生活防衛資金（月手取り${tedoriM}万円×6ヶ月＝${Math.round(tedoriM*6)}万円）を積み上げることが保険見直しの前提です。`;}
+  if(score>=80){
+    title='保険は最小化できる状態です';
+    const assetNote=asset>=500
+      ?`流動資産${asset}万円（入院実質費用の約${Math.round(asset/nyuinTotal)}ヶ月分相当）があり、`
+      :`生活防衛資金も確保でき、`;
+    const shougaiNote=shougai>0?`・傷病手当金（月${shougai}万円）`:'';
+    desc=`${assetNote}高額療養費（月上限${kouryou.limit.toLocaleString()}円）${shougaiNote}と組み合わせで多くのリスクをカバーできています。月${premium}万円の保険料の内訳を確認し、掛け捨て以外の貯蓄型保険を中心に見直しを検討しましょう。`;
+  }else if(score>=55){
+    title='一部の保険は見直し余地があります';
+    if(hasDefense&&asset>=500){
+      desc=`流動資産${asset}万円・生活防衛資金も充足しています。この資産水準では医療保険・貯蓄型保険の多くは過剰な可能性があります。月${premium}万円の保険料の内訳を確認し、掛け捨て以外の保険を中心に見直すことを検討しましょう。`;
+    }else if(hasDefense){
+      desc=`生活防衛資金は確保できています（流動資産${asset}万円）。貯蓄型保険・過剰な医療保険を見直すことで月${premium}万円の保険料を最適化できる可能性があります。`;
+    }else{
+      desc=`基本的な備えはできていますが、貯蓄型保険・過剰な医療保険は見直しポイントです。生活防衛資金（月手取り${tedoriM}万円×6ヶ月＝${defenseAmt}万円）の確保と並行して進めましょう。`;
+    }
+  }else{
+    title='公的保障の把握と防衛資金の確保が先決です';
+    const shougaiNote=shougai>0?`・傷病手当金（月${shougai}万円・最長18ヶ月）`:'';
+    desc=`まず高額療養費（月上限${kouryou.limit.toLocaleString()}円）${shougaiNote}の実額を把握し、生活防衛資金（月手取り${tedoriM}万円×6ヶ月＝${defenseAmt}万円目安）を積み上げることが保険見直しの前提です。`;
+  }
   document.getElementById('score-title').textContent=title;
   document.getElementById('score-desc').textContent=desc;
 
