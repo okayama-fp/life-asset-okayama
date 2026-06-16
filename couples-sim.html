@@ -873,7 +873,7 @@ function update(){
       {cls:'danger-step',txt:'住居費が高い場合（収入の30%超）→ 転居・家賃交渉を最優先で検討'},
       {cls:'danger-step',txt:'使っていないサブスク・保険を全てリストアップして解約・見直し'},
       {cls:'danger-step',txt:'食費を週単位で予算管理（週'+fmtMan((v.food*10000/4/10000).toFixed(1))+'万円が目安）'},
-      {cls:'danger-step',txt:'3ヶ月以内に黒字転換できなければ市区町村の家計相談窓口や金融機関の無料相談を活用'},
+      {cls:'danger-step',txt:'3ヶ月以内に黒字転換できなければ市区町村の家計相談窓口やFPへのお問い合わせを活用'},
     ];
   } else if(savingRate<10){
     dc='warn';di='⚠️';dt='貯蓄率'+savingRate.toFixed(1)+'% — 目標20%まで月'+fmtMan(totalIncome*0.2-saving)+'の改善余地';
@@ -1028,7 +1028,7 @@ function update(){
   if(saving<0){
     phases[0].actions.push({title:'赤字の原因費目を特定する',body:'スマホに「マネーフォワードME」をインストールし、銀行・カードを連携。先月の支出を費目別に確認する。',service:'→ マネーフォワードME（無料）'});
     phases[0].actions.push({title:'全サブスクリプションをリストアップ',body:'Netflixや動画配信・音楽・アプリ課金を全て書き出し、2人で使っていないものを即解約。月1,000円×5個=年6万円の節約。',service:'→ スマホの「サブスク管理」設定から確認'});
-    phases[1].actions.push({title:'保険証券を全部引き出して確認',body:'特に掛け捨てでない保険・医療保険が高額なケースが多い。「ほけんの窓口」の無料相談で適正額か確認する。',service:'→ ほけんの窓口（全国店舗・相談無料）'});
+    phases[1].actions.push({title:'保険証券を全部引き出して確認',body:'特に掛け捨てでない保険・医療保険が高額なケースが多い。「ほけんの窓口」で適正額を確認するか、FPにお問い合わせを。',service:'→ ほけんの窓口（全国店舗）'});
   } else if(savingRate<15){
     phases[0].actions.push({title:'先取り貯蓄の自動振替を今日設定',body:'ネットバンクにログインし、給料日翌日に貯蓄口座へ'+fmtMan(Math.max(1,Math.floor(saving*0.8)))+'の自動振替を設定。「余ったら貯める」はゼロになりがち。',service:'→ ネット銀行の自動振替機能を活用（各社・設定無料）'});
     phases[1].actions.push({title:'通信費を格安SIMに変更',body:'大手キャリアから格安SIM（IIJmio・povo・mineoなど）に変えると2人で月1〜2万節約できる。手続きは30分。',service:'→ 格安SIM各社で比較検討（IIJmio・povo・mineoなど料金は変動します）'});
