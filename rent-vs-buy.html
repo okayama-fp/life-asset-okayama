@@ -6,16 +6,16 @@
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/rent-vs-buy.html">
 <title>住宅購入 vs 賃貸 生涯コスト比較シミュレーター｜ライフアセットオフィス</title>
-<meta name="description" content="物件価格・ローン・家賃を入力するだけで、購入と賃貸の生涯コストを比較。損益分岐点・総コスト差・年次推移グラフを自動表示。登録不要。">
+<meta name="description" content="物件価格・ローン・家賃を入力するだけで、購入と賃貸の生涯総コストを比較。火災保険・解体費用・引越し費・不動産業者リスクまで全て考慮した本格版。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="住宅購入 vs 賃貸 生涯コスト比較シミュレーター">
-<meta property="og:description" content="購入と賃貸の生涯コストを比較。損益分岐点・総コスト差・年次推移グラフを自動表示。">
+<meta property="og:description" content="見落としがちなコストを全て含めて購入と賃貸を比較。損益分岐点・年次グラフ付き。">
 <meta property="og:url" content="https://lifeassetoffice.net/rent-vs-buy.html">
 <meta property="og:site_name" content="ライフアセットオフィス">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="住宅購入 vs 賃貸 生涯コスト比較シミュレーター">
-<meta name="twitter:description" content="購入と賃貸の生涯コストを比較。損益分岐点・年次グラフ付き。">
+<meta name="twitter:description" content="火災保険・解体費・引越し費まで全て含めた本格比較。">
 <meta name="twitter:site" content="@lifeasset_fp">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -36,8 +36,9 @@
   --green:#1a7a4a;--green-dark:#1a3d2b;--green-light:#22c55e;
   --green-pale:#dcfce7;--green-mid:#bbf7d0;
   --buy:#1a7a4a;--buy-pale:#dcfce7;--buy-dark:#1a3d2b;
-  --rent:#1a4fa0;--rent-pale:#e8f0fb;--rent-dark:#0d2d6b;
+  --rent:#1a4fa0;--rent-pale:#dbeafe;--rent-dark:#1e3a8a;
   --red:#c0392b;--red-pale:#fdecea;
+  --orange:#c2410c;--orange-pale:#fff7ed;
   --yellow:#b7860b;--yellow-pale:#fef6e4;
   --ink:#1e293b;--navy:#1a3d2b;--paper:#f8fafc;--cream:#f0fdf4;
   --muted:#64748b;--border:#e2e8f0;--white:#fff;
@@ -45,7 +46,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.9;font-size:16px}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.9;font-size:15px}
 
 .topnav{background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .nav-logo{font-size:17px;font-weight:900;color:var(--green)}
@@ -56,99 +57,152 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--i
 .nav-cta{background:var(--green);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}
 @media(max-width:640px){.nav-links{display:none}}
 
-.hero{background-color:#1a3d2b;background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 60%,#1a5fac 100%);padding:60px 28px 68px;position:relative;overflow:hidden}
+.hero{background-color:#1a3d2b;background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 60%,#1a5fac 100%);padding:56px 28px 64px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 32px)}
 .hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1}
 .hero-cat{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:4px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.1em;margin-bottom:16px}
 .hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(20px,3.8vw,32px);font-weight:900;color:#fff;line-height:1.45;margin-bottom:12px}
 .hero h1 em{color:#7ee8a2;font-style:normal}
-.hero-desc{font-size:14px;color:rgba(255,255,255,.72);line-height:1.85}
+.hero-desc{font-size:14px;color:rgba(255,255,255,.72);line-height:1.9}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero-tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:11px;color:rgba(255,255,255,.8)}
 
-.sim-wrap{max-width:900px;margin:0 auto;padding:40px 20px 80px}
+.sim-wrap{max-width:960px;margin:0 auto;padding:36px 20px 80px}
 
-/* 入力パネル */
-.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.input-box{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:22px 20px;box-shadow:var(--shadow)}
-.input-box.buy{border-top:4px solid var(--buy)}
-.input-box.rent{border-top:4px solid var(--rent)}
-.input-box.common{border-top:4px solid var(--green-light)}
-.input-box-title{font-weight:700;font-size:15px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.input-box.buy .input-box-title{color:var(--buy-dark)}
-.input-box.rent .input-box-title{color:var(--rent-dark)}
-.input-box.common .input-box-title{color:var(--navy)}
+/* パネル */
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.panel{background:var(--white);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.panel-head{padding:14px 20px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+.panel.buy .panel-head{background:linear-gradient(135deg,var(--buy-dark),#1f6040);color:#fff}
+.panel.rent .panel-head{background:linear-gradient(135deg,var(--rent-dark),#1a4fa0);color:#fff}
+.panel-body{padding:18px 20px}
+.subsec{margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed var(--border)}
+.subsec:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.subsec-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.subsec-title::before{content:'';display:inline-block;width:3px;height:12px;border-radius:2px;background:var(--green)}
+.panel.rent .subsec-title::before{background:var(--rent)}
 
-.field{margin-bottom:14px}
-.field label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;letter-spacing:.03em}
-.field label .hint{font-weight:400;color:#94a3b8;font-size:11px}
-.input-row{display:flex;align-items:center;gap:6px}
-.input-row input[type=number],.input-row input[type=range]{flex:1}
-input[type=number]{border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;font-family:inherit;width:100%;background:var(--paper);color:var(--ink);transition:border .15s}
+.field{margin-bottom:10px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:3px;letter-spacing:.03em}
+.field label .lhint{font-weight:400;color:#94a3b8;font-size:11px}
+.irow{display:flex;align-items:center;gap:6px}
+.irow input[type=number]{flex:1}
+input[type=number]{border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:14px;font-family:'DM Mono',monospace;width:100%;background:var(--paper);color:var(--ink);transition:border .15s}
 input[type=number]:focus{outline:none;border-color:var(--green);background:#fff}
-.unit{font-size:12px;color:var(--muted);white-space:nowrap;min-width:30px}
-.field-note{font-size:11px;color:#94a3b8;margin-top:3px}
+.unit{font-size:12px;color:var(--muted);white-space:nowrap;min-width:28px}
+.fnote{font-size:11px;color:#94a3b8;margin-top:3px;line-height:1.6}
+.fnote.warn{color:var(--orange)}
+.fnote strong{color:var(--ink)}
 
-input[type=range]{-webkit-appearance:none;height:4px;background:var(--green-mid);border-radius:2px;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.chk-wrap{display:flex;align-items:flex-start;gap:8px;padding:8px 0;cursor:pointer}
+.chk-wrap input[type=checkbox]{width:17px;height:17px;accent-color:var(--green);flex-shrink:0;margin-top:2px}
+.chk-label{font-size:13px;color:var(--ink);line-height:1.6}
 
+/* 解説ボックス */
+details.guide-box{margin-top:14px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+details.guide-box summary{padding:11px 16px;font-size:12px;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+details.guide-box summary::marker{display:none}
+details.guide-box summary::after{content:'▼';font-size:10px;margin-left:auto;opacity:.5}
+details.guide-box[open] summary::after{content:'▲'}
+.guide-box.buy-guide summary{background:var(--buy-pale);color:var(--buy-dark)}
+.guide-box.rent-guide summary{background:var(--rent-pale);color:var(--rent-dark)}
+.guide-box.warn-guide summary{background:var(--orange-pale);color:var(--orange)}
+.guide-inner{padding:14px 16px;font-size:12.5px;line-height:1.85;color:var(--ink)}
+.guide-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.guide-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.guide-item-title{font-weight:700;color:var(--navy);margin-bottom:4px;font-size:13px}
+.guide-tag{display:inline-block;font-size:10px;font-weight:700;border-radius:3px;padding:1px 6px;margin-right:5px;vertical-align:middle}
+.tag-cost{background:#fee2e2;color:#dc2626}
+.tag-risk{background:#fef3c7;color:#d97706}
+.tag-tip{background:var(--green-pale);color:var(--green)}
+.tag-law{background:#ede9fe;color:#7c3aed}
+
+/* 共通条件 */
+.common-panel{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.common-head{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .common-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 
-.calc-btn{display:block;width:100%;padding:16px;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;margin:20px 0;letter-spacing:.06em;transition:all .2s;box-shadow:0 4px 16px rgba(26,122,74,.35)}
+.calc-btn{display:block;width:100%;padding:17px;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;margin:20px 0;letter-spacing:.06em;transition:all .2s;box-shadow:0 4px 16px rgba(26,122,74,.35)}
 .calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,74,.4)}
+.calc-btn:active{transform:translateY(0)}
 
-/* 結果エリア */
+/* 結果 */
 #results{display:none}
 
-/* 損益分岐点バナー */
-.breakeven-banner{border-radius:12px;padding:22px 26px;margin-bottom:24px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.breakeven-banner{border-radius:12px;padding:24px 28px;margin-bottom:24px;text-align:center;color:#fff;position:relative;overflow:hidden}
 .breakeven-banner.buy-wins{background:linear-gradient(135deg,var(--buy-dark),#1f5c40)}
 .breakeven-banner.rent-wins{background:linear-gradient(135deg,var(--rent-dark),#1a4fa0)}
 .breakeven-banner.tie{background:linear-gradient(135deg,#374151,#4b5563)}
-.be-label{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.75;margin-bottom:6px;text-transform:uppercase}
-.be-title{font-family:'Noto Serif JP',serif;font-size:clamp(18px,3vw,26px);font-weight:900;line-height:1.4}
-.be-sub{font-size:13px;opacity:.75;margin-top:8px}
+.be-label{font-size:11px;font-weight:700;letter-spacing:.12em;opacity:.75;margin-bottom:6px}
+.be-title{font-family:'Noto Serif JP',serif;font-size:clamp(17px,3vw,24px);font-weight:900;line-height:1.45}
+.be-sub{font-size:13px;opacity:.78;margin-top:8px;line-height:1.75}
 
-/* 比較カード */
-.compare-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.compare-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 .cc{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
 .cc.buy{border-left:5px solid var(--buy)}
 .cc.rent{border-left:5px solid var(--rent)}
 .cc-label{font-size:11px;font-weight:700;letter-spacing:.1em;margin-bottom:6px}
 .cc.buy .cc-label{color:var(--buy)}
 .cc.rent .cc-label{color:var(--rent)}
-.cc-total{font-family:'DM Mono',monospace;font-size:clamp(22px,4vw,30px);font-weight:500;line-height:1;margin:6px 0}
+.cc-total{font-family:'DM Mono',monospace;font-size:clamp(20px,3.5vw,28px);font-weight:500;line-height:1;margin:6px 0}
 .cc.buy .cc-total{color:var(--buy)}
 .cc.rent .cc-total{color:var(--rent)}
-.cc-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7}
+.cc-sub{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.7}
 .cc-breakdown{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
-.cc-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:3px 0}
-.cc-row .num{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink)}
-.cc-row .plus{color:var(--red)}
-.cc-row .minus{color:var(--green)}
+.cc-row{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--muted);margin:4px 0;gap:8px}
+.cc-row .rlabel{flex:1;line-height:1.5}
+.cc-row .rval{font-family:'DM Mono',monospace;font-size:12px;white-space:nowrap}
+.rval.plus{color:var(--red)}
+.rval.minus{color:var(--green)}
+.rval.deduct{color:#7c3aed}
+
+.callout{padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.9}
+.callout-key{background:var(--green-pale);border-left:4px solid var(--green)}
+.callout-warn{background:var(--orange-pale);border-left:4px solid var(--orange)}
 
 /* グラフ */
 .chart-box{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow)}
 .chart-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px}
 #costChart{width:100%;display:block}
-.chart-legend{display:flex;gap:20px;margin-top:12px;justify-content:center}
+.chart-legend{display:flex;gap:20px;margin-top:12px;justify-content:center;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
-.legend-dot{width:14px;height:4px;border-radius:2px}
+.legend-dot{width:18px;height:4px;border-radius:2px}
 
-/* 年次テーブル */
+/* テーブル */
 .table-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;color:var(--green);width:100%;margin-bottom:12px;transition:all .2s}
 .table-toggle:hover{background:var(--green-pale)}
 .detail-table-wrap{overflow-x:auto;display:none}
 table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
-th{background:linear-gradient(135deg,var(--navy),#1f5c40);color:#fff;padding:9px 12px;text-align:right;font-size:11px;font-weight:700;white-space:nowrap}
+th{background:linear-gradient(135deg,var(--navy),#1f5c40);color:#fff;padding:9px 10px;text-align:right;font-size:11px;font-weight:700;white-space:nowrap}
 th:first-child{text-align:center}
-td{padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;font-size:12px;white-space:nowrap}
-td:first-child{text-align:center;font-family:'Noto Sans JP',sans-serif;color:var(--muted)}
+td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;font-size:11.5px;white-space:nowrap}
+td:first-child{text-align:center;font-family:'Noto Sans JP',sans-serif;color:var(--muted);font-size:11px}
 tr:nth-child(even) td{background:var(--cream)}
 .td-buy{color:var(--buy);font-weight:500}
 .td-rent{color:var(--rent);font-weight:500}
 .td-win{font-weight:700}
 
-.callout{padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.9}
-.callout-key{background:var(--green-pale);border-left:4px solid var(--green)}
+/* 詳細解説セクション */
+.section-heading{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:700;color:var(--navy);margin:36px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--green-mid);display:flex;align-items:center;gap:10px}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.cost-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.cost-card.buy-card{border-top:3px solid var(--buy)}
+.cost-card.rent-card{border-top:3px solid var(--rent)}
+.cost-card.warn-card{border-top:3px solid var(--orange)}
+.cc-head{font-size:13px;font-weight:700;margin-bottom:8px}
+.cost-card.buy-card .cc-head{color:var(--buy-dark)}
+.cost-card.rent-card .cc-head{color:var(--rent-dark)}
+.cost-card.warn-card .cc-head{color:var(--orange)}
+.cost-card p{font-size:12.5px;color:#475569;line-height:1.85;margin:0}
+.cost-card .amount-hint{display:inline-block;background:var(--yellow-pale);color:var(--yellow);font-size:11px;font-weight:700;border-radius:4px;padding:2px 8px;margin:6px 0}
+
+.warn-box{background:var(--orange-pale);border:1.5px solid #fed7aa;border-radius:10px;padding:18px 20px;margin:16px 0}
+.warn-box-title{font-weight:700;color:var(--orange);font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.warn-box ul{margin-left:18px;font-size:13px;color:#7c2d12;line-height:2}
+
+.tip-box{background:var(--green-pale);border:1.5px solid var(--green-mid);border-radius:10px;padding:18px 20px;margin:16px 0}
+.tip-box-title{font-weight:700;color:var(--green-dark);font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tip-box ul{margin-left:18px;font-size:13px;color:#14532d;line-height:2}
 
 .cta-area{background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:14px;padding:26px;margin-top:32px;color:#fff;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .cta-text{flex:1;min-width:200px}
@@ -157,19 +211,18 @@ tr:nth-child(even) td{background:var(--cream)}
 .cta-btn{background:#fff;color:var(--green);border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:900;font-family:inherit;cursor:pointer;flex-shrink:0;transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-block}
 .cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
 
-.disclaimer{background:#fff8e1;border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;padding:12px 16px;font-size:12px;color:#856404;margin-top:28px;line-height:1.9}
+.disclaimer{background:#fff8e1;border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;padding:14px 18px;font-size:12px;color:#856404;margin-top:24px;line-height:1.9}
 
 footer{background:var(--navy);color:rgba(255,255,255,.85);padding:32px 24px 24px;text-align:center}
 .footer-logo{font-size:1rem;font-weight:700;margin-bottom:8px}
 footer p{font-size:0.72rem;opacity:.7;margin:12px 0 0}
 footer a{color:var(--green-light);text-decoration:underline}
 
-@media(max-width:640px){
-  .input-grid{grid-template-columns:1fr}
-  .compare-cards{grid-template-columns:1fr}
+@media(max-width:680px){
+  .panels,.compare-cards,.cost-grid,.common-grid{grid-template-columns:1fr}
+  .sim-wrap{padding:24px 14px 60px}
+  .hero{padding:36px 16px 44px}
   .common-grid{grid-template-columns:1fr 1fr}
-  .sim-wrap{padding:28px 14px 60px}
-  .hero{padding:40px 16px 48px}
 }
 </style>
 </head>
@@ -185,135 +238,295 @@ footer a{color:var(--green-light);text-decoration:underline}
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-cat">🏠 住宅 ／ コスト比較</div>
-    <h1>住宅購入 vs 賃貸<br><em>生涯コスト比較</em>シミュレーター</h1>
-    <p class="hero-desc">物件価格・ローン条件・家賃を入力するだけで、購入と賃貸の生涯総コストを比較します。<br>損益分岐点・年次グラフ・頭金の機会費用まで考慮した本格シミュレーションです。</p>
+    <div class="hero-cat">🏠 住宅 ／ 生涯コスト比較</div>
+    <h1>住宅購入 vs 賃貸<br><em>全コスト込みの</em>生涯比較シミュレーター</h1>
+    <p class="hero-desc">
+      「なんとなく買った方がいい」「賃貸は家賃を捨てるだけ」——どちらも思い込みです。<br>
+      火災保険・固定資産税・売れない場合の解体費用・引越し費用・不動産業者手数料まで<br>
+      見落としがちな全コストを含めて、あなたの条件でシミュレーションします。
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">✅ 住宅ローン控除</span>
+      <span class="hero-tag">✅ 火災・地震保険</span>
+      <span class="hero-tag">✅ 解体費用</span>
+      <span class="hero-tag">✅ 売却仲介手数料</span>
+      <span class="hero-tag">✅ 引越し費用</span>
+      <span class="hero-tag">✅ 頭金運用益</span>
+    </div>
   </div>
 </div>
 
 <div class="sim-wrap">
 
-  <!-- 入力：購入 / 賃貸 -->
-  <div class="input-grid">
+  <div class="panels">
 
-    <div class="input-box buy">
-      <div class="input-box-title">🏠 購入の場合</div>
+    <!-- 購入パネル -->
+    <div class="panel buy">
+      <div class="panel-head">🏠 購入の場合</div>
+      <div class="panel-body">
 
-      <div class="field">
-        <label>物件価格 <span class="hint">（新築・中古）</span></label>
-        <div class="input-row"><input type="number" id="price" value="3500" min="500" max="30000" step="100"><span class="unit">万円</span></div>
-      </div>
-      <div class="field">
-        <label>頭金</label>
-        <div class="input-row"><input type="number" id="down" value="500" min="0" max="9000" step="50"><span class="unit">万円</span></div>
-        <div class="field-note">物件価格の <span id="downPct">—</span>%</div>
-      </div>
-      <div class="field">
-        <label>住宅ローン金利（年） <span class="hint">（固定想定）</span></label>
-        <div class="input-row"><input type="number" id="rate" value="1.5" min="0" max="6" step="0.1"><span class="unit">%</span></div>
-      </div>
-      <div class="field">
-        <label>ローン期間</label>
-        <div class="input-row"><input type="number" id="loanYears" value="35" min="5" max="50" step="5"><span class="unit">年</span></div>
-        <div class="field-note">月返済額 <span id="monthlyLoanDisp">—</span> 万円</div>
-      </div>
-      <div class="field">
-        <label>管理費＋修繕積立（月） <span class="hint">（マンション）</span></label>
-        <div class="input-row"><input type="number" id="mgmt" value="2.5" min="0" max="10" step="0.5"><span class="unit">万円</span></div>
-      </div>
-      <div class="field">
-        <label>固定資産税（年）</label>
-        <div class="input-row"><input type="number" id="propTax" value="12" min="0" max="100" step="1"><span class="unit">万円</span></div>
-      </div>
-      <div class="field">
-        <label>購入諸費用 <span class="hint">（仲介・登記等）</span></label>
-        <div class="input-row"><input type="number" id="expRate" value="5" min="1" max="10" step="0.5"><span class="unit">%</span></div>
-        <div class="field-note"><span id="expAmt">—</span> 万円（自動計算）</div>
-      </div>
-      <div class="field">
-        <label>比較期間終了時の売却価格 <span class="hint">（残存価値）</span></label>
-        <div class="input-row"><input type="number" id="sellPrice" value="2000" min="0" max="20000" step="100"><span class="unit">万円</span></div>
-      </div>
-      <div class="field">
-        <label>住宅ローン控除を考慮する</label>
-        <div class="input-row" style="padding-top:4px">
-          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink)">
-            <input type="checkbox" id="loanDeduction" checked style="width:18px;height:18px;accent-color:var(--green)">
-            考慮する（年末残高×0.7%・最大13年）
+        <div class="subsec">
+          <div class="subsec-title">物件・ローン</div>
+          <div class="field">
+            <label>物件価格 <span class="lhint">新築・中古</span></label>
+            <div class="irow"><input type="number" id="price" value="3500" min="500" max="30000" step="100"><span class="unit">万円</span></div>
+            <div class="fnote">頭金の割合: <strong id="downPct">—</strong>% ／ ローン元本: <strong id="loanAmt">—</strong>万円</div>
+          </div>
+          <div class="field">
+            <label>頭金</label>
+            <div class="irow"><input type="number" id="down" value="500" min="0" max="9000" step="50"><span class="unit">万円</span></div>
+            <div class="fnote">頭金が少ないと金利負担が大きくなり、火災保険も高額になる場合があります。</div>
+          </div>
+          <div class="field">
+            <label>住宅ローン金利（年） <span class="lhint">固定想定</span></label>
+            <div class="irow"><input type="number" id="rate" value="1.5" min="0" max="8" step="0.1"><span class="unit">%</span></div>
+            <div class="fnote">月返済額: <strong id="monthlyLoanDisp">—</strong> 万円 ／ 総返済額: <strong id="totalLoanDisp">—</strong> 万円</div>
+          </div>
+          <div class="field">
+            <label>ローン期間</label>
+            <div class="irow"><input type="number" id="loanYears" value="35" min="5" max="50" step="5"><span class="unit">年</span></div>
+          </div>
+        </div>
+
+        <div class="subsec">
+          <div class="subsec-title">毎年かかる維持費・税金・保険</div>
+          <div class="field">
+            <label>管理費＋修繕積立（月） <span class="lhint">マンション。戸建は0</span></label>
+            <div class="irow"><input type="number" id="mgmt" value="2.5" min="0" max="15" step="0.5"><span class="unit">万円/月</span></div>
+            <div class="fnote">マンションの修繕積立金は築年数とともに<span class="warn">値上がりが義務付けられています</span>。平均2〜4万/月。</div>
+          </div>
+          <div class="field">
+            <label>固定資産税＋都市計画税（年）</label>
+            <div class="irow"><input type="number" id="propTax" value="12" min="0" max="100" step="1"><span class="unit">万円/年</span></div>
+            <div class="fnote">土地・建物の評価額×1.7%が目安。新築3年間は軽減措置あり（木造）。毎年5月頃に納付書が届きます。</div>
+          </div>
+          <div class="field">
+            <label>火災保険＋地震保険（年換算）</label>
+            <div class="irow"><input type="number" id="fireIns" value="5" min="0" max="50" step="0.5"><span class="unit">万円/年</span></div>
+            <div class="fnote warn">⚠️ 火災保険は最長10年。地震保険は建物の50%まで補償。木造・旧耐震は保険料が高い。年3〜10万が目安。</div>
+          </div>
+        </div>
+
+        <div class="subsec">
+          <div class="subsec-title">購入時の初期費用（諸費用）</div>
+          <div class="field">
+            <label>購入諸費用率 <span class="lhint">仲介・登記・税等</span></label>
+            <div class="irow"><input type="number" id="expRate" value="5" min="1" max="12" step="0.5"><span class="unit">%</span></div>
+            <div class="fnote">自動計算: <strong id="expAmt">—</strong> 万円。仲介手数料（物件価格×3%+6万×1.1）＋登録免許税＋司法書士費用＋印紙税＋不動産取得税（評価額×3%、約半年後）。新築は仲介なしで3%、中古は5〜7%が目安。</div>
+          </div>
+        </div>
+
+        <div class="subsec">
+          <div class="subsec-title">リフォーム・大規模修繕（一時費用）</div>
+          <div class="field">
+            <label>大規模リフォーム費用</label>
+            <div class="irow"><input type="number" id="reform" value="150" min="0" max="1000" step="50"><span class="unit">万円</span></div>
+            <div class="fnote">入居後 <strong id="reformYearDisp">15</strong> 年目に発生と想定。水回り（キッチン・浴室・トイレ）の交換費用が中心。戸建て100〜300万、マンション専有部50〜200万。</div>
+          </div>
+          <div class="field">
+            <label>リフォーム実施年（入居後）</label>
+            <div class="irow"><input type="number" id="reformYear" value="15" min="5" max="40" step="5" oninput="document.getElementById('reformYearDisp').textContent=this.value"><span class="unit">年目</span></div>
+          </div>
+          <div class="fnote" style="margin-top:-6px">※シミュレーターはこれとは別に 10・20・30年目に大規模修繕費100万円を自動加算します（マンション共用部・外壁塗装等）。</div>
+        </div>
+
+        <div class="subsec">
+          <div class="subsec-title">売却・出口</div>
+          <div class="field">
+            <label>居住終了時の扱い</label>
+            <div style="margin-top:8px">
+              <label class="chk-wrap">
+                <input type="radio" name="sellMode" id="modeSelll" value="sell" checked onchange="toggleSellMode()" style="width:16px;height:16px;accent-color:var(--green)">
+                <span class="chk-label">売却する（売却価格を入力）</span>
+              </label>
+              <label class="chk-wrap">
+                <input type="radio" name="sellMode" id="modeDemolish" value="demolish" onchange="toggleSellMode()" style="width:16px;height:16px;accent-color:var(--red)">
+                <span class="chk-label">売れない・解体する（解体費用を入力）</span>
+              </label>
+            </div>
+          </div>
+          <div id="sellSection" class="field">
+            <label>売却想定価格</label>
+            <div class="irow"><input type="number" id="sellPrice" value="2000" min="0" max="20000" step="100"><span class="unit">万円</span></div>
+            <div class="fnote">売却時の仲介手数料（売却額×3%+6万×1.1）は自動計算で差引きます。 <span id="sellCommDisp" style="color:var(--red)"></span></div>
+          </div>
+          <div id="demolishSection" class="field" style="display:none">
+            <label>解体費用（見込み）</label>
+            <div class="irow"><input type="number" id="demolish" value="150" min="0" max="500" step="10"><span class="unit">万円</span></div>
+            <div class="fnote warn">⚠️ 木造一戸建て: 100〜200万円。RC造マンション: 区分所有のため個人解体不可（管理組合が決議）。売れない戸建ては更地にしても固定資産税の軽減がなくなる問題あり。</div>
+          </div>
+          <label class="chk-wrap" style="margin-top:10px">
+            <input type="checkbox" id="loanDeduction" checked>
+            <span class="chk-label">住宅ローン控除を考慮する<br><span style="font-size:11px;color:var(--muted)">年末残高×0.7% ／ 最大13年 ／ 年間上限21万円（新築・省エネ基準）</span></span>
           </label>
         </div>
+
+        <details class="guide-box buy-guide">
+          <summary>💡 購入で見落としやすいコストと注意点（クリックで開く）</summary>
+          <div class="guide-inner">
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-cost">費用</span>不動産取得税（購入から約半年後）</div>
+              固定資産税評価額×3%（土地・建物それぞれ）。物件価格の約2%が目安。現金が必要なのに見落とす人が多い費用です。購入時の諸費用率に含めて計算しましょう。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-cost">費用</span>管理費・修繕積立金の値上がり</div>
+              マンションの修繕積立金は「長期修繕計画」に基づき段階的に値上がりします。購入時は安く見せて、数年後に大幅値上げするケースが多発。修繕積立金不足のマンションでは一時金徴収（50〜200万円）が発生することも。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-risk">リスク</span>火災保険・地震保険の見直し</div>
+              2022年の改定以降、火災保険料は値上がり傾向。木造・旧耐震・ハザードマップ浸水リスクの高い物件は特に高額。地震保険は単独では入れず、火災保険とセット加入。保険金額は建物評価の50%まで。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-risk">リスク</span>売れない・貸せない・壊せない「三重苦」</div>
+              人口減少地域では売却価格がゼロ以下（解体費用が発生）になるケースが現実に起きています。相続で引き継いだ子供に解体費用の負担を残すことになるリスクを必ず検討してください。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-cost">費用</span>住宅ローン控除の注意点</div>
+              2022年以降の新制度では控除率0.7%（旧1%）。省エネ基準を満たさない新築は2024年以降控除対象外になる場合があります。中古物件は築年数・リフォーム状況により異なります。金融機関・税務署に確認を。
+            </div>
+          </div>
+        </details>
+
       </div>
     </div>
 
-    <div class="input-box rent">
-      <div class="input-box-title">🏢 賃貸の場合</div>
+    <!-- 賃貸パネル -->
+    <div class="panel rent">
+      <div class="panel-head">🏢 賃貸の場合</div>
+      <div class="panel-body">
 
-      <div class="field">
-        <label>月額家賃</label>
-        <div class="input-row"><input type="number" id="rent" value="12" min="3" max="100" step="0.5"><span class="unit">万円/月</span></div>
-      </div>
-      <div class="field">
-        <label>家賃上昇率（年） <span class="hint">（インフレ想定）</span></label>
-        <div class="input-row"><input type="number" id="rentUp" value="0.5" min="0" max="5" step="0.1"><span class="unit">%</span></div>
-      </div>
-      <div class="field">
-        <label>礼金</label>
-        <div class="input-row"><input type="number" id="reikin" value="1" min="0" max="3" step="0.5"><span class="unit">ヶ月分</span></div>
-      </div>
-      <div class="field">
-        <label>敷金</label>
-        <div class="input-row"><input type="number" id="shikikin" value="1" min="0" max="3" step="0.5"><span class="unit">ヶ月分</span></div>
-        <div class="field-note">退去時に一部返金されます</div>
-      </div>
-      <div class="field">
-        <label>更新費（2年ごと）</label>
-        <div class="input-row"><input type="number" id="koushin" value="1" min="0" max="2" step="0.5"><span class="unit">ヶ月分</span></div>
-      </div>
+        <div class="subsec">
+          <div class="subsec-title">契約初期費用</div>
+          <div class="field">
+            <label>月額家賃</label>
+            <div class="irow"><input type="number" id="rent" value="12" min="3" max="100" step="0.5"><span class="unit">万円/月</span></div>
+          </div>
+          <div class="field">
+            <label>礼金 <span class="lhint">返金なし</span></label>
+            <div class="irow"><input type="number" id="reikin" value="1" min="0" max="3" step="0.5"><span class="unit">ヶ月分</span></div>
+            <div class="fnote">礼金は法的根拠のない慣行。ゼロ礼金物件や交渉で減額できる場合も。</div>
+          </div>
+          <div class="field">
+            <label>仲介手数料 <span class="lhint">通常1ヶ月分</span></label>
+            <div class="irow"><input type="number" id="rentAgent" value="1" min="0" max="2" step="0.5"><span class="unit">ヶ月分</span></div>
+            <div class="fnote warn">⚠️ 本来は借主・貸主合計1ヶ月分。借主から1ヶ月取るには<strong>借主の承諾が必要</strong>（宅建業法46条）。交渉可能です。</div>
+          </div>
+          <div class="field">
+            <label>敷金</label>
+            <div class="irow"><input type="number" id="shikikin" value="1" min="0" max="3" step="0.5"><span class="unit">ヶ月分</span></div>
+            <div class="fnote">退去時に原状回復費用を差引いた残額が返金されます。本シミュレーターでは敷金は最終的に全額返金と想定。</div>
+          </div>
+        </div>
 
-      <div style="margin-top:24px;padding:14px 16px;background:var(--rent-pale);border-radius:8px;font-size:13px;color:var(--rent-dark);line-height:1.8">
-        <strong>💡 賃貸の有利な点</strong><br>
-        頭金（購入時の自己資金）を運用できます。<br>比較条件で運用利回りを設定してください。
+        <div class="subsec">
+          <div class="subsec-title">毎年かかる費用</div>
+          <div class="field">
+            <label>家賃上昇率（年）</label>
+            <div class="irow"><input type="number" id="rentUp" value="0.5" min="0" max="5" step="0.1"><span class="unit">%</span></div>
+            <div class="fnote">インフレ・需要増により家賃は緩やかに上昇します。都市部は0.5〜1%、地方は0〜0.3%が目安。</div>
+          </div>
+          <div class="field">
+            <label>更新費（2年ごと）</label>
+            <div class="irow"><input type="number" id="koushin" value="1" min="0" max="2" step="0.5"><span class="unit">ヶ月分</span></div>
+            <div class="fnote">関東では1ヶ月が慣行。関西では更新料なしが多い。2年ごとに発生。</div>
+          </div>
+          <div class="field">
+            <label>賃貸火災保険（年）</label>
+            <div class="irow"><input type="number" id="rentIns" value="1.5" min="0" max="5" step="0.5"><span class="unit">万円/年</span></div>
+            <div class="fnote">賃貸でも入居者の家財・個人賠償責任をカバーする火災保険が必要（ほぼ必須）。年1〜2万円。不動産会社指定の高額保険に注意。<span class="warn">自分でネット保険を選ぶと年5千円〜で済むことも。</span></div>
+          </div>
+        </div>
+
+        <div class="subsec">
+          <div class="subsec-title">住み替え時のコスト</div>
+          <div class="field">
+            <label>住み替え周期</label>
+            <div class="irow"><input type="number" id="moveInterval" value="10" min="3" max="30" step="1"><span class="unit">年ごと</span></div>
+            <div class="fnote">ライフスタイルの変化（転勤・子供の進学・家族構成変化）で引越しが発生します。0を入力すると住み替えなしで計算。</div>
+          </div>
+          <div class="field">
+            <label>退去時クリーニング・修繕費</label>
+            <div class="irow"><input type="number" id="cleanFee" value="10" min="0" max="100" step="5"><span class="unit">万円/回</span></div>
+            <div class="fnote warn">⚠️ 通常の使用による汚れ・劣化は借主負担ではありません（ガイドライン）。しかし「クリーニング費用借主負担」の特約契約では請求されます。5〜30万円のトラブル多発。</div>
+          </div>
+          <div class="field">
+            <label>引越し費用</label>
+            <div class="irow"><input type="number" id="moveCost" value="15" min="0" max="100" step="5"><span class="unit">万円/回</span></div>
+            <div class="fnote">繁忙期（3〜4月）は2〜3倍。単身5〜15万、ファミリー15〜40万が目安。複数業者の相見積もりが必須。</div>
+          </div>
+
+          <div class="tip-box" style="margin-top:14px;padding:14px 16px">
+            <div class="tip-box-title" style="font-size:13px">💡 賃貸の有利な点：頭金を運用できる</div>
+            <div style="font-size:12.5px;color:#14532d;line-height:1.8">購入で頭金に充てる資金（例: 500万円）を賃貸ならNISAなどで長期運用できます。比較条件欄で運用利回りを設定してください。</div>
+          </div>
+        </div>
+
+        <details class="guide-box rent-guide">
+          <summary>⚠️ 賃貸の落とし穴と不動産業者に注意すべきこと（クリックで開く）</summary>
+          <div class="guide-inner">
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-law">法律</span>仲介手数料のぼったくり問題</div>
+              宅建業法では仲介手数料は「依頼者双方の合計で賃料1ヶ月分以内」と定められています。借主から1ヶ月取るには<strong>借主の承諾が必要</strong>。承諾なく請求された場合は違法です。「業界慣行です」と言われても法的根拠はありません。交渉または0.5ヶ月物件を探しましょう。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-risk">リスク</span>不当な原状回復請求（退去トラブル）</div>
+              国土交通省ガイドラインにより、通常の使用による汚れ（日焼け・画鋲穴など）は家主負担です。しかし悪質な業者は全額借主に請求してくることがあります。入居時に写真で部屋の状態を記録し、ガイドラインを印刷して持参することで多くの不当請求を防げます。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-risk">リスク</span>賃貸火災保険の指定強制</div>
+              不動産会社が特定の保険会社を「強制指定」するのは違法（独占禁止法）です。しかし実態上、業者指定保険に入らないと入居を断られることも。自分で選んだ保険（年5千〜1万円）が通るか必ず確認を。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-risk">リスク</span>定期借家契約（更新不可）</div>
+              「定期借家」は契約期間終了時に必ず退去しなければならない契約。普通借家と違い、借主の意思では更新できません。契約書の「定期建物賃貸借契約」の文字と書面による事前説明があるか確認してください。
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-title"><span class="guide-tag tag-tip">節約</span>住み替えコストを減らすコツ</div>
+              礼金ゼロ・仲介手数料ゼロ物件も増えています。「UR賃貸」は礼金・仲介手数料・保証人・保証会社不要で更新費もなし。引越しは5〜6月、9〜10月の閑散期に行うと費用が半額以下になることも。
+            </div>
+          </div>
+        </details>
+
       </div>
     </div>
   </div>
 
   <!-- 共通条件 -->
-  <div class="input-box common" style="margin-bottom:16px">
-    <div class="input-box-title">⚙️ 比較条件</div>
+  <div class="common-panel">
+    <div class="common-head">⚙️ 比較条件</div>
     <div class="common-grid">
       <div class="field">
         <label>比較期間</label>
-        <div class="input-row"><input type="number" id="period" value="30" min="5" max="50" step="5"><span class="unit">年</span></div>
+        <div class="irow"><input type="number" id="period" value="30" min="5" max="50" step="5"><span class="unit">年</span></div>
+        <div class="fnote">何年住むかで結論が変わります。</div>
       </div>
       <div class="field">
         <label>現在の年齢</label>
-        <div class="input-row"><input type="number" id="age" value="35" min="20" max="65" step="1"><span class="unit">歳</span></div>
+        <div class="irow"><input type="number" id="age" value="35" min="20" max="65" step="1"><span class="unit">歳</span></div>
       </div>
       <div class="field">
-        <label>頭金の想定運用利回り <span class="hint">（年・賃貸の場合）</span></label>
-        <div class="input-row"><input type="number" id="invReturn" value="4" min="0" max="10" step="0.5"><span class="unit">%</span></div>
-        <div class="field-note">オルカン等の長期平均目安</div>
+        <label>頭金の運用利回り（年） <span class="lhint">賃貸の場合</span></label>
+        <div class="irow"><input type="number" id="invReturn" value="4" min="0" max="10" step="0.5"><span class="unit">%</span></div>
+        <div class="fnote">全世界株式（オルカン）長期平均: 5〜7%。慎重な場合は3〜4%で。</div>
       </div>
     </div>
   </div>
 
-  <button class="calc-btn" onclick="calcAll()">比較する</button>
+  <button class="calc-btn" onclick="calcAll()">📊 全コストを含めて比較する</button>
 
   <div id="results">
 
-    <!-- 損益分岐点 -->
     <div id="bevenBanner" class="breakeven-banner"></div>
 
-    <!-- 総コスト比較カード -->
     <div class="compare-cards">
       <div class="cc buy">
-        <div class="cc-label">🏠 購入の総コスト</div>
+        <div class="cc-label">🏠 購入の総コスト（<span id="buyN">—</span>年間）</div>
         <div class="cc-total" id="buyTotal">—</div>
         <div class="cc-sub" id="buySubNote"></div>
         <div class="cc-breakdown" id="buyBreak"></div>
       </div>
       <div class="cc rent">
-        <div class="cc-label">🏢 賃貸の総コスト</div>
+        <div class="cc-label">🏢 賃貸の総コスト（<span id="rentN">—</span>年間）</div>
         <div class="cc-total" id="rentTotal">—</div>
         <div class="cc-sub" id="rentSubNote"></div>
         <div class="cc-breakdown" id="rentBreak"></div>
@@ -322,32 +535,25 @@ footer a{color:var(--green-light);text-decoration:underline}
 
     <div id="resultCallout" class="callout callout-key"></div>
 
-    <!-- グラフ -->
     <div class="chart-box">
-      <div class="chart-title">累計コスト推移（万円）</div>
+      <div class="chart-title">累計コスト推移（万円） — 売却益・頭金運用益を反映した実質コスト</div>
       <canvas id="costChart" height="280"></canvas>
       <div class="chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--buy)"></div>購入（売却益考慮後）</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--rent)"></div>賃貸（頭金運用益考慮後）</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--buy)"></div>購入（売却益 or 解体費を年末反映）</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--rent)"></div>賃貸（頭金運用益を差引き）</div>
       </div>
     </div>
 
-    <!-- 年次テーブル -->
     <button class="table-toggle" onclick="toggleTable(this)">▼ 年次明細を表示する</button>
     <div class="detail-table-wrap" id="detailTable">
       <div style="overflow-x:auto">
         <table id="yearTable">
           <thead>
             <tr>
-              <th>年</th>
-              <th>年齢</th>
-              <th>【購入】<br>年間支出</th>
-              <th>【購入】<br>ローン控除</th>
-              <th>【購入】<br>累計コスト</th>
-              <th>【賃貸】<br>年間家賃</th>
-              <th>【賃貸】<br>頭金運用益</th>
-              <th>【賃貸】<br>累計コスト</th>
-              <th>差額<br>（購入−賃貸）</th>
+              <th>年</th><th>年齢</th>
+              <th>【購入】年間費用</th><th>【購入】控除</th><th>【購入】累計</th>
+              <th>【賃貸】年間費用</th><th>【賃貸】運用益</th><th>【賃貸】累計</th>
+              <th>差額(購入−賃貸)</th>
             </tr>
           </thead>
           <tbody id="yearTbody"></tbody>
@@ -355,16 +561,83 @@ footer a{color:var(--green-light);text-decoration:underline}
       </div>
     </div>
 
+    <!-- 詳細解説 -->
+    <div class="section-heading">📖 各コストの詳細解説</div>
+
+    <div class="cost-grid">
+      <div class="cost-card buy-card">
+        <div class="cc-head">🏠 購入: 毎年の固定コスト</div>
+        <div class="amount-hint">年間 約100〜250万円</div>
+        <p>ローン返済・管理費・修繕積立・固定資産税・火災地震保険がかかります。ローン完済後も管理費・税・保険は続きます。「ローンが終われば家賃なし」は誤解で、維持費は永続します。</p>
+      </div>
+      <div class="cost-card buy-card">
+        <div class="cc-head">🔨 購入: 大規模修繕・リフォーム</div>
+        <div class="amount-hint">10・15・20・30年目に発生</div>
+        <p>マンション共用部の大規模修繕（外壁・屋根・エレベーター）は管理組合が実施。修繕積立金不足時は一時金（50〜200万）が発生します。専有部の水回りリフォームは自己負担で100〜300万円。</p>
+      </div>
+      <div class="cost-card buy-card">
+        <div class="cc-head">💴 購入: 売却にかかるコスト</div>
+        <div class="amount-hint">売却価格×3%+6万×1.1</div>
+        <p>売却時の仲介手数料は売却価格×3%+6万円（税込み）。3,000万円の物件を売ると約105万円。売却益が3,000万円超えの場合は譲渡所得税（20.315%）も発生。</p>
+      </div>
+      <div class="cost-card warn-card">
+        <div class="cc-head">⛔ 購入: 売れない場合の解体費用</div>
+        <div class="amount-hint">木造: 100〜200万円</div>
+        <p>地方・郊外では「売れない家」が急増中。売れないまま放置すると特定空き家に指定され、固定資産税が6倍になるリスクも。解体すると更地になり固定資産税の軽減がなくなります。負の遺産問題です。</p>
+      </div>
+      <div class="cost-card rent-card">
+        <div class="cc-head">🏢 賃貸: 初期費用の内訳</div>
+        <div class="amount-hint">家賃の4〜6ヶ月分</div>
+        <p>礼金（返金なし）＋仲介手数料（返金なし）＋敷金（返金あり）＋引越し費用。住み替えのたびにこの費用が発生します。礼金0・仲介手数料0物件を選ぶだけで10〜20万円節約できます。</p>
+      </div>
+      <div class="cost-card rent-card">
+        <div class="cc-head">🔥 賃貸: 火災保険・保証料</div>
+        <div class="amount-hint">年1〜2万 + 保証料</div>
+        <p>入居者向け火災保険（家財・賠償責任）は必須。業者指定の保険は割高なことが多く、自分でネット保険を選ぶと半額以下に。さらに家賃保証会社（初回0.5〜1ヶ月分＋年更新料）も発生する場合あり。</p>
+      </div>
+      <div class="cost-card rent-card">
+        <div class="cc-head">🚚 賃貸: 住み替えの総コスト</div>
+        <div class="amount-hint">1回あたり30〜80万円</div>
+        <p>退去修繕費（5〜30万）＋引越し費用（5〜40万）＋新居の礼金・仲介手数料。転勤・子供の入学・収入変化で住み替えるたびに発生。長期同じ物件に住み続けると家賃交渉もできます。</p>
+      </div>
+      <div class="cost-card warn-card">
+        <div class="cc-head">📈 賃貸: 頭金の運用益（プラス要因）</div>
+        <div class="amount-hint">年利4%で30年→2.2倍</div>
+        <p>購入時の頭金500万円をNISA（全世界株式）で運用した場合、年4%なら30年後に約1,621万円（利益1,121万円）。この運用益が賃貸のコストを大幅に下げる重要な要素です。「頭金ゼロで購入」だと賃貸のこの優位がなくなります。</p>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-box-title">⚠️ 不動産業者との取引で特に注意すべき5つのポイント</div>
+      <ul>
+        <li><strong>仲介手数料の交渉</strong>: 法律上、借主から1ヶ月分以上取ることは原則できません。「半額にしてほしい」と言うのは合法的な交渉です。</li>
+        <li><strong>火災保険の自由選択</strong>: 業者指定の保険への強制加入は違法。「自分で入ります」と伝えられます（拒否できない業者は避けましょう）。</li>
+        <li><strong>退去時の原状回復ガイドライン</strong>: 国交省ガイドラインを印刷して保管。通常使用による劣化は家主負担です。</li>
+        <li><strong>「おとり広告」に注意</strong>: ポータルサイトの人気物件が「先日埋まりました」と言われたら、おとり広告（不動産業法違反）の可能性があります。</li>
+        <li><strong>重要事項説明書を必ず精読</strong>: 定期借家、特約（クリーニング費借主負担等）、ハザードマップの説明は契約前に確認義務があります。</li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-box-title">✅ どちらが正解か？FPの視点から</div>
+      <ul>
+        <li><strong>購入が有利になりやすいケース</strong>: 同じ場所に長期居住（15年以上）／売却価格が維持される都市部／低金利の固定ローンが組める／管理費・修繕積立の少ない物件</li>
+        <li><strong>賃貸が有利になりやすいケース</strong>: 転勤・転職の可能性がある／頭金を高利回りで運用できる／郊外・地方（将来の値下がりリスク高）／独身・DINKS（ライフスタイル変化の可能性）</li>
+        <li><strong>答えは「条件次第」</strong>: 「どちらが得か」より「自分のライフプランに合うか」が本質。家族構成・転勤リスク・資産運用方針を含めて総合判断しましょう。</li>
+      </ul>
+    </div>
+
     <div class="cta-area">
       <div class="cta-text">
-        <h3>住宅購入・ライフプランをFPに相談する</h3>
-        <p>購入か賃貸かの判断は、家族構成・収入・将来設計によって変わります。個別の状況に応じた進め方を整理します。</p>
+        <h3>住宅購入・賃貸の判断をFPに相談する</h3>
+        <p>購入か賃貸かは、収入・家族構成・転勤リスク・資産状況によって最適解が変わります。数字だけでなく、ライフプラン全体から整理します。</p>
       </div>
       <a href="/contact.html" class="cta-btn">お問い合わせはこちら →</a>
     </div>
 
-    <div class="disclaimer" style="margin-top:20px">
-      ⚠️ 本シミュレーターは概算です。住宅ローン控除の適用条件・売却コスト・転居時の費用・リフォーム費用・火災保険料等は反映していません。実際の判断は金融機関・税理士・FPにご確認ください。
+    <div class="disclaimer">
+      ⚠️ 本シミュレーターは概算です。住宅ローン控除の詳細適用条件・譲渡所得税・修繕積立金の値上がり・家賃保証会社費用・管理費以外の管理組合費用等は完全には反映していません。実際の判断は税理士・FP・金融機関にご確認ください。<br>
+      <span style="font-size:10px;color:#94a3b8;display:block;margin-top:8px">本コンテンツはAI（Claude）を活用して作成し、FPが監修しています。情報は2026年6月時点のものです。</span>
     </div>
 
   </div><!-- /results -->
@@ -378,12 +651,9 @@ footer a{color:var(--green-light);text-decoration:underline}
 </footer>
 
 <script>
-/* -------- ユーティリティ -------- */
 function v(id){return parseFloat(document.getElementById(id).value)||0}
 function fmt(n){return Math.round(n).toLocaleString()}
-function fmtM(n){return (Math.round(n/10)/10).toFixed(1)} // 万円1桁
 
-/* 月返済額（元利均等） */
 function pmt(principal,annualRate,years){
   if(principal<=0)return 0;
   if(annualRate===0)return principal/(years*12);
@@ -391,279 +661,277 @@ function pmt(principal,annualRate,years){
   return principal*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
 }
 
-/* ローン残高 */
 function balance(principal,annualRate,years,months){
-  if(principal<=0||annualRate===0)return Math.max(0,principal*(1-months/(years*12)));
-  const r=annualRate/100/12,n=years*12;
+  if(principal<=0)return 0;
+  if(annualRate===0)return Math.max(0,principal*(1-months/(years*12)));
+  const r=annualRate/100/12;
   const p=pmt(principal,annualRate,years);
   const b=principal*Math.pow(1+r,months)-p*(Math.pow(1+r,months)-1)/r;
   return Math.max(0,b);
 }
 
-/* リアルタイム補助表示 */
+function toggleSellMode(){
+  const sell=document.querySelector('input[name=sellMode]:checked').value==='sell';
+  document.getElementById('sellSection').style.display=sell?'block':'none';
+  document.getElementById('demolishSection').style.display=sell?'none':'block';
+}
+
 function updateHints(){
   const price=v('price'),down=v('down'),rate=v('rate'),years=v('loanYears'),expR=v('expRate');
   const pct=price>0?(down/price*100).toFixed(1):'—';
   document.getElementById('downPct').textContent=pct;
-  const loan=price-down;
+  const loan=Math.max(0,price-down);
+  document.getElementById('loanAmt').textContent=fmt(loan);
   const m=pmt(loan,rate,years);
   document.getElementById('monthlyLoanDisp').textContent=loan>0?(m/10000).toFixed(2):'—';
-  document.getElementById('expAmt').textContent=fmt(price*expR/100);
+  document.getElementById('totalLoanDisp').textContent=loan>0?fmt(Math.round(m*years*12/10000)):'—';
+  document.getElementById('expAmt').textContent=fmt(Math.round(price*expR/100));
+  const sp=v('sellPrice');
+  const comm=Math.round((sp*10000*0.03+60000)*1.1)/10000;
+  document.getElementById('sellCommDisp').textContent=sp>0?`売却仲介手数料の目安: 約${comm.toFixed(0)}万円`:'';
 }
-['price','down','rate','loanYears','expRate'].forEach(id=>{
+
+['price','down','rate','loanYears','expRate','sellPrice'].forEach(id=>{
   document.getElementById(id).addEventListener('input',updateHints);
 });
 updateHints();
 
-/* -------- メイン計算 -------- */
 function calcAll(){
-  const price=v('price')*10000;
-  const down=v('down')*10000;
-  const rate=v('rate');
-  const loanYrs=v('loanYears');
-  const mgmt=v('mgmt')*10000;      // 月
-  const propTax=v('propTax')*10000; // 年
-  const expRate=v('expRate')/100;
-  const sellPriceVal=v('sellPrice')*10000;
-  const useDeduction=document.getElementById('loanDeduction').checked;
+  /* 購入 */
+  const price    = v('price')*10000;
+  const down     = v('down')*10000;
+  const rate     = v('rate');
+  const loanYrs  = v('loanYears');
+  const mgmt     = v('mgmt')*10000;
+  const propTax  = v('propTax')*10000;
+  const fireIns  = v('fireIns')*10000;
+  const expRate  = v('expRate')/100;
+  const reform   = v('reform')*10000;
+  const reformY  = Math.round(v('reformYear'))||15;
+  const useDeduction = document.getElementById('loanDeduction').checked;
+  const isDemolish = document.querySelector('input[name=sellMode]:checked').value==='demolish';
+  const sellPriceVal = v('sellPrice')*10000;
+  const demolish = v('demolish')*10000;
+  const sellComm = isDemolish ? 0 : Math.round((sellPriceVal*0.03+60000)*1.1);
 
-  const rent=v('rent')*10000;       // 月
-  const rentUpRate=v('rentUp')/100;
-  const reikin=v('reikin');
-  const shikikin=v('shikikin');
-  const koushin=v('koushin');
+  /* 賃貸 */
+  const rentAmt     = v('rent')*10000;
+  const rentUpRate  = v('rentUp')/100;
+  const reikin      = v('reikin');
+  const shikikin    = v('shikikin');
+  const koushin     = v('koushin');
+  const rentAgent   = v('rentAgent');
+  const rentIns     = v('rentIns')*10000;
+  const cleanFee    = v('cleanFee')*10000;
+  const moveCost    = v('moveCost')*10000;
+  const moveInterval= Math.round(v('moveInterval'))||0;
 
-  const N=v('period');
-  const age0=v('age');
-  const invRet=v('invReturn')/100;
+  const N    = Math.round(v('period'));
+  const age0 = Math.round(v('age'));
+  const invRet = v('invReturn')/100;
 
-  const principal=Math.max(0,price-down);
-  const expenses=price*expRate;
-  const monthlyLoan=pmt(principal,rate,loanYrs);
+  const principal = Math.max(0,price-down);
+  const expenses  = Math.round(price*expRate);
+  const monthlyLoan = pmt(principal,rate,loanYrs);
 
-  /* 年次データ */
-  const buyYearly=[];   // 年間支出（控除引前）
-  const buyDeduct=[];   // ローン控除額
-  const buyCum=[];      // 累計ネットコスト（売却考慮）
-  const rentYearly=[];  // 年間家賃支出
-  const rentOpCost=[];  // 頭金運用益（累計）
-  const rentCum=[];     // 累計ネットコスト
+  /* 配列 */
+  const buyYearly=[],buyDeduct=[],buyCum=[];
+  const rentYearly=[],rentOpCost=[],rentCum=[];
 
-  let buyCumVal=down+expenses; // 初年度：頭金+諸費用
-  let rentCumVal=rent*(reikin+shikikin); // 初年度：初期費用
+  /* Year 0 初期費用 */
+  let buyCumVal = down+expenses;
+  const rentLost = Math.round(rentAmt*(reikin+rentAgent));
+  let rentCumVal = rentLost;
 
-  busCum_push(0); // year 0
-  function busCum_push(y){
-    const netBuy = y===N ? buyCumVal-sellPriceVal : buyCumVal;
-    buyCum.push(netBuy/10000);
-  }
-
-  rentCum.push(rentCumVal/10000);
-  buyYearly.push(0); buyDeduct.push(0);
-  rentYearly.push(0); rentOpCost.push(0);
+  buyYearly.push(0); buyDeduct.push(0); buyCum.push(buyCumVal/10000);
+  rentYearly.push(0); rentOpCost.push(0); rentCum.push(rentCumVal/10000);
 
   for(let y=1;y<=N;y++){
-    /* 購入: 年間費用 */
-    const yearLoan = y<=loanYrs ? monthlyLoan*12 : 0;
-    const yearMgmt = mgmt*12;
-    const yearTax = propTax;
+    /* 購入: 年間 */
+    const yearLoan  = y<=loanYrs ? monthlyLoan*12 : 0;
+    const yearMgmt  = mgmt*12;
+    const yearTax   = propTax;
+    const yearFire  = fireIns;
+    const yearRenov = (y===10||y===20||y===30)?1000000:0;
+    const yearRef   = (y===reformY && reform>0)?reform:0;
 
-    // 大規模修繕（10・20・30年目 各100万円）
-    const renov = (y===10||y===20||y===30) ? 1000000 : 0;
-
-    // ローン控除（最初13年、年末残高×0.7%、上限21万）
     let deduct=0;
     if(useDeduction && y<=13 && principal>0){
       const bal=balance(principal,rate,loanYrs,(y-1)*12);
       deduct=Math.min(bal*0.007,210000);
     }
 
-    const yearBuySpend = yearLoan + yearMgmt + yearTax + renov - deduct;
-    buyCumVal += yearBuySpend;
+    const yearBuyGross = yearLoan+yearMgmt+yearTax+yearFire+yearRenov+yearRef;
+    buyCumVal += yearBuyGross-deduct;
 
-    buyYearly.push((yearLoan+yearMgmt+yearTax+renov)/10000);
+    buyYearly.push(yearBuyGross/10000);
     buyDeduct.push(deduct/10000);
 
-    const netBuy = y===N ? buyCumVal-sellPriceVal : buyCumVal;
-    buyCum.push(netBuy/10000);
+    let netBuy = buyCumVal/10000;
+    if(y===N){
+      netBuy = isDemolish
+        ? (buyCumVal+demolish)/10000
+        : (buyCumVal-sellPriceVal+sellComm)/10000;
+    }
+    buyCum.push(netBuy);
 
-    /* 賃貸: 年間費用 */
-    const curRent = rent*Math.pow(1+rentUpRate,y-1);
-    let yearRentSpend = curRent*12;
-    if(y%2===0) yearRentSpend += curRent*koushin; // 更新費
+    /* 賃貸: 年間 */
+    const curRent = rentAmt*Math.pow(1+rentUpRate,y-1);
+    let yearRentSpend = curRent*12+rentIns;
+    if(y%2===0) yearRentSpend+=curRent*koushin;
 
+    if(moveInterval>0 && y%moveInterval===0 && y<N){
+      const nextRent=rentAmt*Math.pow(1+rentUpRate,y);
+      yearRentSpend += cleanFee+moveCost+nextRent*(reikin+rentAgent);
+    }
     rentCumVal += yearRentSpend;
     rentYearly.push(yearRentSpend/10000);
 
-    // 頭金の運用益（複利）
-    const opGain = down*(Math.pow(1+invRet,y)-1);
+    const opGain=down*(Math.pow(1+invRet,y)-1);
     rentOpCost.push(opGain/10000);
-
-    const netRent = rentCumVal - opGain;
-    rentCum.push(netRent/10000);
+    rentCum.push((rentCumVal-opGain)/10000);
   }
 
-  /* 損益分岐点 */
+  /* 損益分岐 */
   let breakeven=-1;
   for(let y=1;y<=N;y++){
     if(buyCum[y]<rentCum[y]){breakeven=y;break;}
   }
 
-  /* 最終コスト */
-  const finalBuy=buyCum[N];
-  const finalRent=rentCum[N];
+  const finalBuy=buyCum[N], finalRent=rentCum[N];
   const diff=Math.abs(finalBuy-finalRent);
   const buyWins=finalBuy<finalRent;
 
-  /* 表示 */
   document.getElementById('results').style.display='block';
-  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}),100);
 
-  // 損益分岐バナー
+  /* 損益分岐バナー */
   const bb=document.getElementById('bevenBanner');
   if(breakeven>0){
-    const beAge=age0+breakeven;
     bb.className='breakeven-banner buy-wins';
     bb.innerHTML=`<div class="be-label">損益分岐点</div>
-      <div class="be-title">購入開始から<strong> ${breakeven}年後（${beAge}歳）</strong>以降<br>購入の方が有利になります</div>
-      <div class="be-sub">${breakeven}年目以降は毎年、購入コストが賃貸コストを下回り続けます</div>`;
+      <div class="be-title">購入開始から <strong>${breakeven}年後（${age0+breakeven}歳）</strong> 以降、<br>購入の方が有利になります</div>
+      <div class="be-sub">${breakeven}年目を境に毎年コスト差が拡大します。${N}年後の差額: 約${fmt(diff)}万円</div>`;
   } else {
-    bb.className='breakeven-banner rent-wins';
+    bb.className=`breakeven-banner ${buyWins?'buy-wins':'rent-wins'}`;
     bb.innerHTML=`<div class="be-label">比較結果（${N}年間）</div>
-      <div class="be-title">${N}年間では<strong>賃貸が有利</strong>です</div>
-      <div class="be-sub">ローン・管理費・諸費用を合計すると、比較期間内では賃貸のコストの方が低い結果になりました</div>`;
+      <div class="be-title">${N}年間では <strong>${buyWins?'購入':'賃貸'}が約${fmt(diff)}万円有利</strong> です</div>
+      <div class="be-sub">${buyWins?'比較期間を通じて購入コストが下回っています。':'比較期間内では損益分岐点に達しませんでした。居住期間を延ばすと結果が変わります。'}</div>`;
   }
 
-  // コストカード
-  document.getElementById('buyTotal').textContent=fmt(finalBuy)+'万円';
-  document.getElementById('rentTotal').textContent=fmt(finalRent)+'万円';
-  document.getElementById('buySubNote').textContent=`（${N}年後の売却価格 ${fmt(sellPriceVal/10000)}万円を差引き後）`;
-  document.getElementById('rentSubNote').textContent=`（頭金${fmt(down/10000)}万円の運用益 ${fmt(rentOpCost[N])}万円を差引き後）`;
+  /* コストカード */
+  ['buyN','rentN'].forEach(id=>document.getElementById(id).textContent=N);
+  document.getElementById('buyTotal').textContent=fmt(Math.round(finalBuy))+'万円';
+  document.getElementById('rentTotal').textContent=fmt(Math.round(finalRent))+'万円';
 
-  // 内訳
-  const buyBreakHTML=`
-    <div class="cc-row"><span>頭金＋購入諸費用</span><span class="num plus">＋${fmt((down+expenses)/10000)}万円</span></div>
-    <div class="cc-row"><span>ローン返済総額</span><span class="num plus">＋${fmt(monthlyLoan*12*Math.min(N,loanYrs)/10000)}万円</span></div>
-    <div class="cc-row"><span>管理費・修繕積立・固定資産税</span><span class="num plus">＋${fmt((mgmt*12+propTax)*N/10000)}万円</span></div>
-    <div class="cc-row"><span>売却収入</span><span class="num minus">－${fmt(sellPriceVal/10000)}万円</span></div>`;
-  document.getElementById('buyBreak').innerHTML=buyBreakHTML;
+  const totalLoan=Math.round(monthlyLoan*12*Math.min(N,loanYrs)/10000);
+  const totalMgmtTax=Math.round((mgmt*12+propTax+fireIns)*N/10000);
+  const totalDeductSum=buyDeduct.slice(1).reduce((a,b)=>a+b,0);
+  const totalRenov=([10,20,30].filter(y=>y<=N).length)*100;
+  const reformAmt=reformY<=N?reform/10000:0;
+  const exitCost=isDemolish?`+${fmt(demolish/10000)}万（解体）`:`-${fmt(sellPriceVal/10000)}万＋${fmt(Math.round(sellComm/10000))}万（仲介）`;
 
-  const rentBreakHTML=`
-    <div class="cc-row"><span>初期費用（礼金・敷金）</span><span class="num plus">＋${fmt(rent*(reikin+shikikin)/10000)}万円</span></div>
-    <div class="cc-row"><span>家賃総額（${N}年間）</span><span class="num plus">＋${fmt(rentYearly.slice(1).reduce((a,b)=>a+b,0))}万円</span></div>
-    <div class="cc-row"><span>頭金の運用益</span><span class="num minus">－${fmt(rentOpCost[N])}万円</span></div>`;
-  document.getElementById('rentBreak').innerHTML=rentBreakHTML;
+  document.getElementById('buySubNote').textContent=isDemolish?'（解体費用を含む）':`（${N}年後売却 ${fmt(sellPriceVal/10000)}万円・仲介手数料 ${fmt(Math.round(sellComm/10000))}万円を考慮後）`;
+  document.getElementById('buyBreak').innerHTML=`
+    <div class="cc-row"><span class="rlabel">頭金＋購入諸費用</span><span class="rval plus">＋${fmt(Math.round((down+expenses)/10000))}万円</span></div>
+    <div class="cc-row"><span class="rlabel">ローン返済総額（${Math.min(N,loanYrs)}年分）</span><span class="rval plus">＋${fmt(totalLoan)}万円</span></div>
+    <div class="cc-row"><span class="rlabel">管理費・固定資産税・火災保険（${N}年）</span><span class="rval plus">＋${fmt(totalMgmtTax)}万円</span></div>
+    ${totalRenov>0?`<div class="cc-row"><span class="rlabel">大規模修繕費（10/20/30年目）</span><span class="rval plus">＋${fmt(totalRenov)}万円</span></div>`:''}
+    ${reformAmt>0?`<div class="cc-row"><span class="rlabel">リフォーム費（${reformY}年目）</span><span class="rval plus">＋${fmt(reformAmt)}万円</span></div>`:''}
+    ${totalDeductSum>0?`<div class="cc-row"><span class="rlabel">住宅ローン控除（最大13年）</span><span class="rval deduct">－${fmt(Math.round(totalDeductSum))}万円</span></div>`:''}
+    <div class="cc-row"><span class="rlabel">売却/解体</span><span class="rval ${isDemolish?'plus':'minus'}">${exitCost}</span></div>`;
 
-  // 結果コメント
+  const totalRentYearly=rentYearly.slice(1).reduce((a,b)=>a+b,0);
+  const moveTimes=moveInterval>0?Math.floor((N-1)/moveInterval):0;
+  document.getElementById('rentSubNote').textContent=`（頭金${fmt(down/10000)}万円を年${v('invReturn')}%運用した場合の利益 ${fmt(Math.round(rentOpCost[N]))}万円を差引き後）`;
+  document.getElementById('rentBreak').innerHTML=`
+    <div class="cc-row"><span class="rlabel">初期費用（礼金＋仲介手数料）</span><span class="rval plus">＋${fmt(Math.round(rentLost/10000))}万円</span></div>
+    <div class="cc-row"><span class="rlabel">家賃・保険・更新費（${N}年）</span><span class="rval plus">＋${fmt(Math.round(totalRentYearly))}万円</span></div>
+    ${moveTimes>0?`<div class="cc-row"><span class="rlabel">住み替えコスト（${moveTimes}回）</span><span class="rval plus">内含</span></div>`:''}
+    <div class="cc-row"><span class="rlabel">頭金の運用益</span><span class="rval deduct">－${fmt(Math.round(rentOpCost[N]))}万円</span></div>`;
+
+  /* 結果コメント */
   const co=document.getElementById('resultCallout');
   if(buyWins){
-    co.textContent=`${N}年間のトータルでは購入が約${fmt(diff)}万円有利です。${breakeven>0?`${breakeven}年目（${age0+breakeven}歳）を過ぎれば毎年差が広がります。`:''}売却価格や運用利回りの前提が変わると結果も変わります。「いくらで売れるか」の見通しが判断の核心です。`;
+    co.innerHTML=`<strong>${N}年間のトータルでは購入が約${fmt(diff)}万円有利</strong>です。${breakeven>0?`${breakeven}年目（${age0+breakeven}歳）から差が広がり、長く住むほど購入優位が拡大します。`:''}「売却価格」と「居住年数」が結論を大きく左右します。`;
+    co.className='callout callout-key';
   } else {
-    co.textContent=`${N}年間のトータルでは賃貸が約${fmt(diff)}万円有利です。頭金（${fmt(down/10000)}万円）を年${v('invReturn')}%で運用できる場合は特に賃貸の優位性が高まります。居住期間・売却価格の前提を変えて再試算してみてください。`;
+    co.innerHTML=`<strong>${N}年間のトータルでは賃貸が約${fmt(diff)}万円有利</strong>です。頭金（${fmt(down/10000)}万円）を年${v('invReturn')}%で運用できる場合は特に賃貸優位が高まります。居住期間を延ばすか、売却価格・利回りの前提を変えて再試算してみてください。`;
+    co.className='callout callout-warn';
   }
-  co.className='callout callout-key';
 
-  // グラフ
   drawChart(buyCum,rentCum,N,breakeven,age0);
-
-  // 年次テーブル
-  buildTable(busCum_arr,rentCum,buyYearly,buyDeduct,rentYearly,rentOpCost,N,age0);
-
-  function busCum_arr(){ return buyCum; }
-
   buildTable(buyCum,rentCum,buyYearly,buyDeduct,rentYearly,rentOpCost,N,age0);
 }
 
-/* -------- グラフ描画 -------- */
 function drawChart(buyArr,rentArr,N,breakeven,age0){
   const canvas=document.getElementById('costChart');
   const dpr=window.devicePixelRatio||1;
   const W=canvas.offsetWidth||640;
   const H=280;
-  canvas.width=W*dpr;
-  canvas.height=H*dpr;
-  canvas.style.width=W+'px';
-  canvas.style.height=H+'px';
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
   const ctx=canvas.getContext('2d');
   ctx.scale(dpr,dpr);
 
-  const PAD={top:20,right:20,bottom:36,left:62};
+  const PAD={top:20,right:20,bottom:38,left:66};
   const pw=W-PAD.left-PAD.right;
   const ph=H-PAD.top-PAD.bottom;
 
   const allVals=[...buyArr,...rentArr];
-  const minV=Math.min(...allVals)*0.95;
-  const maxV=Math.max(...allVals)*1.05;
-  const range=maxV-minV||1;
+  const minV=Math.min(...allVals);
+  const maxV=Math.max(...allVals);
+  const pad=(maxV-minV)*0.08||100;
+  const lo=minV-pad, hi=maxV+pad, range=hi-lo;
 
-  function xPos(i){return PAD.left+i/N*pw}
-  function yPos(v){return PAD.top+ph-(v-minV)/range*ph}
+  const xPos=i=>PAD.left+i/N*pw;
+  const yPos=v=>PAD.top+ph-(v-lo)/range*ph;
 
-  // 背景
   ctx.fillStyle='#f8fafc';
   ctx.fillRect(0,0,W,H);
 
-  // グリッド
-  ctx.strokeStyle='#e2e8f0';
-  ctx.lineWidth=1;
+  ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=1;
   const steps=5;
   for(let i=0;i<=steps;i++){
     const y=PAD.top+ph/steps*i;
     ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+pw,y);ctx.stroke();
-    const val=maxV-(range/steps*i);
-    ctx.fillStyle='#94a3b8';
-    ctx.font='10px DM Mono,monospace';
-    ctx.textAlign='right';
-    ctx.fillText(Math.round(val).toLocaleString(),PAD.left-6,y+4);
+    const val=hi-(range/steps*i);
+    ctx.fillStyle='#94a3b8';ctx.font='10px DM Mono,monospace';ctx.textAlign='right';
+    ctx.fillText(Math.round(val).toLocaleString(),PAD.left-5,y+4);
   }
 
-  // X軸ラベル
-  ctx.fillStyle='#64748b';
-  ctx.font='10px Noto Sans JP,sans-serif';
-  ctx.textAlign='center';
-  const stepX=Math.ceil(N/8);
+  ctx.fillStyle='#64748b';ctx.font='10px Noto Sans JP,sans-serif';ctx.textAlign='center';
+  const stepX=Math.max(1,Math.ceil(N/8));
   for(let i=0;i<=N;i+=stepX){
-    const x=xPos(i);
-    ctx.fillText(i+'年',x,H-PAD.bottom+14);
-    ctx.fillText((age0+i)+'歳',x,H-PAD.bottom+26);
+    ctx.fillText(i+'年',xPos(i),H-PAD.bottom+14);
+    ctx.fillText((age0+i)+'歳',xPos(i),H-PAD.bottom+26);
   }
 
-  // 損益分岐縦線
   if(breakeven>0&&breakeven<=N){
     const bx=xPos(breakeven);
-    ctx.strokeStyle='rgba(26,122,74,.25)';
-    ctx.setLineDash([4,3]);
-    ctx.lineWidth=1.5;
+    ctx.strokeStyle='rgba(26,122,74,.3)';ctx.setLineDash([4,3]);ctx.lineWidth=1.5;
     ctx.beginPath();ctx.moveTo(bx,PAD.top);ctx.lineTo(bx,PAD.top+ph);ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle='rgba(26,122,74,.9)';
-    ctx.font='bold 10px Noto Sans JP,sans-serif';
-    ctx.textAlign='left';
+    ctx.fillStyle='rgba(26,122,74,.9)';ctx.font='bold 10px Noto Sans JP,sans-serif';ctx.textAlign='left';
     ctx.fillText('分岐',bx+3,PAD.top+14);
   }
 
-  // 賃貸ライン
-  ctx.strokeStyle='#1a4fa0';
-  ctx.lineWidth=2.5;
+  /* 賃貸ライン */
+  ctx.strokeStyle='#1a4fa0';ctx.lineWidth=2.5;ctx.setLineDash([]);
   ctx.beginPath();
   for(let i=0;i<=N;i++){const x=xPos(i),y=yPos(rentArr[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
   ctx.stroke();
 
-  // 購入ライン
-  ctx.strokeStyle='#1a7a4a';
-  ctx.lineWidth=2.5;
+  /* 購入ライン */
+  ctx.strokeStyle='#1a7a4a';ctx.lineWidth=2.5;
   ctx.beginPath();
   for(let i=0;i<=N;i++){const x=xPos(i),y=yPos(buyArr[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
   ctx.stroke();
 
-  // X軸
-  ctx.strokeStyle='#cbd5e1';
-  ctx.lineWidth=1;
-  ctx.beginPath();
-  ctx.moveTo(PAD.left,PAD.top+ph);ctx.lineTo(PAD.left+pw,PAD.top+ph);ctx.stroke();
+  ctx.strokeStyle='#cbd5e1';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(PAD.left,PAD.top+ph);ctx.lineTo(PAD.left+pw,PAD.top+ph);ctx.stroke();
 }
 
-/* -------- テーブル構築 -------- */
 function buildTable(buyArr,rentArr,buyY,buyD,rentY,rentOp,N,age0){
   const tbody=document.getElementById('yearTbody');
   tbody.innerHTML='';
@@ -672,15 +940,14 @@ function buildTable(buyArr,rentArr,buyY,buyD,rentY,rentOp,N,age0){
     const diff=buyArr[y]-rentArr[y];
     const tr=document.createElement('tr');
     tr.innerHTML=`
-      <td>${y}年目</td>
-      <td>${age0+y}歳</td>
-      <td class="td-buy">${y===0?'—':fmt(buyY[y])}</td>
-      <td class="td-buy">${y===0?'—':(buyD[y]>0?'-'+fmt(buyD[y]):'—')}</td>
-      <td class="td-buy ${isBuyWin?'td-win':''}">${fmt(buyArr[y])}</td>
-      <td class="td-rent">${y===0?'—':fmt(rentY[y])}</td>
-      <td class="td-rent">${y===0?'—':(rentOp[y]>0?'-'+fmt(rentOp[y]):'—')}</td>
-      <td class="td-rent ${!isBuyWin?'td-win':''}">${fmt(rentArr[y])}</td>
-      <td style="color:${diff<0?'var(--buy)':'var(--rent)'};font-weight:700">${diff>0?'+':''}${fmt(diff)}</td>`;
+      <td>${y}年目</td><td>${age0+y}歳</td>
+      <td class="td-buy">${y===0?'—':fmt(Math.round(buyY[y]))}</td>
+      <td class="td-buy">${y===0||buyD[y]===0?'—':'△'+fmt(Math.round(buyD[y]))}</td>
+      <td class="td-buy ${isBuyWin?'td-win':''}">${fmt(Math.round(buyArr[y]))}</td>
+      <td class="td-rent">${y===0?'—':fmt(Math.round(rentY[y]))}</td>
+      <td class="td-rent">${y===0||rentOp[y]===0?'—':'△'+fmt(Math.round(rentOp[y]))}</td>
+      <td class="td-rent ${!isBuyWin?'td-win':''}">${fmt(Math.round(rentArr[y]))}</td>
+      <td style="color:${diff<0?'var(--buy)':'var(--rent)'};font-weight:700">${diff>0?'+':''}${fmt(Math.round(diff))}</td>`;
     tbody.appendChild(tr);
   }
 }
