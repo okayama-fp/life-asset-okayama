@@ -5,864 +5,640 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TikTok動画: お金を考えないことの精神的デメリット</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #111;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
-    color: #fff;
-    padding: 20px;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+  padding: 16px;
+  gap: 14px;
+}
 
-  /* ===== コントロールパネル ===== */
-  .controls {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .controls button {
-    background: #333;
-    color: #fff;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 8px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s;
-    font-family: inherit;
-  }
-  .controls button:hover { background: #444; }
-  .controls button.active { background: #0ea5e9; border-color: #0ea5e9; }
-  .slide-info {
-    color: #aaa;
-    font-size: 13px;
-    min-width: 80px;
-    text-align: center;
-  }
+/* コントロール */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.controls button {
+  background: #1e1e1e;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .2s;
+}
+.controls button:hover { background: #2a2a2a; }
+.controls button.on { background: #0ea5e9; border-color: #0ea5e9; }
+.slide-info { color: #666; font-size: 12px; min-width: 60px; text-align: center; }
 
-  /* ===== スマホ枠 ===== */
-  .phone-frame {
-    width: 390px;
-    height: 844px;
-    border-radius: 44px;
-    border: 8px solid #333;
-    background: #000;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 60px rgba(14,165,233,0.3), 0 20px 60px rgba(0,0,0,0.8);
-  }
-  /* ノッチ */
-  .phone-frame::before {
-    content: '';
-    position: absolute;
-    top: 10px; left: 50%;
-    transform: translateX(-50%);
-    width: 100px; height: 22px;
-    background: #000;
-    border-radius: 11px;
-    z-index: 100;
-  }
+/* スマホ枠 */
+.phone {
+  width: 360px;
+  height: 780px;
+  border-radius: 40px;
+  border: 7px solid #222;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(14,165,233,.2), 0 20px 60px rgba(0,0,0,.8);
+  flex-shrink: 0;
+}
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 9px; left: 50%;
+  transform: translateX(-50%);
+  width: 90px; height: 20px;
+  background: #000;
+  border-radius: 10px;
+  z-index: 200;
+}
 
-  /* ===== スライドコンテナ ===== */
-  .slide-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
+/* タイマーバー */
+.tbar {
+  position: absolute;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f43f5e, #f97316, #facc15);
+  width: 0%;
+  z-index: 300;
+}
 
-  /* ===== 個別スライド ===== */
-  .slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 30px 80px;
-    opacity: 0;
-    transform: scale(0.97);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    pointer-events: none;
-    text-align: center;
-  }
-  .slide.active {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: all;
-  }
-  .slide.exit {
-    opacity: 0;
-    transform: scale(1.03);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
+/* スライドコンテナ */
+.slides { position: absolute; inset: 0; }
 
-  /* ===== スライド別背景 ===== */
-  .slide-0 { background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 100%); }
-  .slide-1 { background: linear-gradient(160deg, #1a0a2e 0%, #16213e 100%); }
-  .slide-2 { background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 100%); }
-  .slide-3 { background: linear-gradient(160deg, #1a0533 0%, #0c1445 100%); }
-  .slide-4 { background: linear-gradient(160deg, #0d1b2a 0%, #1b2838 100%); }
-  .slide-5 { background: linear-gradient(160deg, #0f0c1d 0%, #1a1040 100%); }
-  .slide-6 { background: linear-gradient(160deg, #001a33 0%, #003060 100%); }
-  .slide-7 { background: linear-gradient(160deg, #002611 0%, #004d20 100%); }
-  .slide-8 { background: linear-gradient(160deg, #0f172a 0%, #0ea5e9 200%); }
+/* 各スライド */
+.s {
+  position: absolute; inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 24px 90px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .45s ease;
+}
+.s.active { opacity: 1; pointer-events: all; }
 
-  /* ===== パーティクル背景 ===== */
-  .slide-bg {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 0;
-  }
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    animation: float linear infinite;
-    opacity: 0.15;
-  }
-  @keyframes float {
-    0% { transform: translateY(100%) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.15; }
-    90% { opacity: 0.15; }
-    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-  }
+/* 背景グラデーション（スライド別） */
+.s0 { background: radial-gradient(ellipse at 30% 20%, #1a0a2e 0%, #0a0a1e 70%); }
+.s1 { background: radial-gradient(ellipse at 70% 30%, #1e0a0a 0%, #0f0a0a 70%); }
+.s2 { background: radial-gradient(ellipse at 20% 60%, #0a1a2e 0%, #050d1a 70%); }
+.s3 { background: radial-gradient(ellipse at 80% 20%, #1a0020 0%, #0d0010 70%); }
+.s4 { background: radial-gradient(ellipse at 40% 80%, #001020 0%, #000a14 70%); }
+.s5 { background: radial-gradient(ellipse at 60% 40%, #100a20 0%, #080610 70%); }
+.s6 { background: radial-gradient(ellipse at 30% 50%, #0a0a1a 0%, #050508 70%); }
+.s7 { background: radial-gradient(ellipse at 70% 70%, #001a10 0%, #000d08 70%); }
+.s8 { background: radial-gradient(ellipse at 50% 30%, #001428 0%, #000814 70%); }
 
-  /* ===== コンテンツ ===== */
-  .slide-inner {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-  }
+/* 浮遊パーティクル */
+.particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.p {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: rise linear infinite;
+}
+@keyframes rise {
+  0%   { transform: translateY(110%) scale(0); opacity: 0; }
+  10%  { opacity: .18; }
+  90%  { opacity: .12; }
+  100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
+}
 
-  /* ===== タグ ===== */
-  .slide-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.4s ease 0.1s;
-  }
-  .slide.active .slide-tag {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .tag-hook { background: rgba(239,68,68,0.25); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
-  .tag-problem { background: rgba(245,158,11,0.25); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); }
-  .tag-demerit { background: rgba(168,85,247,0.25); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.4); }
-  .tag-solution { background: rgba(14,165,233,0.25); color: #7dd3fc; border: 1px solid rgba(14,165,233,0.4); }
-  .tag-cta { background: rgba(34,197,94,0.25); color: #86efac; border: 1px solid rgba(34,197,94,0.4); }
+/* コンテンツ共通 */
+.inner { position: relative; z-index: 10; width: 100%; }
 
-  /* ===== 大見出し ===== */
-  .slide-emoji {
-    font-size: 64px;
-    margin-bottom: 16px;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.2s;
-    line-height: 1;
-  }
-  .slide.active .slide-emoji {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .slide-number {
-    font-size: 11px;
-    font-weight: 700;
-    color: #64748b;
-    letter-spacing: 0.2em;
-    margin-bottom: 12px;
-    opacity: 0;
-    transition: all 0.4s ease 0.15s;
-  }
-  .slide.active .slide-number { opacity: 1; }
-  .slide-title {
-    font-size: 28px;
-    font-weight: 900;
-    line-height: 1.3;
-    margin-bottom: 16px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s ease 0.3s;
-    letter-spacing: -0.01em;
-  }
-  .slide.active .slide-title {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .slide-subtitle {
-    font-size: 16px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(15px);
-    transition: all 0.5s ease 0.45s;
-  }
-  .slide.active .slide-subtitle {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* タグ */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 3px 11px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s ease .1s, transform .4s ease .1s;
+}
+.s.active .tag { opacity: 1; transform: none; }
+.red   { background: rgba(244,63,94,.2); color: #fda4af; border: 1px solid rgba(244,63,94,.35); }
+.amber { background: rgba(245,158,11,.2); color: #fcd34d; border: 1px solid rgba(245,158,11,.35); }
+.purple{ background: rgba(168,85,247,.2); color: #d8b4fe; border: 1px solid rgba(168,85,247,.35); }
+.blue  { background: rgba(14,165,233,.2); color: #7dd3fc; border: 1px solid rgba(14,165,233,.35); }
+.green { background: rgba(34,197,94,.2);  color: #86efac; border: 1px solid rgba(34,197,94,.35); }
+.sky   { background: rgba(56,189,248,.25); color: #38bdf8; border: 1px solid rgba(56,189,248,.4); }
 
-  /* ===== 強調ボックス ===== */
-  .highlight-box {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 14px;
-    padding: 16px 20px;
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.85);
-    opacity: 0;
-    transform: translateY(15px);
-    transition: all 0.5s ease 0.55s;
-    text-align: left;
-  }
-  .slide.active .highlight-box {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 絵文字 */
+.emo {
+  font-size: 58px;
+  line-height: 1;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: scale(.5);
+  transition: opacity .5s cubic-bezier(.34,1.56,.64,1) .2s,
+              transform .5s cubic-bezier(.34,1.56,.64,1) .2s;
+}
+.s.active .emo { opacity: 1; transform: scale(1); }
 
-  /* ===== キーワード強調 ===== */
-  .key-red { color: #f87171; font-weight: 700; }
-  .key-yellow { color: #fbbf24; font-weight: 700; }
-  .key-blue { color: #38bdf8; font-weight: 700; }
-  .key-green { color: #4ade80; font-weight: 700; }
-  .key-purple { color: #c084fc; font-weight: 700; }
-  .big-num {
-    font-size: 52px;
-    font-weight: 900;
-    line-height: 1;
-    margin: 8px 0;
-    background: linear-gradient(90deg, #f87171, #fb923c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+/* 番号ラベル */
+.num {
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #444;
+  margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity .4s ease .15s;
+}
+.s.active .num { opacity: 1; }
 
-  /* ===== アイコンリスト ===== */
-  .icon-list {
-    list-style: none;
-    width: 100%;
-    margin-top: 12px;
-  }
-  .icon-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    font-size: 14px;
-    color: rgba(255,255,255,0.82);
-    line-height: 1.5;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.4s ease;
-  }
-  .slide.active .icon-list li:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.4s; }
-  .slide.active .icon-list li:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.55s; }
-  .slide.active .icon-list li:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.7s; }
-  .slide.active .icon-list li:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.85s; }
-  .icon-list li .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+/* メインタイトル */
+.ttl {
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.3;
+  color: #fff;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .5s ease .3s, transform .5s ease .3s;
+  letter-spacing: -.01em;
+}
+.s.active .ttl { opacity: 1; transform: none; }
 
-  /* ===== 矢印インジケーター ===== */
-  .swipe-hint {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    opacity: 0.5;
-    font-size: 11px;
-    color: #aaa;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
-    50% { opacity: 0.7; transform: translateX(-50%) translateY(-4px); }
-  }
+/* サブタイトル */
+.sub {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease .42s, transform .5s ease .42s;
+}
+.s.active .sub { opacity: 1; transform: none; }
 
-  /* ===== プログレスバー ===== */
-  .progress-dots {
-    position: absolute;
-    top: 50px;
-    right: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    z-index: 10;
-  }
-  .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.3);
-    transition: all 0.3s ease;
-  }
-  .dot.active {
-    background: #fff;
-    height: 16px;
-  }
+/* ボックス */
+.box {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.82);
+  text-align: left;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease .52s, transform .5s ease .52s;
+}
+.s.active .box { opacity: 1; transform: none; }
 
-  /* ===== TikTokっぽいUI要素 ===== */
-  .tiktok-ui {
-    position: absolute;
-    right: 16px;
-    bottom: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    z-index: 10;
-  }
-  .tiktok-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    color: #fff;
-    font-size: 10px;
-    opacity: 0.8;
-  }
-  .tiktok-btn .btn-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-  }
+/* カラーワード */
+.r { color: #f87171; font-weight: 700; }
+.y { color: #fbbf24; font-weight: 700; }
+.b { color: #38bdf8; font-weight: 700; }
+.g { color: #4ade80; font-weight: 700; }
+.v { color: #c084fc; font-weight: 700; }
+.o { color: #fb923c; font-weight: 700; }
 
-  .bottom-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0; right: 0;
-    padding: 14px 16px 30px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    z-index: 10;
-  }
-  .bottom-account {
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-  .bottom-caption {
-    font-size: 12px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.4;
-  }
-  .bottom-tags {
-    font-size: 12px;
-    color: #38bdf8;
-    margin-top: 4px;
-  }
+/* リスト */
+.lst { list-style: none; width: 100%; margin-top: 10px; }
+.lst li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  font-size: 13px;
+  color: rgba(255,255,255,.8);
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.s.active .lst li:nth-child(1) { opacity: 1; transform: none; transition-delay: .38s; }
+.s.active .lst li:nth-child(2) { opacity: 1; transform: none; transition-delay: .52s; }
+.s.active .lst li:nth-child(3) { opacity: 1; transform: none; transition-delay: .66s; }
+.s.active .lst li:nth-child(4) { opacity: 1; transform: none; transition-delay: .80s; }
+.lst li .ic { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
 
-  /* ===== スライド8: CTA ===== */
-  .cta-btn {
-    display: inline-block;
-    margin-top: 20px;
-    background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 14px 28px;
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(14,165,233,0.5);
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.7s;
-  }
-  .slide.active .cta-btn {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* 大数字 */
+.big {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 6px 0;
+  background: linear-gradient(90deg, #f43f5e, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-  /* ===== タイマーバー ===== */
-  .timer-bar {
-    position: absolute;
-    top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-    width: 0%;
-    z-index: 20;
-    transition: none;
-  }
-  .timer-bar.animating {
-    transition: width linear;
-  }
+/* CTAボタン風 */
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 13px 26px;
+  border-radius: 50px;
+  box-shadow: 0 4px 24px rgba(14,165,233,.55);
+  opacity: 0;
+  transform: scale(.9);
+  transition: opacity .5s cubic-bezier(.34,1.56,.64,1) .65s,
+              transform .5s cubic-bezier(.34,1.56,.64,1) .65s;
+}
+.s.active .cta-pill { opacity: 1; transform: scale(1); }
+.url-hint {
+  margin-top: 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,.45);
+  opacity: 0;
+  transition: opacity .5s ease .85s;
+}
+.s.active .url-hint { opacity: 1; }
 
-  /* ===== スクリーン収録ガイド ===== */
-  .recording-guide {
-    margin-top: 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-size: 12px;
-    color: #aaa;
-    max-width: 390px;
-    text-align: center;
-    line-height: 1.7;
-  }
-  .recording-guide strong { color: #38bdf8; }
+/* TikTok UI */
+.tt-ui {
+  position: absolute;
+  right: 12px;
+  bottom: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 50;
+}
+.tt-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: #fff;
+  font-size: 9px;
+  opacity: .75;
+}
+.tt-btn .ic {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
 
-  @media (max-width: 430px) {
-    .phone-frame {
-      width: 100%;
-      max-width: 390px;
-      height: calc((100vw - 40px) * 844 / 390);
-      border-radius: 28px;
-    }
-    .slide-title { font-size: 22px; }
-  }
+/* 下部バー */
+.bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 14px 28px;
+  background: linear-gradient(transparent, rgba(0,0,0,.75));
+  z-index: 50;
+}
+.acct { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.cap  { font-size: 11px; color: rgba(255,255,255,.7); line-height: 1.4; }
+.tags { font-size: 11px; color: #38bdf8; margin-top: 3px; }
+
+/* プログレスドット */
+.dots {
+  position: absolute;
+  top: 44px; right: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 50;
+}
+.dot {
+  width: 3px; height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.25);
+  transition: all .3s;
+}
+.dot.on { background: #fff; height: 14px; }
+
+/* 説明 */
+.guide {
+  max-width: 360px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.75;
+  text-align: center;
+}
+.guide strong { color: #38bdf8; }
+.guide .step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #666;
+}
+.guide .step .n {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #38bdf8;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 400px) {
+  .phone { width: calc(100vw - 32px); height: calc((100vw - 32px) * 780 / 360); border-radius: 28px; }
+}
 </style>
 </head>
 <body>
 
+<!-- コントロール -->
 <div class="controls">
-  <button id="btn-prev" onclick="prevSlide()">◀ 前へ</button>
-  <button id="btn-play" onclick="togglePlay()" class="active">⏸ 停止</button>
-  <button id="btn-next" onclick="nextSlide()">次へ ▶</button>
-  <span class="slide-info" id="slide-info">1 / 9</span>
+  <button onclick="prev()">◀</button>
+  <button id="pbtn" class="on" onclick="togglePlay()">⏸ 停止</button>
+  <button onclick="next()">▶</button>
+  <span class="slide-info" id="si">1 / 9</span>
 </div>
 
-<div class="phone-frame">
-  <div class="timer-bar" id="timerBar"></div>
-  <div class="slide-container" id="container">
+<!-- スマホ -->
+<div class="phone">
+  <div class="tbar" id="tb"></div>
+  <div class="slides" id="slides">
 
-    <!-- ===== スライド 0: フック ===== -->
-    <div class="slide slide-0 active" data-duration="5000">
-      <div class="slide-bg" id="bg0"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-hook">⚠️ 知らないと危険</div>
-        <div class="slide-emoji">😶‍🌫️</div>
-        <div class="slide-title">お金のことを<br>考えるのが<br><span class="key-red">怖い</span>あなたへ</div>
-        <div class="slide-subtitle">「考えなければいい」<br>それが一番<span class="key-yellow">危ない</span></div>
+    <!-- 0: フック -->
+    <div class="s s0 active" data-dur="5000">
+      <div class="particles" id="p0"></div>
+      <div class="inner">
+        <div class="tag red">⚠️ FPが警告</div>
+        <div class="emo">😶‍🌫️</div>
+        <div class="ttl">「お金のこと<br>考えたくない」<br><span class="r">その思考が危険</span></div>
+        <div class="sub">放置するほど<br>精神的ダメージが蓄積されます</div>
       </div>
-      <div class="swipe-hint">▼<br>スワイプ</div>
     </div>
 
-    <!-- ===== スライド 1: 問題提起 ===== -->
-    <div class="slide slide-1" data-duration="5000">
-      <div class="slide-bg" id="bg1"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-problem">📊 データが示す現実</div>
-        <div class="slide-emoji">💸</div>
-        <div class="slide-title">お金を<br>考えない人は<br>むしろ<span class="key-red">苦しんでいる</span></div>
-        <div class="highlight-box">
-          日本FP協会の調査によると<br>
-          <span class="key-yellow">「将来のお金が不安」と感じる人の約7割</span>が<br>
-          「家計を把握していない」と回答
+    <!-- 1: 問題提起 -->
+    <div class="s s1" data-dur="5000">
+      <div class="particles" id="p1"></div>
+      <div class="inner">
+        <div class="tag amber">📊 実態調査</div>
+        <div class="emo">📉</div>
+        <div class="ttl">将来が不安な人の<br><span class="y">約7割</span>が<br>家計未把握</div>
+        <div class="box">
+          日本FP協会の調査より。<br>
+          「わからないから不安」ではなく、<br>
+          <span class="r">「見ないから不安が消えない」</span>のが実態です。
         </div>
       </div>
     </div>
 
-    <!-- ===== スライド 2: デメリット①不安の慢性化 ===== -->
-    <div class="slide slide-2" data-duration="6000">
-      <div class="slide-bg" id="bg2"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-demerit">💜 デメリット①</div>
-        <div class="slide-number">MENTAL DEMERIT 1 / 4</div>
-        <div class="slide-emoji">😰</div>
-        <div class="slide-title"><span class="key-purple">不安が慢性化</span>する</div>
-        <div class="slide-subtitle">「なんとなくお金が心配」<br>この漠然とした不安が<br>ずっと続く状態に</div>
-        <div class="highlight-box">
-          💡 <strong>なぜ？</strong><br>
-          脳は「見えない脅威」を最も恐れます。家計を見ないことで「最悪いくらヤバいかもわからない」という<span class="key-purple">最大の不安</span>が生まれます。
+    <!-- 2: デメリット① -->
+    <div class="s s2" data-dur="6000">
+      <div class="particles" id="p2"></div>
+      <div class="inner">
+        <div class="tag purple">デメリット ①</div>
+        <div class="num">MENTAL RISK 1 / 4</div>
+        <div class="emo">😰</div>
+        <div class="ttl"><span class="v">不安が慢性化</span>して<br>ずっと消えない</div>
+        <div class="box">
+          💡 脳は「見えない脅威」を最も恐れます。<br>
+          家計を見ないことで<span class="v">「最悪どのくらいヤバいかわからない」</span>という
+          最大級の不安が常に漂います。
         </div>
       </div>
     </div>
 
-    <!-- ===== スライド 3: デメリット②無力感 ===== -->
-    <div class="slide slide-3" data-duration="6000">
-      <div class="slide-bg" id="bg3"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-demerit">💜 デメリット②</div>
-        <div class="slide-number">MENTAL DEMERIT 2 / 4</div>
-        <div class="slide-emoji">😔</div>
-        <div class="slide-title">将来への<br><span class="key-red">無力感</span>が育つ</div>
-        <div class="slide-subtitle">「どうせ自分には無理」<br>「考えても変わらない」</div>
-        <div class="highlight-box">
-          🧠 お金を「見ない」習慣は<br>
-          <span class="key-yellow">自己効力感（やればできる感）</span>を<br>
-          じわじわと奪っていきます。<br><br>
-          これは仕事・人間関係にも影響します。
+    <!-- 3: デメリット② -->
+    <div class="s s3" data-dur="6000">
+      <div class="particles" id="p3"></div>
+      <div class="inner">
+        <div class="tag purple">デメリット ②</div>
+        <div class="num">MENTAL RISK 2 / 4</div>
+        <div class="emo">😔</div>
+        <div class="ttl">「どうせ無理」<br><span class="r">無力感</span>が育つ</div>
+        <div class="box">
+          🧠 お金を「見ない」習慣は、<span class="y">自己効力感（やればできる感）</span>を
+          じわじわ奪います。<br>これは仕事・育児・人間関係にも波及します。
         </div>
       </div>
     </div>
 
-    <!-- ===== スライド 4: デメリット③人間関係 ===== -->
-    <div class="slide slide-4" data-duration="6000">
-      <div class="slide-bg" id="bg4"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-demerit">💜 デメリット③</div>
-        <div class="slide-number">MENTAL DEMERIT 3 / 4</div>
-        <div class="slide-emoji">💔</div>
-        <div class="slide-title">人間関係にも<br><span class="key-red">亀裂</span>が入る</div>
-        <ul class="icon-list">
-          <li><span class="icon">👫</span><div>パートナーとお金の話ができない<br>→ すれ違い・ケンカが増える</div></li>
-          <li><span class="icon">👨‍👩‍👧</span><div>子どもの教育費・将来が心配<br>→ イライラ・焦りが家族に伝わる</div></li>
-          <li><span class="icon">🤝</span><div>友人の誘いを「お金が…」と断る<br>→ 孤立感・疎外感につながる</div></li>
+    <!-- 4: デメリット③ -->
+    <div class="s s4" data-dur="6000">
+      <div class="particles" id="p4"></div>
+      <div class="inner">
+        <div class="tag purple">デメリット ③</div>
+        <div class="num">MENTAL RISK 3 / 4</div>
+        <div class="emo">💔</div>
+        <div class="ttl">人間関係にも<br><span class="r">亀裂</span>が入る</div>
+        <ul class="lst">
+          <li><span class="ic">👫</span><div>パートナーとお金の話ができず<br>すれ違い・ケンカが増える</div></li>
+          <li><span class="ic">👨‍👩‍👧</span><div>教育費・老後への漠然とした焦りが<br>家族に伝わりイライラしてしまう</div></li>
+          <li><span class="ic">🤝</span><div>友人の誘いを断り続け<br>孤立感・疎外感につながる</div></li>
         </ul>
       </div>
     </div>
 
-    <!-- ===== スライド 5: デメリット④衝動買い ===== -->
-    <div class="slide slide-5" data-duration="6000">
-      <div class="slide-bg" id="bg5"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-demerit">💜 デメリット④</div>
-        <div class="slide-number">MENTAL DEMERIT 4 / 4</div>
-        <div class="slide-emoji">🛍️</div>
-        <div class="slide-title"><span class="key-purple">衝動買い</span>が増える</div>
-        <div class="slide-subtitle">「ストレス発散でショッピング」<br>これが<span class="key-red">悪循環</span>を生む</div>
-        <div class="highlight-box">
-          😫 不安 →「今だけ気分よくなりたい」<br>→ 衝動買い → お金が減る<br>→ また不安 → また衝動買い<br><br>
-          <span class="key-yellow">心理学では「ストレス回避消費」と呼ばれます</span>
+    <!-- 5: デメリット④ -->
+    <div class="s s5" data-dur="6000">
+      <div class="particles" id="p5"></div>
+      <div class="inner">
+        <div class="tag purple">デメリット ④</div>
+        <div class="num">MENTAL RISK 4 / 4</div>
+        <div class="emo">🛍️</div>
+        <div class="ttl"><span class="v">衝動買い</span>が増え<br>さらに不安になる</div>
+        <div class="box">
+          😫 <span class="r">不安</span> → ストレス発散ショッピング<br>
+          → お金が減る → <span class="r">さらに不安</span> → また買う<br><br>
+          <span class="y">心理学では「ストレス回避消費」</span>と呼ばれる悪循環です。
         </div>
       </div>
     </div>
 
-    <!-- ===== スライド 6: まとめ ===== -->
-    <div class="slide slide-6" data-duration="5000">
-      <div class="slide-bg" id="bg6"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-problem">📋 まとめ</div>
-        <div class="slide-title">「知らない」は<br><span class="key-red">逃げでなく<br>リスク</span>です</div>
-        <ul class="icon-list" style="margin-top:16px">
-          <li><span class="icon">😰</span><div><span class="key-purple">不安の慢性化</span>でメンタルが疲弊</div></li>
-          <li><span class="icon">😔</span><div><span class="key-red">無力感</span>が仕事・人生に波及</div></li>
-          <li><span class="icon">💔</span><div><span class="key-yellow">家族・人間関係</span>への悪影響</div></li>
-          <li><span class="icon">🛍️</span><div><span class="key-purple">衝動買い</span>でお金が減る悪循環</div></li>
+    <!-- 6: 転換 -->
+    <div class="s s6" data-dur="5500">
+      <div class="particles" id="p6"></div>
+      <div class="inner">
+        <div class="tag blue">💡 でも大丈夫</div>
+        <div class="emo">✨</div>
+        <div class="ttl">「見るだけ」で<br>不安は<br><span class="b">半分</span>になる</div>
+        <div class="sub">完璧にわからなくていい<br>まず現状を知ることが全て</div>
+        <div class="box">
+          📱 今すぐスマホで<span class="b">5分</span>あればできます。<br>
+          ライフアセットオフィスの<span class="b">無料シミュレーター</span>を使ってみてください。
+        </div>
+      </div>
+    </div>
+
+    <!-- 7: シミュレーター紹介 -->
+    <div class="s s7" data-dur="7000">
+      <div class="particles" id="p7"></div>
+      <div class="inner">
+        <div class="tag green">🩺 お金の健康診断</div>
+        <div class="emo">💊</div>
+        <div class="ttl"><span class="g">資産シミュレーター</span><br>で今すぐ確認</div>
+        <ul class="lst">
+          <li><span class="ic">✅</span><div>老後資金は足りる？<br>今の貯め方でOK？</div></li>
+          <li><span class="ic">✅</span><div>教育費の準備は十分？<br>いつから始めるべき？</div></li>
+          <li><span class="ic">✅</span><div>保険・ローン・投資の<br>バランスはどう？</div></li>
+          <li><span class="ic">✅</span><div><span class="g">完全無料・登録不要</span><br>スマホで5分でわかる</div></li>
         </ul>
       </div>
     </div>
 
-    <!-- ===== スライド 7: 解決策 ===== -->
-    <div class="slide slide-7" data-duration="6000">
-      <div class="slide-bg" id="bg7"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-solution">✅ 解決策</div>
-        <div class="slide-emoji">⏱️</div>
-        <div class="slide-title"><span class="key-green">月10分だけ</span><br>お金と向き合う</div>
-        <div class="slide-subtitle">完璧にわからなくていい<br>見るだけで不安は<span class="key-green">半分</span>になる</div>
-        <div class="highlight-box">
-          🔑 <strong>まず3つだけ確認する</strong><br>
-          ① 今月の<span class="key-green">収入</span>はいくら？<br>
-          ② 今月の<span class="key-yellow">支出</span>はいくら？<br>
-          ③ 貯金・投資は<span class="key-blue">増えた？減った？</span><br><br>
-          これだけでいい。始めることが全て。
-        </div>
+    <!-- 8: CTA -->
+    <div class="s s8" data-dur="8000">
+      <div class="particles" id="p8"></div>
+      <div class="inner">
+        <div class="tag sky">📲 ライフアセットオフィス</div>
+        <div class="emo">🏦</div>
+        <div class="ttl">プロフィール欄の<br>URLから<br><span class="b">無料で診断</span></div>
+        <div class="sub">岡山のFP事務所<br>オンライン相談も対応</div>
+        <div class="cta-pill">💊 お金の健康診断を受ける</div>
+        <div class="url-hint">lifeassetoffice.net/simulation.html</div>
       </div>
     </div>
 
-    <!-- ===== スライド 8: CTA ===== -->
-    <div class="slide slide-8" data-duration="7000">
-      <div class="slide-bg" id="bg8"></div>
-      <div class="slide-inner">
-        <div class="slide-tag tag-cta">🎯 ライフアセットオフィス</div>
-        <div class="slide-emoji">🏦</div>
-        <div class="slide-title">一緒に<br>お金の不安を<br><span class="key-green">解消しよう</span></div>
-        <div class="slide-subtitle">FP無料相談受付中<br>岡山・オンライン対応</div>
-        <div class="highlight-box">
-          📱 <strong>lifeassetoffice.net</strong><br>
-          まずは気軽にメール相談から<br>
-          <span class="key-blue">lifeassetpartners@gmail.com</span>
-        </div>
-        <div class="cta-btn">📊 無料相談はこちら</div>
-      </div>
-      <div class="swipe-hint" style="animation:none;opacity:0.3">▲<br>最初から</div>
-    </div>
-
-  </div><!-- /slide-container -->
+  </div><!-- /slides -->
 
   <!-- TikTok UI -->
-  <div class="tiktok-ui">
-    <div class="tiktok-btn">
-      <div class="btn-icon">❤️</div>
-      <span>2.3万</span>
-    </div>
-    <div class="tiktok-btn">
-      <div class="btn-icon">💬</div>
-      <span>148</span>
-    </div>
-    <div class="tiktok-btn">
-      <div class="btn-icon">↗️</div>
-      <span>シェア</span>
-    </div>
+  <div class="tt-ui">
+    <div class="tt-btn"><div class="ic">❤️</div><span>3.1万</span></div>
+    <div class="tt-btn"><div class="ic">💬</div><span>214</span></div>
+    <div class="tt-btn"><div class="ic">↗️</div><span>共有</span></div>
   </div>
 
-  <!-- ボトムバー -->
-  <div class="bottom-bar">
-    <div class="bottom-account">@lifeasset_fp</div>
-    <div class="bottom-caption">お金を考えないことの精神的デメリット🧠</div>
-    <div class="bottom-tags">#家計管理 #FP相談 #お金の不安 #メンタルヘルス #節約</div>
+  <!-- 下部バー -->
+  <div class="bottom">
+    <div class="acct">@lifeasset_fp · ライフアセットオフィス</div>
+    <div class="cap">お金を考えないことの精神的デメリット😰 #FP相談 無料シミュレーターはプロフィールから👇</div>
+    <div class="tags">#お金の不安 #家計管理 #FP #老後資金 #資産形成</div>
   </div>
 
   <!-- プログレスドット -->
-  <div class="progress-dots" id="progressDots"></div>
+  <div class="dots" id="dots"></div>
 
-</div><!-- /phone-frame -->
+</div><!-- /phone -->
 
-<div class="recording-guide">
-  <strong>🎬 TikTok動画の作り方</strong><br>
-  このページをスマホのブラウザで開いて<strong>画面収録</strong>するか、<br>
-  PCなら<strong>OBS Studio</strong>（無料）で録画してください。<br>
-  動画は自動再生されます。スライドは約5〜7秒ずつ切り替わります。<br>
-  収録したMP4をTikTokアプリからそのまま投稿できます。
+<!-- CapCutガイド -->
+<div class="guide">
+  <strong>🎬 CapCutで完成させる手順（無料・5分）</strong>
+  <div class="step"><div class="n">1</div><div>この画面を<strong style="color:#fff">スマホで画面収録</strong>（映像素材として使用）</div></div>
+  <div class="step"><div class="n">2</div><div><strong style="color:#fff">CapCut</strong>（無料アプリ）で動画を開く</div></div>
+  <div class="step"><div class="n">3</div><div>「テキスト読み上げ」→ 日本語女声を選択してナレーションを自動生成</div></div>
+  <div class="step"><div class="n">4</div><div>BGM音楽をCapCutライブラリから追加</div></div>
+  <div class="step"><div class="n">5</div><div>TikTokへ直接エクスポート・投稿</div></div>
 </div>
 
 <script>
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.getElementById('progressDots');
-  const timerBar = document.getElementById('timerBar');
-  const slideInfo = document.getElementById('slide-info');
-  const btnPlay = document.getElementById('btn-play');
-  let current = 0;
-  let isPlaying = true;
-  let timer = null;
-  let timerStart = null;
-  let timerDuration = 0;
-  let animFrame = null;
+const slides = document.querySelectorAll('.s');
+const dotsEl = document.getElementById('dots');
+const tb = document.getElementById('tb');
+const si = document.getElementById('si');
+const pbtn = document.getElementById('pbtn');
+let cur = 0, playing = true, raf = null, timer = null, t0 = null, dur = 0;
 
-  // ドット生成
-  slides.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    dots.appendChild(d);
-  });
+// ドット生成
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  dotsEl.appendChild(d);
+});
 
-  // パーティクル生成
-  function createParticles(containerId, count, color) {
-    const bg = document.getElementById(containerId);
-    if (!bg) return;
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const size = Math.random() * 8 + 3;
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.top = Math.random() * 100 + '%';
-      p.style.background = color;
-      p.style.animationDuration = (Math.random() * 8 + 6) + 's';
-      p.style.animationDelay = (Math.random() * 6) + 's';
-      bg.appendChild(p);
-    }
+// パーティクル生成
+const pColors = ['#f43f5e','#fb923c','#facc15','#a855f7','#3b82f6','#8b5cf6','#6366f1','#22c55e','#0ea5e9'];
+for (let i = 0; i <= 8; i++) {
+  const cont = document.getElementById('p' + i);
+  if (!cont) continue;
+  for (let j = 0; j < 10; j++) {
+    const el = document.createElement('div');
+    el.className = 'p';
+    const sz = Math.random() * 6 + 3;
+    el.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${pColors[i]};animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*7}s`;
+    cont.appendChild(el);
   }
+}
 
-  const colors = [
-    '#f87171','#fb923c','#c084fc','#a855f7',
-    '#60a5fa','#818cf8','#22d3ee','#4ade80','#38bdf8'
-  ];
-  for (let i = 0; i <= 8; i++) {
-    createParticles('bg' + i, 12, colors[i % colors.length]);
-  }
-
-  function goTo(idx, direction) {
-    if (idx < 0 || idx >= slides.length) return;
-    slides[current].classList.remove('active');
-    slides[current].classList.add('exit');
-    setTimeout(() => {
-      slides[current].classList.remove('exit');
-    }, 400);
-    current = idx;
-    slides[current].classList.add('active');
-    document.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
-    slideInfo.textContent = (current + 1) + ' / ' + slides.length;
-    startTimer();
-  }
-
-  function nextSlide() {
-    const next = (current + 1) % slides.length;
-    goTo(next);
-  }
-  function prevSlide() {
-    const prev = (current - 1 + slides.length) % slides.length;
-    goTo(prev);
-  }
-
-  function startTimer() {
-    clearTimeout(timer);
-    cancelAnimationFrame(animFrame);
-    timerBar.style.transition = 'none';
-    timerBar.style.width = '0%';
-    timerBar.classList.remove('animating');
-
-    if (!isPlaying) return;
-
-    timerDuration = parseInt(slides[current].dataset.duration) || 5000;
-    timerStart = Date.now();
-
-    function animate() {
-      const elapsed = Date.now() - timerStart;
-      const pct = Math.min(elapsed / timerDuration * 100, 100);
-      timerBar.style.width = pct + '%';
-      if (pct < 100) {
-        animFrame = requestAnimationFrame(animate);
-      }
-    }
-    requestAnimationFrame(animate);
-
-    timer = setTimeout(() => {
-      nextSlide();
-    }, timerDuration);
-  }
-
-  function togglePlay() {
-    isPlaying = !isPlaying;
-    btnPlay.textContent = isPlaying ? '⏸ 停止' : '▶ 再生';
-    btnPlay.classList.toggle('active', isPlaying);
-    if (isPlaying) {
-      startTimer();
-    } else {
-      clearTimeout(timer);
-      cancelAnimationFrame(animFrame);
-    }
-  }
-
-  // スワイプ対応
-  let touchStartX = 0, touchStartY = 0;
-  document.getElementById('container').addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].clientX;
-    touchStartY = e.changedTouches[0].clientY;
-  });
-  document.getElementById('container').addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-    if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {
-      if (dy < 0) nextSlide();
-      else prevSlide();
-    }
-  });
-
-  // キーボード対応
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
-    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
-  });
-
-  // ===== 音声ナレーション =====
-  const narrations = [
-    'お金のことを考えるのが怖いあなたへ。でも実は、考えないことの方が、ずっと危険です。',
-    '日本FP協会の調査によると、将来のお金が不安と感じる人の約7割が、家計をまったく把握していないと回答しています。',
-    'デメリット、1つ目。不安が慢性化します。脳は、見えない脅威を最も恐れます。家計を見ないことで、最悪いくらヤバいかもわからないという、最大の不安が生まれてしまいます。',
-    'デメリット、2つ目。将来への無力感が育ちます。お金を見ない習慣は、やればできるという自己効力感を、じわじわと奪っていきます。これは仕事や人間関係にも影響します。',
-    'デメリット、3つ目。人間関係にも亀裂が入ります。パートナーとのすれ違い、子どもへのイライラ、友人の誘いを断り続けることでの孤立感。お金の問題は人間関係にも広がっていきます。',
-    'デメリット、4つ目。衝動買いが増えます。不安からストレス発散でショッピングをして、お金が減り、またより不安になる。この悪循環が止まらなくなります。',
-    'まとめです。知らないことは、逃げではなくリスクです。不安の慢性化、無力感、人間関係への悪影響、そして衝動買いの悪循環。これらが静かに積み重なっていきます。',
-    '解決策は、月に10分だけ、お金と向き合うことです。今月の収入はいくらか。支出はいくらか。貯金は増えたか減ったか。この3つを確認するだけでいいんです。始めることが、すべてのスタートです。',
-    'ライフアセットオフィスでは、ファイナンシャルプランナーによる無料相談を受け付けています。岡山、そしてオンラインにも対応しています。お金の不安、一緒に解消しましょう。'
-  ];
-
-  let speechSynth = window.speechSynthesis;
-  let currentUtterance = null;
-  let voiceReady = false;
-  let jpVoice = null;
-
-  function loadVoice() {
-    const voices = speechSynth.getVoices();
-    jpVoice = voices.find(v => v.lang === 'ja-JP') ||
-              voices.find(v => v.lang.startsWith('ja')) ||
-              null;
-    if (voices.length > 0) voiceReady = true;
-  }
-  loadVoice();
-  if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = loadVoice;
-  }
-
-  function speak(text) {
-    if (!speechSynth) return;
-    speechSynth.cancel();
-    if (!text) return;
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'ja-JP';
-    u.rate = 0.92;
-    u.pitch = 1.0;
-    u.volume = 1.0;
-    if (jpVoice) u.voice = jpVoice;
-    currentUtterance = u;
-    speechSynth.speak(u);
-  }
-
-  function stopSpeech() {
-    if (speechSynth) speechSynth.cancel();
-  }
-
-  // 開始（最初のスライドはクリックで音声を起動）
-  let audioUnlocked = false;
-
-  function unlockAudio() {
-    if (audioUnlocked) return;
-    audioUnlocked = true;
-    speak(narrations[current]);
-  }
-
-  document.getElementById('container').addEventListener('click', unlockAudio, { once: true });
-  document.addEventListener('keydown', function unlockKey() {
-    unlockAudio();
-    document.removeEventListener('keydown', unlockKey);
-  });
-
-  // startTimer に音声を追加
-  const _origStartTimer = startTimer;
-  startTimer = function() {
-    _origStartTimer();
-    if (audioUnlocked && isPlaying) {
-      speak(narrations[current]);
-    }
-  };
-
-  // togglePlay に音声停止/再生を追加
-  const _origTogglePlay = togglePlay;
-  togglePlay = function() {
-    _origTogglePlay();
-    if (!isPlaying) {
-      stopSpeech();
-    } else {
-      if (audioUnlocked) speak(narrations[current]);
-    }
-  };
-
+function goTo(idx) {
+  slides[cur].classList.remove('active');
+  document.querySelectorAll('.dot')[cur].classList.remove('on');
+  cur = (idx + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot')[cur].classList.add('on');
+  si.textContent = (cur + 1) + ' / ' + slides.length;
   startTimer();
-</script>
+}
+function next() { goTo(cur + 1); }
+function prev() { goTo(cur - 1); }
 
-<!-- 音声起動ボタン（初回クリック必要なブラウザ向け） -->
-<div id="audioPrompt" style="position:fixed;bottom:0;left:0;right:0;background:rgba(14,165,233,0.95);color:#fff;text-align:center;padding:14px;font-size:14px;font-weight:700;cursor:pointer;z-index:9999;font-family:inherit" onclick="unlockAudio();this.style.display='none'">
-  🔊 タップして音声ナレーションを開始
-</div>
-<script>
-  // 音声起動後にバナーを非表示
-  document.getElementById('container').addEventListener('click', function() {
-    const p = document.getElementById('audioPrompt');
-    if (p) p.style.display = 'none';
-  }, { once: true });
+function startTimer() {
+  clearTimeout(timer);
+  cancelAnimationFrame(raf);
+  tb.style.width = '0%';
+  if (!playing) return;
+  dur = parseInt(slides[cur].dataset.dur) || 5000;
+  t0 = Date.now();
+  function tick() {
+    const pct = Math.min((Date.now() - t0) / dur * 100, 100);
+    tb.style.width = pct + '%';
+    if (pct < 100) raf = requestAnimationFrame(tick);
+  }
+  raf = requestAnimationFrame(tick);
+  timer = setTimeout(next, dur);
+}
+
+function togglePlay() {
+  playing = !playing;
+  pbtn.textContent = playing ? '⏸ 停止' : '▶ 再生';
+  pbtn.classList.toggle('on', playing);
+  if (playing) startTimer();
+  else { clearTimeout(timer); cancelAnimationFrame(raf); }
+}
+
+// スワイプ
+let sx = 0, sy = 0;
+document.getElementById('slides').addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; });
+document.getElementById('slides').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) dy < 0 ? next() : prev();
+});
+
+// キーボード
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+  else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+});
+
+startTimer();
 </script>
 </body>
 </html>
