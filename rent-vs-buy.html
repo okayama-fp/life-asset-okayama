@@ -750,8 +750,8 @@ function updateHints(){
   const loan=Math.max(0,price-down);
   document.getElementById('loanAmt').textContent=fmt(loan);
   const m=pmt(loan,rate,years);
-  document.getElementById('monthlyLoanDisp').textContent=loan>0?(m/10000).toFixed(2):'—';
-  document.getElementById('totalLoanDisp').textContent=loan>0?fmt(Math.round(m*years*12/10000)):'—';
+  document.getElementById('monthlyLoanDisp').textContent=loan>0?m.toFixed(2):'—';
+  document.getElementById('totalLoanDisp').textContent=loan>0?fmt(Math.round(m*years*12)):'—';
   document.getElementById('expAmt').textContent=fmt(Math.round(price*expR/100));
   const sp=v('sellPrice');
   const comm=Math.round((sp*10000*0.03+60000)*1.1)/10000;
@@ -1032,20 +1032,24 @@ function drawChart(buyArr,rentArr,N,breakeven,age0){
   /* 賃貸ライン */
   ctx.strokeStyle='#1a4fa0';ctx.lineWidth=2.5;ctx.setLineDash([]);
   ctx.beginPath();
+  let rentStarted=false;
   for(let i=0;i<=N;i++){
     if(!isFinite(rentArr[i]))continue;
-    const x=xPos(i),y=yPos(rentArr[i]);
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    const x=xPos(i),ry=yPos(rentArr[i]);
+    rentStarted?ctx.lineTo(x,ry):ctx.moveTo(x,ry);
+    rentStarted=true;
   }
   ctx.stroke();
 
   /* 購入ライン */
   ctx.strokeStyle='#1a7a4a';ctx.lineWidth=2.5;
   ctx.beginPath();
+  let buyStarted=false;
   for(let i=0;i<=N;i++){
     if(!isFinite(buyArr[i]))continue;
-    const x=xPos(i),y=yPos(buyArr[i]);
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    const x=xPos(i),by=yPos(buyArr[i]);
+    buyStarted?ctx.lineTo(x,by):ctx.moveTo(x,by);
+    buyStarted=true;
   }
   ctx.stroke();
 
