@@ -26,7 +26,7 @@
   gtag('config', 'G-PKDH2DR522');
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --green:#1a7a4a;--green-dark:#1a3d2b;--green-light:#22c55e;
@@ -40,8 +40,9 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:2;font-size:16px}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.9;font-size:16px}
 
+/* ── ナビ ── */
 .topnav{background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .nav-logo{font-size:17px;font-weight:900;color:var(--green)}
 .nav-logo span{font-size:10px;font-weight:400;color:var(--muted);display:block;line-height:1.2}
@@ -51,96 +52,116 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--i
 .nav-cta{background:var(--green);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}
 @media(max-width:640px){.nav-links{display:none}}
 
-.hero{background-color:#1a3d2b;background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 60%,#1a5fac 100%);padding:72px 28px 80px;position:relative;overflow:hidden}
+/* ── ラッパー ── */
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+.breadcrumb{max-width:760px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:var(--muted)}
+.breadcrumb a{color:var(--green);text-decoration:none}
+
+/* ── ヒーロー ── */
+.hero{background-color:#1a3d2b;background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 60%,#1a5fac 100%);color:#fff;padding:52px 32px 44px;border-radius:12px;margin:20px 0 32px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 32px)}
-.hero-inner{max-width:740px;margin:0 auto;position:relative;z-index:1}
-.hero-cat{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:4px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.1em;margin-bottom:20px}
-.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(20px,3.8vw,34px);font-weight:900;color:#fff;line-height:1.45;margin-bottom:16px}
+.hero-inner{position:relative;z-index:1}
+.hero-tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.06em;margin-bottom:18px}
+.hero h1{font-family:'Noto Serif JP',serif;font-weight:900;font-size:clamp(20px,3.8vw,30px);line-height:1.5;margin:0 0 16px;color:#fff}
 .hero h1 em{color:#7ee8a2;font-style:normal}
-.hero-meta{display:flex;gap:20px;font-size:12px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;flex-wrap:wrap}
+.hero-meta{font-size:12px;color:rgba(255,255,255,.55);display:flex;gap:16px;flex-wrap:wrap;font-family:'DM Mono',monospace}
 
-article{max-width:740px;margin:0 auto;padding:56px 28px 80px}
+/* ── 見出し ── */
+h2{font-family:'Noto Serif JP',serif;font-size:clamp(18px,2.8vw,22px);font-weight:900;color:var(--navy);border-left:6px solid var(--green);padding:10px 14px;margin:52px 0 20px;background:linear-gradient(90deg,var(--green-pale),rgba(220,252,231,0));border-radius:0 8px 8px 0;line-height:1.5;scroll-margin-top:80px}
+h3{font-family:'Noto Serif JP',serif;font-weight:700;font-size:17px;color:var(--navy);margin:32px 0 14px;padding:4px 0 4px 12px;border-left:3px solid var(--green-light);line-height:1.6}
+p{margin:0 0 18px}
 
-.lead{font-size:16.5px;line-height:2.1;margin-bottom:40px;color:#222;padding:26px 30px;background:var(--white);border-radius:8px;border:1px solid var(--border);border-top:4px solid var(--green);box-shadow:var(--shadow)}
+/* ── リード（FP opening） ── */
+.fp-opening{display:flex;gap:16px;background:var(--white);border:1px solid var(--border);border-top:4px solid var(--green);border-radius:0 8px 8px 0;padding:22px 24px;margin-bottom:36px;box-shadow:var(--shadow)}
+.fp-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.fp-opening p{margin:0;font-size:15.5px;line-height:2.1;color:#222}
+.fp-opening p strong{color:var(--navy);background:linear-gradient(transparent 62%,var(--green-mid) 62%);padding:0 2px}
 
-.toc{background:var(--cream);border:1px solid var(--green-mid);border-left:4px solid var(--green);padding:24px 28px;margin-bottom:52px;border-radius:0 8px 8px 0}
-.toc li::marker{color:var(--green);font-weight:900}
-.toc-title{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
-.toc ol{padding-left:18px}
-.toc li{margin:7px 0;font-size:14px}
+/* ── 目次 ── */
+.toc{background:var(--cream);border:1px solid var(--green-mid);border-left:4px solid var(--green);padding:22px 28px;margin-bottom:44px;border-radius:0 8px 8px 0}
+.toc-title{font-weight:700;color:var(--navy);margin-bottom:12px;font-size:14px;letter-spacing:.06em}
+.toc ol{margin:0;padding-left:20px}
+.toc li{margin-bottom:7px;font-size:14px}
 .toc a{color:var(--green);text-decoration:none;font-weight:500}
 .toc a:hover{text-decoration:underline}
 
-section{scroll-margin-top:80px}
-h2{font-family:'Noto Serif JP',serif;font-size:clamp(18px,2.8vw,24px);font-weight:900;color:var(--navy);margin:64px 0 22px;padding:12px 18px;border-left:6px solid var(--green);background:linear-gradient(90deg,var(--green-pale),rgba(220,252,231,0));border-radius:0 10px 10px 0;line-height:1.5}
-h3{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:700;color:var(--navy);margin:38px 0 14px;padding:4px 0 4px 12px;border-left:3px solid var(--green-light);line-height:1.6}
-p{margin-bottom:20px}
-section > p strong,.lead strong{color:var(--navy);background:linear-gradient(transparent 62%,var(--green-mid) 62%);padding:0 2px}
+/* ── ケースボックス ── */
+.case-box{background:var(--white);border:1.5px solid var(--border);border-left:5px solid var(--yellow);border-radius:8px;padding:22px 26px;margin:24px 0;box-shadow:var(--shadow)}
+.case-label{display:inline-block;font-size:11px;font-weight:700;color:#8a6d10;background:#faf3df;padding:3px 10px;border-radius:4px;margin-bottom:10px;letter-spacing:.06em}
+.case-name{font-weight:700;font-size:16px;margin-bottom:10px;color:var(--navy)}
+.case-box p{font-size:14px;line-height:1.95;margin-bottom:10px;color:var(--ink)}
+.case-box p:last-child{margin-bottom:0}
 
-.callout{padding:18px 22px;margin:28px 0;border-radius:0 8px 8px 0;font-size:14.5px;line-height:2}
+/* ── 表 ── */
+.table-wrap{overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:linear-gradient(135deg,var(--navy),#1f5c40);color:#fff;padding:10px 12px;text-align:left;font-size:12px;font-weight:700}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.8}
+tr:nth-child(even) td{background:var(--cream)}
+tr.total-row td{font-weight:700;background:var(--green-pale);color:var(--navy)}
+.num{font-family:'DM Mono',monospace;font-weight:500}
+
+/* ── コールアウト ── */
+.callout{border-radius:0 8px 8px 0;padding:18px 22px;margin:24px 0;font-size:14.5px;line-height:2}
 .callout-key{background:var(--green-pale);border-left:4px solid var(--green)}
 .callout-warn{background:var(--yellow-pale);border-left:4px solid var(--yellow)}
 .callout-danger{background:var(--red-pale);border-left:4px solid var(--red)}
-.callout-action{background:#e8f0fb;border-left:4px solid var(--blue)}
+.callout-title{font-weight:700;color:var(--navy);margin-bottom:8px;font-size:14px}
+.callout p{margin:0}
 
-.pull-quote{font-family:'Noto Serif JP',serif;font-size:clamp(16px,2.3vw,21px);font-weight:700;line-height:1.85;color:var(--green-dark);padding:28px 32px;margin:44px 0;border-left:4px solid var(--green);background:var(--green-pale);border-radius:0 8px 8px 0}
+/* ── プルクォート ── */
+.pull-quote{font-family:'Noto Serif JP',serif;font-size:clamp(16px,2.3vw,20px);font-weight:700;color:var(--green-dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;margin:40px 0;text-align:center;line-height:1.75}
 
-.case-box{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:22px 24px;margin:28px 0;box-shadow:var(--shadow)}
-.case-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--navy);padding:3px 10px;border-radius:3px;margin-bottom:12px}
-.case-box p{font-size:14px;line-height:1.95;margin-bottom:10px}
-.case-box p:last-child{margin-bottom:0}
+/* ── チェックリスト ── */
+.checklist{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin:24px 0;box-shadow:var(--shadow)}
+.checklist-title{font-weight:700;margin-bottom:14px;font-size:14px;color:var(--navy)}
+.checklist ul{list-style:none;margin:0;padding:0}
+.checklist li{position:relative;padding-left:30px;margin-bottom:12px;font-size:14.5px;line-height:1.85}
+.checklist li:last-child{margin-bottom:0}
+.checklist li::before{content:"✓";position:absolute;left:0;top:2px;color:var(--green);font-weight:900;background:var(--green-pale);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;border:1.5px solid var(--green-mid)}
+.checklist.no li::before{content:"✕";color:var(--red);background:var(--red-pale);border-color:#f5c6c0}
+.checklist li strong{color:var(--navy)}
+.checklist .checklist-note{font-size:13px;color:var(--muted);margin:10px 0 0;padding-left:0}
 
-.table-wrap{overflow-x:auto;margin:26px 0}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{background:linear-gradient(135deg,var(--navy),#1f5c40);color:#fff;padding:11px 14px;text-align:left;font-size:12px;font-weight:700}
-td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.8}
-tr:nth-child(even) td{background:var(--cream)}
-td strong{color:var(--green-dark)}
-.num{font-family:'DM Mono',monospace;font-weight:500}
-
-.step-box{counter-reset:step}
-.step-item{display:flex;gap:16px;margin:20px 0;align-items:flex-start}
-.step-num{background:var(--green);color:#fff;font-size:13px;font-weight:900;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:4px;font-family:'DM Mono',monospace}
+/* ── ステップ ── */
+.step-list{counter-reset:step;margin:24px 0}
+.step-item{display:flex;gap:16px;margin-bottom:22px;align-items:flex-start}
+.step-num{counter-increment:step;flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;font-family:'DM Mono',monospace;margin-top:2px}
+.step-num::before{content:counter(step)}
 .step-body{flex:1}
 .step-title{font-weight:700;color:var(--navy);margin-bottom:4px;font-size:15px}
-.step-desc{font-size:14px;color:var(--muted);line-height:1.9;margin:0}
+.step-body p{margin:0;font-size:14px;color:var(--muted);line-height:1.85}
 
-.checklist{list-style:none;margin:18px 0}
-.checklist li{display:flex;gap:12px;padding:10px 0;font-size:14.5px;border-bottom:1px dotted var(--border);line-height:1.85;align-items:flex-start}
-.checklist li:last-child{border:none}
-.ck,.ck-x{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:900;flex-shrink:0;margin-top:5px;line-height:1}
-.ck{background:var(--green-pale);color:var(--green);border:1.5px solid var(--green-mid)}
-.ck-x{background:var(--red-pale);color:var(--red);border:1.5px solid #f5c6c0}
-.checklist li strong{color:var(--navy)}
+/* ── 注釈インライン ── */
+.note-inline{font-size:12px;color:var(--muted);background:#f3f2ed;border-radius:6px;padding:10px 14px;margin:10px 0 0;line-height:1.85}
 
-.action-box{background:var(--green-pale);border:1.5px solid var(--green-mid);border-radius:10px;padding:18px 22px;margin:28px 0}
-.action-box-title{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--green);text-transform:uppercase;margin-bottom:10px}
-.action-box ul{list-style:none;padding:0}
-.action-box li{font-size:14px;line-height:2;color:var(--navy);padding-left:18px;position:relative}
-.action-box li::before{content:'→';position:absolute;left:0;color:var(--green);font-weight:700}
-
-.tool-cta{background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:14px;padding:26px;margin:44px 0;color:#fff;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.tool-cta-text{flex:1;min-width:240px}
-.tool-cta h3{font-size:16px;font-weight:700;margin:0 0 6px;padding:0;border:none;font-family:'Noto Sans JP',sans-serif}
-.tool-cta p{font-size:13px;color:rgba(255,255,255,.82);margin:0;line-height:1.8}
-.tool-cta-btn{background:#fff;color:var(--green);border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:900;font-family:inherit;cursor:pointer;flex-shrink:0;transition:all .2s;white-space:nowrap}
+/* ── ツールCTA ── */
+.tool-cta{background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:12px;padding:28px 32px;margin:40px 0;color:#fff;text-align:center}
+.tool-cta h4{font-family:'Noto Serif JP',serif;font-size:18px;margin:0 0 8px;font-weight:700}
+.tool-cta p{font-size:13px;color:rgba(255,255,255,.88);margin:0 0 18px;line-height:1.85}
+.tool-cta-btn{display:inline-block;background:#fff;color:var(--green-dark);padding:11px 30px;border-radius:24px;text-decoration:none;font-weight:900;font-size:14px;transition:all .2s}
 .tool-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
 
-hr{border:none;height:3px;background:linear-gradient(90deg,var(--green-mid),rgba(187,247,208,0));border-radius:2px;margin:54px 0}
+/* ── 著者 ── */
+.author{display:flex;gap:16px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px 26px;margin:48px 0 24px;box-shadow:var(--shadow)}
+.author-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.author-name{font-weight:700;font-size:15px;color:var(--navy);margin-bottom:2px}
+.author-role{font-size:12px;color:var(--muted);margin-bottom:10px}
+.author-bio{font-size:13px;color:var(--muted);line-height:1.9;margin:0}
 
-.author{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:48px}
-.author-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0}
-.author-name{font-size:14px;font-weight:700;margin-bottom:4px}
-.author-bio{font-size:13px;color:var(--muted);line-height:1.9}
+/* ── 免責 ── */
+.disclaimer{background:#fff8e1;border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;padding:14px 18px;font-size:12px;color:#856404;margin-top:24px;line-height:1.9}
+.disclaimer .d-title{font-weight:700;margin-bottom:6px}
 
-.disclaimer{background:#fff8e1;border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;padding:12px 16px;font-size:12px;color:#856404;margin-top:28px;line-height:1.9}
-
+/* ── フッター ── */
 footer{background:var(--navy);color:rgba(255,255,255,.85);padding:32px 24px 24px;text-align:center}
 .footer-logo{font-size:1rem;font-weight:700;margin-bottom:8px}
 footer p{font-size:0.72rem;opacity:.7;margin:12px 0 0}
 footer a{color:var(--green-light);text-decoration:underline}
 
-@media(max-width:600px){article{padding:40px 18px 60px}.hero{padding:48px 18px 56px}}
+hr{border:none;height:3px;background:linear-gradient(90deg,var(--green-mid),rgba(187,247,208,0));border-radius:2px;margin:50px 0}
+
+@media(max-width:600px){.wrap{padding:0 16px 60px}.hero{padding:40px 20px 36px;border-radius:8px}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://lifeassetoffice.net/blog-bukka-kakeibo.html#article","url":"https://lifeassetoffice.net/blog-bukka-kakeibo.html","headline":"「食費を削る」が間違いだった理由｜物価高時代の支出見直し順序とFP実例","description":"物価高で「まず食費を削ろう」と思ったら要注意。FPの実例では固定費を見直すだけで年間31万円削減できました。今日から使える具体的な手順をわかりやすく解説します。","datePublished":"2026-06-19T00:00:00+09:00","dateModified":"2026-06-19T00:00:00+09:00","author":{"@type":"Organization","name":"ライフアセットオフィス FP","url":"https://lifeassetoffice.net/"},"publisher":{"@type":"Organization","name":"ライフアセットオフィス","url":"https://lifeassetoffice.net/","logo":{"@type":"ImageObject","url":"https://lifeassetoffice.net/images/fp-avatar.png"}},"image":"https://lifeassetoffice.net/images/og-blog.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://lifeassetoffice.net/blog-bukka-kakeibo.html"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://lifeassetoffice.net/"},{"@type":"ListItem","position":2,"name":"ブログ","item":"https://lifeassetoffice.net/blog/"},{"@type":"ListItem","position":3,"name":"「食費を削る」が間違いだった理由｜物価高時代の支出見直し順序とFP実例","item":"https://lifeassetoffice.net/blog-bukka-kakeibo.html"}]}]}
@@ -157,380 +178,406 @@ footer a{color:var(--green-light);text-decoration:underline}
   <button class="nav-cta" onclick="window.location.href='/contact.html'">お問い合わせ</button>
 </nav>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-cat">家計管理・物価高対策</div>
-    <h1>「食費を削る」が<br><em>間違いだった</em>理由——<br>物価高時代の支出見直し順序と<br>FP実例</h1>
-    <div class="hero-meta">
-      <span>2026年6月19日</span><span>読了約10分</span><span>Life Asset FP編集部</span>
-    </div>
-  </div>
+<div class="breadcrumb">
+  <a href="/">ホーム</a> › <a href="/blog/">ブログ</a> › 物価高時代の支出見直しと資産防衛
 </div>
 
-<article>
+<div class="wrap">
 
-  <div class="lead">
-    「食費を月1万円削ろう」と特売品を探し回った結果、疲れてやめてしまった——そんな経験はありませんか？<br><br>
-    実は、<strong>食費より先に見直すべきお金が毎月の固定費の中に眠っています</strong>。<br><br>
-    FP相談で家計を一緒に確認すると、固定費を見直すだけで年間31万円の削減に成功した方がいます。食費は一切削らずに、です。<br><br>
-    この記事では「どの順序で何をすればいいか」を、今日から実践できる具体的な手順でお伝えします。
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">家計管理・物価高対策</span>
+      <h1>「食費を削る」が<em>間違いだった</em>理由——<br>物価高時代の支出見直し順序とFP実例</h1>
+      <div class="hero-meta">
+        <span>2026年6月19日</span><span>読了約10分</span><span>Life Asset FP編集部</span>
+      </div>
+    </div>
   </div>
 
-  <nav class="toc">
+  <div class="toc">
     <div class="toc-title">目次</div>
     <ol>
       <li><a href="#sec1">なぜ食費削減から始めると失敗するのか</a></li>
-      <li><a href="#sec2">固定費見直しで年間31万円削減——Bさんの実例</a></li>
+      <li><a href="#sec2">固定費見直しで年間312,000円削減——Bさんの実例</a></li>
       <li><a href="#sec3">今日からできる！固定費の削り方（手順つき）</a></li>
       <li><a href="#sec4">余ったお金の置き場所——インフレに負けない3分割法</a></li>
       <li><a href="#sec5">食費の「賢い節約」はこの3つだけでOK</a></li>
       <li><a href="#sec6">やってはいけない3つの間違い</a></li>
       <li><a href="#sec7">まとめ：今週中にやること</a></li>
     </ol>
-  </nav>
+  </div>
+
+  <div class="fp-opening">
+    <img class="fp-avatar" src="/images/fp-avatar.png" alt="ライフアセットオフィス FP">
+    <p>「食費を月1万円削ろう」と特売品を探し回った結果、疲れてやめてしまった——そんな経験はありませんか？実は、食費より先に見直すべきお金が毎月の固定費の中に眠っています。FP相談で家計を一緒に確認すると、固定費を見直すだけで<strong>年間312,000円</strong>の削減に成功した方がいます。食費は一切削らずに、です。この記事では「どの順序で何をすればいいか」を、今日から実践できる具体的な手順でお伝えします。</p>
+  </div>
 
   <!-- SEC1 -->
-  <section id="sec1">
-    <h2>なぜ食費削減から始めると失敗するのか</h2>
+  <h2 id="sec1">1. なぜ食費削減から始めると失敗するのか</h2>
 
-    <p>物価が上がると、多くの方がまず食費を削ろうとします。気持ちはよくわかります。スーパーで「今日の買い物を減らす」のは、今すぐできる行動だからです。</p>
+  <p>物価が上がると、多くの方がまず食費を削ろうとします。気持ちはよくわかります。スーパーで「今日の買い物を減らす」のは、今すぐできる行動だからです。</p>
 
-    <p>でも、考えてみてください。<strong>食費を月1万円削るために、毎日どれだけ頑張り続けなければなりませんか？</strong></p>
+  <p>でも、考えてみてください。食費を月1万円削るために、毎日どれだけ頑張り続けなければなりませんか。</p>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>節約の方法</th><th>月1万円削るのに必要なこと</th><th>続けられる？</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>食費削減</strong></td>
-            <td>毎日の買い物で値引き品を探す、外食を我慢、自炊の時間を増やす……<strong>毎日継続が必要</strong></td>
-            <td><span style="color:var(--red)">✕ 疲れてやめがち</span></td>
-          </tr>
-          <tr>
-            <td><strong>固定費削減</strong></td>
-            <td>スマホのプランを変える、使っていないサブスクを解約する……<strong>一度やるだけでOK</strong></td>
-            <td><span style="color:var(--green)">◎ やれば永続的に効く</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>節約の方法</th><th>月1万円削るのに必要なこと</th><th>続けられる？</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>食費削減</strong></td>
+          <td>毎日の買い物で値引き品を探す、外食を我慢、自炊の時間を増やす……毎日継続が必要</td>
+          <td><span style="color:var(--red)">✕ 疲れてやめがち</span></td>
+        </tr>
+        <tr>
+          <td><strong>固定費削減</strong></td>
+          <td>スマホのプランを変える、使っていないサブスクを解約する……一度やるだけでOK</td>
+          <td><span style="color:var(--green)">◎ やれば永続的に効く</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <p>固定費の削減は「一度だけ手続きすれば、毎月自動的に節約が続く」のが最大の特徴です。スマホのプランを変えるのに30分かかったとして、月5,000円安くなれば年間6万円。10年で60万円になります。</p>
+  <p>固定費の削減は「一度だけ手続きすれば、毎月自動的に節約が続く」のが最大の特徴です。スマホのプランを変えるのに30分かかったとして、月5,000円安くなれば年間6万円、10年で60万円になります。</p>
 
-    <div class="callout callout-key">
-      <strong>覚えておきたい順序：</strong><br>
-      ①固定費を削る　②変動費（大きいもの）を削る　③食費・日用品を工夫する<br><br>
-      多くの人は③から始めますが、①から始めると同じ努力量で3〜5倍の効果が出ます。
-    </div>
+  <div class="callout callout-key">
+    <div class="callout-title">覚えておきたい順序</div>
+    <p>①固定費を削る　→　②変動費（大きいもの）を削る　→　③食費・日用品を工夫する<br>
+    <span style="font-size:14px;display:block;margin-top:6px">多くの人は③から始めますが、①から始めると同じ努力量で3〜5倍の効果が出ます。</span></p>
+  </div>
 
-    <p>また、食費を削り続けると「ご褒美に外食したい」という反動が出やすく、かえって支出が増えるケースもよくあります。食卓の質を下げることで家族間の不満も生まれがちです。</p>
+  <p>また、食費を削り続けると「ご褒美に外食したい」という反動が出やすく、かえって支出が増えるケースもよくあります。食卓の質を下げることで家族間の不満も生まれがちです。</p>
 
-    <div class="pull-quote">
-      水道管が漏れているのに、<br>
-      コップの水を節約しようとしていませんか？<br>
-      まず管を直す——それが固定費の見直しです。
-    </div>
-  </section>
+  <div class="pull-quote">
+    水道管が漏れているのに、<br>コップの水を節約しようとしていませんか？<br>まず管を直す——それが固定費の見直しです。
+  </div>
 
   <hr>
 
   <!-- SEC2 -->
-  <section id="sec2">
-    <h2>固定費見直しで年間31万円削減——Bさんの実例</h2>
+  <h2 id="sec2">2. 固定費見直しで年間312,000円削減——Bさんの実例</h2>
 
-    <p>40代・共働き夫婦のBさん（仮名）は、食費が月2万円増えて困っていました。「食費を節約しなければ」と思い相談に来たのですが、家計を一緒に確認したところ、<strong>食費に手をつける前に月26,000円（年間31万円）の固定費が削れる</strong>ことが判明しました。</p>
+  <div class="case-box">
+    <span class="case-label">CASE</span>
+    <div class="case-name">Bさん（仮名・40代・共働き・子ども2人）</div>
+    <p>食費が月2万円増えて困っていたBさん。「食費を節約しなければ」と思い相談に来ましたが、家計を一緒に確認したところ、食費に手をつける前に月26,000円の固定費が削れることが判明しました。</p>
+  </div>
 
-    <div class="case-box">
-      <div class="case-label">Bさんの固定費見直し結果（40代・共働き・子ども2人）</div>
-      <div class="table-wrap" style="margin:0">
-        <table>
-          <thead>
-            <tr><th>見直した項目</th><th>見直し前</th><th>見直し後</th><th>月の削減額</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>スマホ2台（大手キャリア → 格安SIM）</td>
-              <td class="num">¥16,000</td>
-              <td class="num">¥4,000</td>
-              <td class="num"><strong>▲¥12,000</strong></td>
-            </tr>
-            <tr>
-              <td>生命保険（不要な特約を整理）</td>
-              <td class="num">¥28,000</td>
-              <td class="num">¥18,000</td>
-              <td class="num"><strong>▲¥10,000</strong></td>
-            </tr>
-            <tr>
-              <td>動画・音楽サブスク（整理・家族共有化）</td>
-              <td class="num">¥5,500</td>
-              <td class="num">¥1,500</td>
-              <td class="num"><strong>▲¥4,000</strong></td>
-            </tr>
-            <tr>
-              <td><strong>合計</strong></td>
-              <td class="num">¥49,500</td>
-              <td class="num">¥23,500</td>
-              <td class="num"><strong>▲¥26,000</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:14px"><strong>月26,000円 × 12ヶ月 ＝ 年間312,000円の削減</strong>。食費の値上がり分（月2万円 × 12 ＝ 年間24万円）を完全にカバーし、さらにプラスになりました。</p>
-      <p>Bさんのコメント：「スマホの変更は30分、保険の整理はFPと1時間話して終わりました。毎日スーパーで悩むより圧倒的に楽でした」</p>
-    </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>見直した項目</th><th>見直し前</th><th>見直し後</th><th>月の削減額</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>スマホ2台（大手キャリア → 格安SIM）</td>
+          <td class="num">¥16,000</td><td class="num">¥4,000</td><td class="num"><strong>▲¥12,000</strong></td>
+        </tr>
+        <tr>
+          <td>生命保険（不要な特約を整理）</td>
+          <td class="num">¥28,000</td><td class="num">¥18,000</td><td class="num"><strong>▲¥10,000</strong></td>
+        </tr>
+        <tr>
+          <td>動画・音楽サブスク（整理・家族共有化）</td>
+          <td class="num">¥5,500</td><td class="num">¥1,500</td><td class="num"><strong>▲¥4,000</strong></td>
+        </tr>
+        <tr class="total-row">
+          <td>合計</td>
+          <td class="num">¥49,500</td><td class="num">¥23,500</td><td class="num">▲¥26,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <p>ポイントは、<strong>一度手続きをしたら毎月自動的に26,000円の節約が続く</strong>こと。食費を毎日削り続ける必要はありませんでした。</p>
-  </section>
+  <div class="callout callout-key">
+    <div class="callout-title">年間効果に換算すると</div>
+    <p>月26,000円 × 12ヶ月 ＝ <strong>年間312,000円の削減</strong>。食費の値上がり分（月2万円 × 12 ＝ 年間240,000円）を完全にカバーし、さらに72,000円分のプラスになりました。</p>
+  </div>
+
+  <p>Bさんのコメント：「スマホの変更は30分、保険の整理はFPと1時間話して終わりました。毎日スーパーで悩むより圧倒的に楽でした」</p>
+
+  <p>ポイントは、一度手続きをしたら毎月自動的に26,000円の節約が続くこと。食費を毎日削り続ける必要はありませんでした。</p>
 
   <hr>
 
   <!-- SEC3 -->
-  <section id="sec3">
-    <h2>今日からできる！固定費の削り方（手順つき）</h2>
+  <h2 id="sec3">3. 今日からできる！固定費の削り方（手順つき）</h2>
 
-    <p>「固定費を見直したいけど、何から手をつければいいの？」という方のために、具体的な手順を説明します。</p>
+  <p>「固定費を見直したいけど、何から手をつければいいの？」という方のために、具体的な手順を説明します。</p>
 
-    <h3>まず30分：自分の固定費を全部書き出す</h3>
+  <h3>まず30分：自分の固定費を全部書き出す</h3>
 
-    <p>銀行口座の引き落とし履歴、またはクレジットカードの明細を開いて、毎月必ず出ていくお金を全部リストアップします。</p>
+  <p>銀行口座の引き落とし履歴、またはクレジットカードの明細を開いて、毎月必ず出ていくお金を全部リストアップします。</p>
 
-    <div class="action-box">
-      <div class="action-box-title">チェックするもの一覧</div>
-      <ul>
-        <li>スマホ代（家族全員分）</li>
-        <li>インターネット代</li>
-        <li>動画・音楽・クラウドのサブスク（Netflix・Disney+・Spotifyなど）</li>
-        <li>保険料（生命・医療・自動車・火災）</li>
-        <li>住宅ローンまたは家賃</li>
-        <li>駐車場代</li>
-        <li>ジム・習い事の月謝</li>
-        <li>NHK受信料・新聞代</li>
-      </ul>
-    </div>
+  <div class="checklist">
+    <div class="checklist-title">チェックするもの一覧</div>
+    <ul>
+      <li>スマホ代（家族全員分）</li>
+      <li>インターネット代</li>
+      <li>動画・音楽・クラウドのサブスク（Netflix・Disney+・Spotifyなど）</li>
+      <li>保険料（生命・医療・自動車・火災）</li>
+      <li>住宅ローンまたは家賃</li>
+      <li>駐車場代</li>
+      <li>ジム・習い事の月謝</li>
+      <li>NHK受信料・新聞代</li>
+    </ul>
+  </div>
 
-    <p>多くの方がここで「え、こんなに引き落とされてたの？」と驚きます。何年も使っていないサブスク、重複した保険保障が見つかることもよくあります。</p>
+  <p>多くの方がここで「え、こんなに引き落とされてたの？」と驚きます。何年も使っていないサブスク、重複した保険保障が見つかることもよくあります。</p>
 
-    <h3>削減効果の大きい順に手をつける</h3>
+  <h3>削減効果の大きい順に手をつける</h3>
 
-    <p>書き出したら、削減金額が大きくて手続きが簡単なものから順番に対応します。</p>
-
-    <div class="step-box">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">サブスクの解約（今日できる・5分）</div>
-          <p class="step-desc">使っていない動画・音楽・アプリを解約。月1,000円のサブスクも5つあれば月5,000円。スマホの設定→サブスクリプションから確認できます。</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">スマホを格安SIMに変更（今週できる・30〜60分）</div>
-          <p class="step-desc">夫婦2台で月1万5千円以上なら格安SIMへの変更を検討。MNPで電話番号はそのまま移行できます。IIJmio・楽天モバイル・ahamo など月2,000〜3,000円台のプランも多数あります。</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">保険の見直し（今月中に・FP相談を活用）</div>
-          <p class="step-desc">保険は「なんとなく加入したまま」が一番危険。月1〜2万円台を払っているなら、必要な保障だけに絞れるか確認しましょう。削りすぎも禁物なのでFP等に相談しながら進めるのがおすすめです。</p>
-        </div>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">サブスクの解約（今日できる・5分）</div>
+        <p>使っていない動画・音楽・アプリを解約。月1,000円のサブスクも5つあれば月5,000円。スマホの設定→サブスクリプションから確認できます。</p>
       </div>
     </div>
-
-    <div class="callout callout-warn">
-      <strong>保険だけは慎重に：</strong>保険を削りすぎると、病気・死亡・収入減少時に困ります。「就業不能保険」「収入保障保険」など公的保険でカバーできない部分は残しておきましょう。削るより先に、公的保険（高額療養費・傷病手当金・遺族年金）がどこまでカバーしてくれるかを確認することが先決です。
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">スマホを格安SIMに変更（今週できる・30〜60分）</div>
+        <p>夫婦2台で月1万5千円以上なら格安SIMへの変更を検討。MNPで電話番号はそのまま移行できます。月2,000〜3,000円台のプランも多数あります。</p>
+      </div>
     </div>
-  </section>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">保険の見直し（今月中に・FP相談を活用）</div>
+        <p>保険は「なんとなく加入したまま」が一番危険。月1〜2万円台を払っているなら、必要な保障だけに絞れるか確認しましょう。削りすぎも禁物なのでFP等に相談しながら進めることをおすすめします。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-warn">
+    <div class="callout-title">保険だけは慎重に</div>
+    <p>保険を削りすぎると、病気・死亡・収入減少時に困ります。「就業不能保険」「収入保障保険」など公的保険でカバーできない部分は残しておきましょう。削るより先に、公的保険（高額療養費・傷病手当金・遺族年金）がどこまでカバーしてくれるかを確認することが先決です。</p>
+  </div>
 
   <hr>
 
   <!-- SEC4 -->
-  <section id="sec4">
-    <h2>余ったお金の置き場所——インフレに負けない3分割法</h2>
+  <h2 id="sec4">4. 余ったお金の置き場所——インフレに負けない3分割法</h2>
 
-    <p>固定費を削って毎月お金が余るようになったら、次は「どこに置くか」が大事です。2026年現在、物価が年3〜4%上昇している環境では、<strong>銀行口座に入れたままにすると実質的に毎年3〜4%損している</strong>のと同じです。</p>
+  <p>固定費を削って毎月お金が余るようになったら、次は「どこに置くか」が大事です。物価が年3〜4%上昇している環境では、銀行口座に入れたままにすると実質的に毎年3〜4%損しているのと同じです。</p>
 
-    <p>シンプルに3つに分けて考えましょう。</p>
+  <p>シンプルに3つに分けて考えましょう。</p>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>区分</th><th>目安の金額</th><th>置く場所</th><th>目的</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>①まず守る：生活防衛資金</strong></td>
-            <td class="num">生活費の3〜6ヶ月分</td>
-            <td>普通預金・ネット銀行</td>
-            <td>病気・失業・急な出費に備える「絶対に使わないお金」</td>
-          </tr>
-          <tr>
-            <td><strong>②次に増やす：インフレ対策資産</strong></td>
-            <td class="num">余剰の60〜70%</td>
-            <td>つみたてNISA・iDeCo</td>
-            <td>物価上昇に負けないよう長期で増やす。毎月自動積立でOK</td>
-          </tr>
-          <tr>
-            <td><strong>③近いうちに使う予定のお金</strong></td>
-            <td class="num">余剰の30〜40%</td>
-            <td>定期預金・個人向け国債</td>
-            <td>3〜5年以内に使う予定があるお金は元本を守る</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>区分</th><th>目安の金額</th><th>置く場所</th><th>目的</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>①まず守る：生活防衛資金</strong></td>
+          <td class="num">生活費の3〜6ヶ月分</td>
+          <td>普通預金・ネット銀行</td>
+          <td>病気・失業・急な出費に備える「絶対に使わないお金」</td>
+        </tr>
+        <tr>
+          <td><strong>②次に増やす：インフレ対策資産</strong></td>
+          <td class="num">余剰の60〜70%</td>
+          <td>つみたてNISA・iDeCo</td>
+          <td>物価上昇に負けないよう長期で増やす。毎月自動積立でOK</td>
+        </tr>
+        <tr>
+          <td><strong>③近いうちに使う予定のお金</strong></td>
+          <td class="num">余剰の30〜40%</td>
+          <td>定期預金・個人向け国債</td>
+          <td>3〜5年以内に使う予定があるお金は元本を守る</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="callout callout-key">
-      <strong>大切なポイント：</strong>①の生活防衛資金が貯まっていない状態で投資を始めると、相場が下がったときに生活費のために投資を解約しなければならなくなります。必ず①→②の順で進めてください。
-    </div>
+  <div class="callout callout-warn">
+    <div class="callout-title">大切なポイント</div>
+    <p>①の生活防衛資金が貯まっていない状態で投資を始めると、相場が下がったときに生活費のために投資を解約しなければならなくなります。必ず①→②の順で進めてください。</p>
+  </div>
 
-    <p>NISAやiDeCoが難しそうに聞こえる方へ——最近は証券会社のアプリから15分で口座開設でき、月1,000円から積立設定できます。「全世界株式インデックス」を選んで毎月自動積立にすれば、あとはほぼ放置でOKです。</p>
+  <p>NISAやiDeCoが難しそうに聞こえる方へ——最近は証券会社のアプリから15分で口座開設でき、月1,000円から積立設定できます。「全世界株式インデックス」を選んで毎月自動積立にすれば、あとはほぼ放置でOKです。</p>
 
-    <div class="action-box">
-      <div class="action-box-title">今月中にやること</div>
-      <ul>
-        <li>生活費3ヶ月分が普通預金にあるか確認する</li>
-        <li>なければまずそこを目標に積み立てる</li>
-        <li>3ヶ月分確保できたらNISA口座を開設してみる（楽天証券・SBI証券が使いやすい）</li>
-      </ul>
-    </div>
-  </section>
+  <div class="checklist">
+    <div class="checklist-title">今月中にやること</div>
+    <ul>
+      <li>生活費3ヶ月分が普通預金にあるか確認する</li>
+      <li>なければまずそこを目標に積み立てる</li>
+      <li>3ヶ月分確保できたらNISA口座を開設してみる</li>
+    </ul>
+  </div>
 
   <hr>
 
   <!-- SEC5 -->
-  <section id="sec5">
-    <h2>食費の「賢い節約」はこの3つだけでOK</h2>
+  <h2 id="sec5">5. 食費の「賢い節約」はこの3つだけでOK</h2>
 
-    <p>固定費の見直しが終わったら、食費も少し工夫できます。ただし「我慢して削る」ではなく、<strong>「賢く仕組み化して食卓の質を下げずに支出を減らす」</strong>のがポイントです。</p>
+  <p>固定費の見直しが終わったら、食費も少し工夫できます。ただし「我慢して削る」ではなく、「賢く仕組み化して食卓の質を下げずに支出を減らす」のがポイントです。</p>
 
-    <ul class="checklist">
-      <li>
-        <span class="ck">1</span>
-        <div>
-          <strong>ふるさと納税で食材を確保する</strong><br>
-          <span style="font-size:14px;color:var(--muted)">実質2,000円の負担でお米・肉・魚が届きます。年収400万円なら約4〜6万円分の返礼品を受け取れます。楽天・さとふるから10分で申込できます。</span>
-        </div>
-      </li>
-      <li>
-        <span class="ck">2</span>
-        <div>
-          <strong>旬の食材に切り替える</strong><br>
-          <span style="font-size:14px;color:var(--muted)">旬の野菜・魚は値段が下がり、栄養価も高い傾向があります。レシピを「旬に合わせて決める」習慣だけで、食費が自然と下がります。</span>
-        </div>
-      </li>
-      <li>
-        <span class="ck">3</span>
-        <div>
-          <strong>食費の支払いをポイント還元率の高いカード1枚に集約する</strong><br>
-          <span style="font-size:14px;color:var(--muted)">食費は毎月必ず発生します。還元率1〜2%のカードに集約するだけで年間数千円〜1万円以上のポイントが貯まります。何も我慢しなくていいのが魅力です。</span>
-        </div>
-      </li>
-    </ul>
-
-    <div class="callout callout-key">
-      <strong>やらなくていいこと：</strong>特売品を探してスーパーをはしごする、安い食材だけで献立を組む、外食を全面禁止にする——これらは疲弊してリバウンドしやすく、コストパフォーマンスが低いです。
-    </div>
-
-    <div class="tool-cta">
-      <div class="tool-cta-text">
-        <h3>ふるさと納税の上限額を調べてみる</h3>
-        <p>収入・家族構成を入力するだけで、ふるさと納税できる上限額を試算できます。登録不要・データ保存なし。</p>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">ふるさと納税で食材を確保する</div>
+        <p>実質2,000円の負担でお米・肉・魚が届きます。年収400万円なら年間の控除上限額の目安は約4〜6万円分です（家族構成により変動）。各サイトから10分ほどで申込できます。</p>
       </div>
-      <button class="tool-cta-btn" onclick="window.location.href='/furusato-sim.html'">上限額を試算する →</button>
     </div>
-  </section>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">旬の食材に切り替える</div>
+        <p>旬の野菜・魚は値段が下がり、栄養価も高い傾向があります。レシピを「旬に合わせて決める」習慣だけで、食費が自然と下がります。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">食費の支払いをポイント還元率の高いカード1枚に集約する</div>
+        <p>食費は毎月必ず発生します。還元率1〜2%のカードに集約するだけで年間数千円〜1万円以上のポイントが貯まります。何も我慢しなくていいのが魅力です。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist no">
+    <div class="checklist-title">やらなくていいこと</div>
+    <ul>
+      <li>特売品を探してスーパーをはしごする</li>
+      <li>安い食材だけで献立を組む</li>
+      <li>外食を全面禁止にする</li>
+    </ul>
+    <p class="checklist-note">これらは疲弊してリバウンドしやすく、コストパフォーマンスが低い方法です。</p>
+  </div>
+
+  <div class="tool-cta">
+    <h4>ふるさと納税の上限額を調べてみる</h4>
+    <p>収入・家族構成を入力するだけで、ふるさと納税できる上限額を試算できます。登録不要・データ保存なし。</p>
+    <a class="tool-cta-btn" href="/furusato-sim.html">上限額を試算する →</a>
+  </div>
 
   <hr>
 
   <!-- SEC6 -->
-  <section id="sec6">
-    <h2>やってはいけない3つの間違い</h2>
+  <h2 id="sec6">6. やってはいけない3つの間違い</h2>
 
-    <p>物価高対策として多くの方がやってしまいがちな、気をつけてほしい落とし穴を3つ紹介します。</p>
+  <p>物価高対策として多くの方がやってしまいがちな、気をつけてほしい落とし穴を3つ紹介します。</p>
 
-    <h3>間違い1：「不動産投資で家賃収入を」という話に乗る</h3>
+  <h3>間違い1：「不動産投資で家賃収入を」という話に乗る</h3>
 
-    <p>物価高・インフレの話をすると、「不動産投資で物価上昇に強いお金を」という営業が近づいてくることがあります。特にこういうキーワードが出たら要注意です。</p>
+  <p>物価高・インフレの話をすると、「不動産投資で物価上昇に強いお金を」という営業が近づいてくることがあります。特にこういうキーワードが出たら要注意です。</p>
 
-    <ul class="checklist">
-      <li><span class="ck-x">✕</span><strong>「節税になる」</strong> — 節税できるのは赤字になるから。赤字自体が損失です。節税のために損をするのは本末転倒です</li>
-      <li><span class="ck-x">✕</span><strong>「家賃保証があるから安心」（サブリース）</strong> — 家賃保証は契約更新のたびに下がる仕組みが多く、長期では収支が悪化しやすいです</li>
-      <li><span class="ck-x">✕</span><strong>「今がチャンス」「限定です」</strong> — 急かす販売には必ず理由があります。急ぐ必要はありません</li>
+  <div class="checklist no">
+    <ul>
+      <li><strong>「節税になる」</strong>——節税できるのは赤字になるからです。赤字自体が損失であり、節税のために損をするのは本末転倒です</li>
+      <li><strong>「家賃保証があるから安心」（サブリース）</strong>——家賃保証は契約更新のたびに下がる仕組みが多く、長期では収支が悪化しやすいです</li>
+      <li><strong>「今がチャンス」「限定です」</strong>——急かす販売には必ず理由があります。急ぐ必要はありません</li>
     </ul>
+  </div>
 
-    <div class="callout callout-danger">
-      <strong>見分け方：</strong>中立なFPは特定の商品販売から手数料を得ません。「この物件を買ってください」「この保険に入ってください」と勧めてくるFPは、実は商品の販売員である可能性があります。「報酬をどこからもらっているか」を確認することが大切です。
-    </div>
+  <div class="callout callout-key">
+    <div class="callout-title">見分け方</div>
+    <p>中立なFPは特定の商品販売から手数料を得ません。「この物件を買ってください」「この保険に入ってください」と勧めてくるFPは、実は商品の販売員である可能性があります。「報酬をどこからもらっているか」を確認することが大切です。</p>
+  </div>
 
-    <h3>間違い2：現金のまま貯め続ける</h3>
+  <h3>間違い2：現金のまま貯め続ける</h3>
 
-    <p>「投資は怖いから現金で貯める」という気持ちはよくわかります。ただ、物価が年3〜4%上がる環境では、現金100万円の価値は1年後に実質96〜97万円分に目減りします。</p>
+  <p>「投資は怖いから現金で貯める」という気持ちはよくわかります。ただ、物価が年3〜4%上がる環境では、現金100万円の価値は1年後に実質96〜97万円分に目減りします。</p>
 
-    <p>「何もしないリスク」も、「投資するリスク」と同じくらい存在します。長期・分散・積立（NISA・iDeCo）は、時間をかけてリスクを分散させる方法として、現代の家計防衛の基本になっています。</p>
+  <p>「何もしないリスク」も、「投資するリスク」と同じくらい存在します。長期・分散・積立（NISA・iDeCo）は、時間をかけてリスクを分散させる方法として、現代の家計防衛の基本になっています。</p>
 
-    <h3>間違い3：節約に集中してiDeCoやNISAを後回しにする</h3>
+  <h3>間違い3：節約に集中してiDeCoやNISAを後回しにする</h3>
 
-    <p>食費を毎日100円節約することに集中する一方で、iDeCoの加入を「いつかやろう」と先延ばしにしているケースは非常に多いです。</p>
+  <p>食費を毎日100円節約することに集中する一方で、iDeCoの加入を「いつかやろう」と先延ばしにしているケースは非常に多いです。</p>
 
-    <p>iDeCoで月2万円積み立てた場合（所得税率20%の方）、年間で約4万8,000円の節税効果があります。月換算で4,000円です。毎日の食費節約より、<strong>iDeCo加入という「1回の判断」のほうが、月4,000円以上の実質効果が永続的に続きます</strong>。</p>
+  <div class="callout callout-key">
+    <div class="callout-title">iDeCoの節税効果を試算すると</div>
+    <p>iDeCoで月2万円積み立てた場合、所得税・住民税をあわせた実質負担軽減率が30%の方（所得税率20%＋住民税率10%）なら、年間で約72,000円、月換算で約6,000円の節税効果になります。</p>
+    <p class="note-inline">※ 所得税率は年収や控除状況によって5〜45%まで幅があります。住民税は原則一律10%です。実際の節税額はお住まいの自治体や所得控除の状況によって変わるため、正確な金額は源泉徴収票等をもとに確認することをおすすめします。</p>
+  </div>
 
-    <div class="callout callout-action">
-      <strong>優先順位の考え方：</strong>「1回の判断で永続的に効果が出るもの」（固定費削減・NISA/iDeCo加入）にまず取り組む。毎日努力が必要な節約は、その後でいい。
-    </div>
-  </section>
+  <p>毎日の食費節約より、iDeCo加入という「1回の判断」のほうが、月数千円単位の実質効果が永続的に続く可能性があります。</p>
+
+  <div class="callout callout-key">
+    <div class="callout-title">優先順位の考え方</div>
+    <p>「1回の判断で永続的に効果が出るもの」（固定費削減・NISA/iDeCo加入）にまず取り組む。毎日努力が必要な節約は、その後でいい。</p>
+  </div>
 
   <hr>
 
   <!-- SEC7 -->
-  <section id="sec7">
-    <h2>まとめ：今週中にやること</h2>
+  <h2 id="sec7">7. まとめ：今週中にやること</h2>
 
-    <p>この記事でお伝えしたことを、「今週中にやること」として整理します。</p>
+  <p>この記事でお伝えしたことを、「今週中にやること」として整理します。</p>
 
-    <ul class="checklist">
-      <li><span class="ck">1</span><strong>今日（30分）：</strong>銀行・カードの明細を開いて固定費を全部書き出す。「これ何だっけ？」というものが1つでも見つかれば成功です</li>
-      <li><span class="ck">2</span><strong>今日〜今週（5分）：</strong>使っていないサブスクを1つ解約する。スマホの設定→サブスクリプションから確認できます</li>
-      <li><span class="ck">3</span><strong>今週中（30分）：</strong>スマホ代を確認。夫婦2台で1万5千円以上なら格安SIMを調べてみる</li>
-      <li><span class="ck">4</span><strong>今月中（1時間）：</strong>生活費3ヶ月分が普通預金にあるか確認する。あればNISA口座の開設を検討する</li>
-      <li><span class="ck">5</span><strong>ふるさと納税：</strong>今年の上限額を試算して、食材の返礼品を申し込む（年末が締め切り）</li>
-    </ul>
-
-    <div class="pull-quote">
-      物価高の時代に家計を守るのは、<br>
-      毎日の我慢ではなく、<br>
-      一度の正しい判断の積み重ねです。
-    </div>
-
-    <p>最初の一歩は「銀行の明細を30分見る」だけで大丈夫です。そこから必ず「削れるもの」が見つかります。</p>
-
-    <div class="tool-cta">
-      <div class="tool-cta-text">
-        <h3>家計の全体像をシミュレーションしてみる</h3>
-        <p>収入・支出・資産を入力して「このままだと何歳まで資産がもつか」「固定費を削減したらどう変わるか」を確認できます。登録不要・データ保存対応。</p>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">今日（30分）：銀行・カードの明細を開いて固定費を全部書き出す</div>
+        <p>「これ何だっけ？」というものが1つでも見つかれば成功です。</p>
       </div>
-      <button class="tool-cta-btn" onclick="window.location.href='/lifeplan.html'">ライフプラン表を作る →</button>
     </div>
-  </section>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">今日〜今週（5分）：使っていないサブスクを1つ解約する</div>
+        <p>スマホの設定→サブスクリプションから確認できます。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">今週中（30分）：スマホ代を確認する</div>
+        <p>夫婦2台で1万5千円以上なら格安SIMを調べてみる。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">今月中（1時間）：生活費3ヶ月分が普通預金にあるか確認する</div>
+        <p>あればNISA口座の開設を検討する。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num"></div>
+      <div class="step-body">
+        <div class="step-title">ふるさと納税：今年の上限額を試算して申し込む</div>
+        <p>食材の返礼品を選べます（年末が締め切り）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    物価高の時代に家計を守るのは、<br>毎日の我慢ではなく、<br>一度の正しい判断の積み重ねです。
+  </div>
+
+  <p>最初の一歩は「銀行の明細を30分見る」だけで大丈夫です。そこから必ず「削れるもの」が見つかります。</p>
+
+  <div class="tool-cta">
+    <h4>家計の全体像をシミュレーションしてみる</h4>
+    <p>収入・支出・資産を入力して「このままだと何歳まで資産がもつか」「固定費を削減したらどう変わるか」を確認できます。登録不要・データ保存対応。</p>
+    <a class="tool-cta-btn" href="/lifeplan.html">ライフプラン表を作る →</a>
+  </div>
 
   <div class="author">
     <img class="author-avatar" src="/images/fp-avatar.png" alt="ライフアセットオフィス FP">
     <div>
       <div class="author-name">Life Asset FP編集部</div>
+      <div class="author-role">ファイナンシャルプランナー技能士｜ライフアセットオフィス</div>
       <p class="author-bio">FP技能士が運営する中立な情報サイト。住宅ローン・資産運用・老後資金・家計管理など、暮らしに直結するお金の知識を、実例・数字・具体的な手順を交えて発信しています。特定の金融商品の販売・仲介は行わず、中立な立場での情報提供を方針としています。</p>
     </div>
   </div>
 
   <div class="disclaimer">
-    ⚠️ 本記事は一般的な情報提供を目的としており、特定の金融商品の購入・売却を勧誘するものではありません。記事内の計算例・節税額等は一定の前提条件に基づく概算であり、個人の所得・状況により異なります。投資には元本割れのリスクがあります。個別の状況に応じた判断は、FP・税理士等の専門家にご相談ください。
+    <div class="d-title">免責事項</div>
+    <p>本記事は一般的な情報提供を目的としており、特定の金融商品の購入・売却を勧誘するものではありません。記事内の計算例・節税額等はすべて一定の前提条件に基づく概算であり、実際の効果は収入・家族構成・お住まいの自治体などにより異なります。税制・各種制度は将来変更される可能性があります。個別の状況に応じた判断は、FP・税理士等の専門家にご相談の上、ご自身の判断で行ってください。</p>
   </div>
 
-</article>
+</div>
 
-<p style="max-width:740px;margin:0 auto 16px;padding:0 28px;font-size:10px;color:#94a3b8;">🤖 AI生成コンテンツを含みます。最新情報は各公式サイトをご確認ください。</p>
+<p style="max-width:760px;margin:0 auto 16px;padding:0 20px;font-size:10px;color:#94a3b8;">🤖 AI生成コンテンツを含みます。最新情報は各公式サイトをご確認ください。</p>
 <footer>
   <div class="footer-logo">Life Asset</div>
   <p>ライフアセットオフィス｜FP技能士が運営する中立な家計・資産の情報サイト</p>
