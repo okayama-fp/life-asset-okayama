@@ -207,6 +207,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 @media(max-width:480px){ .hero-scroll-hint{display:none} }
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -553,12 +554,7 @@ function calc() {
   updateUrlParams({ b: state.balance, y: state.years, r: state.rate, p: state.prepay });
 
   if (typeof gtag === 'function') {
-    gtag('event', 'simulate_prepayment', {
-      balance_man: state.balance,
-      years: state.years,
-      rate: state.rate,
-      prepay_man: state.prepay
-    });
+    (function(){var _d={balance_man:state.balance,years:state.years,rate:state.rate,prepay_man:state.prepay};gtag('event','simulate_prepayment',_d);if(window.trackToSheet)trackToSheet('prepayment',_d);})();
   }
 }
 

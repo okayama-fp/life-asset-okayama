@@ -316,6 +316,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .disclaimer{background:#fffbeb;border-left:3px solid #f5d28a;border-radius:0 8px 8px 0;padding:12px 15px;font-size:11px;color:#856404;margin-top:20px;line-height:1.8}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 
@@ -948,7 +949,7 @@ function update(){
 
   if(typeof gtag==='function'){
     var rng=function(val,s){return (Math.floor(val/s)*s)+'〜'+(Math.floor(val/s)*s+s)+'万';};
-    gtag('event','simulate_couples',{income_range:rng(totalIncome,10),saving_rate:Math.round(savingRate),result:saving<0?'deficit':savingRate<10?'warn':savingRate>=20?'good':'ok'});
+    (function(){var _d={income_range:rng(totalIncome,10),saving_rate:Math.round(savingRate),result:saving<0?'deficit':savingRate<10?'warn':savingRate>=20?'good':'ok'};gtag('event','simulate_couples',_d);if(window.trackToSheet)trackToSheet('couples',_d);})();
   }
 
   if(document.getElementById('tab-method').classList.contains('active'))renderMethod();

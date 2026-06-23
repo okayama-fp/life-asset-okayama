@@ -216,6 +216,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -533,7 +534,7 @@ function calc() {
   updateUrlParams({age:sliders.age,ast:sliders.assets,inc:sliders.income,exp:sliders.expense,r:sliders.rate,fe:sliders['fire-expense'],inf:sliders.inf});
   if(typeof gtag==='function'){
     var rng=function(v,s){return (Math.floor(v/s)*s)+'〜'+(Math.floor(v/s)*s+s)+'万';};
-    gtag('event','simulate_fire',{assets_range:rng(assets,100),income_range:rng(income,100),expense_range:rng(expense,50),rate:rate,result:result.age?'ok':'impossible',years_to_fire:result.age?result.years:null});
+    (function(){var _d={assets_range:rng(assets,100),income_range:rng(income,100),expense_range:rng(expense,50),rate:rate,result:result.age?'ok':'impossible',years_to_fire:result.age?result.years:null};gtag('event','simulate_fire',_d);if(window.trackToSheet)trackToSheet('fire',_d);})();
   }
 }
 

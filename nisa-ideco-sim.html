@@ -226,6 +226,7 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
 }
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -684,7 +685,7 @@ function calc() {
   updateUrl({inc:inc,m:m,y:y,r:r,emp:currentEmp});
 
   if(typeof gtag==='function'){
-    gtag('event','simulate_nisa',{emp_type:currentEmp,monthly:m,years:y,rate:r,score:score});
+    (function(){var _d={emp_type:currentEmp,monthly:m,years:y,rate:r,score:score};gtag('event','simulate_nisa',_d);if(window.trackToSheet)trackToSheet('nisa_ideco',_d);})();
   }
 }
 

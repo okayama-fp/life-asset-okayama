@@ -220,6 +220,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -556,7 +557,7 @@ function calc() {
   updateEduScore(gap, result.total, yearsToUni);
   updateUrlParams({ca:sliders['child-age'],sav:sliders.savings,m:sliders.monthly,c:currentCourse});
   if(typeof gtag==='function'){
-    gtag('event','simulate_education',{course:currentCourse,child_age:childAge,gap_result:gap>0?'shortage':'sufficient',monthly_savings_range:(Math.floor(monthly/1)*1)+'〜'+(Math.floor(monthly/1)*1+1)+'万'});
+    (function(){var _d={course:currentCourse,child_age:childAge,gap_result:gap>0?'shortage':'sufficient',monthly_savings_range:(Math.floor(monthly/1)*1)+'〜'+(Math.floor(monthly/1)*1+1)+'万'};gtag('event','simulate_education',_d);if(window.trackToSheet)trackToSheet('education',_d);})();
   }
 }
 
