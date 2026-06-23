@@ -207,6 +207,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -514,7 +515,7 @@ function calc() {
   updateRefineScore(totalSave, breakeven, monthlySave);
   updateUrlParams({bal:sliders.balance,r1:sliders.rate1,per:sliders.period,r2:sliders.rate2,fee:sliders.fee});
   if(typeof gtag==='function'){
-    gtag('event','simulate_loan_refinance',{balance_range:(Math.floor(bal/500)*500)+'〜'+(Math.floor(bal/500)*500+500)+'万',result:totalSave>0?'save':'costly',breakeven_months:isFinite(breakeven)?Math.round(breakeven):null,period:period});
+    (function(){var _d={balance_range:(Math.floor(bal/500)*500)+'〜'+(Math.floor(bal/500)*500+500)+'万',result:totalSave>0?'save':'costly',breakeven_months:isFinite(breakeven)?Math.round(breakeven):null,period:period};gtag('event','simulate_loan_refinance',_d);if(window.trackToSheet)trackToSheet('loan_refinance',_d);})();
   }
 }
 

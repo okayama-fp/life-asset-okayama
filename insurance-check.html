@@ -230,6 +230,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .ai-disc{font-size:10px;color:#94a3b8;text-align:center;margin-top:24px}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -864,6 +865,9 @@ function calcInsurance(){
 
   document.getElementById('res-panel').classList.add('show');
   document.getElementById('res-panel').scrollIntoView({behavior:'smooth',block:'start'});
+  var _d={age:document.getElementById('age').value,income_range:(Math.floor(income/100)*100)+'〜'+(Math.floor(income/100)*100+100)+'万',family:family,premium_range:(Math.floor(premium/1)*1)+'〜'+(Math.floor(premium/1)*1+1)+'万'};
+  if(typeof gtag==='function')gtag('event','simulate_insurance',_d);
+  if(window.trackToSheet)trackToSheet('insurance',_d);
 }
 
 // ===== 進捗バー =====

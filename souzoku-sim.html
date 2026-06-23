@@ -138,6 +138,7 @@ footer a { color: #22c55e; }
 }
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -462,6 +463,9 @@ function calc(){
     if(spouse===1) tips.push('配偶者軽減を最大限使うと一次相続は有利ですが、二次相続の税額が増えることがあります。トータルで設計しましょう。');
   }
   body.innerHTML = '<ul class="advice-steps">' + tips.map(function(t){return '<li>'+t+'</li>';}).join('') + '</ul>';
+  var _d={spouse:spouse,kids:kids,estate_range:(Math.floor((fudosan+kinyu+hoken)/1000)*1000)+'〜'+(Math.floor((fudosan+kinyu+hoken)/1000)*1000+1000)+'万',result:isan>0?'taxable':'exempt'};
+  if(typeof gtag==='function')gtag('event','simulate_souzoku',_d);
+  if(window.trackToSheet)trackToSheet('souzoku',_d);
 }
 
 function applyPreset(sp,kids,fudosan,kinyu,hoken,fusai,btn){

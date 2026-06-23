@@ -312,6 +312,7 @@ window.addEventListener('cookie-consent-accepted',function(){
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -873,7 +874,7 @@ function calc() {
   updateLoanScore(ratio, endAge, level);
   updateLoanUrl(P, rate, yrs, age, inc);
   if(typeof gtag==='function'){
-    gtag('event','simulate_loan_check',{balance_range:(Math.floor(P/500)*500)+'〜'+(Math.floor(P/500)*500+500)+'万',rate:rate,years:yrs,result:ratio>35?'over':ratio>25?'warn':'ok'});
+    (function(){var _d={balance_range:(Math.floor(P/500)*500)+'〜'+(Math.floor(P/500)*500+500)+'万',rate:rate,years:yrs,result:ratio>35?'over':ratio>25?'warn':'ok'};gtag('event','simulate_loan_check',_d);if(window.trackToSheet)trackToSheet('loan_check',_d);})();
   }
 }
 

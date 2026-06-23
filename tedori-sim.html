@@ -218,6 +218,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -587,7 +588,7 @@ function calc() {
   renderQuickTable();
   updateUrlParams({ y: state.income, a: state.over40, d: state.dep, b: state.bonus });
   if (typeof gtag === 'function') {
-    gtag('event', 'simulate_tedori', { income_range: (Math.floor(state.income/100)*100) + '〜' + (Math.floor(state.income/100)*100 + 100) + '万', over40: state.over40, dependents: state.dep, bonus: state.bonus });
+    (function(){var _d={income_range:(Math.floor(state.income/100)*100)+'〜'+(Math.floor(state.income/100)*100+100)+'万',over40:state.over40,dependents:state.dep,bonus:state.bonus};gtag('event','simulate_tedori',_d);if(window.trackToSheet)trackToSheet('tedori',_d);})();
   }
 }
 

@@ -240,6 +240,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 @keyframes heroBg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -561,7 +562,7 @@ function calc() {
   saveInputs();
   updateUrlParams({ i:initial, m:monthly, r:rate, y:years, inf:inf });
   if(typeof gtag==='function'){
-    gtag('event','simulate_asset',{initial_range:(Math.floor(initial/100)*100)+'〜'+(Math.floor(initial/100)*100+100)+'万',monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',rate:rate,years:years});
+    (function(){var _d={initial_range:(Math.floor(initial/100)*100)+'〜'+(Math.floor(initial/100)*100+100)+'万',monthly_range:(Math.floor(monthly/3)*3)+'〜'+(Math.floor(monthly/3)*3+3)+'万',rate:rate,years:years};gtag('event','simulate_asset',_d);if(window.trackToSheet)trackToSheet('asset',_d);})();
   }
 }
 function updateChart(initial, monthly, rate, years) {

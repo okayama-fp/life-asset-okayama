@@ -262,6 +262,7 @@ nav{background:var(--white);padding:0 24px;height:56px;display:flex;align-items:
 .update-bar-btn:hover{background:#158a3e}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 
@@ -1673,15 +1674,7 @@ function _generatePlan(){
 
   if(typeof gtag==='function'){
     const rng=(v,s)=>(Math.floor(v/s)*s)+'〜'+(Math.floor(v/s)*s+s)+'万';
-    gtag('event','simulate_lifeplan',{
-      income_range: rng(incomeSelf,100),
-      has_spouse: hasSpouse,
-      children_count: childrenCount,
-      retire_age: retireSelf,
-      housing_type: housingType,
-      plan_years: totalYears,
-      result: depleteRow?'danger':minAsset<500?'warn':'ok'
-    });
+    (function(){var _d={income_range:rng(incomeSelf,100),has_spouse:hasSpouse,children_count:childrenCount,retire_age:retireSelf,housing_type:housingType,plan_years:totalYears,result:depleteRow?'danger':minAsset<500?'warn':'ok'};gtag('event','simulate_lifeplan',_d);if(window.trackToSheet)trackToSheet('lifeplan',_d);})();
   }
 
   goStep(6);

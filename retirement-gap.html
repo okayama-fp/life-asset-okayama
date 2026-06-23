@@ -501,6 +501,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 @media(max-width:520px){.premium-section{padding:20px 16px}.delay-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 </style>
 <script src="/js/cookie-consent.js"></script>
+<script src="/js/sim-tracker.js"></script>
 </head>
 <body>
 <div id="pb"></div>
@@ -1078,7 +1079,7 @@ function calc() {
   saveLocal();
   updateUrlParams({age:sliders.age,ret:sliders.retire,exp:sliders.expense,pen:sliders.pension,sav:sliders.savings,ls:sliders.lifespan,nisa:sliders.nisa,ideco:sliders.ideco,inv:sliders.invest,r:sliders.rate,inf:sliders.inf});
   if(typeof gtag==='function'){
-    gtag('event','simulate_retirement_gap',{age_group:age<40?'30代':age<50?'40代':age<60?'50代':'60代',retire_age:retire,expense_range:(Math.floor(expense/5)*5)+'〜'+(Math.floor(expense/5)*5+5)+'万',result:gap>0?'shortage':'sufficient'});
+    (function(){var _d={age_group:age<40?'30代':age<50?'40代':age<60?'50代':'60代',retire_age:retire,expense_range:(Math.floor(expense/5)*5)+'〜'+(Math.floor(expense/5)*5+5)+'万',result:gap>0?'shortage':'sufficient'};gtag('event','simulate_retirement_gap',_d);if(window.trackToSheet)trackToSheet('retirement_gap',_d);})();
   }
 }
 
