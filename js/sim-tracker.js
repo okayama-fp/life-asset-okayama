@@ -11,7 +11,7 @@
 (function () {
   /* ===== 設定 ===== */
   // Google Apps Script Web App URL（デプロイ後にここに貼り付ける）
-  var SHEET_URL = '';
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxHsbyuNn0reGJRTDKywsRnxYsaPyKXgNuiDiNOMHMy3WqIhGCC88P4AeTOy18z0AMQ9A/exec';
 
   /* ===== 内部 ===== */
   var CONSENT_KEY = 'la_cookie_consent';
