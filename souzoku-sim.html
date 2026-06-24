@@ -119,9 +119,7 @@ a { color: inherit; text-decoration: none; }
 .util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
 .util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
 .util-btn:hover { border-color:var(--sky); color:var(--sky); }
-.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
-.util-btn.x-share:hover { opacity:.8; }
-.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-btn.util-btn.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
 .util-toast.show { opacity:1; transform:none; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
@@ -180,7 +178,6 @@ footer a { color: #22c55e; }
 
   <div class="util-bar">
     <button class="util-btn" onclick="copyShareUrl()">🔗 条件入りURLをコピー</button>
-    <button class="util-btn x-share" onclick="shareX()">𝕏 結果をシェア</button>
     <button class="util-btn" onclick="window.print()">🖨 印刷</button>
   </div>
 
@@ -503,11 +500,7 @@ function copyShareUrl(){
   if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ showToast('🔗 URLをコピーしました'); }); }
 }
 
-function shareX(){
-  var total = document.getElementById('r-total').textContent;
-  var text = '相続税シミュレーターで概算したら ' + total + '万円 でした。\n基礎控除・配偶者軽減も自動計算 ↓\n';
-  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://lifeassetoffice.net/souzoku-sim.html'), '_blank', 'noopener');
-}
+
 
 // URLパラメータ復元
 (function(){

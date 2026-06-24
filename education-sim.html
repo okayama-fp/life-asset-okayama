@@ -136,9 +136,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 .util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
 .util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
 .util-btn:hover { border-color:var(--sky); color:var(--sky); }
-.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
-.util-btn.x-share:hover { opacity:.8; }
-.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-btn.util-btn.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
 .util-toast.show { opacity:1; transform:none; }
 @media print {
   header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,.cta-contact-box,footer,#pb { display:none!important; }
@@ -270,7 +268,6 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <div class="util-bar">
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
-    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
   </div>
   <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
@@ -365,10 +362,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         </table>
         <p style="font-size:11px;color:var(--text-light);margin-top:6px;">※ 文部科学省「子供の学習費調査」等に基づく参考値。入学金・制服・修学旅行等は含みません。</p>
       </div>
-<div class="cta-contact-box">
-        <div class="cta-contact-text">教育費の積立プラン、FPと一緒に考えませんか？<br>お問い合わせを承っています。</div>
-        <a href="/contact.html" class="cta-contact-btn">お問い合わせ →</a>
-      </div>
+
     </div>
   </div>
 
@@ -616,7 +610,7 @@ function updateAdvice(gap, yearsToUni, monthlyNeed, course) {
     steps = [
       '日本政策金融公庫の教育一般貸付（上限350万円）・奨学金を今すぐ調べて申込準備を開始',
       '祖父母からの「教育資金一括贈与非課税制度」（1,500万円まで非課税）の活用を家族で相談する',
-      'FPに相談して、手元資金・ローン・奨学金の最適な組み合わせを整理・計画立案する'
+      '手元資金・ローン・奨学金の最適な組み合わせを専門家に相談して整理・計画立案する'
     ];
   }
 
@@ -782,10 +776,7 @@ function showToast(msg) {
   setTimeout(function(){ t.classList.remove('show'); },2500);
 }
 function printSim() { window.print(); }
-function shareX() {
-  var total=document.getElementById('result-amount').textContent; var text='教育費シミュレーターで試しました！\n大学卒業まで: '+total+'\n進学コース: '+currentCourse+'\n#ライフアセットオフィス #教育費';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
-}
+
 (function(){
   try {
     var k='la_sim_recent',u=location.pathname,n='教育費積立プランナー';

@@ -109,8 +109,6 @@ a { color: inherit; text-decoration: none; }
 .sim-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .btn-sim-contact { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(90deg,var(--sky),var(--sky-light)); color: #fff; font-size: 14px; font-weight: 800; padding: 13px 28px; border-radius: 50px; transition: transform .2s, opacity .2s; }
 .btn-sim-contact:hover { transform: translateY(-2px); opacity: .9; }
-.btn-sim-share { display: inline-flex; align-items: center; gap: 7px; background: #000; color: #fff; font-size: 14px; font-weight: 700; padding: 13px 24px; border-radius: 50px; transition: opacity .2s; cursor: pointer; border: none; font-family: inherit; }
-.btn-sim-share:hover { opacity: .85; }
 footer { background: var(--navy); color: rgba(255,255,255,.85); padding: 32px 24px 24px; text-align: center; }
 .footer-logo { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
@@ -138,9 +136,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 .util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
 .util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
 .util-btn:hover { border-color:var(--sky); color:var(--sky); }
-.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
-.util-btn.x-share:hover { opacity:.8; }
-.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-btn.util-btn.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
 .util-toast.show { opacity:1; transform:none; }
 @media print {
   header,.hero,.preset-row,.util-bar,.fp-section,.sim-cta,footer,#pb { display:none!important; }
@@ -267,7 +263,6 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
   <div class="util-bar">
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
-    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
   </div>
   <div class="util-toast" id="util-toast"></div>
   <div class="tool-grid">
@@ -395,15 +390,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
     </div>
   </section>
 
-  <div class="sim-cta">
-    <h3>この結果をもとにお問い合わせください。</h3>
-    <p>「手取りからいくら貯蓄・投資に回せばいい？」「iDeCo・ふるさと納税の節税効果は？」<br>シミュレーション結果を持ってお気軽にお問い合わせください。</p>
-    <div class="sim-cta-btns">
-      <a href="contact.html" class="btn-sim-contact">お問い合わせ</a>
-      <button class="btn-sim-share" onclick="shareX()">𝕏 結果をシェア</button>
-    </div>
   </div>
-</div>
 
 <div style="max-width:920px;margin:0 auto 12px;padding:0 24px;font-size:11px;color:#78716c;line-height:1.6;">
   【免責事項】本ツールの計算結果は参考情報であり、投資・税務・法律上のアドバイスではありません。当サイトは投資助言業の登録を受けていません。
@@ -626,11 +613,7 @@ function showToast(msg) {
   setTimeout(function(){ t.classList.remove('show'); }, 2500);
 }
 function printSim() { window.print(); }
-function shareX() {
-  var net = document.getElementById('r-net').textContent;
-  var text = '手取り計算シミュレーターで試しました！\n額面' + state.income.toLocaleString() + '万円 → 手取り約' + net + '万円\n#ライフアセットオフィス #手取り';
-  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(buildShareUrl()), '_blank', 'noopener,noreferrer');
-}
+
 
 /* ───────── 初期化 ───────── */
 (function(){

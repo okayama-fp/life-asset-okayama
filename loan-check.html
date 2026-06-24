@@ -472,10 +472,7 @@ window.addEventListener('cookie-consent-accepted',function(){
             <ul class="advice-list" id="advice-list"></ul>
           </div>
 
-          <div id="cta-box" class="cta-contact-box low">
-            <div class="cta-contact-text" id="cta-contact-text">余裕があるうちに資産運用を始めませんか？NISAやiDeCoの活用をFPがお問い合わせに対応します。</div>
-            <a href="/contact.html" class="cta-contact-btn">お問い合わせする →</a>
-          </div>
+          
 
           <div class="share-row" style="margin-top:8px;">
           </div>
@@ -837,13 +834,7 @@ function calc() {
 
   document.getElementById('advice-box').className = 'advice-box ' + level;
 
-  var ctaBox = document.getElementById('cta-box');
-  ctaBox.className = 'cta-contact-box ' + level;
-  document.getElementById('cta-contact-text').textContent = {
-    low:  '余裕があるうちに資産運用を始めませんか？NISAやiDeCoの活用をFPがお問い合わせに対応します。',
-    mid:  '金利上昇リスクが気になる方へ。借り換えや繰上返済の判断をFPと一緒に考えましょう。',
-    high: '返済負担が重い状態です。今すぐお問い合わせして、具体的な改善策を一緒に見つけましょう。'
-  }[level];
+
 
   var adviceMap = {
     low: [
