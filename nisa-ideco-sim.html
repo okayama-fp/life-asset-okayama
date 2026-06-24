@@ -71,9 +71,7 @@ a{color:inherit;text-decoration:none}
 .util-bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;align-items:center}
 .util-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 15px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
 .util-btn:hover{border-color:var(--green);color:var(--green)}
-.util-btn.x-share{background:#000;border-color:#000;color:#fff}
-.util-btn.x-share:hover{opacity:.8}
-.util-toast{position:fixed;bottom:24px;right:24px;background:#0f172a;color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.util-btn.util-btn.util-toast{position:fixed;bottom:24px;right:24px;background:#0f172a;color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
 .util-toast.show{opacity:1;transform:none}
 
 /* Tool grid */
@@ -281,7 +279,6 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
   <div class="util-bar">
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー</button>
-    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
   </div>
   <div class="util-toast" id="util-toast"></div>
 
@@ -817,11 +814,7 @@ function copySimUrl(){
 }
 function showToast(msg){var t=document.getElementById('util-toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 function printSim(){window.print();}
-function shareX(){
-  var score=document.getElementById('score-num').textContent;
-  var text='NISA・iDeCo 節税診断をやってみました！\n節税活用スコア: '+score+'点\n積立'+sliders.monthly+'万円/月・'+sliders.years+'年・利回り'+sliders.rate+'%\n#ライフアセットオフィス #NISA #iDeCo #節税';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
-}
+
 
 // ─── Init ─────────────────────────────────
 (function(){

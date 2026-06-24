@@ -379,9 +379,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
 .util-bar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; align-items:center; }
 .util-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 15px; border-radius:50px; border:1.5px solid var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--navy); cursor:pointer; font-family:inherit; transition:all .2s; white-space:nowrap; }
 .util-btn:hover { border-color:var(--sky); color:var(--sky); }
-.util-btn.x-share { background:#000; border-color:#000; color:#fff; }
-.util-btn.x-share:hover { opacity:.8; }
-.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+.util-btn.util-btn.util-toast { position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:11px 18px; border-radius:10px; font-size:13px; font-weight:600; z-index:9999; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
 .util-toast.show { opacity:1; transform:none; }
 .from-asset-banner { background:var(--greenl); border:1.5px solid var(--greenb); border-radius:10px; padding:10px 16px; margin-bottom:16px; font-size:13px; color:var(--navy); font-weight:700; display:none; }
 @media print {
@@ -550,7 +548,6 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
   <div class="util-bar">
     <button class="util-btn" onclick="printSim()">🖨️ 印刷・PDF保存</button>
     <button class="util-btn" onclick="copySimUrl()">🔗 URLコピー（シェア）</button>
-    <button class="util-btn x-share" onclick="shareX()">𝕏 でシェア</button>
     <button class="util-btn" style="background:#f59e0b;border-color:#f59e0b;color:#fff" onclick="saveToPlanShelf()">⭐ プランを保存</button>
     <a href="mypage.html" class="util-btn" style="color:var(--sky);border-color:var(--sky)">マイページ →</a>
   </div>
@@ -1424,10 +1421,7 @@ function showToast(msg) {
   setTimeout(function(){ t.classList.remove('show'); },2500);
 }
 function printSim() { window.print(); }
-function shareX() {
-  var gap=document.getElementById('result-amount').textContent; var lbl=document.getElementById('result-label').textContent; var sc=document.getElementById('score-num').textContent; var text='老後安心度診断をやってみた！\n安心度スコア: '+sc+'点/100点\n'+lbl+': '+gap+'\n#ライフアセットオフィス #老後資金';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(buildShareUrl()),'_blank','noopener,noreferrer');
-}
+
 (function(){
   try {
     var k='la_sim_recent',u=location.pathname,n='老後安心度診断';
