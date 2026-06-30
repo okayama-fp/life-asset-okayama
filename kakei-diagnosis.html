@@ -26,8 +26,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:#0a0a14;min-height:100vh;o
 .top-stars{position:absolute;top:0;left:0;width:100%;height:320px;pointer-events:none;overflow:hidden}
 .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle 3s ease-in-out infinite}
 @keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
-.banner-wrap{width:100%;max-width:480px;position:relative;z-index:1}
-.banner-wrap img{width:100%;display:block;border-radius:0 0 20px 20px}
+.banner-wrap{width:100%;max-width:480px;position:relative;z-index:1;overflow:hidden}
+.banner-wrap img{width:100%;display:block}
+.banner-wrap::after{content:'';position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(transparent 0%,#0a0a14 65%);pointer-events:none}
 .top-cta{padding:24px 24px 40px;width:100%;max-width:480px;z-index:1}
 .fortune-badge{display:inline-block;background:linear-gradient(135deg,#d4a843,#f0c958);color:#3a2000;font-size:12px;font-weight:900;padding:5px 16px;border-radius:20px;letter-spacing:2px;margin-bottom:14px}
 .top-title{font-size:26px;font-weight:900;color:#fff;line-height:1.35;margin-bottom:8px}
