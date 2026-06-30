@@ -95,6 +95,35 @@ body{font-family:'Noto Sans JP',sans-serif;background:#0a0a14;min-height:100vh;o
 @keyframes orbp{0%,100%{box-shadow:0 0 0 0 rgba(212,168,67,0.4)}50%{box-shadow:0 0 0 20px rgba(212,168,67,0)}}
 .ftxt{font-size:18px;font-weight:700;color:#d4a843;letter-spacing:3px;animation:blnk 1s ease-in-out infinite}
 @keyframes blnk{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* ---- モバイル最適化 ---- */
+/* サイトナビ(52px)分、クイズヘッダーのスティッキー位置を下げる */
+.quiz-header{top:52px!important}
+
+/* タッチターゲット最小44px確保 */
+.opt{min-height:48px}
+.nav-back,.nav-next{min-height:44px}
+.start-btn,.cta-main,.cta-x,.cta-retry{min-height:52px}
+
+/* 全幅コンテンツの横スクロール防止 */
+#top-screen,#quiz-screen,#result-screen{overflow-x:hidden;width:100%}
+
+/* 320px以下の小型端末対応 */
+@media(max-width:360px){
+  .type-preview{grid-template-columns:repeat(2,1fr)}
+  .top-title{font-size:22px}
+  .result-type{font-size:24px}
+  .quiz-body,.result-body,.top-cta{padding-left:14px;padding-right:14px}
+  .q-text{font-size:15px}
+  .opt{font-size:13px;padding:12px 14px}
+  .sbar-name{width:56px}
+}
+
+/* iPhone SE(375px)対応 */
+@media(max-width:390px){
+  .start-btn{font-size:16px}
+  .result-type{font-size:26px}
+}
 </style>
 <script>
   window.dataLayer = window.dataLayer || [];
