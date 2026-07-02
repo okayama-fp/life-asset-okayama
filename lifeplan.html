@@ -1203,7 +1203,9 @@ function _generatePlan(){
   for(let i=1;i<=childrenCount;i++){
     children.push({
       age:parseInt(document.getElementById('child-age-'+i)?.value)||0,
-      eduCost:parseFloat(document.getElementById('edu-cost-'+i)?.value)||120
+      eduCost:parseFloat(document.getElementById('edu-cost-'+i)?.value)||120,
+      univ:(document.getElementById('child-univ-'+i)?.value)||'yes',
+      school:(document.getElementById('child-school-'+i)?.value)||'private_h'
     });
   }
 
@@ -1265,9 +1267,9 @@ function _generatePlan(){
       const childNow=c.age+y;
       if(childNow>=3&&childNow<=5)eduExp+=15;
       else if(childNow>=6&&childNow<=11)eduExp+=20;
-      else if(childNow>=12&&childNow<=14)eduExp+=35;
-      else if(childNow>=15&&childNow<=17)eduExp+=50;
-      else if(childNow>=18&&childNow<=21)eduExp+=c.eduCost;
+      else if(childNow>=12&&childNow<=14)eduExp+=(c.school==='private_all'?140:35);
+      else if(childNow>=15&&childNow<=17)eduExp+=(c.school==='public'?50:105);
+      else if(childNow>=18&&childNow<=21&&c.univ!=='no')eduExp+=c.eduCost;
     });
 
     let carExp=0;
@@ -1873,7 +1875,7 @@ function runMonteCarlo(N,sigma){
       let cExp=p.carCycle>0&&y>0&&y%p.carCycle===0&&sa<80?p.carCost:0,rfExp=sa===p.reformAge?p.reformCost:0;
       const lsr=sa<75?p.leisure:0;
       const nc=y<30?p.nisaM*12:0,dc=sa<60?p.idecoM*12:0;
-      const cf=(iS+iSp+lump)-base-lExp-rExp-eExp-cExp-rfExp-lsr-nc-dc;
+      const cf=(iS+iSp+lump)-base-lExp-rExp-eExp-cExp-rfExp-lsr-nc-dc-p.invAnn;
       const shock=_bm()*sigma;
       const rN=Math.max(-5,p.nisaR+shock*100),rD=Math.max(-5,p.idecoR+shock*100),rI=Math.max(-5,p.invR+shock*100);
       const _rn=rN/100/12,_Rn=Math.pow(1+_rn,12);
@@ -2019,7 +2021,7 @@ function runScenario(rateAdj){
     const lsr=sa<75?leisure:0;
     const nc=y<30?nisaM*12:0,dc=sa<60?idecoM*12:0;
     const totExp=base+lExp+rExp+eExp+cExp+rfExp+lsr;
-    const cf=(iS+iSp+lump)-totExp-nc-dc;
+    const cf=(iS+iSp+lump)-totExp-nc-dc-invAnn;
     const _rn=nisaR/100/12,_Rn=Math.pow(1+_rn,12);
     na=y<30?na*_Rn+(_rn===0?nisaM*12:nisaM*(_Rn-1)/_rn):na*_Rn;
     const _ri=idecoR/100/12,_Ri=Math.pow(1+_ri,12);
@@ -2069,12 +2071,21 @@ function calcTH(){
 
   function kyuyoKojo(g){
     const y=g*10000;
-    if(y<=1625000)return 550000;
-    if(y<=1800000)return y*0.4-100000;
+    // 2025年改正後（最低保障65万円）
+    if(y<=1900000)return 650000;
     if(y<=3600000)return y*0.3+80000;
     if(y<=6600000)return y*0.2+440000;
     if(y<=8500000)return y*0.1+1100000;
     return 1950000;
+  }
+  function kisoKojo(gs){
+    // 所得税の基礎控除（2025年改正・2025/26年分の上乗せ込み・合計所得で判定）
+    if(gs<=1320000)return 950000;
+    if(gs<=3360000)return 880000;
+    if(gs<=4890000)return 680000;
+    if(gs<=6550000)return 630000;
+    if(gs<=23500000)return 580000;
+    return 0;
   }
   function shotokuTax(k){
     if(k<=0)return 0;
@@ -2091,10 +2102,11 @@ function calcTH(){
     if(g<=0)return null;
     const shakai=Math.round(g*0.15);
     const kojo=kyuyoKojo(gMan);
-    const kiso=480000;
-    const kazei=Math.max(0,g-shakai-kojo-kiso-fuyo);
+    const gs=Math.max(0,g-kojo);
+    const kazei=Math.max(0,gs-shakai-kisoKojo(gs)-fuyo);
     const st=Math.round(shotokuTax(kazei)*1.021);
-    const jt=Math.round(kazei*0.10);
+    const kazeiJt=Math.max(0,gs-shakai-430000-fuyo);
+    const jt=Math.round(kazeiJt*0.10);
     const th=g-shakai-st-jt;
     return{g,shakai,st,jt,th,kazei};
   }
@@ -2124,7 +2136,7 @@ function calcTH(){
         <span>推定手取り</span>
         <span>${Math.round(r.th/10000).toLocaleString()}万円/年（月${Math.round(r.th/12/10000)}万円）</span>
       </div>
-      ${low?'<p style="font-size:11px;color:#059669;margin-top:8px">103万円以下のため所得税・住民税はほぼ0です</p>':''}
+      ${low?'<p style="font-size:11px;color:#059669;margin-top:8px">所得税の非課税ラインは2025年分から実質160万円です（住民税は自治体基準で少額発生の場合あり）</p>':''}
       ${warn?'<p style="font-size:11px;color:#d97706;margin-top:8px">103〜130万円の範囲は社会保険の扶養ライン付近。勤め先の規模・条件を確認してください</p>':''}
       <p style="font-size:11px;color:var(--gray);margin-top:6px">※協会けんぽ・社保加入者の概算。個人差があります</p>
       <button onclick="applyTH('${id}',${Math.max(0,Math.round(r.th/10000))})" style="margin-top:10px;padding:6px 14px;font-size:12px;background:var(--sky);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700">この金額を手取り欄に反映する</button>

@@ -377,7 +377,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
           <table class="fp-compare-table">
             <thead><tr><th>方法</th><th>利回り</th><th>流動性</th><th>おすすめ度</th></tr></thead>
             <tbody>
-              <tr><td>学資保険</td><td>105〜110%</td><td>低い</td><td>安定重視の方</td></tr>
+              <tr><td>学資保険</td><td>おおむね100〜105%程度</td><td>低い</td><td>安定重視の方</td></tr>
               <tr><td>NISAつみたて</td><td>期待3〜6%</td><td>高い</td><td>10年以上あれば</td></tr>
               <tr><td>定期預金</td><td>0.1〜0.3%</td><td>高い</td><td>5年以内の方</td></tr>
               <tr><td>児童手当積立</td><td>―</td><td>高い</td><td>全員必須</td></tr>
@@ -415,7 +415,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
           <ul>
             <li><strong>日本学生支援機構（給付型）</strong>：住民税非課税世帯等対象。返済不要</li>
             <li><strong>第一種奨学金（無利子）</strong>：成績・家計基準あり。月2〜6.4万円</li>
-            <li><strong>教育一般貸付（日本公庫）</strong>：子1人あたり上限350万円。年利1.7%程度。在学中は利息のみ可</li>
+            <li><strong>教育一般貸付（日本公庫）</strong>：子1人あたり上限350万円。金利は変動します（近年は2%台。最新は日本政策金融公庫サイトで確認）。在学中は利息のみ可</li>
             <li><strong>教育資金贈与非課税制度</strong>：祖父母からの贈与1,500万円まで非課税（直系尊属→30歳未満）</li>
           </ul>
         </div>
@@ -438,10 +438,11 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 <script>
 // 文科省統計ベースの費用（万円/年）
 var COSTS = {
-  kindergarten: { pub: 33, pri: 53, years: 3 },   // 3年
-  elementary:   { pub: 32, pri: 160, years: 6 },   // 6年
-  middle:       { pub: 49, pri: 140, years: 3 },   // 3年
-  high:         { pub: 51, pri: 105, years: 3 },   // 3年 ※令和4年度：公立51.3万・私立105.4万
+  // 文科省「子供の学習費調査」令和3(2021)年度ベース（年額・万円）
+  kindergarten: { pub: 17, pri: 31, years: 3 },   // 3年 ※幼児教育無償化（2019年10月〜）後の水準
+  elementary:   { pub: 35, pri: 167, years: 6 },   // 6年
+  middle:       { pub: 54, pri: 144, years: 3 },   // 3年
+  high:         { pub: 51, pri: 105, years: 3 },   // 3年 ※就学支援金（2025年度所得制限撤廃・2026年度私立上限45.7万円）は含まない
   // 大学：初年度入学金込みの概算
   univ: {
     pub:    { annual: 54, entrance: 28 },
@@ -578,7 +579,7 @@ function updateAdvice(gap, yearsToUni, monthlyNeed, course) {
     title = '準備期間が十分。今すぐ始めれば月' + mnStr + 'で余裕です';
     body = '大学入学まで' + yearsToUni + '年あります。今から毎月' + mnStr + '積み立てるだけで不足額' + gapStr + 'を解消できます。早く始めるほど月額負担は小さくなります。';
     steps = [
-      '学資保険（満期18歳型）を比較して加入。返戻率105〜110%のものを選ぶ。加入は早いほど有利',
+      '学資保険（満期18歳型）を比較して加入。返戻率おおむね100〜105%程度のものを選ぶ。加入は早いほど有利',
       '月額の一部（1〜2万円）はNISAつみたて投資枠でインデックスファンドを積立。長期で大きく育てる',
       '児童手当（月1〜1.5万円）を全額教育専用口座に自動入金する仕組みを作る'
     ];
@@ -599,7 +600,7 @@ function updateAdvice(gap, yearsToUni, monthlyNeed, course) {
     body = '積立だけでは不足額' + gapStr + 'を解消するのが難しくなってきます。積立増額・教育ローン・奨学金の事前確認を今すぐ始めてください。';
     steps = [
       'ボーナス一括積立・退職金の一部充当など、まとまったお金を優先して教育口座に移す',
-      '日本政策金融公庫「教育一般貸付」（上限350万円・年利1.7%程度）の申込資格・条件を確認しておく',
+      '日本政策金融公庫「教育一般貸付」（上限350万円・金利は変動します（近年は2%台。最新は日本政策金融公庫サイトで確認））の申込資格・条件を確認しておく',
       '日本学生支援機構の給付型・第一種奨学金は在学前年に申込開始。早めに情報収集する'
     ];
   } else {

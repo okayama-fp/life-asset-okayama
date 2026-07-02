@@ -571,8 +571,8 @@ window.addEventListener('cookie-consent-accepted',function(){
             <div class="field">
               <div class="field-label" style="margin-bottom:8px">住宅タイプ</div>
               <div class="seg">
-                <button class="seg-btn on" id="cap-general" onclick="setCap('general')">一般住宅</button>
-                <button class="seg-btn" id="cap-premium" onclick="setCap('premium')">長期優良・ZEH</button>
+                <button class="seg-btn on" id="cap-general" onclick="setCap('general')">省エネ基準適合</button>
+                <button class="seg-btn" id="cap-premium" onclick="setCap('premium')">認定住宅（長期優良等）</button>
               </div>
               <div class="ded-label-hint" id="cap-hint">控除上限額：旧4,000万円 / 新4,500万円</div>
             </div>
@@ -682,7 +682,7 @@ var exType   = 'short';
 
 var DED = {
   old: { rate: 0.01,  maxYrs: 10, caps: { general: 4000, premium: 4000 } },
-  new: { rate: 0.007, maxYrs: 13, caps: { general: 4500, premium: 5000 } }
+  new: { rate: 0.007, maxYrs: 13, caps: { general: 3000, premium: 4500 } } // 2024〜25年入居: 省エネ基準適合3,000万 / 認定住宅4,500万（子育て世帯等は上乗せあり）
 };
 
 function setType(t) {
@@ -914,21 +914,27 @@ function calcExtra() {
     document.getElementById('r-extra-period').textContent = shortYrs + '年' + (shortMos > 0 ? shortMos + 'ヶ月' : '') + '短縮';
     document.getElementById('extra-note').textContent = '月' + extra + '万円の追加返済で、完済が約' + shortYrs + '年' + (shortMos > 0 ? shortMos + 'ヶ月' : '') + '早くなり、利息が約' + fmtMan(saved) + '減ります。';
   } else {
-    // 返済額軽減型：同じ期間で残高を減らす効果（毎月extra万を追加した場合の総利息差）
-    // 簡易計算：追加で入金した分が元本に充当され、その分の利息が消える
-    var totalInterestBase = totalBase - P_yen;
-    var nNew2 = n;
-    var mNew2 = m + extraYen; // 実際には返済額を下げるが、軽減型の効果を近似
-    // 軽減型：追加入金で残高が速く減り月返済額が下がる。ここでは総支払差を計算
-    var totalNew2 = mNew2 * Math.min(n, -Math.log(1 - r*P_yen/mNew2)/Math.log(1+r));
-    var saved2 = Math.max(0, totalBase - totalNew2);
-    // 月返済削減額の目安（追加返済1年後の効果）
-    var reducedBalance = P_yen - (extraYen * 12);
-    var mReduced = monthly(reducedBalance/10000, rate, yrs - 1);
-    var monthlyReduction = m - mReduced;
+    // 返済額軽減型：毎月extra万円を追加入金し、都度「残期間据え置きで返済額を再計算」する月次シミュレーション
+    var B = P_yen, nRem = n, totalPaid2 = 0, guard = 0;
+    while (B > 1 && guard < n + 12) {
+      var mt = r <= 0 ? B / nRem : B * r / (1 - Math.pow(1 + r, -nRem));
+      var interest = B * r;
+      var principal = Math.min(B, (mt + extraYen) - interest);
+      if (principal <= 0) break;
+      totalPaid2 += principal + interest;
+      B -= principal;
+      nRem = Math.max(1, nRem - 1);
+      guard++;
+    }
+    var saved2 = Math.max(0, totalBase - totalPaid2);
+    // 1年後の月返済額削減の目安: 通常返済＋追加返済12ヶ月後の残高で残期間(n-12)を再計算
+    var g12 = Math.pow(1 + r, 12);
+    var B12 = r <= 0 ? P_yen - (m + extraYen) * 12 : P_yen * g12 - (m + extraYen) * (g12 - 1) / r;
+    var mNew12 = r <= 0 ? B12 / (n - 12) : B12 * r / (1 - Math.pow(1 + r, -(n - 12)));
+    var monthlyReduction = Math.max(0, m - mNew12);
     document.getElementById('r-extra-save').textContent = fmtMan(saved2);
-    document.getElementById('r-extra-period').textContent = fmt(Math.max(0, monthlyReduction)) + '/月';
-    document.getElementById('extra-note').textContent = '月' + extra + '万円の追加返済を続けると、1年後の月返済額が約' + fmt(Math.max(0, monthlyReduction)) + '削減される見込みです（概算）。';
+    document.getElementById('r-extra-period').textContent = fmt(monthlyReduction) + '/月';
+    document.getElementById('extra-note').textContent = '月' + extra + '万円の追加返済を続けると、1年後の月返済額が約' + fmt(monthlyReduction) + '削減される見込みです（概算）。期間短縮型より利息削減効果は小さくなります。';
   }
 }
 
@@ -943,7 +949,16 @@ function calcDeduction(P, rate, inc) {
   var cap      = cfg.caps[capType];
   var effP     = Math.min(P, cap);
   var annualDed = effP * 10000 * cfg.rate;
-  var totalDed  = annualDed * dedYrs;
+  // 控除総額は各年の年末残高（元利均等で逓減）×控除率で合算
+  var yrsAll   = parseInt(document.getElementById('sl-years').value);
+  var rMon     = rate / 100 / 12, nAll = yrsAll * 12;
+  var mPay     = rMon <= 0 ? P * 10000 / nAll : P * 10000 * rMon / (1 - Math.pow(1 + rMon, -nAll));
+  var totalDed = 0;
+  for (var yD = 1; yD <= dedYrs; yD++) {
+    var mm = Math.min(yD * 12, nAll);
+    var balY = rMon <= 0 ? P * 10000 - mPay * mm : P * 10000 * Math.pow(1 + rMon, mm) - mPay * (Math.pow(1 + rMon, mm) - 1) / rMon;
+    totalDed += Math.min(Math.max(0, balY), cap * 10000) * cfg.rate;
+  }
   var realRate  = rate - cfg.rate * 100;
   var isGyaku   = realRate < 0;
 

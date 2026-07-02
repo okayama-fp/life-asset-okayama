@@ -1035,7 +1035,7 @@ function update(){
     phases[0].actions.push({title:'先取り貯蓄の自動振替を今日設定',body:'ネットバンクにログインし、給料日翌日に貯蓄口座へ'+fmtMan(Math.max(1,Math.floor(saving*0.8)))+'の自動振替を設定。「余ったら貯める」はゼロになりがち。',service:'→ ネット銀行の自動振替機能を活用（各社・設定無料）'});
     phases[1].actions.push({title:'通信費を格安SIMに変更',body:'大手キャリアから格安SIM（IIJmio・povo・mineoなど）に変えると2人で月1〜2万節約できる。手続きは30分。',service:'→ 格安SIM各社で比較検討（IIJmio・povo・mineoなど料金は変動します）'});
   } else {
-    phases[0].actions.push({title:'NISA口座でつみたて設定を今月中に',body:'NISA対応のネット証券でNISA口座を開設（約10分）し、低コストの全世界株式インデックスファンドで月'+nisaMonthly+'万円の自動積立を設定する。',service:'→ NISA対応ネット証券（各社・口座開設無料）'});
+    phases[0].actions.push({title:'NISA口座でつみたて設定を今月中に',body:'NISA対応のネット証券でNISA口座を開設（約10分）し、低コストの全世界株式インデックスファンドで月'+Math.max(1,Math.min(10,Math.floor(saving*0.7)))+'万円の自動積立を設定する。',service:'→ NISA対応ネット証券（各社・口座開設無料）'});
   }
   if(rentRatio>30){
     phases[1].actions.push({title:'住居費を収入の25%以内に下げる計画を立てる',body:'現在'+rentRatio.toFixed(0)+'%と高め。転居・家賃交渉・住宅ローンへの切り替えで月'+fmtMan(v.rent-totalIncome*0.25)+'の削減余地あり。引っ越し費用は4〜6月・9〜11月が安い。',service:'→ スーモ・ホームズで同エリア家賃相場を確認'});
@@ -1417,7 +1417,8 @@ function updateGoal(){
   var retireGap=Math.max(0,retireLivingCost-pension);
   var retireTotal=retireGap*12*30;
   var nisaAt20=nisaMonthly>0?(nisaMonthly*10000*(Math.pow(1+0.05/12,240)-1)/(0.05/12))/10000:0;
-  var totalAtRetire=monthlySaving*12*30+curSaving+nisaAt20;
+  var nisaAt30=nisaMonthly>0?(nisaMonthly*10000*(Math.pow(1+0.05/12,360)-1)/(0.05/12))/10000:0;
+  var totalAtRetire=Math.max(0,(monthlySaving-nisaMonthly))*12*30+curSaving+nisaAt30; // NISA分は現金積立から控除（二重計上防止）
   var gfEl=document.getElementById('gap-flow');
   if(gfEl)gfEl.innerHTML=
     '<div class="gap-box"><div class="gap-box-label">老後月生活費（推定）</div><div class="gap-box-val" style="color:var(--red)">'+fmtMan(retireLivingCost)+'</div></div>'+
@@ -1426,7 +1427,7 @@ function updateGoal(){
     '<span class="gap-arrow">＝</span>'+
     '<div class="gap-box"><div class="gap-box-label">月額不足</div><div class="gap-box-val" style="color:var(--red)">'+fmtMan(retireGap)+'</div></div>'+
     '<span class="gap-arrow">×</span>'+
-    '<div class="gap-box"><div class="gap-box-label">30年間</div><div class="gap-box-val">3600ヶ月</div></div>';
+    '<div class="gap-box"><div class="gap-box-label">30年間</div><div class="gap-box-val">360ヶ月</div></div>';
   var grEl=document.getElementById('gap-result');
   if(grEl){
     var ok2=totalAtRetire>=retireTotal;

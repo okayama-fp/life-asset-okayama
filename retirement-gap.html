@@ -827,7 +827,7 @@ footer p { font-size: 0.72rem; opacity: .75; margin-top: 12px; }
           <div class="reality-card-title">年金の仕組みと手取り額の実態</div>
         </div>
         <div class="reality-card-body">
-          年金には<strong>厚生年金（会社員・公務員）</strong>と<strong>国民年金（自営業等）</strong>があります。2024年度の平均受給額は、夫婦合計で約21万円／月。ただし実際の手取りは<strong>健康保険料・介護保険料・所得税が天引き</strong>され、1〜3万円程度少なくなります。ねんきんネット（日本年金機構）で自分の見込み額を確認しましょう。
+          年金には<strong>厚生年金（会社員・公務員）</strong>と<strong>国民年金（自営業等）</strong>があります。厚生年金＋国民年金の夫婦モデル年金は月23万円前後（2025年度・以後毎年度改定）。ただし実際の手取りは<strong>健康保険料・介護保険料・所得税が天引き</strong>され、1〜3万円程度少なくなります。ねんきんネット（日本年金機構）で自分の見込み額を確認しましょう。
         </div>
       </div>
 
@@ -1015,7 +1015,9 @@ function calc() {
   var totalNeeded = 0;
   for (var t = 0; t < lifespan; t++) totalNeeded += expense * 12 * Math.pow(1 + inf / 100, yearsToRetire + t);
   totalNeeded = Math.round(totalNeeded);
-  var totalPension = pension * 12 * lifespan;
+  // 公的年金は原則65歳支給開始（65歳未満で退職した場合、65歳までは年金なし）
+  var pensionYears = Math.max(lifespan - Math.max(65 - retire, 0), 0);
+  var totalPension = pension * 12 * pensionYears;
   var gap = totalNeeded - totalPension - totalAssets;
   var monthlyNeed = (gap > 0 && monthsToRetire > 0) ? gap / monthsToRetire : 0;
   currentGap = gap;
@@ -1223,8 +1225,11 @@ function calcExtra() {
 function randn(){ var u=1-Math.random(),v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
 
 // 退職後 t 年目（0始まり）の年間取り崩し額（万円）。生活費はインフレ込み、年金は据え置き
+// 公的年金は原則65歳支給開始（繰上げ受給は考慮しない）
 function ddNet(t, yearsToRetire){
-  return sliders.expense*12*Math.pow(1+sliders.inf/100, yearsToRetire+t) - sliders.pension*12;
+  var ageAtT = sliders.retire + t;
+  var pensionY = ageAtT >= 65 ? sliders.pension*12 : 0;
+  return sliders.expense*12*Math.pow(1+sliders.inf/100, yearsToRetire+t) - pensionY;
 }
 
 var ddChart=null, _ddTimer=null;
