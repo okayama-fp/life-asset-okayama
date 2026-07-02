@@ -9,7 +9,7 @@
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/nisa-ideco-sim.html">
 <title>NISA・iDeCo 節税診断｜ライフアセットオフィス</title>
-<meta name="description" content="職業タイプ・年収・積立額から節税活用スコアを即診断。NISA・iDeCo・課税口座・最適コンビの4シナリオ比較と最適配分提案つき。。">
+<meta name="description" content="職業タイプ・年収・積立額から節税活用スコアを即診断。NISA・iDeCo・課税口座・最適コンビの4シナリオ比較と最適配分提案つき。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="NISA・iDeCo 節税診断｜ライフアセットオフィス">
 <meta property="og:description" content="節税活用スコアで現状を可視化。4口座シナリオ比較・iDeCo上限自動計算・最適配分アドバイス。">
@@ -289,7 +289,7 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
       <div class="panel-sub">職業タイプ（iDeCo上限が変わります）</div>
       <div class="emp-row">
         <button class="emp-btn on" id="emp-employee" onclick="setEmp('employee')">会社員<br><small style="font-weight:400">企業年金なし</small></button>
-        <button class="emp-btn" id="emp-gov" onclick="setEmp('gov')">公務員<br><small style="font-weight:400">確定給付年金あり</small></button>
+        <button class="emp-btn" id="emp-gov" onclick="setEmp('gov')">公務員<br><small style="font-weight:400">月2万円（2024年12月改正）</small></button>
         <button class="emp-btn" id="emp-self" onclick="setEmp('self')">自営業<br><small style="font-weight:400">国民年金</small></button>
         <button class="emp-btn" id="emp-spouse" onclick="setEmp('spouse')">専業主婦(夫)<br><small style="font-weight:400">第3号被保険者</small></button>
       </div>
@@ -493,8 +493,8 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
 // ─── State ───────────────────────────────
 var sliders = { income:500, monthly:3, years:20, rate:5 };
 var currentEmp = 'employee';
-var IDECO_MAX = { employee:2.3, gov:1.2, self:6.8, spouse:2.3 };
-var IDECO_ANNUAL = { employee:27.6, gov:14.4, self:81.6, spouse:27.6 };
+var IDECO_MAX = { employee:2.3, gov:2.0, self:6.8, spouse:2.3 }; // gov: 2024年12月改正で月2.0万円
+var IDECO_ANNUAL = { employee:27.6, gov:24.0, self:81.6, spouse:27.6 };
 var compChart = null;
 
 // ─── Helpers ────────────────────────────
@@ -522,12 +522,30 @@ function sync(k,v) {
   document.getElementById('lbl-'+k).textContent=labelOf(k,v);
 }
 function marginalTax(inc) {
-  if(inc<195) return 0.05;
-  if(inc<330) return 0.10;
-  if(inc<695) return 0.20;
-  if(inc<900) return 0.23;
-  if(inc<1800) return 0.33;
-  return 0.40;
+  // 年収（万円）→ 概算課税所得（給与所得控除・社保15%・基礎控除を差引）→ 限界税率
+  var incYen = inc*10000;
+  var salDed;
+  if(incYen<=1900000) salDed=650000;
+  else if(incYen<=3600000) salDed=incYen*0.3+80000;
+  else if(incYen<=6600000) salDed=incYen*0.2+440000;
+  else if(incYen<=8500000) salDed=incYen*0.1+1100000;
+  else salDed=1950000;
+  var gs=Math.max(0,incYen-salDed);
+  var basic;
+  if(gs<=1320000) basic=950000;
+  else if(gs<=3360000) basic=880000;
+  else if(gs<=4890000) basic=680000;
+  else if(gs<=6550000) basic=630000;
+  else if(gs<=23500000) basic=580000;
+  else basic=0;
+  var taxable=Math.max(0,gs-incYen*0.15-basic);
+  if(taxable<=1950000) return 0.05;
+  if(taxable<=3300000) return 0.10;
+  if(taxable<=6950000) return 0.20;
+  if(taxable<=9000000) return 0.23;
+  if(taxable<=18000000) return 0.33;
+  if(taxable<=40000000) return 0.40;
+  return 0.45;
 }
 function effectiveTax(inc) { return marginalTax(inc)+0.10; } // +住民税10%
 
@@ -804,7 +822,7 @@ function loadFromUrl(){
   Object.keys(map).forEach(function(k){
     if(p.has(k)){var key=map[k];sliders[key]=parseFloat(p.get(k));var sl=document.getElementById('sl-'+key);if(sl)sl.value=p.get(k);document.getElementById('lbl-'+key).textContent=labelOf(key,p.get(k));any=true;}
   });
-  if(p.has('emp')) setEmp(p.get('emp'));
+  if(p.has('emp') && IDECO_MAX.hasOwnProperty(p.get('emp'))) setEmp(p.get('emp'));
   return any;
 }
 function copySimUrl(){

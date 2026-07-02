@@ -460,41 +460,69 @@ function setChildAge(idx, ageKey) {
   updateUrl();
 }
 
-// 控除上限計算（総務省モデル・2020年改正税法準拠）
+// 控除上限計算（総務省モデル準拠・2026年適用の税制を反映）
+// 上限 = 住民税所得割 × 20% ÷ (90% − 所得税率 × 1.021) + 2,000円
 function calcLimit(inc, fam, hl) {
-  var deduction = personalDeduction(inc);
-  var familyDed = familyDeduction(fam);
-  var taxableIncome = inc * 10000 - deduction - familyDed;
-  if (taxableIncome < 0) taxableIncome = 0;
-  var incomeTaxRate = getTaxRate(taxableIncome);
-  var localTaxRate = 0.10;
-  var limit = taxableIncome * localTaxRate * 0.2 / (1 - incomeTaxRate * 1.021 - localTaxRate * 0.2);
-  // 住宅ローン控除による圧縮（hl は万円単位、円に換算して差引）
-  limit = Math.max(0, limit - hl * 10000 * 0.2);
+  var incYen = inc * 10000;
+  var salDed = personalDeduction(inc);
+  var gs = Math.max(0, incYen - salDed);   // 給与所得（合計所得）
+  var si = incYen * 0.15;                  // 社会保険料（総務省モデル: 収入の15%）
+  // 住民税の課税所得（基礎控除43万・配偶者33万・扶養33万/特定45万）
+  var taxableR = Math.max(0, gs - si - residentDeduction(fam));
+  var shotokuwari = taxableR * 0.10;       // 住民税所得割
+  // 所得税の限界税率（2025年改正後の基礎控除・課税所得ベースで判定）
+  var taxableI = Math.max(0, gs - si - incomeDeduction(fam, gs));
+  var t = getTaxRate(taxableI);
+  var limit = shotokuwari * 0.2 / (0.9 - t * 1.021) + 2000;
+  // 住宅ローン控除: ワンストップ特例利用時は上限に影響しない（確定申告時も影響は限定的）
   // 1,000円単位で丸める
   return Math.round(limit / 1000) * 1000;
 }
 function personalDeduction(inc) {
-  // 2020年改正後の給与所得控除（最低55万円）
-  if (inc <= 162.5) return 550000;
-  if (inc <= 180)   return inc * 10000 * 0.4 - 100000;
+  // 2025年改正後の給与所得控除（最低65万円）
+  if (inc <= 190)   return 650000;
   if (inc <= 360)   return inc * 10000 * 0.3 + 80000;
   if (inc <= 660)   return inc * 10000 * 0.2 + 440000;
   if (inc <= 850)   return inc * 10000 * 0.1 + 1100000;
   return 1950000;
 }
+function basicDeduction(gs) {
+  // 2025年改正後の所得税基礎控除（2025・2026年分の上乗せ込み・合計所得で判定）
+  if (gs <= 1320000)  return 950000;
+  if (gs <= 3360000)  return 880000;
+  if (gs <= 4890000)  return 680000;
+  if (gs <= 6550000)  return 630000;
+  if (gs <= 23500000) return 580000;
+  return 0;
+}
 function childDed(ageKey) {
+  // 所得税の扶養控除
   if (ageKey === 'high')    return 380000; // 一般扶養控除
   if (ageKey === 'college') return 630000; // 特定扶養控除（19〜22歳）
   if (ageKey === 'adult')   return 380000; // 一般扶養控除
   return 0; // 0〜15歳：年少扶養控除なし（2011年廃止）
 }
-function familyDeduction(fam) {
-  var base = 480000; // 基礎控除
-  var spouseDed = (fam !== 'single') ? 380000 : 0; // 配偶者控除
+function childDedR(ageKey) {
+  // 住民税の扶養控除
+  if (ageKey === 'high')    return 330000;
+  if (ageKey === 'college') return 450000; // 特定扶養
+  if (ageKey === 'adult')   return 330000;
+  return 0;
+}
+function incomeDeduction(fam, gs) {
+  var base = basicDeduction(gs);
+  var spouseDed = (fam !== 'single') ? 380000 : 0;
   var numChildren = fam === 'c1' ? 1 : fam === 'c2' ? 2 : fam === 'c3' ? 3 : 0;
   var kids = 0;
   for (var i = 0; i < numChildren; i++) kids += childDed(childAges[i]);
+  return base + spouseDed + kids;
+}
+function residentDeduction(fam) {
+  var base = 430000; // 住民税の基礎控除（2026年も据え置き）
+  var spouseDed = (fam !== 'single') ? 330000 : 0;
+  var numChildren = fam === 'c1' ? 1 : fam === 'c2' ? 2 : fam === 'c3' ? 3 : 0;
+  var kids = 0;
+  for (var i = 0; i < numChildren; i++) kids += childDedR(childAges[i]);
   return base + spouseDed + kids;
 }
 function getTaxRate(taxable) {
@@ -503,13 +531,21 @@ function getTaxRate(taxable) {
   if (taxable <= 6950000) return 0.20;
   if (taxable <= 9000000) return 0.23;
   if (taxable <= 18000000) return 0.33;
-  return 0.40;
+  if (taxable <= 40000000) return 0.40;
+  return 0.45;
+}
+function getMarginalRate(inc, fam) {
+  var incYen = inc * 10000;
+  var gs = Math.max(0, incYen - personalDeduction(inc));
+  var si = incYen * 0.15;
+  return getTaxRate(Math.max(0, gs - si - incomeDeduction(fam, gs)));
 }
 
 function calc() {
   var limit = calcLimit(income, family, hloan);
-  var incomeTaxRefund = Math.round(limit * 0.10);
-  var localTaxDed = Math.round(limit * 0.88);
+  var mRate = getMarginalRate(income, family);
+  var incomeTaxRefund = Math.round((limit - 2000) * mRate * 1.021);
+  var localTaxDed = Math.max(0, (limit - 2000) - incomeTaxRefund);
   var benefit = Math.round(limit * 0.30);
 
   document.getElementById('result-amount').textContent = limit.toLocaleString()+'円';

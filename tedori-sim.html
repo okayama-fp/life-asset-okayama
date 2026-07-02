@@ -10,7 +10,7 @@
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/tedori-sim.html">
 <title>手取り計算シミュレーター｜額面年収から手取りを瞬時に計算｜ライフアセットオフィス</title>
-<meta name="description" content="額面年収・年齢・扶養家族を入力するだけ。社会保険料・所得税・住民税を概算し、手取り年収・手取り月収をリアルタイム計算。年収帯別の手取り早見表つき。。">
+<meta name="description" content="額面年収・年齢・扶養家族を入力するだけ。社会保険料・所得税・住民税を概算し、手取り年収・手取り月収をリアルタイム計算。年収帯別の手取り早見表つき。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="手取り計算シミュレーター｜額面年収から手取りを瞬時に計算">
 <meta property="og:description" content="スライダーを動かすだけで手取り年収・月収を即計算。社会保険料・税金の内訳も可視化。">
@@ -282,7 +282,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
         <div class="seg-note">40歳以上は介護保険料（約0.8%）が加算されます</div>
       </div>
       <div class="field">
-        <div class="field-label">扶養家族数（配偶者・子など）<span class="field-val" id="lbl-dep">0人</span></div>
+        <div class="field-label">税法上の扶養親族数（16歳以上。16歳未満のお子さまは含めません）<span class="field-val" id="lbl-dep">0人</span></div>
         <input type="range" id="sl-dep" min="0" max="5" step="1" value="0" oninput="syncLabel('dep',this.value);calc()">
         <div class="field-ticks"><span>0人</span><span>2〜3人</span><span>5人</span></div>
         <div class="seg-note">概算として1人あたり扶養控除38万円（住民税33万円）で計算</div>
@@ -418,9 +418,8 @@ var state = { income: 500, over40: 0, dep: 0, bonus: 1 };
            → 累進税率5〜45% → ×1.021（復興特別所得税）
    住民税: 基礎控除43万・扶養控除33万/人 → 所得割10% ＋ 均等割約5,000円 */
 
-function salaryDeduction(inc) { // 給与所得控除（円）
-  if (inc <= 1625000) return 550000;
-  if (inc <= 1800000) return inc * 0.4 - 100000;
+function salaryDeduction(inc) { // 給与所得控除（円・2025年改正後: 最低65万円）
+  if (inc <= 1900000) return 650000;
   if (inc <= 3600000) return inc * 0.3 + 80000;
   if (inc <= 6600000) return inc * 0.2 + 440000;
   if (inc <= 8500000) return inc * 0.1 + 1100000;
@@ -451,12 +450,20 @@ function socialInsurance(gross, over40, hasBonus) { // 円
   var emp     = gross * 0.0055;
   return Math.round(pension + health + care + emp);
 }
+function basicDeduction(gs) { // 所得税の基礎控除（2025年改正・2025/26年分の上乗せ込み・合計所得で判定）
+  if (gs <= 1320000)  return 950000;
+  if (gs <= 3360000)  return 880000;
+  if (gs <= 4890000)  return 680000;
+  if (gs <= 6550000)  return 630000;
+  if (gs <= 23500000) return 580000;
+  return 0;
+}
 function calcNet(incomeMan, over40, dep, hasBonus) {
   var gross = incomeMan * 10000;
   var si = socialInsurance(gross, over40, hasBonus);
   var salDed = salaryDeduction(gross);
   // 所得税
-  var taxableI = Math.max(gross - salDed - 480000 - si - 380000 * dep, 0);
+  var taxableI = Math.max(gross - salDed - basicDeduction(gross - salDed) - si - 380000 * dep, 0);
   taxableI = Math.floor(taxableI / 1000) * 1000; // 千円未満切捨て
   var incomeTax = Math.round(progressiveTax(taxableI) * 1.021);
   // 住民税
