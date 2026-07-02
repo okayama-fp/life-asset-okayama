@@ -561,8 +561,25 @@ function getHyojunHoshu(g) {
 }
 function getHyojunBonus(b){return Math.min(b,150);}
 
-function calcShotokuZei(taxM,dep){
-  const a=taxM*12,k=48,dk=dep*38,inc=Math.max(0,a-k-dk);
+function kyuyoKojoIns(annualMan){ // 給与所得控除（万円・2025年改正後: 最低65万）
+  if(annualMan<=190)return 65;
+  if(annualMan<=360)return annualMan*0.3+8;
+  if(annualMan<=660)return annualMan*0.2+44;
+  if(annualMan<=850)return annualMan*0.1+110;
+  return 195;
+}
+function kisoKojoIns(gsMan){ // 所得税基礎控除（2025年改正・2025/26年分上乗せ込み）
+  if(gsMan<=132)return 95;
+  if(gsMan<=336)return 88;
+  if(gsMan<=489)return 68;
+  if(gsMan<=655)return 63;
+  if(gsMan<=2350)return 58;
+  return 0;
+}
+function calcShotokuZei(gm,shakaiM,dep,isSalary){
+  const annual=gm*12;
+  const gs=isSalary?Math.max(0,annual-kyuyoKojoIns(annual)):annual;
+  const inc=Math.max(0,gs-shakaiM*12-kisoKojoIns(gs)-dep*38);
   let tax=0;
   if(inc<=0)tax=0;
   else if(inc<=195)tax=inc*0.05;
@@ -574,8 +591,10 @@ function calcShotokuZei(taxM,dep){
   else tax=1320.40+(inc-4000)*0.45;
   return Math.round(tax*1.021/12*10)/10;
 }
-function calcJuminZei(taxM,dep){
-  const a=taxM*12,k=43,dk=dep*33,inc=Math.max(0,a-k-dk);
+function calcJuminZei(gm,shakaiM,dep,isSalary){
+  const annual=gm*12;
+  const gs=isSalary?Math.max(0,annual-kyuyoKojoIns(annual)):annual;
+  const inc=Math.max(0,gs-shakaiM*12-43-dep*33);
   return Math.round(Math.max(0,inc*0.10+0.5)/12*10)/10;
 }
 function calcKokuho(annual,dep){
@@ -598,9 +617,9 @@ function calcTedoriDetail(gm,bonusAnnual,employ,depend,age40plus=false){
   const kaigo_m=age40plus?Math.round(hyojunM*rates.kaigo*10)/10:0;
   const kokuho_m=employ==='freelance'?calcKokuho(annualGross,depend):0;
   const shakai_m=kenpo_m+kousei_m+koyo_m+kaigo_m+kokuho_m;
-  const taxableM=Math.max(0,gm-shakai_m);
-  const shotoku_m=employ==='part'?0:calcShotokuZei(taxableM,depend);
-  const jumin_m=employ==='part'?0:calcJuminZei(taxableM,depend);
+  const isSalaryEmp=(employ!=='freelance');
+  const shotoku_m=employ==='part'?0:calcShotokuZei(gm,shakai_m,depend,isSalaryEmp);
+  const jumin_m=employ==='part'?0:calcJuminZei(gm,shakai_m,depend,isSalaryEmp);
   const tax_m=shotoku_m+jumin_m;
   const tedori_m=Math.round((gm-shakai_m-tax_m)*10)/10;
   const rate_m=Math.round(tedori_m/gm*1000)/10;
