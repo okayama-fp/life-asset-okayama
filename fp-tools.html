@@ -8,7 +8,10 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;">
-  <title>FPツール集｜ライフアセットオフィス</title>
+  <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/fp-tools.html">
+<meta name="robots" content="noindex">
+<title>FPツール集｜ライフアセットオフィス</title>
   <meta name="description" content="家計診断・老後資金・NISA複利・相続税・保険診断・FP用語辞典。ライフアセットオフィスのFPツール集。">
   <!-- OGP -->
   <meta property="og:type" content="website">
@@ -44,9 +47,9 @@
     .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
     .logo-main{font-size:20px;font-weight:900;background:linear-gradient(90deg,#1a7a4a,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .logo-text .tagline{font-size:10px;color:var(--text-sub);}
-    nav{display:flex;align-items:center;gap:20px;}
-    nav a{font-size:13px;color:var(--text-sub);font-weight:500;transition:color .2s;}
-    nav a:hover,nav a.active{color:var(--sky);}
+    .topnav{display:flex;align-items:center;gap:20px;}
+    .topnav a{font-size:13px;color:var(--text-sub);font-weight:500;transition:color .2s;}
+    .topnav a:hover,.topnav a.active{color:var(--sky);}
     .btn-cta{display:inline-flex;align-items:center;gap:6px;background:var(--sky);color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:50px;flex-shrink:0;box-shadow:0 4px 14px rgba(26,122,74,.3);}
     /* Hero */
     .page-hero{background:linear-gradient(135deg,#b8e4f9 0%,#f0fdf4 50%,#f4fbff 100%);padding:48px 24px 40px;text-align:center;}
@@ -59,7 +62,7 @@
     .breadcrumb span{opacity:.5;}
     /* Main layout */
     .main-wrap{max-width:960px;margin:0 auto;padding:0 20px 80px;}
-    /* Tab nav */
+    /* Tab .topnav */
     .tab-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-bottom:24px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:8px;}
     .tab-nav::-webkit-scrollbar{display:none;}
     .tab-btn{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:10px 16px;border-radius:10px;border:none;background:transparent;font-size:13px;font-weight:700;color:var(--text-sub);cursor:pointer;transition:all .2s;white-space:nowrap;}
@@ -162,7 +165,7 @@
     .risk-needle{position:absolute;top:-4px;width:24px;height:24px;background:#fff;border:3px solid var(--navy);border-radius:50%;transform:translateX(-50%);transition:left .6s ease;}
     /* ===== MOBILE 768px ===== */
     @media(max-width:768px){
-      nav{display:none;}
+      .topnav{display:none;}
       .header-inner{padding:0 16px;height:56px;}
       .logo-main{font-size:18px;}
       .logo-text .tagline{display:none;}
@@ -242,7 +245,7 @@
 <header>
   <div class="header-inner">
     <a href="/" class="logo"><div class="logo-text"><div class="logo-main">Life Asset</div><div class="tagline">ライフアセットオフィス</div></div></a>
-    <nav>
+    <nav class="topnav">
       <a href="/">ホーム</a>
       <a href="/blog/">ブログ</a>
       <span style="color:#999;cursor:default;">採用情報</span>
