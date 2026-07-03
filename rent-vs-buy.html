@@ -460,8 +460,9 @@ footer a{color:var(--green-light);text-decoration:underline}
             <div class="fnote warn">⚠️ 本来は借主・貸主合計1ヶ月分（宅建業法46条）。借主から1ヶ月取るには借主の<strong>承諾が必要</strong>。交渉できます。</div>
           </div>
           <div class="field">
-            <label>敷金</label>
+            <label>敷金 <span class="lhint">退去時に返還</span></label>
             <div class="irow"><input type="number" id="shikikin" value="1" min="0" max="3" step="0.5"><span class="unit">ヶ月分</span></div>
+            <div class="fnote">敷金は原則退去時に返還されるため、総コスト比較には含めていません（クリーニング代等の実費を除く）。</div>
             <div class="fnote">退去時に原状回復費用を差引いた残額が返金されます（本シミュレーターでは全額返金と想定）。</div>
           </div>
         </div>
@@ -836,7 +837,7 @@ function calcAll(){
     /* 住宅ローン控除 */
     let deduct=0;
     if(useDeduction && y<=13 && principal>0){
-      const bal=balance(principal,rate,loanYrs,(y-1)*12);
+      const bal=balance(principal,rate,loanYrs,y*12); // 年末残高
       deduct=Math.min(bal*0.007,210000);
     }
 
