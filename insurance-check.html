@@ -616,7 +616,9 @@ function calcTedoriDetail(gm,bonusAnnual,employ,depend,age40plus=false){
   const koyo_m=Math.round(gm*rates.koyo*10)/10;
   const kaigo_m=age40plus?Math.round(hyojunM*rates.kaigo*10)/10:0;
   const kokuho_m=employ==='freelance'?calcKokuho(annualGross,depend):0;
-  const shakai_m=kenpo_m+kousei_m+koyo_m+kaigo_m+kokuho_m;
+  // フリーランスは国民年金保険料も負担（2026年度 月17,920円＝月1.792万円）
+  const kokumin_m=employ==='freelance'?1.792:0;
+  const shakai_m=kenpo_m+kousei_m+koyo_m+kaigo_m+kokuho_m+kokumin_m;
   const isSalaryEmp=(employ!=='freelance');
   const shotoku_m=employ==='part'?0:calcShotokuZei(gm,shakai_m,depend,isSalaryEmp);
   const jumin_m=employ==='part'?0:calcJuminZei(gm,shakai_m,depend,isSalaryEmp);
@@ -762,8 +764,8 @@ function calcInsurance(){
   let izokuAnnual=0,izokuText='対象外';
   const hasKid=family==='child_small'||family==='child_big'||family==='alone';
   if(hasKid){
-    if(isEmp){const kosei=Math.round(hyojunM*12*25*5.481/1000*0.75);const kiso=102;izokuAnnual=kosei+kiso;izokuText=`年約${izokuAnnual}万円（月換算 約${Math.round(izokuAnnual/12*10)/10}万円）※非課税`;}
-    else{izokuAnnual=102;izokuText='年約102万円（月換算 約8.5万円）遺族基礎年金のみ・非課税';}
+    if(isEmp){const kosei=Math.round(hyojunM*12*25*5.481/1000*0.75);const kiso=107;izokuAnnual=kosei+kiso;izokuText=`年約${izokuAnnual}万円（月換算 約${Math.round(izokuAnnual/12*10)/10}万円）※子1人前提・非課税。子が増えると加算あり`;}
+    else{izokuAnnual=107;izokuText='年約107万円（月換算 約8.9万円）遺族基礎年金のみ（子1人前提・2025年度）・非課税';}
   }else if(family==='couple'){
     if(isEmp){const kosei=Math.round(hyojunM*12*25*5.481/1000*0.75);izokuAnnual=kosei;izokuText=kosei>0?`年約${kosei}万円（月換算 約${Math.round(kosei/12*10)/10}万円）遺族厚生のみ・非課税`:'少額';}
     else{izokuText='遺族基礎年金なし（子なし）';}

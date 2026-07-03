@@ -1251,7 +1251,17 @@ function _generatePlan(){
     if(selfAge===retireSelf)lumpIncome+=retirePay;
     if(hasSpouse&&spouseAge===retireSpouse)lumpIncome+=retirePaySpouse;
     if(selfAge===inheritanceAge)lumpIncome+=inheritance;
-    const totalIncome=incSelf+incSpouse+lumpIncome;
+    // 児童手当（2024年10月改正・所得制限なし・高校生年代まで）
+    let childAllowance=0;
+    children.forEach((c,ci)=>{
+      const childNow=c.age+y;
+      if(childNow>=0&&childNow<=18){
+        if(ci>=2)childAllowance+=36; // 第3子以降 月3万
+        else if(childNow<3)childAllowance+=18; // 3歳未満 月1.5万
+        else childAllowance+=12; // 3歳〜高校生年代 月1万
+      }
+    });
+    const totalIncome=incSelf+incSpouse+lumpIncome+childAllowance;
 
     const inflFactor=Math.pow(1+inflation/100,y);
     let baseLiving=(selfAge>=retireSelf?livingCostRetire:livingCost)*12*inflFactor;
@@ -1277,14 +1287,17 @@ function _generatePlan(){
     let reformExp=0;
     if(selfAge===reformAge)reformExp=reformCost;
     const leisure=selfAge<75?leisureCost:0;
-    const nisaContrib=y<30?nisaMonthly*12:0;
+    const nisaContribRaw=y<30?nisaMonthly*12:0;
+    const nisaContrib=Math.max(0,Math.min(nisaContribRaw,1800-nisaContribCum));
+    nisaContribCum+=nisaContrib;
     const idecoContrib=selfAge<60?idecoMonthly*12:0;
     const investContrib=nisaContrib+idecoContrib;
     const totalExpense=baseLiving+loanExp+rentExp+eduExp+carExp+reformExp+leisure;
     const cf=totalIncome-totalExpense-investContrib;
 
     const _rn=nisaRate/100/12,_Rn=Math.pow(1+_rn,12);
-    nisaAsset=y<30?nisaAsset*_Rn+(_rn===0?nisaMonthly*12:nisaMonthly*(_Rn-1)/_rn):nisaAsset*_Rn;
+    const nisaMonthlyEff=nisaContrib/12;
+    nisaAsset=nisaContrib>0?nisaAsset*_Rn+(_rn===0?nisaContrib:nisaMonthlyEff*(_Rn-1)/_rn):nisaAsset*_Rn;
     const _ri=idecoRate/100/12,_Ri=Math.pow(1+_ri,12);
     idecoAsset=selfAge<60?idecoAsset*_Ri+(_ri===0?idecoMonthly*12:idecoMonthly*(_Ri-1)/_ri):idecoAsset*(1+idecoRate/100);
     investAsset=investAsset*(1+investRate/100)+investAnnual;
