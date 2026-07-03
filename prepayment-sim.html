@@ -10,7 +10,7 @@
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/prepayment-sim.html">
 <title>繰り上げ返済シミュレーター｜期間短縮型vs返済額軽減型を徹底比較｜ライフアセットオフィス</title>
-<meta name="description" content="住宅ローンの繰り上げ返済を徹底比較。期間短縮型と返済額軽減型の利息削減額・残り返済期間・月返済額をリアルタイムで計算。。">
+<meta name="description" content="住宅ローンの繰り上げ返済を徹底比較。期間短縮型と返済額軽減型の利息削減額・残り返済期間・月返済額をリアルタイムで計算。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="繰り上げ返済シミュレーター｜期間短縮型vs返済額軽減型を徹底比較">
 <meta property="og:description" content="スライダーを動かすだけで繰り上げ返済の効果を即計算。期間短縮型と返済額軽減型の利息削減額を比較できます。">
@@ -491,7 +491,25 @@ function calc() {
   } else {
     shortMonths = remainingMonths(newBalance, rate, m0);
   }
-  var shortInterest = newBalance <= 0 ? 0 : (m0 * shortMonths - newBalance);
+  // 最終月は端数返済（満額としないことで利息の過大計上を回避）
+  var shortInterest;
+  if (newBalance <= 0) {
+    shortInterest = 0;
+  } else if (rate === 0) {
+    shortInterest = 0;
+  } else {
+    var rM = rate / 100 / 12;
+    var bal = newBalance;
+    var paid = 0;
+    for (var _i = 0; _i < shortMonths; _i++) {
+      var intM = bal * rM;
+      var principalM = Math.min(bal, m0 - intM);
+      paid += principalM + intM;
+      bal -= principalM;
+      if (bal <= 0) break;
+    }
+    shortInterest = paid - newBalance;
+  }
   var shortTotal    = prepayYen + m0 * shortMonths; // 繰り上げ額 + 残り返済
   var shortInterestSave = interest0 - shortInterest;
   var shortPeriodSave   = months - shortMonths; // 短縮月数

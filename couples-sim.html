@@ -581,7 +581,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
           <div class="fp-box-icon">🤱</div>
           <div class="fp-box-title">育休中に折れない家計設計</div>
           <div class="fp-box-body">
-            育休給付金は賃金の<strong>最初の180日間は67%、以降50%</strong>。収入が半減しても生活できる固定費水準が重要。<br><br>
+            育休給付金は賃金（賞与除く）の<strong>最初の180日間は67%、以降50%</strong>。ただし非課税・社会保険料免除のため、手取りベースの実質は約8割・約6割になります。収入減に耐える固定費水準が重要。<br><br>
             <span class="tag-green">FP推奨</span> 育休前に固定費を収入の<strong>40%以内</strong>に抑えておく。収入比例分担なら育休中も負担が自動調整される。
           </div>
         </div>
@@ -1042,7 +1042,7 @@ function update(){
   }
   phases[1].actions.push({title:'共同口座（生活費用）を開設',body:'住信SBIネット銀行の「目的別口座」が最適。1つの口座の中に「生活費」「旅行」「車」など用途別に最大10個の仮想口座が無料で作れる。',service:'→ 目的別口座機能のあるネット銀行（各社・手数料無料）'});
   phases[2].actions.push({title:'家計管理アプリで全収支を見える化',body:'マネーフォワードMEで2人の銀行口座・クレカを全連携。「予算管理」機能で費目ごとの上限を設定すると自動でアラートが出る。',service:'→ マネーフォワードME プレミアム（月500円）'});
-  phases[2].actions.push({title:'iDeCoの資料請求（節税を今すぐ開始）',body:'会社員は月2.3万円まで全額所得控除。年収'+fmtMan(totalIncome*12)+'なら年間節税額'+fmtMan(Math.round(23000*12*0.2/10000))+'万円以上。開設に2〜3ヶ月かかるので今すぐ申し込む。',service:'→ iDeCo対応ネット証券（加入手数料・口座管理料は各社ご確認ください）'});
+  phases[2].actions.push({title:'iDeCoの資料請求（節税を今すぐ開始）',body:'会社員は月2.3万円まで全額所得控除。会社員1人あたり年間節税額'+fmtMan(Math.round(23000*12*idecoRate(v.hIncome*12+v.hBonus)/10000))+'万円ほど（所得税＋住民税）。開設に2〜3ヶ月かかるので今すぐ申し込む。',service:'→ iDeCo対応ネット証券（加入手数料・口座管理料は各社ご確認ください）'});
   phases[3].actions.push({title:'生活防衛資金'+fmtMan(Math.round(totalIncome*6))+'を専用口座に積立',body:'月収の6ヶ月分を「絶対に使わない口座」に確保。目標額は'+fmtMan(Math.round(totalIncome*6))+'。達成後は全額NISA・iDeCoへ。',service:'→ 金利の高いネット銀行普通預金を活用（各社金利は変動します）'});
   if(savingRate>=20){
     phases[3].actions.push({title:'資産配分（アセットアロケーション）を決める',body:'NISA（オルカン）＋iDeCo（外国株インデックス）＋現金（生活防衛資金）の3層で構成。株式比率＝100－年齢が目安。現在年齢ベースで株式'+Math.max(50,100-35)+'%が標準。',service:'→ 投信比較サイト「投信まとめ」で信託報酬を確認'});
@@ -1280,29 +1280,36 @@ function updateGoal(){
   // 育休シミュレーション
   var iH=v.hIncome+v.hBonus/12;
   var iW=v.wIncome+v.wBonus/12;
-  var rateFirst=0.67,rateAfter=0.5,breakMonth=6;
-  function ikuyuGivingMonthly(baseIncome,months){
-    var avg=(months<=breakMonth)?baseIncome*rateFirst:((baseIncome*rateFirst*breakMonth+baseIncome*rateAfter*(months-breakMonth))/months);
+  // 育児休業給付は「賞与を除く月給」ベース。非課税・社会保険料免除のため手取り比では実質約8割(180日まで)/約6割(以降)
+  // 支給上限は月額約31万円（万円=31）
+  var rateFirst=0.80,rateAfter=0.60,breakMonth=6,ikuyuCap=31;
+  // 給付の基礎は賞与を除いた月給（v.hIncome/v.wIncome）
+  function ikuyuGivingMonthly(baseMonthly,months){
+    var g1=Math.min(baseMonthly*rateFirst,ikuyuCap);
+    var g2=Math.min(baseMonthly*rateAfter,ikuyuCap);
+    var avg=(months<=breakMonth)?g1:((g1*breakMonth+g2*(months-breakMonth))/months);
     return avg;
   }
   var ikuyuLossPerMonth,ikuyuTotalLoss,ikuyuWorkerIncome;
   if(ikuyuWho==='w'){
     ikuyuWorkerIncome=iH;
-    var wGiving=ikuyuGivingMonthly(iW,ikuyuMonths);
+    var wGiving=ikuyuGivingMonthly(v.wIncome,ikuyuMonths);
     ikuyuLossPerMonth=iW-wGiving;
     ikuyuTotalLoss=ikuyuLossPerMonth*ikuyuMonths;
   } else if(ikuyuWho==='h'){
     ikuyuWorkerIncome=iW;
-    var hGiving=ikuyuGivingMonthly(iH,ikuyuMonths);
+    var hGiving=ikuyuGivingMonthly(v.hIncome,ikuyuMonths);
     ikuyuLossPerMonth=iH-hGiving;
     ikuyuTotalLoss=ikuyuLossPerMonth*ikuyuMonths;
   } else {
-    var wGivingB=ikuyuGivingMonthly(iW,ikuyuMonths);
-    var hGivingB=ikuyuGivingMonthly(iH,ikuyuMonths);
+    var wGivingB=ikuyuGivingMonthly(v.wIncome,ikuyuMonths);
+    var hGivingB=ikuyuGivingMonthly(v.hIncome,ikuyuMonths);
     ikuyuLossPerMonth=(iH-hGivingB)+(iW-wGivingB);
     ikuyuTotalLoss=ikuyuLossPerMonth*ikuyuMonths;
     ikuyuWorkerIncome=0;
   }
+  if(ikuyuLossPerMonth<0)ikuyuLossPerMonth=0;
+  if(ikuyuTotalLoss<0)ikuyuTotalLoss=0;
   var ikuyuNewIncome=totalIncome-ikuyuLossPerMonth;
   var ikuyuSaving=ikuyuNewIncome-totalExp;
   var ikuyuOk=ikuyuSaving>=0;
@@ -1392,15 +1399,15 @@ function updateGoal(){
   var fireHtml=rates.map(function(sc){
     var monthly=(monthlySaving+nisaMonthly)*10000;
     var r=sc.r/12;
-    var fireAge=99;
+    var fireYears=99;
     if(monthly>0){
       for(var mo=1;mo<=600;mo++){
         totalAssets=totalAssets*(1+r)+monthly;
-        if(totalAssets>=fireTarget*10000){fireAge=32+Math.floor(mo/12);break;}
+        if(totalAssets>=fireTarget*10000){fireYears=Math.floor(mo/12);break;}
       }
-    } else if(totalAssets>=fireTarget*10000){fireAge=32;}
+    } else if(totalAssets>=fireTarget*10000){fireYears=0;}
     totalAssets=curSaving*10000;
-    return '<div class="'+sc.cls+'"><div class="fire-scenario">'+sc.label+'</div><div class="fire-age">'+(fireAge>=99?'60歳超':fireAge+'歳')+'</div><div style="font-size:10px;color:'+(sc.cls.includes('best')?'rgba(255,255,255,.7)':'var(--gray)')+'">でFIRE可能</div></div>';
+    return '<div class="'+sc.cls+'"><div class="fire-scenario">'+sc.label+'</div><div class="fire-age">'+(fireYears>=99?'50年超':fireYears===0?'達成済み':fireYears+'年')+'</div><div style="font-size:10px;color:'+(sc.cls.includes('best')?'rgba(255,255,255,.7)':'var(--gray)')+'">'+(fireYears>=99?'':'積立開始から')+'でFIRE</div></div>';
   }).join('');
   var fireTarget万=Math.round(fireTarget/10000);
   var fireEl=document.getElementById('fire-grid');
@@ -1440,20 +1447,32 @@ function updateGoal(){
     '</div>';
   }
 
-  // ── iDeCo節税効果 ──
-  var totalIncome3=(v.hIncome+v.wIncome+(v.hBonus+v.wBonus)/12)*12;
-  var marginal=totalIncome3<200?0.05:totalIncome3<600?0.1:totalIncome3<1000?0.2:0.23;
+  // ── iDeCo節税効果（個人年収ベースの限界税率＋住民税10%）──
+  // 課税所得の概算＝額面×0.7（給与所得控除・社会保険料・基礎控除を差し引いた目安）
+  function idecoRate(annualMan){
+    // 課税所得＝額面−給与所得控除−社会保険料(15%)−基礎控除58万（万円）
+    var a=annualMan;
+    var salDed=a<=190?65:a<=360?a*0.3+8:a<=660?a*0.2+44:a<=850?a*0.1+110:195;
+    var taxable=Math.max(0,a-salDed-a*0.15-58);
+    var it=taxable<195?0.05:taxable<330?0.10:taxable<695?0.20:taxable<900?0.23:0.33;
+    return it+0.10; // ＋住民税10%
+  }
+  var hAnnual=v.hIncome*12+v.hBonus, wAnnual=v.wIncome*12+v.wBonus;
   var idecoAnnual=23000*12;
-  var idecoTaxYear=Math.round(idecoAnnual*marginal/10000);
-  var idecoTax30=idecoTaxYear*30;
+  var hIdecoTax=Math.round(idecoAnnual*idecoRate(hAnnual)/10000);
+  var wIdecoTax=v.wIncome>0?Math.round(idecoAnnual*idecoRate(wAnnual)/10000):0;
+  var idecoTaxYear=hIdecoTax; // 代表（1人・夫）
+  var marginal=idecoRate(hAnnual);
+  var idecoTaxBoth=hIdecoTax+wIdecoTax;
+  var idecoTax30=idecoTaxBoth*30;
   var idecoPrincipal=Math.round(idecoAnnual*30/10000);
   var idecoFV=Math.round((idecoAnnual*(Math.pow(1+0.05/12,360)-1)/(0.05/12))/10000);
   var idecoEl=document.getElementById('ideco-grid');
   if(idecoEl)idecoEl.innerHTML=
-    '<div class="ideco-box"><div class="ideco-label">年間節税額（2人）</div><div class="ideco-num">約'+fmtMan(idecoTaxYear*2)+'万円</div><div style="font-size:11px;color:var(--gray)">所得税率'+Math.round(marginal*100)+'%の場合</div></div>'+
-    '<div class="ideco-box"><div class="ideco-label">30年間の節税総額（2人）</div><div class="ideco-num">約'+fmtMan(idecoTax30*2)+'万円</div><div style="font-size:11px;color:var(--gray)">この分が追加資産に</div></div>'+
+    '<div class="ideco-box"><div class="ideco-label">年間節税額（2人）</div><div class="ideco-num">約'+fmtMan(idecoTaxBoth)+'万円</div><div style="font-size:11px;color:var(--gray)">所得税＋住民税の実効税率で試算</div></div>'+
+    '<div class="ideco-box"><div class="ideco-label">30年間の節税総額（2人）</div><div class="ideco-num">約'+fmtMan(idecoTax30)+'万円</div><div style="font-size:11px;color:var(--gray)">この分が追加資産に</div></div>'+
     '<div class="ideco-box"><div class="ideco-label">30年後の運用資産（1人）</div><div class="ideco-num">約'+fmtMan(idecoFV)+'万円</div><div style="font-size:11px;color:var(--gray)">元本'+fmtMan(idecoPrincipal)+'万 年利5%</div></div>'+
-    '<div class="ideco-box"><div class="ideco-label">実質コスト（節税考慮後）</div><div class="ideco-num">月'+fmtMan((23000-idecoTaxYear*10000/12)/10000)+'万</div><div style="font-size:11px;color:var(--gray)">節税で実質負担が軽くなる</div></div>';
+    '<div class="ideco-box"><div class="ideco-label">実質コスト（節税考慮後）</div><div class="ideco-num">月'+fmtMan((23000-hIdecoTax*10000/12)/10000)+'万</div><div style="font-size:11px;color:var(--gray)">節税で実質負担が軽くなる</div></div>';
 
   // ── 資産形成ロードマップ ──
   var bonusM3=(v.hBonus+v.wBonus)/12;

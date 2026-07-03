@@ -10,7 +10,7 @@
 <link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
 <link rel="canonical" href="https://lifeassetoffice.net/fire-sim.html">
 <title>FIRE達成 総合診断スコア｜ライフアセットオフィス</title>
-<meta name="description" content="現在の資産・収入・支出からFIRE達成スコアと達成年齢をリアルタイム診断。資産推移グラフと感度分析付き。。">
+<meta name="description" content="現在の資産・収入・支出からFIRE達成スコアと達成年齢をリアルタイム診断。資産推移グラフと感度分析付き。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="FIRE達成 総合診断スコア｜ライフアセットオフィス">
 <meta property="og:description" content="FIREスコアで進捗を可視化。達成年齢・貯蓄率・資産推移グラフ・感度分析を総合診断。">
@@ -363,7 +363,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
       </div>
 
       <div class="sensitivity-section">
-        <h3>利回り別 感度分析</h3>
+        <h3>利回り別 感度分析</h3><p style="font-size:11px;color:var(--text-light);margin:4px 0 0">※名目利回りからインフレ率を差し引いた実質利回りで計算しています</p>
         <table class="sens-table">
           <thead>
             <tr><th>利回り</th><th>FIRE達成年齢</th><th>あと何年</th><th>必要資産</th></tr>
@@ -523,7 +523,7 @@ function calc() {
 
   renderChart(age, assets, income, expense, realRate, result.target, result.age);
   updateFIREScore(savingRate, result, realRate);
-  renderSensitivity(age, assets, income, expense, fe, rate);
+  renderSensitivity(age, assets, income, expense, fe, rate, inf);
   updateAdvice(result, savingRate);
   updateUrlParams({age:sliders.age,ast:sliders.assets,inc:sliders.income,exp:sliders.expense,r:sliders.rate,fe:sliders['fire-expense'],inf:sliders.inf});
   if(typeof gtag==='function'){
@@ -574,12 +574,14 @@ function renderChart(age, assets, income, expense, rate, target, fireAge) {
   });
 }
 
-function renderSensitivity(age, assets, income, expense, fe, currentRate) {
+function renderSensitivity(age, assets, income, expense, fe, currentRate, inf) {
   var rates = [3, 5, 7];
   var tbody = document.getElementById('sens-body');
   var html = '';
   rates.forEach(function(r) {
-    var res = calcFIRE(age, assets, income, expense, r, fe);
+    // メイン結果と同じく実質利回り（名目−インフレ）で計算
+    var realR = Math.max(r - (inf||0), 0);
+    var res = calcFIRE(age, assets, income, expense, realR, fe);
     var hl = (Math.abs(r - currentRate) < 0.5) ? ' class="highlight"' : '';
     html += '<tr'+hl+'>';
     html += '<td>'+r+'%</td>';
