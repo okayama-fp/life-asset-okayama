@@ -332,7 +332,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
           <div class="result-row"><span class="result-k">運用益</span><span class="result-v gain" id="r-gain">―万円</span></div>
           <div class="result-row"><span class="result-k">運用益の割合</span><span class="result-v" id="r-ratio">―%</span></div>
           <div class="real-rate-row"><span class="result-k">実質利回り（インフレ調整後）</span><span class="real-rate-badge" id="r-real-rate">―%</span></div>
-          <div class="result-row"><span class="result-k">NISA非課税メリット（税20.315%分）</span><span class="result-v gain" id="r-nisa-benefit">―万円</span></div>
+          <div class="result-row"><span class="result-k">NISA非課税メリット（生涯枠1,800万円内・税20.315%分）</span><span class="result-v gain" id="r-nisa-benefit">―万円</span></div>
         </div>
       </div>
       <div class="chart-card">
@@ -465,7 +465,7 @@ function updateAdvice(totalMan, principalMan, gainMan, rate, years) {
   if (totalMan >= 10000) {
     cls = 'best';
     t = '🏆 1億円突破！資産形成の頂点に到達しています';
-    html = '<p>試算の結果、<strong>' + fmtOku(totalMan) + '</strong>（元本の<strong>' + mult.toFixed(1) + '倍</strong>）に達しています。このレベルになると資産保全と最適な出口戦略が重要です。</p><ul class="advice-steps"><li>資産の分散：国内株・外国株・債券・不動産（REIT）に分散してリスクを管理しましょう。</li><li>4%ルールを活用すれば年間<strong>' + Math.round(totalMan * 0.04).toLocaleString() + '万円</strong>を永続的に取り崩せます。</li><li>相続・贈与対策：1億円超の資産は相続税対策が必須。生前贈与・生命保険の活用を検討しましょう。</li><li>iDeCoの受け取り方・NISAの出口設計など、専門家と一緒に最適な戦略を立てましょう。</li></ul>';
+    html = '<p>試算の結果、<strong>' + fmtOku(totalMan) + '</strong>（元本の<strong>' + mult.toFixed(1) + '倍</strong>）に達しています。このレベルになると資産保全と最適な出口戦略が重要です。</p><ul class="advice-steps"><li>資産の分散：国内株・外国株・債券・不動産（REIT）に分散してリスクを管理しましょう。</li><li>4%ルールを活用すれば年間<strong>' + Math.round(totalMan * 0.04).toLocaleString() + '万円</strong>を約30年にわたり取り崩せる目安です（Trinity Study。市場環境により変動）。</li><li>相続・贈与対策：1億円超の資産は相続税対策が必須。生前贈与・生命保険の活用を検討しましょう。</li><li>iDeCoの受け取り方・NISAの出口設計など、専門家と一緒に最適な戦略を立てましょう。</li></ul>';
   } else if (ratio >= 55) {
     cls = 'good';
     t = '🎯 複利パワーが最大化しています（運用益 ' + ratio.toFixed(0) + '%）';
@@ -541,7 +541,9 @@ function calc() {
   document.getElementById('r-gain').textContent        = gainMan.toLocaleString()+'万円';
   document.getElementById('r-ratio').textContent       = (principalMan>0?Math.round(gainMan/totalMan*100):0)+'%';
   document.getElementById('r-real-rate').textContent   = realRate.toFixed(1)+'%（実質 '+ realTotalMan.toLocaleString()+'万円）';
-  document.getElementById('r-nisa-benefit').textContent = '約'+Math.round(Math.max(0,gainMan)*0.20315).toLocaleString()+'万円おトク';
+  var nisaFrac = principalMan>0 ? Math.min(principalMan,1800)/principalMan : 0;
+  var nisaBenefit = Math.round(Math.max(0,gainMan)*nisaFrac*0.20315);
+  document.getElementById('r-nisa-benefit').textContent = '約'+nisaBenefit.toLocaleString()+'万円おトク'+(principalMan>1800?'（生涯枠1,800万円内の元本分）':'');
   updateChart(initial, monthly, rate, years);
   updateAdvice(totalMan, principalMan, gainMan, rate, years);
   renderScenarios(initial, monthly, rate, years, inf);
@@ -804,7 +806,7 @@ function renderDrawdown(totalMan, rate) {
   var flat = totalMan/n;
   var f = function(v){ return v >= 1 ? (Math.round(v*10)/10).toFixed(1)+'万円' : Math.round(v*10000).toLocaleString()+'円'; };
   document.getElementById('drawdown').innerHTML =
-    '<div class="goal-stat"><div class="gs-label">4%ルール（資産を維持）</div><div class="gs-val">月' + f(rule4) + '</div><div class="gs-sub">年' + Math.round(totalMan*0.04).toLocaleString() + '万円・半永久的に取り崩し可</div></div>'
+    '<div class="goal-stat"><div class="gs-label">4%ルール（資産を維持）</div><div class="gs-val">月' + f(rule4) + '</div><div class="gs-sub">年' + Math.round(totalMan*0.04).toLocaleString() + '万円・約30年持続の目安（Trinity Study）</div></div>'
     + '<div class="goal-stat"><div class="gs-label">運用継続しながら30年取り崩し</div><div class="gs-val">月' + f(ann) + '</div><div class="gs-sub">利回り' + rate.toFixed(1) + '%を維持した場合</div></div>'
     + '<div class="goal-stat"><div class="gs-label">運用せず30年取り崩し</div><div class="gs-val">月' + f(flat) + '</div><div class="gs-sub">現金のまま均等に取り崩し</div></div>';
 }
