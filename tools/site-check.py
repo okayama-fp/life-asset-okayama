@@ -19,6 +19,12 @@ FORBIDDEN_WORDS = ["中立", "売り込みなし", "登録無料", "登録不要
 # チェック対象外（テンプレート・部品など）
 EXCLUDE_FILES = {"google3a26dd3b04d70cbf.html"}
 
+
+def is_excluded(name):
+    """Google Search Console 確認ファイル（google[token].html）等は検査対象外"""
+    import re as _re
+    return name in EXCLUDE_FILES or bool(_re.match(r"google[0-9a-f]+\.html$", name))
+
 issues = {"高": [], "中": [], "低": []}
 
 
@@ -44,7 +50,7 @@ def visible_text(html):
 def collect_html_files():
     files = []
     for p in sorted(ROOT.glob("*.html")):
-        if p.name not in EXCLUDE_FILES:
+        if not is_excluded(p.name):
             files.append(p)
     for p in sorted(ROOT.glob("blog/*.html")):
         files.append(p)
@@ -160,7 +166,7 @@ def check_sitemap():
     # 実ファイル → sitemap（ルート直下の公開HTMLのみ・noindexは除外）
     registered = set(locs)
     for p in sorted(ROOT.glob("*.html")):
-        if p.name in EXCLUDE_FILES or p.name == "404.html":
+        if is_excluded(p.name) or p.name == "404.html":
             continue
         try:
             head = p.read_text(encoding="utf-8")[:2000]
