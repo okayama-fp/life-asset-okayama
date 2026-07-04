@@ -225,6 +225,7 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
 </style>
 <script src="/js/cookie-consent.js"></script>
 <script src="/js/sim-tracker.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "NISAとiDeCoはどちらを優先すべきですか？", "acceptedAnswer": {"@type": "Answer", "text": "一般に、いつでも引き出せる柔軟性を重視するならNISA、所得控除による節税を最大化したいならiDeCoが向きます。多くの場合は両方を併用し、生活防衛資金を確保したうえで無理のない範囲で積み立てるのが基本です。"}}, {"@type": "Question", "name": "iDeCoの掛金の上限はいくらですか？", "acceptedAnswer": {"@type": "Answer", "text": "職業により異なります。会社員（企業年金なし）は月2.3万円、公務員・DB等併用者は月2万円（2024年12月改正後）、自営業者は月6.8万円が上限です。本シミュレーターで職業を選ぶと自動で上限を判定します。"}}, {"@type": "Question", "name": "NISAの非課税枠はどのくらいですか？", "acceptedAnswer": {"@type": "Answer", "text": "新NISAは年間の投資枠がつみたて投資枠120万円・成長投資枠240万円、生涯の非課税保有限度額が1,800万円（うち成長投資枠は1,200万円まで）です。この範囲の運用益が非課税になります。"}}, {"@type": "Question", "name": "シミュレーターの節税額はそのまま受け取れますか？", "acceptedAnswer": {"@type": "Answer", "text": "iDeCoの節税額は掛金が所得控除されることによる概算です。実際の節税額は所得や他の控除により変わります。また、iDeCoは受け取り時に課税される場合がある点にもご注意ください。"}}]}</script>
 </head>
 <body>
 <div id="pb"></div>
@@ -483,6 +484,21 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
 <div style="max-width:960px;margin:0 auto 20px;padding:0 20px">
   <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。最終的な判断はご自身の責任で行ってください。</div>
 </div>
+
+<section style="max-width:920px;margin:0 auto 40px;padding:0 20px;font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1e293b;line-height:1.95">
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:28px 30px">
+    <h2 style="font-size:20px;font-weight:900;color:#1a3d2b;margin:0 0 16px;border-left:5px solid #1a7a4a;padding-left:14px">NISA・iDeCo 節税シミュレーターでできること</h2>
+    <p style="font-size:14.5px;margin:0 0 22px">職業・年収・積立額を入力すると、NISA・iDeCo・課税口座・両者の併用を比較し、将来の資産額と節税効果を試算できます。「どの制度をどう使えば有利か」を数字で確認できます。</p>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 10px">計算のしくみ・使い方</h3>
+    <div style="font-size:14px;margin:0 0 22px">月々の積立額を複利で運用した将来価値を計算し、NISAの非課税メリットとiDeCoの所得控除による節税額を反映して比較します。年収から概算した課税所得をもとに限界税率を判定し、所得税＋住民税の節税額を算出しています。</div>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 10px">利用時の注意点</h3>
+    <div style="font-size:14px;margin:0 0 26px">運用利回りは一定と仮定した概算で、実際の投資成果は変動します。iDeCoは原則60歳まで引き出せず、受け取り時の課税も考慮が必要です。生涯投資枠や受取時課税の詳細は各金融機関・公式サイトでご確認ください。</div>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 12px">よくある質問（FAQ）</h3>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. NISAとiDeCoはどちらを優先すべきですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 一般に、いつでも引き出せる柔軟性を重視するならNISA、所得控除による節税を最大化したいならiDeCoが向きます。多くの場合は両方を併用し、生活防衛資金を確保したうえで無理のない範囲で積み立てるのが基本です。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. iDeCoの掛金の上限はいくらですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 職業により異なります。会社員（企業年金なし）は月2.3万円、公務員・DB等併用者は月2万円（2024年12月改正後）、自営業者は月6.8万円が上限です。本シミュレーターで職業を選ぶと自動で上限を判定します。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. NISAの非課税枠はどのくらいですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 新NISAは年間の投資枠がつみたて投資枠120万円・成長投資枠240万円、生涯の非課税保有限度額が1,800万円（うち成長投資枠は1,200万円まで）です。この範囲の運用益が非課税になります。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. シミュレーターの節税額はそのまま受け取れますか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. iDeCoの節税額は掛金が所得控除されることによる概算です。実際の節税額は所得や他の控除により変わります。また、iDeCoは受け取り時に課税される場合がある点にもご注意ください。</div></div>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:24px 0 10px">関連シミュレーター</h3>
+    <div><a href="/asset-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">将来資産シミュレーター →</a><a href="/fire-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">FIRE計算シミュレーター →</a><a href="/furusato-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">ふるさと納税シミュレーター →</a></div>
+  </div>
+</section>
 <footer>
   <div class="footer-logo">ライフアセットオフィス</div>
   <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
