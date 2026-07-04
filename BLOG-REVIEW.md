@@ -87,6 +87,12 @@
 - post-556/557 が旧テンプレート系デザイン → 規約（blog-mie-shouninyokkyuu準拠）との整合確認
 - blog-insurance-guide「絶対に勝てません」等の断定表現の緩和
 
+## 新規記事（公開前セルフレビュー済み）
+
+| 記事 | 評価 | セルフレビュー結果 |
+|------|------|----------|
+| blog-souzoku-kiso（相続税はいくらから）2026-07-02公開 | A | 事実の正確性: 基礎控除・速算表・配偶者軽減1.6億・2024年改正の生前贈与7年ルール・相続時精算課税110万控除をすべて確認。試算例（6,000万→子166万・1億→子315万・4,000万→非課税）はPythonで検算済み。導線: souzoku-sim へのCTA＋関連記事3本。禁止ワードなし・必須要素すべて充足 |
+
 ## 優良記事（A評価・模範）
 
 blog-insurance-guide／blog-lifeplan-merits（出典明記の模範）／blog-mie-shouninyokkyuu（テンプレ基準記事）／post-411／post-417／post-459／post-477／post-546／post-551／post-555／post-556／post-557
