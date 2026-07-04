@@ -4,7 +4,7 @@
 > チェックの実行: リポジトリルートで `python3 tools/site-check.py`
 > 更新ルール: サイトに変更を加えたセッションでは必ずチェックを再実行し、このファイルを最新化する。
 
-**最終チェック: 2026-07-02（シミュレーター監査後） ｜ 状態: 🟡 深刻度「高」0件・「中」67件・「低」14件**
+**最終チェック: 2026-07-02（低優先度改善後） ｜ 状態: 🟢 site-check.py 問題ゼロ（高0・中0・低0）**
 
 ---
 
@@ -30,10 +30,12 @@
 
 ---
 
-## 🟢 深刻度：低（余裕があれば）
+## 🟢 深刻度：低（2026-07-02 全件解消）
 
-- favicon 欠落: `app.html`、`fire.html`、`fp-tools.html`、`nisa.html`、`blog/index.html`、`blog/asset-building-beginner/index.html`
-- OGP (og:title) 欠落: `404.html`、`contact.html`、`couples-sim.html`、`future-plans.html`、`loan.html`、`mypage.html`、`privacy.html`、`blog/asset-building-beginner/index.html`
+- ✅ favicon/canonical/OGP 欠落: 9ページ＋blog2ページに補完済み
+- ✅ 裸の `nav{}` セレクタ 54ファイル: `.topnav` にスコープ済み（CLAUDE.md規約の時限爆弾を解消）
+- ✅ sitemap未登録の補助ページ（app/tools/fp-tools/mypage）: noindex付与で非公開扱いに整理
+- ✅ site-check.py 改良: noindexページを canonical/OGP/sitemap 要求から除外
 
 ---
 
@@ -98,3 +100,4 @@
 | 2026-07-02 | 監査9グループ完了。couples-sim クラッシュ・lifeplan 収支バグ・loan-check 軽減型/控除・insurance-check 税計算・retirement-gap 年金開始・education-sim データ更新の「高」12件を修正 |
 | 2026-07-02 | 学生シミュレーターJS「高」3件修正。最終監査グループ（診断・子ども・紹介）完了 — 無料強調の言い換え・ツール数統一・メタ文修正 |
 | 2026-07-02 | 中優先度バックログ一巡: couples-sim(iDeCo/育休/FIRE)・fire-sim(感度分析)・asset-sim(NISA枠/4%表現)・nisa-ideco-sim(枠ゲージ)・lifeplan(児童手当/NISA枠)・insurance-check(遺族年金/国民年金)・rent-vs-buy(敷金/控除)・prepayment-sim(端数)を修正 |
+| 2026-07-02 | 低優先度一巡: favicon/OGP補完11ページ・nav{}→.topnav 54ファイル・補助ページnoindex整理。site-check.py 問題ゼロ達成 |

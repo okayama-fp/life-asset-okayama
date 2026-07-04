@@ -44,9 +44,9 @@
     .header-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
     .logo-text .name{font-size:1.2rem;font-weight:700;background:linear-gradient(90deg,#1a7a4a,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .logo-text .tagline{font-size:0.62rem;color:var(--tl)}
-    nav{display:flex;gap:4px;margin-left:auto}
-    nav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
-    nav a:hover,nav a.active{background:var(--sp);color:var(--sky)}
+    .topnav{display:flex;gap:4px;margin-left:auto}
+    .topnav a{padding:6px 14px;border-radius:20px;font-size:0.875rem;font-weight:500;color:var(--t);transition:all .2s}
+    .topnav a:hover,.topnav a.active{background:var(--sp);color:var(--sky)}
     .btn-cta{padding:8px 20px;border-radius:22px;background:linear-gradient(90deg,var(--sky),var(--sl));color:#fff;font-size:0.875rem;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(26,122,74,.3);transition:opacity .2s}
     .btn-cta:hover{opacity:.85}
     .breadcrumb{max-width:760px;margin:0 auto;padding:16px 24px 0;font-size:0.8rem;color:var(--tl);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -179,7 +179,7 @@
         <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
       </div>
     </a>
-    <nav>
+    <nav class="topnav">
       <a href="../index.html">ホーム</a>
       <a href="../index.html#services">サービス</a>
       <a href="index.html" class="active">ブログ</a>

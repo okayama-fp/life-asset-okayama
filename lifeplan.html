@@ -39,7 +39,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
 
-nav{background:var(--white);padding:8px 24px;min-height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 var(--border);gap:8px;flex-wrap:wrap}
+.topnav{background:var(--white);padding:8px 24px;min-height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 var(--border);gap:8px;flex-wrap:wrap}
 .nav-logo{font-size:17px;font-weight:900;color:var(--green);text-decoration:none;display:flex;flex-direction:column;line-height:1.2}
 .nav-logo span{font-size:10px;font-weight:400;color:var(--gray)}
 .nav-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -169,7 +169,7 @@ nav{background:var(--white);padding:8px 24px;min-height:56px;display:flex;align-
 .disclaimer{background:#fff8e1;border-left:3px solid #f5d28a;border-radius:0 8px 8px 0;padding:10px 14px;font-size:11px;color:#856404;margin-top:20px;line-height:1.7}
 
 @media(max-width:640px){
-  nav{padding:6px 12px;gap:6px}
+  .topnav{padding:6px 12px;gap:6px}
   .nav-logo{font-size:15px}
   .nav-home{font-size:11px;padding:4px 6px}
   .nav-btn{font-size:11px;padding:5px 10px}
@@ -189,7 +189,7 @@ nav{background:var(--white);padding:8px 24px;min-height:56px;display:flex;align-
   .year-table .event-cell{max-width:70px}
 }
 @media print{
-  nav,.progress-wrap,.btn-row,.disclaimer,.hero-badge{display:none!important}
+  .topnav,.progress-wrap,.btn-row,.disclaimer,.hero-badge{display:none!important}
   .hero{padding:20px 16px 24px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .main{padding:8px}
   .card{box-shadow:none;border:1px solid var(--border);page-break-inside:avoid}
@@ -270,7 +270,7 @@ nav{background:var(--white);padding:8px 24px;min-height:56px;display:flex;align-
 </head>
 <body>
 
-<nav>
+<nav class="topnav">
   <a href="/" class="nav-logo">ライフアセットオフィス<span>あなたの未来に、確かな安心と成長を。</span></a>
   <div class="nav-actions">
     <a href="simulation.html" class="nav-home">← シミュレーター一覧</a>

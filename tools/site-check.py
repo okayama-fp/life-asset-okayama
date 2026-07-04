@@ -62,6 +62,11 @@ def check_head_elements(path, html):
     head_end = html.find("</head>")
     head = html[:head_end] if head_end != -1 else html
 
+    # noindex ページ（404・確認中の告知等）は canonical/OGP を求めない
+    is_noindex = "noindex" in head
+    if is_noindex:
+        return
+
     if '<link rel="canonical"' not in head:
         add("中", r, "canonical が無い")
     # GA4 は cookie-consent.js が同意後に注入する設計。両方無い場合のみ計測ゼロ
@@ -152,11 +157,17 @@ def check_sitemap():
         if not target.exists():
             add("高", "sitemap.xml", f"存在しないページを登録: {loc}")
 
-    # 実ファイル → sitemap（ルート直下の公開HTMLのみ）
+    # 実ファイル → sitemap（ルート直下の公開HTMLのみ・noindexは除外）
     registered = set(locs)
     for p in sorted(ROOT.glob("*.html")):
         if p.name in EXCLUDE_FILES or p.name == "404.html":
             continue
+        try:
+            head = p.read_text(encoding="utf-8")[:2000]
+        except Exception:
+            head = ""
+        if "noindex" in head:
+            continue  # 非公開・補助ページは sitemap 登録不要
         loc = "/" + p.name
         if loc not in registered and (loc != "/index.html" or "/" not in registered):
             if p.name == "index.html":

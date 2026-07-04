@@ -40,7 +40,7 @@ html,body{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
 
 /* ── NAV ── */
-nav{background:var(--white);padding:0 32px;height:64px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:100}
+.topnav{background:var(--white);padding:0 32px;height:64px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:100}
 .logo{display:flex;flex-direction:column;line-height:1.2;text-decoration:none}
 .logo-main{font-size:20px;font-weight:900;color:var(--green);letter-spacing:-.02em}
 .logo-sub{font-size:10px;color:var(--gray);font-weight:400}
@@ -203,7 +203,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 @media(max-width:640px){
-  nav{padding:0 14px}
+  .topnav{padding:0 14px}
   .hero{padding:36px 16px 40px;min-height:auto}
   .section{padding:48px 16px}
   .hero-stats{gap:16px}
@@ -234,7 +234,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:48px 32px 32px}
 <body>
 
 <!-- NAV -->
-<nav>
+<nav class="topnav">
   <a href="/" class="logo">
     <span class="logo-main">Life Asset</span>
     <span class="logo-sub">あなたの未来に、確かな安心と成長を。</span>
