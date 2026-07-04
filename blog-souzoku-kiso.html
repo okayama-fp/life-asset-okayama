@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/blog-souzoku-kiso.html">
+<title>相続税はいくらから？基礎控除・配偶者の税額軽減・生前贈与の新ルールをFPが解説【2026年版】｜Life Asset</title>
+<meta name="description" content="相続税がかかるのは遺産がいくらから？基礎控除「3,000万円＋600万円×法定相続人」の計算、配偶者の税額軽減、2024年改正の生前贈与7年ルールまで、具体的な試算例つきでFPが解説します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="相続税はいくらから？基礎控除・配偶者の税額軽減・生前贈与の新ルールをFPが解説【2026年版】">
+<meta property="og:description" content="相続税がかかるのは遺産がいくらから？基礎控除の計算・配偶者の税額軽減・2024年改正の生前贈与7年ルールまで、試算例つきでFPが解説。">
+<meta property="og:url" content="https://lifeassetoffice.net/blog-souzoku-kiso.html">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="相続税はいくらから？基礎控除・生前贈与の新ルールをFPが解説【2026年版】">
+<meta name="twitter:description" content="相続税の基礎控除・配偶者の税額軽減・2024年改正の生前贈与7年ルールを試算例つきで解説。">
+<meta name="twitter:site" content="@lifeasset_fp">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PKDH2DR522');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1a7a4a;--green-dark:#1a3d2b;--green-light:#22c55e;
+  --green-pale:#dcfce7;--green-mid:#bbf7d0;
+  --red:#c0392b;--red-pale:#fdecea;
+  --yellow:#b7860b;--yellow-pale:#fef6e4;
+  --blue:#1a4fa0;--blue-pale:#e8f0fb;
+  --ink:#1e293b;--navy:#1a3d2b;--paper:#f8fafc;--cream:#f0fdf4;
+  --muted:#64748b;--border:#e2e8f0;--white:#fff;
+  --shadow:0 4px 28px rgba(0,0,0,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:2;font-size:16px}
+
+.topnav{background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:17px;font-weight:900;color:var(--green)}
+.nav-logo span{font-size:10px;font-weight:400;color:var(--muted);display:block;line-height:1.2}
+.nav-links{display:flex;gap:24px;font-size:13px}
+.nav-links a{color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}
+@media(max-width:640px){.nav-links{display:none}}
+
+.hero{background-color:#1a3d2b;background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 60%,#1a5fac 100%);padding:72px 28px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 32px)}
+.hero-inner{max-width:740px;margin:0 auto;position:relative;z-index:1}
+.hero-cat{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:4px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.1em;margin-bottom:20px}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(20px,3.8vw,34px);font-weight:900;color:#fff;line-height:1.45;margin-bottom:16px}
+.hero h1 em{color:#7ee8a2;font-style:normal}
+.hero-meta{display:flex;gap:20px;font-size:12px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;flex-wrap:wrap}
+article{max-width:740px;margin:0 auto;padding:56px 28px 80px}
+.lead{font-size:16.5px;line-height:2.1;margin-bottom:40px;color:#222;padding:26px 30px;background:var(--white);border-radius:8px;border:1px solid var(--border);border-top:4px solid var(--green);box-shadow:var(--shadow)}
+.toc{background:var(--cream);border:1px solid var(--green-mid);border-left:4px solid var(--green);padding:24px 28px;margin-bottom:52px;border-radius:0 8px 8px 0}
+.toc li::marker{color:var(--green);font-weight:900}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.toc ol{padding-left:18px}
+.toc li{margin:7px 0;font-size:14px}
+.toc a{color:var(--green);text-decoration:none;font-weight:500}
+.toc a:hover{text-decoration:underline}
+section{scroll-margin-top:80px}
+h2{font-family:'Noto Serif JP',serif;font-size:clamp(18px,2.8vw,24px);font-weight:900;color:var(--navy);margin:64px 0 22px;padding:12px 18px;border-left:6px solid var(--green);background:linear-gradient(90deg,var(--green-pale),rgba(220,252,231,0));border-radius:0 10px 10px 0;line-height:1.5}
+h3{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:700;color:var(--navy);margin:38px 0 14px;padding:4px 0 4px 12px;border-left:3px solid var(--green-light);line-height:1.6}
+p{margin-bottom:20px}
+section > p strong,.lead strong{color:var(--navy);background:linear-gradient(transparent 62%,var(--green-mid) 62%);padding:0 2px}
+.callout{padding:18px 22px;margin:28px 0;border-radius:0 8px 8px 0;font-size:14.5px;line-height:2}
+.callout-key{background:var(--green-pale);border-left:4px solid var(--green)}
+.callout-warn{background:var(--yellow-pale);border-left:4px solid var(--yellow)}
+.callout-danger{background:var(--red-pale);border-left:4px solid var(--red)}
+.pull-quote{font-family:'Noto Serif JP',serif;font-size:clamp(16px,2.3vw,21px);font-weight:700;line-height:1.85;color:var(--green-dark);padding:28px 32px;margin:44px 0;border-left:4px solid var(--green);background:var(--green-pale);border-radius:0 8px 8px 0}
+.case-box{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:22px 24px;margin:28px 0;box-shadow:var(--shadow)}
+.case-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--navy);padding:3px 10px;border-radius:3px;margin-bottom:12px}
+.case-box p{font-size:14px;line-height:1.95;margin-bottom:10px}
+.case-box p:last-child{margin-bottom:0}
+.table-wrap{overflow-x:auto;margin:26px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:linear-gradient(135deg,var(--navy),#1f5c40);color:#fff;padding:11px 14px;text-align:left;font-size:12px;font-weight:700}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.8}
+tr:nth-child(even) td{background:var(--cream)}
+td strong{color:var(--green-dark)}
+.num{font-family:'DM Mono',monospace;font-weight:500}
+.checklist{list-style:none;margin:18px 0}
+.checklist li{display:flex;gap:12px;padding:10px 0;font-size:14.5px;border-bottom:1px dotted var(--border);line-height:1.85;align-items:flex-start}
+.checklist li:last-child{border:none}
+.ck,.ck-x{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:900;flex-shrink:0;margin-top:5px;line-height:1}
+.ck{background:var(--green-pale);color:var(--green);border:1.5px solid var(--green-mid)}
+.ck-x{background:var(--red-pale);color:var(--red);border:1.5px solid #f5c6c0}
+.checklist li strong{color:var(--navy)}
+.tool-cta{background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:14px;padding:26px;margin:44px 0;color:#fff;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.tool-cta-text{flex:1;min-width:240px}
+.tool-cta h3{font-size:16px;font-weight:700;margin:0 0 6px;padding:0;border:none;font-family:'Noto Sans JP',sans-serif}
+.tool-cta p{font-size:13px;color:rgba(255,255,255,.82);margin:0;line-height:1.8}
+.tool-cta-btn{background:#fff;color:var(--green);border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:900;font-family:inherit;cursor:pointer;flex-shrink:0;transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-block}
+.tool-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+hr{border:none;height:3px;background:linear-gradient(90deg,var(--green-mid),rgba(187,247,208,0));border-radius:2px;margin:54px 0}
+.related{background:var(--cream);border:1px solid var(--green-mid);border-radius:12px;padding:22px 24px;margin:40px 0}
+.related-title{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted);margin-bottom:12px}
+.related a{display:block;color:var(--green);text-decoration:none;font-size:14px;font-weight:500;padding:6px 0;border-bottom:1px dotted var(--border)}
+.related a:last-child{border:none}
+.related a:hover{text-decoration:underline}
+.author{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:48px}
+.author-avatar{width:42px;height:42px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:900;flex-shrink:0}
+.author-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.author-bio{font-size:13px;color:var(--muted);line-height:1.9}
+.disclaimer{background:#fff8e1;border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;padding:12px 16px;font-size:12px;color:#856404;margin-top:28px;line-height:1.9}
+footer{background:var(--navy);color:rgba(255,255,255,.85);padding:32px 24px 24px;text-align:center}
+.footer-logo{font-size:1rem;font-weight:700;margin-bottom:8px}
+footer p{font-size:0.72rem;opacity:.7;margin:12px 0 0}
+footer a{color:var(--green-light);text-decoration:underline}
+@media(max-width:600px){article{padding:40px 18px 60px}.hero{padding:48px 18px 56px}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://lifeassetoffice.net/blog-souzoku-kiso.html#article","url":"https://lifeassetoffice.net/blog-souzoku-kiso.html","headline":"相続税はいくらから？基礎控除・配偶者の税額軽減・生前贈与の新ルールをFPが解説【2026年版】","description":"相続税がかかるのは遺産がいくらから？基礎控除「3,000万円＋600万円×法定相続人」の計算、配偶者の税額軽減、2024年改正の生前贈与7年ルールまで、具体的な試算例つきでFPが解説します。","datePublished":"2026-07-02T00:00:00+09:00","dateModified":"2026-07-02T00:00:00+09:00","author":{"@type":"Organization","name":"ライフアセットオフィス FP","url":"https://lifeassetoffice.net/"},"publisher":{"@type":"Organization","name":"ライフアセットオフィス","url":"https://lifeassetoffice.net/","logo":{"@type":"ImageObject","url":"https://lifeassetoffice.net/images/fp-avatar.png"}},"image":"https://lifeassetoffice.net/images/og-blog.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://lifeassetoffice.net/blog-souzoku-kiso.html"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://lifeassetoffice.net/"},{"@type":"ListItem","position":2,"name":"ブログ","item":"https://lifeassetoffice.net/blog/"},{"@type":"ListItem","position":3,"name":"相続税はいくらから？基礎控除・配偶者の税額軽減・生前贈与の新ルールをFPが解説【2026年版】","item":"https://lifeassetoffice.net/blog-souzoku-kiso.html"}]}]}
+</script>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-logo">Life Asset<span>あなたの未来に、確かな安心と成長を。</span></div>
+  <div class="nav-links">
+    <a href="/">ホーム</a><a href="/simulation.html">シミュレーター</a><a href="/blog/">ブログ</a>
+  </div>
+  <button class="nav-cta" onclick="window.location.href='/contact.html'">お問い合わせ</button>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-cat">相続・税金</div>
+    <h1>相続税は<em>いくらから</em>かかる？<br>基礎控除・配偶者の税額軽減・<br>生前贈与の新ルールを解説<br>【2026年版】</h1>
+    <div class="hero-meta">
+      <span>2026年7月</span><span>読了約12分</span><span>Life Asset FP編集部</span>
+    </div>
+  </div>
+</div>
+<article>
+  <div class="lead">
+    「うちに相続税なんて関係ない」——多くの人がそう思っています。でも実際に相続が起きたとき、<strong>「思ったより遺産があって課税対象だった」</strong>と慌てるケースは少なくありません。<br><br>
+    相続税がかかるかどうかは、まず<strong>「基礎控除」を超えるかどうか</strong>で決まります。この記事では、基礎控除の計算方法から、配偶者が使える大きな軽減制度、そして2024年に変わった生前贈与のルールまで、<strong>具体的な試算例つき</strong>で整理します。<br><br>
+    読み終わる頃には、「自分の家に相続税がかかるのか」「かかるとしたら概算でいくらか」の見当がつくはずです。
+  </div>
+  <nav class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#sec1">相続税は「基礎控除」を超えた分にかかる</a></li>
+      <li><a href="#sec2">相続税の計算は3ステップ</a></li>
+      <li><a href="#sec3">試算例：遺産6,000万円・1億円のケース</a></li>
+      <li><a href="#sec4">配偶者の税額軽減——1.6億円まで非課税</a></li>
+      <li><a href="#sec5">2024年改正：生前贈与は「7年ルール」に</a></li>
+      <li><a href="#sec6">今からできる相続対策4つ</a></li>
+    </ol>
+  </nav>
+
+  <section id="sec1">
+    <h2>相続税は「基礎控除」を超えた分にかかる</h2>
+    <p>相続税は、亡くなった人（被相続人）が遺した財産すべてに一律でかかるわけではありません。まず<strong>基礎控除</strong>という「非課税の枠」があり、遺産の総額がこの枠を超えたときに、超えた部分に対して課税されます。</p>
+    <p>基礎控除の額は、次の式で計算します。専門用語ですが、覚えておくと便利です。</p>
+    <div class="callout callout-key">
+      <strong>基礎控除額 ＝ 3,000万円 ＋ 600万円 × 法定相続人の数</strong><br>
+      ※法定相続人とは、民法で定められた相続人（配偶者・子など）のことです。
+    </div>
+    <p>たとえば法定相続人が「配偶者と子ども2人」の合計3人なら、基礎控除は <span class="num">3,000万円 ＋ 600万円 × 3人 ＝ 4,800万円</span> になります。遺産の総額が4,800万円以下なら、相続税はかかりません。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>法定相続人の数</th><th>基礎控除額</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1人</td><td><strong>3,600万円</strong></td></tr>
+          <tr><td>2人</td><td><strong>4,200万円</strong></td></tr>
+          <tr><td>3人</td><td><strong>4,800万円</strong></td></tr>
+          <tr><td>4人</td><td><strong>5,400万円</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>逆に言えば、<strong>相続税がかかる最低ラインは3,600万円（相続人が1人の場合）</strong>です。持ち家や生命保険金、預貯金を合わせると、都市部ではこのラインを超える家庭も珍しくありません。「うちは関係ない」と決めつけず、一度おおよその遺産額を把握しておくことが大切です。</p>
+  </section>
+
+  <section id="sec2">
+    <h2>相続税の計算は3ステップ</h2>
+    <p>相続税の計算は、少し独特な手順を踏みます。「各人が実際にもらった額に単純に税率をかける」わけではない点がポイントです。</p>
+    <h3>ステップ1：課税される遺産の総額を出す</h3>
+    <p>遺産の総額（不動産・預貯金・株式・生命保険金など）から、非課税財産・債務・葬式費用を引き、さらに基礎控除を引きます。この残りが<strong>「課税遺産総額」</strong>です。なお、生命保険金には「500万円 × 法定相続人の数」までの非課税枠があります。</p>
+    <h3>ステップ2：いったん法定相続分で分けて税額を計算する</h3>
+    <p>課税遺産総額を、実際の分け方に関係なく、いったん<strong>法定相続分</strong>で分けたものとみなして、各人の税額を計算します。法定相続分とは、たとえば「配偶者と子」の場合、配偶者2分の1・子は残り2分の1を人数で分ける、というルールです。各人の取得分に下の速算表の税率をかけ、全員分を合計したものが<strong>「相続税の総額」</strong>になります。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>法定相続分に応じた取得金額</th><th>税率</th><th>控除額</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1,000万円以下</td><td>10%</td><td>—</td></tr>
+          <tr><td>3,000万円以下</td><td>15%</td><td>50万円</td></tr>
+          <tr><td>5,000万円以下</td><td>20%</td><td>200万円</td></tr>
+          <tr><td>1億円以下</td><td>30%</td><td>700万円</td></tr>
+          <tr><td>2億円以下</td><td>40%</td><td>1,700万円</td></tr>
+          <tr><td>3億円以下</td><td>45%</td><td>2,700万円</td></tr>
+          <tr><td>6億円以下</td><td>50%</td><td>4,200万円</td></tr>
+          <tr><td>6億円超</td><td>55%</td><td>7,200万円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>ステップ3：実際の取得割合で按分し、各種控除を適用する</h3>
+    <p>ステップ2で出した「相続税の総額」を、今度は<strong>実際に各人がもらった割合</strong>で振り分けます。そのうえで、配偶者の税額軽減（後述）などの控除を適用して、各人の最終的な納税額が決まります。</p>
+    <div class="callout callout-warn">
+      <strong>2割加算に注意：</strong>被相続人の配偶者・子・親以外の人（たとえば兄弟姉妹や孫〔代襲相続を除く〕）が相続する場合、その人の税額は2割増しになります。
+    </div>
+  </section>
+
+  <section id="sec3">
+    <h2>試算例：遺産6,000万円・1億円のケース</h2>
+    <p>言葉だけでは分かりにくいので、具体的な金額で見てみましょう。いずれも概算で、実際は財産の種類や分け方によって変わります。</p>
+    <div class="case-box">
+      <span class="case-label">ケースA</span>
+      <p><strong>遺産6,000万円／相続人は配偶者＋子1人（計2人）</strong></p>
+      <p>・基礎控除：3,000万円＋600万円×2人＝<span class="num">4,200万円</span></p>
+      <p>・課税遺産総額：6,000万円 − 4,200万円 ＝ <span class="num">1,800万円</span></p>
+      <p>・相続税の総額（法定相続分で計算）：約<span class="num">332万円</span></p>
+      <p>・配偶者が法定相続分（2分の1）を相続すれば、その分は税額軽減で0円。<strong>子が負担する相続税は約166万円</strong>が目安です。</p>
+    </div>
+    <div class="case-box">
+      <span class="case-label">ケースB</span>
+      <p><strong>遺産1億円／相続人は配偶者＋子2人（計3人）</strong></p>
+      <p>・基礎控除：3,000万円＋600万円×3人＝<span class="num">4,800万円</span></p>
+      <p>・課税遺産総額：1億円 − 4,800万円 ＝ <span class="num">5,200万円</span></p>
+      <p>・相続税の総額（法定相続分で計算）：約<span class="num">630万円</span></p>
+      <p>・配偶者が2分の1、子2人が残りを取得した場合、配偶者分は税額軽減で0円。<strong>子2人が負担する相続税は合計で約315万円</strong>が目安です。</p>
+    </div>
+    <div class="case-box">
+      <span class="case-label">ケースC</span>
+      <p><strong>遺産4,000万円／相続人は配偶者＋子2人（計3人）</strong></p>
+      <p>・基礎控除：<span class="num">4,800万円</span></p>
+      <p>・遺産4,000万円 ＜ 基礎控除4,800万円 なので、<strong>相続税は0円（申告も原則不要）</strong>です。</p>
+    </div>
+    <p>このように、<strong>同じ遺産額でも相続人の数によって結論が変わります</strong>。まずは「遺産の総額」と「相続人の数」を押さえることが、相続税を考える第一歩です。</p>
+
+    <div class="tool-cta">
+      <div class="tool-cta-text">
+        <h3>あなたの家の相続税はいくら？</h3>
+        <p>遺産額と家族構成を入力するだけで、基礎控除・相続税の概算を試算できます。まずは大まかな見当をつけてみましょう。</p>
+      </div>
+      <a href="/souzoku-sim.html" class="tool-cta-btn">相続税を試算する →</a>
+    </div>
+  </section>
+
+  <section id="sec4">
+    <h2>配偶者の税額軽減——1.6億円まで非課税</h2>
+    <p>相続税には、残された配偶者の生活を守るための大きな軽減制度があります。それが<strong>「配偶者の税額軽減」</strong>です。</p>
+    <p>配偶者が相続した財産のうち、<strong>「1億6,000万円」または「配偶者の法定相続分」のどちらか多い金額まで</strong>は、相続税がかかりません。多くの家庭では、この制度によって配偶者の納税額はゼロになります。</p>
+    <div class="callout callout-key">
+      配偶者は「1.6億円」または「法定相続分」まで非課税。<br>
+      たとえば遺産2億円で配偶者が全額相続しても、法定相続分（2分の1＝1億円）と1.6億円の多い方＝1.6億円までは非課税になります。
+    </div>
+    <p>ただし、注意点もあります。配偶者に財産を寄せすぎると、次にその配偶者が亡くなったとき（<strong>二次相続</strong>）に、子が負担する相続税が大きくなることがあります。「一次相続で配偶者に全部」が必ずしも得とは限らないのです。</p>
+    <div class="callout callout-warn">
+      <strong>二次相続の落とし穴：</strong>一次相続で配偶者に寄せすぎると、二次相続では配偶者控除も基礎控除の相続人数も減り、トータルの税負担が増えるケースがあります。一次・二次を通した「合計の税額」で考えるのが鉄則です。
+    </div>
+  </section>
+
+  <section id="sec5">
+    <h2>2024年改正：生前贈与は「7年ルール」に</h2>
+    <p>相続対策の定番だった<strong>生前贈与</strong>ですが、2024年（令和6年）の税制改正で重要なルール変更がありました。相続対策を考えるうえで必ず押さえておきたいポイントです。</p>
+    <h3>暦年贈与の「持ち戻し」が3年→7年に延長</h3>
+    <p>毎年110万円まで非課税で贈与できる「暦年贈与」。ただし、贈与した人が亡くなると、<strong>亡くなる前の一定期間内に相続人へ贈与した分は、相続財産に足し戻して(持ち戻して)相続税を計算する</strong>ルールがあります。</p>
+    <p>この期間が、従来の<strong>「3年以内」から「7年以内」へ段階的に延長</strong>されました（2024年以降の贈与が対象で、段階的に7年へ移行します）。つまり、亡くなる直前の駆け込み贈与では節税効果が得られにくくなった、ということです。</p>
+    <div class="callout callout-key">
+      <strong>持ち戻しの対象は「相続人への贈与」が中心。</strong>孫など相続人以外への贈与は、原則として持ち戻しの対象外です。早くから計画的に贈与することの重要性が増しました。
+    </div>
+    <h3>相続時精算課税にも110万円の基礎控除が新設</h3>
+    <p>もう一つの贈与制度「相続時精算課税」にも、2024年から<strong>年110万円の基礎控除</strong>が新設されました。この110万円分は相続財産に持ち戻す必要がなく、使い方によっては暦年贈与より有利になるケースもあります。どちらの制度が向くかは家庭により異なるため、専門家への相談が有効です。</p>
+    <div class="pull-quote">
+      相続対策は「早く始めるほど選択肢が広がる」。7年ルールの導入で、その傾向がいっそう強まりました。
+    </div>
+  </section>
+
+  <section id="sec6">
+    <h2>今からできる相続対策4つ</h2>
+    <p>相続対策というと「お金持ちの話」と思われがちですが、基本的な備えは誰にとっても意味があります。難しい手続きの前に、まずは次の4つから始めましょう。</p>
+    <ul class="checklist">
+      <li><span class="ck">1</span><span><strong>財産のリストを作る：</strong>不動産・預貯金・株式・保険・借入をおおまかに書き出す。これだけで「基礎控除を超えそうか」の見当がつきます。</span></li>
+      <li><span class="ck">2</span><span><strong>生命保険の非課税枠を活用する：</strong>死亡保険金は「500万円×法定相続人の数」まで非課税。納税資金の準備にもなります。</span></li>
+      <li><span class="ck">3</span><span><strong>贈与は早く・計画的に：</strong>7年ルールを踏まえ、暦年贈与や教育資金の一括贈与などを長い時間をかけて活用する。</span></li>
+      <li><span class="ck">4</span><span><strong>一次・二次相続を通して考える：</strong>配偶者に寄せすぎず、トータルの税額で分け方を検討する。遺言書の準備も争いの予防になります。</span></li>
+    </ul>
+    <div class="callout callout-danger">
+      <strong>子がいない場合は要注意：</strong>お子さまがいないご夫婦の相続では、配偶者とあわせて被相続人の親や兄弟姉妹が相続人になることがあります。法定相続分・基礎控除・税額（兄弟姉妹は2割加算）が変わるため、通常のケースとは計算が大きく異なります。早めに専門家へ相談してください。
+    </div>
+
+    <div class="related">
+      <div class="related-title">あわせて読みたい</div>
+      <a href="/blog/post-441.html">老後2000万円問題の真実：FPが試算する本当に必要な老後資金</a>
+      <a href="/blog/post-447.html">iDeCo完全ガイド：新NISAと組み合わせて老後資金を最大化する方法</a>
+      <a href="/lifeplan.html">ライフプラン表シミュレーターで生涯の家計を見える化する</a>
+    </div>
+
+    <p>相続税は、正しく仕組みを知れば「見当をつける」ことができます。まずは自分の家に相続税がかかりそうかを把握し、必要なら早めに準備を始める——それが、残された家族が安心して暮らすための一番の対策です。</p>
+    <p>具体的な金額の目安を知りたい方は、<strong>相続税シミュレーターで概算を試算</strong>してみてください。実際の申告・対策は、財産の内容によって最適解が変わるため、税理士やFPにご相談いただくのが確実です。</p>
+  </section>
+
+  <div class="author">
+    <div class="author-avatar">FP</div>
+    <div>
+      <div class="author-name">Life Asset FP編集部</div>
+      <p class="author-bio">住宅ローン・資産運用・老後資金・相続・家計管理など、暮らしに直結するお金の知識を発信しています。特定の金融商品の販売・仲介、および税務・法律の個別代理は行っておりません。</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ 本記事は一般的な情報提供を目的としており、税務・法律の個別アドバイスを提供するものではありません。記事内の計算例は一定の前提条件に基づく概算で、実際の税額は財産の種類・評価・分け方・各種特例の適用により異なります。相続税の申告・対策は税理士等の専門家にご相談ください。制度は改正される場合があるため、最新情報は国税庁の公式サイトでご確認ください。
+  </div>
+
+</article>
+
+<p style="max-width:740px;margin:0 auto 16px;padding:0 28px;font-size:10px;color:#94a3b8;">🤖 AI生成コンテンツを含みます。最新情報は各公式サイトをご確認ください。</p>
+<footer>
+  <div class="footer-logo">Life Asset</div>
+  <p>ライフアセットオフィス</p>
+  <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
+  <p>本サイトの情報は参考情報であり投資助言・税務助言ではありません。当サイトは投資助言業・税理士業の登録を受けていません。</p>
+</footer>
+</body>
+</html>
