@@ -101,3 +101,4 @@
 | 2026-07-02 | 学生シミュレーターJS「高」3件修正。最終監査グループ（診断・子ども・紹介）完了 — 無料強調の言い換え・ツール数統一・メタ文修正 |
 | 2026-07-02 | 中優先度バックログ一巡: couples-sim(iDeCo/育休/FIRE)・fire-sim(感度分析)・asset-sim(NISA枠/4%表現)・nisa-ideco-sim(枠ゲージ)・lifeplan(児童手当/NISA枠)・insurance-check(遺族年金/国民年金)・rent-vs-buy(敷金/控除)・prepayment-sim(端数)を修正 |
 | 2026-07-02 | 低優先度一巡: favicon/OGP補完11ページ・nav{}→.topnav 54ファイル・補助ページnoindex整理。site-check.py 問題ゼロ達成 |
+| 2026-07-07 | **AdSense「有用性の低いコンテンツ」対策**: 本文が薄いシミュレーター8ページ（fire/education/tedori/prepayment/asset/loan-check/souzoku/insurance）に「できること・使い方3ステップ・結果の見方・FAQ5問・関連リンク」を追加し、可視テキストを約1,200〜1,500字→2,600〜3,200字に底上げ。各ページに schema.org FAQPage 構造化データ（5問）を付与。計算例は検算済み・禁止ワードなし・site-check問題ゼロ |
