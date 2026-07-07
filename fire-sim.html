@@ -215,6 +215,7 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 </style>
 <script src="/js/cookie-consent.js"></script>
 <script src="/js/sim-tracker.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "FIREにはいくら必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "一般的な目安として「年間生活費の25倍」が必要とされます。これは資産を年4%取り崩す前提（4%ルール）から逆算した金額です。たとえば毎月20万円で暮らすなら年間240万円、その25倍で約6,000万円が目安になります。生活費が高いほど必要資産も比例して大きくなります。"}}, {"@type": "Question", "name": "4%ルールは絶対に安全ですか？", "acceptedAnswer": {"@type": "Answer", "text": "4%ルールは米国の研究（トリニティスタディ）に基づく目安であり、資産の永続を保証するものではありません。取り崩し初期に相場が下落する「配列（シークエンス）リスク」があると、想定より早く資産が減る可能性があります。日本の税・為替環境や自身の運用方針に合わせて、取り崩し率を保守的に見積もることをおすすめします。"}}, {"@type": "Question", "name": "貯蓄率を上げるにはどうすればよいですか？", "acceptedAnswer": {"@type": "Answer", "text": "FIRE達成の速さは貯蓄率（手取りに対する貯蓄・投資の割合）で大きく変わります。効果が大きいのは住居費・通信費・保険料・サブスクといった固定費の削減で、一度見直せば節約効果が毎月続きます。固定費を整えたうえで、浮いた分をNISA・iDeCoなどで積み立てると効率的です。"}}, {"@type": "Question", "name": "サイドFIRE・セミFIREとは何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "サイドFIRE（セミFIRE）は、生活費の一部を資産の取り崩しでまかない、残りを軽い労働で得る働き方です。完全FIREより必要資産が少なくて済み、社会とのつながりを保ちやすいのが特徴です。フルリタイアに不安がある場合の現実的な選択肢として検討されています。"}}, {"@type": "Question", "name": "日本でもFIREはできますか？", "acceptedAnswer": {"@type": "Answer", "text": "日本でもFIREは可能ですが、退職後は会社員時代の社会保険がなくなり、国民健康保険・国民年金の保険料を自分で負担する点に注意が必要です。公的年金の受給開始（原則65歳）までの期間をどう乗り切るか、健康保険料や税金も生活費に含めて計画することが大切です。"}}]}</script>
 </head>
 <body>
 <div id="pb"></div>
@@ -425,6 +426,29 @@ footer p { font-size: 0.72rem; opacity: .55; margin-top: 12px; }
 
 
 <div style="max-width:920px;margin:0 auto 20px;padding:0 20px"><div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;font-size:12px;color:#92400e;line-height:1.7;">⚠️ <strong>免責事項：</strong>本シミュレーターの計算結果はあくまで参考値です。投資・資産運用の個別アドバイスを提供するものではありません。最終的な判断はご自身の責任で行ってください。当サイトは金融商品取引業（投資助言業）の登録を受けておりません。</div></div>
+<section style="max-width:920px;margin:0 auto 40px;padding:0 20px;font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1e293b;line-height:1.95">
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:28px 30px">
+    <h2 style="font-size:20px;font-weight:900;color:#1a3d2b;margin:0 0 16px;border-left:5px solid #1a7a4a;padding-left:14px">FIRE達成シミュレーターでできること</h2>
+    <p style="font-size:14.5px;margin:0 0 22px">FIRE（経済的自立と早期リタイア）を目指すうえで最初に知りたいのは、「いつFIREできるのか」「そのためにいくら必要か」という2つの数字です。本シミュレーターでは、現在の年齢・資産・年収・支出と、想定利回りやFIRE後の生活費を入力するだけで、FIRE達成の見込み年齢・必要資産・達成度スコアをその場で試算できます。数字を動かしながら「あと何年で届くか」「貯蓄率を上げるとどれだけ早まるか」を直感的に確かめられるのが特長です。</p>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 10px">使い方（3ステップ）</h3>
+    <div style="font-size:14px;margin:0 0 12px"><strong>①現状を入力する</strong>：まず現在の年齢・保有資産・年収・毎年の支出（生活費）を入力します。ここが試算の出発点になり、年収から支出を引いた金額が毎年の貯蓄・投資に回ります。</div>
+    <div style="font-size:14px;margin:0 0 12px"><strong>②前提条件を設定する</strong>：次に、資産運用の想定利回りと、FIRE後に必要な年間生活費を設定します。利回りは長期の分散投資を前提に保守的な値から試すと現実的です。FIRE後の生活費は現役時代より下がるケースも多いため、実態に合わせて調整します。</div>
+    <div style="font-size:14px;margin:0 0 22px"><strong>③結果を確認する</strong>：入力が終わると、FIRE達成年齢・必要資産・達成度スコアが即座に表示されます。スライダーを動かして条件を変えると結果もリアルタイムで更新されるので、複数のプランを比較できます。</div>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 10px">結果の見方</h3>
+    <div style="font-size:14px;margin:0 0 12px"><strong>必要資産と4%ルール</strong>：FIREに必要な資産の目安は「年間生活費×25」で計算されます。これは資産を年4%ずつ取り崩す前提から逆算した金額です。たとえば月20万円で暮らすなら年間240万円、その25倍で約6,000万円が目安になります（20万円×12か月×25＝6,000万円）。生活費が上がれば必要資産も比例して増えます。</div>
+    <div style="font-size:14px;margin:0 0 12px"><strong>貯蓄率が達成年齢を決める</strong>：FIRE達成の速さは、手取りに対する貯蓄・投資の割合（貯蓄率）に強く左右されます。貯蓄率が高いほど資産の積み上がりが速く、同時に必要な生活費も小さくなるため、達成年齢は大きく前倒しになります。年収そのものより「いくら残せるか」が効いてくる点が重要です。</div>
+    <div style="font-size:14px;margin:0 0 22px"><strong>感度分析の読み方</strong>：利回りや生活費を少し変えるだけで達成年齢が動くのは、それだけ前提の不確実性が結果に影響するということです。楽観・標準・保守の3パターンで試し、最も慎重なケースでも計画が成り立つかを確認しておくと安心です。なお4%ルールは資産の永続を保証するものではなく、あくまで目安として活用してください。</div>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 12px">よくある質問（FAQ）</h3>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. FIREにはいくら必要ですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 一般的な目安として「年間生活費の25倍」が必要とされます。これは資産を年4%取り崩す前提（4%ルール）から逆算した金額です。たとえば毎月20万円で暮らすなら年間240万円、その25倍で約6,000万円が目安になります。生活費が高いほど必要資産も比例して大きくなります。</div></div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. 4%ルールは絶対に安全ですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 4%ルールは米国の研究（トリニティスタディ）に基づく目安であり、資産の永続を保証するものではありません。取り崩し初期に相場が下落する「配列（シークエンス）リスク」があると、想定より早く資産が減る可能性があります。日本の税・為替環境や自身の運用方針に合わせて、取り崩し率を保守的に見積もることをおすすめします。</div></div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. 貯蓄率を上げるにはどうすればよいですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. FIRE達成の速さは貯蓄率（手取りに対する貯蓄・投資の割合）で大きく変わります。効果が大きいのは住居費・通信費・保険料・サブスクといった固定費の削減で、一度見直せば節約効果が毎月続きます。固定費を整えたうえで、浮いた分をNISA・iDeCoなどで積み立てると効率的です。</div></div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. サイドFIRE・セミFIREとは何ですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. サイドFIRE（セミFIRE）は、生活費の一部を資産の取り崩しでまかない、残りを軽い労働で得る働き方です。完全FIREより必要資産が少なくて済み、社会とのつながりを保ちやすいのが特徴です。フルリタイアに不安がある場合の現実的な選択肢として検討されています。</div></div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. 日本でもFIREはできますか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 日本でもFIREは可能ですが、退職後は会社員時代の社会保険がなくなり、国民健康保険・国民年金の保険料を自分で負担する点に注意が必要です。公的年金の受給開始（原則65歳）までの期間をどう乗り切るか、健康保険料や税金も生活費に含めて計画することが大切です。</div></div>
+    <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:24px 0 10px">関連シミュレーター</h3>
+    <div><a href="/retirement-gap.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">老後資金シミュレーター →</a><a href="/asset-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">資産運用シミュレーター →</a><a href="/nisa-ideco-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">NISA・iDeCo 節税診断 →</a></div>
+    <p style="font-size:13.5px;margin:14px 0 0;color:#334155">FIREの必要額や考え方をもっと詳しく知りたい方は、解説記事「<a href="/blog-fire-ikura.html" style="color:#1a7a4a;font-weight:700;text-decoration:underline">FIREにはいくら必要？</a>」もあわせてご覧ください。ライフアセットオフィス FP編集部が、達成までの道すじをわかりやすく整理しています。</p>
+  </div>
+</section>
 <footer>
   <div class="footer-logo">ライフアセットオフィス</div>
   <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
