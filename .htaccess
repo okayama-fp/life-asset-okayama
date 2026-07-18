@@ -1,4 +1,16 @@
 # Security Headers
+#
+# ⚠️ 注記（2026-07-15）: このサイトは GitHub Pages でホスティングされており、
+# GitHub Pages は .htaccess（Apache用設定ファイル）を一切処理しません。
+# そのため、以下の設定は実際には反映されていません。
+#
+# 同等のセキュリティヘッダーは Cloudflare 側の
+# Rules → Transform Rules → Modify Response Header で設定済みです
+# （X-Frame-Options / X-Content-Type-Options / Referrer-Policy /
+#   Strict-Transport-Security / Permissions-Policy）。
+# 変更する場合はCloudflareダッシュボード側で行ってください。
+#
+# このファイルは将来的に別ホスティングへ移行した場合の参考用として残しています。
 Header always set X-Frame-Options "DENY"
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
