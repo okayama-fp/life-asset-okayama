@@ -4,7 +4,7 @@
 > チェックの実行: リポジトリルートで `python3 tools/site-check.py`
 > 更新ルール: サイトに変更を加えたセッションでは必ずチェックを再実行し、このファイルを最新化する。
 
-**最終チェック: 2026-07-02（低優先度改善後） ｜ 状態: 🟢 site-check.py 問題ゼロ（高0・中0・低0）**
+**最終チェック: 2026-08-10（認知機能トレーニング追加後） ｜ 状態: 🟢 site-check.py 問題ゼロ（高0・中0・低0／99ファイル）**
 
 ---
 
@@ -103,3 +103,4 @@
 | 2026-07-02 | 低優先度一巡: favicon/OGP補完11ページ・nav{}→.topnav 54ファイル・補助ページnoindex整理。site-check.py 問題ゼロ達成 |
 | 2026-07-07 | **AdSense「有用性の低いコンテンツ」対策**: 本文が薄いシミュレーター8ページ（fire/education/tedori/prepayment/asset/loan-check/souzoku/insurance）に「できること・使い方3ステップ・結果の見方・FAQ5問・関連リンク」を追加し、可視テキストを約1,200〜1,500字→2,600〜3,200字に底上げ。各ページに schema.org FAQPage 構造化データ（5問）を付与。計算例は検算済み・禁止ワードなし・site-check問題ゼロ |
 | 2026-07-07 | **AdSense対策・第2弾**: ①孤立した旧版・重複ページ5件（fire/nisa/loan/advisor/future-plans）を削除しsitemap・被リンク整理（91ファイルに）。②到達可能な薄い5ページ（student-sim/kakei-diagnosis/life-game/kids-money/kids-stock）に解説・使い方・FAQ5問・構造化データを追加し約400〜750字→1,300〜1,750字に底上げ（子ども向けページは「遊び方・学べること・保護者の方へ」構成）。student-simのmeta「無料」強調を除去 |
+| 2026-08-10 | **認知機能トレーニング `cog-training.html` を新規追加**（コグトレの5領域「覚える・写す・見つける・数える・想像する」を参考にした独自課題12種／難易度3段階・記録・A4印刷プリント生成）。公開3点セット（本体・kids.html/simulation.htmlのカード・sitemap登録）を実施。Playwrightで12課題×3難易度＝36通りを「正しく解いて正解判定が出るか」まで自動検証（page error 0） |
