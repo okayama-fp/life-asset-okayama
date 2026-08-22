@@ -1,5 +1,17 @@
 {
   "hooks": {
     "Stop": []
+  },
+  "autoMode": {
+    "hard_deny": [
+      "$defaults",
+      "gh-pages ブランチへ直接 push・force push しない。gh-pages への変更は必ず feature branch と PR を経由する",
+      ".env / .env.local / secrets/ 配下のファイルを読み書きしない"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "gh-pages への PR をマージしない（ユーザーが明示的にマージを指示した場合を除く）",
+      "外部API・外部サービスへの送信を伴う通信を行わない（ユーザーが明示的に許可した場合を除く）"
+    ]
   }
 }
