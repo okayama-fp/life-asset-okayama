@@ -1,1 +1,24 @@
 .claude/worktrees/
+
+# ── 個人情報の誤コミット防止（2026-08-22 追加）────────────────
+# 給与台帳・従業員名簿・顧客データ等の実データはリポジトリに置かない。
+# 公開サイト（gh-pages）のため、コミット＝即時公開と同義。
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.xlsm
+*.numbers
+*.pdf
+uploads/
+private/
+personal/
+顧客*/
+*給与*
+*名簿*
+*従業員*
+*源泉*
+*マイナンバー*
+*payroll*
+*salary*
+*employee*
