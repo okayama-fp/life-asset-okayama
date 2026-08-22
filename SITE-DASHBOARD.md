@@ -103,3 +103,4 @@
 | 2026-07-02 | 低優先度一巡: favicon/OGP補完11ページ・nav{}→.topnav 54ファイル・補助ページnoindex整理。site-check.py 問題ゼロ達成 |
 | 2026-07-07 | **AdSense「有用性の低いコンテンツ」対策**: 本文が薄いシミュレーター8ページ（fire/education/tedori/prepayment/asset/loan-check/souzoku/insurance）に「できること・使い方3ステップ・結果の見方・FAQ5問・関連リンク」を追加し、可視テキストを約1,200〜1,500字→2,600〜3,200字に底上げ。各ページに schema.org FAQPage 構造化データ（5問）を付与。計算例は検算済み・禁止ワードなし・site-check問題ゼロ |
 | 2026-07-07 | **AdSense対策・第2弾**: ①孤立した旧版・重複ページ5件（fire/nisa/loan/advisor/future-plans）を削除しsitemap・被リンク整理（91ファイルに）。②到達可能な薄い5ページ（student-sim/kakei-diagnosis/life-game/kids-money/kids-stock）に解説・使い方・FAQ5問・構造化データを追加し約400〜750字→1,300〜1,750字に底上げ（子ども向けページは「遊び方・学べること・保護者の方へ」構成）。student-simのmeta「無料」強調を除去 |
+| 2026-08-22 | **自動モードのガードレール導入**: `.claude/settings.json` に `autoMode` を追加（PR #355）。`hard_deny` に gh-pages への直接 push・`.env`/`secrets` アクセス、`soft_deny` に gh-pages への PR マージ・外部API通信を登録。CLAUDE.md の重大ルールを分類器モデルによる機械的ブロックとして二重化した。サイトのコンテンツ変更は無し |
