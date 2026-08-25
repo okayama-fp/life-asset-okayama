@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/images/life-asset-kun-small.png" type="image/png">
+<link rel="canonical" href="https://lifeassetoffice.net/cog-training.html">
+<title>認知機能トレーニング｜おぼえる・うつす・みつける・かぞえる・そうぞうする｜ライフアセットオフィス</title>
+<meta name="description" content="認知機能の5つの土台（記憶・模写・視覚探索・数える力・想像する力）を鍛える12種類のトレーニング。点つなぎ・さがし算・まとめて数える・心で回す・きもちを考えるなど、ブラウザで今すぐでき、印刷用プリントも作れます。">
+<meta property="og:title" content="認知機能トレーニング｜12種類の課題をブラウザと印刷プリントで">
+<meta property="og:description" content="おぼえる・うつす・みつける・かぞえる・そうぞうする。学習や生活の土台になる認知機能を、1日5分の課題で鍛えるトレーニング集。難易度3段階・記録機能・A4印刷対応。">
+<meta property="og:url" content="https://lifeassetoffice.net/cog-training.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ライフアセットオフィス">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://lifeassetoffice.net/images/life-asset-kun.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lifeasset_fp">
+<meta name="twitter:title" content="認知機能トレーニング｜12種類の課題をブラウザと印刷プリントで">
+<meta name="twitter:description" content="おぼえる・うつす・みつける・かぞえる・そうぞうする。1日5分でできる認知機能トレーニング集。難易度3段階・記録機能・A4印刷対応。">
+<link rel="stylesheet" href="/style.css">
+<style>
+:root{
+  --green:#1a7a4a; --green-dark:#1a3d2b; --green-light:#22c55e; --green-pale:#dcfce7; --green-mid:#bbf7d0;
+  --ink:#1e293b; --navy:#1a3d2b; --paper:#f8fafc; --cream:#f0fdf4;
+  --line:#e2e8f0; --sub:#64748b;
+  --a-mem:#16a34a;  /* 覚える */
+  --a-copy:#0284c7; /* 写す */
+  --a-find:#d97706; /* 見つける */
+  --a-count:#7c3aed;/* 数える */
+  --a-imag:#db2777; /* 想像する */
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:var(--ink);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased;margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;}
+
+/* ─── Hero ─── */
+.hero{
+  background-color:#1a3d2b;
+  background-image:linear-gradient(135deg,#1a3d2b 0%,#1f5c40 55%,#155e75 100%);
+  color:#fff;padding:56px 24px 60px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 15%,rgba(126,232,162,.16) 0%,transparent 55%),radial-gradient(ellipse at 15% 85%,rgba(56,189,248,.12) 0%,transparent 55%);pointer-events:none;}
+.hero-badge{display:inline-block;background:rgba(126,232,162,.16);border:1px solid rgba(126,232,162,.45);color:#7ee8a2;font-size:12px;font-weight:800;letter-spacing:.08em;padding:6px 16px;border-radius:20px;margin-bottom:16px;}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(24px,5.4vw,38px);font-weight:800;line-height:1.45;margin:0 0 14px;}
+.hero h1 em{font-style:normal;color:#7ee8a2;}
+.hero-sub{font-size:clamp(13px,3.4vw,15.5px);opacity:.92;margin:0 auto;max-width:620px;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px;position:relative;z-index:1;}
+.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;}
+
+/* ─── Layout ─── */
+body.playing .hero{display:none;}
+.wrap{max-width:960px;margin:0 auto;padding:34px 20px 72px;}
+.screen{display:none;}
+.screen.on{display:block;}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:19px;font-weight:800;color:var(--navy);margin:0 0 6px;display:flex;align-items:center;gap:9px;}
+.sec-desc{font-size:13.5px;color:var(--sub);margin:0 0 18px;}
+.block{margin-bottom:38px;}
+
+/* ─── 説明ボックス ─── */
+.intro{background:#fff;border:1px solid var(--line);border-top:4px solid var(--green);border-radius:14px;padding:24px 22px;box-shadow:0 2px 10px rgba(15,23,42,.04);}
+.intro p{font-size:14px;margin:0 0 12px;}
+.intro p:last-child{margin-bottom:0;}
+.intro strong{background:linear-gradient(transparent 62%,var(--green-mid) 62%);font-weight:800;}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0 6px;}
+.pillar{border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;background:var(--cream);}
+.pillar-h{font-size:13.5px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.pillar-d{font-size:12px;color:var(--sub);line-height:1.7;}
+.pillar[data-a="mem"]{border-left:4px solid var(--a-mem);}
+.pillar[data-a="copy"]{border-left:4px solid var(--a-copy);}
+.pillar[data-a="find"]{border-left:4px solid var(--a-find);}
+.pillar[data-a="count"]{border-left:4px solid var(--a-count);}
+.pillar[data-a="imag"]{border-left:4px solid var(--a-imag);}
+
+/* ─── 設定バー ─── */
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(15,23,42,.04);}
+.setrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;}
+.setlabel{font-size:12.5px;font-weight:800;color:var(--navy);}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#f1f5f9;}
+.seg button{appearance:none;border:0;background:transparent;font:inherit;font-size:13px;font-weight:700;color:var(--sub);padding:9px 16px;cursor:pointer;min-height:42px;}
+.seg button[aria-pressed="true"]{background:var(--green);color:#fff;}
+.seg button:focus-visible{outline:3px solid #7ee8a2;outline-offset:-3px;}
+
+/* ─── 領域フィルタ ─── */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;}
+.fbtn{appearance:none;border:1px solid var(--line);background:#fff;border-radius:20px;padding:8px 15px;font:inherit;font-size:12.5px;font-weight:700;color:var(--sub);cursor:pointer;min-height:40px;}
+.fbtn[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+/* ─── メニューカード ─── */
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:16px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(15,23,42,.05);transition:transform .18s,box-shadow .18s;}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(15,23,42,.09);}
+.card-top{padding:14px 16px 12px;border-top:4px solid var(--c,#1a7a4a);display:flex;align-items:flex-start;gap:11px;}
+.card-emoji{font-size:26px;line-height:1;}
+.card-badge{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:20px;background:var(--cp,#dcfce7);color:var(--c,#1a7a4a);margin-bottom:3px;}
+.card-title{font-size:15.5px;font-weight:800;color:var(--navy);line-height:1.4;}
+.card-body{padding:0 16px 16px;display:flex;flex-direction:column;flex:1;}
+.card-desc{font-size:12.7px;color:var(--sub);line-height:1.75;margin:2px 0 12px;flex:1;}
+.card-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.tag{font-size:10.5px;font-weight:700;background:#f1f5f9;color:var(--sub);border-radius:6px;padding:3px 8px;}
+.tag.done{background:var(--green-pale);color:var(--green);}
+.card-btn{display:block;text-align:center;background:var(--c,#1a7a4a);color:#fff;font-size:13.5px;font-weight:800;padding:11px;border-radius:10px;border:0;font-family:inherit;cursor:pointer;min-height:44px;}
+.card-btn:hover{filter:brightness(1.08);}
+
+/* ─── プレイ画面 ─── */
+.play-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:14px 14px 0 0;padding:14px 18px;border-bottom:0;}
+.play-title{font-size:16px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;}
+.play-stats{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--sub);}
+.chip{background:#f1f5f9;border-radius:8px;padding:5px 11px;font-variant-numeric:tabular-nums;}
+.chip.time{background:#eef2ff;color:#4338ca;}
+.btn-quit{appearance:none;border:1px solid var(--line);background:#fff;border-radius:8px;font:inherit;font-size:12px;font-weight:700;color:var(--sub);padding:7px 13px;cursor:pointer;min-height:38px;}
+.progress{height:6px;background:#e2e8f0;}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--green-light));width:0;transition:width .3s;}
+.stage{background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;padding:24px 20px 26px;min-height:340px;}
+.q-instr{background:var(--cream);border:1px solid var(--green-mid);border-radius:10px;padding:12px 15px;font-size:13.5px;font-weight:700;color:var(--navy);margin:0 0 18px;}
+.q-instr small{display:block;font-weight:500;color:var(--sub);font-size:12px;margin-top:4px;}
+.center{text-align:center;}
+.btn{appearance:none;border:0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;padding:12px 26px;cursor:pointer;min-height:46px;}
+.btn-main{background:var(--green);color:#fff;}
+.btn-main:hover{background:#166b41;}
+.btn-sub{background:#fff;border:1px solid var(--line);color:var(--sub);}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px;}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+
+/* 記憶提示 */
+.flash{font-size:clamp(26px,7vw,42px);font-weight:800;color:var(--navy);text-align:center;padding:44px 10px;font-family:'Noto Serif JP',serif;}
+.count-down{font-size:13px;color:var(--sub);text-align:center;font-weight:700;}
+.ansrow{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:6px 0 4px;}
+.ansbox{text-align:center;}
+.ansbox label{display:block;font-size:11.5px;color:var(--sub);font-weight:700;margin-bottom:4px;}
+.ansbox input{width:62px;height:58px;text-align:center;font-size:24px;font-weight:800;border:2px solid var(--line);border-radius:10px;font-family:'DM Mono',monospace;color:var(--navy);}
+.ansbox input:focus{outline:0;border-color:var(--green);}
+
+/* グリッド系 */
+.grid-board{display:grid;gap:6px;justify-content:center;margin:0 auto;}
+.cellbtn{appearance:none;border:2px solid var(--line);background:#fff;border-radius:9px;width:100%;aspect-ratio:1;cursor:pointer;font-size:20px;font-weight:800;color:var(--navy);font-family:'DM Mono','Noto Sans JP',monospace;display:flex;align-items:center;justify-content:center;padding:0;}
+.cellbtn.lit{background:var(--green);border-color:var(--green);}
+.cellbtn.sel{background:var(--green-pale);border-color:var(--green);}
+.cellbtn.ok{background:var(--green);border-color:var(--green);color:#fff;}
+.cellbtn.ng{background:#fee2e2;border-color:#ef4444;color:#b91c1c;}
+.cellbtn:disabled{cursor:default;}
+
+/* 単語チップ */
+.wordwrap{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;}
+.wchip{appearance:none;border:2px solid var(--line);background:#fff;border-radius:10px;font:inherit;font-size:14.5px;font-weight:700;color:var(--navy);padding:11px 16px;cursor:pointer;min-height:46px;}
+.wchip[aria-pressed="true"]{background:var(--green-pale);border-color:var(--green);color:var(--green-dark);}
+.wchip.ok{border-color:var(--green);background:var(--green);color:#fff;}
+.wchip.ng{border-color:#ef4444;background:#fee2e2;color:#b91c1c;}
+
+/* 図形2枚並べ */
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;justify-items:center;}
+.figbox{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;width:100%;max-width:300px;}
+.figbox h4{margin:0 0 8px;font-size:12.5px;font-weight:800;color:var(--sub);text-align:center;}
+.figbox svg{display:block;width:100%;height:auto;touch-action:manipulation;}
+.dot{fill:#94a3b8;}
+.dot.hot{fill:var(--green);}
+.dot-hit{fill:transparent;cursor:pointer;}
+.seg-line{stroke:var(--navy);stroke-width:3;stroke-linecap:round;}
+.seg-line.mine{stroke:var(--green);}
+
+/* 選択肢（図形） */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;max-width:560px;margin:0 auto;}
+.opt{appearance:none;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px;cursor:pointer;font:inherit;}
+.opt[aria-pressed="true"]{border-color:var(--green);background:var(--green-pale);}
+.opt.ok{border-color:var(--green);background:var(--green-pale);}
+.opt.ng{border-color:#ef4444;background:#fee2e2;}
+.opt svg{display:block;width:100%;height:auto;}
+.opt-label{font-size:11.5px;font-weight:800;color:var(--sub);text-align:center;margin-top:4px;}
+
+/* 文章系選択肢 */
+.choices{display:grid;gap:10px;max-width:620px;margin:0 auto;}
+.choice{appearance:none;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:13px 16px;font:inherit;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;min-height:50px;display:flex;gap:10px;align-items:center;}
+.choice[aria-pressed="true"]{border-color:var(--green);background:var(--green-pale);}
+.choice .num{flex:0 0 26px;height:26px;border-radius:50%;background:#f1f5f9;color:var(--sub);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.choice[aria-pressed="true"] .num{background:var(--green);color:#fff;}
+.choice.ok{border-color:var(--green);background:var(--green-pale);}
+.choice.ng{border-color:#ef4444;background:#fee2e2;}
+.choice .ordnum{flex:0 0 26px;height:26px;border-radius:8px;background:var(--green);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+
+/* 記号の並び（数える） */
+.symgrid{display:grid;gap:4px;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 10px;max-width:640px;margin:0 auto;}
+.sym{font-size:clamp(17px,4.4vw,24px);text-align:center;line-height:1.25;user-select:none;}
+
+/* 判定 */
+.verdict{margin-top:18px;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:800;display:flex;gap:10px;align-items:flex-start;}
+.verdict.good{background:var(--green-pale);border:1px solid var(--green-mid);color:#14532d;}
+.verdict.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;}
+.verdict .vi{font-size:20px;line-height:1.2;}
+.verdict small{display:block;font-weight:600;font-size:12.5px;margin-top:4px;color:inherit;opacity:.9;}
+
+/* 結果 */
+.result-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 24px;text-align:center;box-shadow:0 4px 18px rgba(15,23,42,.06);}
+.score-ring{font-family:'DM Mono',monospace;font-size:52px;font-weight:800;color:var(--green);line-height:1.1;}
+.score-sub{font-size:13px;color:var(--sub);font-weight:700;margin-bottom:16px;}
+.rstats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:16px 0 6px;}
+.rstat{background:var(--cream);border:1px solid var(--green-mid);border-radius:10px;padding:10px 18px;min-width:110px;}
+.rstat b{display:block;font-size:19px;font-family:'DM Mono',monospace;color:var(--navy);}
+.rstat span{font-size:11px;color:var(--sub);font-weight:700;}
+.comment{background:var(--cream);border-radius:10px;padding:13px 16px;font-size:13.5px;margin:18px auto 0;max-width:520px;text-align:left;}
+
+/* 記録 */
+.rec-table{width:100%;border-collapse:collapse;font-size:12.8px;background:#fff;border-radius:12px;overflow:hidden;}
+.rec-table th{background:linear-gradient(135deg,var(--navy),#1f5c40);color:#fff;font-size:11.5px;padding:9px 8px;text-align:left;font-weight:800;}
+.rec-table td{border-bottom:1px solid var(--line);padding:9px 8px;}
+.rec-table td.num{font-family:'DM Mono',monospace;text-align:right;white-space:nowrap;}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+.streak{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;}
+.streak .rstat{background:#fff;border-color:var(--line);}
+
+/* 印刷 */
+.printgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;}
+.pcard{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;}
+.pcard h4{margin:0 0 4px;font-size:13.5px;font-weight:800;color:var(--navy);}
+.pcard p{margin:0 0 10px;font-size:12px;color:var(--sub);}
+.pcard button{width:100%;}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;font-size:12.5px;color:#78350f;line-height:1.8;}
+.note b{font-weight:800;}
+.disc{font-size:11.5px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;line-height:1.85;}
+.ai-note{font-size:10px;color:#94a3b8;text-align:center;margin-top:22px;}
+
+/* 印刷シート */
+#printArea{display:none;}
+.sheet{padding:10mm 8mm;}
+.sheet h2{font-size:16pt;margin:0 0 2mm;font-family:'Noto Serif JP',serif;}
+.sheet .shead{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1a3d2b;padding-bottom:2mm;margin-bottom:4mm;}
+.sheet .sname{font-size:9pt;}
+.sheet .sinstr{font-size:10pt;margin:0 0 4mm;}
+.sheet .pitem{break-inside:avoid;page-break-inside:avoid;margin-bottom:6mm;}
+.sheet .pitem h3{font-size:11pt;margin:0 0 2mm;}
+.sheet table{border-collapse:collapse;}
+.sheet td.pcell{border:1px solid #334155;width:12mm;height:12mm;text-align:center;font-size:14pt;font-family:'DM Mono',monospace;}
+.sheet .psym{font-size:13pt;letter-spacing:.6em;line-height:1.9;}
+.sheet .pans{font-size:9.5pt;color:#334155;}
+.sheet .pcols{display:flex;gap:8mm;flex-wrap:wrap;}
+
+@media print{
+  body{background:#fff;}
+  header,.hero,.wrap,footer,.print-hide{display:none !important;}
+  #printArea{display:block !important;}
+  .sheet{page-break-after:always;}
+  .sheet:last-child{page-break-after:auto;}
+  @page{size:A4;margin:8mm;}
+}
+
+@media (max-width:560px){
+  .wrap{padding:26px 14px 60px;}
+  .menu{grid-template-columns:1fr;}
+  .stage{padding:18px 13px 22px;}
+  .ansbox input{width:54px;height:52px;font-size:21px;}
+  .play-head{padding:12px 13px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .card{transition:none;}
+  .progress > i{transition:none;}
+}
+</style>
+<script src="/js/cookie-consent.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-text">
+        <div class="logo-main">Life Asset</div>
+        <div class="tagline">あなたの未来に、確かな安心と成長を。</div>
+      </div>
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="/simulation.html">シミュレーター</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/kids.html">子ども学習</a>
+      <a href="/contact.html">お問い合わせ</a>
+    </nav>
+    <a href="/contact.html" class="btn-cta nav-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">🧠 認知機能トレーニング</div>
+  <h1>見る・おぼえる・想像する力を、<br><em>1日5分</em>から。</h1>
+  <p class="hero-sub">
+    読み書き計算の「その手前」にある力＝認知機能を鍛える12種類の課題集。<br>
+    難易度3段階・記録つき。A4の印刷プリントも作れます。
+  </p>
+  <div class="hero-pills">
+    <span class="hero-pill">🧩 覚える</span>
+    <span class="hero-pill">✏️ 写す</span>
+    <span class="hero-pill">🔍 見つける</span>
+    <span class="hero-pill">🔢 数える</span>
+    <span class="hero-pill">💭 想像する</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════ HOME ══════════ -->
+<section id="scr-home" class="screen on">
+
+  <div class="block">
+    <div class="intro">
+      <p>計算や漢字を練習してもなかなか定着しない。話は聞いているのに指示が入らない。板書がうつせない。数え間違いが多い。——こうしたつまずきの背景には、学習の土台になる<strong>認知機能</strong>の弱さがあることが知られています。</p>
+      <p>認知機能とは、<strong>記憶・注意・知覚・言語理解・判断／推論</strong>といった、情報を受け取り、整理し、使うための一連の働きのことです。児童精神科医の宮口幸治氏が『ケーキの切れない非行少年たち』（新潮新書）で紹介した認知機能強化トレーニング（コグトレ）は、この土台を「覚える・写す・見つける・数える・想像する」の5領域に分けて鍛える考え方として広く知られるようになりました。</p>
+      <p>このページは、その<strong>5領域の考え方を参考にした独自制作の練習課題</strong>です。書籍やコグトレ教材の問題を転載したものではなく、問題はすべてブラウザ上で自動生成されます。学校・家庭・支援の現場での練習用にご活用ください。</p>
+
+      <div class="pillars">
+        <div class="pillar" data-a="mem">
+          <div class="pillar-h">🧩 覚える</div>
+          <div class="pillar-d">見聞きした情報を、必要な間だけ頭に置いておく力（記憶・ワーキングメモリ）。指示を最後まで保持する土台。</div>
+        </div>
+        <div class="pillar" data-a="copy">
+          <div class="pillar-h">✏️ 写す</div>
+          <div class="pillar-d">見た形を正しく捉えて再現する力（視覚認知・目と手の協応）。板書・文字の形・図の書き取りに直結。</div>
+        </div>
+        <div class="pillar" data-a="find">
+          <div class="pillar-h">🔍 見つける</div>
+          <div class="pillar-d">たくさんの情報から必要なものを選び出す力（視覚探索・図と地の分離）。見落としや読み飛ばしを減らす。</div>
+        </div>
+        <div class="pillar" data-a="count">
+          <div class="pillar-h">🔢 数える</div>
+          <div class="pillar-d">規則を保ちながら正確に処理する力（注意の持続・処理速度）。計算ミスや作業の抜けに関わる。</div>
+        </div>
+        <div class="pillar" data-a="imag">
+          <div class="pillar-h">💭 想像する</div>
+          <div class="pillar-d">見えない部分を頭の中で補う力（空間認知・推論・他者視点）。段取りや対人関係の土台になる。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2 class="sec-title">⚙️ 設定</h2>
+    <p class="sec-desc">難易度と1回の問題数を選んでから、下のトレーニングを選びます。設定はこの端末に保存されます。</p>
+    <div class="panel">
+      <div class="setrow">
+        <span class="setlabel">難易度</span>
+        <div class="seg" id="segLevel" role="group" aria-label="難易度">
+          <button type="button" data-v="1" aria-pressed="true">やさしい</button>
+          <button type="button" data-v="2" aria-pressed="false">ふつう</button>
+          <button type="button" data-v="3" aria-pressed="false">むずかしい</button>
+        </div>
+        <span class="setlabel">問題数</span>
+        <div class="seg" id="segCount" role="group" aria-label="1回の問題数">
+          <button type="button" data-v="3" aria-pressed="false">3問</button>
+          <button type="button" data-v="5" aria-pressed="true">5問</button>
+          <button type="button" data-v="8" aria-pressed="false">8問</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2 class="sec-title">🎯 トレーニングを選ぶ</h2>
+    <p class="sec-desc">12種類の課題。領域で絞り込めます。1日1〜2種類、5分ずつを目安に。</p>
+    <div class="filters" id="filters" role="group" aria-label="領域でしぼりこむ">
+      <button type="button" class="fbtn" data-a="all" aria-pressed="true">すべて</button>
+      <button type="button" class="fbtn" data-a="mem" aria-pressed="false">🧩 覚える</button>
+      <button type="button" class="fbtn" data-a="copy" aria-pressed="false">✏️ 写す</button>
+      <button type="button" class="fbtn" data-a="find" aria-pressed="false">🔍 見つける</button>
+      <button type="button" class="fbtn" data-a="count" aria-pressed="false">🔢 数える</button>
+      <button type="button" class="fbtn" data-a="imag" aria-pressed="false">💭 想像する</button>
+    </div>
+    <div class="menu" id="menu"></div>
+  </div>
+
+  <div class="block">
+    <h2 class="sec-title">📊 記録</h2>
+    <p class="sec-desc">正答率・実施回数はこの端末のブラウザ内にだけ保存されます。外部には送信されません。</p>
+    <div class="streak" id="streak"></div>
+    <div class="table-wrap">
+      <table class="rec-table">
+        <thead><tr><th>トレーニング</th><th>領域</th><th style="text-align:right">回数</th><th style="text-align:right">直近</th><th style="text-align:right">最高</th><th>最終実施</th></tr></thead>
+        <tbody id="recBody"></tbody>
+      </table>
+    </div>
+    <div class="btn-row" style="justify-content:flex-start;margin-top:12px;">
+      <button type="button" class="btn btn-sub" id="btnClearRec">記録を消去する</button>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2 class="sec-title">🖨️ 印刷用プリントを作る</h2>
+    <p class="sec-desc">紙で取り組みたいときに。ボタンを押すとA4サイズの問題用紙＋解答が生成され、印刷ダイアログが開きます。押すたびに新しい問題になります。</p>
+    <div class="printgrid">
+      <div class="pcard">
+        <h4>🔢 さがし算</h4>
+        <p>となりあう2つの数で、指定の和になる組を全部さがす。6問／枚。</p>
+        <button type="button" class="btn btn-main" data-print="findsum">プリントを作る</button>
+      </div>
+      <div class="pcard">
+        <h4>🔢 まとめて数える</h4>
+        <p>記号の並びから、決めた印だけを数える。4問／枚。</p>
+        <button type="button" class="btn btn-main" data-print="countrule">プリントを作る</button>
+      </div>
+      <div class="pcard">
+        <h4>✏️ 点つなぎ</h4>
+        <p>見本と同じ形を、右の点をつないで写す。6問／枚。</p>
+        <button type="button" class="btn btn-main" data-print="copydots">プリントを作る</button>
+      </div>
+      <div class="pcard">
+        <h4>🔍 同じ形さがし</h4>
+        <p>並んだ形の中から、まったく同じ2つをさがす。4問／枚。</p>
+        <button type="button" class="btn btn-main" data-print="findsame">プリントを作る</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="note">
+      <b>使い方のめやす</b><br>
+      ・<b>毎日少しずつ</b>が基本です。1日5分程度、同じ課題を数日続けてから次へ進むと定着しやすくなります。<br>
+      ・できなかった問題は、責めずに<b>難易度を1つ下げて</b>やり直します。「やさしい」で8〜9割できるようになってから「ふつう」へ。<br>
+      ・時間を競う課題ではありません。<b>正確さが先、速さは後</b>で構いません。<br>
+      ・つまずいた領域（たとえば「写す」だけ極端に苦手）が見えたら、そこを重点的に。得意な領域も混ぜると続きます。
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="disc">
+      <b>ご利用にあたって</b><br>
+      本ページは学習・練習を目的とした一般向けの課題集であり、発達検査・知能検査・診断・治療を目的としたものではありません。成績や得点は認知機能を医学的に評価するものではなく、結果から特定の状態を判断することはできません。お子さまや本人の困りごとが続く場合は、学校のスクールカウンセラー、自治体の発達相談窓口、児童精神科・小児科などの専門機関にご相談ください。<br>
+      文中で言及した書籍・用語は説明のための引用であり、本ページは著者・出版社・関連団体とは関係のない独自制作の教材です。課題はすべて当サイトで自動生成しています。<br>
+      入力内容・成績はお使いのブラウザ内（localStorage）にのみ保存され、当サイトのサーバーや第三者へ送信されることはありません。
+    </div>
+    <p class="ai-note">本ページの課題文・解説の作成にはAIを利用し、当編集部が確認しています。</p>
+  </div>
+
+</section>
+
+<!-- ══════════ PLAY ══════════ -->
+<section id="scr-play" class="screen">
+  <div class="play-head">
+    <div class="play-title"><span id="playEmoji">🧩</span><span id="playTitle">トレーニング</span></div>
+    <div class="play-stats">
+      <span class="chip" id="chipLevel">やさしい</span>
+      <span class="chip" id="chipProg">1 / 5</span>
+      <span class="chip time" id="chipTime">0:00</span>
+      <button type="button" class="btn-quit" id="btnQuit">やめる</button>
+    </div>
+  </div>
+  <div class="progress"><i id="progBar"></i></div>
+  <div class="stage" id="stage"></div>
+</section>
+
+<!-- ══════════ RESULT ══════════ -->
+<section id="scr-result" class="screen">
+  <div class="result-card">
+    <div id="resEmoji" style="font-size:40px;line-height:1">🎉</div>
+    <div class="score-ring" id="resScore">100%</div>
+    <div class="score-sub" id="resTitle">おつかれさまでした</div>
+    <div class="rstats">
+      <div class="rstat"><b id="resCorrect">5</b><span>正解数</span></div>
+      <div class="rstat"><b id="resTotal">5</b><span>問題数</span></div>
+      <div class="rstat"><b id="resTime">1:20</b><span>所要時間</span></div>
+      <div class="rstat"><b id="resBest">100%</b><span>これまでの最高</span></div>
+    </div>
+    <div class="comment" id="resComment"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-main" id="btnAgain">もう一度</button>
+      <button type="button" class="btn btn-sub" id="btnHome">トレーニング一覧へ</button>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.wrap -->
+
+<footer>
+  <div class="footer-logo">ライフアセットオフィス</div>
+  <p>© 2026 ライフアセットオフィス｜<a href="/privacy.html">プライバシーポリシー</a>｜<a href="/contact.html">お問い合わせ</a></p>
+</footer>
+
+<div id="printArea"></div>
+
+<script src="/nav.js" defer></script>
+<script>
+(function(){
+'use strict';
+
+/* ════════ 基本ユーティリティ ════════ */
+function R(n){ return Math.floor(Math.random()*n); }
+function pick(a){ return a[R(a.length)]; }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=R(i+1); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function ri(min,max){ return min+R(max-min+1); }
+function uniq(a){ var o=[]; a.forEach(function(x){ if(o.indexOf(x)<0) o.push(x); }); return o; }
+function same(a,b){ if(a.length!==b.length) return false; var x=a.slice().sort(), y=b.slice().sort(); for(var i=0;i<x.length;i++){ if(String(x[i])!==String(y[i])) return false; } return true; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function pad2(n){ return (n<10?'0':'')+n; }
+function mmss(sec){ return Math.floor(sec/60)+':'+pad2(sec%60); }
+function todayStr(){ var d=new Date(); return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
+function $(id){ return document.getElementById(id); }
+
+function E(tag,opt,kids){
+  var n=document.createElement(tag);
+  opt=opt||{};
+  for(var k in opt){
+    if(!Object.prototype.hasOwnProperty.call(opt,k)) continue;
+    if(k==='class') n.className=opt[k];
+    else if(k==='html') n.innerHTML=opt[k];
+    else if(k==='text') n.textContent=opt[k];
+    else if(k==='style') n.setAttribute('style',opt[k]);
+    else if(k==='on'){ for(var ev in opt.on){ if(Object.prototype.hasOwnProperty.call(opt.on,ev)) n.addEventListener(ev,opt.on[ev]); } }
+    else n.setAttribute(k,opt[k]);
+  }
+  (kids||[]).forEach(function(c){ if(c) n.appendChild(c); });
+  return n;
+}
+
+/* ════════ 領域メタ ════════ */
+var AREAS={
+  mem:  {name:'覚える',   emoji:'🧩', c:'#16a34a', cp:'#dcfce7'},
+  copy: {name:'写す',     emoji:'✏️', c:'#0284c7', cp:'#e0f2fe'},
+  find: {name:'見つける', emoji:'🔍', c:'#d97706', cp:'#fef3c7'},
+  count:{name:'数える',   emoji:'🔢', c:'#7c3aed', cp:'#ede9fe'},
+  imag: {name:'想像する', emoji:'💭', c:'#db2777', cp:'#fce7f3'}
+};
+var LEVEL_NAME=['やさしい','ふつう','むずかしい'];
+
+/* ════════ 保存 ════════ */
+var LS_KEY='lao_cogtr_v1';
+var store={level:1,count:5,recs:{},days:[]};
+function load(){
+  try{
+    var raw=localStorage.getItem(LS_KEY);
+    if(!raw) return;
+    var s=JSON.parse(raw);
+    if(!s||typeof s!=='object') return;
+    if([1,2,3].indexOf(s.level)>=0) store.level=s.level;
+    if([3,5,8].indexOf(s.count)>=0) store.count=s.count;
+    if(s.recs&&typeof s.recs==='object') store.recs=s.recs;
+    if(Object.prototype.toString.call(s.days)==='[object Array]') store.days=s.days;
+  }catch(e){}
+}
+function save(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(store)); }catch(e){} }
+
+/* ════════ 画面切替 ════════ */
+function show(name){
+  ['home','play','result'].forEach(function(n){
+    var el=$('scr-'+n);
+    if(el) el.classList.toggle('on', n===name);
+  });
+  document.body.classList.toggle('playing', name!=='home');
+  window.scrollTo({top:0,behavior:'auto'});
+}
+
+/* ════════ 実行エンジン ════════ */
+var run={tr:null,level:1,total:5,idx:0,correct:0,startAt:0,answered:false};
+var timers=[], tickId=null;
+
+function wait(ms,fn){
+  var id=setTimeout(function(){
+    timers=timers.filter(function(t){ return t!==id; });
+    fn();
+  },ms);
+  timers.push(id);
+  return id;
+}
+function clearTimers(){ timers.forEach(function(t){ clearTimeout(t); }); timers=[]; }
+
+function instr(host,main,sub){
+  host.appendChild(E('div',{class:'q-instr',html:main+(sub?'<small>'+sub+'</small>':'')}));
+}
+function mkBtn(label,kind,fn,attrs){
+  var o={class:'btn '+(kind==='main'?'btn-main':'btn-sub'),type:'button',text:label,on:{click:fn}};
+  if(attrs){ for(var k in attrs){ if(Object.prototype.hasOwnProperty.call(attrs,k)) o[k]=attrs[k]; } }
+  return E('button',o);
+}
+function actionBar(host,btns){
+  var row=E('div',{class:'btn-row'},btns);
+  host.appendChild(row);
+  return row;
+}
+
+var api={
+  E:E, instr:instr, btn:mkBtn, bar:actionBar, wait:wait, R:R, pick:pick, shuffle:shuffle, ri:ri, same:same, esc:esc,
+  done:function(ok,note){ finishQuestion(ok,note); }
+};
+
+function startTraining(id){
+  var tr=null;
+  TRAININGS.forEach(function(t){ if(t.id===id) tr=t; });
+  if(!tr) return;
+  run.tr=tr; run.level=store.level; run.total=store.count; run.idx=0; run.correct=0; run.used={}; run.startAt=Date.now();
+  $('playEmoji').textContent=tr.emoji;
+  $('playTitle').textContent=tr.title;
+  $('chipLevel').textContent=LEVEL_NAME[run.level-1];
+  show('play');
+  if(tickId) clearInterval(tickId);
+  tickId=setInterval(function(){
+    $('chipTime').textContent=mmss(Math.floor((Date.now()-run.startAt)/1000));
+  },500);
+  nextQ();
+}
+
+function nextQ(){
+  clearTimers();
+  run.idx++;
+  run.answered=false;
+  $('chipProg').textContent=run.idx+' / '+run.total;
+  $('progBar').style.width=Math.round((run.idx-1)/run.total*100)+'%';
+  var stage=$('stage');
+  stage.innerHTML='';
+  var host=E('div');
+  stage.appendChild(host);
+  try{
+    run.tr.build(run.level,host,api);
+  }catch(err){
+    host.appendChild(E('div',{class:'verdict bad',html:'<span class="vi">⚠️</span><div>問題の作成に失敗しました。<small>「次の問題へ」を押してください。</small></div>'}));
+    finishQuestion(false,'この問題は採点対象から外れます。');
+  }
+}
+
+function finishQuestion(ok,note){
+  if(run.answered) return;
+  run.answered=true;
+  clearTimers();
+  if(ok) run.correct++;
+  $('progBar').style.width=Math.round(run.idx/run.total*100)+'%';
+  var stage=$('stage');
+  var v=E('div',{class:'verdict '+(ok?'good':'bad'),
+    html:'<span class="vi">'+(ok?'⭕':'✖')+'</span><div>'+(ok?'せいかい！':'おしいところ。答えを確認しましょう')+(note?'<small>'+note+'</small>':'')+'</div>'});
+  stage.appendChild(v);
+  var last=(run.idx>=run.total);
+  var btn=mkBtn(last?'結果を見る':'次の問題へ','main',function(){ if(last){ showResult(); } else { nextQ(); } });
+  stage.appendChild(E('div',{class:'btn-row'},[btn]));
+  try{ btn.focus({preventScroll:true}); }catch(e){}
+}
+
+function quit(){
+  clearTimers();
+  if(tickId){ clearInterval(tickId); tickId=null; }
+  show('home');
+  renderMenu();
+  renderRecords();
+}
+
+function showResult(){
+  clearTimers();
+  if(tickId){ clearInterval(tickId); tickId=null; }
+  var sec=Math.floor((Date.now()-run.startAt)/1000);
+  var pct=Math.round(run.correct/run.total*100);
+  var prevBest=(store.recs[run.tr.id]&&store.recs[run.tr.id].best)||0;
+  saveRecord(run.tr.id,pct);
+  $('resScore').textContent=pct+'%';
+  $('resCorrect').textContent=run.correct;
+  $('resTotal').textContent=run.total;
+  $('resTime').textContent=mmss(sec);
+  $('resBest').textContent=Math.max(prevBest,pct)+'%';
+  var emoji='🌱', title='おつかれさまでした', msg='';
+  if(pct===100){ emoji='🏆'; title='全問正解！'; msg='この難易度は安定しています。<b>一つ上の難易度</b>か、まだ手をつけていない領域の課題に進んでみましょう。'; }
+  else if(pct>=80){ emoji='🎉'; title='よくできました'; msg='ほぼ定着しています。<b>同じ難易度をもう1〜2回</b>くり返して、8〜9割を続けて出せたら次の段階へ。'; }
+  else if(pct>=50){ emoji='💪'; title='あと少し'; msg='半分以上できています。<b>急がず、確実に</b>を意識してもう一度。間違えた問題の「どこを見落としたか」を言葉にしてみると変わります。'; }
+  else { emoji='🌱'; title='ここからです'; msg='今の難易度は少し高いかもしれません。<b>1つ下の難易度</b>に戻して、正確にできる感覚をつくってから戻ってきましょう。'; }
+  if(pct>prevBest&&run.tr&&(store.recs[run.tr.id].plays>1)){ msg+='<br>これまでの最高記録を更新しました。'; }
+  $('resEmoji').textContent=emoji;
+  $('resTitle').textContent=title;
+  $('resComment').innerHTML=msg;
+  show('result');
+}
+
+function saveRecord(id,pct){
+  var r=store.recs[id]||{plays:0,best:0,last:0,date:''};
+  r.plays=(r.plays||0)+1;
+  r.last=pct;
+  if(pct>(r.best||0)) r.best=pct;
+  r.date=todayStr();
+  store.recs[id]=r;
+  var d=todayStr();
+  if(store.days.indexOf(d)<0) store.days.push(d);
+  if(store.days.length>400) store.days=store.days.slice(-400);
+  save();
+}
+
+/* ════════ メニュー・記録の描画 ════════ */
+var filterArea='all';
+
+function renderMenu(){
+  var m=$('menu');
+  m.innerHTML='';
+  TRAININGS.forEach(function(t){
+    if(filterArea!=='all'&&t.area!==filterArea) return;
+    var a=AREAS[t.area];
+    var rec=store.recs[t.id];
+    var card=E('div',{class:'card',style:'--c:'+a.c+';--cp:'+a.cp});
+    var top=E('div',{class:'card-top'},[
+      E('span',{class:'card-emoji',text:t.emoji}),
+      E('div',{},[
+        E('span',{class:'card-badge',text:a.emoji+' '+a.name}),
+        E('div',{class:'card-title',text:t.title})
+      ])
+    ]);
+    var meta=E('div',{class:'card-meta'});
+    (t.tags||[]).forEach(function(g){ meta.appendChild(E('span',{class:'tag',text:g})); });
+    if(rec&&rec.plays) meta.appendChild(E('span',{class:'tag done',text:'最高 '+rec.best+'%・'+rec.plays+'回'}));
+    var body=E('div',{class:'card-body'},[
+      E('p',{class:'card-desc',text:t.desc}),
+      meta,
+      E('button',{class:'card-btn',type:'button',text:'はじめる',on:{click:function(){ startTraining(t.id); }}})
+    ]);
+    card.appendChild(top); card.appendChild(body);
+    m.appendChild(card);
+  });
+  if(!m.children.length) m.appendChild(E('p',{class:'sec-desc',text:'この領域の課題はありません。'}));
+}
+
+function streakDays(){
+  if(!store.days.length) return 0;
+  var days=store.days.slice().sort();
+  var d=new Date(); d.setHours(0,0,0,0);
+  var key=function(dt){ return dt.getFullYear()+'-'+pad2(dt.getMonth()+1)+'-'+pad2(dt.getDate()); };
+  if(days.indexOf(key(d))<0){
+    d.setDate(d.getDate()-1);
+    if(days.indexOf(key(d))<0) return 0;
+  }
+  var n=0;
+  while(days.indexOf(key(d))>=0){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+
+function renderRecords(){
+  var tb=$('recBody');
+  tb.innerHTML='';
+  var plays=0, areasDone={};
+  TRAININGS.forEach(function(t){
+    var r=store.recs[t.id];
+    var a=AREAS[t.area];
+    if(r&&r.plays){ plays+=r.plays; areasDone[t.area]=true; }
+    var tr=E('tr',{},[
+      E('td',{text:t.emoji+' '+t.title}),
+      E('td',{text:a.name}),
+      E('td',{class:'num',text:r&&r.plays?String(r.plays):'—'}),
+      E('td',{class:'num',text:r&&r.plays?r.last+'%':'—'}),
+      E('td',{class:'num',text:r&&r.plays?r.best+'%':'—'}),
+      E('td',{text:r&&r.date?r.date:'—'})
+    ]);
+    tb.appendChild(tr);
+  });
+  var s=$('streak');
+  s.innerHTML='';
+  [['🔥 '+streakDays(),'連続日数'],['🧮 '+plays,'のべ実施回数'],['🗂 '+Object.keys(areasDone).length+' / 5','取り組んだ領域']].forEach(function(p){
+    s.appendChild(E('div',{class:'rstat'},[E('b',{text:p[0]}),E('span',{text:p[1]})]));
+  });
+}
+
+/* ════════ 図形ユーティリティ ════════ */
+function seq(n){ var a=[]; for(var i=0;i<n;i++) a.push(i); return a; }
+
+/* ── 点つなぎ ── */
+function dotXY(i,g,S,pad){
+  var step=(S-2*pad)/(g-1);
+  return [pad+(i%g)*step, pad+Math.floor(i/g)*step];
+}
+function genPath(g,segs){
+  var edges=[], cur=[R(g),R(g)], tries=0;
+  while(edges.length<segs&&tries<500){
+    tries++;
+    var dx=R(5)-2, dy=R(5)-2;
+    if(!dx&&!dy) continue;
+    var nx=cur[0]+dx, ny=cur[1]+dy;
+    if(nx<0||ny<0||nx>=g||ny>=g) continue;
+    var a=cur[1]*g+cur[0], b=ny*g+nx;
+    var key=Math.min(a,b)+'-'+Math.max(a,b);
+    if(edges.indexOf(key)>=0) continue;
+    edges.push(key);
+    cur=[nx,ny];
+  }
+  return edges;
+}
+function makePath(g,segs){
+  for(var t=0;t<40;t++){ var e=genPath(g,segs); if(e.length===segs) return e; }
+  return genPath(g,segs);
+}
+function mirrorEdges(g,edges){
+  function mi(i){ var x=i%g, y=Math.floor(i/g); return y*g+(g-1-x); }
+  return edges.map(function(k){
+    var p=k.split('-'), a=mi(+p[0]), b=mi(+p[1]);
+    return Math.min(a,b)+'-'+Math.max(a,b);
+  });
+}
+function dotsSVG(g,edges,S,color,dotR){
+  S=S||240;
+  var pad=Math.round(S*0.12), out='<svg viewBox="0 0 '+S+' '+S+'" xmlns="http://www.w3.org/2000/svg" role="img">';
+  (edges||[]).forEach(function(k){
+    var p=k.split('-'), A=dotXY(+p[0],g,S,pad), B=dotXY(+p[1],g,S,pad);
+    out+='<line x1="'+A[0].toFixed(1)+'" y1="'+A[1].toFixed(1)+'" x2="'+B[0].toFixed(1)+'" y2="'+B[1].toFixed(1)+'" stroke="'+(color||'#1a3d2b')+'" stroke-width="3" stroke-linecap="round"/>';
+  });
+  for(var i=0;i<g*g;i++){
+    var P=dotXY(i,g,S,pad);
+    out+='<circle cx="'+P[0].toFixed(1)+'" cy="'+P[1].toFixed(1)+'" r="'+(dotR||4.5)+'" fill="#64748b"/>';
+  }
+  return out+'</svg>';
+}
+
+/* ── 多角形（同じ形さがし） ── */
+var RADS=[0.40,0.68,0.98];
+function shapeCode(v){ var c=[]; for(var i=0;i<6;i++) c.push(R(3)); return c; }
+function hamming(a,b){ var d=0; for(var i=0;i<a.length;i++){ if(a[i]!==b[i]) d++; } return d; }
+function distinctCodes(n,minD){
+  var out=[], guard=0;
+  while(out.length<n&&guard<4000){
+    guard++;
+    var c=shapeCode(), ok=true;
+    for(var i=0;i<out.length;i++){ if(hamming(c,out[i])<minD){ ok=false; break; } }
+    if(ok) out.push(c);
+  }
+  while(out.length<n){ out.push(shapeCode()); }
+  return out;
+}
+function polyShapeSVG(code,S,fill){
+  S=S||90;
+  var cx=S/2, cy=S/2, rmax=S*0.44, pts=[];
+  for(var i=0;i<code.length;i++){
+    var ang=(-90+i*(360/code.length))*Math.PI/180;
+    var r=rmax*RADS[code[i]];
+    pts.push((cx+r*Math.cos(ang)).toFixed(1)+','+(cy+r*Math.sin(ang)).toFixed(1));
+  }
+  return '<svg viewBox="0 0 '+S+' '+S+'" xmlns="http://www.w3.org/2000/svg" role="img"><polygon points="'+pts.join(' ')+'" fill="'+(fill||'#dcfce7')+'" stroke="#1a3d2b" stroke-width="2.4" stroke-linejoin="round"/></svg>';
+}
+
+/* ── かさなり図形 ── */
+var OVER_SHAPES=[
+  {id:'circle',name:'まる'},
+  {id:'square',name:'しかく'},
+  {id:'triangle',name:'さんかく'},
+  {id:'star',name:'ほし'},
+  {id:'hex',name:'ろっかくけい'},
+  {id:'cross',name:'じゅうじ'}
+];
+function shapeMarkup(id,cx,cy,r,rot,color){
+  function poly(pts){ return '<polygon points="'+pts.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-linejoin="round" transform="rotate('+rot+','+cx+','+cy+')"/>'; }
+  function ring(k,n,rr,start){
+    var p=[];
+    for(var i=0;i<n;i++){
+      var a=(start+i*(360/n))*Math.PI/180;
+      p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));
+    }
+    return p;
+  }
+  if(id==='circle') return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+color+'" stroke-width="2.6"/>';
+  if(id==='square') return poly(ring(0,4,r*1.05,-45));
+  if(id==='triangle') return poly(ring(0,3,r*1.12,-90));
+  if(id==='diamond') return poly(ring(0,4,r*1.1,-90));
+  if(id==='hex') return poly(ring(0,6,r,-90));
+  if(id==='star'){
+    var p=[];
+    for(var i=0;i<10;i++){
+      var a=(-90+i*36)*Math.PI/180, rr=(i%2===0)?r*1.08:r*0.44;
+      p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));
+    }
+    return poly(p);
+  }
+  /* cross */
+  var t=r*0.34, R2=r*0.95, q=[];
+  q.push((cx-t)+','+(cy-R2)); q.push((cx+t)+','+(cy-R2)); q.push((cx+t)+','+(cy-t));
+  q.push((cx+R2)+','+(cy-t)); q.push((cx+R2)+','+(cy+t)); q.push((cx+t)+','+(cy+t));
+  q.push((cx+t)+','+(cy+R2)); q.push((cx-t)+','+(cy+R2)); q.push((cx-t)+','+(cy+t));
+  q.push((cx-R2)+','+(cy+t)); q.push((cx-R2)+','+(cy-t)); q.push((cx-t)+','+(cy-t));
+  return poly(q);
+}
+function overlapSVG(ids,S,seedOff){
+  S=S||260;
+  var out='<svg viewBox="0 0 '+S+' '+S+'" xmlns="http://www.w3.org/2000/svg" role="img">';
+  ids.forEach(function(id,i){
+    var o=seedOff[i];
+    out+=shapeMarkup(id, S/2+o[0], S/2+o[1], S*0.27, o[2], '#1a3d2b');
+  });
+  return out+'</svg>';
+}
+
+/* ── ポリオミノ（心で回す） ── */
+function normCells(cells){
+  var minR=Math.min.apply(null,cells.map(function(c){return c[0];}));
+  var minC=Math.min.apply(null,cells.map(function(c){return c[1];}));
+  return cells.map(function(c){ return [c[0]-minR,c[1]-minC]; })
+    .sort(function(a,b){ return a[0]-b[0]||a[1]-b[1]; });
+}
+function keyCells(cells){ return normCells(cells).map(function(c){ return c[0]+','+c[1]; }).join('|'); }
+function rot90(cells){
+  var maxR=Math.max.apply(null,cells.map(function(c){return c[0];}));
+  return normCells(cells.map(function(c){ return [c[1], maxR-c[0]]; }));
+}
+function mirrorCells(cells){
+  var maxC=Math.max.apply(null,cells.map(function(c){return c[1];}));
+  return normCells(cells.map(function(c){ return [c[0], maxC-c[1]]; }));
+}
+function rotations(cells){
+  var out=[], cur=normCells(cells);
+  for(var i=0;i<4;i++){ out.push(cur); cur=rot90(cur); }
+  return out;
+}
+function growPoly(g,n){
+  var cells=[[R(g),R(g)]], guard=0;
+  while(cells.length<n&&guard<300){
+    guard++;
+    var base=pick(cells);
+    var d=pick([[0,1],[1,0],[0,-1],[-1,0]]);
+    var c=[base[0]+d[0],base[1]+d[1]];
+    if(c[0]<0||c[1]<0||c[0]>=g||c[1]>=g) continue;
+    var dup=false;
+    cells.forEach(function(x){ if(x[0]===c[0]&&x[1]===c[1]) dup=true; });
+    if(dup) continue;
+    cells.push(c);
+  }
+  return normCells(cells);
+}
+function chiralPoly(g,n){
+  for(var t=0;t<200;t++){
+    var p=growPoly(g,n);
+    if(p.length<n) continue;
+    var rots=rotations(p).map(keyCells);
+    var m=keyCells(mirrorCells(p));
+    if(rots.indexOf(m)<0&&uniq(rots).length===4) return p;
+  }
+  return growPoly(g,n);
+}
+function polySVG(cells,S,color){
+  S=S||96;
+  var maxR=Math.max.apply(null,cells.map(function(c){return c[0];}))+1;
+  var maxC=Math.max.apply(null,cells.map(function(c){return c[1];}))+1;
+  var n=Math.max(maxR,maxC), u=S/(n+0.4), ox=(S-maxC*u)/2, oy=(S-maxR*u)/2;
+  var out='<svg viewBox="0 0 '+S+' '+S+'" xmlns="http://www.w3.org/2000/svg" role="img">';
+  cells.forEach(function(c){
+    out+='<rect x="'+(ox+c[1]*u+1).toFixed(1)+'" y="'+(oy+c[0]*u+1).toFixed(1)+'" width="'+(u-2).toFixed(1)+'" height="'+(u-2).toFixed(1)+'" rx="3" fill="'+(color||'#bbf7d0')+'" stroke="#1a3d2b" stroke-width="2"/>';
+  });
+  return out+'</svg>';
+}
+
+/* ── さがし算 ── */
+function makeSumGrid(size,target,minPairs,maxPairs){
+  for(var t=0;t<600;t++){
+    var cells=[];
+    for(var i=0;i<size*size;i++) cells.push(ri(1,9));
+    var pairs=sumPairs(cells,size,target);
+    if(pairs.length>=minPairs&&pairs.length<=maxPairs) return {cells:cells,pairs:pairs};
+  }
+  var c2=[]; for(var j=0;j<size*size;j++) c2.push(ri(1,9));
+  return {cells:c2,pairs:sumPairs(c2,size,target)};
+}
+function sumPairs(cells,size,target){
+  var out=[];
+  for(var i=0;i<cells.length;i++){
+    var x=i%size, y=Math.floor(i/size);
+    if(x+1<size&&cells[i]+cells[i+1]===target) out.push(i+'-'+(i+1));
+    if(y+1<size&&cells[i]+cells[i+size]===target) out.push(i+'-'+(i+size));
+  }
+  return out;
+}
+function posLabel(i,size){ return (Math.floor(i/size)+1)+'行'+(i%size+1)+'列'; }
+
+/* ── まとめて数える ── */
+var SYMS=['★','●','▲','■','◆'];
+function makeSymSeq(len,weights){
+  var arr=[];
+  for(var i=0;i<len;i++){
+    var r=Math.random(), acc=0, s=SYMS[0];
+    for(var k=0;k<SYMS.length;k++){ acc+=weights[k]; if(r<acc){ s=SYMS[k]; break; } }
+    arr.push(s);
+  }
+  return arr;
+}
+function countSym(arr,s){ var n=0; arr.forEach(function(x){ if(x===s) n++; }); return n; }
+function countSkipAfter(arr,target,before){
+  var n=0;
+  for(var i=0;i<arr.length;i++){
+    if(arr[i]!==target) continue;
+    if(i>0&&arr[i-1]===before) continue;
+    n++;
+  }
+  return n;
+}
+
+/* ════════ トレーニング定義 ════════ */
+var TRAININGS=[
+
+/* ── 1. さいごの数字 ── */
+{
+  id:'memlast', area:'mem', emoji:'🔢', title:'さいごの数字',
+  desc:'短い文が1つずつ出ます。文に出てきた「数」だけを、出た順に覚えて答えます。話を聞きながら要点を保持する力の土台。',
+  tags:['ワーキングメモリ','順序'],
+  build:function(lv,host,api){
+    var cfg=[{n:3,ms:1700},{n:4,ms:1450},{n:5,ms:1250}][lv-1];
+    var nouns=['りんご','みかん','たまご','ボール','ふうせん','コップ','パン','けしゴム','あめ','いちご','ドーナツ','クッキー','なし','くり','おにぎり','プリン'];
+    var ns=shuffle(nouns).slice(0,cfg.n);
+    var nums=[];
+    for(var i=0;i<cfg.n;i++) nums.push(ri(1,9));
+    instr(host,'文が '+cfg.n+' つ、順番に出ます。<b>それぞれの「数」だけ</b>を覚えてください。','文は自動で切り替わります。すべて出たら入力画面になります。');
+    var flash=E('div',{class:'flash'}), cd=E('div',{class:'count-down'});
+    host.appendChild(flash); host.appendChild(cd);
+    var k=0;
+    function step(){
+      if(k>=cfg.n){ ask(); return; }
+      flash.textContent=ns[k]+'が '+nums[k]+' こ';
+      cd.textContent=(k+1)+' / '+cfg.n;
+      k++;
+      wait(cfg.ms,step);
+    }
+    wait(500,step);
+    function ask(){
+      host.innerHTML='';
+      instr(host,'出てきた順に、<b>数だけ</b>を入力してください。','思い出せないところは空欄のままでかまいません。');
+      var row=E('div',{class:'ansrow'}), ins=[];
+      for(var i=0;i<cfg.n;i++){
+        var inp=E('input',{type:'text',inputmode:'numeric',maxlength:'1','aria-label':(i+1)+'番目の数'});
+        ins.push(inp);
+        row.appendChild(E('div',{class:'ansbox'},[E('label',{text:(i+1)+'番目'}),inp]));
+      }
+      host.appendChild(row);
+      ins.forEach(function(inp,i){
+        inp.addEventListener('input',function(){ if(inp.value&&i<ins.length-1) ins[i+1].focus(); });
+      });
+      actionBar(host,[mkBtn('こたえあわせ','main',function(){
+        var ok=true;
+        ins.forEach(function(inp,i){ if(parseInt(inp.value,10)!==nums[i]) ok=false; inp.disabled=true; });
+        api.done(ok,'正しい順番は <b>'+nums.join(' → ')+'</b> でした。');
+      })]);
+      try{ ins[0].focus(); }catch(e){}
+    }
+  }
+},
+
+/* ── 2. 位置をおぼえる ── */
+{
+  id:'memgrid', area:'mem', emoji:'🟩', title:'位置をおぼえる',
+  desc:'光ったマスの場所を覚えて、消えたあとに同じ場所を選びます。目で見た情報を頭の中に置いておく力を鍛えます。',
+  tags:['視覚的記憶','位置'],
+  build:function(lv,host,api){
+    var cfg=[{s:4,m:3,ms:2600},{s:5,m:5,ms:2900},{s:5,m:7,ms:3100}][lv-1];
+    var total=cfg.s*cfg.s;
+    var marks=shuffle(seq(total)).slice(0,cfg.m);
+    instr(host,'光ったマスの<b>場所</b>を覚えてください。','消えたあとに、同じマスを '+cfg.m+' か所えらびます。');
+    var board=E('div',{class:'grid-board',style:'grid-template-columns:repeat('+cfg.s+',minmax(0,1fr));max-width:'+(cfg.s*64)+'px'});
+    var cells=[], sel=[];
+    for(var i=0;i<total;i++){
+      var b=E('button',{type:'button',class:'cellbtn','aria-label':'マス'+(i+1)});
+      b.disabled=true;
+      if(marks.indexOf(i)>=0) b.classList.add('lit');
+      cells.push(b); board.appendChild(b);
+    }
+    host.appendChild(board);
+    var cd=E('div',{class:'count-down',style:'margin-top:12px',text:'よく見て覚えましょう…'});
+    host.appendChild(cd);
+    var checkBtn=mkBtn('こたえあわせ','main',function(){
+      cells.forEach(function(b,i){
+        b.disabled=true;
+        b.classList.remove('sel');
+        if(marks.indexOf(i)>=0) b.classList.add('ok');
+        else if(sel.indexOf(i)>=0) b.classList.add('ng');
+      });
+      var ok=same(sel,marks);
+      api.done(ok,'緑が正解の位置、赤が選び間違えた位置です。');
+    });
+    checkBtn.disabled=true;
+    cells.forEach(function(b,i){
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        var on=b.classList.toggle('sel');
+        if(on) sel.push(i); else sel=sel.filter(function(x){ return x!==i; });
+        cd.textContent='えらんだ数： '+sel.length+' / '+cfg.m;
+        checkBtn.disabled=(sel.length!==cfg.m);
+      });
+    });
+    wait(cfg.ms,function(){
+      cells.forEach(function(b){ b.classList.remove('lit'); b.disabled=false; });
+      cd.textContent='えらんだ数： 0 / '+cfg.m;
+      actionBar(host,[checkBtn]);
+    });
+  }
+},
+
+/* ── 3. ことばをおぼえる ── */
+{
+  id:'memwords', area:'mem', emoji:'💬', title:'ことばをおぼえる',
+  desc:'いくつかのことばを覚え、たくさんの候補の中から出てきたものだけを選びます。言葉の記憶と「見分ける力」を同時に使います。',
+  tags:['言語記憶','再認'],
+  build:function(lv,host,api){
+    var WORDS=['さくら','でんしゃ','みかん','てぶくろ','こうえん','ノート','ひまわり','とけい','かばん','うみ','やま','ゆき','くつした','ポスト','じてんしゃ','たいこ','ぼうし','まくら','はさみ','タオル','カレー','えんぴつ','こおり','はなび','ふとん','くすり','まど','ちず','いす','コップ','しんぶん','たまご','ねこ','いぬ','とり','さかな','くるま','でんわ','かがみ','ほうき','パンダ','こたつ','バケツ','ラジオ'];
+    var cfg=[{n:4,sec:6,opt:10},{n:6,sec:8,opt:14},{n:8,sec:10,opt:18}][lv-1];
+    var all=shuffle(WORDS);
+    var targets=all.slice(0,cfg.n);
+    var others=all.slice(cfg.n,cfg.n+(cfg.opt-cfg.n));
+    instr(host,'つぎのことばを覚えてください。','制限時間 '+cfg.sec+' 秒。消えたあと、候補の中から選びます。');
+    var wrap=E('div',{class:'wordwrap'});
+    targets.forEach(function(w){ wrap.appendChild(E('span',{class:'wchip',style:'cursor:default',text:w})); });
+    host.appendChild(wrap);
+    var cd=E('div',{class:'count-down',style:'margin-top:14px'});
+    host.appendChild(cd);
+    var left=cfg.sec;
+    function tick(){
+      cd.textContent='のこり '+left+' 秒';
+      left--;
+      if(left>=0) wait(1000,tick); else ask();
+    }
+    tick();
+    function ask(){
+      host.innerHTML='';
+      instr(host,'さっき出てきたことばを<b>すべて</b>えらんでください。','出ていないことばも混ざっています。');
+      var opts=shuffle(targets.concat(others));
+      var chosen=[], chips=[];
+      var w2=E('div',{class:'wordwrap'});
+      opts.forEach(function(w){
+        var b=E('button',{type:'button',class:'wchip','aria-pressed':'false',text:w});
+        b.addEventListener('click',function(){
+          var on=b.getAttribute('aria-pressed')!=='true';
+          b.setAttribute('aria-pressed',on?'true':'false');
+          if(on) chosen.push(w); else chosen=chosen.filter(function(x){ return x!==w; });
+          cnt.textContent='えらんだ数： '+chosen.length+' / '+cfg.n;
+        });
+        chips.push(b); w2.appendChild(b);
+      });
+      host.appendChild(w2);
+      var cnt=E('div',{class:'count-down',style:'margin-top:12px',text:'えらんだ数： 0 / '+cfg.n});
+      host.appendChild(cnt);
+      actionBar(host,[mkBtn('こたえあわせ','main',function(){
+        chips.forEach(function(b){
+          b.disabled=true;
+          var w=b.textContent;
+          if(targets.indexOf(w)>=0) b.classList.add('ok');
+          else if(chosen.indexOf(w)>=0) b.classList.add('ng');
+        });
+        api.done(same(chosen,targets),'正解は <b>'+targets.join('・')+'</b> の '+cfg.n+' つでした。');
+      })]);
+    }
+  }
+},
+
+/* ── 4. 点つなぎ ── */
+{
+  id:'copydots', area:'copy', emoji:'✏️', title:'点つなぎ',
+  desc:'見本と同じ形になるように、右の点をつないで線を引きます。形を正しく捉えて再現する力（板書を写す力）の基礎。',
+  tags:['視覚認知','模写'],
+  build:function(lv,host,api){ buildDots(lv,host,api,false); }
+},
+
+/* ── 5. かがみの点つなぎ ── */
+{
+  id:'copymirror', area:'copy', emoji:'🪞', title:'かがみの点つなぎ',
+  desc:'見本を左右反転させた形を、右の点をつないで作ります。頭の中で反転させてから写すぶん、難度が上がります。',
+  tags:['視覚認知','反転'],
+  build:function(lv,host,api){ buildDots(lv,host,api,true); }
+},
+
+/* ── 6. 同じ形さがし ── */
+{
+  id:'findsame', area:'find', emoji:'🔍', title:'同じ形さがし',
+  desc:'ならんだ形の中から、まったく同じ形の2つをさがします。細かい違いを見分ける力と、順序よく探す力を使います。',
+  tags:['視覚探索','弁別'],
+  build:function(lv,host,api){
+    var cfg=[{n:12,cols:4},{n:18,cols:6},{n:24,cols:6}][lv-1];
+    var codes=distinctCodes(cfg.n-1,2);
+    var dupSrc=R(codes.length);
+    var list=codes.slice();
+    list.push(codes[dupSrc].slice());
+    var order=shuffle(seq(list.length));
+    var shown=order.map(function(i){ return list[i]; });
+    var pairIdx=[];
+    order.forEach(function(src,pos){ if(src===dupSrc||src===list.length-1) pairIdx.push(pos); });
+    instr(host,'まったく<b>同じ形</b>の組が1つだけあります。その2つをえらんでください。','形は回っていません。とがり方の違いをよく見ましょう。');
+    var grid=E('div',{class:'opts',style:'grid-template-columns:repeat('+cfg.cols+',minmax(0,1fr));max-width:'+(cfg.cols*104)+'px'});
+    var sel=[], btns=[];
+    shown.forEach(function(code,i){
+      var b=E('button',{type:'button',class:'opt','aria-pressed':'false','aria-label':'形'+(i+1),html:polyShapeSVG(code,90)+'<div class="opt-label">'+(i+1)+'</div>'});
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        var on=b.getAttribute('aria-pressed')!=='true';
+        if(on){
+          sel.push(i);
+          b.setAttribute('aria-pressed','true');
+          if(sel.length>2){
+            var drop=sel.shift();
+            btns[drop].setAttribute('aria-pressed','false');
+          }
+        }else{
+          sel=sel.filter(function(x){ return x!==i; });
+          b.setAttribute('aria-pressed','false');
+        }
+        chk.disabled=(sel.length!==2);
+      });
+      btns.push(b); grid.appendChild(b);
+    });
+    host.appendChild(grid);
+    var chk=mkBtn('こたえあわせ','main',function(){
+      btns.forEach(function(b,i){
+        b.disabled=true;
+        if(pairIdx.indexOf(i)>=0) b.classList.add('ok');
+        else if(sel.indexOf(i)>=0) b.classList.add('ng');
+      });
+      api.done(same(sel,pairIdx),'同じ形だったのは <b>'+(pairIdx[0]+1)+'番 と '+(pairIdx[1]+1)+'番</b> です。');
+    });
+    chk.disabled=true;
+    actionBar(host,[chk]);
+  }
+},
+
+/* ── 7. かさなり図形 ── */
+{
+  id:'overlap', area:'find', emoji:'🌀', title:'かさなり図形',
+  desc:'重なりあった線の中に、どの図形がかくれているかを見分けます。背景から必要な形だけを取り出す「図と地の分離」の練習。',
+  tags:['視覚探索','図と地'],
+  build:function(lv,host,api){
+    var USE=['circle','square','triangle','star','hex','cross'];
+    var k=[2,3,4][lv-1];
+    var ids=shuffle(USE).slice(0,k);
+    var offs=ids.map(function(id){
+      var rot=(id==='square'||id==='circle')?0:pick([0,12,-12,20]);
+      return [ri(-22,22),ri(-22,22),rot];
+    });
+    instr(host,'かさなっている図形は、どれとどれでしょう。<b>あてはまるものをすべて</b>えらんでください。','図形は '+k+' つ重なっています。');
+    var box=E('div',{class:'figbox',style:'margin:0 auto 16px;max-width:280px',html:overlapSVG(ids,260,offs)});
+    host.appendChild(box);
+    var chosen=[], chips=[];
+    var wrap=E('div',{class:'wordwrap'});
+    OVER_SHAPES.forEach(function(s){
+      var b=E('button',{type:'button',class:'wchip','aria-pressed':'false',text:s.name});
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        var on=b.getAttribute('aria-pressed')!=='true';
+        b.setAttribute('aria-pressed',on?'true':'false');
+        if(on) chosen.push(s.id); else chosen=chosen.filter(function(x){ return x!==s.id; });
+        chk.disabled=(chosen.length===0);
+      });
+      b.setAttribute('data-id',s.id);
+      chips.push(b); wrap.appendChild(b);
+    });
+    host.appendChild(wrap);
+    var chk=mkBtn('こたえあわせ','main',function(){
+      chips.forEach(function(b){
+        b.disabled=true;
+        var id=b.getAttribute('data-id');
+        if(ids.indexOf(id)>=0) b.classList.add('ok');
+        else if(chosen.indexOf(id)>=0) b.classList.add('ng');
+      });
+      var names=ids.map(function(id){
+        var nm='';
+        OVER_SHAPES.forEach(function(s){ if(s.id===id) nm=s.name; });
+        return nm;
+      });
+      api.done(same(chosen,ids),'正解は <b>'+names.join('・')+'</b> の '+k+' つでした。');
+    });
+    chk.disabled=true;
+    actionBar(host,[chk]);
+  }
+},
+
+/* ── 8. まとめて数える ── */
+{
+  id:'countrule', area:'count', emoji:'🔢', title:'まとめて数える',
+  desc:'ならんだ記号を、決められたルールどおりに数えます。注意を保ち続ける力と、規則を守りながら作業する力を鍛えます。',
+  tags:['注意の持続','処理速度'],
+  build:function(lv,host,api){
+    var cfg=[
+      {len:30,cols:6,w:[0.25,0.25,0.25,0.25,0]},
+      {len:42,cols:7,w:[0.24,0.24,0.22,0.20,0.10]},
+      {len:48,cols:8,w:[0.26,0.26,0.18,0.18,0.12]}
+    ][lv-1];
+    var arr=makeSymSeq(cfg.len,cfg.w);
+    var answers=[], labels=[];
+    if(lv===1){
+      instr(host,'ならんだ記号の中に <b>★</b> はいくつありますか。','左上から右へ、行が終わったら次の行へ、という順に数えます。');
+      answers=[countSym(arr,'★')]; labels=['★の数'];
+    }else if(lv===2){
+      instr(host,'<b>★</b> と <b>●</b> は、それぞれいくつありますか。','2つを同時に数えます。数えもらしに注意。');
+      answers=[countSym(arr,'★'),countSym(arr,'●')]; labels=['★の数','●の数'];
+    }else{
+      instr(host,'<b>★</b> の数を数えます。ただし、<b>すぐ前が ● になっている ★ は数えません</b>。','「すぐ前」は、左上から右へ読む順で1つ前のことです（行の先頭のマスは、前の行の右端が1つ前になります）。');
+      answers=[countSkipAfter(arr,'★','●')]; labels=['数えた★の数'];
+    }
+    var grid=E('div',{class:'symgrid',style:'grid-template-columns:repeat('+cfg.cols+',minmax(0,1fr))'});
+    arr.forEach(function(s){ grid.appendChild(E('div',{class:'sym',text:s})); });
+    host.appendChild(grid);
+    var row=E('div',{class:'ansrow',style:'margin-top:16px'}), ins=[];
+    labels.forEach(function(lb,i){
+      var inp=E('input',{type:'text',inputmode:'numeric',maxlength:'2','aria-label':lb});
+      ins.push(inp);
+      row.appendChild(E('div',{class:'ansbox'},[E('label',{text:lb}),inp]));
+    });
+    host.appendChild(row);
+    actionBar(host,[mkBtn('こたえあわせ','main',function(){
+      var ok=true;
+      ins.forEach(function(inp,i){ if(parseInt(inp.value,10)!==answers[i]) ok=false; inp.disabled=true; });
+      var note=labels.map(function(lb,i){ return lb+'：<b>'+answers[i]+'</b>'; }).join('　／　');
+      api.done(ok,'正解は '+note+' でした。');
+    })]);
+    try{ ins[0].focus(); }catch(e){}
+  }
+},
+
+/* ── 9. さがし算 ── */
+{
+  id:'findsum', area:'count', emoji:'➕', title:'さがし算',
+  desc:'たてかよこでとなりあう2つの数のうち、たすと指定の数になる組を全部さがします。計算と探索を同時に行う課題です。',
+  tags:['暗算','視覚探索'],
+  build:function(lv,host,api){
+    var cfg=[{size:3,min:2,max:4},{size:4,min:3,max:5},{size:5,min:4,max:6}][lv-1];
+    var target=ri(9,12);
+    var g=makeSumGrid(cfg.size,target,cfg.min,cfg.max);
+    var size=cfg.size, cells=g.cells, answer=g.pairs;
+    instr(host,'たて・よこで<b>となりあう2つの数</b>のうち、たして <b>'+target+'</b> になる組を<b>すべて</b>見つけてください。','2つのマスを続けてタップすると1組になります。ななめは数えません。');
+    var board=E('div',{class:'grid-board',style:'grid-template-columns:repeat('+size+',minmax(0,1fr));max-width:'+(size*66)+'px'});
+    var btns=[], first=-1, found=[];
+    function adjacent(a,b){
+      var ax=a%size, ay=Math.floor(a/size), bx=b%size, by=Math.floor(b/size);
+      return (Math.abs(ax-bx)===1&&ay===by)||(Math.abs(ay-by)===1&&ax===bx);
+    }
+    function repaint(){
+      btns.forEach(function(b,i){
+        b.classList.remove('sel','ok');
+        if(i===first) b.classList.add('sel');
+      });
+      found.forEach(function(k){
+        k.split('-').forEach(function(x){ btns[+x].classList.add('ok'); });
+      });
+      list.innerHTML='';
+      found.forEach(function(k){
+        var p=k.split('-');
+        var chip=E('button',{type:'button',class:'wchip',style:'font-size:13px;padding:7px 12px;min-height:38px',
+          text:cells[+p[0]]+' ＋ '+cells[+p[1]]+' ✕'});
+        chip.addEventListener('click',function(){
+          found=found.filter(function(x){ return x!==k; });
+          repaint();
+        });
+        list.appendChild(chip);
+      });
+      cnt.textContent='見つけた組： '+found.length;
+      chk.disabled=(found.length===0);
+    }
+    cells.forEach(function(v,i){
+      var b=E('button',{type:'button',class:'cellbtn',text:String(v),'aria-label':posLabel(i,size)+' '+v});
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        if(first<0){ first=i; repaint(); return; }
+        if(first===i){ first=-1; repaint(); return; }
+        if(adjacent(first,i)){
+          var key=Math.min(first,i)+'-'+Math.max(first,i);
+          if(found.indexOf(key)<0) found.push(key);
+          first=-1;
+        }else{
+          first=i;
+        }
+        repaint();
+      });
+      btns.push(b); board.appendChild(b);
+    });
+    host.appendChild(board);
+    var cnt=E('div',{class:'count-down',style:'margin-top:12px',text:'見つけた組： 0'});
+    host.appendChild(cnt);
+    var list=E('div',{class:'wordwrap',style:'margin-top:10px'});
+    host.appendChild(list);
+    var chk=mkBtn('こたえあわせ','main',function(){
+      btns.forEach(function(b){ b.disabled=true; });
+      var ok=same(found,answer);
+      var txt=answer.map(function(k){
+        var p=k.split('-');
+        return cells[+p[0]]+'＋'+cells[+p[1]]+'（'+posLabel(+p[0],size)+' と '+posLabel(+p[1],size)+'）';
+      }).join('<br>');
+      api.done(ok,'たして '+target+' になる組は <b>'+answer.length+'組</b>：<br>'+txt);
+    });
+    chk.disabled=true;
+    actionBar(host,[chk,mkBtn('選び直す','sub',function(){ found=[]; first=-1; repaint(); })]);
+  }
+},
+
+/* ── 10. 心で回す ── */
+{
+  id:'rotate', area:'imag', emoji:'🔄', title:'心で回す',
+  desc:'見本の形を頭の中で回転させ、同じ形になるものを選びます。裏返しの形は正解になりません。空間をイメージする力の練習。',
+  tags:['空間認知','心的回転'],
+  build:function(lv,host,api){
+    var cfg=[{g:3,n:4},{g:3,n:5},{g:4,n:6}][lv-1];
+    var base=chiralPoly(cfg.g,cfg.n);
+    var rots=rotations(base);
+    var correct=rots[ri(1,3)];
+    var mrots=rotations(mirrorCells(base));
+    var seen=[keyCells(correct)], opts=[correct];
+    shuffle(mrots).forEach(function(c){
+      if(opts.length>=4) return;
+      var k=keyCells(c);
+      if(seen.indexOf(k)>=0) return;
+      seen.push(k); opts.push(c);
+    });
+    var guard=0;
+    while(opts.length<4&&guard<80){
+      guard++;
+      var c2=growPoly(cfg.g,cfg.n), k2=keyCells(c2);
+      if(seen.indexOf(k2)>=0) continue;
+      var clash=false;
+      rots.forEach(function(r){ if(keyCells(r)===k2) clash=true; });
+      if(clash) continue;
+      seen.push(k2); opts.push(c2);
+    }
+    var shown=shuffle(opts);
+    var answerIdx=-1;
+    shown.forEach(function(c,i){ if(keyCells(c)===keyCells(correct)) answerIdx=i; });
+    instr(host,'見本の形を<b>回した</b>ものはどれでしょう。','回すのはOK、<b>裏返す（鏡にうつす）のはNG</b>です。');
+    host.appendChild(E('div',{class:'figbox',style:'margin:0 auto 18px;max-width:180px'},[
+      E('h4',{text:'見本'}),
+      E('div',{html:polySVG(base,110,'#1a3d2b')})
+    ]));
+    var grid=E('div',{class:'opts',style:'grid-template-columns:repeat(4,minmax(0,1fr));max-width:520px'});
+    var sel=-1, btns=[];
+    shown.forEach(function(c,i){
+      var b=E('button',{type:'button',class:'opt','aria-pressed':'false',html:polySVG(c,96)+'<div class="opt-label">'+(i+1)+'</div>'});
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        sel=i;
+        btns.forEach(function(x,j){ x.setAttribute('aria-pressed',j===i?'true':'false'); });
+        chk.disabled=false;
+      });
+      btns.push(b); grid.appendChild(b);
+    });
+    host.appendChild(grid);
+    var chk=mkBtn('こたえあわせ','main',function(){
+      btns.forEach(function(b,i){
+        b.disabled=true;
+        if(i===answerIdx) b.classList.add('ok');
+        else if(i===sel) b.classList.add('ng');
+      });
+      api.done(sel===answerIdx,'正解は <b>'+(answerIdx+1)+'番</b>。ほかの形は「裏返し」なので、回しても見本には重なりません。');
+    });
+    chk.disabled=true;
+    actionBar(host,[chk]);
+  }
+},
+
+/* ── 11. じゅんばんにならべる ── */
+{
+  id:'order', area:'imag', emoji:'🪜', title:'じゅんばんにならべる',
+  desc:'ばらばらになった手順を、正しい順に並べます。先の見通しを立てる力・段取りの力を使います。',
+  tags:['推論','段取り'],
+  build:function(lv,host,api){
+    var bank=ORDER_BANK();
+    var pool=bank.filter(function(x){ return lv===3?x.hard:(lv===1?!x.hard:true); });
+    if(!pool.length) pool=bank;
+    var item=api.pickFresh('order'+lv,pool);
+    var steps=(lv===1)?item.steps.slice(0,4):item.steps.slice();
+    instr(host,'「'+esc(item.t)+'」の手順が、ばらばらになっています。<b>正しい順にタップ</b>してください。','タップした順に番号がつきます。もう一度タップすると取り消せます。');
+    var shownIdx=shuffle(seq(steps.length));
+    var order=[], btns=[];
+    var box=E('div',{class:'choices'});
+    shownIdx.forEach(function(orig,i){
+      var b=E('button',{type:'button',class:'choice','aria-pressed':'false'});
+      var num=E('span',{class:'num',text:'?'});
+      b.appendChild(num);
+      b.appendChild(E('span',{text:steps[orig]}));
+      b.setAttribute('data-orig',orig);
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        var at=order.indexOf(i);
+        if(at>=0) order.splice(at,1); else order.push(i);
+        paint();
+      });
+      btns.push(b); box.appendChild(b);
+    });
+    host.appendChild(box);
+    function paint(){
+      btns.forEach(function(b,i){
+        var at=order.indexOf(i);
+        b.setAttribute('aria-pressed',at>=0?'true':'false');
+        b.firstChild.textContent=at>=0?String(at+1):'?';
+        b.firstChild.className=at>=0?'ordnum':'num';
+      });
+      chk.disabled=(order.length!==steps.length);
+    }
+    var chk=mkBtn('こたえあわせ','main',function(){
+      btns.forEach(function(b){ b.disabled=true; });
+      var ok=true;
+      order.forEach(function(bi,pos){
+        var orig=parseInt(btns[bi].getAttribute('data-orig'),10);
+        if(orig!==pos) ok=false;
+      });
+      btns.forEach(function(b){
+        var orig=parseInt(b.getAttribute('data-orig'),10);
+        var at=order.indexOf(btns.indexOf(b));
+        if(at===orig) b.classList.add('ok'); else b.classList.add('ng');
+      });
+      var txt=steps.map(function(s,i){ return (i+1)+'. '+esc(s); }).join('<br>');
+      api.done(ok,'正しい順番：<br>'+txt);
+    });
+    chk.disabled=true;
+    actionBar(host,[chk,mkBtn('選び直す','sub',function(){ order=[]; paint(); })]);
+    paint();
+  }
+},
+
+/* ── 12. きもちを考える ── */
+{
+  id:'social', area:'imag', emoji:'💗', title:'きもちを考える',
+  desc:'場面から相手の気持ちや、そのときの行動を考えます。答えは1つに決まらないこともあるので、解説の「考え方」も読んでみてください。',
+  tags:['対人推論','社会面'],
+  build:function(lv,host,api){
+    var bank=SOCIAL_BANK();
+    var pool=bank.filter(function(x){ return x.lv===lv; });
+    if(pool.length<2) pool=bank;
+    var item=api.pickFresh('social'+lv,pool);
+    instr(host,esc(item.q),'いちばん近いと思うものを1つえらんでください。');
+    var order=shuffle(seq(item.a.length));
+    var sel=-1, btns=[];
+    var box=E('div',{class:'choices'});
+    order.forEach(function(orig,i){
+      var b=E('button',{type:'button',class:'choice','aria-pressed':'false'},[
+        E('span',{class:'num',text:String(i+1)}),
+        E('span',{text:item.a[orig]})
+      ]);
+      b.setAttribute('data-orig',orig);
+      b.addEventListener('click',function(){
+        if(b.disabled) return;
+        sel=i;
+        btns.forEach(function(x,j){ x.setAttribute('aria-pressed',j===i?'true':'false'); });
+        chk.disabled=false;
+      });
+      btns.push(b); box.appendChild(b);
+    });
+    host.appendChild(box);
+    var chk=mkBtn('こたえあわせ','main',function(){
+      var ok=false;
+      btns.forEach(function(b,i){
+        b.disabled=true;
+        var orig=parseInt(b.getAttribute('data-orig'),10);
+        if(orig===item.c){ b.classList.add('ok'); if(i===sel) ok=true; }
+        else if(i===sel) b.classList.add('ng');
+      });
+      api.done(ok,'考え方：'+esc(item.hint));
+    });
+    chk.disabled=true;
+    actionBar(host,[chk]);
+  }
+}
+
+];
+
+/* ════════ 点つなぎ 共通ビルダー ════════ */
+var NS='http://www.w3.org/2000/svg';
+function buildDots(lv,host,api,mirror){
+  var cfg=[{g:4,seg:3},{g:4,seg:5},{g:5,seg:6}][lv-1];
+  var g=cfg.g, S=240, pad=Math.round(S*0.12);
+  var edges=makePath(g,cfg.seg);
+  var answer=mirror?mirrorEdges(g,edges):edges;
+  instr(host,
+    mirror?'見本を<b>左右反転（かがみうつし）</b>した形になるように、右の点をつないでください。':'見本と<b>同じ形</b>になるように、右の点をつないでください。',
+    '点を2つ続けてタップすると線が引けます。同じ2点をもう一度タップすると消えます。線は全部で '+cfg.seg+' 本です。');
+  var duo=E('div',{class:'duo'});
+  duo.appendChild(E('div',{class:'figbox'},[E('h4',{text:'見本'}),E('div',{html:dotsSVG(g,edges,S)})]));
+  var mine=E('div',{class:'figbox'});
+  mine.appendChild(E('h4',{text:mirror?'ここに「かがみ」の形を作る':'ここに同じ形を作る'}));
+  var svgWrap=E('div');
+  mine.appendChild(svgWrap);
+  duo.appendChild(mine);
+  host.appendChild(duo);
+
+  var drawn=[], first=-1, locked=false;
+  function onDot(i){
+    if(locked) return;
+    if(first<0){ first=i; }
+    else if(first===i){ first=-1; }
+    else{
+      var key=Math.min(first,i)+'-'+Math.max(first,i);
+      if(drawn.indexOf(key)>=0) drawn=drawn.filter(function(x){ return x!==key; });
+      else drawn.push(key);
+      first=-1;
+    }
+    render();
+  }
+  function render(){
+    svgWrap.innerHTML='';
+    var svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox','0 0 '+S+' '+S);
+    svg.setAttribute('width','100%');
+    drawn.forEach(function(k){
+      var p=k.split('-'), A=dotXY(+p[0],g,S,pad), B=dotXY(+p[1],g,S,pad);
+      var ln=document.createElementNS(NS,'line');
+      ln.setAttribute('x1',A[0]); ln.setAttribute('y1',A[1]);
+      ln.setAttribute('x2',B[0]); ln.setAttribute('y2',B[1]);
+      ln.setAttribute('class','seg-line mine');
+      svg.appendChild(ln);
+    });
+    for(var i=0;i<g*g;i++){
+      var P=dotXY(i,g,S,pad);
+      var c=document.createElementNS(NS,'circle');
+      c.setAttribute('cx',P[0]); c.setAttribute('cy',P[1]); c.setAttribute('r',i===first?7:5);
+      c.setAttribute('class','dot'+(i===first?' hot':''));
+      svg.appendChild(c);
+      var hit=document.createElementNS(NS,'circle');
+      hit.setAttribute('cx',P[0]); hit.setAttribute('cy',P[1]); hit.setAttribute('r',16);
+      hit.setAttribute('class','dot-hit');
+      (function(idx){ hit.addEventListener('click',function(){ onDot(idx); }); })(i);
+      svg.appendChild(hit);
+    }
+    svgWrap.appendChild(svg);
+    chk.disabled=(drawn.length===0);
+    cnt.textContent='引いた線： '+drawn.length+' 本 / '+cfg.seg+' 本';
+  }
+  var cnt=E('div',{class:'count-down',style:'margin-top:12px'});
+  host.appendChild(cnt);
+  var chk=mkBtn('こたえあわせ','main',function(){
+    locked=true;
+    var ok=same(drawn,answer);
+    api.done(ok,'正しい形はこちらです：<br><span style="display:inline-block;width:130px;background:#fff;border-radius:8px;margin-top:4px">'+dotsSVG(g,answer,140)+'</span>');
+  });
+  chk.disabled=true;
+  actionBar(host,[chk,mkBtn('全部消す','sub',function(){ if(locked) return; drawn=[]; first=-1; render(); })]);
+  render();
+}
+
+/* ════════ 手順バンク ════════ */
+function ORDER_BANK(){
+  return [
+    {t:'カップめんを作る',hard:false,steps:['やかんでお湯をわかす','ふたを半分あける','かやくを入れる','お湯を線のところまで注ぐ','3分待ってふたを取る']},
+    {t:'手紙を送る',hard:false,steps:['便せんに用件を書く','便せんを封筒に入れる','封筒にあて名を書く','切手をはる','ポストに入れる']},
+    {t:'洗たくをする',hard:false,steps:['洗たく物を洗たく機に入れる','洗ざいを入れる','スイッチを押す','かわくまで干す','たたんでしまう']},
+    {t:'カレーを作る',hard:false,steps:['材料を切る','肉と野菜をいためる','水を入れて煮こむ','ルウを入れてとかす','ごはんにかける']},
+    {t:'朝の支度をする',hard:false,steps:['目ざましで起きる','顔をあらう','朝ごはんを食べる','歯をみがく','家を出る']},
+    {t:'電車に乗って出かける',hard:false,steps:['目的地までの行き方を調べる','きっぷを買う','改札を通る','ホームで並んで待つ','来た電車に乗る']},
+    {t:'ネット通販で買う',hard:true,steps:['ほしい商品をさがす','カートに入れる','住所と支払い方法を選ぶ','注文を確定する','届いた荷物を受け取る']},
+    {t:'銀行のATMで振り込む',hard:true,steps:['振込先の口座番号を用意する','ATMで「振込」を選ぶ','口座番号と名前を入力する','金額を確認して確定する','明細票を受け取る']},
+    {t:'家計を見直す',hard:true,steps:['1か月の支出をぜんぶ書き出す','固定費と変動費に分ける','減らせそうな項目をえらぶ','減らす金額の目標を決める','翌月に結果をふり返る']},
+    {t:'アルバイトに応募する',hard:true,steps:['募集の内容と時給を確認する','応募の連絡をする','面接の日時を決める','面接を受ける','採用の連絡を待って初出勤する']},
+    {t:'部屋を借りる',hard:true,steps:['家賃の予算を決める','物件を見に行く','申し込みをして審査を受ける','契約して初期費用を払う','かぎを受け取って引っこす']},
+    {t:'風邪で病院に行く',hard:true,steps:['健康保険証を用意する','受付で症状を伝える','診察を受ける','会計で自己負担分を払う','薬局で薬を受け取る']}
+  ];
+}
+
+/* ════════ 場面バンク ════════ */
+function SOCIAL_BANK(){
+  return [
+    {lv:1,q:'待ち合わせに30分おくれて着いたら、友だちは下を向いて黙っていました。友だちの気持ちにいちばん近いのはどれでしょう。',
+     a:['待っている間、不安で悲しい気持ちだった','来てくれてうれしくて言葉が出ない','おなかがいっぱいでねむい','早く来すぎたと後悔している'],c:0,
+     hint:'黙って下を向くのは、怒りだけでなく「心配していた」「がっかりした」のサインでもあります。まず理由よりも先に「待たせてごめん」と伝えると、話が進めやすくなります。'},
+    {lv:1,q:'家の人がいつもより早口で話し、洗い物の音も大きくなっています。考えられることはどれでしょう。',
+     a:['急いでいるか、何かでいらだっている','とてもリラックスしている','こちらをほめようとしている','特に意味はなく、いつもと同じ'],c:0,
+     hint:'声の速さ・音の大きさ・動作の荒さは、言葉より先に気持ちを表すことがあります。「何か手伝おうか」と聞くのが安全です。'},
+    {lv:1,q:'電車で、となりの人が荷物を何度も置き直しています。この人はどんな状態でしょう。',
+     a:['置き場所がなくて困っている','あなたに話しかけたがっている','荷物の中身を自慢したい','この電車が好きで落ち着かない'],c:0,
+     hint:'くり返される動作は「うまくいっていない」サインであることが多いです。少し体をずらすだけで助けになる場面もあります。'},
+    {lv:1,q:'新しい髪型にしたのに、友だちは何も言いませんでした。受け止め方として適切なのはどれでしょう。',
+     a:['気づいていないだけかもしれない','きらわれたにちがいない','怒っているにちがいない','もう友だちではない'],c:0,
+     hint:'情報が足りないときに最悪の解釈をすると、事実と違う行動を取りやすくなります。気になるなら「髪、切ったんだ」と自分から言えば済みます。'},
+    {lv:2,q:'グループ作業で自分の案が通らなかったBさんは、それ以降ひとことも話さなくなりました。Bさんの気持ちに近いのはどれでしょう。',
+     a:['自分の話は聞いてもらえないと感じている','作業が終わって満足している','早く帰りたいだけ','みんなを驚かせようとしている'],c:0,
+     hint:'沈黙は「もういい」ではなく「本当は聞いてほしかった」のサインであることがあります。「さっきの案、もう少し聞かせて」の一言で戻れることが多いです。'},
+    {lv:2,q:'あなたの冗談にCさんは笑いましたが、そのあと少し離れた席に座りました。考えられることはどれでしょう。',
+     a:['笑ったけれど、本当は傷ついたかもしれない','完全に楽しんでいる','席が暑かっただけ','あなたを尊敬した'],c:0,
+     hint:'表情と行動が食いちがうときは、行動のほうが本音に近いことがあります。「さっきの言い方、いやだった？」と確かめる勇気が関係を守ります。'},
+    {lv:2,q:'話している相手が腕を組み、視線を合わせずに聞いています。まず考えられることはどれでしょう。',
+     a:['納得していない、または警戒しているかもしれない','とても賛成している','ねむっている','あなたを好きになった'],c:0,
+     hint:'姿勢や視線は気持ちのヒントになりますが、決めつけは禁物です。「ここまでで分かりにくいところはありますか」と確認するのが確実です。'},
+    {lv:2,q:'SNSであなたの投稿に「へえ、すごいね」とだけ返信がありました。適切な受け止め方はどれでしょう。',
+     a:['短い文だけでは相手の気持ちまでは分からない','確実にばかにされた','絶対にほめてくれている','その人はあなたをきらっている'],c:0,
+     hint:'文字には表情や声の調子がありません。足りない情報を悪い方に補うと、必要のない対立が生まれます。気になるときは直接聞くのが早道です。'},
+    {lv:3,q:'先ぱいから「これ、やっといて」とだけ言われました。最初にとる行動としていちばん良いのはどれでしょう。',
+     a:['「いつまでに、どこまで必要ですか」と確認する','自分の都合のいい日にやる','言われた意味が分からないので何もしない','ほかの人にそのまま頼む'],c:0,
+     hint:'期限・分量・完成の形の3つを最初に確認すると、やり直しとトラブルが大きく減ります。確認は失礼ではなく、仕事の一部です。'},
+    {lv:3,q:'友だちから「お金を貸してほしい」と言われました。断りたいときの伝え方としていちばん良いのはどれでしょう。',
+     a:['「ごめん、お金の貸し借りはしないと決めているんだ」と自分のルールとして伝える','何も言わずに無視する','「お前は信用できない」と理由を言う','とりあえず貸して、あとで責める'],c:0,
+     hint:'断るときは「相手の人格」ではなく「自分のルール」を理由にすると、相手を否定せずに済みます。お金の貸し借りは、返らなかったときに関係そのものを失いやすいものです。'},
+    {lv:3,q:'アルバイト先で、注文を間違えたことに自分で気づきました。最初にすることはどれでしょう。',
+     a:['すぐに責任者へ報告する','だまって様子を見る','あとで自分で直せるか考えてから言う','ほかの人のせいにする'],c:0,
+     hint:'ミスは、報告が早いほど損害も叱責も小さくなります。報告→おわび→どうするかの相談、の順に伝えると落ち着いて話せます。'},
+    {lv:3,q:'店員さんの説明が早口でよく分かりませんでした。契約書にサインを求められています。どうするのがよいでしょう。',
+     a:['分かるまで説明を求め、納得できなければその場でサインしない','分かったふりをしてサインする','何も言わずに帰る','よく分からないので相手にまかせる'],c:0,
+     hint:'その場で決めさせようとする流れは、あとで不利な条件に気づく原因になります。「持ち帰って考えます」は、いつでも使える正当な選択です。'}
+  ];
+}
+
+/* ════════ 出題の重複回避 ════════ */
+api.pickFresh=function(key,arr){
+  if(!run.used) run.used={};
+  var u=run.used[key]||(run.used[key]=[]);
+  var idxs=[];
+  for(var i=0;i<arr.length;i++){ if(u.indexOf(i)<0) idxs.push(i); }
+  if(!idxs.length){ u.length=0; for(var j=0;j<arr.length;j++) idxs.push(j); }
+  var c=pick(idxs);
+  u.push(c);
+  return arr[c];
+};
+
+/* ════════ 印刷プリント ════════ */
+var SHEET_FOOT='<p style="font-size:8pt;color:#64748b;margin-top:6mm">ライフアセットオフィス 認知機能トレーニング｜lifeassetoffice.net</p>';
+function sheetWrap(title,lead,body,noName){
+  return '<div class="sheet"><div class="shead"><h2>'+title+'</h2>'+
+    (noName?'':'<div class="sname">なまえ ＿＿＿＿＿＿＿＿＿　日づけ ＿＿ ／ ＿＿</div>')+'</div>'+
+    (lead?'<p class="sinstr">'+lead+'</p>':'')+body+SHEET_FOOT+'</div>';
+}
+function gridTableHTML(cells,size){
+  var out='<table>';
+  for(var y=0;y<size;y++){
+    out+='<tr>';
+    for(var x=0;x<size;x++){ out+='<td class="pcell">'+cells[y*size+x]+'</td>'; }
+    out+='</tr>';
+  }
+  return out+'</table>';
+}
+function symBlockHTML(arr,cols){
+  var out='', rows=Math.ceil(arr.length/cols);
+  for(var y=0;y<rows;y++){ out+='<div class="psym">'+arr.slice(y*cols,(y+1)*cols).join('')+'</div>'; }
+  return out;
+}
+function sheetFindSum(){
+  var probs=[];
+  for(var i=0;i<6;i++){
+    var t=ri(9,12);
+    probs.push({t:t,g:makeSumGrid(4,t,3,5)});
+  }
+  var body='<div class="pcols">';
+  probs.forEach(function(p,i){
+    body+='<div class="pitem" style="width:44%"><h3>（'+(i+1)+'） たして <b>'+p.t+'</b> になる となりどうしの2つを、ぜんぶ ○ でかこみましょう</h3>'+gridTableHTML(p.g.cells,4)+'</div>';
+  });
+  body+='</div>';
+  var ans='<div class="pitem"><h3>こたえ</h3><p class="pans">';
+  probs.forEach(function(p,i){
+    ans+='（'+(i+1)+'）たして'+p.t+'／'+p.g.pairs.length+'組：'+p.g.pairs.map(function(k){
+      var q=k.split('-');
+      return p.g.cells[+q[0]]+'＋'+p.g.cells[+q[1]]+'（'+posLabel(+q[0],4)+'と'+posLabel(+q[1],4)+'）';
+    }).join('、')+'<br>';
+  });
+  ans+='</p></div>';
+  return sheetWrap('さがし算','たて・よこで となりあう2つの数のうち、たすと指定の数になる組を すべて 見つけて ○ でかこみましょう。ななめは数えません。',body)
+       +sheetWrap('さがし算 ── こたえ','',ans,true);
+}
+function sheetCountRule(){
+  var setups=[
+    {len:36,cols:9,w:[0.25,0.25,0.25,0.25,0],mode:'one'},
+    {len:36,cols:9,w:[0.25,0.25,0.25,0.25,0],mode:'one'},
+    {len:45,cols:9,w:[0.24,0.24,0.22,0.20,0.10],mode:'two'},
+    {len:45,cols:9,w:[0.26,0.26,0.18,0.18,0.12],mode:'rule'}
+  ];
+  var body='', ansTxt='';
+  setups.forEach(function(s,i){
+    var arr=makeSymSeq(s.len,s.w);
+    var q='', a='';
+    if(s.mode==='one'){ q='★ はいくつありますか。'; a='★＝'+countSym(arr,'★'); }
+    else if(s.mode==='two'){ q='★ と ● は、それぞれいくつありますか。'; a='★＝'+countSym(arr,'★')+'／●＝'+countSym(arr,'●'); }
+    else { q='★ を数えます。ただし、<b>すぐ前が ● になっている ★ は数えません</b>。いくつになりますか。'; a='★（●の次をのぞく）＝'+countSkipAfter(arr,'★','●'); }
+    body+='<div class="pitem"><h3>（'+(i+1)+'） '+q+'</h3>'+symBlockHTML(arr,s.cols)+'<p class="pans">こたえ ＿＿＿＿</p></div>';
+    ansTxt+='（'+(i+1)+'）'+a+'<br>';
+  });
+  return sheetWrap('まとめて数える','左上から右へ、行が終わったら次の行の左へ、という順に数えます。指で追わずに目だけで数えられたら上級です。',body)
+       +sheetWrap('まとめて数える ── こたえ','','<p class="pans">'+ansTxt+'</p>',true);
+}
+function sheetCopyDots(){
+  var body='<div class="pcols">';
+  for(var i=0;i<6;i++){
+    var g=(i<3)?4:5, segs=(i<3)?4:5;
+    var e=makePath(g,segs);
+    body+='<div class="pitem" style="width:46%"><h3>（'+(i+1)+'） 見本と同じ形になるように、右の点をつなぎましょう</h3>'+
+      '<div style="display:flex;gap:6mm;align-items:flex-start">'+
+      '<div style="width:36mm"><div style="border:1px solid #94a3b8;border-radius:2mm;padding:1mm">'+dotsSVG(g,e,240,'#0f172a',7)+'</div><div style="font-size:8pt;text-align:center">見本</div></div>'+
+      '<div style="width:36mm"><div style="border:1.5px solid #1a3d2b;border-radius:2mm;padding:1mm">'+dotsSVG(g,[],240,'#0f172a',7)+'</div><div style="font-size:8pt;text-align:center">ここにかく</div></div>'+
+      '</div></div>';
+  }
+  body+='</div>';
+  return sheetWrap('点つなぎ','左の見本をよく見て、右の点をつないで同じ形を作りましょう。線はまっすぐ、点と点をきちんとつなぎます。こたえは見本と同じ形です。',body);
+}
+function sheetFindSame(){
+  var body='', ansTxt='';
+  for(var i=0;i<4;i++){
+    var codes=distinctCodes(11,2);
+    var dup=R(codes.length);
+    var list=codes.slice();
+    list.push(codes[dup].slice());
+    var order=shuffle(seq(12));
+    var pair=[];
+    order.forEach(function(src,pos){ if(src===dup||src===11) pair.push(pos+1); });
+    var row='<div style="display:flex;flex-wrap:wrap;gap:3mm">';
+    order.forEach(function(src,pos){
+      row+='<div style="width:20mm;text-align:center">'+polyShapeSVG(list[src],90,'#ffffff')+'<div style="font-size:8pt">'+(pos+1)+'</div></div>';
+    });
+    row+='</div>';
+    body+='<div class="pitem"><h3>（'+(i+1)+'） まったく同じ形の2つをさがして、番号を書きましょう　こたえ ＿＿ と ＿＿</h3>'+row+'</div>';
+    ansTxt+='（'+(i+1)+'）'+pair[0]+' と '+pair[1]+'<br>';
+  }
+  return sheetWrap('同じ形さがし','ならんだ形の中に、まったく同じ形の組が1つだけあります。番号で答えましょう。',body)
+       +sheetWrap('同じ形さがし ── こたえ','','<p class="pans">'+ansTxt+'</p>',true);
+}
+function makeSheet(kind){
+  if(kind==='findsum') return sheetFindSum();
+  if(kind==='countrule') return sheetCountRule();
+  if(kind==='copydots') return sheetCopyDots();
+  if(kind==='findsame') return sheetFindSame();
+  return '';
+}
+function doPrint(kind){
+  var area=$('printArea');
+  area.innerHTML=makeSheet(kind);
+  wait(60,function(){ window.print(); });
+}
+
+/* ════════ UI 配線 ════════ */
+function bindSeg(id,key,after){
+  var box=$(id);
+  if(!box) return;
+  Array.prototype.slice.call(box.querySelectorAll('button')).forEach(function(b){
+    b.addEventListener('click',function(){
+      var v=parseInt(b.getAttribute('data-v'),10);
+      store[key]=v;
+      save();
+      Array.prototype.slice.call(box.querySelectorAll('button')).forEach(function(x){
+        x.setAttribute('aria-pressed', x===b?'true':'false');
+      });
+      if(after) after(v);
+    });
+  });
+}
+function syncSeg(id,val){
+  var box=$(id);
+  if(!box) return;
+  Array.prototype.slice.call(box.querySelectorAll('button')).forEach(function(b){
+    b.setAttribute('aria-pressed', parseInt(b.getAttribute('data-v'),10)===val?'true':'false');
+  });
+}
+
+function init(){
+  load();
+  syncSeg('segLevel',store.level);
+  syncSeg('segCount',store.count);
+  bindSeg('segLevel','level');
+  bindSeg('segCount','count');
+
+  Array.prototype.slice.call(document.querySelectorAll('#filters .fbtn')).forEach(function(b){
+    b.addEventListener('click',function(){
+      filterArea=b.getAttribute('data-a');
+      Array.prototype.slice.call(document.querySelectorAll('#filters .fbtn')).forEach(function(x){
+        x.setAttribute('aria-pressed', x===b?'true':'false');
+      });
+      renderMenu();
+    });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-print]')).forEach(function(b){
+    b.addEventListener('click',function(){ doPrint(b.getAttribute('data-print')); });
+  });
+
+  $('btnQuit').addEventListener('click',function(){
+    if(run.idx>0&&!confirm('トレーニングを終了して一覧に戻りますか？（この回の記録は残りません）')) return;
+    quit();
+  });
+  $('btnHome').addEventListener('click',quit);
+  $('btnAgain').addEventListener('click',function(){ if(run.tr) startTraining(run.tr.id); });
+  $('btnClearRec').addEventListener('click',function(){
+    if(!confirm('この端末に保存された記録をすべて消します。よろしいですか？')) return;
+    store.recs={}; store.days=[];
+    save();
+    renderRecords();
+    renderMenu();
+  });
+
+  renderMenu();
+  renderRecords();
+}
+
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+else init();
+
+})();
+</script>
+</body>
+</html>
