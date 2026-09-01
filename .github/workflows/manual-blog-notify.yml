@@ -5,6 +5,12 @@ on:
     branches: [gh-pages]
     paths: ['blog/post-*.html']
 
+# 最小権限の原則（2026-09-01 追加）
+# このワークフローはリポジトリの読み取りしか必要としない。
+# permissions 未指定だと GITHUB_TOKEN にデフォルト権限が付与されるため明示する。
+permissions:
+  contents: read
+
 jobs:
   notify:
     runs-on: ubuntu-latest
