@@ -154,6 +154,24 @@ function fmtDate(ts){ return new Date(ts).toLocaleDateString('ja-JP',{year:'nume
 function fmtMan(v){ return v>=10000?(v/10000).toFixed(1).replace(/\.0$/,'')+'億':v.toLocaleString()+'万'; }
 function daysSince(ts){ return Math.floor((Date.now()-ts)/(1000*3600*24)); }
 
+// ── XSS対策（2026-09-08 追加）─────────────────────────────
+// プラン名はユーザーの自由入力で、localStorage に保存されたあと
+// このページで innerHTML に展開される。エスケープしないと
+// 「<img src=x onerror=...>」のような入力がスクリプトとして実行される。
+// innerHTML に外部由来の文字列を入れる箇所では必ず esc() を通すこと。
+function esc(v){
+  return String(v == null ? '' : v)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 復元先URLは localStorage 由来のため、そのまま location.href に渡すと
+// 「javascript:」等の疑似スキームが実行され得る。既知のページのみ許可する。
+const _ALLOWED_TOOL_URLS = ['lifeplan.html','asset-sim.html','retirement-gap.html'];
+function safeToolUrl(u){
+  return _ALLOWED_TOOL_URLS.indexOf(String(u||'')) >= 0 ? u : null;
+}
+
 function renderPlan(plan, idx){
   const isDue = daysSince(plan.savedAt) >= 180;
   const s = plan.summary || {};
@@ -178,10 +196,10 @@ function renderPlan(plan, idx){
   card.innerHTML = `
     <div class="plan-header">
       <div class="plan-tool">
-        <span class="plan-tool-icon">${plan.toolIcon||'📋'}</span>
+        <span class="plan-tool-icon">${esc(plan.toolIcon||'📋')}</span>
         <div>
-          <div class="plan-tool-name">${plan.toolName}</div>
-          <div class="plan-name" id="name-display-${idx}">${plan.name}</div>
+          <div class="plan-tool-name">${esc(plan.toolName)}</div>
+          <div class="plan-name" id="name-display-${idx}">${esc(plan.name)}</div>
         </div>
       </div>
       ${isDue?'<span class="review-badge">⏰ 見直し時期</span>':''}
@@ -204,7 +222,9 @@ function openPlan(idx){
     if(p.tool === 'lifeplan') localStorage.setItem('lp_autosave_v2', JSON.stringify(p.data));
     else if(p.tool === 'asset-sim') localStorage.setItem('la_asset_sim', JSON.stringify(p.data));
   }catch(e){}
-  location.href = p.toolUrl;
+  const dest = safeToolUrl(p.toolUrl);
+  if(!dest){ showToast('このプランの復元先が不正です'); return; }
+  location.href = dest;
 }
 
 function deletePlan(idx){
@@ -251,9 +271,9 @@ function renderCompare(plans){
     const a=lifeplanPlans[0], b=lifeplanPlans[1];
     const sa=a.summary||{}, sb=b.summary||{};
     const cmp=(va,vb)=>va>vb?'compare-best':'';
-    html += `<h3 style="font-size:14px;font-weight:700;color:var(--sky);margin-bottom:10px">📋 ${a.name} vs ${b.name}</h3>
+    html += `<h3 style="font-size:14px;font-weight:700;color:var(--sky);margin-bottom:10px">📋 ${esc(a.name)} vs ${esc(b.name)}</h3>
     <table class="compare-table">
-      <tr><th>項目</th><th>${a.name}</th><th>${b.name}</th></tr>
+      <tr><th>項目</th><th>${esc(a.name)}</th><th>${esc(b.name)}</th></tr>
       <tr><td>ピーク資産</td><td class="${cmp(sa.peakAsset,sb.peakAsset)}">${fmtMan(sa.peakAsset||0)}円</td><td class="${cmp(sb.peakAsset,sa.peakAsset)}">${fmtMan(sb.peakAsset||0)}円</td></tr>
       <tr><td>定年時資産</td><td class="${cmp(sa.retireAsset,sb.retireAsset)}">${fmtMan(sa.retireAsset||0)}円</td><td class="${cmp(sb.retireAsset,sa.retireAsset)}">${fmtMan(sb.retireAsset||0)}円</td></tr>
       <tr><td>最低資産</td><td class="${cmp(sa.minAsset,sb.minAsset)}">${fmtMan(sa.minAsset||0)}円</td><td class="${cmp(sb.minAsset,sa.minAsset)}">${fmtMan(sb.minAsset||0)}円</td></tr>
@@ -265,9 +285,9 @@ function renderCompare(plans){
     const a=assetPlans[0], b=assetPlans[1];
     const sa=a.summary||{}, sb=b.summary||{};
     const cmp=(va,vb)=>va>vb?'compare-best':'';
-    html += `<h3 style="font-size:14px;font-weight:700;color:var(--sky);margin-bottom:10px">📈 ${a.name} vs ${b.name}</h3>
+    html += `<h3 style="font-size:14px;font-weight:700;color:var(--sky);margin-bottom:10px">📈 ${esc(a.name)} vs ${esc(b.name)}</h3>
     <table class="compare-table">
-      <tr><th>項目</th><th>${a.name}</th><th>${b.name}</th></tr>
+      <tr><th>項目</th><th>${esc(a.name)}</th><th>${esc(b.name)}</th></tr>
       <tr><td>${sa.years||30}年後の資産</td><td class="${cmp(sa.totalAsset,sb.totalAsset)}">${fmtMan(sa.totalAsset||0)}円</td><td class="${cmp(sb.totalAsset,sa.totalAsset)}">${fmtMan(sb.totalAsset||0)}円</td></tr>
       <tr><td>運用益</td><td class="${cmp(sa.gainAsset,sb.gainAsset)}">${fmtMan(sa.gainAsset||0)}円</td><td class="${cmp(sb.gainAsset,sa.gainAsset)}">${fmtMan(sb.gainAsset||0)}円</td></tr>
       <tr><td>利回り</td><td>${(sa.rate||5).toFixed(1)}%</td><td>${(sb.rate||5).toFixed(1)}%</td></tr>
