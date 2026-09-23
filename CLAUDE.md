@@ -72,7 +72,7 @@
 
 1. **文字数は必ず4,000文字以上**（本文ベース）。少ない場合は具体例・FAQ・図解で補強する
 2. **記事・X投稿コピペ文・X投稿画像（1080×1080）を毎回セットで同時制作する**（1つでも欠けたら未完了とみなす）
-   - X画像は Chromium ヘッドレスで生成（`/opt/pw-browsers/chromium-1194/chrome-linux/chrome --headless --screenshot`）。ブランド色（緑 or テーマ色）・正方形・下部にブランド＋CTA
+   - X画像は Chromium ヘッドレスで生成（`/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell --window-size=1080,1080 --screenshot`。**旧headlessの `chromium-1194/.../chrome --headless` はビューポートが993pxに制限され画像下部が欠けるため使わない**。生成後は必ず目視確認する）。ブランド色（緑 or テーマ色）・正方形・下部にブランド＋CTA
    - X投稿コピペ文は「フック→箇条書き→URL→ハッシュタグ」構成。記事URLを必ず入れる
    - **X投稿コピペ文は必ず140字以内厳守**（無料プラン基準。URLは23字固定カウント・絵文字等は2字換算で計算すること）
 3. **最新ニュース・時事ネタ（日銀短観・経済指標・相場・制度改正の速報等）は、必ず WebSearch で実データを取得してから書く**。知識カットオフ（2026年1月）以降の数字は絶対に推測・捏造しない。出典URLも確認する

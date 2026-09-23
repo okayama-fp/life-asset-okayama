@@ -4,7 +4,7 @@
 > チェックの実行: リポジトリルートで `python3 tools/site-check.py`
 > 更新ルール: サイトに変更を加えたセッションでは必ずチェックを再実行し、このファイルを最新化する。
 
-**最終チェック: 2026-07-02（低優先度改善後） ｜ 状態: 🟢 site-check.py 問題ゼロ（高0・中0・低0）**
+**最終チェック: 2026-09-22（数次相続記事の追加後・104ファイル） ｜ 状態: 🟢 site-check.py 問題ゼロ（高0・中0・低0）**
 
 ---
 
@@ -57,6 +57,12 @@
 - **一括テキスト修正**: Python の `str.replace()` ループが安全（sed より事故が少ない）
 - **base64埋め込み画像入りのHTML**: grep 結果が巨大化するので `data:image` を除去してから検査（site-check.py は対応済み）
 - **新規ページ追加時の3点セット**: ①ページ本体 ②`blog/index.html` or `simulation.html` へのカード追加 ③`sitemap.xml` 登録
+- **X画像（1080×1080）生成は `headless_shell` を使う（2026-09-22 判明）**: `chromium-1194/chrome-linux/chrome --headless --screenshot` は `--window-size=1080,1080` を指定しても**実際のビューポートが993pxしか確保されず、下部87pxが無地で埋まる**（ブランドバー・CTAが丸ごと欠ける）。`--headless=new` に切り替えるか、`/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` を使えば正しく1080pxになる。生成後は必ず画像を目視確認すること。
+  ```
+  /opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell \
+    --disable-gpu --no-sandbox --hide-scrollbars --force-device-scale-factor=1 \
+    --window-size=1080,1080 --screenshot=out.png --virtual-time-budget=8000 card.html
+  ```
 
 ---
 
