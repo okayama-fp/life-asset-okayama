@@ -226,7 +226,7 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
 </style>
 <script src="/js/cookie-consent.js"></script>
 <script src="/js/sim-tracker.js"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "NISAとiDeCoはどちらを優先すべきですか？", "acceptedAnswer": {"@type": "Answer", "text": "一般に、いつでも引き出せる柔軟性を重視するならNISA、所得控除による節税を最大化したいならiDeCoが向きます。多くの場合は両方を併用し、生活防衛資金を確保したうえで無理のない範囲で積み立てるのが基本です。"}}, {"@type": "Question", "name": "iDeCoの掛金の上限はいくらですか？", "acceptedAnswer": {"@type": "Answer", "text": "職業により異なります。会社員（企業年金なし）は月2.3万円、公務員・DB等併用者は月2万円（2024年12月改正後）、自営業者は月6.8万円が上限です。本シミュレーターで職業を選ぶと自動で上限を判定します。"}}, {"@type": "Question", "name": "NISAの非課税枠はどのくらいですか？", "acceptedAnswer": {"@type": "Answer", "text": "新NISAは年間の投資枠がつみたて投資枠120万円・成長投資枠240万円、生涯の非課税保有限度額が1,800万円（うち成長投資枠は1,200万円まで）です。この範囲の運用益が非課税になります。"}}, {"@type": "Question", "name": "シミュレーターの節税額はそのまま受け取れますか？", "acceptedAnswer": {"@type": "Answer", "text": "iDeCoの節税額は掛金が所得控除されることによる概算です。実際の節税額は所得や他の控除により変わります。また、iDeCoは受け取り時に課税される場合がある点にもご注意ください。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "NISAとiDeCoはどちらを優先すべきですか？", "acceptedAnswer": {"@type": "Answer", "text": "一般に、いつでも引き出せる柔軟性を重視するならNISA、所得控除による節税を最大化したいならiDeCoが向きます。多くの場合は両方を併用し、生活防衛資金を確保したうえで無理のない範囲で積み立てるのが基本です。"}}, {"@type": "Question", "name": "iDeCoの掛金の上限はいくらですか？", "acceptedAnswer": {"@type": "Answer", "text": "職業により異なります。2026年11月30日までは、会社員（企業年金なし）が月2.3万円、公務員・企業年金のある会社員が月2万円、自営業者が月6.8万円です。2026年12月1日施行の改正により、会社員（企業年金なし）は月6.2万円、公務員は月5.4万円、自営業者は月7.5万円へ引き上げられます（第3号被保険者は月2.3万円のまま）。改正後の6.2万円は企業年金等との合算枠のため、企業年金がある方は勤務先の掛金を差し引いた額が上限です。本シミュレーターは施行日に自動で切り替わります。"}}, {"@type": "Question", "name": "NISAの非課税枠はどのくらいですか？", "acceptedAnswer": {"@type": "Answer", "text": "新NISAは年間の投資枠がつみたて投資枠120万円・成長投資枠240万円、生涯の非課税保有限度額が1,800万円（うち成長投資枠は1,200万円まで）です。この範囲の運用益が非課税になります。"}}, {"@type": "Question", "name": "シミュレーターの節税額はそのまま受け取れますか？", "acceptedAnswer": {"@type": "Answer", "text": "iDeCoの節税額は掛金が所得控除されることによる概算です。実際の節税額は所得や他の控除により変わります。また、iDeCoは受け取り時に課税される場合がある点にもご注意ください。"}}]}</script>
 </head>
 <body>
 <div id="pb"></div>
@@ -291,11 +291,17 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
       <div class="panel-sub">職業タイプ（iDeCo上限が変わります）</div>
       <div class="emp-row">
         <button class="emp-btn on" id="emp-employee" onclick="setEmp('employee')">会社員<br><small style="font-weight:400">企業年金なし</small></button>
-        <button class="emp-btn" id="emp-gov" onclick="setEmp('gov')">公務員<br><small style="font-weight:400">月2万円（2024年12月改正）</small></button>
+        <button class="emp-btn" id="emp-corp" onclick="setEmp('corp')">会社員<br><small style="font-weight:400">企業年金あり</small></button>
+        <button class="emp-btn" id="emp-gov" onclick="setEmp('gov')">公務員<br><small style="font-weight:400">共済加入</small></button>
         <button class="emp-btn" id="emp-self" onclick="setEmp('self')">自営業<br><small style="font-weight:400">国民年金</small></button>
         <button class="emp-btn" id="emp-spouse" onclick="setEmp('spouse')">専業主婦(夫)<br><small style="font-weight:400">第3号被保険者</small></button>
       </div>
-      <div class="emp-hint" id="emp-hint">iDeCo上限: <strong>2.3万円/月</strong>（年間27.6万円）。掛金は全額所得控除になります。</div>
+      <div id="corp-wrap" style="display:none;margin:10px 0 2px">
+        <label class="panel-sub" for="corp-contrib" style="display:block;margin-bottom:4px">勤務先の掛金（企業型DC・DB等／月額・万円）</label>
+        <input type="number" id="corp-contrib" value="0" min="0" max="6.2" step="0.1" oninput="setCorpContrib(this.value)" style="width:120px;padding:8px 10px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;font-family:inherit">
+        <span style="font-size:12px;color:#64748b;margin-left:8px">分からない場合は勤務先にご確認ください</span>
+      </div>
+      <div class="emp-hint" id="emp-hint">iDeCo上限を判定しています…</div>
 
       <div class="field">
         <div class="field-label">年収<span class="field-val" id="lbl-income">500万円</span></div>
@@ -495,7 +501,7 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
     <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 10px">利用時の注意点</h3>
     <div style="font-size:14px;margin:0 0 26px">運用利回りは一定と仮定した概算で、実際の投資成果は変動します。iDeCoは原則60歳まで引き出せず、受け取り時の課税も考慮が必要です。生涯投資枠や受取時課税の詳細は各金融機関・公式サイトでご確認ください。</div>
     <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:0 0 12px">よくある質問（FAQ）</h3>
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. NISAとiDeCoはどちらを優先すべきですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 一般に、いつでも引き出せる柔軟性を重視するならNISA、所得控除による節税を最大化したいならiDeCoが向きます。多くの場合は両方を併用し、生活防衛資金を確保したうえで無理のない範囲で積み立てるのが基本です。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. iDeCoの掛金の上限はいくらですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 職業により異なります。会社員（企業年金なし）は月2.3万円、公務員・DB等併用者は月2万円（2024年12月改正後）、自営業者は月6.8万円が上限です。本シミュレーターで職業を選ぶと自動で上限を判定します。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. NISAの非課税枠はどのくらいですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 新NISAは年間の投資枠がつみたて投資枠120万円・成長投資枠240万円、生涯の非課税保有限度額が1,800万円（うち成長投資枠は1,200万円まで）です。この範囲の運用益が非課税になります。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. シミュレーターの節税額はそのまま受け取れますか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. iDeCoの節税額は掛金が所得控除されることによる概算です。実際の節税額は所得や他の控除により変わります。また、iDeCoは受け取り時に課税される場合がある点にもご注意ください。</div></div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. NISAとiDeCoはどちらを優先すべきですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 一般に、いつでも引き出せる柔軟性を重視するならNISA、所得控除による節税を最大化したいならiDeCoが向きます。多くの場合は両方を併用し、生活防衛資金を確保したうえで無理のない範囲で積み立てるのが基本です。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. iDeCoの掛金の上限はいくらですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 職業により異なります。2026年11月30日までは、会社員（企業年金なし）が月2.3万円、公務員・企業年金のある会社員が月2万円、自営業者が月6.8万円です。2026年12月1日施行の改正により、会社員（企業年金なし）は月6.2万円、公務員は月5.4万円、自営業者は月7.5万円へ引き上げられます（第3号被保険者は月2.3万円のまま）。改正後の6.2万円は企業年金等との合算枠のため、企業年金がある方は勤務先の掛金を差し引いた額が上限です。本シミュレーターは施行日に自動で切り替わります。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. NISAの非課税枠はどのくらいですか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. 新NISAは年間の投資枠がつみたて投資枠120万円・成長投資枠240万円、生涯の非課税保有限度額が1,800万円（うち成長投資枠は1,200万円まで）です。この範囲の運用益が非課税になります。</div></div><div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:10px"><div style="font-weight:700;color:#1a3d2b;margin-bottom:6px">Q. シミュレーターの節税額はそのまま受け取れますか？</div><div style="font-size:14px;color:#334155;line-height:1.9">A. iDeCoの節税額は掛金が所得控除されることによる概算です。実際の節税額は所得や他の控除により変わります。また、iDeCoは受け取り時に課税される場合がある点にもご注意ください。</div></div>
     <h3 style="font-size:16px;font-weight:700;color:#1a3d2b;margin:24px 0 10px">関連シミュレーター</h3>
     <div><a href="/asset-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">将来資産シミュレーター →</a><a href="/fire-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">FIRE計算シミュレーター →</a><a href="/furusato-sim.html" style="display:inline-block;background:#fff;border:1.5px solid #bbf7d0;color:#1a7a4a;border-radius:22px;padding:8px 18px;font-size:13px;font-weight:700;text-decoration:none;margin:4px 6px 4px 0">ふるさと納税シミュレーター →</a></div>
   </div>
@@ -510,8 +516,36 @@ footer p{font-size:.72rem;opacity:.55;margin-top:12px}
 // ─── State ───────────────────────────────
 var sliders = { income:500, monthly:3, years:20, rate:5 };
 var currentEmp = 'employee';
-var IDECO_MAX = { employee:2.3, gov:2.0, self:6.8, spouse:2.3 }; // gov: 2024年12月改正で月2.0万円
-var IDECO_ANNUAL = { employee:27.6, gov:24.0, self:81.6, spouse:27.6 };
+// ── iDeCo拠出限度額（2026-10-14 改修）──────────────────────────
+// 2026年12月1日施行の改正で限度額が変わる。施行日をまたいでも正しい値を
+// 出せるよう、現行／改正後の2本を持ち、実行時の日付で自動的に切り替える。
+// 改正後は「企業年金等との合算枠」であり、企業年金がある人は
+// 62,000円から勤務先の掛金を差し引いた額が自分の枠になる点に注意。
+var IDECO_REFORM_DATE = new Date(2026, 11, 1); // 月は0起点なので11＝12月
+var IDECO_TABLE = {
+  before: {
+    max:    { employee:2.3, gov:2.0, self:6.8, spouse:2.3, corp:2.0 },
+    annual: { employee:27.6, gov:24.0, self:81.6, spouse:27.6, corp:24.0 }
+  },
+  after: {
+    // 会社員(企業年金なし)6.2 / 公務員 6.2-0.8=5.4 / 自営業7.5 / 第3号は据え置き
+    // corp（企業年金あり）は 6.2 − 勤務先の掛金 で算出するため上限値を入れる
+    max:    { employee:6.2, gov:5.4, self:7.5, spouse:2.3, corp:6.2 },
+    annual: { employee:74.4, gov:64.8, self:90.0, spouse:27.6, corp:74.4 }
+  }
+};
+function idecoReformed(){ return new Date() >= IDECO_REFORM_DATE; }
+var IDECO_MAX    = idecoReformed() ? IDECO_TABLE.after.max    : IDECO_TABLE.before.max;
+var IDECO_ANNUAL = idecoReformed() ? IDECO_TABLE.after.annual : IDECO_TABLE.before.annual;
+// 企業年金がある会社員の、勤務先の掛金（万円/月）。corp選択時のみ使用
+var corpContrib = 0;
+// corp の実効上限 = 合算枠 − 勤務先の掛金（0未満にはしない）
+function idecoLimitFor(emp){
+  if (emp === 'corp' && idecoReformed()) {
+    return Math.max(0, Math.round((IDECO_MAX.corp - corpContrib) * 10) / 10);
+  }
+  return IDECO_MAX[emp];
+}
 var compChart = null;
 
 // ─── Helpers ────────────────────────────
@@ -598,18 +632,49 @@ function scenarioD(m,y,r,emax) { // NISA+iDeCo optimal
 // ─── Employment ──────────────────────────
 function setEmp(emp) {
   currentEmp=emp;
-  ['employee','gov','self','spouse'].forEach(function(e){
-    document.getElementById('emp-'+e).className='emp-btn'+(e===emp?' on':'');
+  ['employee','gov','self','spouse','corp'].forEach(function(e){
+    var b=document.getElementById('emp-'+e);
+    if(b) b.className='emp-btn'+(e===emp?' on':'');
   });
-  var lim=IDECO_MAX[emp], ann=IDECO_ANNUAL[emp];
-  document.getElementById('emp-hint').innerHTML='iDeCo上限: <strong>'+lim+'万円/月</strong>（年間'+ann+'万円）。掛金は全額所得控除になります。';
+  // 企業年金ありを選んだときだけ、勤務先の掛金の入力欄を出す
+  var cw=document.getElementById('corp-wrap');
+  if(cw) cw.style.display = (emp==='corp' && idecoReformed()) ? 'block' : 'none';
+  renderEmpHint();
+  calc();
+}
+
+// 上限の表示を組み立てる（改正前後・企業年金の有無で文面が変わる）
+function renderEmpHint(){
+  var el=document.getElementById('emp-hint');
+  if(!el) return;
+  var lim=idecoLimitFor(currentEmp);
+  var ann=Math.round(lim*12*10)/10;
+  var html='iDeCo上限: <strong>'+lim+'万円/月</strong>（年間'+ann+'万円）。掛金は全額所得控除になります。';
+  if(currentEmp==='corp'){
+    if(idecoReformed()){
+      html+='<br><span style="color:#b45309">勤務先の掛金（月'+corpContrib+'万円）を6.2万円の合算枠から差し引いた額です。正確な額は勤務先にご確認ください。</span>';
+    } else {
+      html+='<br><span style="color:#b45309">企業型DC・DB等がある場合の上限です。勤務先の制度により異なることがあります。</span>';
+    }
+  }
+  if(!idecoReformed()){
+    html+='<br><span style="color:#1a7a4a">2026年12月1日の改正で上限が引き上げられます（会社員は企業年金等との合算枠で月6.2万円）。本ツールは施行日に自動で切り替わります。</span>';
+  }
+  el.innerHTML=html;
+}
+
+// 勤務先の掛金が変わったら上限を計算し直す
+function setCorpContrib(v){
+  var n=parseFloat(v);
+  corpContrib = isNaN(n) ? 0 : Math.max(0, Math.min(6.2, n));
+  renderEmpHint();
   calc();
 }
 
 // ─── Main calc ───────────────────────────
 function calc() {
   var inc=sliders.income, m=sliders.monthly, y=sliders.years, r=sliders.rate;
-  var emax=IDECO_MAX[currentEmp];
+  var emax=idecoLimitFor(currentEmp);
 
   var fvA=scenarioA(m,y,r);
   var fvB=scenarioB(m,y,r);
@@ -856,6 +921,9 @@ function printSim(){window.print();}
   try{var k='la_sim_recent',u=location.pathname,n='NISA・iDeCo 節税診断';var a=JSON.parse(localStorage.getItem(k)||'[]').filter(function(x){return x.u!==u;});a.unshift({u:u,n:n,ts:Date.now()});localStorage.setItem(k,JSON.stringify(a.slice(0,5)));}catch(e){}
 })();
 loadFromUrl();
+// URLパラメータがない通常アクセスでは setEmp が呼ばれないため、
+// 上限表示をここで必ず描画する（初期表示が未確定のままになるのを防ぐ）
+renderEmpHint();
 calc();
 </script>
 </body>
