@@ -22,3 +22,13 @@ personal/
 *payroll*
 *salary*
 *employee*
+
+# ── 秘密情報・ローカル生成物の誤コミット防止（2026-10-21 追加）────────
+.env
+.env.*
+secrets/
+*.pem
+*.key
+credentials*.json
+new_posts.txt
+note_draft_for_email.txt

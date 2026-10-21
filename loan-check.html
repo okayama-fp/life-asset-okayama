@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="住宅ローン 総合リスク診断｜返済負担率・控除逆ざや・繰上返済効果">
   <meta name="twitter:description" content="金利上昇リスクと住宅ローン控除をまとめて診断。逆ざや判定・実質金利も即確認。">
   <meta name="twitter:site" content="@lifeasset_fp">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://script.google.com https://script.googleusercontent.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://*.adtrafficquality.google; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
@@ -1062,9 +1062,9 @@ function updateLoanUrl(P, rate, yrs, age, inc) {
   if(p.get('P')){ document.getElementById('sl-principal').value=p.get('P'); document.getElementById('lbl-principal').textContent=parseFloat(p.get('P')).toLocaleString()+'万円'; }
   if(p.get('r')){ document.getElementById('sl-rate').value=p.get('r'); document.getElementById('lbl-rate').textContent=parseFloat(p.get('r')).toFixed(2)+'%'; }
   if(p.get('y')){ document.getElementById('sl-years').value=p.get('y'); document.getElementById('lbl-years').textContent=p.get('y')+'年'; }
-  if(p.get('a')){ document.getElementById('sl-age').value=p.get('a'); document.getElementById('lbl-age').textContent=p.get('a')+'歳'; }
+  if(p.get('a')){ var slAge=document.getElementById('sl-age'); slAge.value=p.get('a'); document.getElementById('lbl-age').textContent=slAge.value+'歳'; }
   if(p.get('inc')){ document.getElementById('in-income').value=p.get('inc'); }
-  if(p.get('t')){ setType(p.get('t')); }
+  if(p.get('t')==='var'||p.get('t')==='fix'){ setType(p.get('t')); }
 })();
 
 (function(){ syncExtra(); calc(); })();

@@ -773,15 +773,16 @@ function updateUrlParams(vals) {
     } catch(e) {}
   }, 300);
 }
+// 共有URLの値はスライダー（range）に一度代入し、ブラウザが範囲内に丸めた値だけを使う（2026-10-21）
 function loadFromUrl() {
   var p=new URLSearchParams(location.search);
   var map={ca:'sl-child-age',sav:'sl-savings',m:'sl-monthly'};
   var lmap={ca:'child-age',sav:'savings',m:'monthly'};
   var any=false;
   Object.keys(map).forEach(function(k){
-    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
+    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);var v=el.value;sliders[lmap[k]]=parseFloat(v);document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],v);any=true;}}
   });
-  if(p.has('c')){setCourse(p.get('c'));}
+  if(p.has('c') && ['allpub','hispri','midpri','unipri','allpri'].indexOf(p.get('c'))>=0){setCourse(p.get('c'));}
   return any;
 }
 function copySimUrl() {

@@ -18,7 +18,23 @@
   var _timer = null;
 
   function hasConsent() {
-    return localStorage.getItem(CONSENT_KEY) === 'all';
+    try { return localStorage.getItem(CONSENT_KEY) === 'all'; } catch (e) { return false; }
+  }
+
+  // スプレッドシートの数式インジェクション対策（2026-10-21）
+  // = + - @ で始まる文字列はシートで数式として解釈されるため先頭に ' を付け、長さも制限する。
+  // ※エンドポイントは公開されており直接POSTも可能なため、GAS側でも同じ検証を行うこと。
+  function sanitize(obj) {
+    var out = {};
+    Object.keys(obj).slice(0, 30).forEach(function (k) {
+      var v = obj[k];
+      if (typeof v === 'string') {
+        v = v.slice(0, 100);
+        if (/^[=+\-@\t\r]/.test(v)) v = "'" + v;
+      }
+      out[String(k).slice(0, 40)] = v;
+    });
+    return out;
   }
 
   /**
@@ -36,7 +52,7 @@
           // Content-Type を text/plain にすることで GAS の CORS プリフライトを回避
           headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
           body: JSON.stringify(
-            Object.assign({ sim: simName, ts: new Date().toISOString() }, params)
+            sanitize(Object.assign({ sim: simName, ts: new Date().toISOString() }, params))
           )
         });
       } catch (_) {}

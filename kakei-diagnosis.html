@@ -400,11 +400,11 @@ function showResult(){
     '</div>';
   }).join('');
 }
-function goLP(){window.open('https://lifeassetoffice.net/lifeplan.html','_blank');}
+function goLP(){window.open('https://lifeassetoffice.net/lifeplan.html','_blank','noopener,noreferrer');}
 function shareX(){
   var t=TYPES[topType];
   var txt='【家計体質タイプ占い】\n私は「'+t.name+'」でした！\n'+t.tag+'\n\n#家計診断 #ライフプラン #FP\nhttps://lifeassetoffice.net/kakei-diagnosis.html';
-  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt),'_blank');
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt),'_blank','noopener,noreferrer');
 }
 function retry(){
   answers=new Array(Q.length).fill(null);cur=0;

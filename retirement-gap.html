@@ -1416,13 +1416,14 @@ function updateUrlParams(vals) {
     try { var p = new URLSearchParams(vals); history.replaceState(null,'','?'+p.toString()); } catch(e) {}
   }, 300);
 }
+// 共有URLの値はスライダー（range）に一度代入し、ブラウザが範囲内に丸めた値だけを使う（2026-10-21）
 function loadFromUrl() {
   var p=new URLSearchParams(location.search);
   var map={age:'sl-age',ret:'sl-retire',exp:'sl-expense',pen:'sl-pension',sav:'sl-savings',ls:'sl-lifespan',nisa:'sl-nisa',ideco:'sl-ideco',inv:'sl-invest',r:'sl-rate',inf:'sl-inf'};
   var lmap={age:'age',ret:'retire',exp:'expense',pen:'pension',sav:'savings',ls:'lifespan',nisa:'nisa',ideco:'ideco',inv:'invest',r:'rate',inf:'inf'};
   var any=false;
   Object.keys(map).forEach(function(k){
-    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);sliders[lmap[k]]=parseFloat(p.get(k));document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],p.get(k));any=true;}}
+    if(p.has(k)){var el=document.getElementById(map[k]);if(el){el.value=p.get(k);var v=el.value;sliders[lmap[k]]=parseFloat(v);document.getElementById('lbl-'+lmap[k]).textContent=labelOf(lmap[k],v);any=true;}}
   });
   return any;
 }

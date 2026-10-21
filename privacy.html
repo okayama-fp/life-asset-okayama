@@ -105,6 +105,13 @@
 
   <h2>5. Cookieについて</h2>
   <p>当サイトでは、利便性向上・アクセス解析・広告配信のためにCookieを使用しています。初回アクセス時にCookie同意バナーが表示され、「同意して続ける」を選択した場合のみ解析・広告Cookieが有効になります。「必要なもののみ」を選択した場合、解析・広告用Cookieは使用されません。ブラウザの設定でCookieを無効にすることもできます。</p>
+  <p>同意内容はいつでも変更できます。下のボタンを押すと同意状態がリセットされ、ページの再読み込み後に同意バナーが再表示されます。</p>
+  <p><button type="button" id="la-cc-reset" style="background:#1a7a4a;color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Cookie設定をリセット</button></p>
+  <script>
+  document.getElementById('la-cc-reset').addEventListener('click', function(){
+    if (window.laResetCookieConsent) window.laResetCookieConsent();
+  });
+  </script>
 
   <h2>6. Google Analyticsについて</h2>
   <p>当サイトではGoogle Analytics（GA4）を使用してアクセス解析を行っています。ユーザーがCookie同意を行った場合にのみ有効になります。収集されたデータは匿名で処理され、個人を特定するものではありません。</p>

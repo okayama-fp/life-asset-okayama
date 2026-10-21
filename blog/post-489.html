@@ -439,6 +439,7 @@ function sendComment(){
   });
 </script>
 
+<script>
 (function(){
   var el=document.querySelector('.article-body,.article-content');
   if(!el) return;
@@ -449,6 +450,7 @@ function sendComment(){
     if(spans[i].textContent.indexOf('分で読め')!==-1){spans[i].textContent='⏱ 約'+mins+'分で読めます';break;}
   }
 })();
+</script>
 <script src="/nav.js" defer></script>
 </body>
 </html>

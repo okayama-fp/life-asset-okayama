@@ -11,12 +11,28 @@
     document.head.appendChild(s);
   }
 
+  // 2026-10-21 修正:
+  //  ・未同意時に disableTracking() が gtag を空関数にするため、初回同意時に
+  //    config が送られずページビューが欠落していた → 必ず gtag を作り直す
+  //  ・各ページの<head>のインライン gtag('config') と二重送信になっていた
+  //    → キュー済みの js/config を取り除いてからここで1回だけ送る
+  //  ・シミュレーターの共有URLは年収・資産額などをクエリに含むため、
+  //    page_location からクエリとハッシュを除いて送る
   function enableAnalytics() {
-    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+    var q = window.dataLayer || [];
+    window.dataLayer = [];
+    for (var i = 0; i < q.length; i++) {
+      var a = q[i];
+      if (a && (a[0] === 'js' || a[0] === 'config')) continue;
+      window.dataLayer.push(a);
+    }
+    window.gtag = function(){ window.dataLayer.push(arguments); };
+    window._gtag = window.gtag; // life-game.html などが参照
     window.gtag('js', new Date());
-    window.gtag('config', GA_ID);
+    window.gtag('config', GA_ID, {
+      page_location: location.origin + location.pathname
+    });
+    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
   }
 
   function enableAds() {
@@ -28,7 +44,19 @@
     window.gtag = function(){};
   }
 
-  var consent = localStorage.getItem(KEY);
+  function getConsent() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function setConsent(v) {
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+  }
+  // プライバシーポリシーの「Cookie設定をリセット」から呼ぶ
+  window.laResetCookieConsent = function() {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    location.reload();
+  };
+
+  var consent = getConsent();
   if (consent === 'all') {
     enableAnalytics();
     enableAds();
@@ -62,13 +90,13 @@
       + '</div>';
     document.body.appendChild(d);
     document.getElementById('la-cc-ok').onclick = function(){
-      localStorage.setItem(KEY, 'all');
+      setConsent('all');
       d.remove();
       enableAnalytics();
       enableAds();
     };
     document.getElementById('la-cc-ng').onclick = function(){
-      localStorage.setItem(KEY, 'none');
+      setConsent('none');
       d.remove();
     };
   }

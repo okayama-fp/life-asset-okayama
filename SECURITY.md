@@ -103,6 +103,8 @@ URLが公開ソースに露出しているため、第三者が任意データ�
 **対処案**: `js/chart.umd.min.js` と同様に React を `/js/` へローカル配置する（方針が一貫する）。
 または `react@18.3.1` のように完全固定＋`integrity=` 付与。
 
+> **2026-10-21 更新**: `react@18.3.1` へのバージョン固定は実施済み。`integrity=` の付与またはローカル配置は、ファイル取得（外部通信）の許可が必要なため未実施。
+
 ### 🟢 低: GitHub Actions のバージョン固定
 
 - `actions/checkout@v4` / `actions/setup-python@v5` がタグ指定（コミットSHA未固定）
@@ -138,3 +140,4 @@ URLが公開ソースに露出しているため、第三者が任意データ�
 | 日付 | 内容 |
 |------|------|
 | 2026-09-01 | 5系統の並列セキュリティ監査を実施。本ファイルを新規作成。あわせて以下を実施:<br>①ワークフローに `permissions: contents: read`（最小権限）を明示<br>②32ファイルに有効な `<meta name="referrer">` を追加（http-equiv版は無効なため）<br>③作業ブランチを gh-pages に同期し、個人名ファイル削除と強化版 .gitignore を取り込み |
+| 2026-10-21 | 6系統の並列監査（JSデータフロー／外部リソース・フォーム／Git履歴・個人情報／Actions・ツール／Claude Code設定／改ざん・マルウェア）を実施。乗っ取り・改ざん・機密情報漏洩の痕跡なし。修正:<br>①Cookie同意: 初回同意時にGA4が計測されないバグと、同意済み時の二重計測を修正。page_location からURLクエリ（年収等）を除外。プライバシーポリシーに同意リセットボタンを追加<br>②同意前にAdSenseを直接読み込んでいた2ページ（recruit・asset-building-beginner）を修正<br>③meta CSP 22ページを統一。AdSense（14ページ）とGAS送信（loan-check）をブロックしていた不整合を解消<br>④共有URLの値をスライダーの範囲に丸める（5シミュレーター）＋選択肢の許可リスト検証（education/furusato/loan-check）<br>⑤mypage の数値表示を数値化、life-game のプレイヤー名から HTML 記号を除去、kakei-diagnosis の window.open に noopener<br>⑥sim-tracker.js でスプレッドシート数式インジェクション対策（GAS側の検証は別途必要）<br>⑦React を 18.3.1 に固定<br>⑧ブログ23本で `<script>` の外に出て本文に表示されていたJSを修正、recruit の壊れたメールリンクを修正<br>⑨`.claude/settings.json` に deny ルール（.env/secrets、force push、gh-pages直接push）を追加。CLAUDE.md に指示の出どころ・自動実行ファイル・Stopフックの扱いを明記し、重複ブロックを削除。AGENTS.md の旧TODOを削除。.gitignore 強化 |
