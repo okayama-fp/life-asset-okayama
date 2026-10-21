@@ -712,7 +712,7 @@ function updateUrl() {
 (function() {
   var p = new URLSearchParams(location.search);
   if (p.get('inc')) { income = parseFloat(p.get('inc')); document.getElementById('sl-income').value = income; document.getElementById('lbl-income').textContent = income.toLocaleString()+'万円'; }
-  if (p.get('fam')) setFamily(p.get('fam'));
+  if (p.get('fam') && ['single','couple','c1','c2','c3'].indexOf(p.get('fam'))>=0) setFamily(p.get('fam'));
   if (p.get('hl')) { hloan = parseFloat(p.get('hl')); document.getElementById('sl-hloan').value = hloan; document.getElementById('lbl-hloan').textContent = hloan+'万円'; }
   if (p.get('ca')) { var ca = decodeURIComponent(p.get('ca')).split(','); ca.forEach(function(v,i){ if(v && ['young','high','college','adult'].indexOf(v)>=0) setChildAge(i,v); }); }
 })();

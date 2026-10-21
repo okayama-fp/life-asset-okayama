@@ -897,12 +897,13 @@ function updateUrl(v){
 function buildShareUrl(){
   return location.origin+location.pathname+'?'+new URLSearchParams({inc:sliders.income,m:sliders.monthly,y:sliders.years,r:sliders.rate,emp:currentEmp}).toString();
 }
+// 共有URLの値はスライダー（range）に一度代入し、ブラウザが範囲内に丸めた値だけを使う（2026-10-21）
 function loadFromUrl(){
   var p=new URLSearchParams(location.search);
   var map={inc:'income',m:'monthly',y:'years',r:'rate'};
   var any=false;
   Object.keys(map).forEach(function(k){
-    if(p.has(k)){var key=map[k];sliders[key]=parseFloat(p.get(k));var sl=document.getElementById('sl-'+key);if(sl)sl.value=p.get(k);document.getElementById('lbl-'+key).textContent=labelOf(key,p.get(k));any=true;}
+    if(p.has(k)){var key=map[k];var sl=document.getElementById('sl-'+key);if(!sl)return;sl.value=p.get(k);var v=sl.value;sliders[key]=parseFloat(v);document.getElementById('lbl-'+key).textContent=labelOf(key,v);any=true;}
   });
   if(p.has('emp') && IDECO_MAX.hasOwnProperty(p.get('emp'))) setEmp(p.get('emp'));
   return any;

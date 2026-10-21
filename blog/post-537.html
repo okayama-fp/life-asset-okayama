@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="繰上返済と教育費積立、どっちが先？42歳・子ども3人のAさんがFPに聞いた本音">
   <meta name="twitter:description" content="「どっちを先にすべきですか？」42歳・変動金利1.35%時代に子育て世代が本当に知りたい答えを解説。">
   <meta name="twitter:site" content="@lifeasset_fp">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://script.google.com https://script.googleusercontent.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://*.adtrafficquality.google; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -525,6 +525,7 @@ function sendComment(){
   });
 </script>
 
+<script>
 (function(){
   var el=document.querySelector('.article-body,.article-content');
   if(!el) return;
@@ -535,6 +536,7 @@ function sendComment(){
     if(spans[i].textContent.indexOf('分で読め')!==-1){spans[i].textContent='⏱ 約'+mins+'分で読めます';break;}
   }
 })();
+</script>
 <script src="/nav.js" defer></script>
 </body>
 </html>

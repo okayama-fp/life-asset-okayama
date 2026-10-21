@@ -476,7 +476,8 @@ function startGame() {
   players = [];
   var inputs = nameInputs.querySelectorAll('.name-input');
   for (var i = 0; i < numPlayers; i++) {
-    var inputName = inputs[i] ? inputs[i].value.trim() : '';
+    // 名前は innerHTML で表示するため、HTMLとして解釈される記号を取り除く（2026-10-21）
+    var inputName = inputs[i] ? inputs[i].value.replace(/[<>&"'`]/g, '').trim() : '';
     players.push({
       name:        inputName || PLAYER_LABELS[i],
       emoji:       PLAYER_EMOJIS[i],
