@@ -32,3 +32,6 @@ secrets/
 credentials*.json
 new_posts.txt
 note_draft_for_email.txt
+
+# 個人用のClaude Code権限設定（コミットしない）
+.claude/settings.local.json
