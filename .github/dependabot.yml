@@ -1,0 +1,11 @@
+# 依存関係の更新とセキュリティ修正を PR で知らせる（2026-11-02 追加）
+# ワークフローの Action はコミットSHAで固定しているため、新しい版が出たら
+# Dependabot が SHA の差し替えを PR で提案する。マージは通常どおり人が判断する。
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    target-branch: "gh-pages"
+    open-pull-requests-limit: 3
