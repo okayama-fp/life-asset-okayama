@@ -92,6 +92,8 @@ URLが公開ソースに露出しているため、第三者が任意データ�
 
 **対処案**: GAS側で Origin/Referer チェックとレート制限を実装する。または GA4 イベントで代替できるなら GAS ルートを廃止する。
 
+> **2026-11-02 更新**: 受け取り側（GAS）の検証コードを作成済み（シミュレーター名・項目名の許可リスト、値の型と長さの制限、数式の無害化、1分60件・1日3,000件の受付上限、サーバー時刻での記録）。Apps Script の Web アプリは Origin/Referer を読めないため、送信元の制限は行わず中身の検証と件数上限で守る。**GAS エディタへの貼り付けと再デプロイはユーザー作業**（コードはリポジトリに置かず会話で受け渡し）。
+
 ### 🟡 中: `student-sim.html` の React を unpkg.com から読み込み
 
 ```html
@@ -105,6 +107,8 @@ URLが公開ソースに露出しているため、第三者が任意データ�
 
 > **2026-10-21 更新**: `react@18.3.1` へのバージョン固定は実施済み。`integrity=` の付与またはローカル配置は、ファイル取得（外部通信）の許可が必要なため未実施。
 
+> **2026-11-02 更新**: 引き続き未実施。作業環境のネットワーク設定で npm レジストリ（registry.npmjs.org）と unpkg.com への接続が許可されておらず、公式パッケージの取得とハッシュ計算ができなかった。許可後に、npm の公式パッケージで整合性を確かめたうえで `integrity=` を付与する。
+
 ### 🟢 低: GitHub Actions のバージョン固定
 
 - `actions/checkout@v4` / `actions/setup-python@v5` がタグ指定（コミットSHA未固定）
@@ -113,10 +117,14 @@ URLが公開ソースに露出しているため、第三者が任意データ�
 いずれもGitHub公式Action・主要パッケージのため実現可能性は低いものの、
 侵害された場合は全シークレットが流出します。`requirements.txt` でのハッシュ固定を推奨します。
 
+> **2026-11-02 更新**: `actions/checkout` を v4.4.0、`actions/setup-python` を v5.6.0 のコミットSHAで固定済み（タグの付け替えによる差し替えを防ぐ）。pip パッケージの固定は PyPI への接続が作業環境で許可されておらず、正しい版とハッシュを確かめられないため未実施（推測の版で固定すると記事公開時の通知が壊れるため見送り）。
+
 ### 🟢 低: Dependabot / CODEOWNERS が未設定
 
 - `.github/dependabot.yml` がないため、依存関係の脆弱性通知を受け取れない
 - CODEOWNERS がないため、`CNAME` や `.github/workflows/` の改変時にレビューを強制できない
+
+> **2026-11-02 更新**: `.github/dependabot.yml` を追加（GitHub Actions を月1回確認し、SHA の更新を PR で提案）。CODEOWNERS は見送り：コラボレーターが本人1人のため、自分のPRを自分で承認できない GitHub の仕様上、レビュー必須にするとマージできなくなる。ブランチ保護（🔴高）の設定を優先する。
 
 ---
 
@@ -141,3 +149,4 @@ URLが公開ソースに露出しているため、第三者が任意データ�
 |------|------|
 | 2026-09-01 | 5系統の並列セキュリティ監査を実施。本ファイルを新規作成。あわせて以下を実施:<br>①ワークフローに `permissions: contents: read`（最小権限）を明示<br>②32ファイルに有効な `<meta name="referrer">` を追加（http-equiv版は無効なため）<br>③作業ブランチを gh-pages に同期し、個人名ファイル削除と強化版 .gitignore を取り込み |
 | 2026-10-21 | 6系統の並列監査（JSデータフロー／外部リソース・フォーム／Git履歴・個人情報／Actions・ツール／Claude Code設定／改ざん・マルウェア）を実施。乗っ取り・改ざん・機密情報漏洩の痕跡なし。修正:<br>①Cookie同意: 初回同意時にGA4が計測されないバグと、同意済み時の二重計測を修正。page_location からURLクエリ（年収等）を除外。プライバシーポリシーに同意リセットボタンを追加<br>②同意前にAdSenseを直接読み込んでいた2ページ（recruit・asset-building-beginner）を修正<br>③meta CSP 22ページを統一。AdSense（14ページ）とGAS送信（loan-check）をブロックしていた不整合を解消<br>④共有URLの値をスライダーの範囲に丸める（5シミュレーター）＋選択肢の許可リスト検証（education/furusato/loan-check）<br>⑤mypage の数値表示を数値化、life-game のプレイヤー名から HTML 記号を除去、kakei-diagnosis の window.open に noopener<br>⑥sim-tracker.js でスプレッドシート数式インジェクション対策（GAS側の検証は別途必要）<br>⑦React を 18.3.1 に固定<br>⑧ブログ23本で `<script>` の外に出て本文に表示されていたJSを修正、recruit の壊れたメールリンクを修正<br>⑨`.claude/settings.json` に deny ルール（.env/secrets、force push、gh-pages直接push）を追加。CLAUDE.md に指示の出どころ・自動実行ファイル・Stopフックの扱いを明記し、重複ブロックを削除。AGENTS.md の旧TODOを削除。.gitignore 強化 |
+| 2026-11-02 | 未対応項目の🟡🟢に対応: GitHub Actions をコミットSHAで固定、Dependabot（github-actions）を追加、GAS 受け取り側の検証コードを作成（反映はユーザー作業）。React の SRI と pip の固定は作業環境のネットワーク制限（npm・PyPI 不可）のため保留。CODEOWNERS は単独運用のため見送り |
