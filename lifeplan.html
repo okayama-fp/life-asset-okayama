@@ -1228,6 +1228,7 @@ function _generatePlan(){
   const totalYears=planEndAge-ageSelf+1;
   let nisaAsset=0,idecoAsset=0,investAsset=investCurrent,cashAsset=savingsCurrent;
   let loanRemaining=loanBalance;
+  let nisaContribCum=0; // 新NISAの累計投資額（生涯上限1,800万円の管理用）
 
   for(let y=0;y<totalYears;y++){
     const selfAge=ageSelf+y;
