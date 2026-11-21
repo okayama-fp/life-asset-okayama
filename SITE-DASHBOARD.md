@@ -4,7 +4,7 @@
 > チェックの実行: リポジトリルートで `python3 tools/site-check.py`
 > 更新ルール: サイトに変更を加えたセッションでは必ずチェックを再実行し、このファイルを最新化する。
 
-**最終チェック: 2026-11-15（スタグフレーション記事追加後） ｜ 状態: 🟢 site-check.py 問題ゼロ（120ファイル）**
+**最終チェック: 2026-11-21（冬のボーナス記事追加・手取りシミュレーターの雇用保険料率更新後） ｜ 状態: 🟢 site-check.py 問題ゼロ（121ファイル）**
 
 ---
 
@@ -95,6 +95,8 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-11-21 | ブログ記事追加: blog-fuyu-bonus-202611（冬のボーナス2026の予測・手取り・使い道）。tedori-sim.html の雇用保険料率を2026年度の0.5%（一般の事業・本人負担）に更新。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
+| 2026-11-15 | 不具合修正: lifeplan.html で nisaContribCum 未宣言によりライフプラン表が生成できなかった問題を修正（#376） |
 | 2026-11-15 | ブログ記事追加: blog-stagflation-202611（企業物価7.1%・景気ウォッチャー46.1とスタグフレーション懸念）。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
 | 2026-11-04 | ブログ記事2本追加: blog-beikoku-chukan-senkyo-202611（米中間選挙）・blog-ai-kabu-geraku-202611（AI・ハイテク株の急落と米中AI競争）。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
 | 2026-11-02 | ブログ記事追加: blog-nichigin-2percent-202610（日銀10/30会合「物価2%到達」と預金・住宅ローン・給料）。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
