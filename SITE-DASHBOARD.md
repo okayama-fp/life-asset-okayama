@@ -4,7 +4,7 @@
 > チェックの実行: リポジトリルートで `python3 tools/site-check.py`
 > 更新ルール: サイトに変更を加えたセッションでは必ずチェックを再実行し、このファイルを最新化する。
 
-**最終チェック: 2026-11-24（電気・ガス補助再開の記事追加後） ｜ 状態: 🟢 site-check.py 問題ゼロ（123ファイル）**
+**最終チェック: 2026-11-28（年内の手続き記事追加後） ｜ 状態: 🟢 site-check.py 問題ゼロ（124ファイル）**
 
 ---
 
@@ -95,6 +95,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-11-28 | ブログ記事追加: blog-nennai-tetsuzuki-2026（年内にやっておくお金の手続き2026・締め切りカレンダー）。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
 | 2026-11-24 | ブログ記事追加: blog-denki-gas-hojo-saikai-202611（電気・ガス代の補助が12月使用分から再開）。旧記事 blog-fuyu-hojo-kentou-202610 に決定済みの追記を追加（dateModified・sitemap lastmod更新）。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
 | 2026-11-24 | ブログ記事追加: blog-zeisei-kaisei-2027-202611（2027年度税制改正の議論本格化と家計に関わる論点）。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新。12月中旬の大綱公表後に更新予定 |
 | 2026-11-21 | ブログ記事追加: blog-fuyu-bonus-202611（冬のボーナス2026の予測・手取り・使い道）。tedori-sim.html の雇用保険料率を2026年度の0.5%（一般の事業・本人負担）に更新。blog/index.html カード・sitemap.xml・BLOG-REVIEW.md・OGP画像を同時更新 |
